@@ -19,9 +19,9 @@ module.exports = async () => {
     // Set environment variables for the test run
     process.env.DB_HOST = container.getHost();
     process.env.DB_PORT = container.getMappedPort(5432);
-    process.env.POSTGRES_DB = 'test_db';
-    process.env.POSTGRES_USER = 'test_user';
-    process.env.POSTGRES_PASSWORD = 'test_password';
+    process.env.POSTGRES_DB_NAME = 'test_db';
+    process.env.POSTGRES_DB_USER = 'test_user';
+    process.env.POSTGRES_DB_PASSWORD = 'test_password';
     process.env.JWT_SECRET = 'test_secret';
     process.env.JWT_EXPIRES_IN = '1h';
     process.env.NODE_ENV = 'development';
@@ -41,9 +41,9 @@ module.exports = async () => {
     const envVars = `
 DB_HOST=${process.env.DB_HOST}
 DB_PORT=${process.env.DB_PORT}
-POSTGRES_DB=${process.env.POSTGRES_DB}
-POSTGRES_USER=${process.env.POSTGRES_USER}
-POSTGRES_PASSWORD=${process.env.POSTGRES_PASSWORD}
+POSTGRES_DB_NAME=${process.env.POSTGRES_DB_NAME}
+POSTGRES_DB_USER=${process.env.POSTGRES_DB_USER}
+POSTGRES_DB_PASSWORD=${process.env.POSTGRES_DB_PASSWORD}
 JWT_SECRET=${process.env.JWT_SECRET}
 JWT_EXPIRES_IN=${process.env.JWT_EXPIRES_IN}
 NODE_ENV=${process.env.NODE_ENV}
