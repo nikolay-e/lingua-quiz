@@ -358,7 +358,7 @@ jobs:
 
           # Create a temporary migration job YAML
           MIGRATION_JOB=$(mktemp)
-          cat > $MIGRATION_JOB << EOF
+          cat > $MIGRATION_JOB << 'EOF'
 apiVersion: batch/v1
 kind: Job
 metadata:
