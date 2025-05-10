@@ -112,6 +112,25 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   # If create is false, it defaults to 'default' within the helper.
   name: ""
+# Database migrations configuration
+migrations:
+  enabled: true
+  command: ["npm", "run", "migrate"]
+  ttlSecondsAfterFinished: 120
+  restartPolicy: OnFailure
+  backoffLimit: 4
+  resources:
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+  # Additional environment variables for migrations if needed
+  # env:
+  #   - name: MIGRATION_VERBOSITY
+  #     value: "verbose"
+
 # Optional configurations
 # imagePullSecrets: []
 # nameOverride: ""

@@ -325,75 +325,49 @@ jobs:
             --set secrets.postgresPassword=${{ secrets.POSTGRES_PASSWORD }} \
             --wait --timeout 5m0s
 
-      - name: Run Migrations
+      - name: Wait for Migrations
         run: |
-          echo "Waiting a few seconds before running migrations..."
+          echo "Migrations are now handled automatically by the Helm chart hook."
+          echo "Waiting for the migration job to complete..."
           sleep 10
-          echo "Running database migrations..."
-          BACKEND_POD=$(kubectl get pods -l app.kubernetes.io/component=backend -n ${{ env.DEPLOY_NAMESPACE }} -o jsonpath="{.items[0].metadata.name}" 2>/dev/null)
-          if [[ -z "$BACKEND_POD" ]]; then
-             echo "::error::Could not find backend pod to run migrations."
-             exit 1
+
+          # Check if the migration job exists
+          JOB_NAME="${{ env.HELM_RELEASE_NAME }}-migrations"
+          echo "Looking for migration job: $JOB_NAME in namespace ${{ env.DEPLOY_NAMESPACE }}"
+
+          # Wait for job to complete
+          ATTEMPTS=0
+          MAX_ATTEMPTS=30 # 5 minutes total (10 sec * 30)
+
+          while [ $ATTEMPTS -lt $MAX_ATTEMPTS ]; do
+            # Get job status
+            JOB_STATUS=$(kubectl get job $JOB_NAME -n ${{ env.DEPLOY_NAMESPACE }} -o jsonpath="{.status.conditions[?(@.type=='Complete')].status}" 2>/dev/null)
+            if [ "$JOB_STATUS" == "True" ]; then
+              echo "Migration job completed successfully!"
+              break
+            fi
+
+            # Check if the job failed
+            JOB_FAILED=$(kubectl get job $JOB_NAME -n ${{ env.DEPLOY_NAMESPACE }} -o jsonpath="{.status.conditions[?(@.type=='Failed')].status}" 2>/dev/null)
+            if [ "$JOB_FAILED" == "True" ]; then
+              echo "::error::Migration job failed! Check the logs:"
+              kubectl logs job/$JOB_NAME -n ${{ env.DEPLOY_NAMESPACE }}
+              exit 1
+            fi
+
+            echo "Migration job still running, waiting (attempt $ATTEMPTS of $MAX_ATTEMPTS)..."
+            sleep 10
+            ATTEMPTS=$((ATTEMPTS+1))
+          done
+
+          if [ $ATTEMPTS -eq $MAX_ATTEMPTS ]; then
+            echo "::error::Migration job timed out after 5 minutes."
+            kubectl logs job/$JOB_NAME -n ${{ env.DEPLOY_NAMESPACE }}
+            exit 1
           fi
-          echo "Found backend pod: $BACKEND_POD"
 
-          # Use fully qualified secret name to avoid issues
-          # Ensure the postgres secret name is correct even if env var is not set properly
-          POSTGRES_SECRET_VAR_NAME="${{ env.HELM_RELEASE_NAME }}-postgres"
-          echo "Using Postgres Secret: $POSTGRES_SECRET_VAR_NAME"
-          DB_HOST_VALUE="${{ env.HELM_RELEASE_NAME }}-postgres"
-
-          # Extract secret values securely without printing to logs
-          DB_NAME=$(kubectl get secret "$POSTGRES_SECRET_VAR_NAME" -n ${{ env.DEPLOY_NAMESPACE }} -o jsonpath="{.data.POSTGRES_DB}" | base64 --decode)
-          DB_USER=$(kubectl get secret "$POSTGRES_SECRET_VAR_NAME" -n ${{ env.DEPLOY_NAMESPACE }} -o jsonpath="{.data.POSTGRES_USER}" | base64 --decode)
-          DB_PASS=$(kubectl get secret "$POSTGRES_SECRET_VAR_NAME" -n ${{ env.DEPLOY_NAMESPACE }} -o jsonpath="{.data.POSTGRES_PASSWORD}" | base64 --decode)
-
-          # Validate secrets were retrieved (without printing their values)
-          if [ -z "$DB_NAME" ]; then echo "::error::Failed to get DB_NAME from secret '$POSTGRES_SECRET_VAR_NAME'"; exit 1; fi
-          if [ -z "$DB_USER" ]; then echo "::error::Failed to get DB_USER from secret '$POSTGRES_SECRET_VAR_NAME'"; exit 1; fi
-          if [ -z "$DB_PASS" ]; then echo "::error::Failed to get DB_PASS from secret '$POSTGRES_SECRET_VAR_NAME'"; exit 1; fi
-          # Create a job to run migrations in the cluster
-          echo "Database credentials retrieved successfully."
-          echo "Creating a Kubernetes job to run migrations..."
-
-          # Create a temporary migration job YAML
-          MIGRATION_JOB=$(mktemp)
-          cat > $MIGRATION_JOB << 'EOF'
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: db-migration-job
-  namespace: ${{ env.DEPLOY_NAMESPACE }}
-spec:
-  ttlSecondsAfterFinished: 100
-  template:
-    spec:
-      containers:
-      - name: migration-runner
-        image: $BACKEND_REPO:$BACKEND_TAG
-        command: ["npm", "run", "migrate"]
-        env:
-        - name: DB_HOST
-          value: "$DB_HOST_VALUE"
-        - name: DB_PORT
-          value: "5432"
-        - name: POSTGRES_DB
-          value: "$DB_NAME"
-        - name: POSTGRES_USER
-          value: "$DB_USER"
-        - name: POSTGRES_PASSWORD
-          value: "$DB_PASS"
-      restartPolicy: Never
-  backoffLimit: 4
-EOF
-
-          # Apply the job
-          kubectl apply -f $MIGRATION_JOB
-
-          # Clean up
-          rm -f $MIGRATION_JOB
-
-          echo "Migration job created. Check the job status with: kubectl get jobs -n ${{ env.DEPLOY_NAMESPACE }}"
+          echo "Migrations completed successfully. Checking logs:"
+          kubectl logs job/$JOB_NAME -n ${{ env.DEPLOY_NAMESPACE }}
 
       - name: Log deployment status
         run: |
