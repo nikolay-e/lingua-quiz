@@ -31,6 +31,7 @@ module.exports = {
     ],
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'max-len': ['error', { code: 150 }],
+    'no-use-before-define': 'warn',
     'import/no-mutable-exports': 'off',
     'import/order': [
       'error',
