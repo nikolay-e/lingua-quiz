@@ -202,6 +202,192 @@ function handleQuizSelect(event) {
   }
 }
 
+// Helper function to convert language names to language codes
+function getLanguageCode(language) {
+  const languageMap = {
+    English: 'en-US',
+    Spanish: 'es-MX',
+    German: 'de-DE',
+    Russian: 'ru-RU',
+  };
+
+  return languageMap[language] || languageMap[language.toLowerCase()] || language;
+}
+
+// Helper function to get language code based on language input
+function getLanguageForIOS(lang) {
+  switch (lang) {
+    case 'Spanish':
+      return 'es-MX';
+    case 'German':
+      return 'de-DE';
+    case 'Russian':
+      return 'ru-RU';
+    default:
+      return 'en-US';
+  }
+}
+
+// Helper function to find appropriate voice for a language
+function findVoiceForLanguage(availableVoices, languageCode) {
+  // First try to find exact match
+  let voice = availableVoices.find((v) => v.lang === languageCode);
+
+  // If no exact match, try to find a voice that starts with the language code
+  if (!voice) {
+    const langPrefix = languageCode.split('-')[0];
+    voice = availableVoices.find((v) => v.lang.startsWith(`${langPrefix}-`));
+  }
+
+  // If still no match, just try to find any voice with the base language
+  if (!voice) {
+    const langPrefix = languageCode.split('-')[0];
+    voice = availableVoices.find((v) => v.lang.startsWith(langPrefix));
+  }
+
+  return voice;
+}
+
+// iOS-specific implementation
+function speakWordIOS(text, button) {
+  if (!window.speechSynthesis) {
+    button.classList.remove('speaking');
+    return;
+  }
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  // Get language code - simplified for iOS
+  let languageCode = 'en-US'; // Default
+  if (app) {
+    if (app.direction === true) {
+      // Normal: source language (simplify to base code for better iOS compatibility)
+      const lang = app.sourceLanguage || 'en';
+      languageCode = getLanguageForIOS(lang);
+    } else {
+      // Reverse: target language
+      const lang = app.targetLanguage || 'en';
+      languageCode = getLanguageForIOS(lang);
+    }
+  }
+
+  // Set the language directly without trying to find a voice
+  utterance.lang = languageCode;
+
+  // Basic event handlers for iOS
+  utterance.onend = () => {
+    button.classList.remove('speaking');
+  };
+
+  utterance.onerror = () => {
+    button.classList.remove('speaking');
+  };
+
+  // iOS requires stopping any current speech
+  window.speechSynthesis.cancel();
+
+  // Start speaking
+  window.speechSynthesis.speak(utterance);
+
+  // iOS Safari workaround - needed for reliable operation
+  window.speechSynthesis.pause();
+  window.speechSynthesis.resume();
+}
+
+// Standard implementation for non-iOS browsers
+function speakWordStandard(text, button) {
+  if (!window.speechSynthesis) {
+    button.classList.remove('speaking');
+    return;
+  }
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  let voices = window.speechSynthesis.getVoices();
+
+  // Function to configure and speak
+  function configureAndSpeak() {
+    let languageCode = 'en-US'; // Default fallback
+
+    // Get language from app if available
+    if (app) {
+      if (app.direction === true) {
+        languageCode = getLanguageCode(app.sourceLanguage);
+      } else {
+        languageCode = getLanguageCode(app.targetLanguage);
+      }
+    }
+
+    // Attempt to find a voice for the desired language
+    const preferredVoice = findVoiceForLanguage(voices, languageCode);
+
+    if (preferredVoice) {
+      utterance.voice = preferredVoice;
+      utterance.lang = preferredVoice.lang;
+    } else {
+      utterance.lang = languageCode;
+    }
+
+    // Event handlers
+    utterance.onend = () => {
+      button.classList.remove('speaking');
+    };
+
+    utterance.onerror = () => {
+      button.classList.remove('speaking');
+    };
+
+    // Speak the word
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // If voices aren't loaded yet, wait for them
+  if (voices.length === 0) {
+    speechSynthesis.onvoiceschanged = function handleVoicesChanged() {
+      voices = window.speechSynthesis.getVoices();
+      configureAndSpeak();
+      speechSynthesis.onvoiceschanged = null;
+    };
+  } else {
+    configureAndSpeak();
+  }
+}
+
+// Function to speak the current word using text-to-speech
+function speakCurrentWord() {
+  const wordElement = document.getElementById('word');
+  const speakButton = document.getElementById('speak-word');
+
+  if (!wordElement || !speakButton) {
+    return;
+  }
+
+  const text = wordElement.textContent.trim();
+
+  if (!text || text === 'No more questions available.' || text === 'Loading...' || text === 'Error') {
+    return;
+  }
+
+  // Add visual feedback immediately
+  speakButton.classList.add('speaking');
+
+  // Check if this is iOS
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  try {
+    // iOS-specific approach for better compatibility
+    if (isIOS) {
+      speakWordIOS(text, speakButton);
+    } else {
+      speakWordStandard(text, speakButton);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Speech synthesis error:', error);
+    speakButton.classList.remove('speaking');
+  }
+}
+
 export async function populateWordLists() {
   const quizSelect = document.getElementById('quiz-select');
   if (!quizSelect) {
@@ -273,6 +459,14 @@ export function initEventHandlers() {
     quizSelect.addEventListener('change', handleQuizSelect);
   } else {
     console.error('Quiz select element not found during init.');
+  }
+
+  // Add event listener for the speak button
+  const speakButton = document.getElementById('speak-word');
+  if (speakButton) {
+    speakButton.addEventListener('click', speakCurrentWord);
+  } else {
+    console.error('Speak button element not found during init.');
   }
 
   // Populate word lists when the page loads (if authenticated)

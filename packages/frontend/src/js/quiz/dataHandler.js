@@ -10,15 +10,12 @@ export async function fetchWordSets(token, wordListName) {
       return null;
     }
 
-    const response = await fetch(
-      `${serverAddress}/user/word-sets?wordListName=${encodeURIComponent(wordListName)}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch(`${serverAddress}/user/word-sets?wordListName=${encodeURIComponent(wordListName)}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     if (!response.ok) {
       if (response.status === 401) {

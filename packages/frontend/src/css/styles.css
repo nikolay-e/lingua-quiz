@@ -2,4 +2,40 @@
 @import "base.css";
 @import "layout.css";
 @import "auth.css";
+/* Add the TTS CSS directly here */
+.speak-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.speak-button:hover {
+  color: var(--secondary-color);
+  background-color: rgba(74, 144, 226, 0.1);
+  transform: scale(1.1);
+}
+
+.speak-button.speaking {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Ensure the question container can properly display the word and button */
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 /* Import other CSS modules as needed */
