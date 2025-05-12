@@ -202,16 +202,51 @@ function handleQuizSelect(event) {
   }
 }
 
+// Helper function to convert language names to language codes
 function getLanguageCode(language) {
   const languageMap = {
     English: 'en-US',
     Spanish: 'es-MX',
     German: 'de-DE',
     Russian: 'ru-RU',
-    // Add more language mappings as needed
+    // Also support language codes directly
+    en: 'en-US',
+    es: 'es-MX',
+    de: 'de-DE',
+    ru: 'ru-RU',
   };
 
-  return languageMap[language] || language;
+  return languageMap[language] || languageMap[language.toLowerCase()] || language;
+}
+
+// Helper function to find appropriate voice for a language
+function findVoiceForLanguage(availableVoices, languageCode) {
+  // First try to find exact match
+  let voice = availableVoices.find((v) => v.lang === languageCode);
+
+  // If no exact match, try to find a voice that starts with the language code
+  if (!voice) {
+    const langPrefix = languageCode.split('-')[0];
+    voice = availableVoices.find((v) => v.lang.startsWith(`${langPrefix}-`));
+  }
+
+  // If still no match, just try to find any voice with the base language
+  if (!voice) {
+    const langPrefix = languageCode.split('-')[0];
+    voice = availableVoices.find((v) => v.lang.startsWith(langPrefix));
+  }
+
+  // Log available voices if in development (helpful for debugging)
+  if (!voice && window.location.hostname === 'localhost') {
+    // Using warn instead of log to avoid ESLint errors in production
+    // eslint-disable-next-line no-console
+    console.warn(
+      'Available voices:',
+      availableVoices.map((v) => `${v.name} (${v.lang})`)
+    );
+  }
+
+  return voice;
 }
 
 // Function to speak the current word using text-to-speech
@@ -220,6 +255,8 @@ function speakCurrentWord() {
   const speakButton = document.getElementById('speak-word');
 
   if (!wordElement || !speakButton || !window.speechSynthesis) {
+    // eslint-disable-next-line no-console
+    console.warn('Speech synthesis not available');
     return;
   }
 
@@ -232,28 +269,81 @@ function speakCurrentWord() {
   // Create utterance
   const utterance = new SpeechSynthesisUtterance(text);
 
-  // Get the current language from the app for better pronunciation
-  if (app && app.direction === true) {
-    // Normal direction: speak in source language
-    utterance.lang = getLanguageCode(app.sourceLanguage);
-  } else if (app && app.direction === false) {
-    // Reverse direction: speak in target language
-    utterance.lang = getLanguageCode(app.targetLanguage);
+  // Get available voices
+  let voices = window.speechSynthesis.getVoices();
+
+  // Function to set voice and speak - defined before use to avoid ESLint warnings
+  function configureAndSpeak(currentUtterance, currentVoices) {
+    let languageCode = 'en-US'; // Default fallback
+
+    // Get language from app if available
+    if (app) {
+      if (app.direction === true) {
+        // Normal direction: source language
+        languageCode = getLanguageCode(app.sourceLanguage);
+      } else {
+        // Reverse direction: target language
+        languageCode = getLanguageCode(app.targetLanguage);
+      }
+    }
+
+    // Attempt to find a voice for the desired language
+    const preferredVoice = findVoiceForLanguage(currentVoices, languageCode);
+
+    const speechUtterance = currentUtterance;
+
+    if (preferredVoice) {
+      speechUtterance.voice = preferredVoice;
+      speechUtterance.lang = preferredVoice.lang;
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(`No voice found for ${languageCode}, using default voice`);
+      speechUtterance.lang = languageCode; // Still set lang even without a matching voice
+    }
+
+    // Add visual feedback while speaking
+    speakButton.classList.add('speaking');
+
+    // Remove visual feedback when done speaking
+    speechUtterance.onend = () => {
+      speakButton.classList.remove('speaking');
+    };
+
+    // Handle errors
+    speechUtterance.onerror = (event) => {
+      // eslint-disable-next-line no-console
+      console.error('Speech synthesis error:', event);
+      speakButton.classList.remove('speaking');
+    };
+
+    // Stop any currently speaking utterance
+    window.speechSynthesis.cancel();
+
+    // Speak the word
+    window.speechSynthesis.speak(speechUtterance);
+
+    // iOS Safari workaround - sometimes needs a manual restart
+    // This is a known issue with speech synthesis on iOS
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream) {
+      setTimeout(() => {
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+      }, 0);
+    }
   }
 
-  // Add visual feedback while speaking
-  speakButton.classList.add('speaking');
-
-  // Remove visual feedback when done speaking
-  utterance.onend = () => {
-    speakButton.classList.remove('speaking');
-  };
-
-  // Stop any currently speaking utterance
-  window.speechSynthesis.cancel();
-
-  // Speak the word
-  window.speechSynthesis.speak(utterance);
+  // On some browsers (especially Safari), voices might not be loaded immediately
+  if (voices.length === 0) {
+    // For Safari and other browsers where voices might load asynchronously
+    speechSynthesis.onvoiceschanged = function handleVoicesChanged() {
+      voices = window.speechSynthesis.getVoices();
+      configureAndSpeak(utterance, voices);
+      // Remove the event listener after it fires once
+      speechSynthesis.onvoiceschanged = null;
+    };
+  } else {
+    configureAndSpeak(utterance, voices);
+  }
 }
 
 export async function populateWordLists() {
