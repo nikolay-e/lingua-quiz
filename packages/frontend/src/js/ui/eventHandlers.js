@@ -202,6 +202,61 @@ function handleQuizSelect(event) {
   }
 }
 
+// Function to speak the current word using text-to-speech
+function speakCurrentWord() {
+  const wordElement = document.getElementById('word');
+  const speakButton = document.getElementById('speak-word');
+  
+  if (!wordElement || !speakButton || !window.speechSynthesis) {
+    return;
+  }
+  
+  const text = wordElement.textContent.trim();
+  
+  if (!text || text === 'No more questions available.' || text === 'Loading...' || text === 'Error') {
+    return;
+  }
+  
+  // Create utterance
+  const utterance = new SpeechSynthesisUtterance(text);
+  
+  // Get the current language from the app for better pronunciation
+  if (app && app.direction === true) {
+    // Normal direction: speak in source language
+    utterance.lang = getLanguageCode(app.sourceLanguage);
+  } else if (app && app.direction === false) {
+    // Reverse direction: speak in target language
+    utterance.lang = getLanguageCode(app.targetLanguage);
+  }
+  
+  // Add visual feedback while speaking
+  speakButton.classList.add('speaking');
+  
+  // Remove visual feedback when done speaking
+  utterance.onend = () => {
+    speakButton.classList.remove('speaking');
+  };
+  
+  // Stop any currently speaking utterance
+  window.speechSynthesis.cancel();
+  
+  // Speak the word
+  window.speechSynthesis.speak(utterance);
+}
+
+// Helper function to convert language names to language codes
+function getLanguageCode(language) {
+  const languageMap = {
+    'English': 'en-US',
+    'Spanish': 'es-MX',
+    'German': 'de-DE',
+    'Russian': 'ru-RU',
+    // Add more language mappings as needed
+  };
+  
+  return languageMap[language] || language;
+}
+
 export async function populateWordLists() {
   const quizSelect = document.getElementById('quiz-select');
   if (!quizSelect) {
@@ -273,6 +328,14 @@ export function initEventHandlers() {
     quizSelect.addEventListener('change', handleQuizSelect);
   } else {
     console.error('Quiz select element not found during init.');
+  }
+  
+  // Add event listener for the speak button
+  const speakButton = document.getElementById('speak-word');
+  if (speakButton) {
+    speakButton.addEventListener('click', speakCurrentWord);
+  } else {
+    console.error('Speak button element not found during init.');
   }
 
   // Populate word lists when the page loads (if authenticated)
