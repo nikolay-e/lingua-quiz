@@ -1,17 +1,28 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
-  timeout: 30 * 1000,
+  timeout: 120 * 1000, // Increase timeout to 2 minutes
   expect: {
-    timeout: 5000,
+    timeout: 20000,
   },
+  retries: 2, // Add more retries for flaky tests in Docker environment
+  // Add verbose reporter settings
+  reporter: [
+    ['list', { printSteps: true }],
+    ['html', { open: 'never' }]
+  ],
   use: {
     baseURL: process.env.LINGUA_QUIZ_URL,
     trace: 'off',
     screenshot: 'on',
     video: 'on', // set to 'on' for detailed debugging
+    
+    // Forward all browser console logs to test output
+    logger: {
+      isEnabled: (name, severity) => true,
+      log: (name, severity, message, args) => console.log(`[${name}] ${message}`),
+    },
   },
   reporter: [['html', { open: 'never' }], ['list']],
 

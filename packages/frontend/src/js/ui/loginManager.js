@@ -1,4 +1,4 @@
-import serverAddress from '../config.js';
+import { config } from '../config.js';
 import { AuthUtils } from '../utils/authUtils.js';
 import { errorHandler } from '../utils/errorHandler.js';
 
@@ -16,8 +16,7 @@ export class AuthManager {
     return AuthUtils.isValidToken(this.token);
   }
 
-  // eslint-disable-next-line
-  redirectToLogin() {
+  static redirectToLogin() {
     AuthUtils.redirectToLogin();
   }
 
@@ -35,15 +34,14 @@ export class AuthManager {
     window.location.replace('login.html');
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  async handleLogin(e) {
+  static async handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const loginMessage = document.getElementById('login-message');
 
     try {
-      const response = await fetch(`${serverAddress}/login`, {
+      const response = await fetch(config.getUrl('login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +82,7 @@ export class AuthManager {
           <i class="fas fa-sign-out-alt"></i> 
           <span>Logout (${this.email})</span>
         `;
-        loginLogoutBtn.removeEventListener('click', this.redirectToLogin);
+        loginLogoutBtn.removeEventListener('click', AuthManager.redirectToLogin);
         loginLogoutBtn.addEventListener('click', this.logout.bind(this));
       } else {
         loginLogoutBtn.innerHTML = `
@@ -93,7 +91,7 @@ export class AuthManager {
         `;
         loginLogoutBtn.removeEventListener('click', this.logout);
         if (!window.location.pathname.includes('login.html')) {
-          loginLogoutBtn.addEventListener('click', this.redirectToLogin);
+          loginLogoutBtn.addEventListener('click', AuthManager.redirectToLogin);
         }
       }
     }
@@ -105,13 +103,18 @@ export class AuthManager {
     const password = document.getElementById('register-password').value;
     const registerMessage = document.getElementById('register-message');
 
+    console.log('Registration attempt for:', email);
+
     if (!this.passwordValidator.validatePassword(password)) {
+      console.log('Password validation failed for:', email);
       errorHandler.showError('Please meet all password requirements');
       return;
     }
 
     try {
-      const response = await fetch(`${serverAddress}/register`, {
+      console.log('Sending registration request to:', config.getUrl('register'));
+      
+      const response = await fetch(config.getUrl('register'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,9 +122,18 @@ export class AuthManager {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
+      console.log('Registration response status:', response.status);
+      
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error('Error parsing registration response:', parseError);
+        data = { message: 'Error processing server response' };
+      }
 
       if (response.ok) {
+        console.log('Registration successful for:', email);
         registerMessage.textContent = 'Registration successful. You can now log in.';
         registerMessage.style.color = 'var(--success-color)';
         // Clear the form
@@ -149,11 +161,23 @@ export class AuthManager {
     togglePasswordBtn.className = 'toggle-password-btn';
     togglePasswordBtn.innerHTML = '<i class="fas fa-eye"></i>';
     togglePasswordBtn.addEventListener('click', () => {
-      const type = passwordInput.type === 'password' ? 'text' : 'password';
-      // eslint-disable-next-line no-param-reassign
-      passwordInput.type = type;
-      // eslint-disable-next-line max-len
-      togglePasswordBtn.innerHTML = `<i class="fas fa-eye${type === 'password' ? '' : '-slash'}"></i>`;
+      const newInputType = passwordInput.type === 'password' ? 'text' : 'password';
+
+      // Create a new input element with the updated type
+      const newPasswordInput = document.createElement('input');
+      // Copy all attributes from the original input
+      [...passwordInput.attributes].forEach((attr) => {
+        newPasswordInput.setAttribute(attr.name, attr.value);
+      });
+      // Set the new type
+      newPasswordInput.setAttribute('type', newInputType);
+      // Copy the value
+      newPasswordInput.value = passwordInput.value;
+
+      // Replace the old input with the new one
+      passwordInput.parentNode.replaceChild(newPasswordInput, passwordInput);
+
+      togglePasswordBtn.innerHTML = `<i class="fas fa-eye${newInputType === 'password' ? '' : '-slash'}"></i>`;
     });
     passwordInput.parentNode.appendChild(togglePasswordBtn);
 
@@ -184,7 +208,7 @@ export class AuthManager {
 
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
-      loginForm.addEventListener('submit', this.handleLogin.bind(this));
+      loginForm.addEventListener('submit', AuthManager.handleLogin);
     }
 
     // Initialize login toggle buttons
@@ -193,10 +217,25 @@ export class AuthManager {
       const input = btn.previousElementSibling;
       if (input) {
         btn.addEventListener('click', () => {
-          const type = input.type === 'password' ? 'text' : 'password';
-          input.type = type;
-          // eslint-disable-next-line no-param-reassign
-          btn.innerHTML = `<i class="fas fa-eye${type === 'password' ? '' : '-slash'}"></i>`;
+          const newType = input.type === 'password' ? 'text' : 'password';
+
+          // Create a new input element with the updated type
+          const newInput = document.createElement('input');
+          // Copy all attributes from the original input
+          [...input.attributes].forEach((attr) => {
+            newInput.setAttribute(attr.name, attr.value);
+          });
+          // Set the new type
+          newInput.setAttribute('type', newType);
+          // Copy the value
+          newInput.value = input.value;
+
+          // Replace the old input with the new one
+          input.parentNode.replaceChild(newInput, input);
+
+          const newBtn = btn.cloneNode(false);
+          newBtn.innerHTML = `<i class="fas fa-eye${newType === 'password' ? '' : '-slash'}"></i>`;
+          btn.parentNode.replaceChild(newBtn, btn);
         });
       }
     });
@@ -204,7 +243,7 @@ export class AuthManager {
 
   checkAuthAndRedirect() {
     if (AuthUtils.shouldRedirectToLogin()) {
-      this.redirectToLogin();
+      AuthUtils.redirectToLogin();
     }
   }
 }

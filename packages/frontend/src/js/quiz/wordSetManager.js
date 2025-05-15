@@ -1,8 +1,7 @@
 import { STATUS } from '../app.js';
-import serverAddress from '../config.js';
+import { config } from '../config.js';
 
-// eslint-disable-next-line import/prefer-default-export
-export async function saveQuizState(app, token) {
+async function saveQuizState(app, token) {
   const statusSets = {
     [STATUS.LEVEL_3]: app.wordStatusSets[STATUS.LEVEL_3],
     [STATUS.LEVEL_2]: app.wordStatusSets[STATUS.LEVEL_2],
@@ -14,7 +13,7 @@ export async function saveQuizState(app, token) {
     const promises = Object.entries(statusSets).map(([status, set]) => {
       const wordPairIds = Array.from(set);
 
-      return fetch(`${serverAddress}/user/word-sets`, {
+      return fetch(config.getUrl('userWordSets'), {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -37,3 +36,5 @@ export async function saveQuizState(app, token) {
     throw error;
   }
 }
+
+export { saveQuizState };

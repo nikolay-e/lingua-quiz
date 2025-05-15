@@ -244,43 +244,44 @@ export async function populateWordLists() {
   }
 }
 
-export function initEventHandlers() {
-  errorHandler.init(); // Initialize global error display
-
+export function initQuizEventHandlers() {
   const answerInput = document.getElementById('answer');
   if (answerInput) {
     answerInput.addEventListener('keydown', handleEnterKey);
-  } else {
-    console.error('Answer input element not found during init.');
   }
 
   const submitButton = document.getElementById('submit');
   if (submitButton) {
     submitButton.addEventListener('click', submitAnswer);
-  } else {
-    console.error('Submit button element not found during init.');
   }
 
   const directionToggleBtn = document.getElementById('direction-toggle');
   if (directionToggleBtn) {
     directionToggleBtn.addEventListener('click', handleDirectionToggle);
-  } else {
-    console.error('Direction toggle button element not found during init.');
   }
 
   const quizSelect = document.getElementById('quiz-select');
   if (quizSelect) {
     quizSelect.addEventListener('change', handleQuizSelect);
-  } else {
-    console.error('Quiz select element not found during init.');
   }
 
   // Populate word lists when the page loads (if authenticated)
   if (AuthUtils.isValidToken(AuthUtils.getToken())) {
     populateWordLists();
   } else {
-    // eslint-disable-next-line no-shadow
-    const quizSelect = document.getElementById('quiz-select');
-    if (quizSelect) quizSelect.innerHTML = '<option value="">Please login</option>';
+    const selectElement = document.getElementById('quiz-select');
+    if (selectElement) selectElement.innerHTML = '<option value="">Please login</option>';
   }
+}
+
+export function initEventHandlers() {
+  // Check what page we're on
+  const isQuizPage = document.getElementById('quiz-select') !== null;
+  
+  if (isQuizPage) {
+    initQuizEventHandlers();
+  }
+  
+  // Always initialize error handler
+  errorHandler.init();
 }

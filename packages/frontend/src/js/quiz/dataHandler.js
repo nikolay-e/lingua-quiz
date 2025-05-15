@@ -1,5 +1,5 @@
 import { createApp } from '../app.js';
-import serverAddress from '../config.js';
+import { config } from '../config.js';
 import { AuthUtils } from '../utils/authUtils.js';
 import { errorHandler } from '../utils/errorHandler.js';
 
@@ -10,15 +10,13 @@ export async function fetchWordSets(token, wordListName) {
       return null;
     }
 
-    const response = await fetch(
-      `${serverAddress}/user/word-sets?wordListName=${encodeURIComponent(wordListName)}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const wordSetsUrl = `${config.getUrl('userWordSets')}?wordListName=${encodeURIComponent(wordListName)}`;
+    const response = await fetch(wordSetsUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     if (!response.ok) {
       if (response.status === 401) {
@@ -45,7 +43,7 @@ export async function fetchWordLists(token) {
       return null;
     }
 
-    const response = await fetch(`${serverAddress}/word-lists`, {
+    const response = await fetch(config.getUrl('wordLists'), {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

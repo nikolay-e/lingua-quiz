@@ -66,5 +66,6 @@ class ErrorHandler {
   }
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export const errorHandler = new ErrorHandler();
+const errorHandler = new ErrorHandler();
+
+export { errorHandler };

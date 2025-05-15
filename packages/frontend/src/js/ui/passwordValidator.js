@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export class PasswordValidator {
+class PasswordValidator {
   constructor() {
     this.requirements = [
       {
@@ -63,8 +62,7 @@ export class PasswordValidator {
     return container;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  updateRequirement(requirement, isValid) {
+  static updateRequirement(requirement, isValid) {
     const reqElement = document.getElementById(`req-${requirement.id}`);
     if (!reqElement) return;
 
@@ -84,9 +82,11 @@ export class PasswordValidator {
     let isValid = true;
     this.requirements.forEach((requirement) => {
       const reqValid = requirement.validate(password);
-      this.updateRequirement(requirement, reqValid);
+      PasswordValidator.updateRequirement(requirement, reqValid);
       if (!reqValid) isValid = false;
     });
     return isValid;
   }
 }
+
+export { PasswordValidator };
