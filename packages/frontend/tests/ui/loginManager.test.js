@@ -1,7 +1,7 @@
 import { AuthManager } from '../../src/js/ui/loginManager.js';
 import { AuthUtils } from '../../src/js/utils/authUtils.js';
 import { errorHandler } from '../../src/js/utils/errorHandler.js';
-import serverAddress from '../../src/js/config.js';
+import { config } from '../../src/js/config.js';
 
 jest.mock('../../src/js/utils/authUtils.js', () => ({
   AuthUtils: {

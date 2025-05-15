@@ -8,4 +8,5 @@ COPY . .
 
 RUN npm ci
 
-CMD ["npm", "run", "test", "--reporter=list,null"]
+# Run tests with more verbose output
+CMD ["npm", "run", "test", "--reporter=list"]

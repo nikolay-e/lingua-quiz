@@ -30,20 +30,20 @@ backend:
   # Liveness, Readiness, Startup probes configuration
   probes:
     liveness:
-      path: /healthz
+      path: /api/health
       initialDelaySeconds: 30
       periodSeconds: 10
       timeoutSeconds: 5
       failureThreshold: 3
     readiness:
-      path: /healthz
+      path: /api/health
       initialDelaySeconds: 5
       periodSeconds: 5
       timeoutSeconds: 3
       successThreshold: 1
       failureThreshold: 3
     startup:
-      path: /healthz
+      path: /api/health
       failureThreshold: 30
       periodSeconds: 10
       timeoutSeconds: 5
@@ -97,10 +97,12 @@ ingress:
 # Secrets - These MUST be provided during deployment (e.g., via --set or a secrets file)
 secrets:
   # Values should be plain text, Helm will Base64 encode them
-  jwtSecret: "<JWT_SECRET>" # Placeholder, must be set via --set
-  postgresDb: "<POSTGRES_DB>" # Placeholder, must be set via --set
-  postgresUser: "<POSTGRES_USER>" # Placeholder, must be set via --set
-  postgresPassword: "<POSTGRES_PASSWORD>" # Placeholder, must be set via --set
+  # These are placeholder values only; real values must be provided at deployment time
+  # In production, use --set-file secrets.jwtSecret=./jwt-secret.txt or similar for secure handling
+  jwtSecret: "" # Must be set at deployment time
+  postgresDb: "" # Must be set at deployment time
+  postgresUser: "" # Must be set at deployment time
+  postgresPassword: "" # Must be set at deployment time
 
 # Service Account configuration
 serviceAccount:
@@ -115,7 +117,7 @@ serviceAccount:
 # Database migrations configuration
 migrations:
   enabled: true
-  command: ["npm", "run", "migrate"]
+  command: ["node", "src/migrations.mjs"]
   ttlSecondsAfterFinished: 120
   restartPolicy: OnFailure
   backoffLimit: 4
@@ -130,7 +132,6 @@ migrations:
   # env:
   #   - name: MIGRATION_VERBOSITY
   #     value: "verbose"
-
 # Optional configurations
 # imagePullSecrets: []
 # nameOverride: ""

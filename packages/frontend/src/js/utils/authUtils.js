@@ -2,8 +2,7 @@ import jwtDecode from 'jwt-decode';
 
 import { errorHandler } from './errorHandler.js';
 
-// eslint-disable-next-line import/prefer-default-export
-export class AuthUtils {
+class AuthUtils {
   static TOKEN_KEY = 'token';
 
   static EMAIL_KEY = 'email';
@@ -97,3 +96,5 @@ export class AuthUtils {
     return checkInterval;
   }
 }
+
+export { AuthUtils };

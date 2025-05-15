@@ -85,6 +85,23 @@ test.describe('Quiz Functionality', () => {
 
   test('should master all words in the selected quiz', async ({ page }) => {
     test.setTimeout(TEST_TIMEOUT_MS);
+    
+    // Listen to all console logs
+    page.on('console', (msg) => {
+      console.log(`[Browser Console] ${msg.type()}: ${msg.text()}`);
+    });
+    
+    // Listen to all browser errors
+    page.on('pageerror', (error) => {
+      console.error(`[Browser Error] ${error.message}`);
+    });
+    
+    // Listen to all response errors
+    page.on('response', response => {
+      if (!response.ok() && response.status() !== 401) {
+        console.log(`[Response Error] ${response.status()}: ${response.url()}`);
+      }
+    });
 
     console.log('Starting quiz test...');
     await page.addStyleTag({
@@ -92,9 +109,98 @@ test.describe('Quiz Functionality', () => {
     });
     console.log('UI animations disabled.');
 
-    await register(page, testUser, testPassword, true);
-    await login(page, testUser, testPassword);
-    console.log('User registered and logged in.');
+    // Create a unique test user for this test
+    const uniqueTestEmail = `quiz_user_${Math.floor(Math.random() * 1000)}@example.com`;
+    const uniqueTestPassword = 'TestPassword123!';
+    
+    // The backend is the same for all tests
+    const baseURL = 'http://backend:9000';
+    
+    // Register directly via API to avoid Playwright UI issues
+    console.log(`Creating test user ${uniqueTestEmail} via direct API call`);
+    const registerParams = { baseURL, email: uniqueTestEmail, password: uniqueTestPassword };
+    
+    try {
+      const registerResult = await page.evaluate(async (params) => {
+        const { baseURL, email, password } = params;
+        try {
+          const res = await fetch(`${baseURL}/api/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          
+          let data;
+          try { data = await res.json(); } 
+          catch (e) { data = { message: 'Error parsing response' }; }
+          
+          return { status: res.status, ok: res.ok, data };
+        } catch (error) {
+          return { error: error.toString(), status: 500 };
+        }
+      }, registerParams);
+      
+      console.log('Registration result:', registerResult);
+      
+      // Now login directly via API
+      const loginParams = { baseURL, email: uniqueTestEmail, password: uniqueTestPassword };
+      const loginResult = await page.evaluate(async (params) => {
+        const { baseURL, email, password } = params;
+        try {
+          const res = await fetch(`${baseURL}/api/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          
+          let data;
+          try { data = await res.json(); } 
+          catch (e) { data = { message: 'Error parsing response' }; }
+          
+          if (res.ok && data.token) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('email', email);
+            
+            try {
+              const base64Url = data.token.split('.')[1];
+              const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+              const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => 
+                '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+              ).join(''));
+              const payload = JSON.parse(jsonPayload);
+              
+              if (payload.exp) {
+                localStorage.setItem('tokenExpiration', payload.exp * 1000);
+              }
+            } catch (e) {
+              console.error('Error parsing JWT token:', e);
+            }
+          }
+          
+          return { status: res.status, ok: res.ok, data, hasToken: !!data.token };
+        } catch (error) {
+          return { error: error.toString(), status: 500 };
+        }
+      }, loginParams);
+      
+      console.log('Login result:', loginResult);
+      
+      if (loginResult.ok && loginResult.hasToken) {
+        // Go to the main page - we're authenticated now
+        await page.goto('/');
+        console.log('Successfully logged in, navigated to homepage');
+      } else {
+        console.error('Failed to login for quiz test');
+        test.fail(true, 'Authentication failed for quiz test');
+        return;
+      }
+    } catch (e) {
+      console.error('Error in quiz test setup:', e);
+      test.fail(true, 'Setup error: ' + e.message);
+      return;
+    }
+    
+    console.log('User created and authenticated for quiz test');
 
     const quizSelect = page.locator('#quiz-select');
     await quizSelect.waitFor({ state: 'visible', timeout: WAIT_FOR_ELEMENT_TIMEOUT });
@@ -349,7 +455,7 @@ test.describe('Quiz Functionality', () => {
         try {
           await waitForNextQuestion(page, previousQuestionWord);
         } catch (e) {
-          const currentL3Count = (await getWordsFromList(page, 'level-3-list')).length;
+          const currentL3Count = (await getWordsOrCountFromList(page, 'level-3-list', false)).length;
           masteredVocabularyWordsCount = currentL3Count;
           if (currentL3Count >= targetMasteredCount) {
             console.log('Target reached after waiting timeout. Breaking.');

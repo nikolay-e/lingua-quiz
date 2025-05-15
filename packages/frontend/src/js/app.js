@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { errorHandler } from './utils/errorHandler.js';
 
 // Constants for word statuses
@@ -114,14 +113,15 @@ export class App {
     const oldStatus = wordPair.status;
 
     // Ensure the new status is valid, default to LEVEL_0 if not
-    if (!this.wordStatusSets[newStatus]) {
-      console.warn(`Unknown status '${newStatus}' for wordPairId '${wordPairId}'. Defaulting to 'LEVEL_0'.`);
-      // eslint-disable-next-line no-param-reassign
-      newStatus = STATUS.LEVEL_0;
+    let validStatus = newStatus;
+    if (!this.wordStatusSets[validStatus]) {
+      console.warn(`Unknown status '${validStatus}' for wordPairId '${wordPairId}'. Defaulting to 'LEVEL_0'.`);
+
+      validStatus = STATUS.LEVEL_0;
     }
 
     // Only proceed if the status is actually different
-    if (oldStatus === newStatus) {
+    if (oldStatus === validStatus) {
       return false; // No change occurred
     }
 
@@ -131,10 +131,10 @@ export class App {
     });
 
     // Add to the new set
-    this.wordStatusSets[newStatus].add(wordPairId);
+    this.wordStatusSets[validStatus].add(wordPairId);
 
     // Update status in the main map
-    wordPair.status = newStatus;
+    wordPair.status = validStatus;
 
     return true; // Status changed
   }
@@ -275,11 +275,11 @@ export class App {
 
   aggregateIncorrectCounts() {
     const counts = {};
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(this.stats.incorrectPerTranslationIdAndDirection)) {
+
+    Object.entries(this.stats.incorrectPerTranslationIdAndDirection).forEach(([key, value]) => {
       const [translationId] = key.split('-');
       counts[translationId] = (counts[translationId] || 0) + value;
-    }
+    });
     return counts;
   }
 
@@ -293,17 +293,17 @@ export class App {
     }
   }
 
-  getMistakesKey(wordId, direction) {
+  static getMistakesKey(wordId, direction) {
     return `${wordId}-${direction ? 'normal' : 'reverse'}`;
   }
 
   resetMistakesCounter(wordId, direction) {
-    const key = this.getMistakesKey(wordId, direction);
+    const key = App.getMistakesKey(wordId, direction);
     this.consecutiveMistakes.set(key, 0);
   }
 
   incrementMistakesCounter(wordId, direction) {
-    const key = this.getMistakesKey(wordId, direction);
+    const key = App.getMistakesKey(wordId, direction);
     const currentMistakes = this.consecutiveMistakes.get(key) || 0;
     const newMistakes = currentMistakes + 1;
     this.consecutiveMistakes.set(key, newMistakes);
@@ -426,10 +426,10 @@ export class App {
       throw new Error(`Translation not found for ID ${this.currentTranslationId}`);
     }
     const correctAnswer = this.direction === DIRECTION.NORMAL ? translation.targetWord : translation.sourceWord;
-    return this.compareAnswers(userAnswer, correctAnswer);
+    return App.compareAnswers(userAnswer, correctAnswer);
   }
 
-  compareAnswers(userAnswer, correctAnswer) {
+  static compareAnswers(userAnswer, correctAnswer) {
     const normalize = (answer) => {
       if (!answer) return '';
       // Improved normalization: lowercase, remove diacritics, remove punctuation/symbols, trim

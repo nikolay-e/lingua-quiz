@@ -1,7 +1,7 @@
 /* src/css/auth.css */
 .input-group {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 #password,
@@ -31,15 +31,34 @@
   background: none;
 }
 
+.left-sidebar header {
+  padding: 20px 15px 0;
+}
+
+.left-sidebar h1 {
+  font-size: 1.8em;
+  margin: 0;
+  color: var(--primary-color);
+}
+
 .login-container {
   display: flex;
   min-height: 100vh;
   margin: 0 auto;
+  align-items: center; /* Center vertically */
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .login-container .left-sidebar,
 .login-container .right-sidebar {
-  width: 25%;
+  width: clamp(15%, 25%, 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: flex-start; /* Align to the top of the container */
+  padding-top: 25px;
 }
 
 .login-container .main-content {
@@ -47,16 +66,34 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+  padding: clamp(10px, 3vw, 20px);
 }
 
 .login-content {
-  max-width: 400px;
+  width: 100%;
+  max-width: clamp(280px, 30vw, 350px);
   margin: 0 auto;
 }
 
 .login-content .sidebar-section {
-  margin-bottom: 30px;
+  margin-bottom: clamp(15px, 2vh, 20px);
+  padding: clamp(10px, 2vw, 15px);
+}
+
+.auth-redirect {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+.auth-redirect a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-redirect a:hover {
+  text-decoration: underline;
 }
 
 #login-message,
@@ -70,10 +107,11 @@
 .password-requirements {
   background-color: var(--container-bg);
   border-radius: 6px;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 12px;
   box-shadow: 0 2px 4px var(--shadow-color);
+  font-size: 0.9em;
 }
 
 .password-requirements-title {
@@ -87,7 +125,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  margin: 3px 0;
+  margin: 2px 0;
+  line-height: 1.2;
 }
 
 .requirement:hover {
@@ -116,6 +155,14 @@
 
 /* Responsive styles specific to login page */
 @media (max-width: 768px) {
+  .left-sidebar header {
+    padding: 15px 15px 0;
+  }
+  
+  .left-sidebar h1 {
+    font-size: 1.5em;
+  }
+
   .login-container {
     flex-direction: column;
   }
@@ -124,5 +171,20 @@
   .login-container .main-content,
   .login-container .right-sidebar {
     width: 100%;
+    padding-top: 15px;
+  }
+  
+  .login-content {
+    max-width: min(90%, 400px);
+  }
+}
+
+@media (min-width: 1600px) {
+  .login-content .sidebar-section {
+    font-size: clamp(1em, 1vw, 1.2em);
+  }
+  
+  .left-sidebar h1 {
+    font-size: 2.2em;
   }
 }
