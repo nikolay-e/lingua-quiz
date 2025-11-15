@@ -3,6 +3,8 @@
   import { authStore } from '../stores';
   import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '../adminApi';
   import type { VocabularyItem } from '../api-types';
+  import { Toast } from 'flowbite-svelte';
+  import { CheckCircle, XCircle, Info } from 'lucide-svelte';
 
   let token: string | null = null;
   let searchQuery = '';
@@ -526,11 +528,22 @@
   {/if}
 
   <!-- Toast Notification -->
-  {#if showToast}
-    <div class="toast toast-{toastType}">
-      {toastMessage}
-    </div>
-  {/if}
+  <Toast
+    bind:open={showToast}
+    color={toastType === 'success' ? 'green' : toastType === 'error' ? 'red' : 'blue'}
+    position="bottom-right"
+    class="fixed bottom-4 right-4 z-50">
+    <svelte:fragment slot="icon">
+      {#if toastType === 'success'}
+        <CheckCircle class="w-5 h-5" />
+      {:else if toastType === 'error'}
+        <XCircle class="w-5 h-5" />
+      {:else}
+        <Info class="w-5 h-5" />
+      {/if}
+    </svelte:fragment>
+    {toastMessage}
+  </Toast>
 </div>
 
 <style>
@@ -1041,59 +1054,6 @@
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgb(102 126 234 / 10%);
-  }
-
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: white;
-    padding: 16px 24px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgb(0 0 0 / 15%);
-    z-index: 2000;
-    animation: slide-in 0.3s, slide-out 0.3s 2.7s;
-    font-weight: 500;
-    border-left: 4px solid;
-  }
-
-  .toast-success {
-    border-left-color: #10b981;
-    color: #065f46;
-  }
-
-  .toast-error {
-    border-left-color: #ef4444;
-    color: #991b1b;
-  }
-
-  .toast-info {
-    border-left-color: #3b82f6;
-    color: #1e40af;
-  }
-
-  @keyframes slide-in {
-    from {
-      transform: translateX(400px);
-      opacity: 0;
-    }
-
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes slide-out {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    to {
-      transform: translateX(400px);
-      opacity: 0;
-    }
   }
 
   @media (width <= 768px) {
