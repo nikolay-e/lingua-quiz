@@ -4,7 +4,7 @@
   import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '../adminApi';
   import type { VocabularyItem } from '../api-types';
   import { Toast, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Button, Badge, Modal, Label, Input, Textarea, Select } from 'flowbite-svelte';
-  import { CheckCircle, XCircle, Info, Trash2, Plus } from 'lucide-svelte';
+  import { CheckCircle, XCircle, Info, Trash2, Plus, SearchIcon, X } from 'lucide-svelte';
 
   let token: string | null = null;
   let searchQuery = '';
@@ -223,33 +223,37 @@
   <main class="admin-main">
     <!-- Search Section -->
     <div class="search-section">
-      <div class="search-container">
-        <div class="search-input-wrapper">
-          <span class="search-icon">🔍</span>
-          <input
+      <div class="flex gap-4 items-center">
+        <div class="flex-1 relative">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <SearchIcon class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+          </div>
+          <Input
             id="search-input"
-            type="text"
             bind:value={searchQuery}
             on:input={debouncedSearch}
             on:keydown={(e) => e.key === 'Enter' && handleSearch()}
             placeholder="Search vocabulary... (Ctrl+K)"
-            class="search-input"
-          />
+            size="lg"
+            class="pl-10 {searchQuery ? 'pr-10' : ''}" />
           {#if searchQuery}
             <button
-              class="search-clear"
+              type="button"
               on:click={() => {
                 searchQuery = '';
                 searchResults = [];
               }}
-            >
-              ✕
+              class="absolute inset-y-0 right-0 flex items-center pr-3
+                text-gray-500 hover:text-gray-700
+                dark:text-gray-400 dark:hover:text-gray-200">
+              <X class="w-5 h-5" />
             </button>
           {/if}
         </div>
-        <button on:click={openCreateModal} disabled={loading} class="btn btn-primary">
-          + Create New
-        </button>
+        <Button on:click={openCreateModal} disabled={loading} size="lg">
+          <Plus class="w-5 h-5 mr-2" />
+          Create New
+        </Button>
       </div>
     </div>
 
@@ -570,89 +574,6 @@
     margin-bottom: 32px;
   }
 
-  .search-container {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .search-input-wrapper {
-    flex: 1;
-    position: relative;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    opacity: 0.5;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 14px 48px;
-    font-size: 16px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    transition: all 0.2s;
-  }
-
-  .search-input:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgb(102 126 234 / 10%);
-  }
-
-  .search-clear {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #e2e8f0;
-    border: none;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    transition: all 0.2s;
-  }
-
-  .search-clear:hover {
-    background: #cbd5e0;
-  }
-
-  .btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-  }
-
-  .btn-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgb(102 126 234 / 40%);
-  }
-
   .empty-state {
     text-align: center;
     padding: 80px 20px;
@@ -733,14 +654,6 @@
 
     .admin-main {
       padding: 20px;
-    }
-
-    .search-container {
-      flex-direction: column;
-    }
-
-    .search-input-wrapper {
-      width: 100%;
     }
   }
 </style>
