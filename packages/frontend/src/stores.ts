@@ -54,6 +54,12 @@ function createThemeStore(): ThemeStore {
   const applyTheme = (isDark: boolean) => {
     if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      // Sync with Tailwind/Flowbite dark mode class
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   };
 
