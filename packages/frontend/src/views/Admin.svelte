@@ -3,8 +3,8 @@
   import { authStore } from '../stores';
   import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '../adminApi';
   import type { VocabularyItem } from '../api-types';
-  import { Toast, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Button, Badge } from 'flowbite-svelte';
-  import { CheckCircle, XCircle, Info, Edit, Trash2 } from 'lucide-svelte';
+  import { Toast, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Button, Badge, Modal, Label, Input, Textarea, Select } from 'flowbite-svelte';
+  import { CheckCircle, XCircle, Info, Trash2, Plus } from 'lucide-svelte';
 
   let token: string | null = null;
   let searchQuery = '';
@@ -350,197 +350,129 @@
   </main>
 
   <!-- Edit Modal -->
-  {#if showEditModal && selectedItem}
-    <div
-      class="modal-backdrop"
-      role="button"
-      tabindex="0"
-      on:click={closeEditModal}
-      on:keydown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') closeEditModal();
-      }}
-    ></div>
-    <div class="modal">
-      <div class="modal-header">
-        <h2>✏️ Edit Vocabulary Item</h2>
-        <button class="modal-close" on:click={closeEditModal}>✕</button>
+  <Modal
+    bind:open={showEditModal}
+    size="md"
+    autoclose={false}
+    class="w-full">
+    <form on:submit|preventDefault={handleUpdateItem} class="space-y-6">
+      <h3 class="text-xl font-medium text-gray-900 dark:text-white flex items-center gap-2">
+        <Edit class="w-5 h-5" />
+        Edit Vocabulary Item
+      </h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <Label for="edit-source" class="mb-2">Source Text *</Label>
+          <Input id="edit-source" bind:value={editForm.sourceText} required />
+        </div>
+        <div>
+          <Label for="edit-target" class="mb-2">Target Text *</Label>
+          <Input id="edit-target" bind:value={editForm.targetText} required />
+        </div>
       </div>
-
-      <form on:submit|preventDefault={handleUpdateItem} class="modal-content">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="edit-source">Source Text</label>
-            <input
-              id="edit-source"
-              type="text"
-              bind:value={editForm.sourceText}
-              required />
-          </div>
-
-          <div class="form-group">
-            <label for="edit-target">Target Text</label>
-            <input
-              id="edit-target"
-              type="text"
-              bind:value={editForm.targetText}
-              required />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="edit-source-example">Source Example (optional)</label>
-          <textarea
-            id="edit-source-example"
-            bind:value={editForm.sourceUsageExample}
-            rows="2"
-            placeholder="Example sentence in source language"
-          ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="edit-target-example">Target Example (optional)</label>
-          <textarea
-            id="edit-target-example"
-            bind:value={editForm.targetUsageExample}
-            rows="2"
-            placeholder="Example sentence in target language"
-          ></textarea>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            on:click={closeEditModal}
-            disabled={loading}
-            class="btn btn-secondary">
-            Cancel
-          </button>
-          <button type="submit" disabled={loading} class="btn btn-primary">
-            {loading ? 'Saving...' : 'Save Changes'}
-          </button>
-        </div>
-      </form>
-    </div>
-  {/if}
+      <div>
+        <Label for="edit-source-example" class="mb-2">Source Example (optional)</Label>
+        <Textarea
+          id="edit-source-example"
+          rows="2"
+          bind:value={editForm.sourceUsageExample}
+          placeholder="Example sentence in source language" />
+      </div>
+      <div>
+        <Label for="edit-target-example" class="mb-2">Target Example (optional)</Label>
+        <Textarea
+          id="edit-target-example"
+          rows="2"
+          bind:value={editForm.targetUsageExample}
+          placeholder="Example sentence in target language" />
+      </div>
+      <div class="flex justify-end gap-2">
+        <Button color="alternative" on:click={closeEditModal} disabled={loading}>Cancel</Button>
+        <Button type="submit" disabled={loading}>{loading ? 'Saving...' : 'Save Changes'}</Button>
+      </div>
+    </form>
+  </Modal>
 
   <!-- Create Modal -->
-  {#if showCreateModal}
-    <div
-      class="modal-backdrop"
-      role="button"
-      tabindex="0"
-      on:click={closeCreateModal}
-      on:keydown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') closeCreateModal();
-      }}
-    ></div>
-    <div class="modal">
-      <div class="modal-header">
-        <h2>➕ Create New Vocabulary Item</h2>
-        <button class="modal-close" on:click={closeCreateModal}>✕</button>
+  <Modal
+    bind:open={showCreateModal}
+    size="lg"
+    autoclose={false}
+    class="w-full">
+    <form on:submit|preventDefault={handleCreateItem} class="space-y-6">
+      <h3 class="text-xl font-medium text-gray-900 dark:text-white flex items-center gap-2">
+        <Plus class="w-5 h-5" />
+        Create New Vocabulary Item
+      </h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <Label for="create-source" class="mb-2">Source Text *</Label>
+          <Input id="create-source" bind:value={createForm.sourceText} required />
+        </div>
+        <div>
+          <Label for="create-target" class="mb-2">Target Text *</Label>
+          <Input id="create-target" bind:value={createForm.targetText} required />
+        </div>
       </div>
-
-      <form on:submit|preventDefault={handleCreateItem} class="modal-content">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="create-source">Source Text</label>
-            <input
-              id="create-source"
-              type="text"
-              bind:value={createForm.sourceText}
-              required />
-          </div>
-
-          <div class="form-group">
-            <label for="create-target">Target Text</label>
-            <input
-              id="create-target"
-              type="text"
-              bind:value={createForm.targetText}
-              required />
-          </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <Label for="create-source-lang" class="mb-2">Source Language *</Label>
+          <Select id="create-source-lang" bind:value={createForm.sourceLanguage} required>
+            <option value="en">English</option>
+            <option value="de">German</option>
+            <option value="es">Spanish</option>
+            <option value="ru">Russian</option>
+          </Select>
         </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="create-source-lang">Source Language</label>
-            <select id="create-source-lang" bind:value={createForm.sourceLanguage}>
-              <option value="en">English</option>
-              <option value="de">German</option>
-              <option value="es">Spanish</option>
-              <option value="ru">Russian</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="create-target-lang">Target Language</label>
-            <select id="create-target-lang" bind:value={createForm.targetLanguage}>
-              <option value="en">English</option>
-              <option value="de">German</option>
-              <option value="es">Spanish</option>
-              <option value="ru">Russian</option>
-            </select>
-          </div>
+        <div>
+          <Label for="create-target-lang" class="mb-2">Target Language *</Label>
+          <Select id="create-target-lang" bind:value={createForm.targetLanguage} required>
+            <option value="en">English</option>
+            <option value="de">German</option>
+            <option value="es">Spanish</option>
+            <option value="ru">Russian</option>
+          </Select>
         </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="create-list">List Name</label>
-            <input
-              id="create-list"
-              type="text"
-              bind:value={createForm.listName}
-              required />
-          </div>
-
-          <div class="form-group">
-            <label for="create-level">Difficulty Level</label>
-            <select id="create-level" bind:value={createForm.difficultyLevel}>
-              <option value="A1">A1</option>
-              <option value="A2">A2</option>
-              <option value="B1">B1</option>
-              <option value="B2">B2</option>
-              <option value="C1">C1</option>
-              <option value="C2">C2</option>
-            </select>
-          </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <Label for="create-list" class="mb-2">List Name *</Label>
+          <Input id="create-list" bind:value={createForm.listName} required />
         </div>
-
-        <div class="form-group">
-          <label for="create-source-example">Source Example (optional)</label>
-          <textarea
-            id="create-source-example"
-            bind:value={createForm.sourceUsageExample}
-            rows="2"
-            placeholder="Example sentence in source language"
-          ></textarea>
+        <div>
+          <Label for="create-level" class="mb-2">Difficulty Level *</Label>
+          <Select id="create-level" bind:value={createForm.difficultyLevel} required>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+          </Select>
         </div>
-
-        <div class="form-group">
-          <label for="create-target-example">Target Example (optional)</label>
-          <textarea
-            id="create-target-example"
-            bind:value={createForm.targetUsageExample}
-            rows="2"
-            placeholder="Example sentence in target language"
-          ></textarea>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            on:click={closeCreateModal}
-            disabled={loading}
-            class="btn btn-secondary">
-            Cancel
-          </button>
-          <button type="submit" disabled={loading} class="btn btn-primary">
-            {loading ? 'Creating...' : 'Create Item'}
-          </button>
-        </div>
-      </form>
-    </div>
-  {/if}
+      </div>
+      <div>
+        <Label for="create-source-example" class="mb-2">Source Example (optional)</Label>
+        <Textarea
+          id="create-source-example"
+          rows="2"
+          bind:value={createForm.sourceUsageExample}
+          placeholder="Example sentence in source language" />
+      </div>
+      <div>
+        <Label for="create-target-example" class="mb-2">Target Example (optional)</Label>
+        <Textarea
+          id="create-target-example"
+          rows="2"
+          bind:value={createForm.targetUsageExample}
+          placeholder="Example sentence in target language" />
+      </div>
+      <div class="flex justify-end gap-2">
+        <Button color="alternative" on:click={closeCreateModal} disabled={loading}>Cancel</Button>
+        <Button type="submit" disabled={loading}>{loading ? 'Creating...' : 'Create Item'}</Button>
+      </div>
+    </form>
+  </Modal>
 
   <!-- Toast Notification -->
   <Toast
@@ -721,15 +653,6 @@
     box-shadow: 0 4px 12px rgb(102 126 234 / 40%);
   }
 
-  .btn-secondary {
-    background: #e2e8f0;
-    color: #4a5568;
-  }
-
-  .btn-secondary:hover:not(:disabled) {
-    background: #cbd5e0;
-  }
-
   .empty-state {
     text-align: center;
     padding: 80px 20px;
@@ -794,144 +717,6 @@
     }
   }
 
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgb(0 0 0 / 60%);
-    backdrop-filter: blur(4px);
-    z-index: 999;
-    animation: fade-in 0.2s;
-  }
-
-  .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border-radius: 16px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 20px 60px rgb(0 0 0 / 30%);
-    animation: slide-up 0.3s;
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slide-up {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -45%);
-    }
-
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 28px;
-    border-bottom: 2px solid #e2e8f0;
-  }
-
-  .modal-header h2 {
-    margin: 0;
-    font-size: 22px;
-    color: #1a202c;
-  }
-
-  .modal-close {
-    background: #e2e8f0;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
-    transition: all 0.2s;
-  }
-
-  .modal-close:hover {
-    background: #cbd5e0;
-    transform: rotate(90deg);
-  }
-
-  .modal-content {
-    padding: 24px 28px;
-  }
-
-  .modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    padding: 20px 28px;
-    border-top: 2px solid #e2e8f0;
-    background: #f7fafc;
-    border-radius: 0 0 16px 16px;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  .form-group:last-child {
-    margin-bottom: 0;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #2d3748;
-    font-size: 14px;
-  }
-
-  input[type='text'],
-  select,
-  textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 15px;
-    transition: all 0.2s;
-    font-family: inherit;
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 60px;
-  }
-
-  input[type='text']:focus,
-  select:focus,
-  textarea:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgb(102 126 234 / 10%);
-  }
-
   @media (width <= 768px) {
     .admin-wrapper {
       padding: 12px;
@@ -956,14 +741,6 @@
 
     .search-input-wrapper {
       width: 100%;
-    }
-
-    .modal {
-      width: 95%;
-    }
-
-    .form-grid {
-      grid-template-columns: 1fr;
     }
   }
 </style>
