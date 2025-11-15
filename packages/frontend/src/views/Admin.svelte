@@ -3,8 +3,8 @@
   import { authStore } from '../stores';
   import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '../adminApi';
   import type { VocabularyItem } from '../api-types';
-  import { Toast } from 'flowbite-svelte';
-  import { CheckCircle, XCircle, Info } from 'lucide-svelte';
+  import { Toast, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Button, Badge } from 'flowbite-svelte';
+  import { CheckCircle, XCircle, Info, Edit, Trash2 } from 'lucide-svelte';
 
   let token: string | null = null;
   let searchQuery = '';
@@ -282,54 +282,69 @@
       </div>
     {/if}
 
-    <!-- Results Grid -->
+    <!-- Results Table -->
     {#if searchResults.length > 0}
-      <div class="results-grid">
-        {#each searchResults as item (item.id)}
-          <div class="vocab-card" class:inactive={!item.isActive}>
-            <div class="vocab-header">
-              <div class="vocab-languages">
-                <span class="lang-badge">{item.sourceLanguage.toUpperCase()}</span>
-                <span class="arrow">→</span>
-                <span class="lang-badge">{item.targetLanguage.toUpperCase()}</span>
-              </div>
-              <div class="vocab-list-badge">{item.listName}</div>
-            </div>
-
-            <div class="vocab-content">
-              <div class="vocab-pair">
-                <div class="vocab-text source">{item.sourceText}</div>
-                <div class="vocab-text target">{item.targetText}</div>
-              </div>
-
-              {#if item.sourceUsageExample || item.targetUsageExample}
-                <div class="vocab-examples">
-                  {#if item.sourceUsageExample}
-                    <div class="example">
-                      <span class="example-label">Example:</span>
-                      <span class="example-text">{item.sourceUsageExample}</span>
+      <div class="overflow-x-auto shadow-md rounded-lg">
+        <Table hoverable={true} striped={true}>
+          <TableHead>
+            <TableHeadCell>Source</TableHeadCell>
+            <TableHeadCell>Target</TableHeadCell>
+            <TableHeadCell>Languages</TableHeadCell>
+            <TableHeadCell>List</TableHeadCell>
+            <TableHeadCell>Examples</TableHeadCell>
+            <TableHeadCell>
+              <span class="sr-only">Actions</span>
+            </TableHeadCell>
+          </TableHead>
+          <TableBody>
+            {#each searchResults as item (item.id)}
+              <TableBodyRow class={!item.isActive ? 'opacity-50' : ''}>
+                <TableBodyCell class="font-medium">{item.sourceText}</TableBodyCell>
+                <TableBodyCell>{item.targetText}</TableBodyCell>
+                <TableBodyCell>
+                  <div class="flex items-center gap-1">
+                    <Badge color="blue">{item.sourceLanguage.toUpperCase()}</Badge>
+                    <span class="text-gray-500">→</span>
+                    <Badge color="green">{item.targetLanguage.toUpperCase()}</Badge>
+                  </div>
+                </TableBodyCell>
+                <TableBodyCell>
+                  <Badge color="purple">{item.listName}</Badge>
+                </TableBodyCell>
+                <TableBodyCell>
+                  {#if item.sourceUsageExample || item.targetUsageExample}
+                    <div class="text-sm space-y-1">
+                      {#if item.sourceUsageExample}
+                        <div class="text-gray-600 dark:text-gray-400">
+                          <span class="font-semibold">Ex:</span> {item.sourceUsageExample}
+                        </div>
+                      {/if}
+                      {#if item.targetUsageExample}
+                        <div class="text-gray-600 dark:text-gray-400">
+                          <span class="font-semibold">Tr:</span> {item.targetUsageExample}
+                        </div>
+                      {/if}
                     </div>
+                  {:else}
+                    <span class="text-gray-400">—</span>
                   {/if}
-                  {#if item.targetUsageExample}
-                    <div class="example">
-                      <span class="example-label">Translation:</span>
-                      <span class="example-text">{item.targetUsageExample}</span>
-                    </div>
-                  {/if}
-                </div>
-              {/if}
-            </div>
-
-            <div class="vocab-actions">
-              <button on:click={() => openEditModal(item)} class="btn btn-sm btn-edit">
-                ✏️ Edit
-              </button>
-              <button on:click={() => handleDeleteItem(item)} class="btn btn-sm btn-delete">
-                🗑️ Delete
-              </button>
-            </div>
-          </div>
-        {/each}
+                </TableBodyCell>
+                <TableBodyCell>
+                  <div class="flex items-center gap-2">
+                    <Button size="xs" color="blue" on:click={() => openEditModal(item)}>
+                      <Edit class="w-4 h-4 mr-1" />
+                      Edit
+                    </Button>
+                    <Button size="xs" color="red" on:click={() => handleDeleteItem(item)}>
+                      <Trash2 class="w-4 h-4 mr-1" />
+                      Delete
+                    </Button>
+                  </div>
+                </TableBodyCell>
+              </TableBodyRow>
+            {/each}
+          </TableBody>
+        </Table>
       </div>
     {/if}
   </main>
@@ -715,29 +730,6 @@
     background: #cbd5e0;
   }
 
-  .btn-sm {
-    padding: 6px 12px;
-    font-size: 13px;
-  }
-
-  .btn-edit {
-    background: #fbbf24;
-    color: #78350f;
-  }
-
-  .btn-edit:hover:not(:disabled) {
-    background: #f59e0b;
-  }
-
-  .btn-delete {
-    background: #ef4444;
-    color: white;
-  }
-
-  .btn-delete:hover:not(:disabled) {
-    background: #dc2626;
-  }
-
   .empty-state {
     text-align: center;
     padding: 80px 20px;
@@ -800,122 +792,6 @@
     100% {
       background-position: -200% 0;
     }
-  }
-
-  .results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-  }
-
-  .vocab-card {
-    background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 20px;
-    transition: all 0.2s;
-  }
-
-  .vocab-card:hover {
-    border-color: #667eea;
-    box-shadow: 0 4px 12px rgb(102 126 234 / 15%);
-    transform: translateY(-2px);
-  }
-
-  .vocab-card.inactive {
-    opacity: 0.5;
-    background: #f7fafc;
-  }
-
-  .vocab-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-
-  .vocab-languages {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .lang-badge {
-    background: #667eea;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
-
-  .arrow {
-    color: #cbd5e0;
-    font-weight: bold;
-  }
-
-  .vocab-list-badge {
-    background: #e2e8f0;
-    color: #4a5568;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-
-  .vocab-content {
-    margin-bottom: 16px;
-  }
-
-  .vocab-pair {
-    margin-bottom: 12px;
-  }
-
-  .vocab-text {
-    padding: 8px 0;
-    font-size: 16px;
-  }
-
-  .vocab-text.source {
-    font-weight: 600;
-    color: #2d3748;
-  }
-
-  .vocab-text.target {
-    color: #4a5568;
-  }
-
-  .vocab-examples {
-    background: #f7fafc;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 12px;
-  }
-
-  .example {
-    margin-bottom: 8px;
-    font-size: 13px;
-  }
-
-  .example:last-child {
-    margin-bottom: 0;
-  }
-
-  .example-label {
-    color: #718096;
-    font-weight: 600;
-    margin-right: 6px;
-  }
-
-  .example-text {
-    color: #4a5568;
-    font-style: italic;
-  }
-
-  .vocab-actions {
-    display: flex;
-    gap: 8px;
   }
 
   .modal-backdrop {
@@ -1080,10 +956,6 @@
 
     .search-input-wrapper {
       width: 100%;
-    }
-
-    .results-grid {
-      grid-template-columns: 1fr;
     }
 
     .modal {
