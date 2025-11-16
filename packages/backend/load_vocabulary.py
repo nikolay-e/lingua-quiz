@@ -59,6 +59,7 @@ def load_json_file(json_file, version_id, conn):
 
     records = [
         (
+            item.get("id"),
             version_id,
             item.get("source_word"),
             source_language,
@@ -70,16 +71,17 @@ def load_json_file(json_file, version_id, conn):
             item.get("target_example"),
         )
         for item in translations
+        if item.get("id")
     ]
 
     with conn.cursor() as cur:
         execute_values(
             cur,
             """INSERT INTO vocabulary_items
-               (version_id, source_text, source_language, target_text, target_language,
+               (id, version_id, source_text, source_language, target_text, target_language,
                 list_name, difficulty_level, source_usage_example, target_usage_example)
                VALUES %s
-               ON CONFLICT (version_id, source_text, source_language, target_language) DO NOTHING""",
+               ON CONFLICT (id) DO NOTHING""",
             records,
         )
 

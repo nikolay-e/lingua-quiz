@@ -4,7 +4,7 @@ import { QuizManager, Translation } from '../src/index';
 describe('Core Functionality Tests', () => {
   const sampleTranslations: Translation[] = [
     {
-      id: 1,
+      id: 'uuid-1',
       sourceText: 'hello',
       sourceLanguage: 'en',
       sourceUsageExample: 'Hello world!',
@@ -13,7 +13,7 @@ describe('Core Functionality Tests', () => {
       targetUsageExample: 'Привет мир!',
     },
     {
-      id: 2,
+      id: 'uuid-2',
       sourceText: 'world',
       sourceLanguage: 'en',
       sourceUsageExample: 'Hello world!',
@@ -22,7 +22,7 @@ describe('Core Functionality Tests', () => {
       targetUsageExample: 'Привет мир!',
     },
     {
-      id: 3,
+      id: 'uuid-3',
       sourceText: 'cat',
       sourceLanguage: 'en',
       targetText: 'кот',
@@ -44,7 +44,7 @@ describe('Core Functionality Tests', () => {
 
       const result = singleQuiz.getNextQuestion();
       expect(result.question).toBeTruthy();
-      expect(result.question?.translationId).toBe(1);
+      expect(result.question?.translationId).toBe('uuid-1');
     });
 
     it('should handle invalid translation IDs in submitAnswer', () => {
@@ -89,9 +89,9 @@ describe('Core Functionality Tests', () => {
         const { translationId } = result.question;
 
         let correctAnswer: string;
-        if (translationId === 1) {
+        if (translationId === 'uuid-1') {
           correctAnswer = 'привет';
-        } else if (translationId === 2) {
+        } else if (translationId === 'uuid-2') {
           correctAnswer = 'мир';
         } else {
           correctAnswer = 'кот';
@@ -165,9 +165,9 @@ describe('Core Functionality Tests', () => {
       if (result.question) {
         const { translationId } = result.question;
         let correctAnswer: string;
-        if (translationId === 1) {
+        if (translationId === 'uuid-1') {
           correctAnswer = 'привет';
-        } else if (translationId === 2) {
+        } else if (translationId === 'uuid-2') {
           correctAnswer = 'мир';
         } else {
           correctAnswer = 'кот';
@@ -196,9 +196,9 @@ describe('Core Functionality Tests', () => {
         if (result.question) {
           const { translationId } = result.question;
           let correctAnswer: string;
-          if (translationId === 1) {
+          if (translationId === 'uuid-1') {
             correctAnswer = 'привет';
-          } else if (translationId === 2) {
+          } else if (translationId === 'uuid-2') {
             correctAnswer = 'мир';
           } else {
             correctAnswer = 'кот';

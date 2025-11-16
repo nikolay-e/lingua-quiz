@@ -7,6 +7,8 @@
   import Admin from './views/Admin.svelte';
   import EnvironmentInfo from './components/EnvironmentInfo.svelte';
   import { PAGES, type PageType } from './lib/constants';
+  import { Toaster } from 'svelte-sonner';
+  import { Button } from '$lib/components/ui/button';
 
   let isAuthenticated = false;
   let isAdmin = false;
@@ -48,13 +50,44 @@
   {#if isAuthenticated}
     {#if currentPage === PAGES.ADMIN && isAdmin}
       <div class="admin-nav">
-        <button on:click={navigateToQuiz}>Back to Quiz</button>
+        <Button variant="outline" onclick={navigateToQuiz}>
+          <svg
+            class="mr-2 size-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Quiz
+        </Button>
       </div>
       <Admin />
     {:else}
       {#if isAdmin}
         <div class="admin-nav">
-          <button on:click={navigateToAdmin}>Admin Panel</button>
+          <Button variant="secondary" onclick={navigateToAdmin}>
+            <svg
+              class="mr-2 size-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><!-- eslint-disable-line max-len -->
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Admin Panel
+          </Button>
         </div>
       {/if}
       <Quiz />
@@ -70,6 +103,7 @@
   {/if}
 {/key}
 
+<Toaster richColors position="top-right" />
 <EnvironmentInfo />
 
 <style>
@@ -78,19 +112,5 @@
     top: 10px;
     right: 10px;
     z-index: 1000;
-  }
-
-  .admin-nav button {
-    padding: 10px 20px;
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-
-  .admin-nav button:hover {
-    background-color: #5a6268;
   }
 </style>

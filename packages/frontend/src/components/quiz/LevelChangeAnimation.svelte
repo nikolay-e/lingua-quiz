@@ -11,7 +11,7 @@
   $: if (isVisible && animationElement) {
     animationElement.style.animation = 'none';
     animationElement.offsetHeight;
-    animationElement.style.animation = null;
+    animationElement.style.animation = '';
 
     setTimeout(() => {
       dispatch('complete');

@@ -758,29 +758,6 @@ Expected vocabulary size for each CEFR level across all supported languages:
 | C2         | 4,000          | 14,000           | Proficiency - near-native                   |
 | D          | 8,000          | 22,000           | Native speaker vocabulary                   |
 
-### Database Migration IDs
-
-A deterministic scheme is used to assign unique IDs to translations and words.
-
-#### Base Offsets by Language
-
-| Language | Base ID   | Level | Level Base Offset |
-| :------- | :-------- | :---- | :---------------- |
-| German   | 3,000,000 | A1    | 3,000,000         |
-| Spanish  | 4,000,000 | A1    | 4,000,000         |
-| English  | 8,000,000 | A1    | 8,000,000         |
-|          |           | A2    | 8,010,000         |
-|          |           | B1    | 9,000,000         |
-|          |           | B2    | 9,005,000         |
-
-#### ID Assignment Formula
-
-For each translation entry within a level (where `sequence_number` starts at `0` and increments by `1`):
-
-- `translation_id = level_base_offset + sequence_number`
-- `source_word_id = level_base_offset + (sequence_number * 2) + 1`
-- `target_word_id = level_base_offset + (sequence_number * 2) + 2`
-
 ## Related Files
 
 See parent workspace:

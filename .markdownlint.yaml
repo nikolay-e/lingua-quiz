@@ -13,14 +13,14 @@ MD013:
 
 # Heading style
 MD003:
-  style: "atx"
+  style: 'atx'
 
 # First heading should be h1
 MD041: true
 
 # Ordered list item prefix
 MD029:
-  style: "ordered"
+  style: 'ordered'
 
 # Inline HTML
 MD033: false
@@ -30,16 +30,16 @@ MD034: false
 
 # Code block style
 MD046:
-  style: "fenced"
+  style: 'fenced'
 
 # Code fence style
 MD048:
-  style: "backtick"
+  style: 'backtick'
 
 # Emphasis style
 MD049:
-  style: "asterisk"
+  style: 'asterisk'
 
 # Strong style
 MD050:
-  style: "asterisk"
+  style: 'asterisk'

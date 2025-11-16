@@ -19,6 +19,7 @@ export interface WordList {
 }
 
 export interface Translation {
+  id: string;
   sourceText: string;
   sourceLanguage: string;
   targetText: string;

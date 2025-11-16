@@ -2,7 +2,7 @@ name: Preview Environment Health Check
 
 on:
   workflow_run:
-    workflows: ["Deploy Preview Environment"]
+    workflows: ['Deploy Preview Environment']
     types: [completed]
 
 permissions:

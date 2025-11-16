@@ -23,7 +23,7 @@ import { checkAnswer, formatForDisplay } from './answer-comparison';
 import type { Translation, ProgressEntry } from './types';
 
 export interface QuizQuestion {
-  translationId: number;
+  translationId: string;
   questionText: string;
   level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5';
   direction: 'normal' | 'reverse';
@@ -50,12 +50,12 @@ export interface QuizState {
   progress: ProgressEntry[];
   currentLevel: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4';
   queues: {
-    LEVEL_0: number[];
-    LEVEL_1: number[];
-    LEVEL_2: number[];
-    LEVEL_3: number[];
-    LEVEL_4: number[];
-    LEVEL_5: number[];
+    LEVEL_0: string[];
+    LEVEL_1: string[];
+    LEVEL_2: string[];
+    LEVEL_3: string[];
+    LEVEL_4: string[];
+    LEVEL_5: string[];
   };
 }
 
@@ -85,15 +85,15 @@ export type QuestionType = 'translation' | 'usage';
  * across different platforms and frameworks.
  */
 export class QuizManager {
-  private translations: Map<number, Translation>;
-  private progress: Map<number, ProgressEntry>;
+  private translations: Map<string, Translation>;
+  private progress: Map<string, ProgressEntry>;
   private queues: {
-    LEVEL_0: number[];
-    LEVEL_1: number[];
-    LEVEL_2: number[];
-    LEVEL_3: number[];
-    LEVEL_4: number[];
-    LEVEL_5: number[];
+    LEVEL_0: string[];
+    LEVEL_1: string[];
+    LEVEL_2: string[];
+    LEVEL_3: string[];
+    LEVEL_4: string[];
+    LEVEL_5: string[];
   };
   private currentLevel: PracticeLevel;
   private opts: Required<QuizOptions>;
@@ -130,18 +130,42 @@ export class QuizManager {
     const initialProgressMap = new Map(initialState?.progress?.map((p) => [p.translationId, p]));
     this.progress = new Map();
 
-    translations.forEach((t) => {
+    // Group translations by level with their queue positions
+    const levelGroups: Map<string, Array<{ id: string; queuePosition: number }>> = new Map();
+    const levels: Array<'LEVEL_0' | 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5'> = [
+      'LEVEL_0',
+      'LEVEL_1',
+      'LEVEL_2',
+      'LEVEL_3',
+      'LEVEL_4',
+      'LEVEL_5',
+    ];
+    levels.forEach((level) => levelGroups.set(level, []));
+
+    translations.forEach((t, index) => {
       const existing = initialProgressMap.get(t.id);
       const progress: ProgressEntry = existing ?? {
         translationId: t.id,
         level: 'LEVEL_0',
+        queuePosition: index,
         consecutiveCorrect: 0,
         recentHistory: [],
       };
 
       this.progress.set(t.id, progress);
-      // Add to appropriate queue at the end
-      this.queues[progress.level].push(t.id);
+      const group = levelGroups.get(progress.level);
+      if (group) {
+        group.push({ id: t.id, queuePosition: progress.queuePosition ?? index });
+      }
+    });
+
+    // Sort each level's translations by queue position and populate queues
+    levels.forEach((level) => {
+      const group = levelGroups.get(level);
+      if (group) {
+        group.sort((a, b) => a.queuePosition - b.queuePosition);
+        this.queues[level] = group.map((item) => item.id);
+      }
     });
 
     this.currentLevel = initialState?.currentLevel ?? 'LEVEL_1';
@@ -179,7 +203,7 @@ export class QuizManager {
    */
   private generateQuestion = (): QuizQuestion | null => {
     // Get words available for current level based on level-specific queues
-    let candidateId: number | null = null;
+    let candidateId: string | null = null;
 
     switch (this.currentLevel) {
       case 'LEVEL_1':
@@ -333,7 +357,7 @@ export class QuizManager {
    * @param userAnswer - The user's submitted answer
    * @returns Result of the submission including correctness and level changes
    */
-  submitAnswer = (translationId: number, userAnswer: string): SubmissionResult => {
+  submitAnswer = (translationId: string, userAnswer: string): SubmissionResult => {
     const p = this.progress.get(translationId);
     const t = this.translations.get(translationId);
     if (!p || !t) throw new Error('Translation or progress not found');
@@ -376,7 +400,7 @@ export class QuizManager {
   /**
    * Updates word's position in queue based on answer correctness
    */
-  private updateQueuePosition = (translationId: number, isCorrect: boolean): void => {
+  private updateQueuePosition = (translationId: string, isCorrect: boolean): void => {
     const p = this.progress.get(translationId);
     if (!p) return;
 
@@ -461,7 +485,7 @@ export class QuizManager {
   /**
    * Moves a word from one level to another
    */
-  private moveWordToLevel = (translationId: number, newLevel: LevelStatus): void => {
+  private moveWordToLevel = (translationId: string, newLevel: LevelStatus): void => {
     const p = this.progress.get(translationId);
     if (!p) return;
 
@@ -493,7 +517,7 @@ export class QuizManager {
    * @param id - Translation ID
    * @returns Translation or undefined if not found
    */
-  getTranslation = (id: number): Translation | undefined => {
+  getTranslation = (id: string): Translation | undefined => {
     return this.translations.get(id);
   };
 
@@ -502,7 +526,7 @@ export class QuizManager {
    * @param id - Translation ID
    * @returns Translation with formatted display text or undefined if not found
    */
-  getTranslationForDisplay = (id: number): { source: string; target: string } | undefined => {
+  getTranslationForDisplay = (id: string): { source: string; target: string } | undefined => {
     const translation = this.translations.get(id);
     if (!translation) return undefined;
 
@@ -516,16 +540,13 @@ export class QuizManager {
    * Replenishes the focus pool by promoting words from LEVEL_0 to LEVEL_1
    * @returns Array of translation IDs that were promoted to LEVEL_1
    */
-  private replenishFocusPool = (): number[] => {
-    // MODIFICATION: Refactored to be more direct and reliable.
+  private replenishFocusPool = (): string[] => {
     const level1Count = this.queues.LEVEL_1.length;
     const needed = this.opts.maxFocusWords - level1Count;
     if (needed <= 0) return [];
 
-    // Directly take from the front of the LEVEL_0 queue.
     const wordsToPromote = this.queues.LEVEL_0.slice(0, needed);
     for (const translationId of wordsToPromote) {
-      // This correctly moves the word from the LEVEL_0 queue to the LEVEL_1 queue.
       this.moveWordToLevel(translationId, 'LEVEL_1');
     }
     return wordsToPromote;
@@ -609,7 +630,7 @@ export class QuizManager {
    * Gets all words grouped by their current level for bulk persistence
    * @returns Map of levels to arrays of translation IDs
    */
-  getWordsByLevel = (): Record<LevelStatus, number[]> => {
+  getWordsByLevel = (): Record<LevelStatus, string[]> => {
     return {
       LEVEL_0: [...this.queues.LEVEL_0],
       LEVEL_1: [...this.queues.LEVEL_1],

@@ -3,7 +3,7 @@ name: Deploy Preview Environment
 on:
   # Trigger after CI completes successfully on any PR
   workflow_run:
-    workflows: ["CI"]
+    workflows: ['CI']
     types: [completed]
 
 concurrency:

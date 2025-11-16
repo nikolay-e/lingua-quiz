@@ -4,7 +4,7 @@ import { QuizManager, Translation, K, F } from '../src/index';
 describe('QuizManager Tests', () => {
   const sampleTranslations: Translation[] = [
     {
-      id: 1,
+      id: 'uuid-1',
       sourceText: 'hello',
       sourceLanguage: 'en',
       sourceUsageExample: 'Hello world!',
@@ -13,7 +13,7 @@ describe('QuizManager Tests', () => {
       targetUsageExample: 'Привет мир!',
     },
     {
-      id: 2,
+      id: 'uuid-2',
       sourceText: 'world',
       sourceLanguage: 'en',
       sourceUsageExample: 'Hello world!',
@@ -22,21 +22,21 @@ describe('QuizManager Tests', () => {
       targetUsageExample: 'Привет мир!',
     },
     {
-      id: 3,
+      id: 'uuid-3',
       sourceText: 'cat',
       sourceLanguage: 'en',
       targetText: 'кот',
       targetLanguage: 'ru',
     },
     {
-      id: 4,
+      id: 'uuid-4',
       sourceText: 'dog',
       sourceLanguage: 'en',
       targetText: 'собака',
       targetLanguage: 'ru',
     },
     {
-      id: 5,
+      id: 'uuid-5',
       sourceText: 'book',
       sourceLanguage: 'en',
       targetText: 'книга',
@@ -252,7 +252,7 @@ describe('QuizManager Tests', () => {
     it('should restore progress from initial state', () => {
       const initialProgress = [
         {
-          translationId: 1,
+          translationId: 'uuid-1',
           level: 'LEVEL_2' as const,
           consecutiveCorrect: 1,
           recentHistory: [true, false, true],
@@ -262,9 +262,9 @@ describe('QuizManager Tests', () => {
       const quizManager = new QuizManager(sampleTranslations, { progress: initialProgress });
       const state = quizManager.getState();
 
-      expect(state.queues.LEVEL_2).toContain(1);
-      expect(state.queues.LEVEL_0).not.toContain(1);
-      expect(state.queues.LEVEL_1).not.toContain(1);
+      expect(state.queues.LEVEL_2).toContain('uuid-1');
+      expect(state.queues.LEVEL_0).not.toContain('uuid-1');
+      expect(state.queues.LEVEL_1).not.toContain('uuid-1');
     });
 
     it('should set custom initial level', () => {
@@ -289,14 +289,14 @@ describe('QuizManager Tests', () => {
 
       const result = singleQuiz.getNextQuestion();
       expect(result.question).toBeTruthy();
-      expect(result.question?.translationId).toBe(1);
+      expect(result.question?.translationId).toBe('uuid-1');
     });
 
     it('should handle invalid translation IDs', () => {
       const quizManager = new QuizManager(sampleTranslations);
 
       expect(() => {
-        quizManager.submitAnswer(999, 'any answer');
+        quizManager.submitAnswer('non-existent-uuid', 'any answer');
       }).toThrow('Translation or progress not found');
     });
 
