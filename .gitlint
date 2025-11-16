@@ -19,7 +19,8 @@ words=wip,WIP
 line-length=100
 
 [body-min-length]
-min-length=0  # Allow empty body
+# Allow empty body
+min-length=0
 
 [contrib-title-conventional-commits]
 # Conventional commit types we allow

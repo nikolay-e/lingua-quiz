@@ -82,13 +82,23 @@ function withAuth(token: string, options: RequestInit = {}): RequestInit {
   };
 }
 
-const createApiMethod = <TResponse, TParams = void>(endpoint: string, method = 'GET', requiresAuth = true) => {
+function createApiMethod<TResponse, TParams = void>(
+  endpoint: string,
+  method: string,
+  requiresAuth: false,
+): (params: TParams) => Promise<TResponse>;
+function createApiMethod<TResponse, TParams = void>(
+  endpoint: string,
+  method?: string,
+  requiresAuth?: true,
+): (token: string, params?: TParams) => Promise<TResponse>;
+function createApiMethod<TResponse, TParams = void>(endpoint: string, method = 'GET', requiresAuth = true) {
   if (requiresAuth) {
     return async (token: string, params?: TParams): Promise<TResponse> => {
       const url = `${serverAddress}${endpoint}`;
       const options = withAuth(token, { method });
 
-      if (params && method !== 'GET' && method !== 'DELETE') {
+      if (params !== null && params !== undefined && method !== 'GET' && method !== 'DELETE') {
         options.headers = {
           ...options.headers,
           'Content-Type': 'application/json',
@@ -102,14 +112,14 @@ const createApiMethod = <TResponse, TParams = void>(endpoint: string, method = '
   return async (params: TParams): Promise<TResponse> => {
     const options: RequestInit = { method };
 
-    if (params && method !== 'GET' && method !== 'DELETE') {
+    if (params !== null && params !== undefined && method !== 'GET' && method !== 'DELETE') {
       options.headers = { 'Content-Type': 'application/json' };
       options.body = JSON.stringify(params);
     }
 
     return fetchWrapper<TResponse>(`${serverAddress}${endpoint}`, options);
   };
-};
+}
 
 const api = {
   login: createApiMethod<AuthResponse, { username: string; password: string }>('/auth/login', 'POST', false),
@@ -121,9 +131,7 @@ const api = {
   saveProgress: createApiMethod<
     void,
     {
-      sourceText: string;
-      sourceLanguage: string;
-      targetLanguage: string;
+      vocabularyItemId: string;
       level: number;
       queuePosition: number;
       correctCount: number;

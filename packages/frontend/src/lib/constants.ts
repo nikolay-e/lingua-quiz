@@ -26,10 +26,6 @@ export const API_ENDPOINTS = {
     REGISTER: '/auth/register',
     DELETE_ACCOUNT: '/auth/delete-account',
   },
-  WORD_SETS: '/word-sets',
-  USER: {
-    CURRENT_LEVEL: '/user/current-level',
-  },
   TTS: {
     SYNTHESIZE: '/tts/synthesize',
     LANGUAGES: '/tts/languages',

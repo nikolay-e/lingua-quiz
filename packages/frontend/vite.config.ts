@@ -1,9 +1,12 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     svelte(),
     VitePWA({
       strategies: 'generateSW',
@@ -119,5 +122,10 @@ export default defineConfig({
     drop: ['console', 'debugger'],
     // Remove comments
     legalComments: 'none',
+  },
+  resolve: {
+    alias: {
+      $lib: path.resolve('./src/lib'),
+    },
   },
 });

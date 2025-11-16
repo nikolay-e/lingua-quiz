@@ -34,10 +34,10 @@ export class TTSService {
 
   async initializeLanguages(token: string): Promise<void> {
     try {
-      const ttsData = await api.getTTSLanguages(token);
+      const ttsData = await api.getTTSLanguages(token, undefined);
       this.updateState({
         isAvailable: ttsData.available,
-        supportedLanguages: ttsData.supportedLanguages || [],
+        supportedLanguages: ttsData.supportedLanguages ?? [],
       });
     } catch (error: unknown) {
       console.warn('Failed to load TTS languages:', error);
@@ -61,7 +61,7 @@ export class TTSService {
     this.updateState({ isPlaying: true });
 
     try {
-      const ttsData = await api.synthesizeSpeech(token, text, language);
+      const ttsData = await api.synthesizeSpeech(token, { text, language });
       const audioBlob = new Blob([Uint8Array.from(atob(ttsData.audioData), (c) => c.charCodeAt(0))], {
         type: 'audio/mpeg',
       });

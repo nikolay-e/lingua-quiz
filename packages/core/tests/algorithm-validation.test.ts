@@ -4,21 +4,21 @@ import { QuizManager, Translation, F, K, T_PROMO, MAX_FOCUS_POOL_SIZE } from '..
 describe('Algorithm Parameter Validation', () => {
   const sampleTranslations: Translation[] = [
     {
-      id: 1,
+      id: 'uuid-1',
       sourceText: 'hello',
       sourceLanguage: 'en',
       targetText: 'привет',
       targetLanguage: 'ru',
     },
     {
-      id: 2,
+      id: 'uuid-2',
       sourceText: 'world',
       sourceLanguage: 'en',
       targetText: 'мир',
       targetLanguage: 'ru',
     },
     {
-      id: 3,
+      id: 'uuid-3',
       sourceText: 'good',
       sourceLanguage: 'en',
       targetText: 'хороший',

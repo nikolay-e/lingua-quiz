@@ -72,13 +72,22 @@ async def search_vocabulary(
         results = query_db(
             """SELECT id, source_text, source_language, target_text, target_language,
                       list_name, difficulty_level, source_usage_example, target_usage_example,
-                      is_active, created_at, updated_at
+                      is_active, created_at, updated_at,
+                      ts_rank(
+                        to_tsvector('simple', source_text || ' ' || target_text),
+                        plainto_tsquery('simple', %s)
+                      ) AS rank
                FROM vocabulary_items
                WHERE version_id = %s
-                 AND (source_text ILIKE %s OR target_text ILIKE %s)
-               ORDER BY is_active DESC, source_text
+                 AND (
+                   to_tsvector('simple', source_text) @@ plainto_tsquery('simple', %s)
+                   OR to_tsvector('simple', target_text) @@ plainto_tsquery('simple', %s)
+                   OR similarity(source_text, %s) > 0.3
+                   OR similarity(target_text, %s) > 0.3
+                 )
+               ORDER BY is_active DESC, rank DESC, source_text
                LIMIT %s""",
-            (version_id, f"%{query}%", f"%{query}%", limit),
+            (query, version_id, query, query, query, query, limit),
         )
 
         output = []
@@ -216,10 +225,10 @@ async def update_vocabulary_item(
         if not existing_item:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Vocabulary item not found")
 
-        update_fields = []
-        update_values = []
-        old_values = {}
-        new_values = {}
+        update_fields: list[str] = []
+        update_values: list[str | bool] = []
+        old_values: dict[str, str] = {}
+        new_values: dict[str, str] = {}
 
         if item_data.source_text is not None:
             update_fields.append("source_text = %s")
@@ -248,8 +257,8 @@ async def update_vocabulary_item(
         if item_data.is_active is not None:
             update_fields.append("is_active = %s")
             update_values.append(item_data.is_active)
-            old_values["is_active"] = existing_item["is_active"]
-            new_values["is_active"] = item_data.is_active
+            old_values["is_active"] = str(existing_item["is_active"])
+            new_values["is_active"] = str(item_data.is_active)
 
         if not update_fields:
             raise HTTPException(
@@ -258,8 +267,9 @@ async def update_vocabulary_item(
             )
 
         update_values.append(item_id)
+        # Safe: update_fields contains only predefined strings, values are parameterized
         execute_write_transaction(
-            f"UPDATE vocabulary_items SET {', '.join(update_fields)} WHERE id = %s",
+            f"UPDATE vocabulary_items SET {', '.join(update_fields)} WHERE id = %s",  # nosec B608
             tuple(update_values),
         )
 

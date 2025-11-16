@@ -3,7 +3,7 @@
  * These types are independent of any specific UI or API implementation
  */
 export interface Translation {
-  id: number;
+  id: string;
   sourceText: string;
   sourceLanguage: string;
   sourceUsageExample?: string;
@@ -13,8 +13,9 @@ export interface Translation {
 }
 
 export interface ProgressEntry {
-  translationId: number;
+  translationId: string;
   level: 'LEVEL_0' | 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5';
+  queuePosition?: number;
   consecutiveCorrect: number;
   recentHistory: boolean[];
   lastAskedAt?: string;

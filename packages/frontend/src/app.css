@@ -1,61 +1,101 @@
+@import 'tailwindcss';
+
 /* ============================================
-   CSS VARIABLES & THEMES (DESIGN SYSTEM)
+   TAILWIND THEME CONFIGURATION
+   ============================================ */
+
+@theme {
+  /* Colors - mapped to Tailwind semantic names */
+  --color-primary: #4a90e2;
+  --color-primary-hover: #3a7bc8;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f39c12;
+  --color-secondary-foreground: #ffffff;
+  --color-success: #27ae60;
+  --color-error: #e74c3c;
+  --color-error-hover: #c0392b;
+  --color-destructive: #e74c3c;
+  --color-destructive-foreground: #ffffff;
+
+  /* shadcn-svelte required colors */
+  --color-background: #f4f7f9;
+  --color-foreground: #333333;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-accent: #e2e8f0;
+  --color-accent-foreground: #0f172a;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #4a90e2;
+
+  /* Background colors */
+  --color-background: #f4f7f9;
+  --color-surface: #fff;
+  --color-input-border: #ddd;
+  --color-disabled-bg: #f0f0f0;
+  --color-disabled-text: #aaa;
+  --color-disabled-border: #e0e0e0;
+
+  /* Text colors */
+  --color-text: #333;
+  --color-text-muted: rgba(51, 51, 51, 0.75);
+
+  /* Effect colors */
+  --color-primary-focus: rgba(74, 144, 226, 0.2);
+  --color-hover-light: rgba(74, 144, 226, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Level indicator colors */
+  --color-level-up-border: #4ade80;
+  --color-level-up-text: #059669;
+  --color-level-down-border: #f87171;
+  --color-level-down-text: #dc2626;
+
+  /* Feature/example backgrounds */
+  --color-example-bg: #f8f9fa;
+  --color-feature-start: #f8f9ff;
+  --color-feature-end: #e8f0ff;
+
+  /* Font families */
+  --font-sans: 'Roboto', Arial, sans-serif;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Transition speeds */
+  --transition-speed: 0.3s;
+  --transition-speed-fast: 0.2s;
+}
+
+/* ============================================
+   BACKWARD COMPATIBILITY ALIASES
+   Maps old variable names to new theme values
    ============================================ */
 
 :root {
-  /* Base colors */
-  --primary-color: #4a90e2;
-  --secondary-color: #f39c12;
-  --background-color: #f4f7f9;
-  --text-color: #333;
-  --container-bg: #fff;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --input-border-color: #ddd;
-  --success-color: #27ae60;
-  --error-color: #e74c3c;
+  /* Color aliases */
+  --primary-color: var(--color-primary);
+  --primary-hover: var(--color-primary-hover);
+  --secondary-color: var(--color-secondary);
+  --success-color: var(--color-success);
+  --error-color: var(--color-error);
+  --error-hover: var(--color-error-hover);
+  --background-color: var(--color-background);
+  --container-bg: var(--color-surface);
+  --text-color: var(--color-text);
+  --input-border-color: var(--color-input-border);
+  --shadow-color: var(--color-shadow);
+  --disabled-bg: var(--color-disabled-bg);
+  --disabled-text: var(--color-disabled-text);
+  --disabled-border-color: var(--color-disabled-border);
+  --primary-focus-shadow: var(--color-primary-focus);
+  --hover-bg-light: var(--color-hover-light);
+  --example-bg: var(--color-example-bg);
 
-  /* States and effects */
-  --primary-hover: #3a7bc8;
-  --primary-focus-shadow: rgba(74, 144, 226, 0.2);
-  --disabled-bg: #f0f0f0;
-  --disabled-text: #aaa;
-  --disabled-border-color: #e0e0e0;
-
-  /* Additional colors for components */
-  --example-bg: #f8f9fa;
-  --feature-gradient-start: #f8f9ff;
-  --feature-gradient-end: #e8f0ff;
-  --hover-bg-light: rgba(74, 144, 226, 0.1);
-
-  /* Level animation colors */
-  --level-up-border: #4ade80;
-  --level-up-text: #059669;
-  --level-down-border: #f87171;
-  --level-down-text: #dc2626;
-  --error-hover: #c0392b;
-
-  /* Shadow System (elevation levels) */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.12);
-  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
-  --shadow-focus: 0 0 0 3px var(--primary-focus-shadow);
-  --shadow-button-hover: 0 4px 12px rgba(74, 144, 226, 0.3);
-
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-  --gradient-success: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
-  --gradient-error: linear-gradient(135deg, var(--error-color) 0%, #c0392b 100%);
-  --gradient-feature: linear-gradient(135deg, var(--feature-gradient-start) 0%, var(--feature-gradient-end) 100%);
-
-  /* Transitions and animations */
-  --transition-speed: 0.3s;
-  --transition-speed-fast: 0.2s;
-
-  /* Spacing System */
+  /* Spacing aliases */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
@@ -63,71 +103,72 @@
   --spacing-xl: 24px;
   --spacing-2xl: 40px;
 
-  /* Font sizes */
-  --font-size-sm: 0.875rem; /* 14px */
-  --font-size-base: 1rem; /* 16px */
-  --font-size-md: 1.125rem; /* 18px */
-  --font-size-lg: 1.25rem; /* 20px */
-  --font-size-xl: 1.5rem; /* 24px */
-  --font-size-2xl: 2rem; /* 32px */
+  /* Shadow aliases */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-focus: 0 0 0 3px var(--primary-focus-shadow);
 
-  /* Border radius values */
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
-}
-
-[data-theme='dark'] {
-  /* Base colors for dark theme */
-  --primary-color: #5ba3f5;
-  --secondary-color: #f5b041;
-  --background-color: #1a1a1a;
-  --text-color: #e0e0e0;
-  --container-bg: #2a2a2a;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-  --input-border-color: #444;
-  --success-color: #2ecc71;
-  --error-color: #e67e73;
-
-  /* States and effects for dark theme */
-  --primary-hover: #4a8fe7;
-  --primary-focus-shadow: rgba(91, 163, 245, 0.2);
-  --disabled-bg: #222;
-  --disabled-text: #555;
-  --disabled-border-color: #333;
-
-  /* Additional colors for components */
-  --example-bg: #333;
-  --feature-gradient-start: #1a2332;
-  --feature-gradient-end: #2a3342;
-  --hover-bg-light: rgba(91, 163, 245, 0.1);
-
-  /* Level animation colors for dark theme */
-  --level-up-border: #4ade80;
-  --level-up-text: #10b981;
-  --level-down-border: #f87171;
-  --level-down-text: #ef4444;
-  --error-hover: #d35656;
-
-  /* Shadow System for dark theme */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.4);
-  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.5);
-  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-button-hover: 0 4px 12px rgba(91, 163, 245, 0.3);
-
-  /* Gradients for dark theme */
-  --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-  --gradient-success: linear-gradient(135deg, var(--success-color) 0%, #27a060 100%);
-  --gradient-error: linear-gradient(135deg, var(--error-color) 0%, #d35656 100%);
+  /* Font size aliases */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
 }
 
 /* ============================================
-   BASE STYLES & RESET
+   DARK THEME OVERRIDES
+   ============================================ */
+
+[data-theme='dark'] {
+  --color-primary: #5ba3f5;
+  --color-primary-hover: #4a8fe7;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f5b041;
+  --color-secondary-foreground: #ffffff;
+  --color-success: #2ecc71;
+  --color-error: #e67e73;
+  --color-error-hover: #d35656;
+  --color-destructive: #e67e73;
+  --color-destructive-foreground: #ffffff;
+
+  /* shadcn-svelte dark theme colors */
+  --color-background: #1a1a1a;
+  --color-foreground: #e0e0e0;
+  --color-muted: #27272a;
+  --color-muted-foreground: #a1a1aa;
+  --color-accent: #27272a;
+  --color-accent-foreground: #fafafa;
+  --color-border: #444444;
+  --color-input: #444444;
+  --color-ring: #5ba3f5;
+
+  --color-surface: #2a2a2a;
+  --color-input-border: #444;
+  --color-disabled-bg: #222;
+  --color-disabled-text: #555;
+  --color-disabled-border: #333;
+
+  --color-text: #e0e0e0;
+  --color-text-muted: rgba(224, 224, 224, 0.75);
+
+  --color-primary-focus: rgba(91, 163, 245, 0.2);
+  --color-hover-light: rgba(91, 163, 245, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.5);
+
+  --color-level-up-text: #10b981;
+  --color-level-down-text: #ef4444;
+
+  --color-example-bg: #333;
+  --color-feature-start: #1a2332;
+  --color-feature-end: #2a3342;
+}
+
+/* ============================================
+   BASE STYLES
    ============================================ */
 
 * {
@@ -142,11 +183,11 @@ html {
 }
 
 body {
-  font-family: 'Roboto', Arial, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text);
   line-height: 1.6;
-  font-size: var(--font-size-base);
+  font-size: 1rem;
   overflow-y: auto;
 }
 
@@ -157,43 +198,37 @@ body {
 h1,
 h2,
 h3 {
-  color: var(--primary-color);
+  color: var(--color-primary);
 }
 
 h1 {
-  font-size: var(--font-size-2xl);
+  font-size: 2rem;
   text-align: center;
 }
 
 h2 {
-  font-size: clamp(1.25rem, 2vw, var(--font-size-xl));
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
 }
 
 h3 {
-  font-size: var(--font-size-md);
+  font-size: 1.125rem;
 }
 
 /* ============================================
-   FORM ELEMENTS
+   FORM ELEMENTS (Base styling, can be overridden by Tailwind)
    ============================================ */
 
 input[type='text'],
 input[type='password'],
 input[type='email'],
-select,
-button {
+select {
   width: 100%;
   padding: 12px;
-  margin-bottom: var(--spacing-md);
   border-radius: var(--radius-md);
-  border: 1px solid var(--input-border-color);
-  font-size: var(--font-size-base);
-  background-color: var(--container-bg);
-  color: var(--text-color);
-}
-
-input,
-select {
+  border: 1px solid var(--color-input-border);
+  font-size: 1rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
   transition:
     border-color var(--transition-speed) ease,
     box-shadow var(--transition-speed) ease;
@@ -204,8 +239,8 @@ input[type='password']:focus,
 input[type='email']:focus,
 select:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-focus);
 }
 
 select {
@@ -223,284 +258,48 @@ select {
 
 select:disabled,
 input:disabled {
-  background-color: var(--disabled-bg);
-  color: var(--disabled-text);
-  border-color: var(--disabled-border-color);
-  cursor: not-allowed;
-}
-
-button {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color var(--transition-speed) ease;
-}
-
-button:hover {
-  background-color: var(--primary-hover);
-}
-
-button:disabled {
-  background-color: var(--disabled-bg);
-  color: var(--disabled-text);
-  border: 1px solid var(--disabled-border-color);
+  background-color: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
+  border-color: var(--color-disabled-border);
   cursor: not-allowed;
 }
 
 /* ============================================
-   LAYOUT: single-column feed
+   LAYOUT UTILITIES (kept for backward compatibility)
+   These will be replaced by Tailwind classes gradually
    ============================================ */
 
 .feed {
-  /* Centered, readable column that scales nicely */
   max-width: 840px;
   margin: 0 auto;
-  padding: var(--spacing-2xl) var(--spacing-lg);
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 20px;
 }
 
-/* Utility spacing for stacked bits inside a card */
 .stack {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 16px;
 }
 
-/* Muted helper text */
 .muted {
   opacity: 0.75;
-  font-size: var(--font-size-sm);
-}
-
-/* Full-width buttons/inputs where it feels right */
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-}
-.actions > * {
-  flex: 1 1 auto;
+  font-size: 0.875rem;
 }
 
 /* ============================================
-   STANDARDIZED UTILITY CLASSES (DRY)
-   ============================================ */
-
-/* LAYOUT UTILITIES */
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.flex-align-center {
-  display: flex;
-  align-items: center;
-}
-
-/* GAP UTILITIES */
-.gap-xs {
-  gap: var(--spacing-xs);
-}
-
-.gap-sm {
-  gap: var(--spacing-sm);
-}
-
-.gap-md {
-  gap: var(--spacing-md);
-}
-
-.gap-lg {
-  gap: var(--spacing-lg);
-}
-
-.gap-xl {
-  gap: var(--spacing-xl);
-}
-
-/* SPACING UTILITIES */
-.mb-0 {
-  margin-bottom: 0 !important;
-}
-
-.mb-xs {
-  margin-bottom: var(--spacing-xs);
-}
-.mb-sm {
-  margin-bottom: var(--spacing-sm);
-}
-.mb-md {
-  margin-bottom: var(--spacing-md);
-}
-.mb-lg {
-  margin-bottom: var(--spacing-lg);
-}
-
-.p-0 {
-  padding: 0;
-}
-
-.p-xs {
-  padding: var(--spacing-xs);
-}
-.p-sm {
-  padding: var(--spacing-sm);
-}
-.p-md {
-  padding: var(--spacing-md);
-}
-.p-lg {
-  padding: var(--spacing-lg);
-}
-.p-xl {
-  padding: var(--spacing-xl);
-}
-
-/* FORM UTILITIES */
-.form-compact {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.form-compact .input-group,
-.form-compact input,
-.form-compact button {
-  margin-bottom: 0 !important;
-}
-
-/* BUTTON UTILITIES */
-.btn-reset {
-  margin-bottom: 0 !important;
-}
-
-.btn-full-width {
-  display: block;
-  width: 100%;
-}
-
-.btn-compact {
-  padding: var(--spacing-sm);
-  font-size: var(--spacing-sm);
-}
-
-/* COMPONENT MARGIN RESETS */
-.actions button:last-child {
-  margin-bottom: 0 !important;
-}
-
-.feedback-container,
-.learning-progress-container {
-  margin-bottom: 0 !important;
-}
-
-/* TEXT UTILITIES */
-.text-center {
-  text-align: center;
-}
-
-.text-sm {
-  font-size: var(--font-size-sm);
-}
-
-.text-base {
-  font-size: var(--font-size-base);
-}
-
-.opacity-70 {
-  opacity: 0.7;
-}
-
-.opacity-60 {
-  opacity: 0.6;
-}
-
-/* Standard button styling for consistency */
-.btn-base {
-  display: flex;
-  align-items: center;
-  background: none;
-  border: 1px solid var(--input-border-color);
-  color: var(--text-color);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all var(--transition-speed) ease;
-  font-size: var(--font-size-sm);
-  text-align: left;
-}
-.btn-base:hover {
-  background-color: var(--hover-bg-light);
-  border-color: var(--primary-color);
-  color: var(--primary-color);
-}
-
-/* Standard foldable/collapsible section */
-.foldable-section {
-  margin-bottom: var(--spacing-sm);
-}
-.foldable-header {
-  width: 100%;
-  text-align: left;
-}
-
-/* Reusable presentation classes */
-.text-center {
-  text-align: center;
-}
-.welcome-icon {
-  font-size: 3rem;
-}
-.feature {
-  background: var(--gradient-feature);
-  padding: 12px var(--spacing-md);
-  border-radius: var(--radius-lg);
-  color: var(--primary-color);
-  font-weight: 500;
-  border-left: 4px solid var(--primary-color);
-}
-
-/* ============================================
-   COMPONENTS
-   ============================================ */
-
-/* ============================================
-   PASSWORD TOGGLE
+   PASSWORD TOGGLE COMPONENT
    ============================================ */
 
 .input-group {
   position: relative;
-  margin-bottom: var(--spacing-md);
 }
 
 #password,
 #register-password {
   padding-right: 40px;
-  margin-bottom: 0;
 }
 
 .toggle-password-btn {
@@ -515,37 +314,35 @@ button:disabled {
   height: auto;
   margin: 0;
   cursor: pointer;
-  color: var(--text-color);
+  color: var(--color-text);
   z-index: 2;
   transition: color var(--transition-speed-fast) ease;
 }
 
 .toggle-password-btn:hover {
-  color: var(--primary-color);
-}
-
-#login-message,
-#register-message {
-  margin-top: 10px;
-  text-align: center;
-  font-weight: bold;
+  color: var(--color-primary);
 }
 
 /* ============================================
-   ADDITIONAL COMPONENTS
+   FEATURE COMPONENT
    ============================================ */
 
-.direction-toggle-btn {
-  margin-bottom: var(--spacing-md);
+.feature {
+  background: linear-gradient(135deg, var(--color-feature-start) 0%, var(--color-feature-end) 100%);
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+  font-weight: 500;
+  border-left: 4px solid var(--color-primary);
 }
 
 /* ============================================
-   MEDIA QUERIES (RESPONSIVE DESIGN)
+   MEDIA QUERIES
    ============================================ */
 
 @media (max-width: 480px) {
   body {
-    font-size: var(--font-size-sm);
+    font-size: 0.875rem;
   }
 
   h1 {
@@ -557,20 +354,101 @@ button:disabled {
   h3 {
     font-size: 1.1rem;
   }
-  .question {
-    font-size: 1.5rem;
-  }
 
   .feed {
-    padding: var(--spacing-xl) var(--spacing-md);
+    padding: 24px 16px;
   }
+}
+
+/* ============================================
+   UTILITY CLASSES (backward compatibility)
+   These will be gradually replaced by Tailwind classes
+   ============================================ */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+.p-md {
+  padding: var(--spacing-md);
+}
+
+.p-xl {
+  padding: var(--spacing-xl);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+
+.btn-base {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: 1px solid var(--input-border-color);
+  color: var(--text-color);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  font-size: var(--font-size-sm);
+  text-align: left;
+  width: auto;
+  margin: 0;
+}
+
+.btn-base:hover {
+  background-color: var(--hover-bg-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.welcome-icon {
+  font-size: 3rem;
 }
 
 /* ============================================
    ACCESSIBILITY
    ============================================ */
 
-/* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
