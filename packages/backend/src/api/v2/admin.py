@@ -1,3 +1,4 @@
+import json
 import logging
 
 from core.database import execute_write_transaction, query_db
@@ -185,14 +186,16 @@ async def create_vocabulary_item(
         execute_write_transaction(
             """INSERT INTO content_changelog
                (version_id, change_type, vocabulary_item_id, new_values, changed_by)
-               VALUES (%s, 'ADD', %s, %s, %s)""",
+               VALUES (%s, 'ADD', %s, %s::jsonb, %s)""",
             (
                 version_id,
                 result["id"],
-                {
-                    "source_text": item_data.source_text,
-                    "target_text": item_data.target_text,
-                },
+                json.dumps(
+                    {
+                        "source_text": item_data.source_text,
+                        "target_text": item_data.target_text,
+                    }
+                ),
                 current_admin["username"],
             ),
         )
@@ -276,12 +279,12 @@ async def update_vocabulary_item(
         execute_write_transaction(
             """INSERT INTO content_changelog
                (version_id, change_type, vocabulary_item_id, old_values, new_values, changed_by)
-               VALUES (%s, 'UPDATE', %s, %s, %s, %s)""",
+               VALUES (%s, 'UPDATE', %s, %s::jsonb, %s::jsonb, %s)""",
             (
                 existing_item["version_id"],
                 item_id,
-                old_values,
-                new_values,
+                json.dumps(old_values),
+                json.dumps(new_values),
                 current_admin["username"],
             ),
         )
@@ -321,14 +324,16 @@ async def delete_vocabulary_item(
         execute_write_transaction(
             """INSERT INTO content_changelog
                (version_id, change_type, vocabulary_item_id, old_values, changed_by)
-               VALUES (%s, 'DELETE', %s, %s, %s)""",
+               VALUES (%s, 'DELETE', %s, %s::jsonb, %s)""",
             (
                 existing_item["version_id"],
                 item_id,
-                {
-                    "source_text": existing_item["source_text"],
-                    "target_text": existing_item["target_text"],
-                },
+                json.dumps(
+                    {
+                        "source_text": existing_item["source_text"],
+                        "target_text": existing_item["target_text"],
+                    }
+                ),
                 current_admin["username"],
             ),
         )

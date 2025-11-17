@@ -11,68 +11,43 @@
    ============================================ */
 
 @theme {
-  /* Colors - mapped to Tailwind semantic names */
+  /* Core colors */
   --color-primary: #4a90e2;
-  --color-primary-foreground: #fff;
   --color-secondary: #f39c12;
-  --color-secondary-foreground: #fff;
   --color-success: #27ae60;
   --color-error: #e74c3c;
-  --color-destructive: #e74c3c;
-  --color-destructive-foreground: #fff;
-
-  /* shadcn-svelte required colors */
   --color-background: #f4f7f9;
-  --color-foreground: #333;
-  --color-muted: #f1f5f9;
-  --color-muted-foreground: #64748b;
-  --color-accent: #e2e8f0;
-  --color-accent-foreground: #0f172a;
-  --color-border: #e2e8f0;
-  --color-input: #e2e8f0;
-  --color-ring: #4a90e2;
-  --color-card: #fff;
-  --color-card-foreground: #333;
-  --color-popover: #fff;
-  --color-popover-foreground: #333;
-
-  /* Surface and input colors */
   --color-surface: #fff;
+  --color-border: #e2e8f0;
   --color-input-border: #ddd;
+  --color-text: #333;
+  --color-text-muted: rgb(51 51 51 / 75%);
   --color-disabled-bg: #f0f0f0;
   --color-disabled-text: #aaa;
   --color-disabled-border: #e0e0e0;
 
-  /* Text colors */
-  --color-text: #333;
-  --color-text-muted: rgb(51 51 51 / 75%);
+  /* shadcn-svelte aliases (required by library) */
+  --color-foreground: var(--color-text);
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-accent: var(--color-border);
+  --color-accent-foreground: #0f172a;
+  --color-input: var(--color-border);
+  --color-ring: var(--color-primary);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text);
+  --color-destructive: var(--color-error);
+  --color-destructive-foreground: #fff;
 
-  /* Effect colors */
-  --color-primary-focus: rgb(74 144 226 / 20%);
-  --color-hover-light: rgb(74 144 226 / 10%);
-  --color-shadow: rgb(0 0 0 / 10%);
-
-  /* Level indicator colors */
-  --color-level-up-border: #4ade80;
-  --color-level-up-text: #059669;
-  --color-level-down-border: #f87171;
-  --color-level-down-text: #dc2626;
-
-  /* Feature/example backgrounds */
-  --color-example-bg: #f8f9fa;
-  --color-feature-start: #f8f9ff;
-  --color-feature-end: #e8f0ff;
-
-  /* Font families */
+  /* Font */
   --font-sans: 'Roboto', Arial, sans-serif;
 
-  /* Border radius */
+  /* Radius */
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
-  --radius-xl: 12px;
 
-  /* Transition speeds */
+  /* Transitions */
   --transition-speed: 0.3s;
   --transition-speed-fast: 0.2s;
 }
@@ -83,110 +58,52 @@
 
 @layer tokens {
   :root {
-    /* Color aliases for backward compatibility */
+    /* Backward compatibility aliases (used in components) */
     --primary-color: var(--color-primary);
-    --secondary-color: var(--color-secondary);
-    --success-color: var(--color-success);
-    --error-color: var(--color-error);
-    --background-color: var(--color-background);
     --container-bg: var(--color-surface);
     --text-color: var(--color-text);
     --input-border-color: var(--color-input-border);
-    --shadow-color: var(--color-shadow);
-    --disabled-bg: var(--color-disabled-bg);
-    --disabled-text: var(--color-disabled-text);
-    --disabled-border-color: var(--color-disabled-border);
-    --primary-focus-shadow: var(--color-primary-focus);
-    --hover-bg-light: var(--color-hover-light);
-    --example-bg: var(--color-example-bg);
 
-    /* Level indicator aliases */
-    --level-up-border: var(--color-level-up-border);
-    --level-up-text: var(--color-level-up-text);
-    --level-down-border: var(--color-level-down-border);
-    --level-down-text: var(--color-level-down-text);
-
-    /* Feature gradient aliases */
-    --feature-gradient-start: var(--color-feature-start);
-    --feature-gradient-end: var(--color-feature-end);
-
-    /* Spacing scale (4px base unit) */
-    --spacing-3xs: 2px;
-    --spacing-2xs: 4px;
+    /* Spacing scale */
     --spacing-xs: 8px;
     --spacing-sm: 12px;
     --spacing-md: 16px;
     --spacing-lg: 24px;
     --spacing-xl: 32px;
     --spacing-2xl: 48px;
-    --spacing-3xl: 64px;
 
     /* Shadow scale */
-    --shadow-xs: 0 1px 2px rgb(0 0 0 / 5%);
     --shadow-sm: 0 1px 3px rgb(0 0 0 / 10%);
     --shadow-md: 0 4px 6px rgb(0 0 0 / 10%);
-    --shadow-lg: 0 10px 15px rgb(0 0 0 / 10%);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 8px 10px -6px rgb(0 0 0 / 10%);
-    --shadow-focus: 0 0 0 3px var(--primary-focus-shadow);
-    --shadow-button-hover: var(--shadow-md);
-
-    /* Border radius aliases */
-    --radius-full: 9999px;
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 10%);
 
     /* Font size scale */
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
-    --font-size-md: 1.125rem;
     --font-size-lg: 1.25rem;
     --font-size-xl: 1.5rem;
-    --font-size-2xl: 2rem;
   }
 
   /* Dark theme overrides */
   [data-theme='dark'] {
     --color-primary: #5ba3f5;
-    --color-primary-foreground: #fff;
     --color-secondary: #f5b041;
-    --color-secondary-foreground: #fff;
     --color-success: #2ecc71;
     --color-error: #e67e73;
-    --color-destructive: #e67e73;
-    --color-destructive-foreground: #fff;
-
-    /* shadcn-svelte dark theme colors */
     --color-background: #1a1a1a;
-    --color-foreground: #e0e0e0;
-    --color-muted: #27272a;
-    --color-muted-foreground: #a1a1aa;
-    --color-accent: #27272a;
-    --color-accent-foreground: #fafafa;
-    --color-border: #444;
-    --color-input: #444;
-    --color-ring: #5ba3f5;
-    --color-card: #2a2a2a;
-    --color-card-foreground: #e0e0e0;
-    --color-popover: #2a2a2a;
-    --color-popover-foreground: #e0e0e0;
-
     --color-surface: #2a2a2a;
-    --color-input-border: #444;
+    --color-border: #444;
+    --color-input-border: #555;
+    --color-text: #e0e0e0;
+    --color-text-muted: rgb(224 224 224 / 75%);
     --color-disabled-bg: #222;
     --color-disabled-text: #555;
     --color-disabled-border: #333;
 
-    --color-text: #e0e0e0;
-    --color-text-muted: rgb(224 224 224 / 75%);
-
-    --color-primary-focus: rgb(91 163 245 / 20%);
-    --color-hover-light: rgb(91 163 245 / 10%);
-    --color-shadow: rgb(0 0 0 / 50%);
-
-    --color-level-up-text: #10b981;
-    --color-level-down-text: #ef4444;
-
-    --color-example-bg: #333;
-    --color-feature-start: #1a2332;
-    --color-feature-end: #2a3342;
+    /* shadcn-svelte overrides */
+    --color-muted: #27272a;
+    --color-muted-foreground: #a1a1aa;
+    --color-accent-foreground: #fafafa;
   }
 }
 
@@ -473,9 +390,9 @@
   }
 
   .feature {
-    background: linear-gradient(135deg, var(--color-feature-start) 0%, var(--color-feature-end) 100%);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
     color: var(--color-primary);
     font-weight: 500;
     border-left: 4px solid var(--color-primary);
@@ -499,7 +416,7 @@
     margin: 0;
 
     &:hover {
-      background-color: var(--hover-bg-light);
+      background-color: color-mix(in oklch, var(--color-primary) 10%, transparent);
       border-color: var(--primary-color);
       color: var(--primary-color);
     }
@@ -522,7 +439,7 @@
 
     &:hover:not(:disabled) {
       background-color: color-mix(in oklch, var(--color-primary) 85%, black);
-      box-shadow: var(--shadow-button-hover);
+      box-shadow: var(--shadow-md);
     }
 
     &:disabled {
@@ -558,14 +475,14 @@
 
     &:hover:not(:disabled) {
       background-color: color-mix(in oklch, var(--color-error) 85%, black);
-      box-shadow: var(--shadow-button-hover);
+      box-shadow: var(--shadow-md);
     }
   }
 
   .btn-base.speaking {
     background-color: var(--color-primary);
     color: white;
-    box-shadow: var(--shadow-focus);
+    box-shadow: 0 0 0 3px rgb(74 144 226 / 20%);
 
     i {
       animation: speaking-pulse var(--transition-speed) ease-in-out infinite alternate;
@@ -613,7 +530,7 @@
   }
 
   .gap-2xs {
-    gap: var(--spacing-2xs);
+    gap: var(--spacing-xs);
   }
 
   .gap-xs {

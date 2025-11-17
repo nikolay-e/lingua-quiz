@@ -274,9 +274,9 @@
   }
 </script>
 
-<div class="min-h-screen bg-background p-4 md:p-6 lg:p-8">
-  <div class="mx-auto max-w-7xl space-y-6">
-    <header class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+<div class="min-h-screen bg-background" style="padding: var(--spacing-md);">
+  <div class="mx-auto max-w-7xl" style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+    <header class="flex flex-col md:flex-row md:items-center md:justify-between" style="gap: var(--spacing-md);">
       <div>
         <h1 class="text-3xl font-bold text-primary">Vocabulary Management</h1>
         <p class="text-muted-foreground">Search, create, and manage vocabulary items</p>
@@ -298,7 +298,7 @@
     </header>
 
     {#if searchResults.length > 0}
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4" style="gap: var(--spacing-md);">
         <Card.Root>
           <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
             <Card.Title class="text-sm font-medium">Total Items</Card.Title>
@@ -386,8 +386,8 @@
         <Card.Title>Search Vocabulary</Card.Title>
         <Card.Description>Search by source or target text using full-text search</Card.Description>
       </Card.Header>
-      <Card.Content class="space-y-4">
-        <div class="flex flex-col gap-4 md:flex-row">
+      <Card.Content style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+        <div class="flex flex-col md:flex-row" style="gap: var(--spacing-md);">
           <div class="relative flex-1">
             <Input
               type="text"
@@ -419,8 +419,8 @@
 
         {#if searchResults.length > 0}
           <Separator />
-          <div class="flex flex-col gap-4 md:flex-row md:items-center">
-            <div class="flex items-center gap-2">
+          <div class="flex flex-col md:flex-row md:items-center" style="gap: var(--spacing-md);">
+            <div class="flex items-center" style="gap: var(--spacing-xs);">
               <Label class="text-sm font-medium">Language:</Label>
               <Select.Root type="single" bind:value={filterLanguage}>
                 <Select.Trigger class="w-40">
@@ -438,7 +438,7 @@
               </Select.Root>
             </div>
 
-            <div class="flex items-center gap-2">
+            <div class="flex items-center" style="gap: var(--spacing-xs);">
               <Label class="text-sm font-medium">Status:</Label>
               <Select.Root type="single" bind:value={filterStatus}>
                 <Select.Trigger class="w-32">
@@ -499,7 +499,7 @@
                       <Badge variant="outline">{item.listName}</Badge>
                     </Table.Cell>
                     <Table.Cell>
-                      <div class="flex gap-1">
+                      <div class="flex" style="gap: 4px;">
                         <Badge variant="secondary" class="text-xs">{item.sourceLanguage.toUpperCase()}</Badge>
                         <span class="text-muted-foreground">→</span>
                         <Badge variant="secondary" class="text-xs">{item.targetLanguage.toUpperCase()}</Badge>
@@ -513,7 +513,7 @@
                       {/if}
                     </Table.Cell>
                     <Table.Cell class="text-right">
-                      <div class="flex justify-end gap-2">
+                      <div class="flex justify-end" style="gap: var(--spacing-xs);">
                         <Button variant="outline" size="sm" onclick={() => openEditDialog(item)}>
                           <svg
                             class="mr-1 size-4"
@@ -561,16 +561,16 @@
       <Dialog.Title>Edit Vocabulary Item</Dialog.Title>
       <Dialog.Description>Make changes to the vocabulary item. Click save when you're done.</Dialog.Description>
     </Dialog.Header>
-    <div class="grid gap-4 py-4">
-      <div class="grid gap-2">
+    <div class="grid" style="gap: var(--spacing-md); padding-block: var(--spacing-md);">
+      <div class="grid" style="gap: var(--spacing-xs);">
         <Label for="edit-source">Source Text</Label>
         <Input id="edit-source" bind:value={editForm.sourceText} />
       </div>
-      <div class="grid gap-2">
+      <div class="grid" style="gap: var(--spacing-xs);">
         <Label for="edit-target">Target Text</Label>
         <Input id="edit-target" bind:value={editForm.targetText} />
       </div>
-      <div class="grid gap-2">
+      <div class="grid" style="gap: var(--spacing-xs);">
         <Label for="edit-source-example">Source Example</Label>
         <Textarea
           id="edit-source-example"
@@ -578,7 +578,7 @@
           rows={3}
           placeholder="Enter usage example..." />
       </div>
-      <div class="grid gap-2">
+      <div class="grid" style="gap: var(--spacing-xs);">
         <Label for="edit-target-example">Target Example</Label>
         <Textarea
           id="edit-target-example"
@@ -603,19 +603,19 @@
       <Dialog.Description>Add a new vocabulary item to the database.</Dialog.Description>
     </Dialog.Header>
     <div class="grid gap-4 py-4">
-      <div class="grid grid-cols-2 gap-4">
-        <div class="grid gap-2">
+      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
+        <div class="grid" style="gap: var(--spacing-xs);">
           <Label for="create-source">Source Text *</Label>
           <Input id="create-source" bind:value={createForm.sourceText} required />
         </div>
-        <div class="grid gap-2">
+        <div class="grid" style="gap: var(--spacing-xs);">
           <Label for="create-target">Target Text *</Label>
           <Input id="create-target" bind:value={createForm.targetText} required />
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
-        <div class="grid gap-2">
+      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
+        <div class="grid" style="gap: var(--spacing-xs);">
           <Label>Source Language</Label>
           <Select.Root type="single" bind:value={createForm.sourceLanguage}>
             <Select.Trigger>
@@ -628,7 +628,7 @@
             </Select.Content>
           </Select.Root>
         </div>
-        <div class="grid gap-2">
+        <div class="grid" style="gap: var(--spacing-xs);">
           <Label>Target Language</Label>
           <Select.Root type="single" bind:value={createForm.targetLanguage}>
             <Select.Trigger>
@@ -643,8 +643,8 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
-        <div class="grid gap-2">
+      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
+        <div class="grid" style="gap: var(--spacing-xs);">
           <Label for="create-list">List Name *</Label>
           <Input
             id="create-list"
@@ -652,7 +652,7 @@
             placeholder="e.g., english-russian-a1"
             required />
         </div>
-        <div class="grid gap-2">
+        <div class="grid" style="gap: var(--spacing-xs);">
           <Label>Difficulty Level</Label>
           <Select.Root type="single" bind:value={createForm.difficultyLevel}>
             <Select.Trigger>
@@ -667,7 +667,7 @@
         </div>
       </div>
 
-      <div class="grid gap-2">
+      <div class="grid" style="gap: var(--spacing-xs);">
         <Label for="create-source-example">Source Example</Label>
         <Textarea
           id="create-source-example"
@@ -675,7 +675,7 @@
           rows={3}
           placeholder="Enter usage example..." />
       </div>
-      <div class="grid gap-2">
+      <div class="grid" style="gap: var(--spacing-xs);">
         <Label for="create-target-example">Target Example</Label>
         <Textarea
           id="create-target-example"

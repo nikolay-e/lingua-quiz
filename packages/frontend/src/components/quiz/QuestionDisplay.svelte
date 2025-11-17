@@ -19,7 +19,7 @@
 <style>
   .question {
     padding: var(--spacing-sm) var(--spacing-md);
-    background: linear-gradient(135deg, var(--feature-gradient-start), var(--feature-gradient-end));
+    background: linear-gradient(135deg, #f8f9ff, #e8f0ff);
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
@@ -27,9 +27,9 @@
   }
 
   .question-text {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-xl);
     font-weight: bold;
-    color: var(--secondary-color);
+    color: var(--color-secondary);
     text-align: center;
   }
 </style>

@@ -17,3 +17,5 @@ package-lock.json
 *.json
 *.csv
 vocab_tools
+e2e
+*playwright*

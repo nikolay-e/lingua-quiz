@@ -52,7 +52,7 @@
   .header-text {
     h3 {
       margin: 0;
-      margin-block-end: var(--spacing-2xs);
+      margin-block-end: var(--spacing-xs);
       color: var(--text-color);
       font-size: var(--font-size-lg);
     }

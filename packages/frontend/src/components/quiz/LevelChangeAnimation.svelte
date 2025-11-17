@@ -66,13 +66,13 @@
   }
 
   .level-up .animation-content {
-    border-color: var(--level-up-border);
-    color: var(--level-up-text);
+    border-color: #4ade80;
+    color: #059669;
   }
 
   .level-down .animation-content {
-    border-color: var(--level-down-border);
-    color: var(--level-down-text);
+    border-color: #f87171;
+    color: #dc2626;
   }
 
   .icon {
@@ -80,7 +80,7 @@
   }
 
   .text {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-lg);
   }
 
   @keyframes level-up-animation {
