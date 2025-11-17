@@ -33,7 +33,7 @@
 
 {#if feedback}
   <div class="feedback-container" role="alert" aria-live="polite">
-    <div class="feedback-text {isSuccess ? 'success' : 'error'} flex-center text-center">
+    <div class="feedback-text {isSuccess ? 'success' : 'error'} flex-center gap-sm text-center">
       <span class="feedback-icon" aria-hidden="true"></span>
       <span class="feedback-message">
         {feedbackMessage}
@@ -52,7 +52,7 @@
 
 <style>
   .feedback-container {
-    margin-top: var(--spacing-md);
+    margin-block-start: var(--spacing-md);
     background-color: var(--container-bg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
@@ -86,7 +86,6 @@
 
   .feedback-icon {
     font-size: var(--font-size-lg);
-    margin-right: var(--spacing-sm);
   }
 
   .feedback-message {

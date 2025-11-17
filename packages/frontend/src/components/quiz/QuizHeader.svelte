@@ -39,8 +39,8 @@
       </select>
     </div>
   {:else}
-    <div class="selected-quiz-header flex-between">
-      <div class="quiz-info flex-align-center gap-sm">
+    <div class="selected-quiz-header flex-between gap-md">
+      <div class="quiz-info flex-align-center gap-xs">
         <i class="fas fa-book"></i>
         <span class="quiz-name">{selectedQuiz}</span>
       </div>
@@ -53,12 +53,8 @@
 </div>
 
 <style>
-  .quiz-header {
-    margin-top: calc(var(--spacing-md) * -0.5);
-  }
-
   .quiz-select-container {
-    margin-top: var(--spacing-md);
+    margin-block-start: var(--spacing-md);
   }
 
   .quiz-select {
@@ -84,7 +80,7 @@
   }
 
   .selected-quiz-header {
-    margin-top: var(--spacing-md);
+    margin-block-start: var(--spacing-md);
   }
 
   .quiz-info {

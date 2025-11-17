@@ -57,7 +57,7 @@ const collapseGerman = (s: string): string => {
 
 /** Full script‑/accent‑aware canonicalisation used for matching logic. */
 export const normalizeForComparison = (text: string): string => {
-  if (!text) return '';
+  if (text === '') return '';
   let result = text;
 
   // 1. Trim + lower + remove all whitespace (spaces are ignored).
@@ -71,7 +71,7 @@ export const normalizeForComparison = (text: string): string => {
 
   // Convert if there's already Cyrillic present and we have visually identical Latin chars
   if (containsCyr) {
-    result = result.replace(/[aAcCeEoOpPxXyY]/g, (ch) => latinToCyrillic[ch] || ch);
+    result = result.replace(/[aAcCeEoOpPxXyY]/g, (ch) => latinToCyrillic[ch] ?? ch);
   }
 
   // Conservative lookalike conversion for very specific cases
@@ -83,7 +83,7 @@ export const normalizeForComparison = (text: string): string => {
     // Very restrictive: only 3 chars or less, and contains patterns common in Russian
     const strongRussianPattern = result.includes('py') || result.includes('op') || result.includes('po');
     if (strongRussianPattern) {
-      result = result.replace(/[aAcCeEoOpPxXyY]/g, (ch) => latinToCyrillic[ch] || ch);
+      result = result.replace(/[aAcCeEoOpPxXyY]/g, (ch) => latinToCyrillic[ch] ?? ch);
     }
   }
 
@@ -110,17 +110,18 @@ const PIPE_SENTINEL = '§§PIPE§§';
  *   – keep commas intact, [] intact
  */
 export const formatForDisplay = (input: string): string => {
-  if (!input) return input;
+  if (input === '') return input;
   let text = input;
 
   // 1. Replace each ( ... ) group containing a pipe with its first alternative.
-  text = text.replace(/\(([^)]+)\)/g, (match, inner) => {
-    if (!inner.includes('|')) return match; // leave untouched.
+  text = text.replace(/\(([^)]+)\)/g, (match, inner: unknown) => {
+    const innerStr = String(inner);
+    if (!innerStr.includes('|')) return match; // leave untouched.
     const firstAlt =
-      inner
+      innerStr
         .split('|')
         .map((s: string) => s.trim())
-        .find((s: string) => s) ?? '';
+        .find((s: string) => s !== '') ?? '';
     return firstAlt; // drop surrounding parentheses.
   });
 
@@ -177,7 +178,7 @@ const splitTopLevelCommas = (s: string): string[] => {
     }
     current += ch;
   }
-  if (current.trim()) parts.push(current.trim());
+  if (current.trim() !== '') parts.push(current.trim());
   return parts;
 };
 
@@ -199,10 +200,10 @@ const expandGroup = (group: string): string[] => {
   // 2. Handle square brackets for optional parts (first occurrence only)
   const bracketMatch = g.match(/^(.*?)(\[(.*?)\])(.*)$/);
   let baseVariants: string[] = [];
-  if (bracketMatch) {
-    const pre = bracketMatch[1];
-    const opt = bracketMatch[3];
-    const post = bracketMatch[4];
+  if (bracketMatch !== null) {
+    const pre = bracketMatch[1] ?? '';
+    const opt = bracketMatch[3] ?? '';
+    const post = bracketMatch[4] ?? '';
     // With whitespace removal in normalize(), we only need to generate logical combinations.
     baseVariants.push(`${pre}${opt}${post}`);
     baseVariants.push(`${pre}${post}`);
@@ -216,9 +217,9 @@ const expandGroup = (group: string): string[] => {
     if (b.includes('|')) {
       b.split('|').forEach((p) => {
         const t = p.trim();
-        if (t) alts.push(t);
+        if (t !== '') alts.push(t);
       });
-    } else if (b) {
+    } else if (b !== '') {
       alts.push(b);
     }
   });
@@ -245,7 +246,7 @@ export const checkAnswer = (userAnswer: string, correctAnswer: string): boolean 
   // If pattern has only one group & no commas, we can treat pipes/brackets only.
   if (correctGroups.length === 1) {
     const firstGroup = correctGroups[0];
-    if (!firstGroup) return false;
+    if (firstGroup === undefined) return false;
     return firstGroup.has(normalize(userAnswer));
   }
 
@@ -259,7 +260,7 @@ export const checkAnswer = (userAnswer: string, correctAnswer: string): boolean 
     for (let i = 0; i < correctGroups.length; i++) {
       if (used.has(i)) continue;
       const group = correctGroups[i];
-      if (!group) continue;
+      if (group === undefined) continue;
       if (group.has(token)) {
         used.add(i);
         matched = true;

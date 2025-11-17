@@ -127,7 +127,8 @@ export class QuizManager {
     };
 
     // Initialize progress and populate queues
-    const initialProgressMap = new Map(initialState?.progress?.map((p) => [p.translationId, p]));
+    const progressArray = initialState.progress ?? [];
+    const initialProgressMap = new Map(progressArray.map((p) => [p.translationId, p]));
     this.progress = new Map();
 
     // Group translations by level with their queue positions
@@ -154,7 +155,7 @@ export class QuizManager {
 
       this.progress.set(t.id, progress);
       const group = levelGroups.get(progress.level);
-      if (group) {
+      if (group !== undefined) {
         group.push({ id: t.id, queuePosition: progress.queuePosition ?? index });
       }
     });
@@ -162,13 +163,13 @@ export class QuizManager {
     // Sort each level's translations by queue position and populate queues
     levels.forEach((level) => {
       const group = levelGroups.get(level);
-      if (group) {
+      if (group !== undefined) {
         group.sort((a, b) => a.queuePosition - b.queuePosition);
         this.queues[level] = group.map((item) => item.id);
       }
     });
 
-    this.currentLevel = initialState?.currentLevel ?? 'LEVEL_1';
+    this.currentLevel = initialState.currentLevel ?? 'LEVEL_1';
     this.replenishFocusPool();
   }
 
@@ -239,7 +240,7 @@ export class QuizManager {
 
     const t = this.translations.get(candidateId);
     const p = this.progress.get(candidateId);
-    if (!t || !p) return null;
+    if (t === undefined || p === undefined) return null;
 
     // Update last asked time
     p.lastAskedAt = new Date().toISOString();
@@ -360,7 +361,7 @@ export class QuizManager {
   submitAnswer = (translationId: string, userAnswer: string): SubmissionResult => {
     const p = this.progress.get(translationId);
     const t = this.translations.get(translationId);
-    if (!p || !t) throw new Error('Translation or progress not found');
+    if (p === undefined || t === undefined) throw new Error('Translation or progress not found');
 
     // Determine correct answer based on current level's direction
     const direction = this.getLevelDirection(this.currentLevel);
@@ -374,7 +375,7 @@ export class QuizManager {
     p.consecutiveCorrect = isCorrect ? p.consecutiveCorrect + 1 : 0;
 
     // Calculate response time
-    const responseTimeMs = this.submissionStartTime ? Date.now() - this.submissionStartTime : undefined;
+    const responseTimeMs = this.submissionStartTime !== null ? Date.now() - this.submissionStartTime : undefined;
     this.submissionStartTime = null;
 
     const oldStatus = p.level;
@@ -402,7 +403,7 @@ export class QuizManager {
    */
   private updateQueuePosition = (translationId: string, isCorrect: boolean): void => {
     const p = this.progress.get(translationId);
-    if (!p) return;
+    if (p === undefined) return;
 
     // Remove from current queue
     const currentQueue = this.queues[p.level];
@@ -434,7 +435,7 @@ export class QuizManager {
     // Check advancement (3 consecutive correct)
     if (p.consecutiveCorrect >= this.opts.correctAnswersToLevelUp) {
       const nextLevel = this.getNextLevel(p.level);
-      if (nextLevel) {
+      if (nextLevel !== null) {
         this.moveWordToLevel(p.translationId, nextLevel);
         p.consecutiveCorrect = 0;
       }
@@ -442,10 +443,10 @@ export class QuizManager {
     }
 
     // Check degradation (3 mistakes in last 10 attempts)
-    const recentMistakes = p.recentHistory.filter((h) => !h).length;
+    const recentMistakes = p.recentHistory.filter((h) => h === false).length;
     if (recentMistakes >= this.opts.mistakesToLevelDown && p.recentHistory.length >= MIN_HISTORY_FOR_DEGRADATION) {
       const prevLevel = this.getPreviousLevel(p.level);
-      if (prevLevel) {
+      if (prevLevel !== null) {
         this.moveWordToLevel(p.translationId, prevLevel);
         p.recentHistory = [];
       }
@@ -487,7 +488,7 @@ export class QuizManager {
    */
   private moveWordToLevel = (translationId: string, newLevel: LevelStatus): void => {
     const p = this.progress.get(translationId);
-    if (!p) return;
+    if (p === undefined) return;
 
     // Remove from old queue
     const oldQueue = this.queues[p.level];
@@ -528,7 +529,7 @@ export class QuizManager {
    */
   getTranslationForDisplay = (id: string): { source: string; target: string } | undefined => {
     const translation = this.translations.get(id);
-    if (!translation) return undefined;
+    if (translation === undefined) return undefined;
 
     return {
       source: formatForDisplay(translation.sourceText),

@@ -18,6 +18,7 @@
 {#if message}
   <p
     {id}
+    class="text-center"
     style:color={messageColor}
     role="status"
     aria-live="polite">

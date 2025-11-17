@@ -123,14 +123,19 @@
     background-color: var(--container-bg);
     border-radius: var(--radius-md);
     padding: var(--spacing-sm);
-    margin-top: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
+    margin-block: var(--spacing-sm) var(--spacing-md);
     box-shadow: var(--shadow-sm);
   }
 
   .password-requirements-title {
-    margin-bottom: var(--spacing-xs);
+    margin-block-end: var(--spacing-xs);
     font-weight: bold;
+  }
+
+  .requirements-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
   }
 
   .requirement {
@@ -139,7 +144,6 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-    margin: var(--spacing-xs) 0;
   }
 
   .requirement:hover {

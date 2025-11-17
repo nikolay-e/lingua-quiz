@@ -37,7 +37,7 @@ export class TTSService {
       const ttsData = await api.getTTSLanguages(token, undefined);
       this.updateState({
         isAvailable: ttsData.available,
-        supportedLanguages: ttsData.supportedLanguages ?? [],
+        supportedLanguages: ttsData.supportedLanguages,
       });
     } catch (error: unknown) {
       console.warn('Failed to load TTS languages:', error);
@@ -89,7 +89,7 @@ export class TTSService {
   }
 
   stopCurrentAudio(): void {
-    if (this.currentAudio) {
+    if (this.currentAudio !== null) {
       this.currentAudio.pause();
       this.currentAudio = null;
       this.updateState({ isPlaying: false });

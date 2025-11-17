@@ -27,12 +27,12 @@ export function getAvailableVoices(): SpeechSynthesisVoice[] {
 export function getVoiceForLanguage(langCode: string): SpeechSynthesisVoice | null {
   const voices = getAvailableVoices();
   const exactMatch = voices.find((v) => v.lang === langCode);
-  if (exactMatch) return exactMatch;
+  if (exactMatch !== undefined) return exactMatch;
 
   const prefix = langCode.split('-')[0];
-  if (!prefix) return null;
+  if (prefix === undefined || prefix === '') return null;
   const partialMatch = voices.find((v) => v.lang.startsWith(prefix));
-  return partialMatch || null;
+  return partialMatch ?? null;
 }
 
 export function speak(text: string, options: SpeechOptions = {}): Promise<void> {
@@ -49,10 +49,10 @@ export function speak(text: string, options: SpeechOptions = {}): Promise<void> 
     utterance.pitch = options.pitch ?? DEFAULT_PITCH;
     utterance.volume = options.volume ?? DEFAULT_VOLUME;
 
-    if (options.lang) {
+    if (typeof options.lang === 'string' && options.lang !== '') {
       utterance.lang = options.lang;
       const voice = getVoiceForLanguage(options.lang);
-      if (voice) {
+      if (voice !== null) {
         utterance.voice = voice;
       }
     }

@@ -7,11 +7,11 @@ declare global {
 }
 
 const getServerAddress = (): string => {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL as string;
+  if (typeof import.meta.env.VITE_API_URL === 'string' && import.meta.env.VITE_API_URL !== '') {
+    return import.meta.env.VITE_API_URL;
   }
 
-  if (window.LINGUA_QUIZ_API_URL) {
+  if (typeof window.LINGUA_QUIZ_API_URL === 'string' && window.LINGUA_QUIZ_API_URL !== '') {
     return window.LINGUA_QUIZ_API_URL;
   }
 
@@ -20,13 +20,18 @@ const getServerAddress = (): string => {
 
 const serverAddress = getServerAddress();
 
+interface ApiErrorResponse {
+  message?: string;
+  detail?: string;
+}
+
 async function fetchWrapper<T = unknown>(url: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    let errorData;
+    let errorData: ApiErrorResponse = {};
     try {
-      errorData = await response.json();
+      errorData = (await response.json()) as ApiErrorResponse;
     } catch {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -49,7 +54,7 @@ async function fetchWrapper<T = unknown>(url: string, options: RequestInit = {})
     return {} as T;
   }
 
-  return response.json();
+  return (await response.json()) as T;
 }
 
 export interface VocabularyItemCreate {
@@ -129,9 +134,15 @@ const adminApi = {
     options: { listName?: string; limit?: number; offset?: number } = {},
   ): Promise<VocabularyItem[]> => {
     const params = new URLSearchParams();
-    if (options.listName) params.append('list_name', options.listName);
-    if (options.limit) params.append('limit', options.limit.toString());
-    if (options.offset) params.append('offset', options.offset.toString());
+    if (typeof options.listName === 'string' && options.listName !== '') {
+      params.append('list_name', options.listName);
+    }
+    if (typeof options.limit === 'number' && options.limit > 0) {
+      params.append('limit', options.limit.toString());
+    }
+    if (typeof options.offset === 'number' && options.offset >= 0) {
+      params.append('offset', options.offset.toString());
+    }
 
     return fetchWrapper<VocabularyItem[]>(`${serverAddress}/admin/vocabulary?${params.toString()}`, {
       headers: {

@@ -39,18 +39,20 @@
   }
 
   .feed-item__header {
-    margin-bottom: var(--spacing-sm);
+    margin-block-end: var(--spacing-sm);
   }
 
   .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-md);
   }
 
   .header-text {
     h3 {
-      margin: 0 0 var(--spacing-xs);
+      margin: 0;
+      margin-block-end: var(--spacing-2xs);
       color: var(--text-color);
       font-size: var(--font-size-lg);
     }

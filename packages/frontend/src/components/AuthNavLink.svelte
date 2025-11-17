@@ -11,7 +11,7 @@
 
 <style>
   .auth-link {
-    margin-top: var(--spacing-lg);
+    margin-block-start: var(--spacing-lg);
     text-align: center;
     color: var(--text-color);
     display: flex;

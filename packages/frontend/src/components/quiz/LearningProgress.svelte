@@ -96,13 +96,15 @@
   }
 
   .word-list {
-    padding-left: var(--spacing-2xl);
-    margin-top: var(--spacing-sm);
+    padding-inline-start: var(--spacing-2xl);
+    margin-block-start: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
 
     li {
-      padding: var(--spacing-xs) 0;
+      padding-block: var(--spacing-xs);
       border-bottom: 1px solid var(--input-border-color);
-      margin: var(--spacing-xs) 0;
     }
   }
 
@@ -117,7 +119,7 @@
 
   .fold-icon {
     font-size: var(--font-size-sm);
-    margin-right: var(--spacing-sm);
+    margin-inline-end: var(--spacing-sm);
     transition: transform var(--transition-speed-fast) ease;
     color: var(--text-color);
     opacity: 0.6;
@@ -125,7 +127,7 @@
 
   .foldable-content {
     animation: fade-in var(--transition-speed) ease;
-    margin-top: var(--spacing-sm);
+    margin-block-start: var(--spacing-sm);
   }
 
   @keyframes fade-in {

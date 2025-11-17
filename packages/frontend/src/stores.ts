@@ -47,8 +47,8 @@ function createThemeStore(): ThemeStore {
   const getInitialTheme = () => {
     if (typeof window === 'undefined') return false;
     const savedTheme = safeStorage.getItem(STORAGE_KEYS.THEME);
-    if (savedTheme) return savedTheme === THEMES.DARK;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme !== null) return savedTheme === THEMES.DARK;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   };
 
   const applyTheme = (isDark: boolean) => {
@@ -65,10 +65,10 @@ function createThemeStore(): ThemeStore {
 
   applyTheme(initialTheme);
 
-  if (typeof window !== 'undefined' && window.matchMedia) {
+  if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
-      if (!safeStorage.getItem(STORAGE_KEYS.THEME)) {
+      if (safeStorage.getItem(STORAGE_KEYS.THEME) === null) {
         const isDark = e.matches;
         applyTheme(isDark);
         set({ isDarkMode: isDark });
@@ -89,7 +89,9 @@ function createThemeStore(): ThemeStore {
     clearPreference: () => {
       safeStorage.removeItem(STORAGE_KEYS.THEME);
       const systemPreference =
-        typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        typeof window !== 'undefined' &&
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
       applyTheme(systemPreference);
       set({ isDarkMode: systemPreference });
     },
@@ -126,7 +128,7 @@ function createAuthStore(): AuthStore {
 
   async function refreshAccessToken() {
     const refreshToken = safeStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN);
-    if (!refreshToken) {
+    if (refreshToken === null) {
       logoutUser();
       return;
     }
@@ -146,13 +148,13 @@ function createAuthStore(): AuthStore {
   }
 
   function scheduleTokenRefresh() {
-    if (refreshTimer) {
+    if (refreshTimer !== null) {
       clearTimeout(refreshTimer);
       refreshTimer = null;
     }
 
     const expirationStr = safeStorage.getItem(STORAGE_KEYS.TOKEN_EXPIRATION);
-    if (!expirationStr) return;
+    if (expirationStr === null) return;
 
     const expirationMs = parseInt(expirationStr, 10);
     const now = Date.now();
@@ -168,7 +170,7 @@ function createAuthStore(): AuthStore {
   function checkToken() {
     const token = safeStorage.getItem(STORAGE_KEYS.TOKEN);
 
-    if (!token) {
+    if (token === null) {
       set({ token: null, username: null, isAuthenticated: false, isAdmin: false });
       return;
     }
@@ -193,7 +195,7 @@ function createAuthStore(): AuthStore {
 
   function setUser(data: { token: string; username: string; refreshToken?: string }) {
     safeStorage.setItem(STORAGE_KEYS.TOKEN, data.token);
-    if (data.refreshToken) {
+    if (data.refreshToken !== undefined) {
       safeStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, data.refreshToken);
     }
 
@@ -214,7 +216,7 @@ function createAuthStore(): AuthStore {
     safeStorage.removeItem(STORAGE_KEYS.TOKEN);
     safeStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
     safeStorage.removeItem(STORAGE_KEYS.TOKEN_EXPIRATION);
-    if (refreshTimer) {
+    if (refreshTimer !== null) {
       clearTimeout(refreshTimer);
       refreshTimer = null;
     }
@@ -234,7 +236,7 @@ function createAuthStore(): AuthStore {
     },
     logout: async () => {
       const state = get({ subscribe });
-      if (state.token) {
+      if (state.token !== null) {
         try {
           await quizStore.saveAndCleanup(state.token);
         } catch (error) {
@@ -251,7 +253,7 @@ function createAuthStore(): AuthStore {
     },
     deleteAccount: async () => {
       const state = get({ subscribe });
-      if (!state.token) throw new Error('Not authenticated');
+      if (state.token === null) throw new Error('Not authenticated');
 
       await api.deleteAccount(state.token);
       logoutUser();
@@ -303,9 +305,9 @@ function createQuizStore(): QuizStore {
 
   const bulkSaveProgress = async (token: string): Promise<void> => {
     const state = get(store);
-    if (!state.quizManager || progressMap.size === 0) return;
+    if (state.quizManager === null || progressMap.size === 0) return;
 
-    if (debounceTimer) {
+    if (debounceTimer !== null) {
       clearTimeout(debounceTimer);
       debounceTimer = null;
     }
@@ -322,8 +324,9 @@ function createQuizStore(): QuizStore {
           incorrectCount: progress.incorrectCount,
         };
         persistencePromises.push(
-          api.saveProgress(token, payload).catch((err) => {
-            console.error(`Progress save failed for ${vocabularyItemId}:`, err.message, 'Payload:', payload);
+          api.saveProgress(token, payload).catch((err: unknown) => {
+            const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+            console.error(`Progress save failed for ${vocabularyItemId}:`, errorMessage, 'Payload:', payload);
             return Promise.resolve();
           }),
         );
@@ -342,7 +345,7 @@ function createQuizStore(): QuizStore {
   };
 
   const debouncedBulkSave = (token: string) => {
-    if (debounceTimer) {
+    if (debounceTimer !== null) {
       clearTimeout(debounceTimer);
     }
 
@@ -366,7 +369,7 @@ function createQuizStore(): QuizStore {
       return await operation();
     } catch (error) {
       const errorInfo = handleQuiz401Error(error);
-      if (onError) {
+      if (onError !== undefined) {
         onError(errorInfo.message);
       }
       if (!errorInfo.isUnauthorized) {
@@ -386,7 +389,7 @@ function createQuizStore(): QuizStore {
         const currentVersion = await api.fetchContentVersion(token);
         const savedVersion = safeStorage.getItem(STORAGE_KEYS.CONTENT_VERSION);
 
-        if (savedVersion && parseInt(savedVersion) !== currentVersion.versionId) {
+        if (savedVersion !== null && parseInt(savedVersion) !== currentVersion.versionId) {
           console.info(`Content version changed: ${savedVersion} -> ${currentVersion.versionId}. Clearing cache.`);
           return true;
         }
@@ -395,7 +398,7 @@ function createQuizStore(): QuizStore {
         return false;
       });
 
-      if (versionChanged) {
+      if (versionChanged === true) {
         progressMap.clear();
       }
 
@@ -404,7 +407,7 @@ function createQuizStore(): QuizStore {
         (error) => update((state) => ({ ...state, error: error as string, loading: false })),
       );
 
-      if (result) {
+      if (result !== null) {
         update((state) => ({ ...state, wordLists: result, loading: false }));
       }
     },
@@ -469,7 +472,7 @@ function createQuizStore(): QuizStore {
           // Initialize progressMap with persisted counts from database (keyed by vocabularyItemId)
           for (const [vocabularyItemId, prog] of progressLookup.entries()) {
             const translation = orderedTranslations.find((t) => t.id === vocabularyItemId);
-            if (translation) {
+            if (translation !== undefined) {
               progressMap.set(vocabularyItemId, {
                 level: prog.level,
                 queuePosition: prog.queuePosition,
@@ -495,7 +498,7 @@ function createQuizStore(): QuizStore {
         (error) => update((state) => ({ ...state, error: error as string, loading: false })),
       );
 
-      if (result) {
+      if (result !== null) {
         update((state) => ({
           ...state,
           loading: false,
@@ -507,7 +510,7 @@ function createQuizStore(): QuizStore {
 
     getNextQuestion: () => {
       const state = get(store);
-      if (!state.quizManager) return null;
+      if (state.quizManager === null) return null;
 
       const questionResult = state.quizManager.getNextQuestion();
       const { question } = questionResult;
@@ -518,14 +521,14 @@ function createQuizStore(): QuizStore {
 
     submitAnswer: async (token: string, answer: string) => {
       const state = get(store);
-      if (!state.quizManager || !state.currentQuestion) return null;
+      if (state.quizManager === null || state.currentQuestion === null) return null;
 
       try {
         const feedback = state.quizManager.submitAnswer(state.currentQuestion.translationId, answer);
 
         const { translationId } = state.currentQuestion;
         const translation = state.quizManager.getTranslation(translationId);
-        if (!translation) {
+        if (translation === undefined) {
           console.error(`Translation not found for ID ${translationId}`);
           return feedback;
         }
@@ -533,7 +536,7 @@ function createQuizStore(): QuizStore {
         const quizState = state.quizManager.getState();
         const currentProgress = quizState.progress.find((p) => p.translationId === translationId);
 
-        if (!currentProgress) {
+        if (currentProgress === undefined) {
           console.error(`Progress not found for translation ID ${translationId}`);
           return feedback;
         }
@@ -566,12 +569,12 @@ function createQuizStore(): QuizStore {
 
     setLevel: async (level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4', token?: string) => {
       const state = get(store);
-      if (!state.quizManager) {
+      if (state.quizManager === null) {
         return { success: false, actualLevel: 'LEVEL_1' as const, message: 'Quiz not initialized' };
       }
 
       try {
-        if (token) {
+        if (token !== undefined) {
           try {
             await bulkSaveProgress(token);
           } catch (error) {
@@ -594,7 +597,7 @@ function createQuizStore(): QuizStore {
 
     reset: () => {
       const state = get(store);
-      if (debounceTimer) {
+      if (debounceTimer !== null) {
         clearTimeout(debounceTimer);
         debounceTimer = null;
       }
@@ -612,12 +615,12 @@ function createQuizStore(): QuizStore {
 
     saveAndCleanup: (token: string) => {
       const state = get(store);
-      if (debounceTimer) {
+      if (debounceTimer !== null) {
         clearTimeout(debounceTimer);
         debounceTimer = null;
       }
-      if (state.quizManager) {
-        void bulkSaveProgress(token).catch((err) => console.error('Failed to save progress on stop:', err));
+      if (state.quizManager !== null) {
+        void bulkSaveProgress(token).catch((err: unknown) => console.error('Failed to save progress on stop:', err));
       }
       return Promise.resolve();
     },
@@ -634,7 +637,7 @@ export { safeStorage };
 export const levelWordLists = derived(
   quizStore,
   ($quizStore, set) => {
-    if (!$quizStore.quizManager) {
+    if ($quizStore.quizManager === null) {
       const emptyLevelWordLists = LEVEL_CONFIG.reduce((acc, level) => {
         acc[level.id] = { ...level, words: [], count: 0 };
         return acc;
@@ -647,16 +650,18 @@ export const levelWordLists = derived(
     const manager = $quizStore.quizManager;
 
     const newLevelWordLists = LEVEL_CONFIG.reduce((acc, level) => {
-      const words =
-        state.queues[level.key as keyof typeof state.queues]
-          ?.map((id) => manager.getTranslationForDisplay(id))
-          .filter((translation): translation is TranslationDisplay => translation !== undefined)
-          .map((w) => `${w.source} -> ${w.target}`) || [];
+      const queue = state.queues[level.key as keyof typeof state.queues];
+      const words = queue
+        .map((id) => manager.getTranslationForDisplay(id))
+        .filter((translation): translation is TranslationDisplay => translation !== undefined)
+        .map((w) => `${w.source} -> ${w.target}`);
+
+      const queueLength = queue.length;
 
       acc[level.id] = {
         ...level,
         words,
-        count: state.queues[level.key as keyof typeof state.queues]?.length || 0,
+        count: queueLength,
       };
       return acc;
     }, {} as LevelWordLists);

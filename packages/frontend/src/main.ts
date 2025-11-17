@@ -3,7 +3,7 @@ import App from './App.svelte';
 import { mount } from 'svelte';
 
 const appElement = document.getElementById('app');
-if (!appElement) {
+if (appElement === null) {
   throw new Error('App element not found');
 }
 

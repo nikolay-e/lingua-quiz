@@ -5,11 +5,11 @@ declare global {
 }
 
 const getServerAddress = (): string => {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL as string;
+  if (typeof import.meta.env.VITE_API_URL === 'string' && import.meta.env.VITE_API_URL !== '') {
+    return import.meta.env.VITE_API_URL;
   }
 
-  if (window.LINGUA_QUIZ_API_URL) {
+  if (typeof window.LINGUA_QUIZ_API_URL === 'string' && window.LINGUA_QUIZ_API_URL !== '') {
     return window.LINGUA_QUIZ_API_URL;
   }
 
@@ -28,13 +28,23 @@ import type {
 
 const serverAddress = getServerAddress();
 
+interface ApiErrorDetail {
+  msg?: string;
+  message?: string;
+}
+
+interface ApiErrorResponse {
+  message?: string;
+  detail?: string | ApiErrorDetail[];
+}
+
 async function fetchWrapper<T = unknown>(url: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    let errorData;
+    let errorData: ApiErrorResponse = {};
     try {
-      errorData = await response.json();
+      errorData = (await response.json()) as ApiErrorResponse;
     } catch {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -46,27 +56,29 @@ async function fetchWrapper<T = unknown>(url: string, options: RequestInit = {})
       throw new Error('Resource not found');
     }
 
-    if (errorData.detail && Array.isArray(errorData.detail)) {
+    if (Array.isArray(errorData.detail)) {
       const errors = errorData.detail
-        .map((err: { msg?: string; message?: string }) => err.msg ?? err.message)
-        .filter(Boolean)
+        .map((err: ApiErrorDetail) => err.msg ?? err.message ?? '')
+        .filter((msg: string) => msg !== '')
         .join(', ');
-      const errorMessage = errors.length > 0 ? errors : `Request failed with status ${response.status}`;
+      const errorMessage = errors !== '' ? errors : `Request failed with status ${response.status}`;
       throw new Error(errorMessage);
     }
 
-    const errorMessage = errorData.message ?? errorData.detail ?? `Request failed with status ${response.status}`;
+    const detailMessage = typeof errorData.detail === 'string' ? errorData.detail : '';
+    const errorMessage =
+      errorData.message ?? (detailMessage !== '' ? detailMessage : `Request failed with status ${response.status}`);
     throw new Error(errorMessage);
   }
 
   const cl = response.headers.get('content-length');
   if (response.status === 204 || cl === '0' || cl === null) {
     const text = await response.text();
-    return (text ? JSON.parse(text) : undefined) as unknown as T;
+    return text !== '' ? (JSON.parse(text) as T) : (undefined as unknown as T);
   }
 
   try {
-    return await response.json();
+    return (await response.json()) as T;
   } catch {
     return undefined as unknown as T;
   }
@@ -152,9 +164,10 @@ const api = {
   },
 
   async fetchUserProgress(token: string, listName?: string): Promise<UserProgress[]> {
-    const url = listName
-      ? `${serverAddress}/user/progress?list_name=${encodeURIComponent(listName)}`
-      : `${serverAddress}/user/progress`;
+    const url =
+      typeof listName === 'string' && listName !== ''
+        ? `${serverAddress}/user/progress?list_name=${encodeURIComponent(listName)}`
+        : `${serverAddress}/user/progress`;
     return fetchWrapper(url, withAuth(token, { method: 'GET' }));
   },
 

@@ -83,43 +83,14 @@ class TestAuthentication:
 
     def test_protected_endpoint_without_token(self, api_client):
         """Test accessing protected endpoint without token."""
-        response = api_client.get(f"{API_URL}/auth/profile")
-        # Should be 401 (Unauthorized) or 403 (Forbidden) for missing auth
+        response = api_client.get(f"{API_URL}/user/progress")
         assert response.status_code in [401, 403]
 
     def test_protected_endpoint_with_invalid_token(self, api_client):
         """Test accessing protected endpoint with invalid token."""
         headers = {"Authorization": "Bearer invalid_token"}
-        response = api_client.get(f"{API_URL}/auth/profile", headers=headers)
-        # Should be 401 (Unauthorized) or 403 (Forbidden) for invalid auth
+        response = api_client.get(f"{API_URL}/user/progress", headers=headers)
         assert response.status_code in [401, 403]
-
-
-@pytest.mark.integration
-class TestUserProfile:
-    """Test user profile management."""
-
-    def test_get_user_profile(self, authenticated_api_client, test_user):
-        """Test getting user profile."""
-        response = authenticated_api_client.get(f"{API_URL}/auth/profile")
-
-        assert response.status_code == 200
-        data = response.json()
-        assert data["username"] == test_user["username"]
-        assert "id" in data
-
-    def test_update_user_profile(self, authenticated_api_client, test_user):
-        """Test updating user profile."""
-        new_display_name = "Updated Test User"
-
-        response = authenticated_api_client.put(f"{API_URL}/auth/profile", json={"display_name": new_display_name})
-
-        if response.status_code == 200:
-            data = response.json()
-            assert data["display_name"] == new_display_name
-        else:
-            # Profile update might not be implemented - just check it's handled gracefully
-            assert response.status_code in [404, 405, 501]
 
 
 @pytest.mark.integration
