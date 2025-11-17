@@ -52,16 +52,17 @@
   }
 
   .animation-content {
-    background: rgb(255 255 255 / 95%);
-    border-radius: 12px;
-    padding: 16px 24px;
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-md) var(--spacing-xl);
     box-shadow: var(--shadow-xl);
     backdrop-filter: blur(10px);
     border: 2px solid;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-sm);
     font-weight: bold;
+    opacity: 0.95;
   }
 
   .level-up .animation-content {
@@ -75,11 +76,11 @@
   }
 
   .icon {
-    font-size: 24px;
+    font-size: var(--font-size-xl);
   }
 
   .text {
-    font-size: 18px;
+    font-size: var(--font-size-md);
   }
 
   @keyframes level-up-animation {

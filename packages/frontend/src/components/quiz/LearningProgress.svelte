@@ -68,13 +68,13 @@
     background: var(--container-bg);
     border: 1px solid var(--input-border-color);
     border-radius: var(--radius-lg);
-    padding: 12px var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
     box-shadow: var(--shadow-sm);
     transition: box-shadow var(--transition-speed) ease;
-  }
 
-  .current-level-display:hover {
-    box-shadow: var(--shadow-md);
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
   }
 
   .level-label {
@@ -96,14 +96,14 @@
   }
 
   .word-list {
-    padding-left: 50px;
+    padding-left: var(--spacing-2xl);
     margin-top: var(--spacing-sm);
-  }
 
-  .word-list li {
-    padding: var(--spacing-xs) 0;
-    border-bottom: 1px solid var(--input-border-color);
-    margin: var(--spacing-xs) 0;
+    li {
+      padding: var(--spacing-xs) 0;
+      border-bottom: 1px solid var(--input-border-color);
+      margin: var(--spacing-xs) 0;
+    }
   }
 
   .no-words {
@@ -116,7 +116,7 @@
   }
 
   .fold-icon {
-    font-size: 0.8rem;
+    font-size: var(--font-size-sm);
     margin-right: var(--spacing-sm);
     transition: transform var(--transition-speed-fast) ease;
     color: var(--text-color);

@@ -69,26 +69,28 @@
     padding: var(--spacing-sm);
     font-size: var(--font-size-base);
     transition: border-color var(--transition-speed) ease;
-  }
 
-  .quiz-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-focus);
-  }
+    &:focus-visible {
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-focus);
+    }
 
-  .quiz-select:disabled {
-    background-color: var(--disabled-bg);
-    color: var(--disabled-text);
-    border-color: var(--disabled-border-color);
-    cursor: not-allowed;
+    &:disabled {
+      background-color: var(--disabled-bg);
+      color: var(--disabled-text);
+      border-color: var(--disabled-border-color);
+      cursor: not-allowed;
+    }
   }
 
   .selected-quiz-header {
     margin-top: var(--spacing-md);
   }
 
-  .quiz-info i {
-    color: var(--primary-color);
+  .quiz-info {
+    i {
+      color: var(--primary-color);
+    }
   }
 
   .quiz-name {

@@ -68,12 +68,12 @@
     padding: 0;
     max-width: 400px;
     width: 90%;
-    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
+    box-shadow: var(--shadow-xl);
     background-color: var(--container-bg);
   }
 
   dialog::backdrop {
-    background-color: rgb(0 0 0 / 50%);
+    background-color: var(--color-shadow);
     backdrop-filter: blur(4px);
   }
 
@@ -122,31 +122,30 @@
     font-weight: 500;
     cursor: pointer;
     transition: all var(--transition-speed) ease;
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
   }
 
   .cancel-btn {
     background-color: transparent;
     border: 1px solid var(--input-border-color);
     color: var(--text-color);
-  }
 
-  .cancel-btn:hover {
-    background-color: var(--disabled-bg);
+    &:hover {
+      background-color: var(--disabled-bg);
+    }
   }
 
   .confirm-btn {
     background-color: var(--primary-color);
     border: none;
-    color: white;
-  }
+    color: var(--color-primary-foreground);
 
-  .confirm-btn:hover {
-    background-color: var(--primary-hover);
-  }
-
-  .confirm-btn:focus-visible,
-  .cancel-btn:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+    &:hover {
+      background-color: color-mix(in oklch, var(--primary-color) 85%, black);
+    }
   }
 </style>

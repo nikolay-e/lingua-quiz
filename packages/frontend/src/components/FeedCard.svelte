@@ -32,10 +32,10 @@
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
     padding: var(--spacing-lg);
-  }
 
-  .feed-item.dense {
-    padding: var(--spacing-md);
+    &.dense {
+      padding: var(--spacing-md);
+    }
   }
 
   .feed-item__header {
@@ -48,25 +48,31 @@
     align-items: center;
   }
 
-  .header-text h3 {
-    margin: 0 0 2px;
-    color: var(--text-color);
-    font-size: var(--font-size-lg);
+  .header-text {
+    h3 {
+      margin: 0 0 var(--spacing-xs);
+      color: var(--text-color);
+      font-size: var(--font-size-lg);
+    }
+
+    .subtitle {
+      margin: 0;
+      opacity: 0.8;
+      font-size: var(--font-size-sm);
+    }
   }
 
-  .header-text .subtitle {
-    margin: 0;
-    opacity: 0.8;
-    font-size: var(--font-size-sm);
+  .header-action {
+    :global(.btn-base) {
+      gap: var(--spacing-xs);
+      margin: 0;
+      width: auto;
+    }
   }
 
-  .header-action :global(.btn-base) {
-    gap: var(--spacing-xs);
-    margin: 0;
-    width: auto;
-  }
-
-  .feed-item__body :global(.full-width) {
-    width: 100%;
+  .feed-item__body {
+    :global(.full-width) {
+      width: 100%;
+    }
   }
 </style>

@@ -76,66 +76,65 @@
   }
 
   .stat-label {
-    flex: 0 0 120px;
+    flex: 0 0 7.5rem;
     font-size: var(--font-size-sm);
     font-weight: 500;
     color: var(--text-color);
   }
 
-  progress,
-  meter {
+  :is(progress, meter) {
     flex: 1;
-    height: 20px;
+    height: 1.25rem;
     border-radius: var(--radius-sm);
   }
 
   progress {
     appearance: none;
     background-color: var(--disabled-bg);
-  }
 
-  progress::-webkit-progress-bar {
-    background-color: var(--disabled-bg);
-    border-radius: var(--radius-sm);
-  }
+    &::-webkit-progress-bar {
+      background-color: var(--disabled-bg);
+      border-radius: var(--radius-sm);
+    }
 
-  progress::-webkit-progress-value {
-    background-color: var(--primary-color);
-    border-radius: var(--radius-sm);
-    transition: width var(--transition-speed) ease;
-  }
+    &::-webkit-progress-value {
+      background-color: var(--primary-color);
+      border-radius: var(--radius-sm);
+      transition: width var(--transition-speed) ease;
+    }
 
-  progress::-moz-progress-bar {
-    background-color: var(--primary-color);
-    border-radius: var(--radius-sm);
+    &::-moz-progress-bar {
+      background-color: var(--primary-color);
+      border-radius: var(--radius-sm);
+    }
   }
 
   meter {
     appearance: none;
-  }
 
-  meter::-webkit-meter-bar {
-    background-color: var(--disabled-bg);
-    border-radius: var(--radius-sm);
-  }
+    &::-webkit-meter-bar {
+      background-color: var(--disabled-bg);
+      border-radius: var(--radius-sm);
+    }
 
-  meter::-webkit-meter-optimum-value {
-    background-color: var(--success-color);
-    border-radius: var(--radius-sm);
-  }
+    &::-webkit-meter-optimum-value {
+      background-color: var(--success-color);
+      border-radius: var(--radius-sm);
+    }
 
-  meter::-webkit-meter-suboptimum-value {
-    background-color: var(--secondary-color);
-    border-radius: var(--radius-sm);
-  }
+    &::-webkit-meter-suboptimum-value {
+      background-color: var(--secondary-color);
+      border-radius: var(--radius-sm);
+    }
 
-  meter::-webkit-meter-even-less-good-value {
-    background-color: var(--error-color);
-    border-radius: var(--radius-sm);
+    &::-webkit-meter-even-less-good-value {
+      background-color: var(--error-color);
+      border-radius: var(--radius-sm);
+    }
   }
 
   .stat-value {
-    flex: 0 0 60px;
+    flex: 0 0 3.75rem;
     text-align: right;
     font-weight: 600;
     color: var(--primary-color);

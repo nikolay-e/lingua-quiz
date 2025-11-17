@@ -18,12 +18,12 @@
   .environment-info {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    padding: 16px 8px;
-    font-size: 11px;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-sm);
+    font-size: var(--font-size-sm);
     font-family: monospace;
     opacity: 0.6;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-speed-fast);
   }
 
   .environment-info:hover {
@@ -32,40 +32,28 @@
 
   .env-label,
   .version {
-    padding: 4px 8px;
-    border-radius: 4px;
-    background: var(--bg-secondary, #f0f0f0);
-    color: var(--text-primary, #333);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    background: var(--color-muted);
+    color: var(--color-foreground);
   }
 
   .env-label.production {
-    background: #10b981;
-    color: white;
+    background: var(--color-success);
+    color: var(--color-primary-foreground);
   }
 
   .env-label.staging {
-    background: #f59e0b;
-    color: white;
+    background: var(--color-secondary);
+    color: var(--color-secondary-foreground);
   }
 
   .env-label.preview {
-    background: #3b82f6;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
   }
 
   .version {
-    background: var(--bg-tertiary, #e5e5e5);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .env-label,
-    .version {
-      background: var(--bg-secondary-dark, #2a2a2a);
-      color: var(--text-primary-dark, #e0e0e0);
-    }
-
-    .version {
-      background: var(--bg-tertiary-dark, #1a1a1a);
-    }
+    background: var(--color-accent);
   }
 </style>

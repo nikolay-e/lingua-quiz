@@ -111,29 +111,29 @@
     border: none;
     border-radius: var(--radius-full);
     background-color: var(--primary-color);
-    color: white;
+    color: var(--color-primary-foreground);
     cursor: pointer;
     transition: all var(--transition-speed) ease;
-  }
 
-  .speak-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
-  .speak-btn:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-  }
+    &:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
 
-  .speak-btn:hover:not(:disabled) {
-    background-color: var(--primary-hover);
-    transform: scale(1.1);
-  }
+    &:hover:not(:disabled) {
+      background-color: color-mix(in oklch, var(--primary-color) 85%, black);
+      transform: scale(1.1);
+    }
 
-  .speak-btn.speaking {
-    background-color: var(--error-color);
-    animation: pulse 1.5s infinite;
+    &.speaking {
+      background-color: var(--error-color);
+      animation: pulse 1.5s infinite;
+    }
   }
 
   @keyframes pulse {
@@ -148,21 +148,21 @@
   }
 
   .speak-btn-sm {
-    width: 32px;
-    height: 32px;
-    padding: 6px;
+    width: 2rem;
+    height: 2rem;
+    padding: var(--spacing-xs);
   }
 
   .speak-btn-md {
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: var(--spacing-sm);
   }
 
   .speak-btn-lg {
-    width: 48px;
-    height: 48px;
-    padding: 10px;
+    width: 3rem;
+    height: 3rem;
+    padding: calc(var(--spacing-sm) + 2px);
   }
 
   svg {

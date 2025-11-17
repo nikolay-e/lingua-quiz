@@ -48,7 +48,7 @@ repos:
   # Hidden gems with high impact - prevents pipeline breakage
   # =============================================================================
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.34.1
+    rev: 0.35.0
     hooks:
       - id: check-github-workflows
         name: Validate GitHub workflows
@@ -67,7 +67,7 @@ repos:
   # CRITICAL: Run on staged files only for speed
   # =============================================================================
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.28.0
+    rev: v8.29.0
     hooks:
       - id: gitleaks
         name: Scan for secrets (gitleaks)
@@ -77,7 +77,7 @@ repos:
   # Ruff replaces: isort + autoflake + black + flake8 (10x faster)
   # =============================================================================
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.3
+    rev: v0.14.5
     hooks:
       - id: ruff
         name: Lint Python with ruff
@@ -88,7 +88,7 @@ repos:
         types_or: [python, pyi]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.21.0
+    rev: v3.21.1
     hooks:
       - id: pyupgrade
         name: Upgrade Python syntax
@@ -117,7 +117,7 @@ repos:
         stages: [pre-push]
 
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.8.6
+    rev: 1.9.0
     hooks:
       - id: bandit
         name: Security scan Python (bandit)
@@ -129,7 +129,7 @@ repos:
   # STAGE 6: SQL Quality (<2 seconds)
   # =============================================================================
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 4.0.0a1
+    rev: 4.0.0a2
     hooks:
       - id: sqlfluff-fix
         name: Format SQL files

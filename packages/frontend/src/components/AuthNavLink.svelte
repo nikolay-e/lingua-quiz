@@ -11,17 +11,17 @@
 
 <style>
   .auth-link {
-    margin-top: 20px;
+    margin-top: var(--spacing-lg);
     text-align: center;
     color: var(--text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
-  }
+    gap: var(--spacing-xs);
 
-  .auth-link p {
-    margin: 0;
+    p {
+      margin: 0;
+    }
   }
 
   .link-button {
@@ -34,10 +34,10 @@
     margin: 0;
     font-size: inherit;
     width: auto;
-  }
 
-  .link-button:hover {
-    color: var(--secondary-color);
-    background: none;
+    &:hover {
+      color: color-mix(in oklch, var(--primary-color) 70%, black);
+      background: none;
+    }
   }
 </style>

@@ -18,10 +18,10 @@
   header {
     display: flex;
     align-items: center;
-    gap: 10px;
-  }
+    gap: var(--spacing-sm);
 
-  h1 {
-    margin: 0;
+    h1 {
+      margin: 0;
+    }
   }
 </style>

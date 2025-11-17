@@ -354,10 +354,10 @@
 <style>
   .delete-button {
     background-color: var(--error-color);
-  }
 
-  .delete-button:hover {
-    background-color: var(--error-hover);
+    &:hover {
+      background-color: color-mix(in oklch, var(--error-color) 85%, black);
+    }
   }
 
   .logo {
@@ -371,12 +371,12 @@
     color: inherit;
     transition: all var(--transition-speed) ease;
     cursor: pointer;
-  }
 
-  .feature-link:hover {
-    background-color: var(--primary-color);
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-button-hover);
+    &:hover {
+      background-color: var(--primary-color);
+      color: var(--color-primary-foreground);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-button-hover);
+    }
   }
 </style>

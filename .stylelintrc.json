@@ -2,29 +2,69 @@
   "extends": ["stylelint-config-standard", "stylelint-config-html/svelte"],
   "customSyntax": "postcss-html",
   "rules": {
+    "color-function-notation": "modern",
+    "alpha-value-notation": "number",
     "selector-pseudo-class-no-unknown": [
       true,
       {
-        "ignorePseudoClasses": ["global", "local"]
+        "ignorePseudoClasses": ["global", "local", "deep"]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["v-deep"]
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["composes"]
       }
     ],
     "at-rule-no-unknown": [
       true,
       {
-        "ignoreAtRules": ["tailwind", "apply", "layer", "responsive", "screen"]
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "variants",
+          "responsive",
+          "screen",
+          "layer",
+          "theme",
+          "source",
+          "utility",
+          "variant",
+          "plugin",
+          "custom-variant"
+        ]
+      }
+    ],
+    "function-no-unknown": [
+      true,
+      {
+        "ignoreFunctions": ["theme", "screen"]
       }
     ],
     "color-hex-length": "short",
-    "declaration-block-no-redundant-longhand-properties": true,
+    "no-descending-specificity": null,
+    "declaration-block-no-redundant-longhand-properties": null,
     "shorthand-property-no-redundant-values": true,
     "selector-class-pattern": null,
     "custom-property-pattern": null,
+    "keyframes-name-pattern": null,
     "value-keyword-case": [
       "lower",
       {
+        "ignoreKeywords": ["currentColor"],
+        "ignoreFunctions": ["url"],
         "camelCaseSvgKeywords": true
       }
-    ]
+    ],
+    "declaration-empty-line-before": null,
+    "rule-empty-line-before": null,
+    "custom-property-empty-line-before": null
   },
   "overrides": [
     {

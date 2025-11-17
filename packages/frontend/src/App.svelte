@@ -109,8 +109,8 @@
 <style>
   .admin-nav {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
     z-index: 1000;
   }
 </style>

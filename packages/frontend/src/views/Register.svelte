@@ -122,14 +122,14 @@
   .password-requirements {
     background-color: var(--container-bg);
     border-radius: var(--radius-md);
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    padding: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
     box-shadow: var(--shadow-sm);
   }
 
   .password-requirements-title {
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-xs);
     font-weight: bold;
   }
 
@@ -138,8 +138,8 @@
     transition: opacity var(--transition-speed) ease;
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin: 3px 0;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
   }
 
   .requirement:hover {
@@ -151,7 +151,7 @@
       transform var(--transition-speed-fast) ease,
       color var(--transition-speed-fast) ease;
     color: var(--input-border-color);
-    font-size: 12px;
+    font-size: var(--font-size-sm);
   }
 
   .requirement.valid {
