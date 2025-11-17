@@ -87,12 +87,6 @@ export interface TranslationDisplay {
   target: string;
 }
 
-export interface AppError {
-  message: string;
-  code?: string;
-  details?: unknown;
-}
-
 export interface ContentVersion {
   versionId: number;
   versionName: string;

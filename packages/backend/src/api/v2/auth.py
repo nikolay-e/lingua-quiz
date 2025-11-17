@@ -194,19 +194,3 @@ async def delete_account(current_user: dict = Depends(get_current_user)):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to delete account",
         )
-
-
-@router.get("/profile", response_model=UserResponse)
-async def get_user_profile(current_user: dict = Depends(get_current_user)):
-    try:
-        return UserResponse(
-            id=current_user["user_id"],
-            username=current_user["username"],
-            is_admin=current_user.get("is_admin", False),
-        )
-    except Exception as e:
-        logger.error(f"Error fetching user profile: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to fetch user profile",
-        )
