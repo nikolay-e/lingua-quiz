@@ -10,7 +10,9 @@
   </FeedCard>
 
   <FeedCard>
-    <slot />
+    <div class="auth-content">
+      <slot />
+    </div>
   </FeedCard>
 </main>
 
@@ -23,5 +25,17 @@
     h1 {
       margin: 0;
     }
+  }
+
+  .auth-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .auth-content :global(h2) {
+    font-size: var(--font-size-xl);
+    text-align: center;
+    margin: 0;
   }
 </style>

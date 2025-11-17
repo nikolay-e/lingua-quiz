@@ -104,7 +104,7 @@
       </div>
     {/if}
 
-    <button type="submit" disabled={!isPasswordValid || isLoading}>
+    <button type="submit" class="btn-base primary-button" disabled={!isPasswordValid || isLoading}>
       <i class="fas fa-user-plus"></i> Create Account
     </button>
   </form>

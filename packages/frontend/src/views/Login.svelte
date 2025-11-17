@@ -55,7 +55,7 @@
       autocomplete="current-password"
     />
 
-    <button type="submit" disabled={isLoading}>
+    <button type="submit" class="btn-base primary-button" disabled={isLoading}>
       <i class="fas fa-sign-in-alt"></i> Sign In
     </button>
   </form>

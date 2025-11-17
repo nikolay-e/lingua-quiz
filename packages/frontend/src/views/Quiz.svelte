@@ -301,7 +301,12 @@
             disabled={isSubmitting}
             aria-describedby="word"
           />
-          <button type="button" on:click={submitAnswer} disabled={isSubmitting}>
+          <button
+            type="button"
+            class="btn-base primary-button"
+            on:click={submitAnswer}
+            disabled={isSubmitting}
+          >
             <i class="fas fa-paper-plane"></i> {isSubmitting ? 'Submitting…' : 'Submit'}
           </button>
         </div>
@@ -334,10 +339,10 @@
 
     <FeedCard dense>
       <div class="actions">
-        <button class="logout-button" on:click={logout}>
+        <button class="btn-base logout-button" on:click={logout}>
           <i class="fas fa-sign-out-alt"></i> Logout ({username})
         </button>
-        <button class="delete-button" on:click={handleDeleteAccount}>
+        <button class="btn-base delete-button" on:click={handleDeleteAccount}>
           <i class="fas fa-trash-alt"></i> Delete Account
         </button>
       </div>
@@ -352,14 +357,6 @@
 />
 
 <style>
-  .delete-button {
-    background-color: var(--error-color);
-
-    &:hover {
-      background-color: color-mix(in oklch, var(--error-color) 85%, black);
-    }
-  }
-
   .logo {
     margin: 0;
     color: var(--primary-color);
