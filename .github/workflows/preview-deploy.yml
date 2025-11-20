@@ -112,7 +112,7 @@ jobs:
           echo "✓ All images verified and ready for deployment"
 
       - name: Checkout gitops repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: ${{ env.GITOPS_REPO }}
           token: ${{ secrets.GITOPS_PAT }}
