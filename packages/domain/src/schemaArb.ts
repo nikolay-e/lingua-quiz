@@ -1,6 +1,7 @@
 import type { JSONSchema7 } from 'json-schema';
 import jsf from 'json-schema-faker';
-import fc, { type Arbitrary } from 'fast-check';
+import * as fc from 'fast-check';
+import type { Arbitrary } from 'fast-check';
 
 const toArbitrary = (schema: JSONSchema7): Arbitrary<unknown> => {
   if (schema.anyOf) {

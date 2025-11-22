@@ -9,8 +9,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "clean": "rm -rf dist src/generated",
+    "build": "tsc -p tsconfig.json && cp -r ../domain-schema ./domain-schema",
+    "clean": "rm -rf dist src/generated domain-schema",
     "generate": "node ./generate.js",
     "prepare": "npm run generate && npm run build",
     "test": "vitest run"
