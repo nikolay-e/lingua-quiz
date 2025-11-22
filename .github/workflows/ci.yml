@@ -47,6 +47,9 @@ jobs:
 
       - run: pip install --no-cache-dir pre-commit isort datamodel-code-generator
 
+      - name: Install backend dependencies for schema generation
+        run: pip install --no-cache-dir -r packages/backend/requirements.txt
+
       - name: Regenerate schemas and clients
         run: make generate-all
 
