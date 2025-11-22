@@ -3,11 +3,13 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
 class TTSResponse(BaseModel):
-    audioData: str = Field(..., title="Audiodata")
-    contentType: str | None = Field("audio/mpeg", title="Contenttype")
-    text: str = Field(..., title="Text")
-    language: str = Field(..., title="Language")
+    audioData: str = Field(..., title='Audiodata')
+    contentType: str | None = Field('audio/mpeg', title='Contenttype')
+    text: str = Field(..., title='Text')
+    language: str = Field(..., title='Language')

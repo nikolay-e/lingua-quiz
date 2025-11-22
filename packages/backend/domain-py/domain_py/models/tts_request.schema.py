@@ -7,5 +7,5 @@ from pydantic import BaseModel, Field
 
 
 class TTSRequest(BaseModel):
-    text: str = Field(..., max_length=500, min_length=1, title="Text")
-    language: str = Field(..., regex="^(en|de|ru|es)$", title="Language")
+    text: str = Field(..., max_length=500, min_length=1, title='Text')
+    language: str = Field(..., regex='^(en|de|ru|es)$', title='Language')

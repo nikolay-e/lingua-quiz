@@ -15,4 +15,4 @@ await generate({
   useUnionTypes: true,
 });
 
-console.log('✅ Generated TypeScript client from OpenAPI');
+console.info('✅ Generated TypeScript client from OpenAPI');

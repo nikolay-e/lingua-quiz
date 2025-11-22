@@ -7,8 +7,8 @@ from pydantic import BaseModel, Field
 
 
 class ProgressUpdateRequest(BaseModel):
-    vocabularyItemId: str = Field(..., title="Vocabularyitemid")
-    level: int = Field(..., ge=0, le=5, title="Level")
-    queuePosition: int = Field(..., ge=0, title="Queueposition")
-    correctCount: int = Field(..., ge=0, title="Correctcount")
-    incorrectCount: int = Field(..., ge=0, title="Incorrectcount")
+    vocabularyItemId: str = Field(..., title='Vocabularyitemid')
+    level: int = Field(..., ge=0, le=5, title='Level')
+    queuePosition: int = Field(..., ge=0, title='Queueposition')
+    correctCount: int = Field(..., ge=0, title='Correctcount')
+    incorrectCount: int = Field(..., ge=0, title='Incorrectcount')

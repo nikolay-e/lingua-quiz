@@ -3,15 +3,17 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
 class VocabularyItemResponse(BaseModel):
-    id: str = Field(..., title="Id")
-    sourceText: str = Field(..., title="Sourcetext")
-    sourceLanguage: str = Field(..., title="Sourcelanguage")
-    targetText: str = Field(..., title="Targettext")
-    targetLanguage: str = Field(..., title="Targetlanguage")
-    listName: str = Field(..., title="Listname")
-    sourceUsageExample: str | None = Field(..., title="Sourceusageexample")
-    targetUsageExample: str | None = Field(..., title="Targetusageexample")
+    id: str = Field(..., title='Id')
+    sourceText: str = Field(..., title='Sourcetext')
+    sourceLanguage: str = Field(..., title='Sourcelanguage')
+    targetText: str = Field(..., title='Targettext')
+    targetLanguage: str = Field(..., title='Targetlanguage')
+    listName: str = Field(..., title='Listname')
+    sourceUsageExample: str | None = Field(..., title='Sourceusageexample')
+    targetUsageExample: str | None = Field(..., title='Targetusageexample')

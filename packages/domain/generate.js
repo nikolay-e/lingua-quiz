@@ -70,7 +70,7 @@ const compileSchemas = async () => {
   }
 
   fs.writeFileSync(outputFile, `${banner + chunks.join('\n\n')}\n`);
-  console.log(`✅ Generated ${path.relative(repoRoot, outputFile)}`);
+  console.info(`✅ Generated ${path.relative(repoRoot, outputFile)}`);
 };
 
 await compileSchemas();

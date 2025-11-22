@@ -7,5 +7,5 @@ from pydantic import BaseModel, Field
 
 
 class TTSLanguagesResponse(BaseModel):
-    available: bool = Field(..., title="Available")
-    supportedLanguages: list[str] = Field(..., title="Supportedlanguages")
+    available: bool = Field(..., title='Available')
+    supportedLanguages: list[str] = Field(..., title='Supportedlanguages')

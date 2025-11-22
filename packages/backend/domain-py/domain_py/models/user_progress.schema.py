@@ -3,17 +3,19 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
 class UserProgressResponse(BaseModel):
-    vocabularyItemId: str = Field(..., title="Vocabularyitemid")
-    sourceText: str = Field(..., title="Sourcetext")
-    sourceLanguage: str = Field(..., title="Sourcelanguage")
-    targetLanguage: str = Field(..., title="Targetlanguage")
-    level: int = Field(..., title="Level")
-    queuePosition: int = Field(..., title="Queueposition")
-    correctCount: int = Field(..., title="Correctcount")
-    incorrectCount: int = Field(..., title="Incorrectcount")
-    consecutiveCorrect: int = Field(..., title="Consecutivecorrect")
-    lastPracticed: str | None = Field(..., title="Lastpracticed")
+    vocabularyItemId: str = Field(..., title='Vocabularyitemid')
+    sourceText: str = Field(..., title='Sourcetext')
+    sourceLanguage: str = Field(..., title='Sourcelanguage')
+    targetLanguage: str = Field(..., title='Targetlanguage')
+    level: int = Field(..., title='Level')
+    queuePosition: int = Field(..., title='Queueposition')
+    correctCount: int = Field(..., title='Correctcount')
+    incorrectCount: int = Field(..., title='Incorrectcount')
+    consecutiveCorrect: int = Field(..., title='Consecutivecorrect')
+    lastPracticed: str | None = Field(..., title='Lastpracticed')

@@ -53,6 +53,9 @@ jobs:
       - name: Regenerate schemas and clients
         run: make generate-all
 
+      - name: Build core package for type checking
+        run: npm run build --workspace @lingua-quiz/core
+
       - name: Domain property-based tests
         run: npm run test --workspace @lingua-quiz/domain
 
@@ -229,7 +232,7 @@ jobs:
           # Build all images in parallel using cache
           docker buildx build --target backend --load -t lingua-quiz-backend:latest --cache-from type=gha . &
           docker buildx build --target frontend --load -t lingua-quiz-frontend:latest --cache-from type=gha . &
-          docker buildx build --target integration-e2e-tests --load -t lingua-quiz-integration-e2e-tests:latest --cache-from type=gha . &
+          docker buildx build --target integration-e2e-tests --load -t lingua-quiz-tests:latest --cache-from type=gha . &
           wait
 
       - name: Run tests

@@ -3,10 +3,12 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
 class UserResponse(BaseModel):
-    id: int = Field(..., title="Id")
-    username: str = Field(..., title="Username")
-    is_admin: bool | None = Field(False, title="Is Admin")
+    id: int = Field(..., title='Id')
+    username: str = Field(..., title='Username')
+    is_admin: bool | None = Field(False, title='Is Admin')

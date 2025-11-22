@@ -60,7 +60,7 @@ const extractErrorMessage = (body: unknown): string | undefined => {
       const collected = typedBody.detail
         .map((item) => {
           if (typeof item === 'string') return item;
-          if (item && typeof item === 'object') {
+          if (item != null && typeof item === 'object') {
             const obj = item as { msg?: string; message?: string };
             return obj.msg ?? obj.message ?? '';
           }

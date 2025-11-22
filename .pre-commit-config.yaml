@@ -76,44 +76,6 @@ repos:
         name: Validate backend OpenAPI spec
         files: ^packages/backend/openapi\.json$
 
-  - repo: local
-    hooks:
-      # Generate OpenAPI spec when backend API changes
-      - id: generate-openapi
-        name: Generate OpenAPI spec from backend
-        entry: python packages/backend/scripts/export_openapi.py
-        language: system
-        pass_filenames: false
-        files: ^packages/backend/src/
-        stages: [pre-commit]
-
-      # Generate domain JSON schemas
-      - id: generate-domain/schemas
-        name: Generate domain JSON schemas from backend
-        entry: python packages/backend/scripts/export_domain_schema.py
-        language: system
-        pass_filenames: false
-        files: ^packages/backend/src/
-        stages: [pre-commit]
-
-      # Generate TS API client from OpenAPI
-      - id: generate-api-client
-        name: Generate TS API client from OpenAPI
-        entry: node packages/frontend/scripts/generate-api.js
-        language: system
-        pass_filenames: false
-        files: ^packages/backend/openapi\.json$
-        stages: [pre-commit]
-
-      # Generate TS domain types from JSON Schema
-      - id: generate-domain-ts
-        name: Generate TS domain types from JSON Schema
-        entry: node packages/domain/generate.js
-        language: system
-        pass_filenames: false
-        files: ^packages/domain/schemas/
-        stages: [pre-commit]
-
   # =============================================================================
   # STAGE 3: Security - Secrets Scanning (<3 seconds)
   # CRITICAL: Run on staged files only for speed
