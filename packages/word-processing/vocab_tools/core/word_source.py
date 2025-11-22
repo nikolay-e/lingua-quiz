@@ -5,8 +5,6 @@ from pathlib import Path
 
 from wordfreq import top_n_list
 
-from .database_parser import VocabularyFileParser
-
 
 @dataclass
 class Word:
@@ -26,34 +24,6 @@ class WordSource(ABC):
 
     def count(self) -> int:
         return sum(1 for _ in self.get_words())
-
-
-class MigrationFileSource(WordSource):
-    def __init__(self, migrations_directory: Path | None, language_code: str):
-        self.language_code = language_code
-        self.parser = VocabularyFileParser(migrations_directory)
-        self.files = self._discover_files()
-
-    def _discover_files(self) -> list[str]:
-        discovered = self.parser.discover_migration_files()
-        return discovered.get(self.language_code, [])
-
-    def get_words(self) -> Iterator[Word]:
-        for filename in self.files:
-            entries = self.parser.parse_migration_file(filename)
-            for entry in entries:
-                yield Word(
-                    text=entry.source_word,
-                    source=f"migration:{filename}",
-                    metadata={
-                        "target_word": entry.target_word,
-                        "source_example": entry.source_example,
-                        "target_example": entry.target_example,
-                    },
-                )
-
-    def get_language_code(self) -> str:
-        return self.language_code
 
 
 class FrequencyBasedSource(WordSource):

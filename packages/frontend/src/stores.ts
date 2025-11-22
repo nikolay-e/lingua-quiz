@@ -389,12 +389,14 @@ function createQuizStore(): QuizStore {
         const currentVersion = await api.fetchContentVersion(token);
         const savedVersion = safeStorage.getItem(STORAGE_KEYS.CONTENT_VERSION);
 
+        const currentVersionId = currentVersion.versionId.toString();
         if (savedVersion !== null && parseInt(savedVersion) !== currentVersion.versionId) {
-          console.info(`Content version changed: ${savedVersion} -> ${currentVersion.versionId}. Clearing cache.`);
+          console.info(`Content version changed: ${savedVersion} -> ${currentVersionId}. Clearing cache.`);
+          safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
           return true;
         }
 
-        safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersion.versionId.toString());
+        safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
         return false;
       });
 
@@ -451,6 +453,7 @@ function createQuizStore(): QuizStore {
             targetText: word.targetText,
             targetLanguage: word.targetLanguage,
             targetUsageExample: word.targetUsageExample ?? '',
+            listName: word.listName,
           }));
 
           const progress = orderedTranslations.map((word, index) => {

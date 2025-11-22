@@ -1,0 +1,65 @@
+{
+  "properties": {
+    "vocabularyItemId": {
+      "title": "Vocabularyitemid",
+      "type": "string"
+    },
+    "sourceText": {
+      "title": "Sourcetext",
+      "type": "string"
+    },
+    "sourceLanguage": {
+      "title": "Sourcelanguage",
+      "type": "string"
+    },
+    "targetLanguage": {
+      "title": "Targetlanguage",
+      "type": "string"
+    },
+    "level": {
+      "title": "Level",
+      "type": "integer"
+    },
+    "queuePosition": {
+      "title": "Queueposition",
+      "type": "integer"
+    },
+    "correctCount": {
+      "title": "Correctcount",
+      "type": "integer"
+    },
+    "incorrectCount": {
+      "title": "Incorrectcount",
+      "type": "integer"
+    },
+    "consecutiveCorrect": {
+      "title": "Consecutivecorrect",
+      "type": "integer"
+    },
+    "lastPracticed": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Lastpracticed"
+    }
+  },
+  "required": [
+    "vocabularyItemId",
+    "sourceText",
+    "sourceLanguage",
+    "targetLanguage",
+    "level",
+    "queuePosition",
+    "correctCount",
+    "incorrectCount",
+    "consecutiveCorrect",
+    "lastPracticed"
+  ],
+  "title": "UserProgressResponse",
+  "type": "object"
+}

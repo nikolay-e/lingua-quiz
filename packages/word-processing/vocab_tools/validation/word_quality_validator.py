@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from ..config.config_loader import get_config_loader
-from ..core.database_parser import VocabularyFileParser
+from ..core.api_client import VocabularyAPIAdapter
 from ..core.vocabulary_processor import VocabularyProcessor
 from .base_validation import BaseValidationIssue, BaseValidationResult
 
@@ -54,7 +54,7 @@ class WordQualityResult(BaseValidationResult):
 
 class WordQualityValidator:
     def __init__(self, migrations_directory: Path | None = None):
-        self.db_parser = VocabularyFileParser(migrations_directory)
+        self.db_parser = VocabularyAPIAdapter()
         self.config_loader = get_config_loader()
 
     def validate_all_migrations(self, silent: bool = False) -> dict[str, WordQualityResult]:
@@ -110,7 +110,7 @@ class WordQualityValidator:
         )
 
         for entry in entries:
-            word_variants = self._extract_word_variants(entry.source_word)
+            word_variants = self._extract_word_variants(entry.source_text)
 
             for word in word_variants:
                 if not word or not word.strip():

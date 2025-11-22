@@ -13,8 +13,8 @@ from ..config.constants import (
     ESSENTIAL_VOCABULARY_CATEGORIES,
     SUPPORTED_LANGUAGES,
 )
+from .api_client import VocabularyAPIAdapter, VocabularyEntry
 from .base_normalizer import get_universal_normalizer
-from .database_parser import VocabularyEntry, VocabularyFileParser
 
 
 @dataclass
@@ -77,7 +77,7 @@ class VocabularyAnalyzer(ABC):
         self.silent = silent
 
         # Initialize components
-        self.db_parser = VocabularyFileParser(migrations_directory)
+        self.db_parser = VocabularyAPIAdapter()
         config_loader = get_config_loader()
         self.normalizer = get_universal_normalizer(language_code, config_loader)
         self._nlp_model: Any | None = None
@@ -243,7 +243,7 @@ class VocabularyAnalyzer(ABC):
                 entries = self.db_parser.parse_migration_file(migration_file)
                 for entry in entries:
                     if self._is_valid_vocabulary_entry(entry):
-                        word_variants = self.normalizer.extract_word_variants(entry.source_word)
+                        word_variants = self.normalizer.extract_word_variants(entry.source_text)
                         existing_words.update(word_variants)
             except FileNotFoundError:
                 print(f"⚠️ Migration file not found: {migration_file}")
@@ -262,11 +262,11 @@ class VocabularyAnalyzer(ABC):
             True if entry is valid for analysis
         """
         # Skip obvious placeholder entries
-        if entry.source_word == "word" and entry.target_word == "translation":
+        if entry.source_text == "word" and entry.target_text == "translation":
             return False
 
         # Skip empty entries
-        if not entry.source_word.strip():
+        if not entry.source_text.strip():
             return False
 
         return True

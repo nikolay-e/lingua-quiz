@@ -1,0 +1,15 @@
+# Generated files - use directory patterns to avoid maintaining file lists
+**/generated/
+packages/domain-schema/
+packages/backend/openapi.json
+
+# Build artifacts
+**/dist/
+**/build/
+**/node_modules/
+
+# Package lock
+package-lock.json
+
+# Flux system files
+flux/**/flux-system/

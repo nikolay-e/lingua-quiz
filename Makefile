@@ -138,6 +138,25 @@ endif
 push: ## ⬆️ (CI ONLY) Push all Docker images to the registry.
 	@echo "--> Skipping push: Handled by CI/CD workflow with build-push-action and GHCR caching."
 
+openapi: ## 📄 Generate OpenAPI schema from backend
+	@echo "--> Generating OpenAPI spec from FastAPI app..."
+	@SKIP_DB_INIT=1 JWT_SECRET=$${JWT_SECRET:-openapi-placeholder-secret} python packages/backend/scripts/export_openapi.py
+
+domain-schema: ## 📄 Generate JSON Schemas for domain models
+	@echo "--> Generating domain JSON Schemas from Pydantic models..."
+	@SKIP_DB_INIT=1 JWT_SECRET=$${JWT_SECRET:-domain-schema-placeholder} python packages/backend/scripts/export_domain_schema.py
+
+domain-py: domain-schema ## 🐍 Generate Pydantic models from domain JSON Schemas
+	@echo "--> Generating Python domain models from JSON Schemas..."
+	@python packages/domain-py/generate_models.py
+
+generate-all: ## 🔄 Regenerate OpenAPI, domain schemas, TS client, TS domain, and Python domain models
+	@$(MAKE) openapi
+	@$(MAKE) domain-schema
+	@npm run generate:api
+	@npm run generate:domain
+	@$(MAKE) domain-py
+
 # ===================================================================================
 # SAFETY CHECKS
 # ===================================================================================

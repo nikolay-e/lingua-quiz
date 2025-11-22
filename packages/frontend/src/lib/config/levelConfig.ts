@@ -1,8 +1,8 @@
-import type { LevelStatus } from '@lingua-quiz/core';
+import type { LevelKey } from '@lingua-quiz/domain';
 
 export interface LevelConfigItem {
   id: string;
-  key: LevelStatus;
+  key: LevelKey;
   label: string;
   icon: string;
   description: (sourceLanguage: string, targetLanguage: string) => string;
@@ -59,11 +59,11 @@ export const LEVEL_CONFIG: readonly LevelConfigItem[] = [
   },
 ] as const;
 
-export function getLevelConfig(levelKey: LevelStatus): LevelConfigItem | undefined {
+export function getLevelConfig(levelKey: LevelKey): LevelConfigItem | undefined {
   return LEVEL_CONFIG.find((config) => config.key === levelKey);
 }
 
-export function getLevelDescription(levelKey: LevelStatus, sourceLanguage: string, targetLanguage: string): string {
+export function getLevelDescription(levelKey: LevelKey, sourceLanguage: string, targetLanguage: string): string {
   const config = getLevelConfig(levelKey);
   return config?.description(sourceLanguage, targetLanguage) ?? '';
 }

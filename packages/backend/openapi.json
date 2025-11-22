@@ -8,7 +8,9 @@
   "paths": {
     "/api/auth/register": {
       "post": {
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "summary": "Register User",
         "operationId": "register_user_api_auth_register_post",
         "requestBody": {
@@ -47,7 +49,9 @@
     },
     "/api/auth/login": {
       "post": {
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "summary": "Login User",
         "operationId": "login_user_api_auth_login_post",
         "requestBody": {
@@ -84,9 +88,52 @@
         }
       }
     },
+    "/api/auth/refresh": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refresh Access Token",
+        "operationId": "refresh_access_token_api_auth_refresh_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/auth/delete-account": {
       "delete": {
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "summary": "Delete Account",
         "operationId": "delete_account_api_auth_delete_account_delete",
         "responses": {
@@ -106,33 +153,11 @@
         ]
       }
     },
-    "/api/auth/profile": {
-      "get": {
-        "tags": ["Authentication"],
-        "summary": "Get User Profile",
-        "operationId": "get_user_profile_api_auth_profile_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
     "/api/word-lists": {
       "get": {
-        "tags": ["Vocabulary"],
+        "tags": [
+          "Vocabulary"
+        ],
         "summary": "Get Word Lists",
         "operationId": "get_word_lists_api_word_lists_get",
         "responses": {
@@ -160,7 +185,9 @@
     },
     "/api/translations": {
       "get": {
-        "tags": ["Vocabulary"],
+        "tags": [
+          "Vocabulary"
+        ],
         "summary": "Get Translations",
         "operationId": "get_translations_api_translations_get",
         "security": [
@@ -209,7 +236,9 @@
     },
     "/api/user/progress": {
       "get": {
-        "tags": ["Progress"],
+        "tags": [
+          "Progress"
+        ],
         "summary": "Get User Progress",
         "operationId": "get_user_progress_api_user_progress_get",
         "security": [
@@ -263,7 +292,9 @@
         }
       },
       "post": {
-        "tags": ["Progress"],
+        "tags": [
+          "Progress"
+        ],
         "summary": "Save User Progress",
         "operationId": "save_user_progress_api_user_progress_post",
         "security": [
@@ -305,7 +336,9 @@
     },
     "/api/tts/synthesize": {
       "post": {
-        "tags": ["Text-to-Speech"],
+        "tags": [
+          "Text-to-Speech"
+        ],
         "summary": "Synthesize Speech",
         "operationId": "synthesize_speech_api_tts_synthesize_post",
         "requestBody": {
@@ -349,7 +382,9 @@
     },
     "/api/tts/languages": {
       "get": {
-        "tags": ["Text-to-Speech"],
+        "tags": [
+          "Text-to-Speech"
+        ],
         "summary": "Get Tts Languages",
         "operationId": "get_tts_languages_api_tts_languages_get",
         "responses": {
@@ -373,7 +408,9 @@
     },
     "/api/admin/vocabulary/search": {
       "get": {
-        "tags": ["Admin"],
+        "tags": [
+          "Admin"
+        ],
         "summary": "Search Vocabulary",
         "operationId": "search_vocabulary_api_admin_vocabulary_search_get",
         "security": [
@@ -436,7 +473,9 @@
     },
     "/api/admin/vocabulary/{item_id}": {
       "get": {
-        "tags": ["Admin"],
+        "tags": [
+          "Admin"
+        ],
         "summary": "Get Vocabulary Item",
         "operationId": "get_vocabulary_item_api_admin_vocabulary__item_id__get",
         "security": [
@@ -479,7 +518,9 @@
         }
       },
       "put": {
-        "tags": ["Admin"],
+        "tags": [
+          "Admin"
+        ],
         "summary": "Update Vocabulary Item",
         "operationId": "update_vocabulary_item_api_admin_vocabulary__item_id__put",
         "security": [
@@ -530,7 +571,9 @@
         }
       },
       "delete": {
-        "tags": ["Admin"],
+        "tags": [
+          "Admin"
+        ],
         "summary": "Delete Vocabulary Item",
         "operationId": "delete_vocabulary_item_api_admin_vocabulary__item_id__delete",
         "security": [
@@ -573,7 +616,9 @@
     },
     "/api/admin/vocabulary": {
       "post": {
-        "tags": ["Admin"],
+        "tags": [
+          "Admin"
+        ],
         "summary": "Create Vocabulary Item",
         "operationId": "create_vocabulary_item_api_admin_vocabulary_post",
         "security": [
@@ -613,7 +658,9 @@
         }
       },
       "get": {
-        "tags": ["Admin"],
+        "tags": [
+          "Admin"
+        ],
         "summary": "List Vocabulary",
         "operationId": "list_vocabulary_api_admin_vocabulary_get",
         "security": [
@@ -690,9 +737,37 @@
         }
       }
     },
+    "/api/content-version": {
+      "get": {
+        "tags": [
+          "Content Version"
+        ],
+        "summary": "Get Active Content Version",
+        "operationId": "get_active_content_version_api_content_version_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentVersionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/health": {
       "get": {
-        "tags": ["Health"],
+        "tags": [
+          "Health"
+        ],
         "summary": "Health Check",
         "operationId": "health_check_api_health_get",
         "responses": {
@@ -711,7 +786,9 @@
     },
     "/api/version": {
       "get": {
-        "tags": ["Health"],
+        "tags": [
+          "Health"
+        ],
         "summary": "Get Version",
         "operationId": "get_version_api_version_get",
         "responses": {
@@ -731,6 +808,29 @@
   },
   "components": {
     "schemas": {
+      "ContentVersionResponse": {
+        "properties": {
+          "versionId": {
+            "type": "integer",
+            "title": "Versionid"
+          },
+          "versionName": {
+            "type": "string",
+            "title": "Versionname"
+          },
+          "isActive": {
+            "type": "boolean",
+            "title": "Isactive"
+          }
+        },
+        "type": "object",
+        "required": [
+          "versionId",
+          "versionName",
+          "isActive"
+        ],
+        "title": "ContentVersionResponse"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -760,7 +860,11 @@
           }
         },
         "type": "object",
-        "required": ["status", "database", "timestamp"],
+        "required": [
+          "status",
+          "database",
+          "timestamp"
+        ],
         "title": "HealthResponse"
       },
       "ProgressUpdateRequest": {
@@ -789,11 +893,6 @@
             "type": "integer",
             "minimum": 0.0,
             "title": "Incorrectcount"
-          },
-          "consecutiveCorrect": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Consecutivecorrect"
           }
         },
         "type": "object",
@@ -802,10 +901,22 @@
           "level",
           "queuePosition",
           "correctCount",
-          "incorrectCount",
-          "consecutiveCorrect"
+          "incorrectCount"
         ],
         "title": "ProgressUpdateRequest"
+      },
+      "RefreshTokenRequest": {
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          }
+        },
+        "type": "object",
+        "required": [
+          "refresh_token"
+        ],
+        "title": "RefreshTokenRequest"
       },
       "TTSLanguagesResponse": {
         "properties": {
@@ -822,7 +933,10 @@
           }
         },
         "type": "object",
-        "required": ["available", "supportedLanguages"],
+        "required": [
+          "available",
+          "supportedLanguages"
+        ],
         "title": "TTSLanguagesResponse"
       },
       "TTSRequest": {
@@ -840,7 +954,10 @@
           }
         },
         "type": "object",
-        "required": ["text", "language"],
+        "required": [
+          "text",
+          "language"
+        ],
         "title": "TTSRequest"
       },
       "TTSResponse": {
@@ -864,7 +981,11 @@
           }
         },
         "type": "object",
-        "required": ["audioData", "text", "language"],
+        "required": [
+          "audioData",
+          "text",
+          "language"
+        ],
         "title": "TTSResponse"
       },
       "TokenResponse": {
@@ -873,17 +994,25 @@
             "type": "string",
             "title": "Token"
           },
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          },
           "expires_in": {
             "type": "string",
             "title": "Expires In",
-            "default": "24h"
+            "default": "15m"
           },
           "user": {
             "$ref": "#/components/schemas/UserResponse"
           }
         },
         "type": "object",
-        "required": ["token", "user"],
+        "required": [
+          "token",
+          "refresh_token",
+          "user"
+        ],
         "title": "TokenResponse"
       },
       "UserLogin": {
@@ -900,7 +1029,10 @@
           }
         },
         "type": "object",
-        "required": ["username", "password"],
+        "required": [
+          "username",
+          "password"
+        ],
         "title": "UserLogin"
       },
       "UserProgressResponse": {
@@ -908,6 +1040,18 @@
           "vocabularyItemId": {
             "type": "string",
             "title": "Vocabularyitemid"
+          },
+          "sourceText": {
+            "type": "string",
+            "title": "Sourcetext"
+          },
+          "sourceLanguage": {
+            "type": "string",
+            "title": "Sourcelanguage"
+          },
+          "targetLanguage": {
+            "type": "string",
+            "title": "Targetlanguage"
           },
           "level": {
             "type": "integer",
@@ -944,6 +1088,9 @@
         "type": "object",
         "required": [
           "vocabularyItemId",
+          "sourceText",
+          "sourceLanguage",
+          "targetLanguage",
           "level",
           "queuePosition",
           "correctCount",
@@ -969,7 +1116,10 @@
           }
         },
         "type": "object",
-        "required": ["username", "password"],
+        "required": [
+          "username",
+          "password"
+        ],
         "title": "UserRegistration"
       },
       "UserResponse": {
@@ -989,7 +1139,10 @@
           }
         },
         "type": "object",
-        "required": ["id", "username"],
+        "required": [
+          "id",
+          "username"
+        ],
         "title": "UserResponse"
       },
       "ValidationError": {
@@ -1018,7 +1171,11 @@
           }
         },
         "type": "object",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "title": "ValidationError"
       },
       "VersionResponse": {
@@ -1029,7 +1186,9 @@
           }
         },
         "type": "object",
-        "required": ["version"],
+        "required": [
+          "version"
+        ],
         "title": "VersionResponse"
       },
       "VocabularyItemCreate": {
@@ -1089,7 +1248,13 @@
           }
         },
         "type": "object",
-        "required": ["sourceText", "sourceLanguage", "targetText", "targetLanguage", "listName"],
+        "required": [
+          "sourceText",
+          "sourceLanguage",
+          "targetText",
+          "targetLanguage",
+          "listName"
+        ],
         "title": "VocabularyItemCreate"
       },
       "VocabularyItemDetailResponse": {
@@ -1299,6 +1464,28 @@
               }
             ],
             "title": "Isactive"
+          },
+          "listName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Listname"
+          },
+          "difficultyLevel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Difficultylevel"
           }
         },
         "type": "object",
@@ -1316,7 +1503,10 @@
           }
         },
         "type": "object",
-        "required": ["listName", "wordCount"],
+        "required": [
+          "listName",
+          "wordCount"
+        ],
         "title": "WordListResponse"
       }
     },

@@ -36,7 +36,7 @@
     {#each Object.values(levelWordLists) as levelData (levelData.id)}
       <div id="{levelData.id}" class="foldable-section">
         <button
-          class="foldable-header btn-base"
+          class="foldable-header"
           on:click={() => handleToggleFold(levelData.id)}
           aria-expanded={!foldedLists[levelData.id]}
         >
@@ -115,6 +115,28 @@
   .foldable-header {
     cursor: pointer;
     user-select: none;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: none;
+    border: 1px solid var(--input-border-color);
+    color: var(--text-color);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-speed) ease;
+    width: 100%;
+    text-align: left;
+
+    &:hover {
+      background-color: color-mix(in oklch, var(--color-primary) 10%, transparent);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
   }
 
   .fold-icon {

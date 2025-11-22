@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "available": {
+      "title": "Available",
+      "type": "boolean"
+    },
+    "supportedLanguages": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Supportedlanguages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "available",
+    "supportedLanguages"
+  ],
+  "title": "TTSLanguagesResponse",
+  "type": "object"
+}

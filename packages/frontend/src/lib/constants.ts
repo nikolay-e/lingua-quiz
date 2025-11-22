@@ -1,6 +1,7 @@
 export const PAGES = {
   LOGIN: 'login',
   REGISTER: 'register',
+  QUIZ: 'quiz',
   ADMIN: 'admin',
 } as const;
 

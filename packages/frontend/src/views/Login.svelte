@@ -5,6 +5,9 @@
   import PasswordInput from '../components/PasswordInput.svelte';
   import AuthMessage from '../components/AuthMessage.svelte';
   import AuthNavLink from '../components/AuthNavLink.svelte';
+  import { Input } from '$lib/components/ui/input';
+  import { Button } from '$lib/components/ui/button';
+  import { Label } from '$lib/components/ui/label';
 
   const dispatch = createEventDispatcher<{ navigate: { page: 'register' } }>();
 
@@ -37,7 +40,8 @@
   <h2>Sign In</h2>
   <form on:submit={handleSubmit} aria-busy={isLoading} class="form-compact">
     <div class="input-group">
-      <input
+      <Label for="username">Username</Label>
+      <Input
         type="text"
         id="username"
         bind:value={username}
@@ -55,9 +59,9 @@
       autocomplete="current-password"
     />
 
-    <button type="submit" class="btn-base primary-button" disabled={isLoading}>
+    <Button type="submit" disabled={isLoading}>
       <i class="fas fa-sign-in-alt"></i> Sign In
-    </button>
+    </Button>
   </form>
 
   <AuthMessage {message} variant={message.includes('successful') ? 'success' : 'error'} id="login-message" />

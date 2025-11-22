@@ -45,7 +45,13 @@ jobs:
           restore-keys: |
             pre-commit-${{ runner.os }}-
 
-      - run: pip install --no-cache-dir pre-commit isort
+      - run: pip install --no-cache-dir pre-commit isort datamodel-code-generator
+
+      - name: Regenerate schemas and clients
+        run: make generate-all
+
+      - name: Domain property-based tests
+        run: npm run test --workspace @lingua-quiz/domain
 
       - run: pre-commit run --all-files --show-diff-on-failure --color=always
 

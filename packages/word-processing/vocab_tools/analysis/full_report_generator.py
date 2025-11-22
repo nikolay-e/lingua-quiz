@@ -1,535 +1,366 @@
+"""
+Full vocabulary analysis report generator using API data.
+
+Generates comprehensive reports on vocabulary coverage, missing words,
+duplicates, and quality issues.
+"""
+
 import csv
 import json
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
 from wordfreq import zipf_frequency
 
-from .migration_analyzer import MigrationAnalyzer
-from .transliteration_detector import TransliterationDetector
+from ..core.api_client import StagingAPIClient, VocabularyEntry
+from .level_coverage_analyzer import CEFR_FREQUENCY_RANGES, LevelCoverageAnalyzer
 
 
 class FullReportGenerator:
-    def __init__(self, language_code: str, migration_file_path: Path, top_n: int | None = None):
+    def __init__(self, language_code: str, list_name: str, top_n: int = 1000):
         from ..config.config_loader import get_config_loader
 
         self.language_code = language_code
-        self.migration_file_path = Path(migration_file_path)
-        self.analyzer = MigrationAnalyzer(language_code, migration_file_path)
+        self.list_name = list_name
+        self.top_n = top_n
         self.config_loader = get_config_loader()
+        self.client = StagingAPIClient()
 
-        self.level = self._get_level_from_filename()
-        if not self.level:
-            self.level = "a1"
-
-        if top_n is None:
-            cumulative = self.config_loader.get_cumulative_total(self.level)
-            self.top_n = cumulative if cumulative > 0 else 50000
-        else:
-            self.top_n = top_n
-
+        self.level = self._extract_level_from_list_name()
         level_config = self.config_loader.config.get_cefr_level(self.level)
         if level_config:
             self.rank_range = level_config.rank_range
         else:
             self.rank_range = [1, 1000]
 
-    def _get_level_from_filename(self) -> str:
-        filename = self.migration_file_path.stem
-        parts = filename.split("-")
-        if len(parts) >= 3:
-            level = parts[-1]
-            return level.lower()
-        return ""
+    def _extract_level_from_list_name(self) -> str:
+        parts = self.list_name.lower().split()
+        if parts:
+            return parts[-1]
+        return "a1"
 
-    def _analyze_transliterations(self) -> list[dict[str, Any]]:
-        with open(self.migration_file_path, encoding="utf-8") as f:
-            migration_data = json.load(f)
+    def _fetch_vocabulary(self) -> list[VocabularyEntry]:
+        return self.client.fetch_vocabulary(self.list_name)
 
-        translations = migration_data.get("translations", [])
+    def _fetch_previous_levels(self) -> set[str]:
+        level_hierarchy = ["a0", "a1", "a2", "b1", "b2", "c1", "c2"]
+        current_idx = level_hierarchy.index(self.level) if self.level in level_hierarchy else -1
 
-        pairs = [
-            (pair.get("source_word", ""), pair.get("target_word", ""))
-            for pair in translations
-            if pair.get("source_word") and pair.get("target_word") and pair.get("target_word") != "[PLACEHOLDER]"
-        ]
+        previous_words = set()
+        if current_idx > 0:
+            lang_map = {"en": "English", "es": "Spanish", "de": "German"}
+            lang_name = lang_map.get(self.language_code, self.language_code.title())
 
-        detector = TransliterationDetector(similarity_threshold=0.9)
-        transliterations = detector.find_transliterations(pairs, source_lang=self.language_code, target_lang="ru")
+            for prev_level in level_hierarchy[:current_idx]:
+                prev_list = f"{lang_name} Russian {prev_level.upper()}"
+                try:
+                    entries = self.client.fetch_vocabulary(prev_list)
+                    previous_words.update(e.source_text.lower() for e in entries)
+                except Exception:  # nosec B112
+                    continue
 
-        return transliterations
+        return previous_words
 
     def generate_full_report(self, output_dir: Path) -> dict[str, Any]:
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
 
+        entries = self._fetch_vocabulary()
+        previous_words = self._fetch_previous_levels()
+
         validation_errors = []
         validation_warnings = []
 
-        try:
-            with open(self.migration_file_path, encoding="utf-8") as f:
-                migration_data = json.load(f)
-
-            translations = migration_data.get("translations", [])
-
-            for pair in translations:
-                source = pair.get("source_word", "")
-                target = pair.get("target_word", "")
-
-                if not target or target == "[PLACEHOLDER]":
-                    validation_errors.append(
-                        {
-                            "type": "empty_translation",
-                            "word": source,
-                            "message": f'Empty or placeholder translation for "{source}"',
-                        }
-                    )
-
-                if not source:
-                    validation_errors.append(
-                        {
-                            "type": "empty_source",
-                            "word": target,
-                            "message": f'Empty source word for translation "{target}"',
-                        }
-                    )
-
-            source_words = [p.get("source_word", "") for p in translations if p.get("source_word")]
-            from collections import Counter
-
-            word_counts = Counter(source_words)
-            duplicates = {word: count for word, count in word_counts.items() if count > 1}
-
-            for word, count in duplicates.items():
+        for entry in entries:
+            if not entry.target_text or "[translation needed" in entry.target_text.lower():
                 validation_errors.append(
                     {
-                        "type": "duplicate_word",
-                        "word": word,
-                        "message": f'Duplicate word "{word}" appears {count} times',
+                        "type": "empty_translation",
+                        "word": entry.source_text,
+                        "message": f'Empty or placeholder translation for "{entry.source_text}"',
                     }
                 )
 
-        except Exception as e:
-            validation_errors.append({"type": "file_error", "word": "N/A", "message": f"Error reading file: {e!s}"})
+            if not entry.source_text:
+                validation_errors.append(
+                    {
+                        "type": "empty_source",
+                        "word": entry.target_text,
+                        "message": f'Empty source word for translation "{entry.target_text}"',
+                    }
+                )
 
-        validation_result = {
+            if not entry.source_usage_example:
+                validation_warnings.append(
+                    {
+                        "type": "missing_example",
+                        "word": entry.source_text,
+                        "message": f'Missing source example for "{entry.source_text}"',
+                    }
+                )
+
+        source_words = [e.source_text for e in entries if e.source_text]
+        word_counts = Counter(source_words)
+        duplicates = [(word, count) for word, count in word_counts.items() if count > 1]
+
+        for word, count in duplicates:
+            validation_errors.append(
+                {
+                    "type": "duplicate",
+                    "word": word,
+                    "message": f'Duplicate word "{word}" appears {count} times',
+                }
+            )
+
+        existing_words = {e.source_text.lower() for e in entries}
+        frequency_analysis = self._analyze_frequency_coverage(existing_words, previous_words)
+        level_analysis = self._analyze_words_to_move(entries)
+
+        report_data = {
+            "language_code": self.language_code,
+            "list_name": self.list_name,
+            "level": self.level,
+            "top_n": self.top_n,
+            "rank_range": self.rank_range,
+            "total_words": len(entries),
+            "unique_words": len(existing_words),
+            "duplicates_count": len(duplicates),
+            "validation_errors": len(validation_errors),
+            "validation_warnings": len(validation_warnings),
+            "frequency_analysis": frequency_analysis,
+            "level_analysis": level_analysis,
             "errors": validation_errors,
             "warnings": validation_warnings,
+            "duplicates": duplicates,
         }
 
-        result = self.analyzer.analyze(top_n=self.top_n)
+        files = self._save_reports(output_dir, report_data, entries)
+        report_data["files"] = files
 
-        vocab_words = self.analyzer._load_vocabulary()
+        return report_data
 
-        lemmatized = self.analyzer.lemmatization_service.lemmatize_batch(vocab_words)
-
-        vocab_lemma_map = {}
-        for original_word, lemma in zip(vocab_words, lemmatized, strict=False):
-            if lemma not in vocab_lemma_map:
-                vocab_lemma_map[lemma] = []
-            vocab_lemma_map[lemma].append(original_word)
-
+    def _analyze_frequency_coverage(self, existing_words: set[str], previous_words: set[str]) -> dict[str, Any]:
         from ..core.frequency_list_loader import find_frequency_list, load_frequency_list
 
         freq_list_path = find_frequency_list(self.language_code)
-        if freq_list_path:
-            vocab = load_frequency_list(freq_list_path)
-            if len(vocab.words) > self.top_n:
-                vocab.words = vocab.words[: self.top_n]
-        else:
-            from ..core.vocabulary_processor import VocabularyProcessor
-            from ..core.word_source import SubtitleFrequencySource
+        if not freq_list_path:
+            return {"error": f"Frequency list not found for {self.language_code}"}
 
-            processor = VocabularyProcessor(self.language_code, silent=True)
-            multiplier = self.config_loader.get_raw_frequency_multiplier(self.language_code)
-            source = SubtitleFrequencySource(self.language_code, top_n=int(self.top_n * multiplier), lemmatize=False)
-            vocab = processor.process_words(
-                source, filter_inflections=True, target_count=self.top_n, collect_stats=False
-            )
+        freq_list = load_frequency_list(freq_list_path)
 
-        lemma_to_real_rank = {word.lemma: rank for rank, word in enumerate(vocab.words, start=1)}
+        min_rank, max_rank = self.rank_range
+        in_range_total = 0
+        in_range_found = 0
+        missing_words = []
 
-        detailed_data = self._categorize_all_words(vocab_lemma_map, lemma_to_real_rank)
+        for rank, word_obj in enumerate(freq_list.words, start=1):
+            if rank < min_rank or rank > max_rank:
+                continue
 
-        for missing_word in result.missing_from_a1:
-            detailed_data.append(
-                {
-                    "lemma": missing_word["lemma"],
-                    "forms": [missing_word["word"]],
-                    "rank": missing_word["rank_estimate"],
-                    "zipf": missing_word["zipf"],
-                    "english_zipf": 0.0,
-                    "category": self._categorize_by_rank(missing_word["rank_estimate"]),
-                    "priority": self._get_priority(missing_word["rank_estimate"]),
-                    "status": "MISSING",
-                }
-            )
+            in_range_total += 1
+            lemma = word_obj.lemma.lower()
 
-        detailed_data.sort(key=lambda x: (x["priority"], x["rank"]))
+            if lemma in existing_words:
+                in_range_found += 1
+            elif lemma not in previous_words:
+                priority = "critical" if rank <= 100 else "high" if rank <= 500 else "medium"
+                missing_words.append(
+                    {
+                        "word": word_obj.lemma,
+                        "rank": rank,
+                        "priority": priority,
+                        "zipf": zipf_frequency(word_obj.lemma, self.language_code),
+                    }
+                )
 
-        transliterations = self._analyze_transliterations()
+        coverage = (in_range_found / in_range_total * 100) if in_range_total > 0 else 0
 
-        report_path = output_dir / f"{self.language_code}_vocabulary_FULL_REPORT.md"
-        json_path = output_dir / f"{self.language_code}_vocabulary_detailed.json"
-        csv_path = output_dir / f"{self.language_code}_vocabulary_analysis.csv"
+        missing_critical = len([w for w in missing_words if w["priority"] == "critical"])
+        missing_high = len([w for w in missing_words if w["priority"] == "high"])
+        missing_medium = len([w for w in missing_words if w["priority"] == "medium"])
 
-        self._generate_markdown_report(
-            detailed_data, result, report_path, vocab_words, vocab_lemma_map, transliterations, validation_result
+        return {
+            "rank_range": [min_rank, max_rank],
+            "expected_words": in_range_total,
+            "found_words": in_range_found,
+            "coverage_percent": round(coverage, 1),
+            "missing_total": len(missing_words),
+            "missing_critical": missing_critical,
+            "missing_high": missing_high,
+            "missing_medium": missing_medium,
+            "missing_words": sorted(missing_words, key=lambda x: x["rank"])[:100],
+        }
+
+    def _analyze_words_to_move(self, entries: list[VocabularyEntry]) -> dict[str, Any]:
+        analyzer = LevelCoverageAnalyzer()
+
+        from ..config.config_loader import get_config_loader
+        from ..core.base_normalizer import get_universal_normalizer
+
+        config_loader = get_config_loader()
+        normalizer = get_universal_normalizer(self.language_code, config_loader)
+
+        expected_range = CEFR_FREQUENCY_RANGES.get(self.level, (1, 1000))
+
+        words_in_range, words_out_of_range, mismatches = analyzer._analyze_words_from_entries(
+            entries,
+            normalizer,
+            self.language_code,
+            self.level,
+            expected_range,
+            f"{self.language_code}-{self.level}",
+            show_progress=False,
         )
 
-        with open(json_path, "w", encoding="utf-8") as f:
-            json.dump(detailed_data, f, ensure_ascii=False, indent=2)
-
-        with open(csv_path, "w", encoding="utf-8", newline="") as f:
-            writer = csv.DictWriter(
-                f,
-                fieldnames=["lemma", "forms", "rank", "zipf", "english_zipf", "category", "priority", "status"],
-            )
-            writer.writeheader()
-            for row in detailed_data:
-                row_copy = row.copy()
-                row_copy["forms"] = ", ".join(row_copy["forms"])
-                writer.writerow(row_copy)
-
-        stats = self._calculate_statistics(detailed_data, result, vocab_words, vocab_lemma_map)
-
-        return {
-            "stats": stats,
-            "files": {
-                "markdown": report_path,
-                "json": json_path,
-                "csv": csv_path,
-            },
-        }
-
-    def _categorize_by_rank(self, rank: int) -> str:
-        range_start, range_end = self.rank_range
-        range_size = range_end - range_start + 1
-
-        if rank < range_start:
-            return "TOO_HIGH_FREQUENCY"
-        if rank <= range_start + (range_size * 0.25):
-            return "HIGH_FREQUENCY"
-        if rank <= range_start + (range_size * 0.5):
-            return "VERY_COMMON"
-        if rank <= range_end:
-            return "LEGITIMATE"
-        if rank <= range_end * 2:
-            return "LOW_PRIORITY"
-        return "VERY_RARE"
-
-    def _get_priority(self, rank: int) -> int:
-        range_start, range_end = self.rank_range
-        range_size = range_end - range_start + 1
-
-        if rank < range_start:
-            return 0
-        if rank <= range_start + (range_size * 0.25):
-            return 1
-        if rank <= range_start + (range_size * 0.5):
-            return 2
-        if rank <= range_end:
-            return 3
-        if rank <= range_end * 2:
-            return 4
-        return 6
-
-    def _categorize_all_words(
-        self, vocab_lemma_map: dict[str, list[str]], lemma_to_real_rank: dict[str, int]
-    ) -> list[dict[str, Any]]:
-        detailed_data = []
-
-        for lemma, forms in vocab_lemma_map.items():
-            target_zipf = zipf_frequency(lemma, self.language_code)
-
-            if lemma in lemma_to_real_rank:
-                rank_estimate = lemma_to_real_rank[lemma]
-            elif target_zipf > 0:
-                rank_estimate = int(10 ** (8 - target_zipf))
-            else:
-                rank_estimate = 999999
-
-            english_zipf = zipf_frequency(lemma, "en")
-            is_english = False
-
-            if english_zipf > target_zipf + 2.0 or (target_zipf == 0.0 and english_zipf > 0.0):
-                is_english = True
-
-            if is_english:
-                category = "ENGLISH"
-                priority = 1
-            else:
-                category = self._categorize_by_rank(rank_estimate)
-                priority = self._get_priority(rank_estimate)
-
-            detailed_data.append(
+        by_target_level = defaultdict(list)
+        for mismatch in mismatches:
+            target = mismatch.expected_level.upper() if mismatch.expected_level != "unknown" else "NOT_FOUND"
+            by_target_level[target].append(
                 {
-                    "lemma": lemma,
-                    "forms": forms,
-                    "rank": rank_estimate,
-                    "zipf": target_zipf,
-                    "english_zipf": english_zipf,
-                    "category": category,
-                    "priority": priority,
-                    "status": "IN_VOCABULARY",
+                    "word": mismatch.word,
+                    "rank": mismatch.actual_rank,
+                    "reason": mismatch.reason,
                 }
             )
 
-        return detailed_data
-
-    def _generate_markdown_report(
-        self,
-        detailed_data: list[dict[str, Any]],
-        result: Any,
-        output_path: Path,
-        vocab_words: list[str],
-        vocab_lemma_map: dict[str, list[str]],
-        transliterations: list[dict[str, Any]],
-        validation_result: dict[str, Any],
-    ):
-        lang_upper = self.language_code.upper()
-        range_start, range_end = self.rank_range
-        range_size = range_end - range_start + 1
-
-        high_freq_threshold = range_start + int(range_size * 0.25)
-        very_rare_threshold = range_end * 2
-
-        total_errors = len(validation_result.get("errors", []))
-        total_warnings = len(validation_result.get("warnings", []))
-
-        report = f"""# ПОЛНЫЙ ОТЧЁТ: Анализ словаря ({lang_upper} {self.level.upper()})
-
-## Общая статистика
-
-| Метрика | Значение |
-|---------|----------|
-| Уровень CEFR | {self.level.upper()} |
-| Целевой диапазон рангов | {range_start:,} - {range_end:,} |
-| Всего слов в словаре | {len(vocab_words):,} |
-| Уникальных лемм | {len(vocab_lemma_map):,} |
-| Высокочастотные (ранг ≤ {high_freq_threshold:,}) | {len([x for x in detailed_data if x["rank"] <= high_freq_threshold]):,} |
-| Английские слова | {len([x for x in detailed_data if x["category"] == "ENGLISH"]):,} |
-| Очень редкие (ранг > {very_rare_threshold:,}) | {len([x for x in detailed_data if x["rank"] > very_rare_threshold]):,} |
-| **Ошибки валидации** | **{total_errors}** |
-| **Предупреждения валидации** | **{total_warnings}** |
-
----
-
-## ПРОБЛЕМЫ ВАЛИДАЦИИ
-
-### Ошибки ({total_errors})
-
-"""
-
-        # Add validation errors
-        errors = validation_result.get("errors", [])
-        if errors:
-            # Group errors by type
-            error_groups = {}
-            for error in errors:
-                error_type = error.get("type", "Unknown")
-                if error_type not in error_groups:
-                    error_groups[error_type] = []
-                error_groups[error_type].append(error)
-
-            for error_type, error_list in sorted(error_groups.items()):
-                report += f"\n**{error_type}** ({len(error_list)} случаев):\n\n"
-                for i, error in enumerate(error_list, 1):  # Show ALL
-                    word = error.get("word", "N/A")
-                    message = error.get("message", "")
-                    report += f"{i}. `{word}` - {message}\n"
-        else:
-            report += "Ошибок не обнаружено\n"
-
-        report += f"""
-### Предупреждения ({total_warnings})
-
-"""
-
-        # Add validation warnings
-        warnings = validation_result.get("warnings", [])
-        if warnings:
-            for i, warning in enumerate(warnings, 1):  # Show ALL
-                word = warning.get("word", "N/A")
-                message = warning.get("message", "")
-                report += f"{i}. `{word}` - {message}\n"
-        else:
-            report += "Предупреждений нет\n"
-
-        report += """
----
-
-##  КРИТИЧЕСКИЕ ПРОБЛЕМЫ
-
-### 1. Английские слова (удалить)
-
-| № | Лемма | Формы | {lang_upper} Zipf | EN Zipf | Разница | Причина |
-|---|-------|-------|---------|---------|---------|---------|
-"""
-
-        english_words = [x for x in detailed_data if x["category"] == "ENGLISH"]
-        for i, word in enumerate(english_words, 1):
-            forms = ", ".join(word["forms"])
-            target_zipf = word["zipf"]
-            en_zipf = word["english_zipf"]
-            diff = en_zipf - target_zipf
-
-            reason = "Только в EN корпусе" if target_zipf == 0.0 and en_zipf > 0.0 else f"EN частотнее на {diff:.1f}"
-
-            report += (
-                f"| {i} | {word['lemma']} | {forms} | {target_zipf:.2f} | {en_zipf:.2f} | +{diff:.1f} | {reason} |\n"
-            )
-
-        report += f"""
-### 2. Очень редкие слова (ранг > {very_rare_threshold:,})
-
-**Всего: {len([x for x in detailed_data if x["rank"] > very_rare_threshold])} слов**
-
-| № | Лемма | Формы | Ранг | Zipf | Рекомендация |
-|---|-------|-------|------|------|--------------|
-"""
-
-        rare_words = [x for x in detailed_data if x["rank"] > very_rare_threshold]
-        for i, word in enumerate(rare_words, 1):
-            forms = ", ".join(word["forms"])
-            recommendation = "Слишком редкое"
-            report += (
-                f"| {i} | {word['lemma']} | {forms} | {word['rank']:,} | {word['zipf']:.2f} | {recommendation} |\n"
-            )
-
-        report += f"""
-### 3. Транслитерации (переместить в A0)
-
-**Всего: {len(transliterations)} слов**
-
-Эти слова являются прямой транслитерацией между языками и должны быть перемещены на уровень A0 (базовый словарь для начинающих).
-
-| № | Источник ({lang_upper}) | Перевод (RU) | Схожесть | Рекомендация |
-|---|-------------|------------|----------|--------------|
-"""
-
-        for i, trans in enumerate(transliterations, 1):
-            report += f"| {i} | {trans['source_word']} | {trans['target_word']} | {trans['similarity']:.1%} | {trans['recommendation']} |\n"
-
-        report += f"""
----
-
-## ➕ НЕДОСТАЮЩИЕ СЛОВА (добавить)
-
-**Высокочастотные слова из топ-{self.top_n}, отсутствующие в словаре: {len(result.missing_from_a1)}**
-
-### Все недостающие слова (по убыванию частотности)
-
-| № | Лемма | Ранг | Zipf | Частотность | Приоритет |
-|---|-------|------|------|-------------|-----------|
-"""
-
-        critical_threshold = range_start + int(range_size * 0.1)
-        high_threshold = range_start + int(range_size * 0.25)
-        medium_threshold = range_start + int(range_size * 0.5)
-
-        for i, item in enumerate(result.missing_from_a1, 1):
-            rank = item["rank_estimate"]
-            priority = (
-                " КРИТИЧНО"
-                if rank <= critical_threshold
-                else " ВЫСОКИЙ"
-                if rank <= high_threshold
-                else " СРЕДНИЙ"
-                if rank <= medium_threshold
-                else "⚪ НИЗКИЙ"
-            )
-            report += f"| {i} | {item['lemma']} | {item['rank_estimate']:,} | {item['zipf']:.2f} | {item['frequency']:.8f} | {priority} |\n"
-
-        report += f"""
----
-
-## ЛЕГИТИМНЫЕ СЛОВА
-
-### Высокочастотные слова (ранг {range_start:,} - {high_freq_threshold:,})
-
-**Всего: {len([x for x in detailed_data if range_start <= x["rank"] <= high_freq_threshold])} слов**
-
-| № | Лемма | Формы | Ранг | Zipf | Статус |
-|---|-------|-------|------|------|--------|
-"""
-
-        legitimate = [x for x in detailed_data if range_start <= x["rank"] <= high_freq_threshold]
-        for i, word in enumerate(legitimate, 1):
-            forms = ", ".join(word["forms"])
-            report += f"| {i} | {word['lemma']} | {forms} | {word['rank']:,} | {word['zipf']:.2f} | Отлично |\n"
-
-        moderate_threshold = range_start + int(range_size * 0.5)
-        report += f"""
-### Умеренно частотные слова (ранг {high_freq_threshold + 1:,} - {moderate_threshold:,})
-
-**Всего: {len([x for x in detailed_data if high_freq_threshold < x["rank"] <= moderate_threshold])} слов**
-
-| № | Лемма | Формы | Ранг | Zipf | Статус |
-|---|-------|-------|------|------|--------|
-"""
-
-        moderate = [x for x in detailed_data if high_freq_threshold < x["rank"] <= moderate_threshold]
-        for i, word in enumerate(moderate, 1):
-            forms = ", ".join(word["forms"])
-            report += f"| {i} | {word['lemma']} | {forms} | {word['rank']:,} | {word['zipf']:.2f} | Приемлемо |\n"
-
-        report += f"""
-### В целевом диапазоне (ранг {moderate_threshold + 1:,} - {range_end:,})
-
-**Всего: {len([x for x in detailed_data if moderate_threshold < x["rank"] <= range_end])} слов**
-
-| № | Лемма | Формы | Ранг | Zipf | Статус |
-|---|-------|-------|------|------|--------|
-"""
-
-        low_priority = [x for x in detailed_data if moderate_threshold < x["rank"] <= range_end]
-        for i, word in enumerate(low_priority, 1):
-            forms = ", ".join(word["forms"])
-            report += (
-                f"| {i} | {word['lemma']} | {forms} | {word['rank']:,} | {word['zipf']:.2f} | ⚪ Низкий приоритет |\n"
-            )
-
-        output_path.write_text(report, encoding="utf-8")
-
-    def _calculate_statistics(
-        self,
-        detailed_data: list[dict[str, Any]],
-        result: Any,
-        vocab_words: list[str],
-        vocab_lemma_map: dict[str, list[str]],
-    ) -> dict[str, Any]:
-        range_start, range_end = self.rank_range
-        range_size = range_end - range_start + 1
-        high_freq_threshold = range_start + int(range_size * 0.25)
-        moderate_threshold = range_start + int(range_size * 0.5)
-        very_rare_threshold = range_end * 2
-
-        critical_threshold = range_start + int(range_size * 0.1)
-        high_threshold = range_start + int(range_size * 0.25)
-        medium_threshold = range_start + int(range_size * 0.5)
-
-        english_words = [x for x in detailed_data if x["category"] == "ENGLISH"]
-        rare_words = [x for x in detailed_data if x["rank"] > very_rare_threshold]
-        low_priority = [x for x in detailed_data if moderate_threshold < x["rank"] <= range_end]
-        moderate = [x for x in detailed_data if high_freq_threshold < x["rank"] <= moderate_threshold]
-        legitimate = [x for x in detailed_data if range_start <= x["rank"] <= high_freq_threshold]
+        level_counts = {level: len(words) for level, words in by_target_level.items()}
 
         return {
-            "total_words": len(vocab_words),
-            "unique_lemmas": len(vocab_lemma_map),
-            "in_vocabulary": {
-                "english": len(english_words),
-                "very_rare": len(rare_words),
-                "low_priority": len(low_priority),
-                "moderate": len(moderate),
-                "high_frequency": len(legitimate),
-            },
-            "missing": {
-                "total": len(result.missing_from_a1),
-                "critical": len([x for x in result.missing_from_a1 if x["rank_estimate"] <= critical_threshold]),
-                "high_priority": len([x for x in result.missing_from_a1 if x["rank_estimate"] <= high_threshold]),
-                "medium_priority": len([x for x in result.missing_from_a1 if x["rank_estimate"] <= medium_threshold]),
-                "low_priority": len([x for x in result.missing_from_a1 if x["rank_estimate"] > medium_threshold]),
-            },
+            "words_in_range": words_in_range,
+            "words_out_of_range": words_out_of_range,
+            "coverage_percent": round(words_in_range / (words_in_range + words_out_of_range) * 100, 1)
+            if (words_in_range + words_out_of_range) > 0
+            else 0,
+            "by_target_level": level_counts,
+            "words_to_move": {level: words[:20] for level, words in by_target_level.items()},
         }
+
+    def _save_reports(self, output_dir: Path, report_data: dict, entries: list[VocabularyEntry]) -> dict[str, Path]:
+        files = {}
+
+        json_file = output_dir / f"{self.language_code}_{self.level}_report.json"
+        with open(json_file, "w", encoding="utf-8") as f:
+            json.dump(report_data, f, ensure_ascii=False, indent=2, default=str)
+        files["json"] = json_file
+
+        csv_file = output_dir / f"{self.language_code}_{self.level}_vocabulary.csv"
+        with open(csv_file, "w", encoding="utf-8", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["source_word", "target_word", "source_example", "target_example"])
+            for entry in entries:
+                writer.writerow(
+                    [
+                        entry.source_text,
+                        entry.target_text,
+                        entry.source_usage_example,
+                        entry.target_usage_example,
+                    ]
+                )
+        files["csv"] = csv_file
+
+        md_file = output_dir / f"{self.language_code}_{self.level}_report.md"
+        with open(md_file, "w", encoding="utf-8") as f:
+            f.write(self._generate_markdown_report(report_data))
+        files["markdown"] = md_file
+
+        return files
+
+    def _generate_markdown_report(self, data: dict) -> str:
+        lines = [
+            f"# {data['language_code'].upper()} {data['level'].upper()} Vocabulary Report",
+            "",
+            "## Summary",
+            f"- **List**: {data['list_name']}",
+            f"- **Total words**: {data['total_words']}",
+            f"- **Unique words**: {data['unique_words']}",
+            f"- **Duplicates**: {data['duplicates_count']}",
+            f"- **Errors**: {data['validation_errors']}",
+            f"- **Warnings**: {data['validation_warnings']}",
+            "",
+        ]
+
+        freq = data.get("frequency_analysis", {})
+        if freq and "error" not in freq:
+            lines.extend(
+                [
+                    "## Frequency Coverage",
+                    f"- **Rank range**: {freq['rank_range'][0]}-{freq['rank_range'][1]}",
+                    f"- **Coverage**: {freq['coverage_percent']}%",
+                    f"- **Found**: {freq['found_words']}/{freq['expected_words']}",
+                    "",
+                    "### Missing Words",
+                    f"- Critical (<100): {freq['missing_critical']}",
+                    f"- High (<500): {freq['missing_high']}",
+                    f"- Medium (<1000): {freq['missing_medium']}",
+                    "",
+                ]
+            )
+
+            if freq.get("missing_words"):
+                lines.append("#### Top Missing Words")
+                lines.append("| Rank | Word | Zipf |")
+                lines.append("|------|------|------|")
+                for w in freq["missing_words"][:20]:
+                    lines.append(f"| {w['rank']} | {w['word']} | {w['zipf']:.1f} |")
+                lines.append("")
+
+        level = data.get("level_analysis", {})
+        if level and level.get("words_out_of_range", 0) > 0:
+            lines.extend(
+                [
+                    "## Words to Move (Out of Range)",
+                    f"- **In range**: {level['words_in_range']}",
+                    f"- **Out of range**: {level['words_out_of_range']}",
+                    f"- **Level coverage**: {level['coverage_percent']}%",
+                    "",
+                    "### By Target Level",
+                ]
+            )
+
+            by_target = level.get("by_target_level", {})
+            level_order = ["A2", "B1", "B2", "C1", "C2", "D", "NOT_FOUND", "UNKNOWN"]
+            for target in level_order:
+                if target in by_target:
+                    lines.append(f"- **→ {target}**: {by_target[target]}")
+            lines.append("")
+
+            words_to_move = level.get("words_to_move", {})
+            for target in level_order:
+                if target in words_to_move and words_to_move[target]:
+                    lines.append(f"#### Words → {target}")
+                    lines.append("| Word | Rank |")
+                    lines.append("|------|------|")
+                    for w in words_to_move[target][:10]:
+                        rank = w["rank"] if w["rank"] else "N/A"
+                        lines.append(f"| {w['word']} | {rank} |")
+                    if len(words_to_move[target]) > 10:
+                        lines.append(f"| ... | +{len(words_to_move[target]) - 10} more |")
+                    lines.append("")
+
+        if data.get("errors"):
+            lines.extend(
+                [
+                    "## Errors",
+                    "",
+                ]
+            )
+            for err in data["errors"][:20]:
+                lines.append(f"- {err['message']}")
+            if len(data["errors"]) > 20:
+                lines.append(f"- ... and {len(data['errors']) - 20} more")
+            lines.append("")
+
+        if data.get("warnings"):
+            lines.extend(
+                [
+                    "## Warnings",
+                    "",
+                ]
+            )
+            for warn in data["warnings"][:10]:
+                lines.append(f"- {warn['message']}")
+            if len(data["warnings"]) > 10:
+                lines.append(f"- ... and {len(data['warnings']) - 10} more")
+
+        return "\n".join(lines)

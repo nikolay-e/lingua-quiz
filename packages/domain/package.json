@@ -1,0 +1,31 @@
+{
+  "name": "@lingua-quiz/domain",
+  "version": "0.0.0",
+  "description": "Generated domain types shared between frontend and core",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist src/generated",
+    "generate": "node ./generate.js",
+    "prepare": "npm run generate && npm run build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/json-schema": "^7.0.15",
+    "@types/node": "^22.9.3",
+    "fast-check": "^3.19.0",
+    "json-schema-faker": "^0.5.7",
+    "json-schema-to-typescript": "^15.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.4"
+  }
+}

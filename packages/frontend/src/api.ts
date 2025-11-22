@@ -1,179 +1,151 @@
-declare global {
-  interface Window {
-    LINGUA_QUIZ_API_URL?: string;
-  }
-}
-
-const getServerAddress = (): string => {
-  if (typeof import.meta.env.VITE_API_URL === 'string' && import.meta.env.VITE_API_URL !== '') {
-    return import.meta.env.VITE_API_URL;
-  }
-
-  if (typeof window.LINGUA_QUIZ_API_URL === 'string' && window.LINGUA_QUIZ_API_URL !== '') {
-    return window.LINGUA_QUIZ_API_URL;
-  }
-
-  return '/api';
-};
-
+import {
+  AuthenticationService,
+  ContentVersionService,
+  ProgressService,
+  TextToSpeechService,
+  VocabularyService,
+  type TokenResponse,
+} from '@lingua-quiz/api-client';
 import type {
   AuthResponse,
-  WordList,
-  Translation,
-  UserProgress,
-  TTSResponse,
-  TTSLanguagesResponse,
   ContentVersion,
+  Translation,
+  TTSLanguagesResponse,
+  TTSResponse,
+  UserProgress,
+  WordList,
 } from './api-types';
+import {
+  validateContentVersion,
+  validateTtsLanguages,
+  validateTtsResponse,
+  validateUserProgress,
+  validateVocabularyItem,
+  validateWordList,
+} from '@lingua-quiz/domain';
+import { handleApiError, setAuthToken } from './apiClientConfig';
 
-const serverAddress = getServerAddress();
+const mapAuthResponse = (response: TokenResponse): AuthResponse => ({
+  token: response.token,
+  refresh_token: response.refresh_token,
+  expires_in: response.expires_in ?? '15m',
+  user: {
+    id: response.user.id,
+    username: response.user.username,
+    is_admin: response.user.is_admin ?? false,
+    isAdmin: response.user.is_admin ?? false,
+  },
+});
 
-interface ApiErrorDetail {
-  msg?: string;
-  message?: string;
-}
+type ValidatorFn = (data: unknown) => { valid: boolean; errors: string[] };
 
-interface ApiErrorResponse {
-  message?: string;
-  detail?: string | ApiErrorDetail[];
-}
-
-async function fetchWrapper<T = unknown>(url: string, options: RequestInit = {}): Promise<T> {
-  const response = await fetch(url, options);
-
-  if (!response.ok) {
-    let errorData: ApiErrorResponse = {};
-    try {
-      errorData = (await response.json()) as ApiErrorResponse;
-    } catch {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-
-    if (response.status === 401) {
-      throw new Error('Unauthorized');
-    }
-    if (response.status === 404) {
-      throw new Error('Resource not found');
-    }
-
-    if (Array.isArray(errorData.detail)) {
-      const errors = errorData.detail
-        .map((err: ApiErrorDetail) => err.msg ?? err.message ?? '')
-        .filter((msg: string) => msg !== '')
-        .join(', ');
-      const errorMessage = errors !== '' ? errors : `Request failed with status ${response.status}`;
-      throw new Error(errorMessage);
-    }
-
-    const detailMessage = typeof errorData.detail === 'string' ? errorData.detail : '';
-    const errorMessage =
-      errorData.message ?? (detailMessage !== '' ? detailMessage : `Request failed with status ${response.status}`);
-    throw new Error(errorMessage);
+const validateOne = <T>(data: T, validator: ValidatorFn, label: string): T => {
+  const result = validator(data);
+  if (!result.valid) {
+    throw new Error(`Invalid ${label}: ${result.errors.join('; ')}`);
   }
+  return data;
+};
 
-  const cl = response.headers.get('content-length');
-  if (response.status === 204 || cl === '0' || cl === null) {
-    const text = await response.text();
-    return text !== '' ? (JSON.parse(text) as T) : (undefined as unknown as T);
+const validateMany = <T>(data: T[], validator: ValidatorFn, label: string): T[] => {
+  data.forEach((item, idx) => validateOne(item, validator, `${label}[${idx}]`));
+  return data;
+};
+
+const execute = async <T>(operation: () => Promise<T>, token?: string): Promise<T> => {
+  if (token !== undefined) {
+    setAuthToken(token);
   }
-
   try {
-    return (await response.json()) as T;
-  } catch {
-    return undefined as unknown as T;
+    return await operation();
+  } catch (error) {
+    return handleApiError(error);
   }
-}
-
-function withAuth(token: string, options: RequestInit = {}): RequestInit {
-  return {
-    ...options,
-    headers: {
-      ...options.headers,
-      Authorization: `Bearer ${token}`,
-    },
-  };
-}
-
-function createApiMethod<TResponse, TParams = void>(
-  endpoint: string,
-  method: string,
-  requiresAuth: false,
-): (params: TParams) => Promise<TResponse>;
-function createApiMethod<TResponse, TParams = void>(
-  endpoint: string,
-  method?: string,
-  requiresAuth?: true,
-): (token: string, params?: TParams) => Promise<TResponse>;
-function createApiMethod<TResponse, TParams = void>(endpoint: string, method = 'GET', requiresAuth = true) {
-  if (requiresAuth) {
-    return async (token: string, params?: TParams): Promise<TResponse> => {
-      const url = `${serverAddress}${endpoint}`;
-      const options = withAuth(token, { method });
-
-      if (params !== null && params !== undefined && method !== 'GET' && method !== 'DELETE') {
-        options.headers = {
-          ...options.headers,
-          'Content-Type': 'application/json',
-        };
-        options.body = JSON.stringify(params);
-      }
-
-      return fetchWrapper<TResponse>(url, options);
-    };
-  }
-  return async (params: TParams): Promise<TResponse> => {
-    const options: RequestInit = { method };
-
-    if (params !== null && params !== undefined && method !== 'GET' && method !== 'DELETE') {
-      options.headers = { 'Content-Type': 'application/json' };
-      options.body = JSON.stringify(params);
-    }
-
-    return fetchWrapper<TResponse>(`${serverAddress}${endpoint}`, options);
-  };
-}
+};
 
 const api = {
-  login: createApiMethod<AuthResponse, { username: string; password: string }>('/auth/login', 'POST', false),
-  register: createApiMethod<AuthResponse, { username: string; password: string }>('/auth/register', 'POST', false),
-  refreshToken: createApiMethod<AuthResponse, { refresh_token: string }>('/auth/refresh', 'POST', false),
+  login: async (params: { username: string; password: string }): Promise<AuthResponse> => {
+    setAuthToken(undefined);
+    return execute(() => AuthenticationService.loginUserApiAuthLoginPost(params).then(mapAuthResponse));
+  },
 
-  fetchWordLists: createApiMethod<WordList[]>('/word-lists'),
+  register: async (params: { username: string; password: string }): Promise<AuthResponse> => {
+    setAuthToken(undefined);
+    return execute(() => AuthenticationService.registerUserApiAuthRegisterPost(params).then(mapAuthResponse));
+  },
 
-  saveProgress: createApiMethod<
-    void,
-    {
+  refreshToken: async (params: { refresh_token: string }): Promise<AuthResponse> => {
+    setAuthToken(undefined);
+    return execute(() => AuthenticationService.refreshAccessTokenApiAuthRefreshPost(params).then(mapAuthResponse));
+  },
+
+  fetchWordLists: (token: string): Promise<WordList[]> =>
+    execute(
+      () =>
+        VocabularyService.getWordListsApiWordListsGet().then((data) =>
+          validateMany(data, validateWordList, 'wordList'),
+        ),
+      token,
+    ),
+
+  saveProgress: (
+    token: string,
+    payload: {
       vocabularyItemId: string;
       level: number;
       queuePosition: number;
       correctCount: number;
       incorrectCount: number;
-    }
-  >('/user/progress', 'POST'),
+    },
+  ): Promise<void> => execute(() => ProgressService.saveUserProgressApiUserProgressPost(payload), token),
 
-  synthesizeSpeech: createApiMethod<TTSResponse, { text: string; language: string }>('/tts/synthesize', 'POST'),
-  getTTSLanguages: createApiMethod<TTSLanguagesResponse>('/tts/languages'),
+  synthesizeSpeech: (token: string, data: { text: string; language: string }): Promise<TTSResponse> =>
+    execute(
+      () =>
+        TextToSpeechService.synthesizeSpeechApiTtsSynthesizePost(data).then((res) =>
+          validateOne(res, validateTtsResponse, 'ttsResponse'),
+        ),
+      token,
+    ),
 
-  deleteAccount: createApiMethod<void>('/auth/delete-account', 'DELETE'),
+  getTTSLanguages: (token: string): Promise<TTSLanguagesResponse> =>
+    execute(
+      () =>
+        TextToSpeechService.getTtsLanguagesApiTtsLanguagesGet().then((res) =>
+          validateOne(res, validateTtsLanguages, 'ttsLanguages'),
+        ),
+      token,
+    ),
 
-  async fetchTranslations(token: string, listName: string): Promise<Translation[]> {
-    return fetchWrapper(
-      `${serverAddress}/translations?list_name=${encodeURIComponent(listName)}`,
-      withAuth(token, { method: 'GET' }),
-    );
-  },
+  deleteAccount: (token: string): Promise<void> =>
+    execute(() => AuthenticationService.deleteAccountApiAuthDeleteAccountDelete(), token),
 
-  async fetchUserProgress(token: string, listName?: string): Promise<UserProgress[]> {
-    const url =
-      typeof listName === 'string' && listName !== ''
-        ? `${serverAddress}/user/progress?list_name=${encodeURIComponent(listName)}`
-        : `${serverAddress}/user/progress`;
-    return fetchWrapper(url, withAuth(token, { method: 'GET' }));
-  },
+  fetchTranslations: (token: string, listName: string): Promise<Translation[]> =>
+    execute(
+      () =>
+        VocabularyService.getTranslationsApiTranslationsGet(listName).then((data) =>
+          validateMany(data, validateVocabularyItem, 'translation'),
+        ),
+      token,
+    ),
 
-  async fetchContentVersion(token: string): Promise<ContentVersion> {
-    return fetchWrapper(`${serverAddress}/content-version`, withAuth(token, { method: 'GET' }));
-  },
+  fetchUserProgress: (token: string, listName?: string): Promise<UserProgress[]> =>
+    execute(
+      () =>
+        ProgressService.getUserProgressApiUserProgressGet(listName ?? null).then((data) =>
+          validateMany(data, validateUserProgress, 'userProgress'),
+        ),
+      token,
+    ),
+
+  fetchContentVersion: (token: string): Promise<ContentVersion> =>
+    execute(
+      () =>
+        ContentVersionService.getActiveContentVersionApiContentVersionGet().then((res) =>
+          validateOne(res, validateContentVersion, 'contentVersion'),
+        ),
+      token,
+    ),
 };
 
 export default api;

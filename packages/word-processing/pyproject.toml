@@ -42,6 +42,7 @@ dependencies = [
     # Configuration management
     "PyYAML>=6.0",
     "pydantic>=2.6.0",
+    "jsonschema>=4.23.0",
 
     # Modern CLI with Rich UI (Typer includes Rich)
     "typer[all]>=0.12.0",

@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from ..config.config_loader import get_config_loader
+from ..core.api_client import VocabularyAPIAdapter, VocabularyEntry
 from ..core.base_normalizer import get_universal_normalizer
-from ..core.database_parser import VocabularyEntry, VocabularyFileParser
 from ..core.lemmatization_service import get_lemmatization_service
 from .base_validation import BaseValidationIssue, BaseValidationResult
 
@@ -37,7 +37,7 @@ class ValidationResult(BaseValidationResult):
 
 class MigrationValidator:
     def __init__(self, migrations_directory: Path | None = None):
-        self.db_parser = VocabularyFileParser(migrations_directory)
+        self.db_parser = VocabularyAPIAdapter()
         # Initialize normalizers and lemmatizers for supported languages
         supported_languages = ["en", "de", "es"]
         config_loader = get_config_loader()
@@ -123,13 +123,13 @@ class MigrationValidator:
             result.issues.extend(entry_issues)
 
             # Use lemmatization + POS for duplicate detection
-            normalized_word = normalizer.normalize(entry.source_word)
+            normalized_word = normalizer.normalize(entry.source_text)
             lemma_with_pos = lemmatizer.lemmatize_with_pos(normalized_word)
 
             # Store lemma+POS as key
             for lemma, pos in lemma_with_pos:
                 key = f"{lemma}:{pos}"
-                seen_words[key].append((entry.source_word, pos))
+                seen_words[key].append((entry.source_text, pos))
 
         # Check for duplicates (same lemma AND same POS)
         # Exclude pronouns (PRON) - they often have same lemma but different functions
@@ -159,7 +159,7 @@ class MigrationValidator:
     def _validate_entry(self, entry: VocabularyEntry, filename: str, normalizer) -> list[ValidationIssue]:
         issues = []
 
-        if not entry.source_word.strip():
+        if not entry.source_text.strip():
             issues.append(
                 ValidationIssue(
                     severity="error",
@@ -169,7 +169,7 @@ class MigrationValidator:
                 )
             )
 
-        if not entry.target_word.strip():
+        if not entry.target_text.strip():
             issues.append(
                 ValidationIssue(
                     severity="error",
@@ -179,17 +179,17 @@ class MigrationValidator:
                 )
             )
 
-        if entry.source_word == entry.target_word:
+        if entry.source_text == entry.target_text:
             issues.append(
                 ValidationIssue(
                     severity="warning",
                     category="data_quality",
-                    message=f"Source word and translation are identical: '{entry.source_word}'",
+                    message=f"Source word and translation are identical: '{entry.source_text}'",
                     file_name=filename,
                 )
             )
 
-        if entry.source_word == "word" and entry.target_word == "translation":
+        if entry.source_text == "word" and entry.target_text == "translation":
             issues.append(
                 ValidationIssue(
                     severity="warning",
@@ -199,47 +199,47 @@ class MigrationValidator:
                 )
             )
 
-        if "[translation needed" in entry.target_word.lower():
+        if "[translation needed" in entry.target_text.lower():
             issues.append(
                 ValidationIssue(
                     severity="error",
                     category="data_integrity",
-                    message=f"Translation needed for word: '{entry.source_word}'",
+                    message=f"Translation needed for word: '{entry.source_text}'",
                     file_name=filename,
                 )
             )
 
-        if len(entry.source_word) > 100:
+        if len(entry.source_text) > 100:
             issues.append(
                 ValidationIssue(
                     severity="warning",
                     category="data_quality",
-                    message=f"Unusually long word: '{entry.source_word[:50]}...'",
+                    message=f"Unusually long word: '{entry.source_text[:50]}...'",
                     file_name=filename,
                 )
             )
 
-        if not entry.source_example or not entry.source_example.strip():
+        if not entry.source_usage_example or not entry.source_usage_example.strip():
             issues.append(
                 ValidationIssue(
                     severity="error",
                     category="data_integrity",
-                    message=f"Empty source_example for word: '{entry.source_word}'",
+                    message=f"Empty source_example for word: '{entry.source_text}'",
                     file_name=filename,
                 )
             )
 
-        if not entry.target_example or not entry.target_example.strip():
+        if not entry.target_usage_example or not entry.target_usage_example.strip():
             issues.append(
                 ValidationIssue(
                     severity="error",
                     category="data_integrity",
-                    message=f"Empty target_example for word: '{entry.source_word}'",
+                    message=f"Empty target_example for word: '{entry.source_text}'",
                     file_name=filename,
                 )
             )
 
-        syntax_issues = self._validate_answer_syntax(entry.target_word, filename)
+        syntax_issues = self._validate_answer_syntax(entry.target_text, filename)
         issues.extend(syntax_issues)
 
         return issues
@@ -287,9 +287,9 @@ class MigrationValidator:
                     entries = self.db_parser.parse_migration_file(filename)
                     for entry in entries:
                         # Use lemmatization for cross-file duplicate detection
-                        normalized = normalizer.normalize(entry.source_word)
+                        normalized = normalizer.normalize(entry.source_text)
                         lemmatized = lemmatizer.lemmatize(normalized)
-                        global_seen_words[lemmatized].append((filename, entry.source_word))
+                        global_seen_words[lemmatized].append((filename, entry.source_text))
                 except (FileNotFoundError, json.JSONDecodeError, ValueError):
                     continue
 

@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "text": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "language": {
+      "pattern": "^(en|de|ru|es)$",
+      "title": "Language",
+      "type": "string"
+    }
+  },
+  "required": [
+    "text",
+    "language"
+  ],
+  "title": "TTSRequest",
+  "type": "object"
+}

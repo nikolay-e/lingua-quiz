@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "audioData": {
+      "title": "Audiodata",
+      "type": "string"
+    },
+    "contentType": {
+      "default": "audio/mpeg",
+      "title": "Contenttype",
+      "type": "string"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    },
+    "language": {
+      "title": "Language",
+      "type": "string"
+    }
+  },
+  "required": [
+    "audioData",
+    "text",
+    "language"
+  ],
+  "title": "TTSResponse",
+  "type": "object"
+}

@@ -23,7 +23,9 @@
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
+    "@lingua-quiz/api-client": "file:../api-client",
     "@lingua-quiz/core": "file:../core",
+    "@lingua-quiz/domain": "file:../domain",
     "jwt-decode": "^4.0.0"
   },
   "devDependencies": {

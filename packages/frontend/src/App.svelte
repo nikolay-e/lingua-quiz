@@ -12,7 +12,7 @@
 
   let isAuthenticated = false;
   let isAdmin = false;
-  let currentPage: PageType = PAGES.LOGIN;
+  let currentPage: PageType = PAGES.QUIZ;
 
   const unsubscribe = authStore.subscribe(({ isAuthenticated: authenticated, isAdmin: adminStatus }) => {
     isAuthenticated = authenticated;
@@ -20,6 +20,8 @@
     if (!isAuthenticated) {
       quizStore.reset();
       currentPage = PAGES.LOGIN;
+    } else if (currentPage === PAGES.LOGIN || currentPage === PAGES.REGISTER) {
+      currentPage = PAGES.QUIZ;
     }
   });
 
@@ -36,7 +38,7 @@
   }
 
   function navigateToQuiz() {
-    currentPage = PAGES.LOGIN;
+    currentPage = PAGES.QUIZ;
   }
 
   function navigateToAdmin() {

@@ -14,12 +14,13 @@ Key Components:
 __version__ = "2.0.0"
 __author__ = "Nikolay Eremeev"
 
-from .core.database_parser import VocabularyFileParser
+from .core.api_client import VocabularyAPIAdapter, VocabularyEntry
 from .core.vocabulary_analyzer import VocabularyAnalyzer
 from .validation.migration_validator import MigrationValidator
 
 __all__ = [
     "MigrationValidator",
     "VocabularyAnalyzer",
-    "VocabularyFileParser",
+    "VocabularyAPIAdapter",
+    "VocabularyEntry",
 ]

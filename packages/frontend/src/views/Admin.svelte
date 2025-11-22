@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { authStore } from '../stores';
   import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '../adminApi';
-  import type { VocabularyItem } from '../api-types';
+  import type { AdminVocabularyItem } from '../api-types';
   import { toast } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
@@ -17,14 +17,16 @@
 
   let token: string | null = null;
   let searchQuery = $state('');
-  let searchResults = $state<VocabularyItem[]>([]);
-  let selectedItem = $state<VocabularyItem | null>(null);
+  let searchResults = $state<AdminVocabularyItem[]>([]);
+  let selectedItem = $state<AdminVocabularyItem | null>(null);
   let isEditDialogOpen = $state(false);
   let isCreateDialogOpen = $state(false);
   let isDeleteDialogOpen = $state(false);
-  let itemToDelete = $state<VocabularyItem | null>(null);
+  let itemToDelete = $state<AdminVocabularyItem | null>(null);
   let loading = $state(false);
   let searchLoading = $state(false);
+
+  type AdminCreateForm = Omit<VocabularyItemCreate, 'difficultyLevel'> & { difficultyLevel?: string };
 
   let editForm = $state({
     sourceText: '',
@@ -35,7 +37,7 @@
     difficultyLevel: '',
   });
 
-  let createForm = $state<VocabularyItemCreate>({
+  let createForm = $state<AdminCreateForm>({
     sourceText: '',
     sourceLanguage: 'en',
     targetText: '',
@@ -154,7 +156,7 @@
     }
   }
 
-  function openEditDialog(item: VocabularyItem) {
+  function openEditDialog(item: AdminVocabularyItem) {
     selectedItem = item;
     editForm = {
       sourceText: item.sourceText,
@@ -201,7 +203,7 @@
           targetUsageExample: updates.targetUsageExample ?? existingItem.targetUsageExample,
           listName: updates.listName ?? existingItem.listName,
           difficultyLevel: updates.difficultyLevel ?? existingItem.difficultyLevel,
-        } as VocabularyItem;
+        } as AdminVocabularyItem;
         searchResults = [...searchResults];
       }
 
@@ -255,7 +257,7 @@
     }
   }
 
-  function openDeleteDialog(item: VocabularyItem) {
+  function openDeleteDialog(item: AdminVocabularyItem) {
     itemToDelete = item;
     isDeleteDialogOpen = true;
   }
@@ -765,7 +767,7 @@
     <Dialog.Header>
       <Dialog.Title>Delete Vocabulary Item</Dialog.Title>
       <Dialog.Description>
-        Are you sure you want to delete this item? This action will mark it as inactive.
+        Are you sure you want to delete this item? This will remove it from the list.
       </Dialog.Description>
     </Dialog.Header>
     {#if itemToDelete}

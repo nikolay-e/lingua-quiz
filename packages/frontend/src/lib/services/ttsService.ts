@@ -34,7 +34,7 @@ export class TTSService {
 
   async initializeLanguages(token: string): Promise<void> {
     try {
-      const ttsData = await api.getTTSLanguages(token, undefined);
+      const ttsData = await api.getTTSLanguages(token);
       this.updateState({
         isAvailable: ttsData.available,
         supportedLanguages: ttsData.supportedLanguages,

@@ -21,11 +21,14 @@ import {
 } from './constants';
 import { checkAnswer, formatForDisplay } from './answer-comparison';
 import type { Translation, ProgressEntry } from './types';
+import type { LevelKey } from '@lingua-quiz/domain';
+
+export type LevelStatus = LevelKey;
 
 export interface QuizQuestion {
   translationId: string;
   questionText: string;
-  level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5';
+  level: Extract<LevelKey, 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5'>;
   direction: 'normal' | 'reverse';
   sourceLanguage: string;
   targetLanguage: string;
@@ -48,15 +51,8 @@ export interface SubmissionResult {
 export interface QuizState {
   translations: Translation[];
   progress: ProgressEntry[];
-  currentLevel: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4';
-  queues: {
-    LEVEL_0: string[];
-    LEVEL_1: string[];
-    LEVEL_2: string[];
-    LEVEL_3: string[];
-    LEVEL_4: string[];
-    LEVEL_5: string[];
-  };
+  currentLevel: Extract<LevelKey, 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4'>;
+  queues: Record<LevelKey, string[]>;
 }
 
 export interface QuizOptions {
@@ -70,11 +66,10 @@ export interface QuizOptions {
 
 export interface InitialState {
   progress?: ProgressEntry[];
-  currentLevel?: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4';
+  currentLevel?: Extract<LevelKey, 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4'>;
 }
 
-export type LevelStatus = 'LEVEL_0' | 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5';
-export type PracticeLevel = 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4';
+export type PracticeLevel = Extract<LevelKey, 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4'>;
 export type QuestionDirection = 'normal' | 'reverse';
 export type QuestionType = 'translation' | 'usage';
 
@@ -312,7 +307,8 @@ export class QuizManager {
     if (questionType !== 'usage') {
       return undefined;
     }
-    return direction === 'normal' ? translation.sourceUsageExample : translation.targetUsageExample;
+    const example = direction === 'normal' ? translation.sourceUsageExample : translation.targetUsageExample;
+    return example ?? undefined;
   };
 
   /**

@@ -38,6 +38,7 @@
     WithElementRef<HTMLAnchorAttributes> & {
       variant?: ButtonVariant;
       size?: ButtonSize;
+      onclick?: (event: MouseEvent) => void;
     };
 </script>
 
@@ -51,6 +52,7 @@
     href = undefined,
     type = 'button',
     disabled,
+    onclick = undefined,
     children,
     ...restProps
   }: ButtonProps = $props();
@@ -65,6 +67,7 @@
     aria-disabled={disabled}
     role={disabled ? 'link' : undefined}
     tabindex={disabled ? -1 : undefined}
+    onclick={onclick}
     {...restProps}
   >
     {@render children?.()}
@@ -76,6 +79,7 @@
     class={cn(buttonVariants({ variant, size }), className)}
     {type}
     {disabled}
+    onclick={onclick}
     {...restProps}
   >
     {@render children?.()}

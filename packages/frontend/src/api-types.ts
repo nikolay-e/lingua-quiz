@@ -1,73 +1,29 @@
+import type { VocabularyItemDetailResponse } from '@lingua-quiz/api-client';
+import type {
+  ContentVersion as DomainContentVersion,
+  User as DomainUser,
+  UserProgress as DomainUserProgress,
+  VocabularyItem as DomainVocabularyItem,
+  WordList as DomainWordList,
+  TtsLanguages,
+  TtsResponse,
+} from '@lingua-quiz/domain';
 import type { LevelConfigItem } from './lib/config/levelConfig';
 
-export interface User {
-  id: number;
-  username: string;
-  isAdmin?: boolean;
-}
+export type User = DomainUser & { isAdmin?: boolean };
 
 export interface AuthResponse {
   token: string;
   refresh_token: string;
-  expires_in: string;
+  expires_in?: string;
   user: User;
 }
 
-export interface WordList {
-  listName: string;
-  wordCount: number;
-}
-
-export interface Translation {
-  id: string;
-  sourceText: string;
-  sourceLanguage: string;
-  targetText: string;
-  targetLanguage: string;
-  listName: string;
-  sourceUsageExample?: string;
-  targetUsageExample?: string;
-}
-
-export interface UserProgress {
-  vocabularyItemId: string;
-  sourceText: string;
-  sourceLanguage: string;
-  targetLanguage: string;
-  level: number;
-  queuePosition: number;
-  correctCount: number;
-  incorrectCount: number;
-  consecutiveCorrect: number;
-  lastPracticed?: string;
-}
-
-export interface VocabularyItem {
-  id: string;
-  sourceText: string;
-  sourceLanguage: string;
-  targetText: string;
-  targetLanguage: string;
-  listName: string;
-  difficultyLevel?: string;
-  sourceUsageExample?: string;
-  targetUsageExample?: string;
-  isActive?: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-export interface TTSResponse {
-  audioData: string;
-  contentType: string;
-  text: string;
-  language: string;
-}
-
-export interface TTSLanguagesResponse {
-  available: boolean;
-  supportedLanguages: string[];
-}
+export type Translation = DomainVocabularyItem;
+export type TTSResponse = TtsResponse;
+export type TTSLanguagesResponse = TtsLanguages;
+export type WordList = DomainWordList;
+export type UserProgress = DomainUserProgress;
 
 export interface QuizFeedback {
   message: string;
@@ -88,8 +44,5 @@ export interface TranslationDisplay {
   target: string;
 }
 
-export interface ContentVersion {
-  versionId: number;
-  versionName: string;
-  isActive: boolean;
-}
+export type ContentVersion = DomainContentVersion;
+export type AdminVocabularyItem = VocabularyItemDetailResponse;

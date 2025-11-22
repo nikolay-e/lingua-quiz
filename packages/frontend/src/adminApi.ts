@@ -1,157 +1,46 @@
-import type { VocabularyItem } from './api-types';
+import {
+  AdminService,
+  type VocabularyItemCreate,
+  type VocabularyItemDetailResponse,
+  type VocabularyItemUpdate,
+} from '@lingua-quiz/api-client';
+import type { AdminVocabularyItem } from './api-types';
+import { handleApiError, setAuthToken } from './apiClientConfig';
 
-declare global {
-  interface Window {
-    LINGUA_QUIZ_API_URL?: string;
+const execute = async <T>(token: string, operation: () => Promise<T>): Promise<T> => {
+  setAuthToken(token);
+  try {
+    return await operation();
+  } catch (error) {
+    return handleApiError(error);
   }
-}
-
-const getServerAddress = (): string => {
-  if (typeof import.meta.env.VITE_API_URL === 'string' && import.meta.env.VITE_API_URL !== '') {
-    return import.meta.env.VITE_API_URL;
-  }
-
-  if (typeof window.LINGUA_QUIZ_API_URL === 'string' && window.LINGUA_QUIZ_API_URL !== '') {
-    return window.LINGUA_QUIZ_API_URL;
-  }
-
-  return '/api';
 };
-
-const serverAddress = getServerAddress();
-
-interface ApiErrorResponse {
-  message?: string;
-  detail?: string;
-}
-
-async function fetchWrapper<T = unknown>(url: string, options: RequestInit = {}): Promise<T> {
-  const response = await fetch(url, options);
-
-  if (!response.ok) {
-    let errorData: ApiErrorResponse = {};
-    try {
-      errorData = (await response.json()) as ApiErrorResponse;
-    } catch {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-
-    if (response.status === 401) {
-      throw new Error('Unauthorized');
-    }
-    if (response.status === 403) {
-      throw new Error('Forbidden - Admin access required');
-    }
-    if (response.status === 404) {
-      throw new Error('Resource not found');
-    }
-
-    const errorMessage = errorData.message ?? errorData.detail ?? `Request failed with status ${response.status}`;
-    throw new Error(errorMessage);
-  }
-
-  if (response.status === 204) {
-    return {} as T;
-  }
-
-  return (await response.json()) as T;
-}
-
-export interface VocabularyItemCreate {
-  sourceText: string;
-  sourceLanguage: string;
-  targetText: string;
-  targetLanguage: string;
-  listName: string;
-  difficultyLevel?: string;
-  sourceUsageExample?: string;
-  targetUsageExample?: string;
-}
-
-export interface VocabularyItemUpdate {
-  sourceText?: string;
-  targetText?: string;
-  sourceUsageExample?: string;
-  targetUsageExample?: string;
-  isActive?: boolean;
-  listName?: string;
-  difficultyLevel?: string;
-}
 
 const adminApi = {
-  searchVocabulary: async (token: string, query: string, limit = 50): Promise<VocabularyItem[]> => {
-    const url = `${serverAddress}/admin/vocabulary/search?query=${encodeURIComponent(query)}&limit=${limit}`;
-    return fetchWrapper<VocabularyItem[]>(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  },
+  searchVocabulary: (token: string, query: string, limit = 50): Promise<AdminVocabularyItem[]> =>
+    execute(token, () => AdminService.searchVocabularyApiAdminVocabularySearchGet(query, limit)),
 
-  getVocabularyItem: async (token: string, itemId: string): Promise<VocabularyItem> => {
-    return fetchWrapper<VocabularyItem>(`${serverAddress}/admin/vocabulary/${itemId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  },
+  getVocabularyItem: (token: string, itemId: string): Promise<AdminVocabularyItem> =>
+    execute(token, () => AdminService.getVocabularyItemApiAdminVocabularyItemIdGet(itemId)),
 
-  createVocabularyItem: async (token: string, data: VocabularyItemCreate): Promise<{ message: string; id: string }> => {
-    return fetchWrapper<{ message: string; id: string }>(`${serverAddress}/admin/vocabulary`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    });
-  },
+  createVocabularyItem: (token: string, data: VocabularyItemCreate): Promise<{ message: string; id: string }> =>
+    execute(token, () => AdminService.createVocabularyItemApiAdminVocabularyPost(data)),
 
-  updateVocabularyItem: async (
-    token: string,
-    itemId: string,
-    data: VocabularyItemUpdate,
-  ): Promise<{ message: string }> => {
-    return fetchWrapper<{ message: string }>(`${serverAddress}/admin/vocabulary/${itemId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    });
-  },
+  updateVocabularyItem: (token: string, itemId: string, data: VocabularyItemUpdate): Promise<{ message: string }> =>
+    execute(token, () => AdminService.updateVocabularyItemApiAdminVocabularyItemIdPut(itemId, data)),
 
-  deleteVocabularyItem: async (token: string, itemId: string): Promise<{ message: string }> => {
-    return fetchWrapper<{ message: string }>(`${serverAddress}/admin/vocabulary/${itemId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  },
+  deleteVocabularyItem: (token: string, itemId: string): Promise<{ message: string }> =>
+    execute(token, () => AdminService.deleteVocabularyItemApiAdminVocabularyItemIdDelete(itemId)),
 
-  listVocabulary: async (
+  listVocabulary: (
     token: string,
     options: { listName?: string; limit?: number; offset?: number } = {},
-  ): Promise<VocabularyItem[]> => {
-    const params = new URLSearchParams();
-    if (typeof options.listName === 'string' && options.listName !== '') {
-      params.append('list_name', options.listName);
-    }
-    if (typeof options.limit === 'number' && options.limit > 0) {
-      params.append('limit', options.limit.toString());
-    }
-    if (typeof options.offset === 'number' && options.offset >= 0) {
-      params.append('offset', options.offset.toString());
-    }
-
-    return fetchWrapper<VocabularyItem[]>(`${serverAddress}/admin/vocabulary?${params.toString()}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  ): Promise<AdminVocabularyItem[]> => {
+    const { listName, limit = 100, offset } = options;
+    return execute(token, () => AdminService.listVocabularyApiAdminVocabularyGet(listName ?? null, limit, offset));
   },
 };
+
+export type { VocabularyItemCreate, VocabularyItemDetailResponse, VocabularyItemUpdate };
 
 export default adminApi;

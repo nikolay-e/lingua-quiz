@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import Any
 
 from ..config.constants import SUPPORTED_LANGUAGES
+from ..core.api_client import VocabularyAPIAdapter
 from ..core.base_normalizer import get_universal_normalizer
-from ..core.database_parser import VocabularyFileParser
 
 CEFR_FREQUENCY_RANGES = {
     "a1": (1, 1000),
@@ -66,8 +66,7 @@ class LevelCoverageResult:
 
 class LevelCoverageAnalyzer:
     def __init__(self, migrations_directory: Path | None = None):
-        self.db_parser = VocabularyFileParser(migrations_directory)
-        self.migrations_dir = self.db_parser.migrations_dir
+        self.db_parser = VocabularyAPIAdapter()
         self._lemmatization_services = {}
         self._lemma_rank_maps = {}
 
@@ -110,7 +109,7 @@ class LevelCoverageAnalyzer:
 
             word_lemma = service.lemmatize(word)
             return self._lemma_rank_maps[language_code].get(word_lemma)
-        except Exception:
+        except Exception:  # nosec B110
             pass
         return None
 
@@ -136,7 +135,7 @@ class LevelCoverageAnalyzer:
         analyzed_words = set()
 
         for entry in entries:
-            word_variants = normalizer.extract_word_variants(entry.source_word)
+            word_variants = normalizer.extract_word_variants(entry.source_text)
 
             for word in word_variants:
                 if not word or word in analyzed_words:
@@ -246,29 +245,25 @@ class LevelCoverageAnalyzer:
         )
 
     def analyze_all_files(self, show_progress: bool = True) -> dict[str, LevelCoverageResult]:
-        vocabulary_dir = self.migrations_dir / "data" / "vocabulary"
-        if not vocabulary_dir.exists():
-            if show_progress:
-                print(f"⚠️  Vocabulary directory not found: {vocabulary_dir}")
-            return {}
-
+        discovered_files = self.db_parser.discover_migration_files()
         results = {}
-        for json_file in sorted(vocabulary_dir.glob("*.json")):
-            filename = json_file.name
 
-            if show_progress:
-                print(f"\nAnalyzing {filename}...")
-
-            result = self.analyze_file(filename, show_progress=show_progress)
-            if result:
-                results[filename] = result
-
+        for _lang_code, filenames in discovered_files.items():
+            for filename in filenames:
                 if show_progress:
-                    print(
-                        f"   Coverage: {result.coverage_percentage:.1f}% ({result.words_in_range}/{result.total_words} words in correct range)"
-                    )
-                    if result.words_out_of_range > 0:
-                        print(f"   ⚠️  {result.words_out_of_range} words out of range")
+                    print(f"\nAnalyzing {filename}...")
+
+                result = self.analyze_file(filename, show_progress=show_progress)
+                if result:
+                    results[filename] = result
+
+                    if show_progress:
+                        print(
+                            f"   Coverage: {result.coverage_percentage:.1f}% "
+                            f"({result.words_in_range}/{result.total_words} words in correct range)"
+                        )
+                        if result.words_out_of_range > 0:
+                            print(f"   ⚠️  {result.words_out_of_range} words out of range")
 
         return results
 

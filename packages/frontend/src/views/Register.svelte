@@ -6,6 +6,9 @@
   import PasswordInput from '../components/PasswordInput.svelte';
   import AuthMessage from '../components/AuthMessage.svelte';
   import AuthNavLink from '../components/AuthNavLink.svelte';
+  import { Input } from '$lib/components/ui/input';
+  import { Button } from '$lib/components/ui/button';
+  import { Label } from '$lib/components/ui/label';
 
   interface PasswordRequirement {
     id: string;
@@ -70,7 +73,8 @@
   <h2>Create Account</h2>
   <form on:submit={handleSubmit} aria-busy={isLoading} class="form-compact">
     <div class="input-group">
-      <input
+      <Label for="register-username">Username</Label>
+      <Input
         type="text"
         id="register-username"
         bind:value={username}
@@ -104,9 +108,9 @@
       </div>
     {/if}
 
-    <button type="submit" class="btn-base primary-button" disabled={!isPasswordValid || isLoading}>
+    <Button type="submit" disabled={!isPasswordValid || isLoading}>
       <i class="fas fa-user-plus"></i> Create Account
-    </button>
+    </Button>
   </form>
 
   <AuthMessage {message} variant={message.includes('successful') ? 'success' : 'error'} id="register-message" />

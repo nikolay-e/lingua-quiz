@@ -1,20 +1,14 @@
+import type { LevelKey, VocabularyItem } from '@lingua-quiz/domain';
+
 /**
  * Core type definitions for the LinguaQuiz business logic
  * These types are independent of any specific UI or API implementation
  */
-export interface Translation {
-  id: string;
-  sourceText: string;
-  sourceLanguage: string;
-  sourceUsageExample?: string;
-  targetText: string;
-  targetLanguage: string;
-  targetUsageExample?: string;
-}
+export type Translation = VocabularyItem;
 
 export interface ProgressEntry {
   translationId: string;
-  level: 'LEVEL_0' | 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5';
+  level: LevelKey;
   queuePosition?: number;
   consecutiveCorrect: number;
   recentHistory: boolean[];

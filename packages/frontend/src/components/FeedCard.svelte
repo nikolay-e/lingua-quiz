@@ -64,14 +64,6 @@
     }
   }
 
-  .header-action {
-    :global(.btn-base) {
-      gap: var(--spacing-xs);
-      margin: 0;
-      width: auto;
-    }
-  }
-
   .feed-item__body {
     :global(.full-width) {
       width: 100%;

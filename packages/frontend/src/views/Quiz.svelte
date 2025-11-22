@@ -6,6 +6,8 @@
   import { LEVEL_CONFIG } from '../lib/config/levelConfig';
   import { ttsService } from '../lib/services/ttsService';
   import { STORAGE_KEYS } from '../lib/constants';
+  import { Button } from '$lib/components/ui/button';
+  import { toast } from 'svelte-sonner';
 
   import QuizHeader from '../components/quiz/QuizHeader.svelte';
   import QuestionDisplay from '../components/quiz/QuestionDisplay.svelte';
@@ -23,6 +25,8 @@
 
   let showLevelAnimation = false;
   let isLevelUp = true;
+  let showDeleteConfirm = false;
+  let liveStatus = '';
 
   let ttsState: import('../lib/services/ttsService').TTSState = { isAvailable: false, supportedLanguages: [], isPlaying: false };
 
@@ -93,8 +97,12 @@
     usageExamples = null;
     userAnswer = '';
     questionForFeedback = null;
+    liveStatus = 'Loading quiz...';
 
-    if (!quiz) return;
+    if (!quiz) {
+      liveStatus = '';
+      return;
+    }
 
     try {
       await quizStore.startQuiz($authStore.token!, quiz);
@@ -109,6 +117,7 @@
       const errorMessage = error instanceof Error ? error.message : 'Failed to start quiz. Please try again.';
       feedback = { message: errorMessage, isSuccess: false } as QuizFeedback;
     }
+    liveStatus = '';
   }
 
   function handleBackToMenu(): void {
@@ -130,6 +139,7 @@
 
     isSubmitting = true;
     questionForFeedback = currentQuestion;
+    liveStatus = 'Submitting answer...';
 
     try {
       const result = await quizStore.submitAnswer($authStore.token!, userAnswer);
@@ -165,6 +175,7 @@
       feedback = { message: errorMessage, isSuccess: false } as QuizFeedback;
     } finally {
       isSubmitting = false;
+      liveStatus = '';
     }
   }
 
@@ -179,16 +190,13 @@
   }
 
   async function handleDeleteAccount(): Promise<void> {
-    if (!confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      return;
-    }
-
+    showDeleteConfirm = false;
     try {
       await authStore.deleteAccount();
-      alert('Your account has been successfully deleted.');
+      toast.success('Your account has been deleted');
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Failed to delete account';
-      alert(`Failed to delete account: ${message}`);
+      toast.error(message);
     }
   }
 
@@ -236,7 +244,11 @@
 
 {#key selectedQuiz}
   <main class="feed">
-    <FeedCard title={selectedQuiz ? undefined : undefined}>
+    {#if liveStatus}
+      <div class="status-banner" aria-live="polite">{liveStatus}</div>
+    {/if}
+
+    <FeedCard title={selectedQuiz ?? null}>
       {#if !selectedQuiz}
         <header class="flex-align-center gap-sm mb-md">
           <h1 class="logo"><i class="fas fa-language"></i> LinguaQuiz</h1>
@@ -271,18 +283,21 @@
       <FeedCard dense title="Translate">
         <svelte:fragment slot="headerAction">
           {#if canUseTTS}
-            <button
-              class="btn-base {ttsState.isPlaying ? 'speaking' : ''}"
-              on:click={() =>
+            <Button
+              variant="outline"
+              size="sm"
+              class={ttsState.isPlaying ? 'speaking' : ''}
+              onclick={() =>
                 currentQuestion &&
                   ttsService.playTTS($authStore.token!, currentQuestion.questionText, currentLanguage)}
               disabled={ttsState.isPlaying}
-              title="Listen to pronunciation"
               aria-label="Listen to pronunciation"
             >
               <i class="fas fa-volume-up"></i>
-              <span>Listen</span>
-            </button>
+              <span>{ttsState.isPlaying ? 'Playing…' : 'Listen'}</span>
+            </Button>
+          {:else}
+            <span class="tts-muted" aria-live="polite">TTS unavailable for {currentLanguage || 'this language'}</span>
           {/if}
         </svelte:fragment>
         <QuestionDisplay {currentQuestion} />
@@ -301,15 +316,18 @@
             disabled={isSubmitting}
             aria-describedby="word"
           />
-          <button
+          <Button
             type="button"
-            class="btn-base primary-button"
-            on:click={submitAnswer}
+            variant="default"
+            onclick={submitAnswer}
             disabled={isSubmitting}
           >
             <i class="fas fa-paper-plane"></i> {isSubmitting ? 'Submitting…' : 'Submit'}
-          </button>
+          </Button>
         </div>
+        {#if liveStatus && isSubmitting}
+          <p class="status-hint" aria-live="polite">{liveStatus}</p>
+        {/if}
       </FeedCard>
     {/if}
 
@@ -339,13 +357,25 @@
 
     <FeedCard dense>
       <div class="actions">
-        <button class="btn-base logout-button" on:click={logout}>
+        <Button variant="outline" onclick={logout}>
           <i class="fas fa-sign-out-alt"></i> Logout ({username})
-        </button>
+        </Button>
         {#if !selectedQuiz}
-          <button class="btn-base delete-button" on:click={handleDeleteAccount}>
-            <i class="fas fa-trash-alt"></i> Delete Account
-          </button>
+          {#if showDeleteConfirm}
+            <div class="delete-confirm">
+              <span>Delete account?</span>
+              <Button size="sm" variant="destructive" onclick={handleDeleteAccount}>
+                Confirm
+              </Button>
+              <Button size="sm" variant="ghost" onclick={() => (showDeleteConfirm = false)}>
+                Cancel
+              </Button>
+            </div>
+          {:else}
+            <Button variant="destructive" onclick={() => (showDeleteConfirm = true)}>
+              <i class="fas fa-trash-alt"></i> Delete Account
+            </Button>
+          {/if}
         {/if}
       </div>
     </FeedCard>
@@ -357,6 +387,10 @@
   {isLevelUp}
   on:complete={() => showLevelAnimation = false}
 />
+
+<div class="sr-only" aria-live="polite">
+  {liveStatus}
+</div>
 
 <style>
   .logo {
@@ -377,5 +411,33 @@
       transform: translateY(-1px);
       box-shadow: var(--shadow-button-hover);
     }
+  }
+
+  .tts-muted {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .delete-confirm {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  .status-banner {
+    background: var(--color-muted);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  .status-hint {
+    margin-top: var(--spacing-xs);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
   }
 </style>

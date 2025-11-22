@@ -2,10 +2,9 @@
 Integration tests for WordSource implementations.
 
 Tests verify all WordSource implementations:
-1. MigrationFileSource - parsing migration JSON files
-2. FrequencySource - wordfreq library integration
-3. SubtitleFrequencySource - CSV subtitle frequency files
-4. CustomListSource - user-provided files (JSON, CSV, TXT)
+1. FrequencySource - wordfreq library integration
+2. SubtitleFrequencySource - CSV subtitle frequency files
+3. CustomListSource - user-provided files (JSON, CSV, TXT)
 """
 
 import json
@@ -15,7 +14,6 @@ import pytest
 from vocab_tools.core.word_source import (
     CustomListSource,
     FrequencySource,
-    MigrationFileSource,
     SubtitleFrequencySource,
 )
 
@@ -26,82 +24,6 @@ def temp_data_dir(tmp_path):
     data_dir = tmp_path / "data"
     data_dir.mkdir()
     return data_dir
-
-
-@pytest.fixture
-def temp_migrations_dir(tmp_path):
-    """Create temporary migrations directory for testing."""
-    migrations_dir = tmp_path / "migrations" / "data" / "vocabulary"
-    migrations_dir.mkdir(parents=True)
-    return migrations_dir
-
-
-@pytest.fixture
-def sample_migration_file(temp_migrations_dir):
-    """Create sample migration file."""
-    data = {
-        "word_pairs": [
-            {
-                "source_word": "casa",
-                "target_word": "дом",
-                "source_example": "Mi casa es bonita.",
-                "target_example": "Мой дом красивый.",
-            },
-            {
-                "source_word": "libro",
-                "target_word": "книга",
-                "source_example": "Leo un libro.",
-                "target_example": "Я читаю книгу.",
-            },
-        ]
-    }
-
-    file_path = temp_migrations_dir / "spanish-russian-a1.json"
-    with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-    return file_path
-
-
-class TestMigrationFileSource:
-    """Test MigrationFileSource for parsing migration files."""
-
-    def test_get_words_from_migration_file(self, sample_migration_file, temp_migrations_dir):
-        """Verify MigrationFileSource returns words from migration files."""
-        source = MigrationFileSource(temp_migrations_dir.parent.parent, "es")
-        words = list(source.get_words())
-
-        assert len(words) == 2
-        assert words[0].text == "casa"
-        assert words[1].text == "libro"
-
-    def test_get_language_code(self, sample_migration_file, temp_migrations_dir):
-        """Verify get_language_code returns correct language."""
-        source = MigrationFileSource(temp_migrations_dir.parent.parent, "es")
-
-        assert source.get_language_code() == "es"
-
-    def test_word_metadata_includes_translation_info(self, sample_migration_file, temp_migrations_dir):
-        """Verify words include translation metadata."""
-        source = MigrationFileSource(temp_migrations_dir.parent.parent, "es")
-        words = list(source.get_words())
-
-        assert words[0].metadata is not None
-        assert "target_word" in words[0].metadata
-        assert words[0].metadata["target_word"] == "дом"
-
-    def test_count_method(self, sample_migration_file, temp_migrations_dir):
-        """Verify count() returns correct number of words."""
-        source = MigrationFileSource(temp_migrations_dir.parent.parent, "es")
-
-        assert source.count() == 2
-
-    def test_empty_migrations_directory(self, temp_migrations_dir):
-        """Verify handling of empty migrations directory."""
-        source = MigrationFileSource(temp_migrations_dir.parent.parent, "es")
-        words = list(source.get_words())
-
-        assert len(words) == 0
 
 
 class TestFrequencySource:
@@ -331,12 +253,6 @@ class TestCustomListSource:
 
 class TestWordSourceCount:
     """Test WordSource.count() method."""
-
-    def test_count_migration_source(self, sample_migration_file, temp_migrations_dir):
-        """Verify count() works for MigrationFileSource."""
-        source = MigrationFileSource(temp_migrations_dir.parent.parent, "es")
-
-        assert source.count() == 2
 
     def test_count_frequency_source(self):
         """Verify count() works for FrequencySource."""

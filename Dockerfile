@@ -33,10 +33,8 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
 
 # Copy application source code
 COPY --chown=appuser:appuser packages/backend/src/ ./
-COPY --chown=appuser:appuser packages/backend/load_vocabulary.py ./
 COPY --chown=appuser:appuser packages/backend/alembic/ ./alembic/
 COPY --chown=appuser:appuser packages/backend/alembic.ini ./
-COPY --chown=appuser:appuser packages/backend/migrations/data/ ./migrations/data/
 
 # Copy startup script
 COPY --chown=appuser:appuser packages/backend/start.sh ./

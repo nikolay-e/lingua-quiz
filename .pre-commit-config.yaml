@@ -39,9 +39,12 @@ repos:
 
       # Auto-fixable hygiene
       - id: trailing-whitespace
+        exclude: (^packages/domain-schema/|/generated/|^packages/backend/openapi\.json$)
       - id: end-of-file-fixer
+        exclude: (^packages/domain-schema/|/generated/|^packages/backend/openapi\.json$)
       - id: mixed-line-ending
         args: ["--fix=lf"]
+        exclude: (^packages/domain-schema/|/generated/|^packages/backend/openapi\.json$)
 
   # =============================================================================
   # STAGE 2: Schema & CI Configuration Validation (<1 second)
@@ -61,6 +64,55 @@ repos:
     hooks:
       - id: actionlint
         name: Lint GitHub Actions
+
+  # =============================================================================
+  # STAGE 2b: API Contracts & Schema Generation
+  # Ensures OpenAPI, domain schemas, and TS clients stay in sync with backend
+  # =============================================================================
+  - repo: https://github.com/python-openapi/openapi-spec-validator
+    rev: 0.8.0b1
+    hooks:
+      - id: openapi-spec-validator
+        name: Validate backend OpenAPI spec
+        files: ^packages/backend/openapi\.json$
+
+  - repo: local
+    hooks:
+      # Generate OpenAPI spec when backend API changes
+      - id: generate-openapi
+        name: Generate OpenAPI spec from backend
+        entry: python packages/backend/scripts/export_openapi.py
+        language: system
+        pass_filenames: false
+        files: ^packages/backend/src/
+        stages: [pre-commit]
+
+      # Generate domain JSON schemas
+      - id: generate-domain-schema
+        name: Generate domain JSON schemas from backend
+        entry: python packages/backend/scripts/export_domain_schema.py
+        language: system
+        pass_filenames: false
+        files: ^packages/backend/src/
+        stages: [pre-commit]
+
+      # Generate TS API client from OpenAPI
+      - id: generate-api-client
+        name: Generate TS API client from OpenAPI
+        entry: node packages/api-client/generate.js
+        language: system
+        pass_filenames: false
+        files: ^packages/backend/openapi\.json$
+        stages: [pre-commit]
+
+      # Generate TS domain types from JSON Schema
+      - id: generate-domain-ts
+        name: Generate TS domain types from JSON Schema
+        entry: node packages/domain/generate.js
+        language: system
+        pass_filenames: false
+        files: ^packages/domain-schema/
+        stages: [pre-commit]
 
   # =============================================================================
   # STAGE 3: Security - Secrets Scanning (<3 seconds)
@@ -83,9 +135,11 @@ repos:
         name: Lint Python with ruff
         args: ["--fix", "--exit-non-zero-on-fix"]
         types_or: [python, pyi]
+        files: ^packages/(backend|word-processing|integration-tests)/
       - id: ruff-format
         name: Format Python with ruff
         types_or: [python, pyi]
+        files: ^packages/(backend|word-processing|integration-tests)/
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.21.1
@@ -93,6 +147,7 @@ repos:
       - id: pyupgrade
         name: Upgrade Python syntax
         args: ["--py313-plus"]
+        files: ^packages/(backend|word-processing|integration-tests)/.*\.py$
 
   # =============================================================================
   # STAGE 5: Python Type Checking & Security (pre-push only, ~10 seconds)
@@ -122,7 +177,18 @@ repos:
       - id: bandit
         name: Security scan Python (bandit)
         args: ["-q", "-r", "-x", "tests,*/test_*.py,*/conftest.py"]
-        files: ^packages/backend/
+        files: ^packages/(backend|word-processing)/
+        stages: [pre-push]
+
+  - repo: https://github.com/trailofbits/pip-audit
+    rev: v2.9.0
+    hooks:
+      - id: pip-audit
+        name: Python dependency vulnerability audit
+        args: [
+          "-r", "packages/backend/requirements.txt",
+          "-r", "packages/word-processing/requirements.txt",
+        ]
         stages: [pre-push]
 
   # =============================================================================
@@ -148,9 +214,9 @@ repos:
     hooks:
       - id: prettier
         name: Format JS/TS/Svelte with Prettier
-        args: ["--write", "--ignore-path", ".gitignore"]
+        args: ["--write"]
         files: \.(js|jsx|ts|tsx|svelte|json|css|scss|html|md)$
-        exclude: ^(packages/.*/((dist|build|node_modules)/.*)|package-lock\.json|flux/.*/flux-system/.*)$
+        exclude: (^packages/domain-schema/|/generated/|^packages/backend/openapi\.json$|/(dist|build|node_modules)/|^package-lock\.json$|^flux/.*/flux-system/)
 
   - repo: local
     hooks:

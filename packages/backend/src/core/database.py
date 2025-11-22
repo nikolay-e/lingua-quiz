@@ -1,4 +1,5 @@
 import logging
+import os
 
 from core.config import (
     DB_HOST,
@@ -15,22 +16,32 @@ from psycopg2.pool import SimpleConnectionPool
 
 logger = logging.getLogger(__name__)
 
-db_pool = SimpleConnectionPool(
-    DB_POOL_MIN_SIZE,
-    DB_POOL_MAX_SIZE,
-    host=DB_HOST,
-    port=DB_PORT,
-    database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD,
-)
+SKIP_DB_INIT = os.getenv("SKIP_DB_INIT", "false").lower() in {"1", "true", "yes"}
+
+if SKIP_DB_INIT:
+    logger.info("Skipping database pool initialization because SKIP_DB_INIT is set")
+    db_pool = None
+else:
+    db_pool = SimpleConnectionPool(
+        DB_POOL_MIN_SIZE,
+        DB_POOL_MAX_SIZE,
+        host=DB_HOST,
+        port=DB_PORT,
+        database=DB_NAME,
+        user=DB_USER,
+        password=DB_PASSWORD,
+    )
 
 
 def get_db():
+    if db_pool is None:
+        raise RuntimeError("Database pool is not initialized")
     return db_pool.getconn()
 
 
 def put_db(conn):
+    if db_pool is None:
+        raise RuntimeError("Database pool is not initialized")
     db_pool.putconn(conn)
 
 
@@ -58,7 +69,7 @@ def query_db(query, args=(), one=False):
         if conn:
             try:
                 conn.rollback()
-            except Exception:
+            except Exception:  # nosec B110
                 pass
         raise
     except Exception as e:
@@ -66,7 +77,7 @@ def query_db(query, args=(), one=False):
         if conn:
             try:
                 conn.rollback()
-            except Exception:
+            except Exception:  # nosec B110
                 pass
         raise
     finally:
@@ -77,7 +88,7 @@ def query_db(query, args=(), one=False):
                 logger.critical(f"Failed to return connection to pool: {e}")
                 try:
                     conn.close()
-                except Exception:
+                except Exception:  # nosec B110
                     pass
 
 
@@ -108,7 +119,7 @@ def execute_write_transaction(query, args=(), fetch_results=False, one=False):
         if conn:
             try:
                 conn.rollback()
-            except Exception:
+            except Exception:  # nosec B110
                 pass
         raise
     finally:
@@ -119,5 +130,5 @@ def execute_write_transaction(query, args=(), fetch_results=False, one=False):
                 logger.critical(f"Failed to return connection to pool: {e}")
                 try:
                     conn.close()
-                except Exception:
+                except Exception:  # nosec B110
                     pass

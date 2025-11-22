@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type { WordList } from '../../api-types';
+  import { Button } from '$lib/components/ui/button';
 
   const dispatch = createEventDispatcher<{ select: { quiz: string }; backToMenu: void }>();
 
@@ -44,10 +45,10 @@
         <i class="fas fa-book"></i>
         <span class="quiz-name">{selectedQuiz}</span>
       </div>
-      <button class="btn-base" on:click={handleBackToMenu}>
+      <Button variant="outline" size="sm" onclick={handleBackToMenu}>
         <i class="fas fa-arrow-left"></i>
         <span>Back to Menu</span>
-      </button>
+      </Button>
     </div>
   {/if}
 </div>
@@ -93,11 +94,5 @@
     font-weight: 600;
     color: var(--primary-color);
     font-size: var(--font-size-lg);
-  }
-
-  .btn-base {
-    gap: var(--spacing-xs);
-    margin: 0;
-    width: auto;
   }
 </style>

@@ -1,0 +1,18 @@
+{
+  "properties": {
+    "listName": {
+      "title": "Listname",
+      "type": "string"
+    },
+    "wordCount": {
+      "title": "Wordcount",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "listName",
+    "wordCount"
+  ],
+  "title": "WordListResponse",
+  "type": "object"
+}
