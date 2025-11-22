@@ -21,7 +21,7 @@ services:
     image: lingua-quiz-backend:latest
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/lingua_quiz_test # pragma: allowlist secret
-      JWT_SECRET: test-jwt-secret-for-integration-tests # pragma: allowlist secret
+      JWT_SECRET: test-jwt-secret-for-tests # pragma: allowlist secret
       CORS_ALLOWED_ORIGINS: http://frontend
       PORT: 9000
       DB_HOST: postgres

@@ -7,6 +7,6 @@ from pydantic import BaseModel, Field
 
 
 class ContentVersionResponse(BaseModel):
-    versionId: int = Field(..., title='Versionid')
-    versionName: str = Field(..., title='Versionname')
-    isActive: bool = Field(..., title='Isactive')
+    versionId: int = Field(..., title="Versionid")
+    versionName: str = Field(..., title="Versionname")
+    isActive: bool = Field(..., title="Isactive")

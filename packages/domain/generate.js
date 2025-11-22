@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const repoRoot = path.resolve(__dirname, '..', '..');
-const schemaDir = path.resolve(repoRoot, 'packages', 'domain-schema');
+const schemaDir = path.resolve(__dirname, 'schemas');
 const outputDir = path.resolve(__dirname, 'src', 'generated');
 const outputFile = path.join(outputDir, 'domain.ts');
 

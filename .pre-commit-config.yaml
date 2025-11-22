@@ -39,12 +39,12 @@ repos:
 
       # Auto-fixable hygiene
       - id: trailing-whitespace
-        exclude: (^packages/domain-schema/|/generated/|^packages/backend/openapi\.json$)
+        exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$)
       - id: end-of-file-fixer
-        exclude: (^packages/domain-schema/|/generated/|^packages/backend/openapi\.json$)
+        exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$)
       - id: mixed-line-ending
         args: ["--fix=lf"]
-        exclude: (^packages/domain-schema/|/generated/|^packages/backend/openapi\.json$)
+        exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$)
 
   # =============================================================================
   # STAGE 2: Schema & CI Configuration Validation (<1 second)
@@ -88,7 +88,7 @@ repos:
         stages: [pre-commit]
 
       # Generate domain JSON schemas
-      - id: generate-domain-schema
+      - id: generate-domain/schemas
         name: Generate domain JSON schemas from backend
         entry: python packages/backend/scripts/export_domain_schema.py
         language: system
@@ -99,7 +99,7 @@ repos:
       # Generate TS API client from OpenAPI
       - id: generate-api-client
         name: Generate TS API client from OpenAPI
-        entry: node packages/api-client/generate.js
+        entry: node packages/frontend/scripts/generate-api.js
         language: system
         pass_filenames: false
         files: ^packages/backend/openapi\.json$
@@ -111,7 +111,7 @@ repos:
         entry: node packages/domain/generate.js
         language: system
         pass_filenames: false
-        files: ^packages/domain-schema/
+        files: ^packages/domain/schemas/
         stages: [pre-commit]
 
   # =============================================================================
@@ -135,11 +135,11 @@ repos:
         name: Lint Python with ruff
         args: ["--fix", "--exit-non-zero-on-fix"]
         types_or: [python, pyi]
-        files: ^packages/(backend|word-processing|integration-tests)/
+        files: ^packages/(backend|tools|tests)/
       - id: ruff-format
         name: Format Python with ruff
         types_or: [python, pyi]
-        files: ^packages/(backend|word-processing|integration-tests)/
+        files: ^packages/(backend|tools|tests)/
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.21.1
@@ -147,7 +147,7 @@ repos:
       - id: pyupgrade
         name: Upgrade Python syntax
         args: ["--py313-plus"]
-        files: ^packages/(backend|word-processing|integration-tests)/.*\.py$
+        files: ^packages/(backend|tools|tests)/.*\.py$
 
   # =============================================================================
   # STAGE 5: Python Type Checking & Security (pre-push only, ~10 seconds)
@@ -177,7 +177,7 @@ repos:
       - id: bandit
         name: Security scan Python (bandit)
         args: ["-q", "-r", "-x", "tests,*/test_*.py,*/conftest.py"]
-        files: ^packages/(backend|word-processing)/
+        files: ^packages/(backend|tools)/
         stages: [pre-push]
 
   - repo: https://github.com/trailofbits/pip-audit
@@ -187,7 +187,7 @@ repos:
         name: Python dependency vulnerability audit
         args: [
           "-r", "packages/backend/requirements.txt",
-          "-r", "packages/word-processing/requirements.txt",
+          "-r", "packages/tools/requirements.txt",
         ]
         stages: [pre-push]
 
@@ -216,7 +216,7 @@ repos:
         name: Format JS/TS/Svelte with Prettier
         args: ["--write"]
         files: \.(js|jsx|ts|tsx|svelte|json|css|scss|html|md)$
-        exclude: (^packages/domain-schema/|/generated/|^packages/backend/openapi\.json$|/(dist|build|node_modules)/|^package-lock\.json$|^flux/.*/flux-system/)
+        exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$|/(dist|build|node_modules)/|^package-lock\.json$|^flux/.*/flux-system/)
 
   - repo: local
     hooks:

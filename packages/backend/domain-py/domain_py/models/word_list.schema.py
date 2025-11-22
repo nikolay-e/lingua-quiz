@@ -7,5 +7,5 @@ from pydantic import BaseModel, Field
 
 
 class WordListResponse(BaseModel):
-    listName: str = Field(..., title='Listname')
-    wordCount: int = Field(..., title='Wordcount')
+    listName: str = Field(..., title="Listname")
+    wordCount: int = Field(..., title="Wordcount")

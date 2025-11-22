@@ -1,4 +1,4 @@
-import type { VocabularyItemDetailResponse } from '@lingua-quiz/api-client';
+import type { VocabularyItemDetailResponse } from './generated/api';
 import type {
   ContentVersion as DomainContentVersion,
   User as DomainUser,

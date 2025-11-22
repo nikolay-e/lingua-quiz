@@ -16,6 +16,7 @@ exclude = [
     "dist",
     "build",
     "*.egg-info",
+    "packages/backend/domain-py",  # Generated Pydantic models
 ]
 
 [tool.ruff.lint]

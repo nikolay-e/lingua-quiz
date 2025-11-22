@@ -18,7 +18,7 @@
     "check": "npm run check --workspaces --if-present",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "generate:api": "make openapi && npm run generate --workspace @lingua-quiz/api-client && npm run build --workspace @lingua-quiz/api-client",
+    "generate:api": "make openapi && npm run generate:api --workspace @lingua-quiz/frontend",
     "generate:domain": "make domain-schema && npm run generate --workspace @lingua-quiz/domain && npm run build --workspace @lingua-quiz/domain",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

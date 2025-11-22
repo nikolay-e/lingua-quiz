@@ -16,6 +16,7 @@
     "predev": "npm run build --workspace=@lingua-quiz/core",
     "dev": "vite",
     "format": "prettier --write .",
+    "generate:api": "node ./scripts/generate-api.js",
     "lint": "prettier --check . && eslint .",
     "preview": "vite preview",
     "test:e2e": "playwright test",
@@ -23,7 +24,6 @@
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
-    "@lingua-quiz/api-client": "file:../api-client",
     "@lingua-quiz/core": "file:../core",
     "@lingua-quiz/domain": "file:../domain",
     "jwt-decode": "^4.0.0"
@@ -38,6 +38,7 @@
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.553.0",
     "mode-watcher": "^1.1.0",
+    "openapi-typescript-codegen": "^0.29.0",
     "svelte": "^5.43.3",
     "svelte-check": "^4.3.3",
     "svelte-sonner": "^1.0.6",

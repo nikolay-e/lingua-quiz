@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""Generate Pydantic models from JSON Schemas in packages/domain-schema."""
+"""Generate Pydantic models from JSON Schemas in packages/domain/schemas."""
+
 from __future__ import annotations
 
-import sys
 from pathlib import Path
+import sys
 
 from datamodel_code_generator import InputFileType, generate
 from datamodel_code_generator.format import PythonVersion
-from datamodel_code_generator.model.pydantic import Config
 
 
 def main() -> None:
-    repo_root = Path(__file__).resolve().parents[2]
-    schema_dir = repo_root / "packages" / "domain-schema"
+    repo_root = Path(__file__).resolve().parents[3]
+    schema_dir = repo_root / "packages" / "domain" / "schemas"
     output_path = Path(__file__).resolve().parent / "domain_py" / "models"
 
     if not schema_dir.exists():

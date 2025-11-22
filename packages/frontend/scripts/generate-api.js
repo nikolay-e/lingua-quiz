@@ -5,8 +5,8 @@ import path from 'node:path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const backendOpenApiPath = path.resolve(__dirname, '../backend/openapi.json');
-const outputPath = path.resolve(__dirname, 'src/generated');
+const backendOpenApiPath = path.resolve(__dirname, '../../backend/openapi.json');
+const outputPath = path.resolve(__dirname, '../src/generated/api');
 
 await generate({
   input: backendOpenApiPath,

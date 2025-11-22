@@ -1,15 +1,15 @@
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
-import contentVersionSchema from '../../domain-schema/content_version.schema.json';
-import progressUpdateSchema from '../../domain-schema/progress_update.schema.json';
-import ttsLanguagesSchema from '../../domain-schema/tts_languages.schema.json';
-import ttsRequestSchema from '../../domain-schema/tts_request.schema.json';
-import ttsResponseSchema from '../../domain-schema/tts_response.schema.json';
-import userSchema from '../../domain-schema/user.schema.json';
-import userProgressSchema from '../../domain-schema/user_progress.schema.json';
-import vocabularyItemSchema from '../../domain-schema/vocabulary_item.schema.json';
-import wordListSchema from '../../domain-schema/word_list.schema.json';
+import contentVersionSchema from '../schemas/content_version.schema.json';
+import progressUpdateSchema from '../schemas/progress_update.schema.json';
+import ttsLanguagesSchema from '../schemas/tts_languages.schema.json';
+import ttsRequestSchema from '../schemas/tts_request.schema.json';
+import ttsResponseSchema from '../schemas/tts_response.schema.json';
+import userSchema from '../schemas/user.schema.json';
+import userProgressSchema from '../schemas/user_progress.schema.json';
+import vocabularyItemSchema from '../schemas/vocabulary_item.schema.json';
+import wordListSchema from '../schemas/word_list.schema.json';
 
 import type { JSONSchema7 } from 'json-schema';
 

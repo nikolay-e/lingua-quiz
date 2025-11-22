@@ -1,7 +1,7 @@
 /* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
-/* eslint-disable */
+
 import type { VocabularyItemResponse } from '../models/VocabularyItemResponse';
 import type { WordListResponse } from '../models/WordListResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';

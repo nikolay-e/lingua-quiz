@@ -24,7 +24,8 @@ def main() -> None:
     repo_root = Path(__file__).resolve().parents[3]
     backend_root = repo_root / "packages" / "backend"
     src_path = backend_root / "src"
-    output_dir = repo_root / "packages" / "domain-schema"
+    output_dir_env = os.environ.get("SCHEMA_OUTPUT_DIR")
+    output_dir = Path(output_dir_env) if output_dir_env else repo_root / "packages" / "domain" / "schemas"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Keep imports side-effect free (no DB)

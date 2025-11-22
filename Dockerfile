@@ -117,11 +117,11 @@ FROM python-base AS integration-e2e-tests
 WORKDIR /home/appuser
 
 # Install test dependencies
-COPY --chown=appuser:appuser packages/integration-tests/requirements.txt ./
+COPY --chown=appuser:appuser packages/tests/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy test suite
-COPY --chown=appuser:appuser packages/integration-tests/ ./
+COPY --chown=appuser:appuser packages/tests/ ./
 
 RUN mkdir -p reports && chown appuser:appuser reports
 

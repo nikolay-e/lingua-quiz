@@ -1,4 +1,4 @@
-import { ApiError, OpenAPI } from '@lingua-quiz/api-client';
+import { ApiError, OpenAPI } from './generated/api';
 
 declare global {
   interface Window {

@@ -1,7 +1,7 @@
 /* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
-/* eslint-disable */
+
 import type { TTSLanguagesResponse } from '../models/TTSLanguagesResponse';
 import type { TTSRequest } from '../models/TTSRequest';
 import type { TTSResponse } from '../models/TTSResponse';

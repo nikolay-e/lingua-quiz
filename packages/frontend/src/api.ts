@@ -5,7 +5,7 @@ import {
   TextToSpeechService,
   VocabularyService,
   type TokenResponse,
-} from '@lingua-quiz/api-client';
+} from './generated/api';
 import type {
   AuthResponse,
   ContentVersion,

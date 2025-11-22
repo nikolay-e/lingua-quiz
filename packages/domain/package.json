@@ -3,14 +3,15 @@
   "version": "0.0.0",
   "description": "Generated domain types shared between frontend and core",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "schemas"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && cp -r ../domain-schema ./domain-schema",
-    "clean": "rm -rf dist src/generated domain-schema",
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist src/generated",
     "generate": "node ./generate.js",
     "prepare": "npm run generate && npm run build",
     "test": "vitest run"
