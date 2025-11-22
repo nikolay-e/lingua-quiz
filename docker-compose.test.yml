@@ -59,7 +59,7 @@ services:
 
   # Integration and E2E tests
   tests:
-    image: lingua-quiz-integration-e2e-tests:latest
+    image: lingua-quiz-tests:latest
     environment:
       API_URL: http://backend:9000/api
       FRONTEND_URL: http://frontend

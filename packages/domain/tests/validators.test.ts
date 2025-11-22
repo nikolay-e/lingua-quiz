@@ -10,10 +10,10 @@ import {
   validateWordList,
 } from '../src/validators';
 
-import vocabularyItemSchema from '../../domain-schema/vocabulary_item.schema.json';
-import userProgressSchema from '../../domain-schema/user_progress.schema.json';
-import progressUpdateSchema from '../../domain-schema/progress_update.schema.json';
-import wordListSchema from '../../domain-schema/word_list.schema.json';
+import vocabularyItemSchema from '../schemas/vocabulary_item.schema.json';
+import userProgressSchema from '../schemas/user_progress.schema.json';
+import progressUpdateSchema from '../schemas/progress_update.schema.json';
+import wordListSchema from '../schemas/word_list.schema.json';
 
 const assertValid = (arb: fc.Arbitrary<unknown>, validate: (data: unknown) => { valid: boolean; errors: string[] }) =>
   fc.assert(
