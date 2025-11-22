@@ -31,6 +31,8 @@ class VocabularyItemUpdate(BaseModel):
     source_usage_example: str | None = Field(alias="sourceUsageExample", default=None)
     target_usage_example: str | None = Field(alias="targetUsageExample", default=None)
     is_active: bool | None = Field(alias="isActive", default=None)
+    list_name: str | None = Field(alias="listName", default=None)
+    difficulty_level: str | None = Field(alias="difficultyLevel", default=None)
 
     class Config:
         populate_by_name = True
@@ -212,6 +214,36 @@ async def create_vocabulary_item(
         )
 
 
+def _collect_field_updates(
+    item_data: VocabularyItemUpdate,
+    existing_item: dict,
+) -> tuple[list[str], list[str | bool], dict[str, str | bool | None], dict[str, str | bool | None]]:
+    update_fields: list[str] = []
+    update_values: list[str | bool] = []
+    old_values: dict[str, str | bool | None] = {}
+    new_values: dict[str, str | bool | None] = {}
+
+    field_mappings = [
+        ("source_text", item_data.source_text, False),
+        ("target_text", item_data.target_text, False),
+        ("source_usage_example", item_data.source_usage_example, False),
+        ("target_usage_example", item_data.target_usage_example, False),
+        ("is_active", item_data.is_active, True),
+        ("list_name", item_data.list_name, False),
+        ("difficulty_level", item_data.difficulty_level, False),
+    ]
+
+    for field_name, new_value, stringify in field_mappings:
+        if new_value is not None:
+            update_fields.append(f"{field_name} = %s")
+            update_values.append(new_value)
+            old_val = existing_item[field_name]
+            old_values[field_name] = str(old_val) if stringify else old_val
+            new_values[field_name] = str(new_value) if stringify else new_value
+
+    return update_fields, update_values, old_values, new_values
+
+
 @router.put("/vocabulary/{item_id}")
 async def update_vocabulary_item(
     item_id: str,
@@ -220,7 +252,7 @@ async def update_vocabulary_item(
 ):
     try:
         existing_item = query_db(
-            "SELECT id, source_text, target_text, source_usage_example, target_usage_example, is_active, version_id FROM vocabulary_items WHERE id = %s",
+            "SELECT id, source_text, target_text, source_usage_example, target_usage_example, is_active, list_name, difficulty_level, version_id FROM vocabulary_items WHERE id = %s",
             (item_id,),
             one=True,
         )
@@ -228,40 +260,7 @@ async def update_vocabulary_item(
         if not existing_item:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Vocabulary item not found")
 
-        update_fields: list[str] = []
-        update_values: list[str | bool] = []
-        old_values: dict[str, str] = {}
-        new_values: dict[str, str] = {}
-
-        if item_data.source_text is not None:
-            update_fields.append("source_text = %s")
-            update_values.append(item_data.source_text)
-            old_values["source_text"] = existing_item["source_text"]
-            new_values["source_text"] = item_data.source_text
-
-        if item_data.target_text is not None:
-            update_fields.append("target_text = %s")
-            update_values.append(item_data.target_text)
-            old_values["target_text"] = existing_item["target_text"]
-            new_values["target_text"] = item_data.target_text
-
-        if item_data.source_usage_example is not None:
-            update_fields.append("source_usage_example = %s")
-            update_values.append(item_data.source_usage_example)
-            old_values["source_usage_example"] = existing_item["source_usage_example"]
-            new_values["source_usage_example"] = item_data.source_usage_example
-
-        if item_data.target_usage_example is not None:
-            update_fields.append("target_usage_example = %s")
-            update_values.append(item_data.target_usage_example)
-            old_values["target_usage_example"] = existing_item["target_usage_example"]
-            new_values["target_usage_example"] = item_data.target_usage_example
-
-        if item_data.is_active is not None:
-            update_fields.append("is_active = %s")
-            update_values.append(item_data.is_active)
-            old_values["is_active"] = str(existing_item["is_active"])
-            new_values["is_active"] = str(item_data.is_active)
+        update_fields, update_values, old_values, new_values = _collect_field_updates(item_data, existing_item)
 
         if not update_fields:
             raise HTTPException(

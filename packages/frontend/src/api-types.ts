@@ -49,6 +49,7 @@ export interface VocabularyItem {
   targetText: string;
   targetLanguage: string;
   listName: string;
+  difficultyLevel?: string;
   sourceUsageExample?: string;
   targetUsageExample?: string;
   isActive?: boolean;

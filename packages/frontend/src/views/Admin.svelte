@@ -31,6 +31,8 @@
     targetText: '',
     sourceUsageExample: '',
     targetUsageExample: '',
+    listName: '',
+    difficultyLevel: '',
   });
 
   let createForm = $state<VocabularyItemCreate>({
@@ -63,6 +65,24 @@
     { value: 'B2', label: 'B2 - Upper Intermediate' },
     { value: 'C1', label: 'C1 - Advanced' },
     { value: 'C2', label: 'C2 - Proficiency' },
+  ];
+
+  const listNameOptions = [
+    { value: 'english-russian-a0', label: 'English-Russian A0' },
+    { value: 'english-russian-a1', label: 'English-Russian A1' },
+    { value: 'english-russian-a2', label: 'English-Russian A2' },
+    { value: 'english-russian-b1', label: 'English-Russian B1' },
+    { value: 'english-russian-b2', label: 'English-Russian B2' },
+    { value: 'german-russian-a0', label: 'German-Russian A0' },
+    { value: 'german-russian-a1', label: 'German-Russian A1' },
+    { value: 'german-russian-a2', label: 'German-Russian A2' },
+    { value: 'german-russian-b1', label: 'German-Russian B1' },
+    { value: 'german-russian-b2', label: 'German-Russian B2' },
+    { value: 'spanish-russian-a0', label: 'Spanish-Russian A0' },
+    { value: 'spanish-russian-a1', label: 'Spanish-Russian A1' },
+    { value: 'spanish-russian-a2', label: 'Spanish-Russian A2' },
+    { value: 'spanish-russian-b1', label: 'Spanish-Russian B1' },
+    { value: 'spanish-russian-b2', label: 'Spanish-Russian B2' },
   ];
 
   const filteredResults = $derived(() => {
@@ -141,6 +161,8 @@
       targetText: item.targetText,
       sourceUsageExample: item.sourceUsageExample || '',
       targetUsageExample: item.targetUsageExample || '',
+      listName: item.listName,
+      difficultyLevel: item.difficultyLevel || '',
     };
     isEditDialogOpen = true;
   }
@@ -156,6 +178,8 @@
       if (editForm.targetText !== selectedItem.targetText) updates.targetText = editForm.targetText;
       if (editForm.sourceUsageExample !== (selectedItem.sourceUsageExample || '')) {updates.sourceUsageExample = editForm.sourceUsageExample;}
       if (editForm.targetUsageExample !== (selectedItem.targetUsageExample || '')) {updates.targetUsageExample = editForm.targetUsageExample;}
+      if (editForm.listName !== selectedItem.listName) updates.listName = editForm.listName;
+      if (editForm.difficultyLevel !== (selectedItem.difficultyLevel || '')) updates.difficultyLevel = editForm.difficultyLevel;
 
       if (Object.keys(updates).length === 0) {
         toast.warning('No changes to save');
@@ -175,6 +199,8 @@
           targetText: updates.targetText ?? existingItem.targetText,
           sourceUsageExample: updates.sourceUsageExample ?? existingItem.sourceUsageExample,
           targetUsageExample: updates.targetUsageExample ?? existingItem.targetUsageExample,
+          listName: updates.listName ?? existingItem.listName,
+          difficultyLevel: updates.difficultyLevel ?? existingItem.difficultyLevel,
         } as VocabularyItem;
         searchResults = [...searchResults];
       }
@@ -594,6 +620,34 @@
           rows={3}
           placeholder="Enter translation example..." />
       </div>
+      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
+        <div class="grid" style="gap: var(--spacing-xs);">
+          <Label>List Name</Label>
+          <Select.Root type="single" bind:value={editForm.listName}>
+            <Select.Trigger>
+              {listNameOptions.find((l) => l.value === editForm.listName)?.label || editForm.listName}
+            </Select.Trigger>
+            <Select.Content>
+              {#each listNameOptions as list (list.value)}
+                <Select.Item value={list.value}>{list.label}</Select.Item>
+              {/each}
+            </Select.Content>
+          </Select.Root>
+        </div>
+        <div class="grid" style="gap: var(--spacing-xs);">
+          <Label>Difficulty Level</Label>
+          <Select.Root type="single" bind:value={editForm.difficultyLevel}>
+            <Select.Trigger>
+              {difficultyOptions.find((d) => d.value === editForm.difficultyLevel)?.label || 'Select'}
+            </Select.Trigger>
+            <Select.Content>
+              {#each difficultyOptions as diff (diff.value)}
+                <Select.Item value={diff.value}>{diff.label}</Select.Item>
+              {/each}
+            </Select.Content>
+          </Select.Root>
+        </div>
+      </div>
     </div>
     <Dialog.Footer>
       <Button variant="outline" onclick={() => (isEditDialogOpen = false)}>Cancel</Button>
@@ -653,12 +707,17 @@
 
       <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
         <div class="grid" style="gap: var(--spacing-xs);">
-          <Label for="create-list">List Name *</Label>
-          <Input
-            id="create-list"
-            bind:value={createForm.listName}
-            placeholder="e.g., english-russian-a1"
-            required />
+          <Label>List Name *</Label>
+          <Select.Root type="single" bind:value={createForm.listName}>
+            <Select.Trigger>
+              {listNameOptions.find((l) => l.value === createForm.listName)?.label || 'Select list'}
+            </Select.Trigger>
+            <Select.Content>
+              {#each listNameOptions as list (list.value)}
+                <Select.Item value={list.value}>{list.label}</Select.Item>
+              {/each}
+            </Select.Content>
+          </Select.Root>
         </div>
         <div class="grid" style="gap: var(--spacing-xs);">
           <Label>Difficulty Level</Label>

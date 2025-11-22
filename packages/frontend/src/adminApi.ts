@@ -74,6 +74,8 @@ export interface VocabularyItemUpdate {
   sourceUsageExample?: string;
   targetUsageExample?: string;
   isActive?: boolean;
+  listName?: string;
+  difficultyLevel?: string;
 }
 
 const adminApi = {
