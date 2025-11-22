@@ -176,7 +176,7 @@ repos:
     hooks:
       - id: bandit
         name: Security scan Python (bandit)
-        args: ["-q", "-r", "-x", "tests,*/test_*.py,*/conftest.py"]
+        args: ["-q", "-r", "-x", "tests,*/test_*.py,*/conftest.py", "--skip", "B101,B108,B110,B404,B603"]
         files: ^packages/(backend|tools)/
         stages: [pre-push]
 

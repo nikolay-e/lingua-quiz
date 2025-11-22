@@ -169,11 +169,17 @@ show_error_codes = true
 
 [tool.bandit]
 exclude_dirs = ["tests", "*/test_*.py"]
-skips = ["B101"]  # Allow assert
+skips = [
+    "B101",  # Allow assert
+    "B108",  # Hardcoded tmp directory (intentional for reports)
+    "B110",  # Try/except/pass (graceful error handling in lemmatization)
+    "B404",  # subprocess import (used for model downloads)
+    "B603",  # subprocess without shell (safe usage for spacy download)
+]
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-testpaths = ["tests", "packages/backend/tests", "packages/integration-tests/tests"]
+testpaths = ["tests", "packages/backend/tests", "packages/tests/tests"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"

@@ -29,7 +29,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres # pragma: allowlist secret
       POSTGRES_DB: lingua_quiz
-      MIGRATE: 'true'
+      MIGRATE: 'false'
       DOCKER_ENVIRONMENT: 'true'
     ports:
       - '9000:9000'
@@ -48,7 +48,7 @@ services:
       context: .
       target: frontend
     ports:
-      - '80:80'
+      - '8080:80'
     depends_on:
       backend:
         condition: service_healthy
