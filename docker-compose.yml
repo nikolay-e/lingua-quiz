@@ -1,0 +1,62 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres # pragma: allowlist secret
+      POSTGRES_DB: lingua_quiz
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      target: backend
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/lingua_quiz # pragma: allowlist secret
+      JWT_SECRET: dev-jwt-secret-change-in-production # pragma: allowlist secret
+      CORS_ALLOWED_ORIGINS: http://localhost,http://frontend
+      PORT: 9000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres # pragma: allowlist secret
+      POSTGRES_DB: lingua_quiz
+      MIGRATE: 'true'
+      DOCKER_ENVIRONMENT: 'true'
+    ports:
+      - '9000:9000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/api/health']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  frontend:
+    build:
+      context: .
+      target: frontend
+    ports:
+      - '80:80'
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost/']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
