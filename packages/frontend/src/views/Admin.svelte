@@ -300,7 +300,9 @@
     {#if searchResults.length > 0}
       <div class="grid md:grid-cols-2 lg:grid-cols-4" style="gap: var(--spacing-md);">
         <Card.Root>
-          <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+          <Card.Header
+            class="flex flex-row items-center justify-between space-y-0"
+            style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
             <Card.Title class="text-sm font-medium">Total Items</Card.Title>
             <svg
               class="size-4 text-muted-foreground"
@@ -314,13 +316,15 @@
                 d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /><!-- eslint-disable-line max-len -->
             </svg>
           </Card.Header>
-          <Card.Content>
+          <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
             <div class="text-2xl font-bold">{stats().total}</div>
           </Card.Content>
         </Card.Root>
 
         <Card.Root>
-          <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+          <Card.Header
+            class="flex flex-row items-center justify-between space-y-0"
+            style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
             <Card.Title class="text-sm font-medium">Active Items</Card.Title>
             <svg
               class="size-4 text-success"
@@ -334,13 +338,15 @@
                 d="M5 13l4 4L19 7" />
             </svg>
           </Card.Header>
-          <Card.Content>
+          <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
             <div class="text-2xl font-bold text-success">{stats().active}</div>
           </Card.Content>
         </Card.Root>
 
         <Card.Root>
-          <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+          <Card.Header
+            class="flex flex-row items-center justify-between space-y-0"
+            style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
             <Card.Title class="text-sm font-medium">Inactive Items</Card.Title>
             <svg
               class="size-4 text-destructive"
@@ -354,13 +360,15 @@
                 d="M6 18L18 6M6 6l12 12" />
             </svg>
           </Card.Header>
-          <Card.Content>
+          <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
             <div class="text-2xl font-bold text-destructive">{stats().inactive}</div>
           </Card.Content>
         </Card.Root>
 
         <Card.Root>
-          <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+          <Card.Header
+            class="flex flex-row items-center justify-between space-y-0"
+            style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
             <Card.Title class="text-sm font-medium">Languages</Card.Title>
             <svg
               class="size-4 text-muted-foreground"
@@ -374,7 +382,7 @@
                 d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /><!-- eslint-disable-line max-len -->
             </svg>
           </Card.Header>
-          <Card.Content>
+          <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
             <div class="text-2xl font-bold">{stats().languageCount}</div>
           </Card.Content>
         </Card.Root>
@@ -382,11 +390,11 @@
     {/if}
 
     <Card.Root>
-      <Card.Header>
+      <Card.Header style="padding: var(--spacing-md);">
         <Card.Title>Search Vocabulary</Card.Title>
         <Card.Description>Search by source or target text using full-text search</Card.Description>
       </Card.Header>
-      <Card.Content style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+      <Card.Content class="flex flex-col gap-4" style="padding: var(--spacing-md); padding-block-start: 0;">
         <div class="flex flex-col md:flex-row" style="gap: var(--spacing-md);">
           <div class="relative flex-1">
             <Input
@@ -468,10 +476,10 @@
 
     {#if filteredResults().length > 0}
       <Card.Root>
-        <Card.Header>
+        <Card.Header style="padding: var(--spacing-md);">
           <Card.Title>Search Results</Card.Title>
         </Card.Header>
-        <Card.Content>
+        <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
           <div class="overflow-x-auto">
             <Table.Root>
               <Table.Header>
@@ -602,7 +610,7 @@
       <Dialog.Title>Create New Vocabulary Item</Dialog.Title>
       <Dialog.Description>Add a new vocabulary item to the database.</Dialog.Description>
     </Dialog.Header>
-    <div class="grid gap-4 py-4">
+    <div class="grid" style="gap: var(--spacing-md); padding-block: var(--spacing-md);">
       <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
         <div class="grid" style="gap: var(--spacing-xs);">
           <Label for="create-source">Source Text *</Label>
