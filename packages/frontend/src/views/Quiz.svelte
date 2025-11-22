@@ -342,9 +342,11 @@
         <button class="btn-base logout-button" on:click={logout}>
           <i class="fas fa-sign-out-alt"></i> Logout ({username})
         </button>
-        <button class="btn-base delete-button" on:click={handleDeleteAccount}>
-          <i class="fas fa-trash-alt"></i> Delete Account
-        </button>
+        {#if !selectedQuiz}
+          <button class="btn-base delete-button" on:click={handleDeleteAccount}>
+            <i class="fas fa-trash-alt"></i> Delete Account
+          </button>
+        {/if}
       </div>
     </FeedCard>
   </main>

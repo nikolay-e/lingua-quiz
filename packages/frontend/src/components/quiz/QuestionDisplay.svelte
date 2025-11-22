@@ -26,6 +26,10 @@
     justify-content: center;
   }
 
+  :global([data-theme='dark']) .question {
+    background: linear-gradient(135deg, #2a3441, #1e2a38);
+  }
+
   .question-text {
     font-size: var(--font-size-xl);
     font-weight: bold;

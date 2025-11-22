@@ -329,6 +329,7 @@
     flex-wrap: wrap;
     gap: var(--spacing-md);
     align-items: center;
+    justify-content: center;
   }
 
   .form-compact {
@@ -397,6 +398,10 @@
     font-weight: 500;
     border-left: 4px solid var(--color-primary);
     text-wrap: pretty;
+  }
+
+  [data-theme='dark'] .feature {
+    background: linear-gradient(135deg, #2a3441 0%, #1e2a38 100%);
   }
 
   .btn-base {
