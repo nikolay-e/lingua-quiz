@@ -15,7 +15,7 @@
     "prepare": "npm run generate && npm run build"
   },
   "devDependencies": {
-    "@types/node": "^22.9.3",
+    "@types/node": "^24.10.1",
     "openapi-typescript-codegen": "^0.29.0",
     "typescript": "^5.9.3"
   }
