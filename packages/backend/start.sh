@@ -18,12 +18,6 @@ if [ "$MIGRATE" = "true" ]; then
     echo "ERROR: Alembic migration failed"
     exit 1
   }
-
-  echo "Loading vocabulary data..."
-  python load_vocabulary.py || {
-    echo "ERROR: Vocabulary loading failed"
-    exit 1
-  }
 fi
 
 if [ -n "$UVICORN_WORKERS" ]; then
