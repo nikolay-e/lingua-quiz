@@ -59,7 +59,7 @@
       autocomplete="current-password"
     />
 
-    <Button type="submit" disabled={isLoading}>
+    <Button type="submit" disabled={isLoading} class="w-full">
       <i class="fas fa-sign-in-alt"></i> Sign In
     </Button>
   </form>

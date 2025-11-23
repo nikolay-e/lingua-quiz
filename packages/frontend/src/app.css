@@ -157,6 +157,10 @@
     font: inherit;
   }
 
+  [data-slot='button'] {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
   p,
   h1,
   h2,

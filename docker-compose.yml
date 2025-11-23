@@ -29,7 +29,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres # pragma: allowlist secret
       POSTGRES_DB: lingua_quiz
-      MIGRATE: 'false'
+      MIGRATE: 'true'
       DOCKER_ENVIRONMENT: 'true'
     ports:
       - '9000:9000'
@@ -49,6 +49,8 @@ services:
       target: frontend
     ports:
       - '8080:80'
+    volumes:
+      - ./nginx.local.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       backend:
         condition: service_healthy

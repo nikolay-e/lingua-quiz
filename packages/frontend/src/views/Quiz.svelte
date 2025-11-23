@@ -357,7 +357,7 @@
 
     <FeedCard dense>
       <div class="actions">
-        <Button variant="outline" onclick={logout}>
+        <Button variant="outline" onclick={logout} class="w-full">
           <i class="fas fa-sign-out-alt"></i> Logout ({username})
         </Button>
         {#if !selectedQuiz}
@@ -372,7 +372,7 @@
               </Button>
             </div>
           {:else}
-            <Button variant="destructive" onclick={() => (showDeleteConfirm = true)}>
+            <Button variant="destructive" onclick={() => (showDeleteConfirm = true)} class="w-full">
               <i class="fas fa-trash-alt"></i> Delete Account
             </Button>
           {/if}
