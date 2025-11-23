@@ -14,6 +14,23 @@ TIMEOUT = int(os.getenv("TIMEOUT", "30"))
 SKIP_TTS_TESTS = os.getenv("SKIP_TTS_TESTS", "false").lower() == "true"
 
 
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args):
+    return {
+        **browser_context_args,
+        "viewport": {"width": 1280, "height": 720},
+        "ignore_https_errors": True,
+    }
+
+
+@pytest.fixture(scope="session")
+def browser_type_launch_args(browser_type_launch_args):
+    return {
+        **browser_type_launch_args,
+        "headless": True,
+    }
+
+
 def random_username() -> str:
     """Generate random test username."""
     suffix = "".join(random.choices(string.ascii_lowercase + string.digits, k=8))

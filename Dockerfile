@@ -113,19 +113,22 @@ CMD ["nginx", "-g", "daemon off;"]
 # ======================================================================================
 # INTEGRATION AND E2E TESTS STAGE
 # ======================================================================================
-FROM python-base AS integration-e2e-tests
+FROM --platform=linux/amd64 mcr.microsoft.com/playwright/python:v1.52.0-noble AS integration-e2e-tests
 
-WORKDIR /home/appuser
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+WORKDIR /home/pwuser
 
 # Install test dependencies
-COPY --chown=appuser:appuser packages/tests/requirements.txt ./
+COPY packages/tests/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy test suite
-COPY --chown=appuser:appuser packages/tests/ ./
+# Copy test suite with correct ownership
+COPY --chown=pwuser:pwuser packages/tests/ ./
 
-RUN mkdir -p reports && chown appuser:appuser reports
+RUN mkdir -p reports && chown -R pwuser:pwuser /home/pwuser
 
-USER appuser
+USER pwuser
 
 CMD ["python3", "run_tests.py"]
