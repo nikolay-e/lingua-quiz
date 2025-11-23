@@ -17,7 +17,7 @@ jobs:
       github.event.workflow_run.conclusion == 'success'
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Initial delay for ArgoCD sync
         run: |

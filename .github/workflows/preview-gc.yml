@@ -33,7 +33,7 @@ jobs:
             return prNumbers;
 
       - name: Checkout gitops repository
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v6
         with:
           repository: ${{ env.GITOPS_REPO }}
           token: ${{ secrets.GITOPS_PAT }}
