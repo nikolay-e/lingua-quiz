@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { Input } from '$lib/components/ui/input';
+  import { Label } from '$lib/components/ui/label';
+
   export let value: string;
-  export let placeholder: string = 'Password';
+  export let placeholder: string = '';
   export let disabled: boolean = false;
   export let id: string = 'password';
   export let label: string = '';
@@ -15,9 +18,9 @@
 
 <div class="input-group">
   {#if label}
-    <label for={id}>{label}</label>
+    <Label for={id}>{label}</Label>
   {/if}
-  <input
+  <Input
     type={showPassword ? 'text' : 'password'}
     bind:value
     {placeholder}
@@ -29,7 +32,7 @@
   <button
     type="button"
     class="toggle-password-btn"
-    on:click={togglePasswordVisibility}
+    onclick={togglePasswordVisibility}
     aria-label={showPassword ? 'Hide password' : 'Show password'}
   >
     <i class="fas fa-eye{showPassword ? '-slash' : ''}"></i>

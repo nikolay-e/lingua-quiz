@@ -78,7 +78,6 @@
         type="text"
         id="register-username"
         bind:value={username}
-        placeholder="Username"
         required
         disabled={isLoading}
         autocomplete="username"
@@ -89,6 +88,7 @@
       bind:value={password}
       disabled={isLoading}
       id="register-password"
+      label="Password"
       autocomplete="new-password"
     />
 

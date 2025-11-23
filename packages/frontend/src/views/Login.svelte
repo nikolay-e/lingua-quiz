@@ -45,7 +45,6 @@
         type="text"
         id="username"
         bind:value={username}
-        placeholder="Username"
         required
         disabled={isLoading}
         autocomplete="username"
@@ -56,6 +55,7 @@
       bind:value={password}
       disabled={isLoading}
       id="password"
+      label="Password"
       autocomplete="current-password"
     />
 

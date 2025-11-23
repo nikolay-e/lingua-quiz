@@ -69,13 +69,13 @@
 
     &:focus-visible {
       border-color: var(--primary-color);
-      box-shadow: var(--shadow-focus);
+      box-shadow: 0 0 0 3px rgb(74 144 226 / 0.2);
     }
 
     &:disabled {
-      background-color: var(--disabled-bg);
-      color: var(--disabled-text);
-      border-color: var(--disabled-border-color);
+      background-color: var(--color-disabled-bg);
+      color: var(--color-disabled-text);
+      border-color: var(--color-disabled-border);
       cursor: not-allowed;
     }
   }
