@@ -110,6 +110,7 @@ repos:
         name: Upgrade Python syntax
         args: ['--py313-plus']
         files: ^packages/(backend|tools|tests)/.*\.py$
+        exclude: ^packages/backend/domain-py/
 
   # =============================================================================
   # STAGE 5: Python Type Checking & Security (pre-push only, ~10 seconds)

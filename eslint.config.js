@@ -163,6 +163,7 @@ export default [
       '**/.venv/',
       '**/packages/word-processing/venv/',
       '**/packages/frontend/src/lib/components/ui/**', // Auto-generated shadcn-svelte components
+      '**/packages/frontend/src/generated/**', // Auto-generated API client
     ],
   },
 
