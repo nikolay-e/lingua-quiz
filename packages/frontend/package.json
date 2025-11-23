@@ -1,6 +1,6 @@
 {
   "name": "@lingua-quiz/frontend",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Frontend application for Lingua Quiz",
   "keywords": [
     "svelte",
