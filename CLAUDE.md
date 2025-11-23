@@ -21,15 +21,16 @@ Full-stack application with Svelte frontend, Python backend, and Kubernetes depl
 
 ```text
 lingua-quiz/
-├── packages/                   # npm workspaces monorepo
+├── packages/                   # Monorepo packages
+│   ├── core/                  # Quiz business logic (TypeScript)
+│   ├── domain/                # Shared domain models (TypeScript)
 │   ├── frontend/              # Svelte 5 application
 │   ├── backend/               # Python FastAPI application
-│   └── tests/                 # Playwright E2E tests
-├── helm/                      # Helm charts
-│   ├── lingua-quiz/           # Application chart
-│   └── shared-postgres/       # PostgreSQL database chart
+│   ├── tests/                 # Playwright E2E tests
+│   └── tools/                 # Vocabulary generation pipeline (Python)
 ├── Dockerfile                 # Multi-stage build (backend, frontend, tests)
-├── docker-compose.test.yml    # Local testing environment
+├── docker-compose.yml         # Local development environment
+├── docker-compose.test.yml    # Testing environment
 ├── Makefile                   # Unified deployment workflow
 ├── pyproject.toml            # Python backend dependencies
 ├── package.json              # Workspace-level scripts
@@ -131,45 +132,6 @@ git commit -m "deploy: lingua-quiz v1.2.3 to production"
 git push
 argocd app sync lingua-quiz-production
 ```
-
-### Production Deployment with FluxCD
-
-LinguaQuiz also supports **FluxCD** for GitOps-based continuous deployment to Kubernetes clusters as an alternative to ArgoCD.
-
-**Quick Start:**
-
-```bash
-# Bootstrap FluxCD for production
-cd flux
-./bootstrap.sh production
-
-# Check deployment status
-flux get all
-flux get helmreleases -n lingua-quiz-production
-```
-
-**How It Works:**
-
-1. **CI Pipeline** (GitHub Actions):
-   - Runs tests on every PR
-   - Builds Docker images
-   - Pushes images to GitHub Container Registry
-
-2. **CD Pipeline** (FluxCD):
-   - Monitors GHCR for new images
-   - Automatically updates Kubernetes deployments
-   - Manages secrets with SOPS encryption
-   - Provides automated rollbacks on failure
-
-**Features:**
-
-- ✅ Automated image updates from GHCR
-- ✅ SOPS-encrypted secrets
-- ✅ Separate production and staging environments
-- ✅ No direct cluster access from CI/CD
-- ✅ GitOps workflow with full audit trail
-
-See [flux/README.md](flux/README.md) for detailed setup instructions.
 
 ### Docker Build (Manual)
 
@@ -325,7 +287,7 @@ SOPS_AGE_KEY_FILE=.age-key.txt sops helm/lingua-quiz/values.sops.yaml
 npm test
 
 # Run specific test suite
-npm test -- tests/login.spec.ts
+npm test -- packages/frontend/e2e/auth.spec.ts
 
 # Debug mode
 npm test -- --debug
@@ -335,7 +297,7 @@ npm test -- --debug
 
 ```bash
 # Run Python integration tests (in CI or via Docker)
-docker-compose -f docker-compose.test.yml run integration-tests
+docker-compose -f docker-compose.test.yml run tests
 ```
 
 ### Testing Philosophy
@@ -492,9 +454,9 @@ ArgoCD Image Updater detects new image → Updates Application manifest → Argo
 
 The system is built on a decoupled architecture that separates business logic from the presentation and persistence layers.
 
-- **`quiz-core` (Portable Logic):** A standalone TypeScript package containing the entire learning and answer
+- **`@lingua-quiz/core` (Portable Logic):** A standalone TypeScript package containing the entire learning and answer
   validation algorithm. It is framework-agnostic and can run on any client (web, mobile, etc.).
-- **Client (Frontend):** Executes all `quiz-core` logic locally for a zero-latency user experience. It manages the
+- **Client (Frontend):** Executes all `@lingua-quiz/core` logic locally for a zero-latency user experience. It manages the
   active session state in memory and is responsible for displaying the UI.
 - **Backend (Persistence Layer):** A stateless CRUD API. Its only role is to store and retrieve user progress and
   word data. It performs **no business logic validation**.
@@ -502,7 +464,7 @@ The system is built on a decoupled architecture that separates business logic fr
 #### Session & Persistence Flow
 
 1. **Start Session:** The client fetches word data and the user's latest saved progress from the backend.
-2. **In-Memory Learning:** The `quiz-core` module builds the learning queues in the client's memory. The entire
+2. **In-Memory Learning:** The `@lingua-quiz/core` module builds the learning queues in the client's memory. The entire
    session (answering questions, updating queues, leveling up) runs locally.
 3. **Asynchronous Persistence:** Progress is saved to the backend when answer is submitted, including:
    - **level**: Current mastery level (0-5)
@@ -574,7 +536,7 @@ normalized before comparison.
 The normalization strategy differs between the user-facing answer validation and the backend analysis tools to
 balance user convenience with linguistic accuracy.
 
-**Answer Validation (`quiz-core`)**
+**Answer Validation (`@lingua-quiz/core`)**
 
 For real-time answer checking, normalization is aggressive to forgive minor user typos. Before comparison, all input
 (user answer and correct answer) is normalized as follows:
@@ -585,7 +547,7 @@ For real-time answer checking, normalization is aggressive to forgive minor user
 - **German characters converted** (`ä` → `a`, `ö` → `o`, `ü` → `u`, `ß` → `ss`)
 - **Cyrillic characters normalized** (`ё` → `е`, and Latin lookalikes converted `p` → `р`)
 
-**Vocabulary Analysis (`word-processing`)**
+**Vocabulary Analysis (`packages/tools`)**
 
 For accurate linguistic analysis (e.g., duplicate detection, lemmatization), the Python scripts are more
 conservative:
@@ -617,7 +579,7 @@ This project prioritizes development velocity via LLM assistance, overseen by hu
 
 ### Vocabulary Generation Pipeline
 
-The `word-processing` package (`packages/word-processing/`) generates CEFR-level vocabulary lists from subtitle
+The `tools` package (`packages/tools/`) generates CEFR-level vocabulary lists from subtitle
 frequency data through a multi-stage pipeline:
 
 ```mermaid
@@ -741,7 +703,7 @@ vocab-tools validate
 - **Filtering:** Language-specific inflection ratios (ES: 0.4, DE: 0.2, RU: 0.15)
 - **Validation:** 30+ integration tests ensure accuracy
 
-See `packages/word-processing/CLAUDE.md` for detailed architecture documentation.
+See `packages/tools/CLAUDE.md` for detailed architecture documentation.
 
 ### Vocabulary Size by CEFR Level
 

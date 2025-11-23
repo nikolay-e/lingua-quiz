@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
   import { authStore, quizStore, themeStore } from './stores';
   import Login from './views/Login.svelte';
   import Register from './views/Register.svelte';
@@ -10,27 +9,21 @@
   import { Toaster } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
 
-  let isAuthenticated = false;
-  let isAdmin = false;
-  let currentPage: PageType = PAGES.QUIZ;
+  let currentPage = $state<PageType>(PAGES.QUIZ);
 
-  const unsubscribe = authStore.subscribe(({ isAuthenticated: authenticated, isAdmin: adminStatus }) => {
-    isAuthenticated = authenticated;
-    isAdmin = adminStatus;
-    if (!isAuthenticated) {
+  const auth = $derived($authStore);
+  // Subscribe to theme store to trigger re-renders on theme change
+  $effect(() => void $themeStore);
+
+  $effect(() => {
+    if (!auth.isAuthenticated) {
       quizStore.reset();
-      currentPage = PAGES.LOGIN;
+      if (currentPage !== PAGES.LOGIN && currentPage !== PAGES.REGISTER) {
+        currentPage = PAGES.LOGIN;
+      }
     } else if (currentPage === PAGES.LOGIN || currentPage === PAGES.REGISTER) {
       currentPage = PAGES.QUIZ;
     }
-  });
-
-  const unsubscribeTheme = themeStore.subscribe(() => {
-  });
-
-  onDestroy(() => {
-    unsubscribe();
-    unsubscribeTheme();
   });
 
   function handleNavigation(event: CustomEvent<{ page: PageType }>) {
@@ -42,15 +35,15 @@
   }
 
   function navigateToAdmin() {
-    if (isAdmin) {
+    if (auth.isAdmin) {
       currentPage = PAGES.ADMIN;
     }
   }
 </script>
 
-{#key isAuthenticated}
-  {#if isAuthenticated}
-    {#if currentPage === PAGES.ADMIN && isAdmin}
+{#key auth.isAuthenticated}
+  {#if auth.isAuthenticated}
+    {#if currentPage === PAGES.ADMIN && auth.isAdmin}
       <div class="admin-nav">
         <Button variant="outline" onclick={navigateToQuiz}>
           <svg
@@ -69,7 +62,7 @@
       </div>
       <Admin />
     {:else}
-      {#if isAdmin}
+      {#if auth.isAdmin}
         <div class="admin-nav">
           <Button variant="secondary" onclick={navigateToAdmin}>
             <svg
@@ -111,8 +104,8 @@
 <style>
   .admin-nav {
     position: fixed;
-    top: var(--spacing-sm);
-    right: var(--spacing-sm);
+    top: max(var(--spacing-sm), env(safe-area-inset-top, 0px));
+    right: max(var(--spacing-sm), env(safe-area-inset-right, 0px));
     z-index: 1000;
   }
 </style>

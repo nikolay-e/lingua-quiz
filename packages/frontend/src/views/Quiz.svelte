@@ -16,33 +16,32 @@
   import FeedCard from '../components/FeedCard.svelte';
   import LevelChangeAnimation from '../components/quiz/LevelChangeAnimation.svelte';
 
-  let userAnswer: string = '';
-  let answerInput: HTMLInputElement;
-  let feedback: SubmissionResult | QuizFeedback | null = null;
-  let usageExamples: { source: string; target: string } | null = null;
-  let isSubmitting: boolean = false;
-  let questionForFeedback: QuizQuestion | null = null;
+  let userAnswer = $state('');
+  let answerInput = $state<HTMLInputElement | null>(null);
+  let feedback = $state<SubmissionResult | QuizFeedback | null>(null);
+  let usageExamples = $state<{ source: string; target: string } | null>(null);
+  let isSubmitting = $state(false);
+  let questionForFeedback = $state<QuizQuestion | null>(null);
 
-  let showLevelAnimation = false;
-  let isLevelUp = true;
-  let showDeleteConfirm = false;
-  let liveStatus = '';
+  let showLevelAnimation = $state(false);
+  let isLevelUp = $state(true);
+  let showDeleteConfirm = $state(false);
+  let liveStatus = $state('');
 
-  let ttsState: import('../lib/services/ttsService').TTSState = { isAvailable: false, supportedLanguages: [], isPlaying: false };
+  let ttsState = $state<import('../lib/services/ttsService').TTSState>({ isAvailable: false, supportedLanguages: [], isPlaying: false });
 
-  const foldedLists: Record<string, boolean> = {};
-
+  const initialFoldedLists: Record<string, boolean> = {};
   LEVEL_CONFIG.forEach(level => {
-    foldedLists[level.id] = true;
+    initialFoldedLists[level.id] = true;
   });
 
   const savedFoldStates = safeStorage.getItem(STORAGE_KEYS.FOLDED_LISTS);
   if (savedFoldStates) {
     try {
       const saved = JSON.parse(savedFoldStates);
-      Object.keys(foldedLists).forEach(key => {
+      Object.keys(initialFoldedLists).forEach(key => {
         if (key in saved) {
-          foldedLists[key] = saved[key];
+          initialFoldedLists[key] = saved[key];
         }
       });
     } catch {
@@ -50,44 +49,43 @@
     }
   }
 
+  const foldedLists = $state<Record<string, boolean>>(initialFoldedLists);
+
   function toggleFold(event: CustomEvent<{ levelId: string }>) {
     const {levelId} = event.detail;
     foldedLists[levelId] = !foldedLists[levelId];
     safeStorage.setItem(STORAGE_KEYS.FOLDED_LISTS, JSON.stringify(foldedLists));
   }
 
-  // eslint-disable-next-line prefer-destructuring
-  $: wordLists = $quizStore.wordLists;
-  // eslint-disable-next-line prefer-destructuring
-  $: selectedQuiz = $quizStore.selectedQuiz;
-  // eslint-disable-next-line prefer-destructuring
-  $: currentQuestion = $quizStore.currentQuestion;
-  // eslint-disable-next-line prefer-destructuring
-  $: loading = $quizStore.loading;
-  // eslint-disable-next-line prefer-destructuring
-  $: username = $authStore.username;
+  const wordLists = $derived($quizStore.wordLists);
+  const selectedQuiz = $derived($quizStore.selectedQuiz);
+  const currentQuestion = $derived($quizStore.currentQuestion);
+  const loading = $derived($quizStore.loading);
+  const username = $derived($authStore.username);
 
-  $: direction = currentQuestion?.direction ?? 'normal';
-  $: sourceLanguage = currentQuestion?.sourceLanguage ?? $quizStore.quizManager?.getState().translations[0]?.sourceLanguage ?? '';
-  $: targetLanguage = currentQuestion?.targetLanguage ?? $quizStore.quizManager?.getState().translations[0]?.targetLanguage ?? '';
+  const direction = $derived(currentQuestion?.direction ?? 'normal');
+  const sourceLanguage = $derived(currentQuestion?.sourceLanguage ?? $quizStore.quizManager?.getState().translations[0]?.sourceLanguage ?? '');
+  const targetLanguage = $derived(currentQuestion?.targetLanguage ?? $quizStore.quizManager?.getState().translations[0]?.targetLanguage ?? '');
 
-  let currentLevel: string = 'LEVEL_1';
-  let lastCurrentLevel: string = 'LEVEL_1';
+  let currentLevel = $state('LEVEL_1');
+  let lastCurrentLevel = 'LEVEL_1';
 
-  $: {
+  $effect(() => {
     const newLevel = $quizStore.quizManager?.getState().currentLevel || 'LEVEL_1';
     if (newLevel !== lastCurrentLevel) {
       lastCurrentLevel = newLevel;
       currentLevel = newLevel;
     }
-  }
+  });
 
-  $: currentLanguage = direction === 'normal' ? sourceLanguage : targetLanguage;
-  $: canUseTTS = currentQuestion && ttsService.canUseTTS(currentLanguage);
+  const currentLanguage = $derived(direction === 'normal' ? sourceLanguage : targetLanguage);
+  const canUseTTS = $derived(currentQuestion && ttsService.canUseTTS(currentLanguage));
 
-  $: if (answerInput && currentQuestion) {
-    answerInput.focus();
-  }
+  $effect(() => {
+    if (answerInput && currentQuestion) {
+      answerInput.focus();
+    }
+  });
 
   async function handleQuizSelect(event: CustomEvent<{ quiz: string }>): Promise<void> {
     const {quiz} = event.detail;
@@ -311,10 +309,14 @@
             type="text"
             bind:this={answerInput}
             bind:value={userAnswer}
-            on:keydown={handleKeydown}
+            onkeydown={handleKeydown}
             placeholder="Type your answer…"
             disabled={isSubmitting}
             aria-describedby="word"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
           />
           <Button
             type="button"

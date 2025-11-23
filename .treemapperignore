@@ -19,3 +19,4 @@ package-lock.json
 vocab_tools
 e2e
 *playwright*
+generated

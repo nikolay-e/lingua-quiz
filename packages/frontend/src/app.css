@@ -60,19 +60,25 @@
 
 @layer tokens {
   :root {
+    /* iOS Safe Area Support */
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+
     /* Backward compatibility aliases (used in components) */
     --primary-color: var(--color-primary);
     --container-bg: var(--color-surface);
     --text-color: var(--color-text);
     --input-border-color: var(--color-input-border);
 
-    /* Spacing scale */
-    --spacing-xs: 8px;
-    --spacing-sm: 12px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-    --spacing-2xl: 48px;
+    /* Spacing scale - mobile first (smaller values) */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
 
     /* Shadow scale */
     --shadow-sm: 0 1px 3px rgb(0 0 0 / 10%);
@@ -80,17 +86,33 @@
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 10%);
     --shadow-button-hover: 0 8px 18px rgb(0 0 0 / 14%);
 
-    /* Font size scale */
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.25rem;
-    --font-size-xl: 1.5rem;
+    /* Fluid font size scale using clamp() */
+    --font-size-sm: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --font-size-base: clamp(0.875rem, 0.8rem + 0.4vw, 1rem);
+    --font-size-lg: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 1rem + 1vw, 1.5rem);
+    --font-size-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+
+    /* Touch target minimum */
+    --touch-target-min: 44px;
 
     /* Additional aliases used in components */
     --success-color: var(--color-success);
     --error-color: var(--color-error);
     --example-bg: #f9fafb;
     --color-hover-light: #e9eff7;
+  }
+
+  /* Desktop: increase spacing */
+  @media (min-width: 768px) {
+    :root {
+      --spacing-xs: 8px;
+      --spacing-sm: 12px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+    }
   }
 
   /* Dark theme overrides */
@@ -158,6 +180,7 @@
   }
 
   [data-slot='button'] {
+    min-height: var(--touch-target-min);
     padding: var(--spacing-sm) var(--spacing-md);
   }
 
@@ -184,6 +207,7 @@
   html {
     height: 100%;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -193,8 +217,12 @@
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.6;
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+    padding-left: var(--safe-area-inset-left);
+    padding-right: var(--safe-area-inset-right);
   }
 
   #app {
@@ -203,9 +231,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: var(--safe-area-inset-bottom);
   }
 
-  /* Typography - no color forcing, let components decide */
+  /* Touch-friendly interactive elements */
+  a,
+  button,
+  [role='button'] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Typography - fluid sizing */
   h1,
   h2,
   h3 {
@@ -214,25 +251,26 @@
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
     text-align: center;
   }
 
   h2 {
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-size: var(--font-size-xl);
   }
 
   h3 {
-    font-size: 1.125rem;
+    font-size: var(--font-size-lg);
   }
 
   /* Form elements using :is() for grouping */
   :is(input[type='text'], input[type='password'], input[type='email'], select) {
     width: 100%;
-    padding: var(--spacing-sm) !important;
+    min-height: var(--touch-target-min);
+    padding: var(--spacing-sm) var(--spacing-md) !important;
     border-radius: var(--radius-md);
     border: 1px solid var(--color-input-border);
-    font-size: 1rem !important;
+    font-size: var(--font-size-base) !important;
     background-color: var(--color-surface);
     color: var(--color-text);
     transition:
@@ -271,25 +309,6 @@
   [data-theme='dark'] select {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
   }
-
-  /* Responsive typography */
-  @media (width <= 480px) {
-    body {
-      font-size: 0.875rem;
-    }
-
-    h1 {
-      font-size: 1.8rem;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-    }
-
-    h3 {
-      font-size: 1.1rem;
-    }
-  }
 }
 
 /* ============================================
@@ -301,16 +320,18 @@
     width: 100%;
     max-width: 840px;
     margin-inline: auto;
-    padding-block-start: 64px !important;
-    padding-block-end: var(--spacing-2xl);
-    padding-inline: var(--spacing-lg);
+    padding-block-start: calc(var(--spacing-lg) + var(--safe-area-inset-top));
+    padding-block-end: var(--spacing-xl);
+    padding-inline: var(--spacing-md);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
 
-    @media (width <= 480px) {
-      padding-block: var(--spacing-lg);
-      padding-inline: var(--spacing-md);
+    @media (min-width: 768px) {
+      padding-block-start: 64px;
+      padding-block-end: var(--spacing-2xl);
+      padding-inline: var(--spacing-lg);
+      gap: var(--spacing-lg);
     }
   }
 
@@ -418,6 +439,54 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+  }
+
+  /* Admin table to cards on mobile */
+  @media (max-width: 767px) {
+    [data-admin-table] {
+      display: block;
+    }
+
+    [data-admin-table] thead {
+      display: none;
+    }
+
+    [data-admin-table] tbody {
+      display: grid;
+      gap: var(--spacing-md);
+    }
+
+    [data-admin-table] tr {
+      display: grid;
+      padding: var(--spacing-md);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+
+    [data-admin-table] td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-xs) 0;
+      border: none;
+    }
+
+    [data-admin-table] td::before {
+      content: attr(data-label);
+      font-weight: 500;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      margin-right: var(--spacing-sm);
+    }
+
+    [data-admin-table] td:last-child {
+      justify-content: center;
+      padding-top: var(--spacing-sm);
+      margin-top: var(--spacing-xs);
+      border-top: 1px solid var(--color-border);
+    }
   }
 
   .speaking {

@@ -509,7 +509,7 @@
         </Card.Header>
         <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
           <div class="overflow-x-auto">
-            <Table.Root>
+            <Table.Root data-admin-table>
               <Table.Header>
                 <Table.Row>
                   <Table.Head class="cursor-pointer hover:text-primary" onclick={() => toggleSort('source')}>
@@ -529,26 +529,26 @@
               <Table.Body>
                 {#each filteredResults() as item (item.id)}
                   <Table.Row class={item.isActive ? '' : 'opacity-50'}>
-                    <Table.Cell class="max-w-xs truncate font-medium">{item.sourceText}</Table.Cell>
-                    <Table.Cell class="max-w-xs truncate">{item.targetText}</Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell class="max-w-xs truncate font-medium" data-label="Source">{item.sourceText}</Table.Cell>
+                    <Table.Cell class="max-w-xs truncate" data-label="Target">{item.targetText}</Table.Cell>
+                    <Table.Cell data-label="List">
                       <Badge variant="outline">{item.listName}</Badge>
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell data-label="Languages">
                       <div class="flex" style="gap: 4px;">
                         <Badge variant="secondary" class="text-xs">{item.sourceLanguage.toUpperCase()}</Badge>
                         <span class="text-muted-foreground">→</span>
                         <Badge variant="secondary" class="text-xs">{item.targetLanguage.toUpperCase()}</Badge>
                       </div>
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell data-label="Status">
                       {#if item.isActive}
                         <Badge class="bg-success text-white">Active</Badge>
                       {:else}
                         <Badge variant="destructive">Inactive</Badge>
                       {/if}
                     </Table.Cell>
-                    <Table.Cell class="text-right">
+                    <Table.Cell class="text-right" data-label="Actions">
                       <div class="flex justify-end" style="gap: var(--spacing-xs);">
                         <Button variant="outline" size="sm" onclick={() => openEditDialog(item)}>
                           <svg
