@@ -7,13 +7,13 @@
 # - Pre-push: Type checking, security scanning (heavier)
 # - CI: Deep SAST, tests with coverage, image scanning
 
-minimum_pre_commit_version: "3.5.0"
+minimum_pre_commit_version: '3.5.0'
 default_stages: [pre-commit]
 default_language_version:
   python: python3.13
   node: system
 
-fail_fast: false  # Run all hooks to get complete feedback
+fail_fast: false # Run all hooks to get complete feedback
 
 repos:
   # =============================================================================
@@ -29,7 +29,7 @@ repos:
       - id: debug-statements
         language_version: python3
       - id: check-added-large-files
-        args: ["--maxkb=1024"]
+        args: ['--maxkb=1024']
 
       # File format checks
       - id: check-yaml
@@ -43,7 +43,7 @@ repos:
       - id: end-of-file-fixer
         exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$)
       - id: mixed-line-ending
-        args: ["--fix=lf"]
+        args: ['--fix=lf']
         exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$)
 
   # =============================================================================
@@ -55,7 +55,7 @@ repos:
     hooks:
       - id: check-github-workflows
         name: Validate GitHub workflows
-        args: ["--verbose"]
+        args: ['--verbose']
       - id: check-dependabot
         name: Validate Dependabot config
 
@@ -95,7 +95,7 @@ repos:
     hooks:
       - id: ruff
         name: Lint Python with ruff
-        args: ["--fix", "--exit-non-zero-on-fix"]
+        args: ['--fix', '--exit-non-zero-on-fix']
         types_or: [python, pyi]
         files: ^packages/(backend|tools|tests)/
       - id: ruff-format
@@ -108,7 +108,7 @@ repos:
     hooks:
       - id: pyupgrade
         name: Upgrade Python syntax
-        args: ["--py313-plus"]
+        args: ['--py313-plus']
         files: ^packages/(backend|tools|tests)/.*\.py$
 
   # =============================================================================
@@ -120,16 +120,8 @@ repos:
     hooks:
       - id: mypy
         name: Type check Python with mypy
-        args: [
-          "--python-version=3.13",
-          "--check-untyped-defs",
-          "--ignore-missing-imports",
-          "--no-warn-unused-ignores"
-        ]
-        additional_dependencies: [
-          "types-requests",
-          "types-PyYAML"
-        ]
+        args: ['--python-version=3.13', '--check-untyped-defs', '--ignore-missing-imports', '--no-warn-unused-ignores']
+        additional_dependencies: ['types-requests', 'types-PyYAML']
         files: ^packages/backend/
         stages: [pre-push]
 
@@ -138,7 +130,7 @@ repos:
     hooks:
       - id: bandit
         name: Security scan Python (bandit)
-        args: ["-q", "-r", "-x", "tests,*/test_*.py,*/conftest.py", "--skip", "B101,B108,B110,B404,B603"]
+        args: ['-q', '-r', '-x', 'tests,*/test_*.py,*/conftest.py', '--skip', 'B101,B108,B110,B404,B603']
         files: ^packages/(backend|tools)/
         stages: [pre-push]
 
@@ -147,10 +139,7 @@ repos:
     hooks:
       - id: pip-audit
         name: Python dependency vulnerability audit
-        args: [
-          "-r", "packages/backend/requirements.txt",
-          "-r", "packages/tools/requirements.txt",
-        ]
+        args: ['-r', 'packages/backend/requirements.txt', '-r', 'packages/tools/requirements.txt']
         stages: [pre-push]
 
   # =============================================================================
@@ -161,11 +150,11 @@ repos:
     hooks:
       - id: sqlfluff-fix
         name: Format SQL files
-        args: ["--dialect=postgres", "--exclude-rules=RF04"]
+        args: ['--dialect=postgres', '--exclude-rules=RF04']
         files: \.sql$
       - id: sqlfluff-lint
         name: Lint SQL files
-        args: ["--dialect=postgres", "--exclude-rules=RF04"]
+        args: ['--dialect=postgres', '--exclude-rules=RF04']
         files: \.sql$
 
   # =============================================================================
@@ -176,7 +165,7 @@ repos:
     hooks:
       - id: prettier
         name: Format JS/TS/Svelte with Prettier
-        args: ["--write"]
+        args: ['--write']
         files: \.(js|jsx|ts|tsx|svelte|json|css|scss|html|md)$
         exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$|/(dist|build|node_modules)/|^package-lock\.json$|^flux/.*/flux-system/)
 
@@ -231,14 +220,14 @@ repos:
     hooks:
       - id: shellcheck
         name: Lint shell scripts
-        args: ["--exclude=SC2034,SC2155,SC2086"]
+        args: ['--exclude=SC2034,SC2155,SC2086']
 
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.12.0-2
     hooks:
       - id: shfmt
         name: Format shell scripts
-        args: ["-i", "2", "-ci", "-bn", "-w"]
+        args: ['-i', '2', '-ci', '-bn', '-w']
 
   # =============================================================================
   # STAGE 9: Docker (<1 second)
@@ -250,12 +239,17 @@ repos:
         name: Lint Dockerfiles
         files: (^|/)[Dd]ockerfile(\..*)?$
         args: [
-          "--ignore", "DL3018",  # Pin versions (alpine apk)
-          "--ignore", "DL3013",  # Pin versions (pip)
-          "--ignore", "DL3029",  # Do not use --platform flag
-          "--ignore", "DL3059",  # Multiple consecutive RUN
-          "--ignore", "DL3003"   # Use WORKDIR
-        ]
+            '--ignore',
+            'DL3018', # Pin versions (alpine apk)
+            '--ignore',
+            'DL3013', # Pin versions (pip)
+            '--ignore',
+            'DL3029', # Do not use --platform flag
+            '--ignore',
+            'DL3059', # Multiple consecutive RUN
+            '--ignore',
+            'DL3003', # Use WORKDIR
+          ]
 
   - repo: local
     hooks:
@@ -275,7 +269,7 @@ repos:
     hooks:
       - id: yamllint
         name: Lint YAML files
-        args: ["-d", "relaxed"]
+        args: ['-d', 'relaxed']
         files: \.(yaml|yml)$
         exclude: ^(helm/.*\.yaml|flux/.*/flux-system/.*)$
 
@@ -284,7 +278,7 @@ repos:
     hooks:
       - id: markdownlint
         name: Lint and fix Markdown files
-        args: ["--fix", "--config", ".markdownlint.yaml"]
+        args: ['--fix', '--config', '.markdownlint.yaml']
         files: \.(md|markdown)$
 
   # =============================================================================
@@ -331,8 +325,7 @@ repos:
       - id: gitlint
         name: Validate commit message
         stages: [commit-msg]
-        args: ["--msg-filename"]
-
+        args: ['--msg-filename']
 # =============================================================================
 # Installation Instructions
 # =============================================================================

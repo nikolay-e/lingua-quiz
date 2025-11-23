@@ -16,12 +16,12 @@ def _base_url_from_api(api_url: str) -> str:
 
 
 schema_path = Path(__file__).resolve().parents[2].parent / "backend" / "openapi.json"
+BASE_URL = _base_url_from_api(API_URL)
 
-schema = schemathesis.from_path(schema_path, base_url=_base_url_from_api(API_URL))
+schema = schemathesis.openapi.from_path(str(schema_path))
 
 
 @pytest.mark.skipif(not RUN_SCHEMATHESIS, reason="Set RUN_SCHEMATHESIS=1 to run contract tests")
-@schemathesis.parametrize()
-@schemathesis.settings(max_examples=5)
+@schema.parametrize()
 def test_api_contract(case):
-    case.call_and_validate()
+    case.call_and_validate(base_url=BASE_URL)
