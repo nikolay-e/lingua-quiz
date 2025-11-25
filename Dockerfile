@@ -113,7 +113,7 @@ CMD ["nginx", "-g", "daemon off;"]
 # ======================================================================================
 # INTEGRATION AND E2E TESTS STAGE
 # ======================================================================================
-FROM --platform=linux/amd64 mcr.microsoft.com/playwright/python:v1.52.0-noble AS integration-e2e-tests
+FROM --platform=linux/amd64 mcr.microsoft.com/playwright/python:v1.55.0-noble AS integration-e2e-tests
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
