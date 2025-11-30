@@ -141,7 +141,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Delete Account Api Auth Delete Account Delete"
+                }
               }
             }
           }
@@ -317,7 +323,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Save User Progress Api User Progress Post"
+                }
               }
             }
           },
@@ -332,6 +344,56 @@
             }
           }
         }
+      }
+    },
+    "/api/user/progress/bulk": {
+      "post": {
+        "tags": [
+          "Progress"
+        ],
+        "summary": "Save Bulk Progress",
+        "operationId": "save_bulk_progress_api_user_progress_bulk_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkProgressUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Save Bulk Progress Api User Progress Bulk Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/tts/synthesize": {
@@ -554,7 +616,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Update Vocabulary Item Api Admin Vocabulary  Item Id  Put"
+                }
               }
             }
           },
@@ -597,7 +665,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Delete Vocabulary Item Api Admin Vocabulary  Item Id  Delete"
+                }
               }
             }
           },
@@ -641,7 +715,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Create Vocabulary Item Api Admin Vocabulary Post"
+                }
               }
             }
           },
@@ -808,6 +888,24 @@
   },
   "components": {
     "schemas": {
+      "BulkProgressUpdateRequest": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ProgressUpdateRequest"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "BulkProgressUpdateRequest"
+      },
       "ContentVersionResponse": {
         "properties": {
           "versionId": {

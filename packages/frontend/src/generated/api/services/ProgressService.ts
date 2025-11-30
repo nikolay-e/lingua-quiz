@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { BulkProgressUpdateRequest } from '../models/BulkProgressUpdateRequest';
 import type { ProgressUpdateRequest } from '../models/ProgressUpdateRequest';
 import type { UserProgressResponse } from '../models/UserProgressResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -31,15 +32,34 @@ export class ProgressService {
     /**
      * Save User Progress
      * @param requestBody
-     * @returns any Successful Response
+     * @returns string Successful Response
      * @throws ApiError
      */
     public static saveUserProgressApiUserProgressPost(
         requestBody: ProgressUpdateRequest,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<Record<string, string>> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/user/progress',
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+    /**
+     * Save Bulk Progress
+     * @param requestBody
+     * @returns string Successful Response
+     * @throws ApiError
+     */
+    public static saveBulkProgressApiUserProgressBulkPost(
+        requestBody: BulkProgressUpdateRequest,
+    ): CancelablePromise<Record<string, string>> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/user/progress/bulk',
             body: requestBody,
             mediaType: 'application/json',
             errors: {

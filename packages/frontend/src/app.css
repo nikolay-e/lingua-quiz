@@ -118,6 +118,18 @@
     }
   }
 
+  /* Landscape mode optimization for small screens */
+  @media (orientation: landscape) and (max-height: 500px) {
+    :root {
+      --spacing-xs: 2px;
+      --spacing-sm: 4px;
+      --spacing-md: 6px;
+      --spacing-lg: 8px;
+      --spacing-xl: 12px;
+      --spacing-2xl: 16px;
+    }
+  }
+
   /* Dark theme overrides */
   [data-theme='dark'] {
     --color-primary: #5ba3f5;
@@ -246,6 +258,20 @@
   [role='button'] {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+    padding: max(var(--spacing-sm), 8px) max(var(--spacing-md), 12px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+  }
+
+  /* Text links don't need min-width */
+  a:not([role='button']) {
+    min-width: auto;
+    display: inline;
+    padding: 0;
   }
 
   /* Typography - fluid sizing */
@@ -333,6 +359,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
+
+    /* Mobile: add padding for bottom nav */
+    @media (max-width: 767px) {
+      padding-block-end: calc(64px + var(--spacing-md));
+    }
 
     @media (min-width: 768px) {
       padding-block-start: 64px;
@@ -647,6 +678,22 @@
    ============================================ */
 
 @layer overrides {
+  /* Landscape mode: hide decorative elements */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .welcome-icon {
+      display: none;
+    }
+
+    .feature {
+      padding: var(--spacing-sm);
+    }
+
+    .feed {
+      padding-block-start: var(--spacing-xs);
+      padding-block-end: var(--spacing-xs);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

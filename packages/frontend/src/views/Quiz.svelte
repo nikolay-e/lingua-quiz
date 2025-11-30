@@ -20,9 +20,11 @@
   import ErrorBoundary from '../components/ErrorBoundary.svelte';
   import ErrorDisplay from '../components/ErrorDisplay.svelte';
   import QuizSkeleton from '../components/quiz/QuizSkeleton.svelte';
+  import BottomNav from '../components/quiz/BottomNav.svelte';
   import { Languages } from 'lucide-svelte';
 
   let userAnswer = $state('');
+  let showProgress = $state(true);
   let answerInputRef: ReturnType<typeof AnswerInput> | undefined = $state();
   let feedback = $state<SubmissionResult | QuizFeedback | null>(null);
   let usageExamples = $state<{ source: string; target: string } | null>(null);
@@ -289,7 +291,7 @@
   {#key selectedQuiz}
     <main id="main-content" class="feed">
       {#if liveStatus}
-        <div class="status-banner" aria-live="polite">{liveStatus}</div>
+        <div class="status-banner">{liveStatus}</div>
       {/if}
 
       <FeedCard title={selectedQuiz ?? null}>
@@ -363,7 +365,7 @@
               onValueChange={(v) => (userAnswer = v)}
             />
             {#if liveStatus && isSubmitting}
-              <p class="status-hint" aria-live="polite">{liveStatus}</p>
+              <p class="status-hint">{liveStatus}</p>
             {/if}
           </FeedCard>
         {/if}
@@ -379,7 +381,7 @@
           </FeedCard>
         {/if}
 
-        {#if selectedQuiz}
+        {#if selectedQuiz && showProgress}
           <FeedCard>
             <LearningProgress
               selectedQuiz={selectedQuiz || undefined}
@@ -417,6 +419,14 @@
   <div class="sr-only" aria-live="polite">
     {liveStatus}
   </div>
+
+  <BottomNav
+    {selectedQuiz}
+    {showProgress}
+    onBackToMenu={handleBackToMenu}
+    onToggleProgress={() => (showProgress = !showProgress)}
+    onLogout={handleLogoutClick}
+  />
 </ErrorBoundary>
 
 <style>

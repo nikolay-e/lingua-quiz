@@ -103,7 +103,6 @@ class TestQuizFlowE2E:
         initial_stats = page.locator("[data-testid='session-stats']").inner_text()
 
         for i in range(15):
-            question_text = page.locator("[data-testid='question-text']").inner_text()
             answer_input = page.get_by_placeholder("Type your answer")
             answer_input.fill("answer")
             page.keyboard.press("Enter")

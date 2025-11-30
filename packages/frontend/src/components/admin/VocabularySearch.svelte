@@ -25,7 +25,7 @@
     onsearch?: () => void;
   }
 
-  // eslint-disable-next-line prefer-const
+  /* eslint-disable prefer-const */
   let {
     searchQuery = $bindable(),
     filterLanguage = $bindable(),
@@ -39,6 +39,7 @@
     totalCount = 0,
     onsearch,
   }: Props = $props();
+  /* eslint-enable prefer-const */
 
   function handleSearchClick() {
     if (onsearch && searchQuery.trim()) {

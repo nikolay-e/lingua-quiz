@@ -97,7 +97,8 @@ const api = {
       correctCount: number;
       incorrectCount: number;
     },
-  ): Promise<void> => execute(() => ProgressService.saveUserProgressApiUserProgressPost(payload), token),
+  ): Promise<Record<string, string>> =>
+    execute(() => ProgressService.saveUserProgressApiUserProgressPost(payload), token),
 
   saveBulkProgress: (
     token: string,
@@ -141,7 +142,7 @@ const api = {
       token,
     ),
 
-  deleteAccount: (token: string): Promise<void> =>
+  deleteAccount: (token: string): Promise<Record<string, string>> =>
     execute(() => AuthenticationService.deleteAccountApiAuthDeleteAccountDelete(), token),
 
   fetchTranslations: (token: string, listName: string): Promise<Translation[]> =>

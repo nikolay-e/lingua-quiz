@@ -28,10 +28,10 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+  }
 
-    h1 {
-      margin: 0;
-    }
+  header h1 {
+    margin: 0;
   }
 
   .auth-content {

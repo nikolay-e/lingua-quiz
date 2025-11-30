@@ -41,7 +41,7 @@
     onconfirmdelete: () => void;
   };
 
-  // eslint-disable-next-line prefer-const
+  /* eslint-disable prefer-const */
   let {
     isEditDialogOpen = $bindable(),
     isCreateDialogOpen = $bindable(),
@@ -57,6 +57,7 @@
     oncreate,
     onconfirmdelete,
   }: Props = $props();
+/* eslint-enable prefer-const */
 </script>
 
 <Dialog.Root bind:open={isEditDialogOpen}>

@@ -23,13 +23,13 @@ const adminApi = {
   getVocabularyItem: (token: string, itemId: string): Promise<AdminVocabularyItem> =>
     execute(token, () => AdminService.getVocabularyItemApiAdminVocabularyItemIdGet(itemId)),
 
-  createVocabularyItem: (token: string, data: VocabularyItemCreate): Promise<{ message: string; id: string }> =>
+  createVocabularyItem: (token: string, data: VocabularyItemCreate): Promise<Record<string, string>> =>
     execute(token, () => AdminService.createVocabularyItemApiAdminVocabularyPost(data)),
 
-  updateVocabularyItem: (token: string, itemId: string, data: VocabularyItemUpdate): Promise<{ message: string }> =>
+  updateVocabularyItem: (token: string, itemId: string, data: VocabularyItemUpdate): Promise<Record<string, string>> =>
     execute(token, () => AdminService.updateVocabularyItemApiAdminVocabularyItemIdPut(itemId, data)),
 
-  deleteVocabularyItem: (token: string, itemId: string): Promise<{ message: string }> =>
+  deleteVocabularyItem: (token: string, itemId: string): Promise<Record<string, string>> =>
     execute(token, () => AdminService.deleteVocabularyItemApiAdminVocabularyItemIdDelete(itemId)),
 
   listVocabulary: (

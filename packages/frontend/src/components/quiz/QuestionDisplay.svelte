@@ -6,11 +6,13 @@
   }
 
   const { currentQuestion = null }: Props = $props();
+
+  const questionLanguage = $derived(currentQuestion?.sourceLanguage || 'en');
 </script>
 
 {#if currentQuestion}
   <div class="question">
-    <span id="word" class="question-text">
+    <span id="word" class="question-text" lang={questionLanguage}>
       {currentQuestion.questionText}
     </span>
   </div>

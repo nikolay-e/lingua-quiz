@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import { LogOut, Trash2, AlertTriangle } from 'lucide-svelte';
+  import { focusTrap } from '$lib/actions/focusTrap';
 
   interface Props {
     username: string | null;
@@ -54,6 +55,7 @@
 <div class="actions">
   {#if showLogoutConfirm}
     <div
+      use:focusTrap
       class="confirm-dialog"
       role="alertdialog"
       aria-labelledby="logout-confirm-title"
@@ -88,6 +90,7 @@
   {#if showDeleteOption}
     {#if showDeleteConfirm}
       <div
+        use:focusTrap
         class="confirm-dialog"
         role="alertdialog"
         aria-labelledby="delete-confirm-title"

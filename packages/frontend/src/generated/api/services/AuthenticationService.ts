@@ -69,10 +69,10 @@ export class AuthenticationService {
     }
     /**
      * Delete Account
-     * @returns any Successful Response
+     * @returns string Successful Response
      * @throws ApiError
      */
-    public static deleteAccountApiAuthDeleteAccountDelete(): CancelablePromise<any> {
+    public static deleteAccountApiAuthDeleteAccountDelete(): CancelablePromise<Record<string, string>> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/auth/delete-account',

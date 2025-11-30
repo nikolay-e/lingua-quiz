@@ -27,6 +27,10 @@
     const levelConfig = LEVEL_CONFIG.find((config) => config.key === level);
     return levelConfig?.description(sourceLanguage, targetLanguage) || '';
   }
+
+  const totalWords = $derived(
+    Object.values(levelWordLists).reduce((sum, level) => sum + level.count, 0),
+  );
 </script>
 
 <div class="learning-progress-container flex-col gap-lg">
@@ -45,15 +49,31 @@
           onclick={() => onToggleFold?.(levelData.id)}
           aria-expanded={!foldedLists[levelData.id]}
         >
-          <span class="fold-icon">
-            {#if foldedLists[levelData.id]}
-              <ChevronRight size={14} />
-            {:else}
-              <ChevronDown size={14} />
-            {/if}
-          </span>
-          <levelData.icon size={16} />
-          {levelData.label} ({levelData.count})
+          <div class="header-content">
+            <div class="header-info">
+              <span class="fold-icon">
+                {#if foldedLists[levelData.id]}
+                  <ChevronRight size={14} />
+                {:else}
+                  <ChevronDown size={14} />
+                {/if}
+              </span>
+              <levelData.icon size={16} />
+              <span>{levelData.label} ({levelData.count})</span>
+            </div>
+            <div
+              class="progress-bar"
+              role="progressbar"
+              aria-valuenow={levelData.count}
+              aria-valuemin="0"
+              aria-valuemax={totalWords}
+            >
+              <div
+                class="progress-fill"
+                style="width: {totalWords > 0 ? (levelData.count / totalWords) * 100 : 0}%"
+              ></div>
+            </div>
+          </div>
         </button>
         {#if !foldedLists[levelData.id]}
           {#if levelData.words.length > 0}
@@ -83,10 +103,10 @@
     padding: var(--spacing-sm) var(--spacing-md);
     box-shadow: var(--shadow-sm);
     transition: box-shadow var(--transition-speed) ease;
+  }
 
-    &:hover {
-      box-shadow: var(--shadow-md);
-    }
+  .current-level-display:hover {
+    box-shadow: var(--shadow-md);
   }
 
   .level-label {
@@ -113,11 +133,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
+  }
 
-    li {
-      padding-block: var(--spacing-xs);
-      border-bottom: 1px solid var(--input-border-color);
-    }
+  .word-list li {
+    padding-block: var(--spacing-xs);
+    border-bottom: 1px solid var(--input-border-color);
   }
 
   .no-words {
@@ -127,9 +147,6 @@
   .foldable-header {
     cursor: pointer;
     user-select: none;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
     background: none;
     border: 1px solid var(--input-border-color);
     color: var(--text-color);
@@ -138,17 +155,44 @@
     transition: all var(--transition-speed) ease;
     width: 100%;
     text-align: left;
+  }
 
-    &:hover {
-      background-color: color-mix(in oklch, var(--color-primary) 10%, transparent);
-      border-color: var(--primary-color);
-      color: var(--primary-color);
-    }
+  .foldable-header:hover {
+    background-color: color-mix(in oklch, var(--color-primary) 10%, transparent);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+  }
 
-    &:focus-visible {
-      outline: 2px solid var(--primary-color);
-      outline-offset: 2px;
-    }
+  .foldable-header:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    width: 100%;
+  }
+
+  .header-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--color-muted);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    transition: width 0.3s ease;
   }
 
   .fold-icon {

@@ -56,13 +56,13 @@ export class AdminService {
      * Update Vocabulary Item
      * @param itemId
      * @param requestBody
-     * @returns any Successful Response
+     * @returns string Successful Response
      * @throws ApiError
      */
     public static updateVocabularyItemApiAdminVocabularyItemIdPut(
         itemId: string,
         requestBody: VocabularyItemUpdate,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<Record<string, string>> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/admin/vocabulary/{item_id}',
@@ -79,12 +79,12 @@ export class AdminService {
     /**
      * Delete Vocabulary Item
      * @param itemId
-     * @returns any Successful Response
+     * @returns string Successful Response
      * @throws ApiError
      */
     public static deleteVocabularyItemApiAdminVocabularyItemIdDelete(
         itemId: string,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<Record<string, string>> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/admin/vocabulary/{item_id}',
@@ -99,12 +99,12 @@ export class AdminService {
     /**
      * Create Vocabulary Item
      * @param requestBody
-     * @returns any Successful Response
+     * @returns string Successful Response
      * @throws ApiError
      */
     public static createVocabularyItemApiAdminVocabularyPost(
         requestBody: VocabularyItemCreate,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<Record<string, string>> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/admin/vocabulary',

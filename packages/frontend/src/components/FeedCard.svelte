@@ -32,10 +32,10 @@
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
     padding: var(--spacing-lg);
+  }
 
-    &.dense {
-      padding: var(--spacing-md);
-    }
+  .feed-item.dense {
+    padding: var(--spacing-md);
   }
 
   .feed-item__header {
@@ -49,24 +49,20 @@
     gap: var(--spacing-md);
   }
 
-  .header-text {
-    h3 {
-      margin: 0;
-      margin-block-end: var(--spacing-xs);
-      color: var(--text-color);
-      font-size: var(--font-size-lg);
-    }
-
-    .subtitle {
-      margin: 0;
-      opacity: 0.8;
-      font-size: var(--font-size-sm);
-    }
+  .header-text h3 {
+    margin: 0;
+    margin-block-end: var(--spacing-xs);
+    color: var(--text-color);
+    font-size: var(--font-size-lg);
   }
 
-  .feed-item__body {
-    :global(.full-width) {
-      width: 100%;
-    }
+  .header-text .subtitle {
+    margin: 0;
+    opacity: 0.8;
+    font-size: var(--font-size-sm);
+  }
+
+  .feed-item__body :global(.full-width) {
+    width: 100%;
   }
 </style>

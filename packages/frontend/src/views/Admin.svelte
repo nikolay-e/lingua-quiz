@@ -21,9 +21,14 @@
   let loading = $state(false);
   let searchLoading = $state(false);
 
-  type AdminCreateForm = Omit<VocabularyItemCreate, 'difficultyLevel'> & { difficultyLevel?: string };
-
-  let editForm = $state({
+  let editForm = $state<{
+    sourceText: string;
+    targetText: string;
+    sourceUsageExample: string | null;
+    targetUsageExample: string | null;
+    listName: string;
+    difficultyLevel?: string;
+  }>({
     sourceText: '',
     targetText: '',
     sourceUsageExample: '',
@@ -32,7 +37,16 @@
     difficultyLevel: '',
   });
 
-  let createForm = $state<AdminCreateForm>({
+  let createForm = $state<{
+    sourceText: string;
+    targetText: string;
+    sourceLanguage: string;
+    targetLanguage: string;
+    listName: string;
+    difficultyLevel?: string;
+    sourceUsageExample: string | null;
+    targetUsageExample: string | null;
+  }>({
     sourceText: '',
     sourceLanguage: 'en',
     targetText: '',

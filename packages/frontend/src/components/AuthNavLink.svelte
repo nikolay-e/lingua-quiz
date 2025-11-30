@@ -22,10 +22,10 @@
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-xs);
+  }
 
-    p {
-      margin: 0;
-    }
+  .auth-link p {
+    margin: 0;
   }
 
   .link-button {
@@ -38,10 +38,10 @@
     margin: 0;
     font-size: inherit;
     width: auto;
+  }
 
-    &:hover {
-      color: color-mix(in oklch, var(--primary-color) 70%, black);
-      background: none;
-    }
+  .link-button:hover {
+    color: color-mix(in oklch, var(--primary-color) 70%, black);
+    background: none;
   }
 </style>

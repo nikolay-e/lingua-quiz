@@ -365,15 +365,7 @@ export default [
         { startTag: 'never', endTag: 'never', selfClosingTag: 'always' },
       ],
       'svelte/first-attribute-linebreak': ['error', { multiline: 'below', singleline: 'beside' }],
-      'svelte/indent': [
-        'error',
-        {
-          indent: 2,
-          indentScript: true,
-          switchCase: 1,
-          alignAttributesVertically: false,
-        },
-      ],
+      'svelte/indent': 'off', // Disabled due to known bug causing stack overflow
       'svelte/max-attributes-per-line': [
         'error',
         {
