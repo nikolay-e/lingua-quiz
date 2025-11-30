@@ -27,7 +27,7 @@ const compile = <T>(schema: JSONSchema7): Validator<T> => {
       errors: valid
         ? []
         : (validate.errors ?? []).map((e) => {
-            const path = 'instancePath' in e ? e.instancePath : (e.dataPath ?? '');
+            const path = 'instancePath' in e ? e.instancePath : '';
             return `${path} ${e.message ?? ''}`.trim();
           }),
     };

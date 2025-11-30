@@ -7,6 +7,8 @@
   import * as Dialog from '$lib/components/ui/dialog';
   import * as Select from '$lib/components/ui/select';
 
+  type LanguageOption = { value: string; label: string };
+
   type Props = {
     isEditDialogOpen: boolean;
     isCreateDialogOpen: boolean;
@@ -14,8 +16,8 @@
     editForm: {
       sourceText: string;
       targetText: string;
-      sourceUsageExample: string;
-      targetUsageExample: string;
+      sourceUsageExample: string | null | undefined;
+      targetUsageExample: string | null | undefined;
       listName: string;
       difficultyLevel?: string;
     };
@@ -26,8 +28,8 @@
       targetLanguage: string;
       listName: string;
       difficultyLevel?: string;
-      sourceUsageExample: string;
-      targetUsageExample: string;
+      sourceUsageExample: string | null | undefined;
+      targetUsageExample: string | null | undefined;
     };
     itemToDelete: AdminVocabularyItem | null;
     languageOptions: Array<{ value: string; label: string }>;
@@ -39,6 +41,7 @@
     onconfirmdelete: () => void;
   };
 
+  // eslint-disable-next-line prefer-const
   let {
     isEditDialogOpen = $bindable(),
     isCreateDialogOpen = $bindable(),

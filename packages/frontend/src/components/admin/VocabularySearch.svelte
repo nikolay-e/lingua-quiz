@@ -25,6 +25,7 @@
     onsearch?: () => void;
   }
 
+  // eslint-disable-next-line prefer-const
   let {
     searchQuery = $bindable(),
     filterLanguage = $bindable(),

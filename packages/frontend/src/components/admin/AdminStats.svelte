@@ -32,7 +32,7 @@
             stroke-linejoin="round"
             stroke-width="2"
             d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0
-               002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
         </svg>
       </Card.Header>
       <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
@@ -99,7 +99,7 @@
             stroke-linejoin="round"
             stroke-width="2"
             d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751
-               5C11.783 10.77 8.07 15.61 3 18.129" />
+              5C11.783 10.77 8.07 15.61 3 18.129" />
         </svg>
       </Card.Header>
       <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
