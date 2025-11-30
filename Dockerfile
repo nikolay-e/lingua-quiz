@@ -2,10 +2,13 @@
 # BASE STAGES
 # ======================================================================================
 
+# Build argument for target platform (allows cross-compilation)
+ARG TARGETPLATFORM=linux/amd64
+
 # --- Python Base Stage for Backend & Tests ---
 # Establishes a common foundation for both the backend and test stages to reduce duplication.
 # Using alpine for reliable builds, pinned to specific version for reproducibility
-FROM --platform=linux/amd64 python:3.14.0-alpine AS python-base
+FROM --platform=$TARGETPLATFORM python:3.14.0-alpine AS python-base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 
@@ -53,7 +56,7 @@ CMD ["./start.sh"]
 # FRONTEND BUILDER STAGE
 # ======================================================================================
 # Pinned to specific version for reproducible builds
-FROM --platform=linux/amd64 node:25.2.1-slim AS frontend-builder
+FROM --platform=$TARGETPLATFORM node:25.2.1-slim AS frontend-builder
 
 # Build arguments for version and environment
 ARG APP_VERSION=dev
@@ -98,7 +101,7 @@ RUN cd packages/frontend && \
 # FRONTEND PRODUCTION STAGE
 # ======================================================================================
 # Pinned to specific version for reproducible builds
-FROM --platform=linux/amd64 nginx:1.29.3-alpine AS frontend
+FROM --platform=$TARGETPLATFORM nginx:1.29.3-alpine AS frontend
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
@@ -113,7 +116,7 @@ CMD ["nginx", "-g", "daemon off;"]
 # ======================================================================================
 # INTEGRATION AND E2E TESTS STAGE
 # ======================================================================================
-FROM --platform=linux/amd64 mcr.microsoft.com/playwright/python:v1.55.0-noble AS integration-e2e-tests
+FROM --platform=$TARGETPLATFORM mcr.microsoft.com/playwright/python:v1.55.0-noble AS integration-e2e-tests
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
