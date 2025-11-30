@@ -6,7 +6,6 @@
   import { LEVEL_CONFIG } from '../lib/config/levelConfig';
   import { ttsService } from '../lib/services/ttsService';
   import { STORAGE_KEYS } from '../lib/constants';
-  import { Button } from '$lib/components/ui/button';
   import { toast } from 'svelte-sonner';
 
   import QuizHeader from '../components/quiz/QuizHeader.svelte';
@@ -17,6 +16,7 @@
   import LevelChangeAnimation from '../components/quiz/LevelChangeAnimation.svelte';
   import AnswerInput from '../components/quiz/AnswerInput.svelte';
   import TTSButton from '../components/quiz/TTSButton.svelte';
+  import UserActions from '../components/quiz/UserActions.svelte';
 
   let userAnswer = $state('');
   let answerInputRef: ReturnType<typeof AnswerInput> | undefined = $state();
@@ -27,7 +27,6 @@
 
   let showLevelAnimation = $state(false);
   let isLevelUp = $state(true);
-  let showDeleteConfirm = $state(false);
   let liveStatus = $state('');
 
   const initialFoldedLists: Record<string, boolean> = {};
@@ -181,7 +180,6 @@
   }
 
   async function handleDeleteAccount(): Promise<void> {
-    showDeleteConfirm = false;
     try {
       await authStore.deleteAccount();
       toast.success('Your account has been deleted');
@@ -317,28 +315,12 @@
     {/if}
 
     <FeedCard dense>
-      <div class="actions">
-        <Button variant="outline" onclick={logout} class="w-full">
-          <i class="fas fa-sign-out-alt"></i> Logout ({username})
-        </Button>
-        {#if !selectedQuiz}
-          {#if showDeleteConfirm}
-            <div class="delete-confirm">
-              <span>Delete account?</span>
-              <Button size="sm" variant="destructive" onclick={handleDeleteAccount}>
-                Confirm
-              </Button>
-              <Button size="sm" variant="ghost" onclick={() => (showDeleteConfirm = false)}>
-                Cancel
-              </Button>
-            </div>
-          {:else}
-            <Button variant="destructive" onclick={() => (showDeleteConfirm = true)} class="w-full">
-              <i class="fas fa-trash-alt"></i> Delete Account
-            </Button>
-          {/if}
-        {/if}
-      </div>
+      <UserActions
+        {username}
+        showDeleteOption={!selectedQuiz}
+        onLogout={logout}
+        onDeleteAccount={handleDeleteAccount}
+      />
     </FeedCard>
   </main>
 {/key}
@@ -372,13 +354,6 @@
       transform: translateY(-1px);
       box-shadow: var(--shadow-button-hover);
     }
-  }
-
-  .delete-confirm {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    font-size: var(--font-size-sm);
   }
 
   .status-banner {
