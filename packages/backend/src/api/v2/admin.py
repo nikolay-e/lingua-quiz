@@ -61,7 +61,7 @@ async def search_vocabulary(
     query: str = Query(..., min_length=1, max_length=100),
     limit: int = Query(50, ge=1, le=500),
     current_admin: dict = Depends(require_admin),
-):
+) -> list[VocabularyItemDetailResponse]:
     try:
         active_version_id = query_db("SELECT get_active_version_id()", one=True)
         if not active_version_id:
@@ -117,7 +117,7 @@ async def search_vocabulary(
 async def get_vocabulary_item(
     item_id: str,
     current_admin: dict = Depends(require_admin),
-):
+) -> VocabularyItemDetailResponse:
     try:
         item = query_db(
             """SELECT id, source_text, source_language, target_text, target_language,
@@ -137,7 +137,7 @@ async def get_vocabulary_item(
         item_dict["created_at"] = item_dict["created_at"].isoformat()
         item_dict["updated_at"] = item_dict["updated_at"].isoformat()
 
-        return convert_keys_to_camel_case(item_dict)
+        return convert_keys_to_camel_case(item_dict)  # type: ignore[no-any-return]
 
     except HTTPException:
         raise
@@ -153,7 +153,7 @@ async def get_vocabulary_item(
 async def create_vocabulary_item(
     item_data: VocabularyItemCreate,
     current_admin: dict = Depends(require_admin),
-):
+) -> dict[str, str]:
     try:
         active_version_id = query_db("SELECT get_active_version_id()", one=True)
         if not active_version_id:
@@ -249,7 +249,7 @@ async def update_vocabulary_item(
     item_id: str,
     item_data: VocabularyItemUpdate,
     current_admin: dict = Depends(require_admin),
-):
+) -> dict[str, str]:
     try:
         existing_item = query_db(
             "SELECT id, source_text, target_text, source_usage_example, target_usage_example, is_active, list_name, difficulty_level, version_id FROM vocabulary_items WHERE id = %s",
@@ -304,7 +304,7 @@ async def update_vocabulary_item(
 async def delete_vocabulary_item(
     item_id: str,
     current_admin: dict = Depends(require_admin),
-):
+) -> dict[str, str]:
     try:
         existing_item = query_db(
             "SELECT id, source_text, target_text, version_id FROM vocabulary_items WHERE id = %s",
@@ -355,7 +355,7 @@ async def list_vocabulary(
     limit: int = Query(100, ge=1, le=1000),
     offset: int = Query(0, ge=0),
     current_admin: dict = Depends(require_admin),
-):
+) -> list[VocabularyItemDetailResponse]:
     try:
         active_version_id = query_db("SELECT get_active_version_id()", one=True)
         if not active_version_id:

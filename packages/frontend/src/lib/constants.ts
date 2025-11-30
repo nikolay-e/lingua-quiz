@@ -41,6 +41,7 @@ export const STORAGE_KEYS = {
   THEME: 'theme',
   FOLDED_LISTS: 'foldedLists',
   CONTENT_VERSION: 'contentVersion',
+  PENDING_PROGRESS: 'pendingProgress',
 } as const;
 
 export const THEMES = {

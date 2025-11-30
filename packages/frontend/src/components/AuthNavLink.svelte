@@ -1,12 +1,16 @@
 <script lang="ts">
-  export let text: string;
-  export let linkText: string;
-  export let onClick: () => void;
+  interface Props {
+    text: string;
+    linkText: string;
+    onClick: () => void;
+  }
+
+  const { text, linkText, onClick }: Props = $props();
 </script>
 
 <div class="auth-link">
   <p>{text}</p>
-  <button type="button" on:click={onClick} class="link-button">{linkText}</button>
+  <button type="button" onclick={onClick} class="link-button">{linkText}</button>
 </div>
 
 <style>

@@ -9,7 +9,7 @@
   const { children }: Props = $props();
 </script>
 
-<main class="feed">
+<main id="main-content" class="feed">
   <FeedCard dense>
     <header>
       <h1><Languages size={28} /> LinguaQuiz</h1>

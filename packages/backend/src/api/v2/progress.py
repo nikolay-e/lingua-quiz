@@ -2,16 +2,24 @@ import logging
 
 from core.database import execute_write_transaction, query_db
 from core.security import get_current_user
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from schemas.progress import ProgressUpdateRequest, UserProgressResponse
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 from utils import convert_keys_to_camel_case
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/user", tags=["Progress"])
+limiter = Limiter(key_func=get_remote_address)
 
 
 @router.get("/progress", response_model=list[UserProgressResponse])
-async def get_user_progress(list_name: str | None = None, current_user: dict = Depends(get_current_user)):
+@limiter.limit("100/minute")
+async def get_user_progress(
+    request: Request,
+    list_name: str | None = None,
+    current_user: dict = Depends(get_current_user),
+) -> list[UserProgressResponse]:
     try:
         if list_name:
             active_version_id = query_db("SELECT get_active_version_id()", one=True)
@@ -68,7 +76,12 @@ async def get_user_progress(list_name: str | None = None, current_user: dict = D
 
 
 @router.post("/progress")
-async def save_user_progress(progress_data: ProgressUpdateRequest, current_user: dict = Depends(get_current_user)):
+@limiter.limit("200/minute")
+async def save_user_progress(
+    request: Request,
+    progress_data: ProgressUpdateRequest,
+    current_user: dict = Depends(get_current_user),
+) -> dict[str, str]:
     try:
         execute_write_transaction(
             """INSERT INTO user_progress

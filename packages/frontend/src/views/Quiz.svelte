@@ -18,6 +18,8 @@
   import TTSButton from '../components/quiz/TTSButton.svelte';
   import UserActions from '../components/quiz/UserActions.svelte';
   import ErrorBoundary from '../components/ErrorBoundary.svelte';
+  import ErrorDisplay from '../components/ErrorDisplay.svelte';
+  import QuizSkeleton from '../components/quiz/QuizSkeleton.svelte';
   import { Languages } from 'lucide-svelte';
 
   let userAnswer = $state('');
@@ -30,6 +32,8 @@
   let showLevelAnimation = $state(false);
   let isLevelUp = $state(true);
   let liveStatus = $state('');
+  let loadError = $state<string | null>(null);
+  let lastSelectedQuiz = $state<string | null>(null);
 
   const initialFoldedLists: Record<string, boolean> = {};
   LEVEL_CONFIG.forEach(level => {
@@ -87,7 +91,6 @@
   });
 
   async function handleQuizSelect(quiz: string): Promise<void> {
-
     quizStore.reset();
     feedback = null;
     usageExamples = null;
@@ -99,6 +102,8 @@
       liveStatus = '';
       return;
     }
+
+    lastSelectedQuiz = quiz;
 
     try {
       await quizStore.startQuiz($authStore.token!, quiz);
@@ -116,11 +121,23 @@
     liveStatus = '';
   }
 
-  function handleBackToMenu(): void {
-    if ($authStore.token) {
-      quizStore.saveAndCleanup($authStore.token).catch((error) => {
+  function retryLastOperation(): void {
+    if (lastSelectedQuiz && !selectedQuiz) {
+      handleQuizSelect(lastSelectedQuiz);
+    }
+  }
+
+  async function handleBackToMenu(): Promise<void> {
+    if ($authStore.token && $quizStore.quizManager) {
+      liveStatus = 'Saving progress...';
+      try {
+        await quizStore.saveAndCleanup($authStore.token);
+      } catch (error) {
         console.error('Failed to save progress before returning to menu:', error);
-      });
+        toast.error('Could not save all progress.');
+      } finally {
+        liveStatus = '';
+      }
     }
 
     quizStore.reset();
@@ -175,8 +192,23 @@
     }
   }
 
-  async function logout(): Promise<void> {
+  let showLogoutConfirm = $state(false);
+
+  function handleLogoutClick(): void {
+    if (quizStore.hasPendingChanges()) {
+      showLogoutConfirm = true;
+    } else {
+      performLogout();
+    }
+  }
+
+  async function performLogout(): Promise<void> {
+    showLogoutConfirm = false;
     await authStore.logout();
+  }
+
+  function cancelLogout(): void {
+    showLogoutConfirm = false;
   }
 
   async function handleDeleteAccount(): Promise<void> {
@@ -189,32 +221,62 @@
     }
   }
 
+  async function loadWordLists(): Promise<void> {
+    if (!$authStore.token) return;
+
+    loadError = null;
+    try {
+      await quizStore.loadWordLists($authStore.token);
+    } catch (error) {
+      console.error('Failed to load word lists:', error);
+      const message = error instanceof Error ? error.message : 'Failed to load quizzes';
+      loadError = message;
+    }
+  }
+
   onMount(() => {
+    quizStore.setSaveErrorCallback((message) => {
+      toast.error(message);
+    });
+
+    ttsService.setErrorCallback((message) => {
+      toast.error(message);
+    });
+
     (async () => {
       if ($authStore.token) {
+        await quizStore.restorePending($authStore.token);
         await ttsService.initializeLanguages($authStore.token);
-        try {
-          await quizStore.loadWordLists($authStore.token);
-        } catch (error) {
-          console.error('Failed to load word lists:', error);
-        }
+        await loadWordLists();
       }
       await tick();
       answerInputRef?.focus();
-    })();
+    })().catch((error) => {
+      console.error('Failed to initialize quiz:', error);
+    });
   });
 
   onMount(() => {
-    const handleBeforeUnload = async () => {
-      if ($authStore.token && $quizStore.quizManager) {
-        await quizStore.saveAndCleanup($authStore.token);
+    const handleBeforeUnload = (e: BeforeUnloadEvent): void => {
+      if ($authStore.token && quizStore.hasPendingChanges()) {
+        quizStore.flushImmediately($authStore.token);
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+
+    const handleVisibilityChange = (): void => {
+      if (document.hidden && $authStore.token && $quizStore.quizManager) {
+        quizStore.flushImmediately($authStore.token);
       }
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   });
 
@@ -225,7 +287,7 @@
 
 <ErrorBoundary>
   {#key selectedQuiz}
-    <main class="feed">
+    <main id="main-content" class="feed">
       {#if liveStatus}
         <div class="status-banner" aria-live="polite">{liveStatus}</div>
       {/if}
@@ -244,13 +306,25 @@
             onSelect={handleQuizSelect}
             onBackToMenu={handleBackToMenu}
           />
-          {#if !selectedQuiz}
+          {#if loadError && !selectedQuiz}
+            <ErrorDisplay
+              message={loadError}
+              onRetry={loadWordLists}
+              retryLabel="Reload quizzes"
+            />
+          {:else if !selectedQuiz}
             <div class="text-center p-xl">
               <div class="welcome-icon mb-md">🎯</div>
               <h3>Welcome to LinguaQuiz!</h3>
               <p class="muted mb-lg">Start learning with these features:</p>
               <div class="stack">
-                <a href="https://github.com/nikolay-e/lingua-quiz/blob/main/CLAUDE.md#learning-algorithm" target="_blank" class="feature feature-link">
+                <a
+                  href="https://github.com/nikolay-e/lingua-quiz/blob/main/CLAUDE.md#learning-algorithm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="feature feature-link"
+                  aria-label="Adaptive learning algorithm (opens in new window)"
+                >
                   ✨ Adaptive learning algorithm
                 </a>
                 <div class="feature">📊 Track your progress in real-time</div>
@@ -261,66 +335,74 @@
         </div>
       </FeedCard>
 
-      {#if selectedQuiz}
-        <FeedCard dense title="Translate">
-          <svelte:fragment slot="headerAction">
-            {#if currentQuestion}
-              <TTSButton
-                token={$authStore.token!}
-                text={currentQuestion.questionText}
-                language={currentLanguage}
-              />
+      {#if selectedQuiz && loading && !currentQuestion}
+        <QuizSkeleton />
+      {:else}
+        {#if selectedQuiz}
+          <FeedCard dense title="Translate">
+            <svelte:fragment slot="headerAction">
+              {#if currentQuestion}
+                <TTSButton
+                  token={$authStore.token!}
+                  text={currentQuestion.questionText}
+                  language={currentLanguage}
+                />
+              {/if}
+            </svelte:fragment>
+            <QuestionDisplay {currentQuestion} />
+          </FeedCard>
+        {/if}
+
+        {#if currentQuestion}
+          <FeedCard dense>
+            <AnswerInput
+              bind:this={answerInputRef}
+              value={userAnswer}
+              disabled={isSubmitting}
+              onSubmit={submitAnswer}
+              onValueChange={(v) => (userAnswer = v)}
+            />
+            {#if liveStatus && isSubmitting}
+              <p class="status-hint" aria-live="polite">{liveStatus}</p>
             {/if}
-          </svelte:fragment>
-          <QuestionDisplay {currentQuestion} />
-        </FeedCard>
-      {/if}
+          </FeedCard>
+        {/if}
 
-      {#if currentQuestion}
-        <FeedCard dense>
-          <AnswerInput
-            bind:this={answerInputRef}
-            value={userAnswer}
-            disabled={isSubmitting}
-            onSubmit={submitAnswer}
-            onValueChange={(v) => (userAnswer = v)}
-          />
-          {#if liveStatus && isSubmitting}
-            <p class="status-hint" aria-live="polite">{liveStatus}</p>
-          {/if}
-        </FeedCard>
-      {/if}
+        {#if feedback}
+          <FeedCard dense>
+            <FeedbackDisplay
+              {feedback}
+              {usageExamples}
+              {questionForFeedback}
+              onRetry={retryLastOperation}
+            />
+          </FeedCard>
+        {/if}
 
-      {#if feedback}
-        <FeedCard dense>
-          <FeedbackDisplay
-            {feedback}
-            {usageExamples}
-            {questionForFeedback}
-          />
-        </FeedCard>
-      {/if}
-
-      {#if selectedQuiz}
-        <FeedCard>
-          <LearningProgress
-            selectedQuiz={selectedQuiz || undefined}
-            {currentLevel}
-            {sourceLanguage}
-            {targetLanguage}
-            levelWordLists={$levelWordLists}
-            {foldedLists}
-            onToggleFold={toggleFold}
-          />
-        </FeedCard>
+        {#if selectedQuiz}
+          <FeedCard>
+            <LearningProgress
+              selectedQuiz={selectedQuiz || undefined}
+              {currentLevel}
+              {sourceLanguage}
+              {targetLanguage}
+              levelWordLists={$levelWordLists}
+              {foldedLists}
+              onToggleFold={toggleFold}
+            />
+          </FeedCard>
+        {/if}
       {/if}
 
       <FeedCard dense>
         <UserActions
           {username}
           showDeleteOption={!selectedQuiz}
-          onLogout={logout}
+          onLogout={handleLogoutClick}
           onDeleteAccount={handleDeleteAccount}
+          showLogoutConfirm={showLogoutConfirm}
+          onLogoutConfirm={performLogout}
+          onLogoutCancel={cancelLogout}
         />
       </FeedCard>
     </main>

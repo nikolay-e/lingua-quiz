@@ -26,7 +26,7 @@ limiter = Limiter(key_func=get_remote_address)
     status_code=status.HTTP_201_CREATED,
 )
 @limiter.limit("100/15minutes")
-async def register_user(request: Request, user_data: UserRegistration):
+async def register_user(request: Request, user_data: UserRegistration) -> TokenResponse:
     logger.info(f"Starting registration for user: {user_data.username}")
     try:
         existing_user = query_db("SELECT id FROM users WHERE username = %s", (user_data.username,), one=True)
@@ -81,7 +81,7 @@ async def register_user(request: Request, user_data: UserRegistration):
 
 @router.post("/login", response_model=TokenResponse)
 @limiter.limit("100/15minutes")
-async def login_user(request: Request, user_data: UserLogin):
+async def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
     logger.info(f"Login attempt for user: {user_data.username}")
     try:
         user = query_db(
@@ -124,7 +124,7 @@ async def login_user(request: Request, user_data: UserLogin):
 
 @router.post("/refresh", response_model=TokenResponse)
 @limiter.limit("100/15minutes")
-async def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest):
+async def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest) -> TokenResponse:
     logger.info("Access token refresh attempt")
     try:
         user_data = verify_refresh_token(refresh_request.refresh_token)
@@ -174,7 +174,9 @@ async def refresh_access_token(request: Request, refresh_request: RefreshTokenRe
 
 
 @router.delete("/delete-account")
-async def delete_account(current_user: dict = Depends(get_current_user)):
+async def delete_account(
+    current_user: dict = Depends(get_current_user),
+) -> dict[str, str]:
     logger.info(f"Account deletion request for user: {current_user['username']}")
     try:
         result = execute_write_transaction("DELETE FROM users WHERE id = %s", (current_user["user_id"],))

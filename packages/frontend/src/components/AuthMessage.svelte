@@ -1,18 +1,19 @@
 <script lang="ts">
-  export let message: string;
-  export let variant: 'success' | 'error' | null = null;
-  export let id: string = 'auth-message';
-
-  $: {
-    if (variant === 'success') {
-      messageColor = 'var(--success-color)';
-    } else if (variant === 'error') {
-      messageColor = 'var(--error-color)';
-    } else {
-      messageColor = 'inherit';
-    }
+  interface Props {
+    message: string;
+    variant?: 'success' | 'error' | null;
+    id?: string;
   }
-  let messageColor = 'inherit';
+
+  const { message, variant = null, id = 'auth-message' }: Props = $props();
+
+  function getMessageColor(v: 'success' | 'error' | null): string {
+    if (v === 'success') return 'var(--success-color)';
+    if (v === 'error') return 'var(--error-color)';
+    return 'inherit';
+  }
+
+  const messageColor = $derived(getMessageColor(variant));
 </script>
 
 {#if message}

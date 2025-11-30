@@ -24,15 +24,17 @@
 <div class="quiz-header">
   {#if !selectedQuiz}
     <div class="quiz-select-container">
+      <label for="quiz-select" class="sr-only">Select a quiz</label>
       <select
         id="quiz-select"
         class="quiz-select"
         bind:value={selected}
         onchange={handleQuizSelect}
         disabled={loading}
+        aria-label="Select a quiz to start learning"
       >
         <option value="" disabled>
-          {loading ? 'Loading quizzes...' : '🎯 Select a quiz to start learning'}
+          {loading ? 'Loading quizzes...' : 'Select a quiz to start learning'}
         </option>
         {#each wordLists as list (list.listName)}
           <option value={list.listName}>{list.listName}</option>
@@ -42,7 +44,7 @@
   {:else}
     <div class="selected-quiz-header flex-between gap-md">
       <div class="quiz-info flex-align-center gap-xs">
-        <BookOpen size={18} />
+        <BookOpen size={16} />
         <span class="quiz-name">{selectedQuiz}</span>
       </div>
       <Button variant="outline" size="sm" onclick={onBackToMenu}>

@@ -6,6 +6,8 @@ export interface TTSState {
   isPlaying: boolean;
 }
 
+export type TTSErrorCallback = (message: string) => void;
+
 export class TTSService {
   private currentAudio: HTMLAudioElement | null = null;
   private state: TTSState = {
@@ -14,6 +16,11 @@ export class TTSService {
     isPlaying: false,
   };
   private stateCallbacks: ((state: TTSState) => void)[] = [];
+  private errorCallback: TTSErrorCallback | null = null;
+
+  setErrorCallback(callback: TTSErrorCallback): void {
+    this.errorCallback = callback;
+  }
 
   subscribe(callback: (state: TTSState) => void): () => void {
     this.stateCallbacks.push(callback);
@@ -79,12 +86,14 @@ export class TTSService {
         this.updateState({ isPlaying: false });
         URL.revokeObjectURL(audioUrl);
         this.currentAudio = null;
+        this.errorCallback?.('Audio playback failed. Please try again.');
       };
 
       await this.currentAudio.play();
     } catch (error: unknown) {
       console.error('TTS playback failed:', error);
       this.updateState({ isPlaying: false });
+      this.errorCallback?.('Failed to synthesize speech. Please try again.');
     }
   }
 

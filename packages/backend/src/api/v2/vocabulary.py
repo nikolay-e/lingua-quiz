@@ -2,16 +2,20 @@ import logging
 
 from core.database import query_db
 from core.security import get_current_user
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from schemas.vocabulary import VocabularyItemResponse, WordListResponse
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 from utils import convert_keys_to_camel_case
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["Vocabulary"])
+limiter = Limiter(key_func=get_remote_address)
 
 
 @router.get("/word-lists", response_model=list[WordListResponse])
-async def get_word_lists(current_user: dict = Depends(get_current_user)):
+@limiter.limit("100/minute")
+async def get_word_lists(request: Request, current_user: dict = Depends(get_current_user)) -> list[WordListResponse]:
     logger.debug(f"Fetching word lists for user: {current_user['username']}")
     try:
         active_version_id = query_db("SELECT get_active_version_id()", one=True)
@@ -44,7 +48,8 @@ async def get_word_lists(current_user: dict = Depends(get_current_user)):
 
 
 @router.get("/translations", response_model=list[VocabularyItemResponse])
-async def get_translations(list_name: str, current_user: dict = Depends(get_current_user)):
+@limiter.limit("100/minute")
+async def get_translations(request: Request, list_name: str, current_user: dict = Depends(get_current_user)) -> list[VocabularyItemResponse]:
     try:
         active_version_id = query_db("SELECT get_active_version_id()", one=True)
         if not active_version_id:

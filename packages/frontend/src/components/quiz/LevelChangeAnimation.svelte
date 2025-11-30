@@ -11,15 +11,17 @@
   let animationElement = $state<HTMLDivElement | null>(null);
 
   $effect(() => {
-    if (isVisible && animationElement) {
-      animationElement.style.animation = 'none';
-      animationElement.offsetHeight;
-      animationElement.style.animation = '';
+    if (!isVisible || !animationElement) return;
 
-      setTimeout(() => {
-        onComplete?.();
-      }, 1500);
-    }
+    animationElement.style.animation = 'none';
+    animationElement.offsetHeight;
+    animationElement.style.animation = '';
+
+    const timer = setTimeout(() => {
+      onComplete?.();
+    }, 1500);
+
+    return () => clearTimeout(timer);
   });
 </script>
 

@@ -23,13 +23,15 @@
 </script>
 
 <div class="actions">
+  <label for="answer-input" class="sr-only">Your answer</label>
   <input
+    id="answer-input"
     type="text"
     bind:this={inputElement}
     {value}
     oninput={(e) => onValueChange(e.currentTarget.value)}
     onkeydown={handleKeydown}
-    placeholder="Type your answer…"
+    placeholder="Type your answer..."
     {disabled}
     aria-describedby="word"
     autocomplete="off"

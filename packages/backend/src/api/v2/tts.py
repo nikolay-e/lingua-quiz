@@ -25,7 +25,7 @@ async def synthesize_speech(
     request: Request,
     tts_data: TTSRequest,
     current_user: dict = Depends(get_current_user),
-):
+) -> TTSResponse:
     try:
         tts_service = get_tts_service()
         audio_data = tts_service.synthesize_speech(tts_data.text, tts_data.language)
@@ -56,7 +56,8 @@ async def synthesize_speech(
 
 
 @router.get("/languages", response_model=TTSLanguagesResponse)
-async def get_tts_languages(current_user: dict = Depends(get_current_user)):
+@limiter.limit("100/minute")
+async def get_tts_languages(request: Request, current_user: dict = Depends(get_current_user)) -> TTSLanguagesResponse:
     try:
         tts_service = get_tts_service()
         return TTSLanguagesResponse(

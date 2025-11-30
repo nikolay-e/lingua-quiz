@@ -257,6 +257,10 @@ interface QuizStore {
   ) => Promise<{ success: boolean; actualLevel: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4'; message?: string }>;
   reset: () => void;
   saveAndCleanup: (token: string) => Promise<void>;
+  flushImmediately: (token: string) => void;
+  restorePending: (token: string) => Promise<void>;
+  hasPendingChanges: () => boolean;
+  setSaveErrorCallback: (callback: (message: string) => void) => void;
 }
 
 function createQuizStore(): QuizStore {
@@ -360,6 +364,23 @@ function createQuizStore(): QuizStore {
     saveAndCleanup: async (token: string) => {
       const state = get(store);
       await quizService.saveAndCleanup(token, state.quizManager);
+    },
+
+    flushImmediately: (token: string) => {
+      const state = get(store);
+      quizService.flushImmediately(token, state.quizManager);
+    },
+
+    restorePending: async (token: string) => {
+      await quizService.restorePendingFromStorage(token);
+    },
+
+    hasPendingChanges: () => {
+      return quizService.hasPendingChanges();
+    },
+
+    setSaveErrorCallback: (callback: (message: string) => void) => {
+      quizService.setSaveErrorCallback(callback);
     },
   };
 

@@ -302,7 +302,7 @@
   }
 </script>
 
-<div class="min-h-screen bg-background" style="padding: var(--spacing-md);">
+<main id="main-content" class="min-h-screen bg-background" style="padding: var(--spacing-md);">
   <div class="mx-auto max-w-7xl" style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
     <header class="flex flex-col md:flex-row md:items-center md:justify-between" style="gap: var(--spacing-md);">
       <div>
@@ -589,7 +589,7 @@
       </Card.Root>
     {/if}
   </div>
-</div>
+</main>
 
 <Dialog.Root bind:open={isEditDialogOpen}>
   <Dialog.Content class="max-w-2xl">

@@ -195,6 +195,17 @@ export class QuizManager {
   };
 
   /**
+   * Picks a random item from the first N items of a queue
+   * This adds variety while respecting queue priority order
+   */
+  private pickFromQueue = (queue: string[], windowSize = 3): string | null => {
+    if (queue.length === 0) return null;
+    const maxIndex = Math.min(windowSize, queue.length);
+    const randomIndex = Math.floor(Math.random() * maxIndex);
+    return queue[randomIndex] ?? null;
+  };
+
+  /**
    * Generates a question based on current level and available words
    */
   private generateQuestion = (): QuizQuestion | null => {
@@ -205,26 +216,26 @@ export class QuizManager {
       case 'LEVEL_1':
         // LEVEL_1 practices words from LEVEL_0 and LEVEL_1 queues (prioritize LEVEL_1)
         if (this.queues.LEVEL_1.length > 0) {
-          candidateId = this.queues.LEVEL_1[0] ?? null;
+          candidateId = this.pickFromQueue(this.queues.LEVEL_1);
         } else if (this.queues.LEVEL_0.length > 0) {
-          candidateId = this.queues.LEVEL_0[0] ?? null;
+          candidateId = this.pickFromQueue(this.queues.LEVEL_0);
         }
         break;
       case 'LEVEL_2':
         // LEVEL_2 practices words from LEVEL_2 queue
         if (this.queues.LEVEL_2.length > 0) {
-          candidateId = this.queues.LEVEL_2[0] ?? null;
+          candidateId = this.pickFromQueue(this.queues.LEVEL_2);
         }
         break;
       case 'LEVEL_3':
       case 'LEVEL_4':
         // LEVEL_3 and LEVEL_4 practice words from LEVEL_3+ queues (prioritize LEVEL_3)
         if (this.queues.LEVEL_3.length > 0) {
-          candidateId = this.queues.LEVEL_3[0] ?? null;
+          candidateId = this.pickFromQueue(this.queues.LEVEL_3);
         } else if (this.queues.LEVEL_4.length > 0) {
-          candidateId = this.queues.LEVEL_4[0] ?? null;
+          candidateId = this.pickFromQueue(this.queues.LEVEL_4);
         } else if (this.queues.LEVEL_5.length > 0) {
-          candidateId = this.queues.LEVEL_5[0] ?? null;
+          candidateId = this.pickFromQueue(this.queues.LEVEL_5);
         }
         break;
     }
@@ -422,6 +433,9 @@ export class QuizManager {
     // Insert at calculated position (or end if position > queue length)
     const insertIndex = Math.min(newPosition, currentQueue.length);
     currentQueue.splice(insertIndex, 0, translationId);
+
+    // Update queuePosition in progress entry
+    p.queuePosition = insertIndex;
   };
 
   /**
@@ -445,6 +459,7 @@ export class QuizManager {
       if (prevLevel !== null) {
         this.moveWordToLevel(p.translationId, prevLevel);
         p.recentHistory = [];
+        p.consecutiveCorrect = 0;
       }
     }
   };
@@ -495,7 +510,11 @@ export class QuizManager {
 
     // Update status and add to new queue at the end
     p.level = newLevel;
-    this.queues[newLevel].push(translationId);
+    const newQueue = this.queues[newLevel];
+    newQueue.push(translationId);
+
+    // Update queuePosition to reflect new position
+    p.queuePosition = newQueue.length - 1;
   };
 
   /**

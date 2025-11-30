@@ -1,20 +1,26 @@
 <script lang="ts">
   import { formatForDisplay, type SubmissionResult, type QuizQuestion } from '@lingua-quiz/core';
+  import { Button } from '$lib/components/ui/button';
+  import { RefreshCw } from 'lucide-svelte';
   import type { QuizFeedback } from '../../api-types';
 
   interface Props {
     feedback?: SubmissionResult | QuizFeedback | null;
     usageExamples?: { source: string; target: string } | null;
     questionForFeedback?: QuizQuestion | null;
+    onRetry?: () => void;
   }
 
-  const { feedback = null, usageExamples = null, questionForFeedback = null }: Props = $props();
+  const { feedback = null, usageExamples = null, questionForFeedback = null, onRetry }: Props = $props();
 
   const isSuccess = $derived.by(() => {
     if (!feedback) return false;
     if ('isSuccess' in feedback) return feedback.isSuccess;
     return feedback.isCorrect;
   });
+
+  const isQuizFeedback = $derived(feedback && 'isSuccess' in feedback && !('isCorrect' in feedback));
+  const showRetry = $derived(isQuizFeedback && !isSuccess && onRetry);
 
   const feedbackMessage = $derived.by(() => {
     if (!feedback) return '';
@@ -38,6 +44,14 @@
           <p>{usageExamples.source}</p>
           <p>{usageExamples.target}</p>
         </div>
+      </div>
+    {/if}
+    {#if showRetry}
+      <div class="retry-action">
+        <Button variant="outline" size="sm" onclick={onRetry}>
+          <RefreshCw size={16} />
+          <span>Try again</span>
+        </Button>
       </div>
     {/if}
   </div>
@@ -96,5 +110,11 @@
       border-radius: var(--radius-md);
       margin: 0;
     }
+  }
+
+  .retry-action {
+    padding: var(--spacing-sm);
+    display: flex;
+    justify-content: center;
   }
 </style>

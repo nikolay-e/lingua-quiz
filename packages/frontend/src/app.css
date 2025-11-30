@@ -23,7 +23,7 @@
   --color-text: #333;
   --color-text-muted: rgb(51 51 51 / 75%);
   --color-disabled-bg: #f0f0f0;
-  --color-disabled-text: #aaa;
+  --color-disabled-text: #767676;
   --color-disabled-border: #e0e0e0;
 
   /* shadcn-svelte aliases (required by library) */
@@ -36,6 +36,8 @@
   --color-ring: var(--color-primary);
   --color-card: var(--color-surface);
   --color-card-foreground: var(--color-text);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-text);
   --color-destructive: var(--color-error);
   --color-destructive-foreground: #fff;
   --color-primary-foreground: #ffffff;
@@ -101,6 +103,7 @@
     --error-color: var(--color-error);
     --example-bg: #f9fafb;
     --color-hover-light: #e9eff7;
+    --color-primary-focus: rgb(74 144 226 / 0.3);
   }
 
   /* Desktop: increase spacing */
@@ -128,7 +131,7 @@
     --color-text: #e0e0e0;
     --color-text-muted: rgb(224 224 224 / 75%);
     --color-disabled-bg: #222;
-    --color-disabled-text: #555;
+    --color-disabled-text: #8a8a8a;
     --color-disabled-border: #333;
     --color-primary-foreground: #0f172a;
     --color-secondary-foreground: #0f172a;
@@ -137,10 +140,13 @@
     --color-muted: #27272a;
     --color-muted-foreground: #a1a1aa;
     --color-accent-foreground: #fafafa;
+    --color-popover: var(--color-surface);
+    --color-popover-foreground: var(--color-text);
     --success-color: var(--color-success);
     --error-color: var(--color-error);
     --example-bg: #1f2933;
     --color-hover-light: #2c3a49;
+    --color-primary-focus: rgb(91 163 245 / 0.3);
   }
 }
 
@@ -267,10 +273,10 @@
   :is(input[type='text'], input[type='password'], input[type='email'], select) {
     width: 100%;
     min-height: var(--touch-target-min);
-    padding: var(--spacing-sm) var(--spacing-md) !important;
+    padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
     border: 1px solid var(--color-input-border);
-    font-size: var(--font-size-base) !important;
+    font-size: var(--font-size-base);
     background-color: var(--color-surface);
     color: var(--color-text);
     transition:

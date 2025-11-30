@@ -4,6 +4,8 @@ import type { WordList } from '../../api-types';
 import { STORAGE_KEYS } from '../constants';
 import { safeStorage } from '../utils/safeStorage';
 
+export type SaveErrorCallback = (message: string) => void;
+
 export interface ProgressData {
   level: number;
   queuePosition: number;
@@ -29,10 +31,20 @@ export class QuizService {
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
   private saveInProgress = false;
   private logoutCallback: LogoutCallback | null = null;
+  private saveErrorCallback: SaveErrorCallback | null = null;
+  private lastSaveHadErrors = false;
   private readonly DEBOUNCE_DELAY = 1000;
 
   setLogoutCallback(callback: LogoutCallback): void {
     this.logoutCallback = callback;
+  }
+
+  setSaveErrorCallback(callback: SaveErrorCallback): void {
+    this.saveErrorCallback = callback;
+  }
+
+  hasPendingChanges(): boolean {
+    return this.progressMap.size > 0 || this.debounceTimer !== null;
   }
 
   handleAuthError(error: unknown): AuthErrorInfo {
@@ -240,6 +252,8 @@ export class QuizService {
       this.debounceTimer = null;
     }
 
+    let hadErrors = false;
+
     try {
       const persistencePromises: Promise<void>[] = [];
 
@@ -253,6 +267,7 @@ export class QuizService {
         };
         persistencePromises.push(
           api.saveProgress(token, payload).catch((err: unknown) => {
+            hadErrors = true;
             const errorMessage = err instanceof Error ? err.message : 'Unknown error';
             console.error(`Progress save failed for ${vocabularyItemId}:`, errorMessage, 'Payload:', payload);
             if (!this.progressMap.has(vocabularyItemId)) {
@@ -265,10 +280,21 @@ export class QuizService {
       if (persistencePromises.length > 0) {
         await Promise.allSettled(persistencePromises);
       }
+
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- hadErrors is set in catch callbacks
+      if (hadErrors) {
+        if (!this.lastSaveHadErrors) {
+          this.lastSaveHadErrors = true;
+          this.saveErrorCallback?.('Some progress could not be saved. Will retry automatically.');
+        }
+      } else {
+        this.lastSaveHadErrors = false;
+      }
     } catch (error) {
       const errorInfo = this.handleAuthError(error);
       if (!errorInfo.isUnauthorized) {
         console.error('Bulk save error:', error);
+        this.saveErrorCallback?.('Failed to save progress. Please check your connection.');
       }
       for (const [id, progress] of itemsToSave.entries()) {
         if (!this.progressMap.has(id)) {
@@ -297,6 +323,66 @@ export class QuizService {
       await this.bulkSaveProgress(token, manager).catch((err: unknown) =>
         console.error('Failed to save progress on stop:', err),
       );
+    }
+  }
+
+  persistPendingToStorage(): void {
+    if (this.progressMap.size === 0) return;
+
+    const pending = Array.from(this.progressMap.entries()).map(([id, p]) => ({
+      vocabularyItemId: id,
+      ...p,
+    }));
+
+    try {
+      safeStorage.setItem(STORAGE_KEYS.PENDING_PROGRESS, JSON.stringify(pending));
+    } catch {
+      console.warn('Failed to persist pending progress to storage');
+    }
+  }
+
+  async restorePendingFromStorage(token: string): Promise<void> {
+    const pendingJson = safeStorage.getItem(STORAGE_KEYS.PENDING_PROGRESS);
+    if (pendingJson === null || pendingJson === '') return;
+
+    try {
+      const pending = JSON.parse(pendingJson) as Array<ProgressData & { vocabularyItemId: string }>;
+      safeStorage.removeItem(STORAGE_KEYS.PENDING_PROGRESS);
+
+      for (const item of pending) {
+        if (!this.progressMap.has(item.vocabularyItemId)) {
+          this.progressMap.set(item.vocabularyItemId, {
+            level: item.level,
+            queuePosition: item.queuePosition,
+            correctCount: item.correctCount,
+            incorrectCount: item.incorrectCount,
+            targetLanguage: item.targetLanguage,
+          });
+        }
+      }
+
+      if (this.progressMap.size > 0) {
+        await this.bulkSaveProgress(token, null).catch(() => {
+          this.persistPendingToStorage();
+        });
+      }
+    } catch {
+      safeStorage.removeItem(STORAGE_KEYS.PENDING_PROGRESS);
+    }
+  }
+
+  flushImmediately(token: string, manager: QuizManager | null): void {
+    this.persistPendingToStorage();
+
+    if (this.debounceTimer !== null) {
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = null;
+    }
+
+    if (manager !== null && this.progressMap.size > 0) {
+      this.bulkSaveProgress(token, manager).catch(() => {
+        this.persistPendingToStorage();
+      });
     }
   }
 }
