@@ -58,11 +58,17 @@ describe('Core Functionality Tests', () => {
     it('should maintain consistency during rapid operations', () => {
       const quizManager = new QuizManager(sampleTranslations);
 
+      const correctAnswersMap: Record<string, string> = {
+        'uuid-1': 'привет',
+        'uuid-2': 'мир',
+        'uuid-3': 'кот',
+      };
+
       for (let i = 0; i < 20; i++) {
         const result = quizManager.getNextQuestion();
         if (result.question) {
-          const correctAnswers = ['привет', 'мир', 'кот'];
-          const answer = i % 3 === 0 ? 'wrong' : correctAnswers[result.question.translationId - 1];
+          const correctAnswer = correctAnswersMap[result.question.translationId];
+          const answer = i % 3 === 0 ? 'wrong' : correctAnswer;
           quizManager.submitAnswer(result.question.translationId, answer);
         }
       }
