@@ -17,6 +17,7 @@
   import AnswerInput from '../components/quiz/AnswerInput.svelte';
   import TTSButton from '../components/quiz/TTSButton.svelte';
   import UserActions from '../components/quiz/UserActions.svelte';
+  import ErrorBoundary from '../components/ErrorBoundary.svelte';
 
   let userAnswer = $state('');
   let answerInputRef: ReturnType<typeof AnswerInput> | undefined = $state();
@@ -223,117 +224,119 @@
   });
 </script>
 
-{#key selectedQuiz}
-  <main class="feed">
-    {#if liveStatus}
-      <div class="status-banner" aria-live="polite">{liveStatus}</div>
-    {/if}
-
-    <FeedCard title={selectedQuiz ?? null}>
-      {#if !selectedQuiz}
-        <header class="flex-align-center gap-sm mb-md">
-          <h1 class="logo"><i class="fas fa-language"></i> LinguaQuiz</h1>
-        </header>
+<ErrorBoundary>
+  {#key selectedQuiz}
+    <main class="feed">
+      {#if liveStatus}
+        <div class="status-banner" aria-live="polite">{liveStatus}</div>
       {/if}
-      <div class="stack">
-        <QuizHeader
-          {wordLists}
-          {selectedQuiz}
-          {loading}
-          on:select={handleQuizSelect}
-          on:backToMenu={handleBackToMenu}
-        />
+
+      <FeedCard title={selectedQuiz ?? null}>
         {#if !selectedQuiz}
-          <div class="text-center p-xl">
-            <div class="welcome-icon mb-md">🎯</div>
-            <h3>Welcome to LinguaQuiz!</h3>
-            <p class="muted mb-lg">Start learning with these features:</p>
-            <div class="stack">
-              <a href="https://github.com/nikolay-e/lingua-quiz/blob/main/CLAUDE.md#learning-algorithm" target="_blank" class="feature feature-link">
-                ✨ Adaptive learning algorithm
-              </a>
-              <div class="feature">📊 Track your progress in real-time</div>
-              <div class="feature">🎧 Listen to pronunciations</div>
+          <header class="flex-align-center gap-sm mb-md">
+            <h1 class="logo"><i class="fas fa-language"></i> LinguaQuiz</h1>
+          </header>
+        {/if}
+        <div class="stack">
+          <QuizHeader
+            {wordLists}
+            {selectedQuiz}
+            {loading}
+            on:select={handleQuizSelect}
+            on:backToMenu={handleBackToMenu}
+          />
+          {#if !selectedQuiz}
+            <div class="text-center p-xl">
+              <div class="welcome-icon mb-md">🎯</div>
+              <h3>Welcome to LinguaQuiz!</h3>
+              <p class="muted mb-lg">Start learning with these features:</p>
+              <div class="stack">
+                <a href="https://github.com/nikolay-e/lingua-quiz/blob/main/CLAUDE.md#learning-algorithm" target="_blank" class="feature feature-link">
+                  ✨ Adaptive learning algorithm
+                </a>
+                <div class="feature">📊 Track your progress in real-time</div>
+                <div class="feature">🎧 Listen to pronunciations</div>
+              </div>
             </div>
-          </div>
-        {/if}
-      </div>
-    </FeedCard>
-
-    {#if selectedQuiz}
-      <FeedCard dense title="Translate">
-        <svelte:fragment slot="headerAction">
-          {#if currentQuestion}
-            <TTSButton
-              token={$authStore.token!}
-              text={currentQuestion.questionText}
-              language={currentLanguage}
-            />
           {/if}
-        </svelte:fragment>
-        <QuestionDisplay {currentQuestion} />
+        </div>
       </FeedCard>
-    {/if}
 
-    {#if currentQuestion}
+      {#if selectedQuiz}
+        <FeedCard dense title="Translate">
+          <svelte:fragment slot="headerAction">
+            {#if currentQuestion}
+              <TTSButton
+                token={$authStore.token!}
+                text={currentQuestion.questionText}
+                language={currentLanguage}
+              />
+            {/if}
+          </svelte:fragment>
+          <QuestionDisplay {currentQuestion} />
+        </FeedCard>
+      {/if}
+
+      {#if currentQuestion}
+        <FeedCard dense>
+          <AnswerInput
+            bind:this={answerInputRef}
+            value={userAnswer}
+            disabled={isSubmitting}
+            onSubmit={submitAnswer}
+            onValueChange={(v) => (userAnswer = v)}
+          />
+          {#if liveStatus && isSubmitting}
+            <p class="status-hint" aria-live="polite">{liveStatus}</p>
+          {/if}
+        </FeedCard>
+      {/if}
+
+      {#if feedback}
+        <FeedCard dense>
+          <FeedbackDisplay
+            {feedback}
+            {usageExamples}
+            {questionForFeedback}
+          />
+        </FeedCard>
+      {/if}
+
+      {#if selectedQuiz}
+        <FeedCard>
+          <LearningProgress
+            selectedQuiz={selectedQuiz || undefined}
+            {currentLevel}
+            {sourceLanguage}
+            {targetLanguage}
+            levelWordLists={$levelWordLists}
+            {foldedLists}
+            on:toggleFold={toggleFold}
+          />
+        </FeedCard>
+      {/if}
+
       <FeedCard dense>
-        <AnswerInput
-          bind:this={answerInputRef}
-          value={userAnswer}
-          disabled={isSubmitting}
-          onSubmit={submitAnswer}
-          onValueChange={(v) => userAnswer = v}
-        />
-        {#if liveStatus && isSubmitting}
-          <p class="status-hint" aria-live="polite">{liveStatus}</p>
-        {/if}
-      </FeedCard>
-    {/if}
-
-    {#if feedback}
-      <FeedCard dense>
-        <FeedbackDisplay
-          {feedback}
-          {usageExamples}
-          {questionForFeedback}
+        <UserActions
+          {username}
+          showDeleteOption={!selectedQuiz}
+          onLogout={logout}
+          onDeleteAccount={handleDeleteAccount}
         />
       </FeedCard>
-    {/if}
+    </main>
+  {/key}
 
-    {#if selectedQuiz}
-      <FeedCard>
-        <LearningProgress
-          selectedQuiz={selectedQuiz || undefined}
-          {currentLevel}
-          {sourceLanguage}
-          {targetLanguage}
-          levelWordLists={$levelWordLists}
-          {foldedLists}
-          on:toggleFold={toggleFold}
-        />
-      </FeedCard>
-    {/if}
+  <LevelChangeAnimation
+    bind:isVisible={showLevelAnimation}
+    {isLevelUp}
+    on:complete={() => (showLevelAnimation = false)}
+  />
 
-    <FeedCard dense>
-      <UserActions
-        {username}
-        showDeleteOption={!selectedQuiz}
-        onLogout={logout}
-        onDeleteAccount={handleDeleteAccount}
-      />
-    </FeedCard>
-  </main>
-{/key}
-
-<LevelChangeAnimation
-  bind:isVisible={showLevelAnimation}
-  {isLevelUp}
-  on:complete={() => showLevelAnimation = false}
-/>
-
-<div class="sr-only" aria-live="polite">
-  {liveStatus}
-</div>
+  <div class="sr-only" aria-live="polite">
+    {liveStatus}
+  </div>
+</ErrorBoundary>
 
 <style>
   .logo {
