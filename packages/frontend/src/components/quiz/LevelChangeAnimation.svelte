@@ -1,22 +1,26 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-
-  export let isVisible = false;
-  export let isLevelUp = true;
-
-  const dispatch = createEventDispatcher();
-
-  let animationElement: HTMLDivElement;
-
-  $: if (isVisible && animationElement) {
-    animationElement.style.animation = 'none';
-    animationElement.offsetHeight;
-    animationElement.style.animation = '';
-
-    setTimeout(() => {
-      dispatch('complete');
-    }, 1500);
+  interface Props {
+    isVisible?: boolean;
+    isLevelUp?: boolean;
+    onComplete?: () => void;
   }
+
+  // eslint-disable-next-line prefer-const -- Svelte 5 requires let for $bindable props
+  let { isVisible = $bindable(false), isLevelUp = true, onComplete }: Props = $props();
+
+  let animationElement = $state<HTMLDivElement | null>(null);
+
+  $effect(() => {
+    if (isVisible && animationElement) {
+      animationElement.style.animation = 'none';
+      animationElement.offsetHeight;
+      animationElement.style.animation = '';
+
+      setTimeout(() => {
+        onComplete?.();
+      }, 1500);
+    }
+  });
 </script>
 
 {#if isVisible}

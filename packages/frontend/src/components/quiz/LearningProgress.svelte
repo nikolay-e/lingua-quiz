@@ -1,26 +1,30 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { LEVEL_CONFIG } from '../../lib/config/levelConfig';
   import type { LevelWordLists } from '../../api-types';
 
-  const dispatch = createEventDispatcher<{
-    toggleFold: { levelId: string };
-  }>();
-
-  export let selectedQuiz: string | null | undefined = null;
-  export let currentLevel: string = 'LEVEL_1';
-  export let sourceLanguage: string = '';
-  export let targetLanguage: string = '';
-  export let levelWordLists: LevelWordLists = {};
-  export let foldedLists: Record<string, boolean> = {};
-
-  function getLevelDescription(level: string): string {
-    const levelConfig = LEVEL_CONFIG.find(config => config.key === level);
-    return levelConfig?.description(sourceLanguage, targetLanguage) || '';
+  interface Props {
+    selectedQuiz?: string | null;
+    currentLevel?: string;
+    sourceLanguage?: string;
+    targetLanguage?: string;
+    levelWordLists?: LevelWordLists;
+    foldedLists?: Record<string, boolean>;
+    onToggleFold?: (levelId: string) => void;
   }
 
-  function handleToggleFold(levelId: string): void {
-    dispatch('toggleFold', { levelId });
+  const {
+    selectedQuiz = null,
+    currentLevel = 'LEVEL_1',
+    sourceLanguage = '',
+    targetLanguage = '',
+    levelWordLists = {},
+    foldedLists = {},
+    onToggleFold,
+  }: Props = $props();
+
+  function getLevelDescription(level: string): string {
+    const levelConfig = LEVEL_CONFIG.find((config) => config.key === level);
+    return levelConfig?.description(sourceLanguage, targetLanguage) || '';
   }
 </script>
 
@@ -37,7 +41,7 @@
       <div id="{levelData.id}" class="foldable-section">
         <button
           class="foldable-header"
-          on:click={() => handleToggleFold(levelData.id)}
+          onclick={() => onToggleFold?.(levelData.id)}
           aria-expanded={!foldedLists[levelData.id]}
         >
           <i class="fas fa-{foldedLists[levelData.id] ? 'chevron-right' : 'chevron-down'} fold-icon"></i>

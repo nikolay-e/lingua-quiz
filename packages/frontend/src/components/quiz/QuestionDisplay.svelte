@@ -1,7 +1,11 @@
 <script lang="ts">
   import type { QuizQuestion } from '@lingua-quiz/core';
 
-  export let currentQuestion: QuizQuestion | null = null;
+  interface Props {
+    currentQuestion?: QuizQuestion | null;
+  }
+
+  const { currentQuestion = null }: Props = $props();
 </script>
 
 {#if currentQuestion}

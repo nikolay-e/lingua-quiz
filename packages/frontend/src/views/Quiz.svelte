@@ -51,8 +51,7 @@
 
   const foldedLists = $state<Record<string, boolean>>(initialFoldedLists);
 
-  function toggleFold(event: CustomEvent<{ levelId: string }>) {
-    const {levelId} = event.detail;
+  function toggleFold(levelId: string) {
     foldedLists[levelId] = !foldedLists[levelId];
     safeStorage.setItem(STORAGE_KEYS.FOLDED_LISTS, JSON.stringify(foldedLists));
   }
@@ -86,8 +85,7 @@
     }
   });
 
-  async function handleQuizSelect(event: CustomEvent<{ quiz: string }>): Promise<void> {
-    const {quiz} = event.detail;
+  async function handleQuizSelect(quiz: string): Promise<void> {
 
     quizStore.reset();
     feedback = null;
@@ -242,8 +240,8 @@
             {wordLists}
             {selectedQuiz}
             {loading}
-            on:select={handleQuizSelect}
-            on:backToMenu={handleBackToMenu}
+            onSelect={handleQuizSelect}
+            onBackToMenu={handleBackToMenu}
           />
           {#if !selectedQuiz}
             <div class="text-center p-xl">
@@ -311,7 +309,7 @@
             {targetLanguage}
             levelWordLists={$levelWordLists}
             {foldedLists}
-            on:toggleFold={toggleFold}
+            onToggleFold={toggleFold}
           />
         </FeedCard>
       {/if}
@@ -330,7 +328,7 @@
   <LevelChangeAnimation
     bind:isVisible={showLevelAnimation}
     {isLevelUp}
-    on:complete={() => (showLevelAnimation = false)}
+    onComplete={() => (showLevelAnimation = false)}
   />
 
   <div class="sr-only" aria-live="polite">

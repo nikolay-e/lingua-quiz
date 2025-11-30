@@ -2,33 +2,26 @@
   import { formatForDisplay, type SubmissionResult, type QuizQuestion } from '@lingua-quiz/core';
   import type { QuizFeedback } from '../../api-types';
 
-  export let feedback: SubmissionResult | QuizFeedback | null = null;
-  export let usageExamples: { source: string; target: string } | null = null;
-  export let questionForFeedback: QuizQuestion | null = null;
-
-  $: {
-    if (!feedback) {
-      isSuccess = false;
-    } else if ('isSuccess' in feedback) {
-      // eslint-disable-next-line prefer-destructuring
-      isSuccess = feedback.isSuccess;
-    } else {
-      isSuccess = feedback.isCorrect;
-    }
+  interface Props {
+    feedback?: SubmissionResult | QuizFeedback | null;
+    usageExamples?: { source: string; target: string } | null;
+    questionForFeedback?: QuizQuestion | null;
   }
-  let isSuccess = false;
 
-  $: {
-    if (!feedback) {
-      feedbackMessage = '';
-    } else if ('message' in feedback) {
-      feedbackMessage = feedback.message;
-    } else {
-      const questionText = questionForFeedback?.questionText ?? '';
-      feedbackMessage = `${questionText} = ${formatForDisplay(feedback.correctAnswerText)}`;
-    }
-  }
-  let feedbackMessage = '';
+  const { feedback = null, usageExamples = null, questionForFeedback = null }: Props = $props();
+
+  const isSuccess = $derived.by(() => {
+    if (!feedback) return false;
+    if ('isSuccess' in feedback) return feedback.isSuccess;
+    return feedback.isCorrect;
+  });
+
+  const feedbackMessage = $derived.by(() => {
+    if (!feedback) return '';
+    if ('message' in feedback) return feedback.message;
+    const questionText = questionForFeedback?.questionText ?? '';
+    return `${questionText} = ${formatForDisplay(feedback.correctAnswerText)}`;
+  });
 </script>
 
 {#if feedback}

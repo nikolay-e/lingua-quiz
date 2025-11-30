@@ -1,23 +1,22 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import type { WordList } from '../../api-types';
   import { Button } from '$lib/components/ui/button';
 
-  const dispatch = createEventDispatcher<{ select: { quiz: string }; backToMenu: void }>();
+  interface Props {
+    wordLists?: WordList[];
+    selectedQuiz?: string | null;
+    loading?: boolean;
+    onSelect?: (quiz: string) => void;
+    onBackToMenu?: () => void;
+  }
 
-  export let wordLists: WordList[] = [];
-  export let selectedQuiz: string | null = null;
-  export let loading: boolean = false;
+  const { wordLists = [], selectedQuiz = null, loading = false, onSelect, onBackToMenu }: Props = $props();
 
-  let selected = '';
+  let selected = $state('');
 
   function handleQuizSelect(): void {
     if (!selected) return;
-    dispatch('select', { quiz: selected });
-  }
-
-  function handleBackToMenu(): void {
-    dispatch('backToMenu');
+    onSelect?.(selected);
   }
 </script>
 
@@ -28,7 +27,7 @@
         id="quiz-select"
         class="quiz-select"
         bind:value={selected}
-        on:change={handleQuizSelect}
+        onchange={handleQuizSelect}
         disabled={loading}
       >
         <option value="" disabled>
@@ -45,7 +44,7 @@
         <i class="fas fa-book"></i>
         <span class="quiz-name">{selectedQuiz}</span>
       </div>
-      <Button variant="outline" size="sm" onclick={handleBackToMenu}>
+      <Button variant="outline" size="sm" onclick={onBackToMenu}>
         <i class="fas fa-arrow-left"></i>
         <span>Back to Menu</span>
       </Button>
