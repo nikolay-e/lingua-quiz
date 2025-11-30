@@ -5,15 +5,10 @@
   import type { AdminVocabularyItem } from '../api-types';
   import { toast } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
-  import { Input } from '$lib/components/ui/input';
-  import { Textarea } from '$lib/components/ui/textarea';
-  import { Badge } from '$lib/components/ui/badge';
-  import * as Card from '$lib/components/ui/card';
-  import * as Dialog from '$lib/components/ui/dialog';
-  import * as Select from '$lib/components/ui/select';
-  import * as Table from '$lib/components/ui/table';
-  import { Label } from '$lib/components/ui/label';
-  import { Separator } from '$lib/components/ui/separator';
+  import AdminStats from '../components/admin/AdminStats.svelte';
+  import VocabularySearch from '../components/admin/VocabularySearch.svelte';
+  import VocabularyTable from '../components/admin/VocabularyTable.svelte';
+  import VocabularyDialogs from '../components/admin/VocabularyDialogs.svelte';
 
   let token: string | null = null;
   let searchQuery = $state('');
@@ -102,13 +97,9 @@
 
     results.sort((a, b) => {
       let comparison = 0;
-      if (sortBy === 'source') {
-        comparison = a.sourceText.localeCompare(b.sourceText);
-      } else if (sortBy === 'target') {
-        comparison = a.targetText.localeCompare(b.targetText);
-      } else if (sortBy === 'list') {
-        comparison = a.listName.localeCompare(b.listName);
-      }
+      if (sortBy === 'source') comparison = a.sourceText.localeCompare(b.sourceText);
+      else if (sortBy === 'target') comparison = a.targetText.localeCompare(b.targetText);
+      else if (sortBy === 'list') comparison = a.listName.localeCompare(b.listName);
       return sortOrder === 'asc' ? comparison : -comparison;
     });
 
@@ -142,15 +133,13 @@
     searchLoading = true;
 
     try {
-      searchResults = await adminApi.searchVocabulary(token, searchQuery, 100);
-      if (searchResults.length === 0) {
-        toast.info('No results found');
-      } else {
-        toast.success(`Found ${searchResults.length} items`);
-      }
+      const results = await adminApi.searchVocabulary(token, searchQuery);
+      searchResults = results;
+      toast.success(`Found ${results.length} items`);
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Search failed';
       toast.error(message);
+      searchResults = [];
     } finally {
       searchLoading = false;
     }
@@ -161,10 +150,10 @@
     editForm = {
       sourceText: item.sourceText,
       targetText: item.targetText,
-      sourceUsageExample: item.sourceUsageExample || '',
-      targetUsageExample: item.targetUsageExample || '',
+      sourceUsageExample: item.sourceUsageExample ?? '',
+      targetUsageExample: item.targetUsageExample ?? '',
       listName: item.listName,
-      difficultyLevel: item.difficultyLevel || '',
+      difficultyLevel: item.difficultyLevel ?? '',
     };
     isEditDialogOpen = true;
   }
@@ -176,39 +165,29 @@
 
     try {
       const updates: VocabularyItemUpdate = {};
+
       if (editForm.sourceText !== selectedItem.sourceText) updates.sourceText = editForm.sourceText;
       if (editForm.targetText !== selectedItem.targetText) updates.targetText = editForm.targetText;
-      if (editForm.sourceUsageExample !== (selectedItem.sourceUsageExample || '')) {updates.sourceUsageExample = editForm.sourceUsageExample;}
-      if (editForm.targetUsageExample !== (selectedItem.targetUsageExample || '')) {updates.targetUsageExample = editForm.targetUsageExample;}
+      if (editForm.sourceUsageExample !== (selectedItem.sourceUsageExample ?? '')) {updates.sourceUsageExample = editForm.sourceUsageExample || null;}
+      if (editForm.targetUsageExample !== (selectedItem.targetUsageExample ?? '')) {updates.targetUsageExample = editForm.targetUsageExample || null;}
       if (editForm.listName !== selectedItem.listName) updates.listName = editForm.listName;
-      if (editForm.difficultyLevel !== (selectedItem.difficultyLevel || '')) updates.difficultyLevel = editForm.difficultyLevel;
+      if (editForm.difficultyLevel && editForm.difficultyLevel !== (selectedItem.difficultyLevel ?? '')) {updates.difficultyLevel = editForm.difficultyLevel;}
 
       if (Object.keys(updates).length === 0) {
-        toast.warning('No changes to save');
-        loading = false;
+        toast.info('No changes to save');
+        isEditDialogOpen = false;
         return;
       }
 
-      await adminApi.updateVocabularyItem(token, selectedItem.id, updates);
-      toast.success('Vocabulary item updated successfully');
-
+      const updatedItem = await adminApi.updateVocabularyItem(token, selectedItem.id, updates);
       const index = searchResults.findIndex((item) => item.id === selectedItem?.id);
       const existingItem = searchResults[index];
-      if (index !== -1 && selectedItem && existingItem) {
-        searchResults[index] = {
-          ...existingItem,
-          sourceText: updates.sourceText ?? existingItem.sourceText,
-          targetText: updates.targetText ?? existingItem.targetText,
-          sourceUsageExample: updates.sourceUsageExample ?? existingItem.sourceUsageExample,
-          targetUsageExample: updates.targetUsageExample ?? existingItem.targetUsageExample,
-          listName: updates.listName ?? existingItem.listName,
-          difficultyLevel: updates.difficultyLevel ?? existingItem.difficultyLevel,
-        } as AdminVocabularyItem;
-        searchResults = [...searchResults];
+      if (existingItem !== undefined) {
+        searchResults[index] = { ...existingItem, ...updatedItem };
       }
 
+      toast.success('Item updated successfully');
       isEditDialogOpen = false;
-      selectedItem = null;
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Update failed';
       toast.error(message);
@@ -234,21 +213,23 @@
   async function handleCreateItem() {
     if (!token) return;
 
-    if (!createForm.sourceText.trim() || !createForm.targetText.trim() || !createForm.listName.trim()) {
-      toast.error('Please fill in all required fields');
-      return;
-    }
-
     loading = true;
 
     try {
-      await adminApi.createVocabularyItem(token, createForm);
-      toast.success('Vocabulary item created successfully');
-      isCreateDialogOpen = false;
+      const payload: VocabularyItemCreate = {
+        sourceText: createForm.sourceText,
+        sourceLanguage: createForm.sourceLanguage,
+        targetText: createForm.targetText,
+        targetLanguage: createForm.targetLanguage,
+        listName: createForm.listName,
+        difficultyLevel: createForm.difficultyLevel ?? undefined,
+        sourceUsageExample: createForm.sourceUsageExample || null,
+        targetUsageExample: createForm.targetUsageExample || null,
+      };
 
-      if (searchQuery) {
-        await handleSearch();
-      }
+      await adminApi.createVocabularyItem(token, payload);
+      toast.success('Item created successfully');
+      isCreateDialogOpen = false;
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Create failed';
       toast.error(message);
@@ -270,14 +251,9 @@
 
     try {
       await adminApi.deleteVocabularyItem(token, deletedItemId);
-      toast.success('Vocabulary item deleted successfully');
       searchResults = searchResults.filter((item) => item.id !== deletedItemId);
+      toast.success('Item deleted successfully');
       isDeleteDialogOpen = false;
-
-      if (selectedItem?.id === deletedItemId) {
-        selectedItem = null;
-      }
-
       itemToDelete = null;
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Delete failed';
@@ -294,11 +270,6 @@
       sortBy = column;
       sortOrder = 'asc';
     }
-  }
-
-  function getSortIcon(column: 'source' | 'target' | 'list'): string {
-    if (sortBy !== column) return '↕';
-    return sortOrder === 'asc' ? '↑' : '↓';
   }
 </script>
 
@@ -325,462 +296,40 @@
       </Button>
     </header>
 
-    {#if searchResults.length > 0}
-      <div class="grid md:grid-cols-2 lg:grid-cols-4" style="gap: var(--spacing-md);">
-        <Card.Root>
-          <Card.Header
-            class="flex flex-row items-center justify-between space-y-0"
-            style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
-            <Card.Title class="text-sm font-medium">Total Items</Card.Title>
-            <svg
-              class="size-4 text-muted-foreground"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /><!-- eslint-disable-line max-len -->
-            </svg>
-          </Card.Header>
-          <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
-            <div class="text-2xl font-bold">{stats().total}</div>
-          </Card.Content>
-        </Card.Root>
+    <AdminStats stats={stats()} />
 
-        <Card.Root>
-          <Card.Header
-            class="flex flex-row items-center justify-between space-y-0"
-            style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
-            <Card.Title class="text-sm font-medium">Active Items</Card.Title>
-            <svg
-              class="size-4 text-success"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7" />
-            </svg>
-          </Card.Header>
-          <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
-            <div class="text-2xl font-bold text-success">{stats().active}</div>
-          </Card.Content>
-        </Card.Root>
+    <VocabularySearch
+      bind:searchQuery
+      bind:filterLanguage
+      bind:filterStatus
+      bind:sortBy
+      bind:sortOrder
+      {searchLoading}
+      {languageOptions}
+      {listNameOptions}
+      onsearch={handleSearch} />
 
-        <Card.Root>
-          <Card.Header
-            class="flex flex-row items-center justify-between space-y-0"
-            style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
-            <Card.Title class="text-sm font-medium">Inactive Items</Card.Title>
-            <svg
-              class="size-4 text-destructive"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </Card.Header>
-          <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
-            <div class="text-2xl font-bold text-destructive">{stats().inactive}</div>
-          </Card.Content>
-        </Card.Root>
-
-        <Card.Root>
-          <Card.Header
-            class="flex flex-row items-center justify-between space-y-0"
-            style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
-            <Card.Title class="text-sm font-medium">Languages</Card.Title>
-            <svg
-              class="size-4 text-muted-foreground"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /><!-- eslint-disable-line max-len -->
-            </svg>
-          </Card.Header>
-          <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
-            <div class="text-2xl font-bold">{stats().languageCount}</div>
-          </Card.Content>
-        </Card.Root>
-      </div>
-    {/if}
-
-    <Card.Root>
-      <Card.Header style="padding: var(--spacing-md);">
-        <Card.Title>Search Vocabulary</Card.Title>
-        <Card.Description>Search by source or target text using full-text search</Card.Description>
-      </Card.Header>
-      <Card.Content class="flex flex-col gap-4" style="padding: var(--spacing-md); padding-block-start: 0;">
-        <div class="flex flex-col md:flex-row" style="gap: var(--spacing-md);">
-          <div class="relative flex-1">
-            <Input
-              type="text"
-              placeholder="Enter search term..."
-              bind:value={searchQuery}
-              onkeydown={(e) => e.key === 'Enter' && handleSearch()}
-              class="pr-10"
-            />
-            {#if searchLoading}
-              <div class="absolute right-3 top-1/2 -translate-y-1/2">
-                <svg class="size-5 animate-spin text-primary" fill="none" viewBox="0 0 24 24">
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"></circle>
-                  <!-- eslint-disable-next-line max-len -->
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-              </div>
-            {/if}
-          </div>
-          <Button onclick={handleSearch} disabled={searchLoading || !searchQuery.trim()} class="md:w-32">
-            {searchLoading ? 'Searching...' : 'Search'}
-          </Button>
-        </div>
-
-        {#if searchResults.length > 0}
-          <Separator />
-          <div class="flex flex-col md:flex-row md:items-center" style="gap: var(--spacing-md);">
-            <div class="flex items-center" style="gap: var(--spacing-xs);">
-              <Label class="text-sm font-medium">Language:</Label>
-              <Select.Root type="single" bind:value={filterLanguage}>
-                <Select.Trigger class="w-40">
-                  {filterLanguage === 'all'
-                    ? 'All Languages'
-                    : languageOptions.find((l) => l.value === filterLanguage)?.label ||
-                      filterLanguage}
-                </Select.Trigger>
-                <Select.Content>
-                  <Select.Item value="all">All Languages</Select.Item>
-                  {#each languageOptions as lang (lang.value)}
-                    <Select.Item value={lang.value}>{lang.label}</Select.Item>
-                  {/each}
-                </Select.Content>
-              </Select.Root>
-            </div>
-
-            <div class="flex items-center" style="gap: var(--spacing-xs);">
-              <Label class="text-sm font-medium">Status:</Label>
-              <Select.Root type="single" bind:value={filterStatus}>
-                <Select.Trigger class="w-32">
-                  {#if filterStatus === 'all'}
-                    All
-                  {:else if filterStatus === 'active'}
-                    Active
-                  {:else}
-                    Inactive
-                  {/if}
-                </Select.Trigger>
-                <Select.Content>
-                  <Select.Item value="all">All</Select.Item>
-                  <Select.Item value="active">Active</Select.Item>
-                  <Select.Item value="inactive">Inactive</Select.Item>
-                </Select.Content>
-              </Select.Root>
-            </div>
-
-            <div class="ml-auto text-sm text-muted-foreground">
-              Showing {filteredResults().length} of {searchResults.length} items
-            </div>
-          </div>
-        {/if}
-      </Card.Content>
-    </Card.Root>
-
-    {#if filteredResults().length > 0}
-      <Card.Root>
-        <Card.Header style="padding: var(--spacing-md);">
-          <Card.Title>Search Results</Card.Title>
-        </Card.Header>
-        <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
-          <div class="overflow-x-auto">
-            <Table.Root data-admin-table>
-              <Table.Header>
-                <Table.Row>
-                  <Table.Head class="cursor-pointer hover:text-primary" onclick={() => toggleSort('source')}>
-                    Source Text {getSortIcon('source')}
-                  </Table.Head>
-                  <Table.Head class="cursor-pointer hover:text-primary" onclick={() => toggleSort('target')}>
-                    Target Text {getSortIcon('target')}
-                  </Table.Head>
-                  <Table.Head class="cursor-pointer hover:text-primary" onclick={() => toggleSort('list')}>
-                    List Name {getSortIcon('list')}
-                  </Table.Head>
-                  <Table.Head>Languages</Table.Head>
-                  <Table.Head>Status</Table.Head>
-                  <Table.Head class="text-right">Actions</Table.Head>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {#each filteredResults() as item (item.id)}
-                  <Table.Row class={item.isActive ? '' : 'opacity-50'}>
-                    <Table.Cell class="max-w-xs truncate font-medium" data-label="Source">{item.sourceText}</Table.Cell>
-                    <Table.Cell class="max-w-xs truncate" data-label="Target">{item.targetText}</Table.Cell>
-                    <Table.Cell data-label="List">
-                      <Badge variant="outline">{item.listName}</Badge>
-                    </Table.Cell>
-                    <Table.Cell data-label="Languages">
-                      <div class="flex" style="gap: 4px;">
-                        <Badge variant="secondary" class="text-xs">{item.sourceLanguage.toUpperCase()}</Badge>
-                        <span class="text-muted-foreground">→</span>
-                        <Badge variant="secondary" class="text-xs">{item.targetLanguage.toUpperCase()}</Badge>
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell data-label="Status">
-                      {#if item.isActive}
-                        <Badge class="bg-success text-white">Active</Badge>
-                      {:else}
-                        <Badge variant="destructive">Inactive</Badge>
-                      {/if}
-                    </Table.Cell>
-                    <Table.Cell class="text-right" data-label="Actions">
-                      <div class="flex justify-end" style="gap: var(--spacing-xs);">
-                        <Button variant="outline" size="sm" onclick={() => openEditDialog(item)}>
-                          <svg
-                            class="mr-1 size-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /><!-- eslint-disable-line max-len -->
-                          </svg>
-                          Edit
-                        </Button>
-                        <Button variant="destructive" size="sm" onclick={() => openDeleteDialog(item)}>
-                          <svg
-                            class="mr-1 size-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /><!-- eslint-disable-line max-len -->
-                          </svg>
-                          Delete
-                        </Button>
-                      </div>
-                    </Table.Cell>
-                  </Table.Row>
-                {/each}
-              </Table.Body>
-            </Table.Root>
-          </div>
-        </Card.Content>
-      </Card.Root>
-    {/if}
+    <VocabularyTable
+      items={filteredResults()}
+      {sortBy}
+      {sortOrder}
+      onedit={(e) => openEditDialog(e.detail)}
+      ondelete={(e) => openDeleteDialog(e.detail)}
+      onsort={(e) => toggleSort(e.detail)} />
   </div>
 </main>
 
-<Dialog.Root bind:open={isEditDialogOpen}>
-  <Dialog.Content class="max-w-2xl">
-    <Dialog.Header>
-      <Dialog.Title>Edit Vocabulary Item</Dialog.Title>
-      <Dialog.Description>Make changes to the vocabulary item. Click save when you're done.</Dialog.Description>
-    </Dialog.Header>
-    <div class="grid" style="gap: var(--spacing-md); padding-block: var(--spacing-md);">
-      <div class="grid" style="gap: var(--spacing-xs);">
-        <Label for="edit-source">Source Text</Label>
-        <Input id="edit-source" bind:value={editForm.sourceText} />
-      </div>
-      <div class="grid" style="gap: var(--spacing-xs);">
-        <Label for="edit-target">Target Text</Label>
-        <Input id="edit-target" bind:value={editForm.targetText} />
-      </div>
-      <div class="grid" style="gap: var(--spacing-xs);">
-        <Label for="edit-source-example">Source Example</Label>
-        <Textarea
-          id="edit-source-example"
-          bind:value={editForm.sourceUsageExample}
-          rows={3}
-          placeholder="Enter usage example..." />
-      </div>
-      <div class="grid" style="gap: var(--spacing-xs);">
-        <Label for="edit-target-example">Target Example</Label>
-        <Textarea
-          id="edit-target-example"
-          bind:value={editForm.targetUsageExample}
-          rows={3}
-          placeholder="Enter translation example..." />
-      </div>
-      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
-        <div class="grid" style="gap: var(--spacing-xs);">
-          <Label>List Name</Label>
-          <Select.Root type="single" bind:value={editForm.listName}>
-            <Select.Trigger>
-              {listNameOptions.find((l) => l.value === editForm.listName)?.label || editForm.listName}
-            </Select.Trigger>
-            <Select.Content>
-              {#each listNameOptions as list (list.value)}
-                <Select.Item value={list.value}>{list.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
-        </div>
-        <div class="grid" style="gap: var(--spacing-xs);">
-          <Label>Difficulty Level</Label>
-          <Select.Root type="single" bind:value={editForm.difficultyLevel}>
-            <Select.Trigger>
-              {difficultyOptions.find((d) => d.value === editForm.difficultyLevel)?.label || 'Select'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each difficultyOptions as diff (diff.value)}
-                <Select.Item value={diff.value}>{diff.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
-        </div>
-      </div>
-    </div>
-    <Dialog.Footer>
-      <Button variant="outline" onclick={() => (isEditDialogOpen = false)}>Cancel</Button>
-      <Button onclick={handleUpdateItem} disabled={loading}>
-        {loading ? 'Saving...' : 'Save Changes'}
-      </Button>
-    </Dialog.Footer>
-  </Dialog.Content>
-</Dialog.Root>
-
-<Dialog.Root bind:open={isCreateDialogOpen}>
-  <Dialog.Content class="max-w-2xl">
-    <Dialog.Header>
-      <Dialog.Title>Create New Vocabulary Item</Dialog.Title>
-      <Dialog.Description>Add a new vocabulary item to the database.</Dialog.Description>
-    </Dialog.Header>
-    <div class="grid" style="gap: var(--spacing-md); padding-block: var(--spacing-md);">
-      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
-        <div class="grid" style="gap: var(--spacing-xs);">
-          <Label for="create-source">Source Text *</Label>
-          <Input id="create-source" bind:value={createForm.sourceText} required />
-        </div>
-        <div class="grid" style="gap: var(--spacing-xs);">
-          <Label for="create-target">Target Text *</Label>
-          <Input id="create-target" bind:value={createForm.targetText} required />
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
-        <div class="grid" style="gap: var(--spacing-xs);">
-          <Label>Source Language</Label>
-          <Select.Root type="single" bind:value={createForm.sourceLanguage}>
-            <Select.Trigger>
-              {languageOptions.find((l) => l.value === createForm.sourceLanguage)?.label || 'Select'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each languageOptions as lang (lang.value)}
-                <Select.Item value={lang.value}>{lang.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
-        </div>
-        <div class="grid" style="gap: var(--spacing-xs);">
-          <Label>Target Language</Label>
-          <Select.Root type="single" bind:value={createForm.targetLanguage}>
-            <Select.Trigger>
-              {languageOptions.find((l) => l.value === createForm.targetLanguage)?.label || 'Select'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each languageOptions as lang (lang.value)}
-                <Select.Item value={lang.value}>{lang.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
-        <div class="grid" style="gap: var(--spacing-xs);">
-          <Label>List Name *</Label>
-          <Select.Root type="single" bind:value={createForm.listName}>
-            <Select.Trigger>
-              {listNameOptions.find((l) => l.value === createForm.listName)?.label || 'Select list'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each listNameOptions as list (list.value)}
-                <Select.Item value={list.value}>{list.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
-        </div>
-        <div class="grid" style="gap: var(--spacing-xs);">
-          <Label>Difficulty Level</Label>
-          <Select.Root type="single" bind:value={createForm.difficultyLevel}>
-            <Select.Trigger>
-              {difficultyOptions.find((d) => d.value === createForm.difficultyLevel)?.label || 'Select'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each difficultyOptions as diff (diff.value)}
-                <Select.Item value={diff.value}>{diff.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
-        </div>
-      </div>
-
-      <div class="grid" style="gap: var(--spacing-xs);">
-        <Label for="create-source-example">Source Example</Label>
-        <Textarea
-          id="create-source-example"
-          bind:value={createForm.sourceUsageExample}
-          rows={3}
-          placeholder="Enter usage example..." />
-      </div>
-      <div class="grid" style="gap: var(--spacing-xs);">
-        <Label for="create-target-example">Target Example</Label>
-        <Textarea
-          id="create-target-example"
-          bind:value={createForm.targetUsageExample}
-          rows={3}
-          placeholder="Enter translation example..." />
-      </div>
-    </div>
-    <Dialog.Footer>
-      <Button variant="outline" onclick={() => (isCreateDialogOpen = false)}>Cancel</Button>
-      <Button onclick={handleCreateItem} disabled={loading}>
-        {loading ? 'Creating...' : 'Create Item'}
-      </Button>
-    </Dialog.Footer>
-  </Dialog.Content>
-</Dialog.Root>
-
-<Dialog.Root bind:open={isDeleteDialogOpen}>
-  <Dialog.Content>
-    <Dialog.Header>
-      <Dialog.Title>Delete Vocabulary Item</Dialog.Title>
-      <Dialog.Description>
-        Are you sure you want to delete this item? This will remove it from the list.
-      </Dialog.Description>
-    </Dialog.Header>
-    {#if itemToDelete}
-      <div class="rounded-lg bg-muted p-4">
-        <p class="font-medium">{itemToDelete.sourceText}</p>
-        <p class="text-muted-foreground">{itemToDelete.targetText}</p>
-      </div>
-    {/if}
-    <Dialog.Footer>
-      <Button variant="outline" onclick={() => (isDeleteDialogOpen = false)}>Cancel</Button>
-      <Button variant="destructive" onclick={handleDeleteItem} disabled={loading}>
-        {loading ? 'Deleting...' : 'Delete'}
-      </Button>
-    </Dialog.Footer>
-  </Dialog.Content>
-</Dialog.Root>
+<VocabularyDialogs
+  bind:isEditDialogOpen
+  bind:isCreateDialogOpen
+  bind:isDeleteDialogOpen
+  bind:editForm
+  bind:createForm
+  {itemToDelete}
+  {languageOptions}
+  {difficultyOptions}
+  {listNameOptions}
+  {loading}
+  onupdate={handleUpdateItem}
+  oncreate={handleCreateItem}
+  onconfirmdelete={handleDeleteItem} />

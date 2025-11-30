@@ -26,3 +26,10 @@ class ProgressUpdateRequest(BaseModel):
 
     class Config:
         populate_by_name = True
+
+
+class BulkProgressUpdateRequest(BaseModel):
+    items: list[ProgressUpdateRequest] = Field(..., min_length=1, max_length=1000)
+
+    class Config:
+        populate_by_name = True

@@ -13,7 +13,7 @@ import wordListSchema from '../schemas/word_list.schema.json';
 
 import type { JSONSchema7 } from 'json-schema';
 
-const ajv = new Ajv({ allErrors: true, strict: false } as any);
+const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
 
 type Validator<T> = (data: unknown) => { valid: boolean; errors: string[] };
@@ -27,7 +27,7 @@ const compile = <T>(schema: JSONSchema7): Validator<T> => {
       errors: valid
         ? []
         : (validate.errors ?? []).map((e) => {
-            const path = 'instancePath' in e ? e.instancePath : ((e as any).dataPath ?? '');
+            const path = 'instancePath' in e ? e.instancePath : (e.dataPath ?? '');
             return `${path} ${e.message ?? ''}`.trim();
           }),
     };

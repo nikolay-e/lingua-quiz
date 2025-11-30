@@ -1,6 +1,7 @@
 import datetime
 import hashlib
 import secrets
+import uuid
 
 import bcrypt
 from core.config import JWT_ACCESS_TOKEN_EXPIRES_MINUTES, JWT_REFRESH_TOKEN_EXPIRES_DAYS, JWT_SECRET
@@ -23,8 +24,9 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 def create_access_token(data: dict) -> str:
     to_encode = data.copy()
-    expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=JWT_ACCESS_TOKEN_EXPIRES_MINUTES)
-    to_encode.update({"exp": expire, "iat": datetime.datetime.utcnow()})
+    now = datetime.datetime.now(datetime.UTC)
+    expire = now + datetime.timedelta(minutes=JWT_ACCESS_TOKEN_EXPIRES_MINUTES)
+    to_encode.update({"exp": expire, "iat": now, "nbf": now, "jti": str(uuid.uuid4())})
     encoded: str = jwt.encode(to_encode, JWT_SECRET, algorithm="HS256")
     return encoded
 
@@ -32,7 +34,7 @@ def create_access_token(data: dict) -> str:
 def create_refresh_token() -> tuple[str, str, datetime.datetime]:
     token = secrets.token_urlsafe(32)
     token_hash = hashlib.sha256(token.encode()).hexdigest()
-    expires_at = datetime.datetime.utcnow() + datetime.timedelta(days=JWT_REFRESH_TOKEN_EXPIRES_DAYS)
+    expires_at = datetime.datetime.now(datetime.UTC) + datetime.timedelta(days=JWT_REFRESH_TOKEN_EXPIRES_DAYS)
     return token, token_hash, expires_at
 
 
@@ -55,15 +57,20 @@ def verify_refresh_token(token: str) -> dict:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
 
     if token_data["revoked_at"] is not None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Refresh token has been revoked")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Refresh token has been revoked",
+        )
 
-    if token_data["expires_at"] < datetime.datetime.utcnow():
+    if token_data["expires_at"] < datetime.datetime.now(datetime.UTC):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Refresh token has expired")
 
     return {"user_id": token_data["user_id"]}
 
 
-async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
+async def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+) -> dict:
     try:
         payload = jwt.decode(credentials.credentials, JWT_SECRET, algorithms=["HS256"])
         user_id = payload.get("userId")

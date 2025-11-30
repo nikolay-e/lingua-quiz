@@ -3,6 +3,7 @@ import { QuizManager, type QuizQuestion, type SubmissionResult } from '@lingua-q
 import type { WordList } from '../../api-types';
 import { STORAGE_KEYS } from '../constants';
 import { safeStorage } from '../utils/safeStorage';
+import { logger } from '../utils/logger';
 
 export type SaveErrorCallback = (message: string) => void;
 
@@ -32,7 +33,6 @@ export class QuizService {
   private saveInProgress = false;
   private logoutCallback: LogoutCallback | null = null;
   private saveErrorCallback: SaveErrorCallback | null = null;
-  private lastSaveHadErrors = false;
   private readonly DEBOUNCE_DELAY = 1000;
 
   setLogoutCallback(callback: LogoutCallback): void {
@@ -49,7 +49,7 @@ export class QuizService {
 
   handleAuthError(error: unknown): AuthErrorInfo {
     if (error instanceof Error && error.message === 'Unauthorized') {
-      console.warn('Session expired during quiz operation. Redirecting to login.');
+      logger.warn('Session expired during quiz operation. Redirecting to login.');
       this.logoutCallback?.();
       return { isUnauthorized: true, message: 'Your session has expired. Please log in again.' };
     }
@@ -76,7 +76,7 @@ export class QuizService {
       const currentVersionId = currentVersion.versionId.toString();
 
       if (savedVersion !== null && parseInt(savedVersion) !== currentVersion.versionId) {
-        console.info(`Content version changed: ${savedVersion} -> ${currentVersionId}. Clearing cache.`);
+        logger.info(`Content version changed: ${savedVersion} -> ${currentVersionId}. Clearing cache.`);
         safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
         return true;
       }
@@ -175,7 +175,7 @@ export class QuizService {
 
     const translation = manager.getTranslation(question.translationId);
     if (translation === undefined) {
-      console.error(`Translation not found for ID ${question.translationId}`);
+      logger.error(`Translation not found for ID ${question.translationId}`);
       return feedback;
     }
 
@@ -183,7 +183,7 @@ export class QuizService {
     const currentProgress = quizState.progress.find((p) => p.translationId === question.translationId);
 
     if (currentProgress === undefined) {
-      console.error(`Progress not found for translation ID ${question.translationId}`);
+      logger.error(`Progress not found for translation ID ${question.translationId}`);
       return feedback;
     }
 
@@ -219,13 +219,13 @@ export class QuizService {
         try {
           await this.bulkSaveProgress(token, manager);
         } catch (error) {
-          console.error('Failed to save progress before level change:', error);
+          logger.error('Failed to save progress before level change:', error);
         }
       }
 
       return manager.setLevel(level);
     } catch (error) {
-      console.error('Failed to set level:', error);
+      logger.error('Failed to set level:', error);
       return { success: false, actualLevel: 'LEVEL_1' as const, message: 'Failed to set level' };
     }
   }
@@ -252,48 +252,22 @@ export class QuizService {
       this.debounceTimer = null;
     }
 
-    let hadErrors = false;
-
     try {
-      const persistencePromises: Promise<void>[] = [];
+      const items = Array.from(itemsToSave.entries()).map(([vocabularyItemId, progress]) => ({
+        vocabularyItemId,
+        level: progress.level,
+        queuePosition: progress.queuePosition,
+        correctCount: progress.correctCount,
+        incorrectCount: progress.incorrectCount,
+      }));
 
-      for (const [vocabularyItemId, progress] of itemsToSave.entries()) {
-        const payload = {
-          vocabularyItemId,
-          level: progress.level,
-          queuePosition: progress.queuePosition,
-          correctCount: progress.correctCount,
-          incorrectCount: progress.incorrectCount,
-        };
-        persistencePromises.push(
-          api.saveProgress(token, payload).catch((err: unknown) => {
-            hadErrors = true;
-            const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-            console.error(`Progress save failed for ${vocabularyItemId}:`, errorMessage, 'Payload:', payload);
-            if (!this.progressMap.has(vocabularyItemId)) {
-              this.progressMap.set(vocabularyItemId, progress);
-            }
-          }),
-        );
-      }
-
-      if (persistencePromises.length > 0) {
-        await Promise.allSettled(persistencePromises);
-      }
-
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- hadErrors is set in catch callbacks
-      if (hadErrors) {
-        if (!this.lastSaveHadErrors) {
-          this.lastSaveHadErrors = true;
-          this.saveErrorCallback?.('Some progress could not be saved. Will retry automatically.');
-        }
-      } else {
-        this.lastSaveHadErrors = false;
+      if (items.length > 0) {
+        await api.saveBulkProgress(token, items);
       }
     } catch (error) {
       const errorInfo = this.handleAuthError(error);
       if (!errorInfo.isUnauthorized) {
-        console.error('Bulk save error:', error);
+        logger.error('Bulk save error:', error);
         this.saveErrorCallback?.('Failed to save progress. Please check your connection.');
       }
       for (const [id, progress] of itemsToSave.entries()) {
@@ -321,7 +295,7 @@ export class QuizService {
     }
     if (manager !== null) {
       await this.bulkSaveProgress(token, manager).catch((err: unknown) =>
-        console.error('Failed to save progress on stop:', err),
+        logger.error('Failed to save progress on stop:', err),
       );
     }
   }
@@ -337,7 +311,7 @@ export class QuizService {
     try {
       safeStorage.setItem(STORAGE_KEYS.PENDING_PROGRESS, JSON.stringify(pending));
     } catch {
-      console.warn('Failed to persist pending progress to storage');
+      logger.warn('Failed to persist pending progress to storage');
     }
   }
 

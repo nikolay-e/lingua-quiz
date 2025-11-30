@@ -21,6 +21,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
+    "composite": true,
     "baseUrl": ".",
     "paths": {
       "$lib": ["./src/lib"],
@@ -29,5 +30,5 @@
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "src/app.d.ts"],
   "exclude": ["node_modules", "**/.svelte2tsx-language-server-files"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }, { "path": "../core" }, { "path": "../domain" }]
 }

@@ -1,19 +1,54 @@
 # Version control
 .git/
 .gitignore
+.gitattributes
 
 # Secrets and environment
 .env
 .env.*
+.env.local
+.env.*.local
 *.key
 *.pem
 secrets/
-tests
-
 .age-key.txt
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.npm/
+.pnpm-store/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Testing
+coverage/
+.coverage
+test-reports/
+*.lcov
+playwright-report/
+test-results/
+tests/
 
 # Documentation
 *.md
+!README.md
+!CLAUDE.md
 docs/
 
 # IDE and editor
@@ -34,8 +69,10 @@ logs/
 # CI/CD
 .github/
 .gitlab-ci.yml
+.circleci/
 
 # Temporary files
 *.tmp
 *.bak
 tmp/
+.cache/

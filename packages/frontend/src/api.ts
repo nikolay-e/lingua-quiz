@@ -99,6 +99,30 @@ const api = {
     },
   ): Promise<void> => execute(() => ProgressService.saveUserProgressApiUserProgressPost(payload), token),
 
+  saveBulkProgress: (
+    token: string,
+    items: Array<{
+      vocabularyItemId: string;
+      level: number;
+      queuePosition: number;
+      correctCount: number;
+      incorrectCount: number;
+    }>,
+  ): Promise<void> =>
+    execute(async () => {
+      const response = await fetch('/api/user/progress/bulk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ items }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+      }
+    }, token),
+
   synthesizeSpeech: (token: string, data: { text: string; language: string }): Promise<TTSResponse> =>
     execute(
       () =>

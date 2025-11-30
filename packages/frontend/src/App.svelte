@@ -3,7 +3,6 @@
   import Login from './views/Login.svelte';
   import Register from './views/Register.svelte';
   import Quiz from './views/Quiz.svelte';
-  import Admin from './views/Admin.svelte';
   import EnvironmentInfo from './components/EnvironmentInfo.svelte';
   import { PAGES, type PageType } from './lib/constants';
   import { Toaster } from 'svelte-sonner';
@@ -62,7 +61,10 @@
           Back to Quiz
         </Button>
       </div>
-      <Admin />
+      {#await import('./views/Admin.svelte') then module}
+        {@const AdminView = module.default}
+        <AdminView />
+      {/await}
     {:else}
       {#if auth.isAdmin}
         <div class="admin-nav">

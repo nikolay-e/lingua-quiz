@@ -4,6 +4,7 @@ import logging
 
 from api.v2 import admin, auth, progress, tts, version, vocabulary
 from core.config import CORS_ALLOWED_ORIGINS, PORT
+from core.csrf import validate_origin
 from core.database import query_db
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,6 +33,14 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def csrf_protection(request: Request, call_next):
+    if request.url.path.startswith("/api/"):
+        validate_origin(request)
+    response = await call_next(request)
+    return response
 
 
 @app.middleware("http")
@@ -111,4 +120,4 @@ async def internal_server_error_handler(request: Request, exc):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=PORT)
+    uvicorn.run(app, host="0.0.0.0", port=PORT)  # nosec B104

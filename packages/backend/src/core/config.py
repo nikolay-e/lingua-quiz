@@ -9,8 +9,8 @@ DB_PORT = int(os.getenv("DB_PORT", 5432))
 DB_NAME = os.getenv("POSTGRES_DB", "linguaquiz_db")
 DB_USER = os.getenv("POSTGRES_USER", "linguaquiz_user")
 DB_PASSWORD = os.getenv("POSTGRES_PASSWORD", "password")
-DB_POOL_MIN_SIZE = int(os.getenv("DB_POOL_MIN_SIZE", "5"))
-DB_POOL_MAX_SIZE = int(os.getenv("DB_POOL_MAX_SIZE", "10"))
+DB_POOL_MIN_SIZE = int(os.getenv("DB_POOL_MIN_SIZE", "10"))
+DB_POOL_MAX_SIZE = int(os.getenv("DB_POOL_MAX_SIZE", "30"))
 
 # JWT configuration
 JWT_SECRET = os.getenv("JWT_SECRET")

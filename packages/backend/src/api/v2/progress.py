@@ -3,7 +3,7 @@ import logging
 from core.database import execute_write_transaction, query_db
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from schemas.progress import ProgressUpdateRequest, UserProgressResponse
+from schemas.progress import BulkProgressUpdateRequest, ProgressUpdateRequest, UserProgressResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from utils import convert_keys_to_camel_case
@@ -113,4 +113,58 @@ async def save_user_progress(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to update progress",
+        )
+
+
+@router.post("/progress/bulk")
+@limiter.limit("100/minute")
+async def save_bulk_progress(
+    request: Request,
+    bulk_data: BulkProgressUpdateRequest,
+    current_user: dict = Depends(get_current_user),
+) -> dict[str, str]:
+    try:
+        if not bulk_data.items:
+            return {"message": "No items to update"}
+
+        values_placeholders = []
+        params = []
+
+        for item in bulk_data.items:
+            values_placeholders.append("(%s, %s, %s, %s, %s, %s, NOW())")
+            params.extend(
+                [
+                    current_user["user_id"],
+                    item.vocabulary_item_id,
+                    item.level,
+                    item.queue_position,
+                    item.correct_count,
+                    item.incorrect_count,
+                ]
+            )
+
+        query = f"""
+            INSERT INTO user_progress
+            (user_id, vocabulary_item_id, level, queue_position, correct_count, incorrect_count, last_practiced_at)
+            VALUES {", ".join(values_placeholders)}
+            ON CONFLICT (user_id, vocabulary_item_id)
+            DO UPDATE SET
+                level = EXCLUDED.level,
+                queue_position = EXCLUDED.queue_position,
+                correct_count = EXCLUDED.correct_count,
+                incorrect_count = EXCLUDED.incorrect_count,
+                last_practiced_at = EXCLUDED.last_practiced_at
+        """  # nosec B608
+
+        execute_write_transaction(query, tuple(params))
+
+        return {"message": f"Successfully updated {len(bulk_data.items)} progress items"}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error bulk updating progress: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to bulk update progress",
         )
