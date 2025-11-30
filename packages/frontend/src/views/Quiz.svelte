@@ -16,6 +16,7 @@
   import FeedCard from '../components/FeedCard.svelte';
   import LevelChangeAnimation from '../components/quiz/LevelChangeAnimation.svelte';
   import AnswerInput from '../components/quiz/AnswerInput.svelte';
+  import TTSButton from '../components/quiz/TTSButton.svelte';
 
   let userAnswer = $state('');
   let answerInputRef: ReturnType<typeof AnswerInput> | undefined = $state();
@@ -28,8 +29,6 @@
   let isLevelUp = $state(true);
   let showDeleteConfirm = $state(false);
   let liveStatus = $state('');
-
-  let ttsState = $state<import('../lib/services/ttsService').TTSState>({ isAvailable: false, supportedLanguages: [], isPlaying: false });
 
   const initialFoldedLists: Record<string, boolean> = {};
   LEVEL_CONFIG.forEach(level => {
@@ -80,7 +79,6 @@
   });
 
   const currentLanguage = $derived(direction === 'normal' ? sourceLanguage : targetLanguage);
-  const canUseTTS = $derived(currentQuestion && ttsService.canUseTTS(currentLanguage));
 
   $effect(() => {
     if (answerInputRef && currentQuestion) {
@@ -194,10 +192,6 @@
   }
 
   onMount(() => {
-    const unsubscribeTTS = ttsService.subscribe((state) => {
-      ttsState = state;
-    });
-
     (async () => {
       if ($authStore.token) {
         await ttsService.initializeLanguages($authStore.token);
@@ -210,10 +204,6 @@
       await tick();
       answerInputRef?.focus();
     })();
-
-    return () => {
-      unsubscribeTTS();
-    };
   });
 
   onMount(() => {
@@ -275,22 +265,12 @@
     {#if selectedQuiz}
       <FeedCard dense title="Translate">
         <svelte:fragment slot="headerAction">
-          {#if canUseTTS}
-            <Button
-              variant="outline"
-              size="sm"
-              class={ttsState.isPlaying ? 'speaking' : ''}
-              onclick={() =>
-                currentQuestion &&
-                  ttsService.playTTS($authStore.token!, currentQuestion.questionText, currentLanguage)}
-              disabled={ttsState.isPlaying}
-              aria-label="Listen to pronunciation"
-            >
-              <i class="fas fa-volume-up"></i>
-              <span>{ttsState.isPlaying ? 'Playing…' : 'Listen'}</span>
-            </Button>
-          {:else}
-            <span class="tts-muted" aria-live="polite">TTS unavailable for {currentLanguage || 'this language'}</span>
+          {#if currentQuestion}
+            <TTSButton
+              token={$authStore.token!}
+              text={currentQuestion.questionText}
+              language={currentLanguage}
+            />
           {/if}
         </svelte:fragment>
         <QuestionDisplay {currentQuestion} />
@@ -392,11 +372,6 @@
       transform: translateY(-1px);
       box-shadow: var(--shadow-button-hover);
     }
-  }
-
-  .tts-muted {
-    color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
   }
 
   .delete-confirm {
