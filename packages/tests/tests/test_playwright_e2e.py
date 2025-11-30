@@ -122,7 +122,7 @@ class TestRegistration:
         page.click("button:has-text('Create Account')")
         expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
 
-        page.click("button:has-text('Logout')")
+        page.click("button:has-text('Log Out')")
         expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
         page.click("text=Register here")
@@ -150,7 +150,7 @@ class TestAuthentication:
         page.click("button:has-text('Create Account')")
         expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
 
-        page.click("button:has-text('Logout')")
+        page.click("button:has-text('Log Out')")
         expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
         page.fill("#username", test_user["username"])
