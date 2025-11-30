@@ -297,6 +297,7 @@ function createQuizStore(): QuizStore {
 
   const DEBOUNCE_DELAY = 1000;
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  let saveInProgress = false;
 
   const progressMap = new Map<
     string,
@@ -304,8 +305,15 @@ function createQuizStore(): QuizStore {
   >();
 
   const bulkSaveProgress = async (token: string): Promise<void> => {
+    if (saveInProgress) return;
+
     const state = get(store);
     if (state.quizManager === null || progressMap.size === 0) return;
+
+    saveInProgress = true;
+
+    const itemsToSave = new Map(progressMap);
+    progressMap.clear();
 
     if (debounceTimer !== null) {
       clearTimeout(debounceTimer);
@@ -315,7 +323,7 @@ function createQuizStore(): QuizStore {
     try {
       const persistencePromises: Promise<void>[] = [];
 
-      for (const [vocabularyItemId, progress] of progressMap.entries()) {
+      for (const [vocabularyItemId, progress] of itemsToSave.entries()) {
         const payload = {
           vocabularyItemId,
           level: progress.level,
@@ -327,20 +335,28 @@ function createQuizStore(): QuizStore {
           api.saveProgress(token, payload).catch((err: unknown) => {
             const errorMessage = err instanceof Error ? err.message : 'Unknown error';
             console.error(`Progress save failed for ${vocabularyItemId}:`, errorMessage, 'Payload:', payload);
-            return Promise.resolve();
+            if (!progressMap.has(vocabularyItemId)) {
+              progressMap.set(vocabularyItemId, progress);
+            }
           }),
         );
       }
 
       if (persistencePromises.length > 0) {
         await Promise.allSettled(persistencePromises);
-        progressMap.clear();
       }
     } catch (error) {
       const errorInfo = handleQuiz401Error(error);
       if (!errorInfo.isUnauthorized) {
         console.error('Bulk save error:', error);
       }
+      for (const [id, progress] of itemsToSave.entries()) {
+        if (!progressMap.has(id)) {
+          progressMap.set(id, progress);
+        }
+      }
+    } finally {
+      saveInProgress = false;
     }
   };
 
