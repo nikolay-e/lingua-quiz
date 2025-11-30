@@ -15,9 +15,10 @@
   import LearningProgress from '../components/quiz/LearningProgress.svelte';
   import FeedCard from '../components/FeedCard.svelte';
   import LevelChangeAnimation from '../components/quiz/LevelChangeAnimation.svelte';
+  import AnswerInput from '../components/quiz/AnswerInput.svelte';
 
   let userAnswer = $state('');
-  let answerInput = $state<HTMLInputElement | null>(null);
+  let answerInputRef: ReturnType<typeof AnswerInput> | undefined = $state();
   let feedback = $state<SubmissionResult | QuizFeedback | null>(null);
   let usageExamples = $state<{ source: string; target: string } | null>(null);
   let isSubmitting = $state(false);
@@ -82,8 +83,8 @@
   const canUseTTS = $derived(currentQuestion && ttsService.canUseTTS(currentLanguage));
 
   $effect(() => {
-    if (answerInput && currentQuestion) {
-      answerInput.focus();
+    if (answerInputRef && currentQuestion) {
+      answerInputRef.focus();
     }
   });
 
@@ -109,7 +110,7 @@
         feedback = { message: 'No questions available for this quiz.', isSuccess: false } as QuizFeedback;
       }
       await tick();
-      if (answerInput) answerInput.focus();
+      answerInputRef?.focus();
     } catch (error: unknown) {
       console.error('Failed to start quiz:', error);
       const errorMessage = error instanceof Error ? error.message : 'Failed to start quiz. Please try again.';
@@ -165,7 +166,7 @@
         quizStore.getNextQuestion();
 
         await tick();
-        if (answerInput) answerInput.focus();
+        answerInputRef?.focus();
       }
     } catch (error: unknown) {
       console.error('Error submitting answer:', error);
@@ -174,12 +175,6 @@
     } finally {
       isSubmitting = false;
       liveStatus = '';
-    }
-  }
-
-  function handleKeydown(e: KeyboardEvent): void {
-    if (e.key === 'Enter' && !isSubmitting) {
-      submitAnswer();
     }
   }
 
@@ -213,7 +208,7 @@
         }
       }
       await tick();
-      if (answerInput) answerInput.focus();
+      answerInputRef?.focus();
     })();
 
     return () => {
@@ -304,29 +299,13 @@
 
     {#if currentQuestion}
       <FeedCard dense>
-        <div class="actions">
-          <input
-            type="text"
-            bind:this={answerInput}
-            bind:value={userAnswer}
-            onkeydown={handleKeydown}
-            placeholder="Type your answer…"
-            disabled={isSubmitting}
-            aria-describedby="word"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="false"
-          />
-          <Button
-            type="button"
-            variant="default"
-            onclick={submitAnswer}
-            disabled={isSubmitting}
-          >
-            <i class="fas fa-paper-plane"></i> {isSubmitting ? 'Submitting…' : 'Submit'}
-          </Button>
-        </div>
+        <AnswerInput
+          bind:this={answerInputRef}
+          value={userAnswer}
+          disabled={isSubmitting}
+          onSubmit={submitAnswer}
+          onValueChange={(v) => userAnswer = v}
+        />
         {#if liveStatus && isSubmitting}
           <p class="status-hint" aria-live="polite">{liveStatus}</p>
         {/if}
