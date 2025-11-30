@@ -1,6 +1,7 @@
 <script lang="ts">
   import { LEVEL_CONFIG } from '../../lib/config/levelConfig';
   import type { LevelWordLists } from '../../api-types';
+  import { ChevronRight, ChevronDown } from 'lucide-svelte';
 
   interface Props {
     selectedQuiz?: string | null;
@@ -44,8 +45,15 @@
           onclick={() => onToggleFold?.(levelData.id)}
           aria-expanded={!foldedLists[levelData.id]}
         >
-          <i class="fas fa-{foldedLists[levelData.id] ? 'chevron-right' : 'chevron-down'} fold-icon"></i>
-          <i class="{levelData.icon}"></i> {levelData.label} ({levelData.count})
+          <span class="fold-icon">
+            {#if foldedLists[levelData.id]}
+              <ChevronRight size={14} />
+            {:else}
+              <ChevronDown size={14} />
+            {/if}
+          </span>
+          <levelData.icon size={16} />
+          {levelData.label} ({levelData.count})
         </button>
         {#if !foldedLists[levelData.id]}
           {#if levelData.words.length > 0}

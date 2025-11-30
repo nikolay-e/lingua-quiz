@@ -1,17 +1,24 @@
 <script lang="ts">
   import FeedCard from './FeedCard.svelte';
+  import { Languages } from 'lucide-svelte';
+
+  interface Props {
+    children: import('svelte').Snippet;
+  }
+
+  const { children }: Props = $props();
 </script>
 
 <main class="feed">
   <FeedCard dense>
     <header>
-      <h1><i class="fas fa-language"></i> LinguaQuiz</h1>
+      <h1><Languages size={28} /> LinguaQuiz</h1>
     </header>
   </FeedCard>
 
   <FeedCard>
     <div class="auth-content">
-      <slot />
+      {@render children()}
     </div>
   </FeedCard>
 </main>

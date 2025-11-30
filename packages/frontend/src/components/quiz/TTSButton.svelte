@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { Button } from '$lib/components/ui/button';
   import { ttsService, type TTSState } from '../../lib/services/ttsService';
+  import { Volume2 } from 'lucide-svelte';
 
   interface Props {
     token: string;
@@ -38,7 +39,7 @@
     onclick={handlePlay}
     disabled={ttsState.isPlaying}
     aria-label="Listen to pronunciation">
-    <i class="fas fa-volume-up"></i>
+    <Volume2 size={16} />
     <span>{ttsState.isPlaying ? 'Playing…' : 'Listen'}</span>
   </Button>
 {:else}

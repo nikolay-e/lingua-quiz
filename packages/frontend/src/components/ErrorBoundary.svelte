@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Button } from '$lib/components/ui/button';
+  import { RotateCcw } from 'lucide-svelte';
 
   interface Props {
     children: import('svelte').Snippet;
@@ -47,7 +48,7 @@
       <h2>Something went wrong</h2>
       <p class="error-message">{errorMessage}</p>
       <Button onclick={retry} variant="default">
-        <i class="fas fa-redo"></i> Reload Page
+        <RotateCcw size={16} /> Reload Page
       </Button>
     </div>
   </div>

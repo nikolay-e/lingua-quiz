@@ -1,15 +1,29 @@
 <script lang="ts">
   import { Input } from '$lib/components/ui/input';
   import { Label } from '$lib/components/ui/label';
+  import { Eye, EyeOff } from 'lucide-svelte';
 
-  export let value: string;
-  export let placeholder: string = '';
-  export let disabled: boolean = false;
-  export let id: string = 'password';
-  export let label: string = '';
-  export let autocomplete: 'current-password' | 'new-password' = 'current-password';
+  interface Props {
+    value: string;
+    placeholder?: string;
+    disabled?: boolean;
+    id?: string;
+    label?: string;
+    autocomplete?: 'current-password' | 'new-password';
+  }
 
-  let showPassword = false;
+  /* eslint-disable prefer-const */
+  let {
+    value = $bindable(''),
+    placeholder = '',
+    disabled = false,
+    id = 'password',
+    label = '',
+    autocomplete = 'current-password',
+  }: Props = $props();
+  /* eslint-enable prefer-const */
+
+  let showPassword = $state(false);
 
   function togglePasswordVisibility() {
     showPassword = !showPassword;
@@ -35,6 +49,10 @@
     onclick={togglePasswordVisibility}
     aria-label={showPassword ? 'Hide password' : 'Show password'}
   >
-    <i class="fas fa-eye{showPassword ? '-slash' : ''}"></i>
+    {#if showPassword}
+      <EyeOff size={18} />
+    {:else}
+      <Eye size={18} />
+    {/if}
   </button>
 </div>

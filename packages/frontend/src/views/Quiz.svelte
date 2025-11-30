@@ -18,6 +18,7 @@
   import TTSButton from '../components/quiz/TTSButton.svelte';
   import UserActions from '../components/quiz/UserActions.svelte';
   import ErrorBoundary from '../components/ErrorBoundary.svelte';
+  import { Languages } from 'lucide-svelte';
 
   let userAnswer = $state('');
   let answerInputRef: ReturnType<typeof AnswerInput> | undefined = $state();
@@ -232,7 +233,7 @@
       <FeedCard title={selectedQuiz ?? null}>
         {#if !selectedQuiz}
           <header class="flex-align-center gap-sm mb-md">
-            <h1 class="logo"><i class="fas fa-language"></i> LinguaQuiz</h1>
+            <h1 class="logo"><Languages size={28} /> LinguaQuiz</h1>
           </header>
         {/if}
         <div class="stack">

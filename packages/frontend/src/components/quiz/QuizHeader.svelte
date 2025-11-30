@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { WordList } from '../../api-types';
   import { Button } from '$lib/components/ui/button';
+  import { BookOpen, ArrowLeft } from 'lucide-svelte';
 
   interface Props {
     wordLists?: WordList[];
@@ -41,11 +42,11 @@
   {:else}
     <div class="selected-quiz-header flex-between gap-md">
       <div class="quiz-info flex-align-center gap-xs">
-        <i class="fas fa-book"></i>
+        <BookOpen size={18} />
         <span class="quiz-name">{selectedQuiz}</span>
       </div>
       <Button variant="outline" size="sm" onclick={onBackToMenu}>
-        <i class="fas fa-arrow-left"></i>
+        <ArrowLeft size={16} />
         <span>Back to Menu</span>
       </Button>
     </div>
@@ -84,7 +85,7 @@
   }
 
   .quiz-info {
-    i {
+    :global(svg) {
       color: var(--primary-color);
     }
   }

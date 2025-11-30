@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
+  import { LogOut, Trash2 } from 'lucide-svelte';
 
   interface Props {
     username: string | null;
@@ -20,7 +21,7 @@
 
 <div class="actions">
   <Button variant="outline" onclick={onLogout} class="w-full">
-    <i class="fas fa-sign-out-alt"></i> Logout ({username})
+    <LogOut size={16} /> Logout ({username})
   </Button>
   {#if showDeleteOption}
     {#if showDeleteConfirm}
@@ -35,7 +36,7 @@
       </div>
     {:else}
       <Button variant="destructive" onclick={() => (showDeleteConfirm = true)} class="w-full">
-        <i class="fas fa-trash-alt"></i> Delete Account
+        <Trash2 size={16} /> Delete Account
       </Button>
     {/if}
   {/if}

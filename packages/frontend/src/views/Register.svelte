@@ -9,6 +9,7 @@
   import { Input } from '$lib/components/ui/input';
   import { Button } from '$lib/components/ui/button';
   import { Label } from '$lib/components/ui/label';
+  import { UserPlus } from 'lucide-svelte';
 
   interface PasswordRequirement {
     id: string;
@@ -109,7 +110,7 @@
     {/if}
 
     <Button type="submit" disabled={!isPasswordValid || isLoading} class="w-full">
-      <i class="fas fa-user-plus"></i> Create Account
+      <UserPlus size={16} /> Create Account
     </Button>
   </form>
 

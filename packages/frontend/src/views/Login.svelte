@@ -8,6 +8,7 @@
   import { Input } from '$lib/components/ui/input';
   import { Button } from '$lib/components/ui/button';
   import { Label } from '$lib/components/ui/label';
+  import { LogIn } from 'lucide-svelte';
 
   const dispatch = createEventDispatcher<{ navigate: { page: 'register' } }>();
 
@@ -60,7 +61,7 @@
     />
 
     <Button type="submit" disabled={isLoading} class="w-full">
-      <i class="fas fa-sign-in-alt"></i> Sign In
+      <LogIn size={16} /> Sign In
     </Button>
   </form>
 

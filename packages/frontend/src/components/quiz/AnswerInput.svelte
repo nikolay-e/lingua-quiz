@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
+  import { Send } from 'lucide-svelte';
 
   interface Props {
     value: string;
@@ -41,7 +42,7 @@
     variant="default"
     onclick={onSubmit}
     {disabled}>
-    <i class="fas fa-paper-plane"></i>
+    <Send size={16} />
     {disabled ? 'Submitting…' : 'Submit'}
   </Button>
 </div>
