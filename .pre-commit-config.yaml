@@ -187,6 +187,13 @@ repos:
         files: \.(js|jsx|ts|tsx|svelte)$
         pass_filenames: false
 
+      - id: jscpd
+        name: Copy-paste detection (jscpd)
+        entry: npx jscpd --min-lines 6 --min-tokens 50 --threshold 0 packages/
+        language: system
+        files: \.(js|jsx|ts|tsx|svelte|py)$
+        pass_filenames: false
+
       - id: typescript-check
         name: TypeScript type checking
         entry: npm run typecheck
