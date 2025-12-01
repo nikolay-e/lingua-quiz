@@ -32,7 +32,7 @@ login_limiter = Limiter(key_func=get_username_for_rate_limit)
     response_model=TokenResponse,
     status_code=status.HTTP_201_CREATED,
 )
-@limiter.limit("100/15minutes")
+@limiter.limit("3/minute;10/hour")
 @handle_api_errors("Registration")
 async def register_user(request: Request, user_data: UserRegistration) -> TokenResponse:
     logger.info(f"Starting registration for user: {user_data.username}")
