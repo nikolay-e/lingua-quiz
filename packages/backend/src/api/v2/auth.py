@@ -67,118 +67,94 @@ async def register_user(request: Request, user_data: UserRegistration) -> TokenR
 
 @router.post("/login", response_model=TokenResponse)
 @limiter.limit("100/15minutes")
+@handle_api_errors("Login")
 async def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
     logger.info(f"Login attempt for user: {user_data.username}")
-    try:
-        user = query_db(
-            "SELECT id, username, password, is_admin FROM users WHERE username = %s",
-            (user_data.username,),
-            one=True,
+    user = query_db(
+        "SELECT id, username, password, is_admin FROM users WHERE username = %s",
+        (user_data.username,),
+        one=True,
+    )
+
+    if not user or not verify_password(user_data.password, user["password"]):
+        logger.warning(f"Invalid login attempt for user: {user_data.username}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password",
         )
 
-        if not user or not verify_password(user_data.password, user["password"]):
-            logger.warning(f"Invalid login attempt for user: {user_data.username}")
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid username or password",
-            )
+    is_admin = user.get("is_admin", False)
+    token = create_access_token(data={"userId": user["id"], "sub": user["username"], "isAdmin": is_admin})
 
-        is_admin = user.get("is_admin", False)
-        token = create_access_token(data={"userId": user["id"], "sub": user["username"], "isAdmin": is_admin})
+    refresh_token, token_hash, expires_at = create_refresh_token()
+    execute_write_transaction(
+        "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
+        (user["id"], token_hash, expires_at),
+    )
 
-        refresh_token, token_hash, expires_at = create_refresh_token()
-        execute_write_transaction(
-            "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
-            (user["id"], token_hash, expires_at),
-        )
+    logger.info(f"Successful login for user: {user_data.username}")
 
-        logger.info(f"Successful login for user: {user_data.username}")
-
-        return TokenResponse(
-            token=token,
-            refresh_token=refresh_token,
-            expires_in="15m",
-            user=UserResponse(id=user["id"], username=user["username"], is_admin=is_admin),
-        )
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Login error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Login failed")
+    return TokenResponse(
+        token=token,
+        refresh_token=refresh_token,
+        expires_in="15m",
+        user=UserResponse(id=user["id"], username=user["username"], is_admin=is_admin),
+    )
 
 
 @router.post("/refresh", response_model=TokenResponse)
 @limiter.limit("100/15minutes")
+@handle_api_errors("Token refresh")
 async def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest) -> TokenResponse:
     logger.info("Access token refresh attempt")
-    try:
-        user_data = verify_refresh_token(refresh_request.refresh_token)
+    user_data = verify_refresh_token(refresh_request.refresh_token)
 
-        user = query_db(
-            "SELECT id, username, is_admin FROM users WHERE id = %s",
-            (user_data["user_id"],),
-            one=True,
-        )
+    user = query_db(
+        "SELECT id, username, is_admin FROM users WHERE id = %s",
+        (user_data["user_id"],),
+        one=True,
+    )
 
-        if not user:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
 
-        is_admin = user.get("is_admin", False)
-        new_access_token = create_access_token(data={"userId": user["id"], "sub": user["username"], "isAdmin": is_admin})
+    is_admin = user.get("is_admin", False)
+    new_access_token = create_access_token(data={"userId": user["id"], "sub": user["username"], "isAdmin": is_admin})
 
-        new_refresh_token, token_hash, expires_at = create_refresh_token()
-        old_token_hash = hashlib.sha256(refresh_request.refresh_token.encode()).hexdigest()
+    new_refresh_token, token_hash, expires_at = create_refresh_token()
+    old_token_hash = hashlib.sha256(refresh_request.refresh_token.encode()).hexdigest()
 
-        execute_write_transaction(
-            "UPDATE refresh_tokens SET revoked_at = NOW() WHERE token_hash = %s",
-            (old_token_hash,),
-        )
+    execute_write_transaction(
+        "UPDATE refresh_tokens SET revoked_at = NOW() WHERE token_hash = %s",
+        (old_token_hash,),
+    )
 
-        execute_write_transaction(
-            "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
-            (user["id"], token_hash, expires_at),
-        )
+    execute_write_transaction(
+        "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
+        (user["id"], token_hash, expires_at),
+    )
 
-        logger.info(f"Access token refreshed for user: {user['username']}")
+    logger.info(f"Access token refreshed for user: {user['username']}")
 
-        return TokenResponse(
-            token=new_access_token,
-            refresh_token=new_refresh_token,
-            expires_in="15m",
-            user=UserResponse(id=user["id"], username=user["username"], is_admin=is_admin),
-        )
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Token refresh error: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Token refresh failed",
-        )
+    return TokenResponse(
+        token=new_access_token,
+        refresh_token=new_refresh_token,
+        expires_in="15m",
+        user=UserResponse(id=user["id"], username=user["username"], is_admin=is_admin),
+    )
 
 
 @router.delete("/delete-account")
+@handle_api_errors("Account deletion")
 async def delete_account(
     current_user: dict = Depends(get_current_user),
 ) -> dict[str, str]:
     logger.info(f"Account deletion request for user: {current_user['username']}")
-    try:
-        result = execute_write_transaction("DELETE FROM users WHERE id = %s", (current_user["user_id"],))
+    result = execute_write_transaction("DELETE FROM users WHERE id = %s", (current_user["user_id"],))
 
-        if result == 0:
-            logger.warning(f"Account deletion failed - user not found: {current_user['username']}")
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    if result == 0:
+        logger.warning(f"Account deletion failed - user not found: {current_user['username']}")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
-        logger.info(f"Account successfully deleted for user: {current_user['username']}")
-        return {"message": "Account deleted successfully"}
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Account deletion error: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to delete account",
-        )
+    logger.info(f"Account successfully deleted for user: {current_user['username']}")
+    return {"message": "Account deleted successfully"}
