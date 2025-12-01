@@ -96,7 +96,7 @@
     { value: 'spanish-russian-b2', label: 'Spanish-Russian B2' },
   ];
 
-  const filteredResults = $derived(() => {
+  const filteredResults = $derived.by(() => {
     let results = [...searchResults];
 
     if (filterLanguage !== 'all') {
@@ -120,7 +120,7 @@
     return results;
   });
 
-  const stats = $derived(() => {
+  const stats = $derived.by(() => {
     const total = searchResults.length;
     const active = searchResults.filter((item) => item.isActive).length;
     const inactive = total - active;
