@@ -310,7 +310,7 @@
       </Button>
     </header>
 
-    <AdminStats stats={stats()} />
+    <AdminStats {stats} />
 
     <VocabularySearch
       bind:searchQuery
@@ -324,7 +324,7 @@
       onsearch={handleSearch} />
 
     <VocabularyTable
-      items={filteredResults()}
+      items={filteredResults}
       {sortBy}
       {sortOrder}
       onedit={(e) => openEditDialog(e.detail)}

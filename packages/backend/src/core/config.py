@@ -27,7 +27,7 @@ def _load_jwt_secret() -> str:
         except Exception as e:
             logger.error("Failed to read JWT_SECRET from file %s: %s", secret_file, e)
 
-    secret = os.getenv("JWT_SECRET")
+    secret = os.getenv("JWT_SECRET")  # type: ignore[assignment]
     if secret:
         logger.warning(
             "Using JWT_SECRET from environment variable. For production, use Kubernetes Secrets mounted at %s",

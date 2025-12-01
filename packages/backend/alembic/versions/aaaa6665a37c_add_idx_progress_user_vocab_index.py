@@ -8,7 +8,7 @@ Create Date: 2025-12-01 10:34:46.273699
 
 from collections.abc import Sequence
 
-from alembic import op
+from alembic import op  # type: ignore
 
 # revision identifiers, used by Alembic.
 revision: str = "aaaa6665a37c"

@@ -34,7 +34,7 @@ def handle_api_errors(
         @wraps(func)
         async def async_wrapper(*args: Any, **kwargs: Any) -> T:
             try:
-                return await func(*args, **kwargs)
+                return await func(*args, **kwargs)  # type: ignore[misc,no-any-return]
             except HTTPException:
                 raise
             except Exception as e:
