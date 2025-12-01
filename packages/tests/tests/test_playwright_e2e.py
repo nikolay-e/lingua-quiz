@@ -35,6 +35,7 @@ def test_user():
 class TestLoginPage:
     def test_login_page_initial_state(self, page: Page):
         page.goto(FRONTEND_URL)
+        page.wait_for_load_state("networkidle")
 
         expect(page.locator("h2")).to_have_text("Sign In")
         expect(page.locator("#username")).to_be_visible()
