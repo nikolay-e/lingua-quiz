@@ -14,6 +14,19 @@ router = APIRouter(prefix="/api/auth", tags=["Authentication"])
 limiter = Limiter(key_func=get_remote_address)
 
 
+def get_username_for_rate_limit(request: Request) -> str:
+    """Extract username from login request body for per-user rate limiting."""
+    try:
+        if hasattr(request.state, "username"):
+            return f"login:{request.state.username}"
+        return f"ip:{get_remote_address(request)}"
+    except Exception:
+        return f"ip:{get_remote_address(request)}"
+
+
+login_limiter = Limiter(key_func=get_username_for_rate_limit)
+
+
 @router.post(
     "/register",
     response_model=TokenResponse,
@@ -66,9 +79,10 @@ async def register_user(request: Request, user_data: UserRegistration) -> TokenR
 
 
 @router.post("/login", response_model=TokenResponse)
-@limiter.limit("100/15minutes")
+@login_limiter.limit("5/minute;10/hour")
 @handle_api_errors("Login")
 async def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
+    request.state.username = user_data.username
     logger.info(f"Login attempt for user: {user_data.username}")
     user = query_db(
         "SELECT id, username, password, is_admin FROM users WHERE username = %s",
