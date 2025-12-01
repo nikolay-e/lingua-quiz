@@ -285,7 +285,18 @@
   onDestroy(() => {
     ttsService.destroy();
   });
+
+  function handleKeydown(e: KeyboardEvent): void {
+    if (e.key === 'Enter' && !isSubmitting && feedback && currentQuestion) {
+      feedback = null;
+      usageExamples = null;
+      questionForFeedback = null;
+      tick().then(() => answerInputRef?.focus());
+    }
+  }
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <ErrorBoundary>
   {#key selectedQuiz}
