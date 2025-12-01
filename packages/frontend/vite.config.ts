@@ -114,7 +114,6 @@ export default defineConfig({
         intro: '',
         outro: '',
         manualChunks: {
-          admin: ['./src/views/Admin.svelte'],
           vendor: ['svelte', 'svelte/store'],
           'ui-components': ['bits-ui', 'lucide-svelte'],
         },
