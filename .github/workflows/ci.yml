@@ -87,8 +87,9 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
           REF_NAME: ${{ github.ref_name }}
         run: |
-          # Format: {ref}-{short-sha}-{timestamp}
-          # e.g., main-5db1366-1761421093 or pr-243-5db1366-1761421093
+          # Format: {ref}-{short-sha}
+          # e.g., main-5db1366 or pr-243-5db1366
+          # Deterministic builds: no timestamp, reproducible from commit SHA
 
           # Use head SHA for PRs (persistent), github.sha for branches
           if [ "$EVENT_NAME" == "pull_request" ]; then
@@ -102,12 +103,10 @@ jobs:
           fi
 
           SHORT_SHA=$(echo "${COMMIT_SHA}" | cut -c1-7)
-          TIMESTAMP=$(date +%s)
 
-          TAG="${REF}-${SHORT_SHA}-${TIMESTAMP}"
+          TAG="${REF}-${SHORT_SHA}"
           {
             echo "value=${TAG}"
-            echo "timestamp=${TIMESTAMP}"
             echo "commit_sha=${COMMIT_SHA}"
           } >> "$GITHUB_OUTPUT"
           echo "Generated image tag: ${TAG} (commit: ${COMMIT_SHA})"
@@ -166,7 +165,6 @@ jobs:
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
             org.opencontainers.image.revision=${{ steps.tag.outputs.commit_sha }}
-            org.opencontainers.image.created=${{ steps.tag.outputs.timestamp }}
           cache-from: type=gha
 
   test:
@@ -268,11 +266,12 @@ jobs:
         id: tag
         run: |
           # Reconstruct tag (same logic as build job)
+          # Format: {ref}-{short-sha}
+          # Deterministic builds: no timestamp, reproducible from commit SHA
           COMMIT_SHA="${{ github.sha }}"
           SHORT_SHA=$(echo "${COMMIT_SHA}" | cut -c1-7)
-          TIMESTAMP=$(date +%s)
           REF=$(echo "${{ github.ref_name }}" | sed 's/\//-/g')
-          TAG="${REF}-${SHORT_SHA}-${TIMESTAMP}"
+          TAG="${REF}-${SHORT_SHA}"
           {
             echo "value=${TAG}"
             echo "commit_sha=${COMMIT_SHA}"
