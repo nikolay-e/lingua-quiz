@@ -20,7 +20,8 @@ def validate_origin(request: Request) -> None:
     referer = request.headers.get("Referer")
 
     if not origin and not referer:
-        if request.url.hostname in {"localhost", "127.0.0.1"}:
+        # Allow internal requests from localhost and Docker network
+        if request.url.hostname in {"localhost", "127.0.0.1", "backend", "frontend"}:
             return
         logger.warning(f"Missing Origin/Referer for {request.method} {request.url.path}")
         raise HTTPException(
