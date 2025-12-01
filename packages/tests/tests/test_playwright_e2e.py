@@ -37,7 +37,7 @@ class TestLoginPage:
         page.goto(FRONTEND_URL)
         page.wait_for_load_state("networkidle")
 
-        expect(page.locator("h2")).to_have_text("Sign In")
+        expect(page.get_by_test_id("login-title")).to_have_text("Sign In")
         expect(page.locator("#username")).to_be_visible()
         expect(page.locator("#password")).to_be_visible()
         expect(page.locator("button:has-text('Sign In')")).to_be_visible()
@@ -181,7 +181,7 @@ class TestQuizInterface:
 
     def test_logout_functionality(self, logged_in_page: Page):
         logged_in_page.click("button:has-text('Logout')")
-        expect(logged_in_page.locator("h2")).to_have_text("Sign In", timeout=10000)
+        expect(logged_in_page.get_by_test_id("login-title")).to_have_text("Sign In", timeout=10000)
         logged_in_page.screenshot(path=str(SCREENSHOTS_DIR / "12_after_logout.png"))
 
     def test_language_selector_visible(self, logged_in_page: Page):

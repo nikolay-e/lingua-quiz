@@ -38,7 +38,7 @@
 </script>
 
 <AuthLayout>
-  <h2>Sign In</h2>
+  <h2 data-testid="login-title">Sign In</h2>
   <form on:submit={handleSubmit} aria-busy={isLoading} class="form-compact">
     <div class="input-group">
       <Label for="username">Username</Label>
