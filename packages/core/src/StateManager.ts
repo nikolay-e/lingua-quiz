@@ -3,10 +3,24 @@ import type { Translation, ProgressEntry } from './types';
 export class StateManager {
   private translations: Map<string, Translation>;
   private progress: Map<string, ProgressEntry>;
+  private progressArrayCache: ProgressEntry[] | null = null;
+  private statisticsCache: Map<boolean, ReturnType<StateManager['getStatistics']>> = new Map();
 
   constructor(translations: Translation[], initialProgress: ProgressEntry[]) {
     this.translations = new Map(translations.map((t) => [t.id, t]));
     this.progress = new Map(initialProgress.map((p) => [p.translationId, p]));
+  }
+
+  private invalidateCache(): void {
+    this.progressArrayCache = null;
+    this.statisticsCache.clear();
+  }
+
+  private getProgressArray(): ProgressEntry[] {
+    if (this.progressArrayCache === null) {
+      this.progressArrayCache = Array.from(this.progress.values());
+    }
+    return this.progressArrayCache;
   }
 
   getTranslation(id: string): Translation | undefined {
@@ -18,7 +32,7 @@ export class StateManager {
   }
 
   getAllProgress(): ProgressEntry[] {
-    return Array.from(this.progress.values());
+    return this.getProgressArray();
   }
 
   getAllTranslations(): Translation[] {
@@ -29,6 +43,7 @@ export class StateManager {
     const current = this.progress.get(id);
     if (current !== undefined) {
       this.progress.set(id, { ...current, ...updates });
+      this.invalidateCache();
     }
   }
 
@@ -38,7 +53,12 @@ export class StateManager {
     completionPercentage: number;
     isComplete: boolean;
   } {
-    const allProgress = Array.from(this.progress.values());
+    const cached = this.statisticsCache.get(enableUsageExamples);
+    if (cached !== undefined) {
+      return cached;
+    }
+
+    const allProgress = this.getProgressArray();
     const levelCounts: Record<string, number> = {
       LEVEL_0: 0,
       LEVEL_1: 0,
@@ -58,29 +78,22 @@ export class StateManager {
     const completionPercentage = allProgress.length === 0 ? 0 : Math.round((completed / allProgress.length) * 100);
     const isComplete = allProgress.length > 0 && allProgress.every((p) => p.level === targetLevel);
 
-    return {
+    const result = {
       totalWords: allProgress.length,
       levelCounts,
       completionPercentage,
       isComplete,
     };
+
+    this.statisticsCache.set(enableUsageExamples, result);
+    return result;
   }
 
   isQuizComplete(enableUsageExamples: boolean): boolean {
-    const allProgress = Array.from(this.progress.values());
-    if (allProgress.length === 0) return false;
-
-    const targetLevel = enableUsageExamples ? 'LEVEL_5' : 'LEVEL_3';
-    return allProgress.every((p) => p.level === targetLevel);
+    return this.getStatistics(enableUsageExamples).isComplete;
   }
 
   getCompletionPercentage(enableUsageExamples: boolean): number {
-    const allProgress = Array.from(this.progress.values());
-    if (allProgress.length === 0) return 0;
-
-    const targetLevel = enableUsageExamples ? 'LEVEL_5' : 'LEVEL_3';
-    const completed = allProgress.filter((p) => p.level === targetLevel).length;
-
-    return Math.round((completed / allProgress.length) * 100);
+    return this.getStatistics(enableUsageExamples).completionPercentage;
   }
 }
