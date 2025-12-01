@@ -45,7 +45,7 @@ def verify_refresh_token(token: str) -> dict:
 
     token_data = query_db(
         """
-        SELECT user_id, expires_at, revoked_at
+        SELECT user_id, expires_at, revoked_at, token_hash
         FROM refresh_tokens
         WHERE token_hash = %s
         """,
@@ -54,6 +54,10 @@ def verify_refresh_token(token: str) -> dict:
     )
 
     if not token_data:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
+
+    stored_hash = token_data["token_hash"]
+    if not secrets.compare_digest(token_hash, stored_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
 
     if token_data["revoked_at"] is not None:

@@ -2,14 +2,8 @@ import hashlib
 import logging
 
 from core.database import execute_write_transaction, query_db
-from core.security import (
-    create_access_token,
-    create_refresh_token,
-    get_current_user,
-    hash_password,
-    verify_password,
-    verify_refresh_token,
-)
+from core.error_handler import handle_api_errors
+from core.security import create_access_token, create_refresh_token, get_current_user, hash_password, verify_password, verify_refresh_token
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from schemas.user import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
 from slowapi import Limiter
@@ -26,57 +20,49 @@ limiter = Limiter(key_func=get_remote_address)
     status_code=status.HTTP_201_CREATED,
 )
 @limiter.limit("100/15minutes")
+@handle_api_errors("Registration")
 async def register_user(request: Request, user_data: UserRegistration) -> TokenResponse:
     logger.info(f"Starting registration for user: {user_data.username}")
-    try:
-        existing_user = query_db("SELECT id FROM users WHERE username = %s", (user_data.username,), one=True)
-        if existing_user:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Username already exists",
-            )
 
-        hashed_password = hash_password(user_data.password)
-        result = execute_write_transaction(
-            "INSERT INTO users (username, password) VALUES (%s, %s) RETURNING id, is_admin",
-            (user_data.username, hashed_password),
-            fetch_results=True,
-            one=True,
+    existing_user = query_db("SELECT id FROM users WHERE username = %s", (user_data.username,), one=True)
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Username already exists",
         )
 
-        if not result:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Failed to create user",
-            )
+    hashed_password = hash_password(user_data.password)
+    result = execute_write_transaction(
+        "INSERT INTO users (username, password) VALUES (%s, %s) RETURNING id, is_admin",
+        (user_data.username, hashed_password),
+        fetch_results=True,
+        one=True,
+    )
 
-        user_id = result["id"]
-        is_admin = result.get("is_admin", False)
-        logger.info(f"Successfully created user {user_data.username} with id {user_id}")
-
-        token = create_access_token(data={"userId": user_id, "sub": user_data.username, "isAdmin": is_admin})
-
-        refresh_token, token_hash, expires_at = create_refresh_token()
-        execute_write_transaction(
-            "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
-            (user_id, token_hash, expires_at),
-        )
-
-        return TokenResponse(
-            token=token,
-            refresh_token=refresh_token,
-            expires_in="15m",
-            user=UserResponse(id=user_id, username=user_data.username, is_admin=is_admin),
-        )
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Registration error: {e}")
+    if not result:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Registration failed",
+            detail="Failed to create user",
         )
+
+    user_id = result["id"]
+    is_admin = result.get("is_admin", False)
+    logger.info(f"Successfully created user {user_data.username} with id {user_id}")
+
+    token = create_access_token(data={"userId": user_id, "sub": user_data.username, "isAdmin": is_admin})
+
+    refresh_token, token_hash, expires_at = create_refresh_token()
+    execute_write_transaction(
+        "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
+        (user_id, token_hash, expires_at),
+    )
+
+    return TokenResponse(
+        token=token,
+        refresh_token=refresh_token,
+        expires_in="15m",
+        user=UserResponse(id=user_id, username=user_data.username, is_admin=is_admin),
+    )
 
 
 @router.post("/login", response_model=TokenResponse)
