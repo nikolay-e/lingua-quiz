@@ -294,9 +294,22 @@
       tick().then(() => answerInputRef?.focus());
     }
   }
+
+  function handleClick(e: MouseEvent): void {
+    if (currentQuestion && answerInputRef && !isSubmitting) {
+      const target = e.target as HTMLElement;
+      const isClickOnInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+      const isClickOnButton = target.closest('button') !== null;
+      const isClickOnLink = target.closest('a') !== null;
+
+      if (!isClickOnInput && !isClickOnButton && !isClickOnLink) {
+        tick().then(() => answerInputRef?.focus());
+      }
+    }
+  }
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window on:keydown={handleKeydown} on:click={handleClick} />
 
 <ErrorBoundary>
   {#key selectedQuiz}
