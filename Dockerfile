@@ -5,7 +5,7 @@
 # --- Python Base Stage for Backend & Tests ---
 # Establishes a common foundation for both the backend and test stages to reduce duplication.
 # Using alpine for reliable builds, pinned to specific version for reproducibility
-FROM python:3.14.0-alpine AS python-base
+FROM python:3.14.1-alpine AS python-base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 
