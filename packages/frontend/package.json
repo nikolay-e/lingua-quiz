@@ -37,7 +37,7 @@
     "@tsconfig/svelte": "^5.0.6",
     "bits-ui": "^2.14.4",
     "clsx": "^2.1.1",
-    "lucide-svelte": "^0.555.0",
+    "lucide-svelte": "^0.556.0",
     "mode-watcher": "^1.1.0",
     "openapi-typescript-codegen": "^0.29.0",
     "svelte": "^5.45.5",
