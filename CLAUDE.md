@@ -41,9 +41,41 @@ npm run typecheck       # Type checking
 npm test                # Run E2E tests
 
 # Code generation
-make generate-all       # Regenerate all schemas, types, and clients
-make openapi            # Generate unified OpenAPI schema (single source of truth)
+make generate-all       # Regenerate all schemas, types, and clients from OpenAPI
+make openapi-generate   # Regenerate OpenAPI schema from backend code
+make openapi            # Show OpenAPI schema management info
 ```
+
+## Setup After Clone
+
+**IMPORTANT:** Run code generation after cloning:
+
+```bash
+npm install
+make generate-all  # Generate backend/domain/frontend types from lingua-quiz-schema.json
+```
+
+This is required because generated files are git-ignored.
+
+### Code Generation Workflow
+
+**Schema as Source of Truth:**
+
+- `lingua-quiz-schema.json` is committed and serves as the single source of truth
+- Backend Pydantic models, frontend TypeScript types, and domain models are all generated from this schema
+- Schema is only regenerated manually via `make openapi-generate` when backend code changes
+
+**Development:**
+
+- Generated files are git-ignored
+- Backend uses `TYPE_CHECKING` pattern with safe fallback to placeholder models
+- If `generated.schemas` is missing, backend logs warnings but remains functional (validation disabled)
+
+**Production/CI:**
+
+- Set `FAIL_ON_MISSING_GENERATED=true` to enforce strict checks
+- Backend will fail at startup if `generated.schemas` is missing
+- CI should run `make generate-all` as part of the build process
 
 ## System Architecture
 

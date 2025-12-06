@@ -1,12 +1,37 @@
 import logging
+from typing import TYPE_CHECKING
 
 from core.database import get_active_version, query_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, Request
-from generated.schemas import VocabularyItemResponse, WordListResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
+
+if TYPE_CHECKING:
+    from generated.schemas import VocabularyItemResponse, WordListResponse
+else:
+    try:
+        from generated.schemas import VocabularyItemResponse, WordListResponse
+    except ImportError:
+        import os
+
+        if os.getenv("FAIL_ON_MISSING_GENERATED", "false").lower() == "true":
+            raise
+
+        from pydantic import BaseModel
+
+        logging.warning(
+            "generated.schemas not found in vocabulary.py. "
+            "Run 'make generate-all' to generate Pydantic models from OpenAPI schema. "
+            "Using placeholder models with no validation."
+        )
+
+        class _PlaceholderModel(BaseModel):
+            class Config:
+                extra = "allow"
+
+        VocabularyItemResponse = WordListResponse = _PlaceholderModel  # type: ignore
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["Vocabulary"])

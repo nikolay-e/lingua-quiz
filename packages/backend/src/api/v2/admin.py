@@ -1,11 +1,36 @@
 import json
 import logging
+from typing import TYPE_CHECKING
 
 from core.database import execute_write_transaction, get_active_version, query_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import require_admin
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from generated.schemas import VocabularyItemCreate, VocabularyItemDetailResponse, VocabularyItemUpdate
+
+if TYPE_CHECKING:
+    from generated.schemas import VocabularyItemCreate, VocabularyItemDetailResponse, VocabularyItemUpdate
+else:
+    try:
+        from generated.schemas import VocabularyItemCreate, VocabularyItemDetailResponse, VocabularyItemUpdate
+    except ImportError:
+        import os
+
+        if os.getenv("FAIL_ON_MISSING_GENERATED", "false").lower() == "true":
+            raise
+
+        from pydantic import BaseModel
+
+        logging.warning(
+            "generated.schemas not found in admin.py. "
+            "Run 'make generate-all' to generate Pydantic models from OpenAPI schema. "
+            "Using placeholder models with no validation."
+        )
+
+        class _PlaceholderModel(BaseModel):
+            class Config:
+                extra = "allow"
+
+        VocabularyItemCreate = VocabularyItemDetailResponse = VocabularyItemUpdate = _PlaceholderModel  # type: ignore
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/admin", tags=["Admin"])

@@ -17,12 +17,18 @@ help: ## Show this help message
 # ===================================================================================
 # CODE GENERATION
 # ===================================================================================
-openapi: ## Generate unified OpenAPI schema (single source of truth)
-	@python packages/backend/scripts/prepare_stubs.py
-	@echo "--> Generating unified OpenAPI schema (single source of truth)..."
-	@SKIP_DB_INIT=1 JWT_SECRET=$${JWT_SECRET:-openapi-placeholder-secret} python packages/backend/scripts/export_openapi.py
+openapi-info: ## Show info about OpenAPI schema management
+	@echo "ℹ️  OpenAPI schema is committed as single source of truth: lingua-quiz-schema.json"
+	@echo "ℹ️  To regenerate from backend code, run: make openapi-generate"
 
-generate-backend: openapi ## Generate backend Pydantic models from OpenAPI schema
+openapi-generate: ## Regenerate OpenAPI schema from backend code
+	@echo "--> Regenerating OpenAPI schema from backend code..."
+	@SKIP_DB_INIT=1 JWT_SECRET=$${JWT_SECRET:-openapi-placeholder-secret} python packages/backend/scripts/export_openapi.py
+	@echo "✅ Schema regenerated. Review changes before committing!"
+
+openapi: openapi-info ## Alias for openapi-info (shows schema info)
+
+generate-backend: ## Generate backend Pydantic models from OpenAPI schema
 	@echo "--> Generating backend Pydantic models from OpenAPI schema..."
 	@python -m datamodel_code_generator \
 		--input lingua-quiz-schema.json \

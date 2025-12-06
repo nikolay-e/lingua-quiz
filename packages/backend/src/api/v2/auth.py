@@ -1,13 +1,38 @@
 import hashlib
 import logging
+from typing import TYPE_CHECKING
 
 from core.database import execute_write_transaction, query_db
 from core.error_handler import handle_api_errors
 from core.security import create_access_token, create_refresh_token, get_current_user, hash_password, verify_password, verify_refresh_token
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
+
+if TYPE_CHECKING:
+    from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
+else:
+    try:
+        from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
+    except ImportError:
+        import os
+
+        if os.getenv("FAIL_ON_MISSING_GENERATED", "false").lower() == "true":
+            raise
+
+        from pydantic import BaseModel
+
+        logging.warning(
+            "generated.schemas not found in auth.py. "
+            "Run 'make generate-all' to generate Pydantic models from OpenAPI schema. "
+            "Using placeholder models with no validation."
+        )
+
+        class _PlaceholderModel(BaseModel):
+            class Config:
+                extra = "allow"
+
+        RefreshTokenRequest = TokenResponse = UserLogin = UserRegistration = UserResponse = _PlaceholderModel  # type: ignore
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
