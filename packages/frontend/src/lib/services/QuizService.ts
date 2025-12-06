@@ -345,7 +345,7 @@ export class QuizService {
     }
   }
 
-  flushImmediately(token: string, manager: QuizManager | null): void {
+  flushImmediately(token: string, manager: QuizManager | null, isUnloading = false): void {
     this.persistPendingToStorage();
 
     if (this.debounceTimer !== null) {
@@ -354,9 +354,39 @@ export class QuizService {
     }
 
     if (manager !== null && this.progressMap.size > 0) {
-      this.bulkSaveProgress(token, manager).catch(() => {
-        this.persistPendingToStorage();
-      });
+      if (isUnloading && typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
+        this.sendBeaconSave(token);
+      } else {
+        this.bulkSaveProgress(token, manager).catch(() => {
+          this.persistPendingToStorage();
+        });
+      }
+    }
+  }
+
+  private sendBeaconSave(_token: string): void {
+    const items = Array.from(this.progressMap.entries()).map(([vocabularyItemId, progress]) => ({
+      vocabularyItemId,
+      level: progress.level,
+      queuePosition: progress.queuePosition,
+      correctCount: progress.correctCount,
+      incorrectCount: progress.incorrectCount,
+    }));
+
+    if (items.length === 0) return;
+
+    const apiBaseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+    const url = `${apiBaseUrl}/api/user/progress/bulk`;
+    const payload = JSON.stringify({ items });
+
+    const blob = new Blob([payload], { type: 'application/json' });
+
+    const success = navigator.sendBeacon(url, blob);
+    if (success) {
+      logger.info(`Sent ${items.length} progress items via sendBeacon`);
+      this.progressMap.clear();
+    } else {
+      logger.warn('sendBeacon failed, progress will be restored from storage on next session');
     }
   }
 }

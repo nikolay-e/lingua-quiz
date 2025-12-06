@@ -4,10 +4,9 @@ from core.database import execute_write_transaction, query_db
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from schemas.progress import BulkProgressUpdateRequest, ProgressUpdateRequest, UserProgressResponse
+from generated.schemas import BulkProgressUpdateRequest, ProgressUpdateRequest, UserProgressResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
-from utils import convert_keys_to_camel_case
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/user", tags=["Progress"])
@@ -17,7 +16,7 @@ limiter = Limiter(key_func=get_remote_address)
 @router.get("/progress", response_model=list[UserProgressResponse])
 @limiter.limit("100/minute")
 @handle_api_errors("Get user progress")
-async def get_user_progress(
+def get_user_progress(
     request: Request,
     list_name: str | None = None,
     current_user: dict = Depends(get_current_user),
@@ -56,21 +55,22 @@ async def get_user_progress(
             (current_user["user_id"],),
         )
 
-    result = []
-    for p in progress:
-        item_dict = dict(p)
-        item_dict["vocabulary_item_id"] = str(item_dict["vocabulary_item_id"])
-        if item_dict.get("last_practiced"):
-            item_dict["last_practiced"] = item_dict["last_practiced"].isoformat()
-        result.append(convert_keys_to_camel_case(item_dict))
-
-    return result
+    return [
+        UserProgressResponse.model_validate(
+            {
+                **dict(p),
+                "vocabulary_item_id": str(p["vocabulary_item_id"]),
+                "last_practiced": (p["last_practiced"].isoformat() if p.get("last_practiced") else None),
+            }
+        )
+        for p in progress
+    ]
 
 
 @router.post("/progress")
 @limiter.limit("200/minute")
 @handle_api_errors("Save user progress")
-async def save_user_progress(
+def save_user_progress(
     request: Request,
     progress_data: ProgressUpdateRequest,
     current_user: dict = Depends(get_current_user),
@@ -102,7 +102,7 @@ async def save_user_progress(
 @router.post("/progress/bulk")
 @limiter.limit("100/minute")
 @handle_api_errors("Save bulk progress")
-async def save_bulk_progress(
+def save_bulk_progress(
     request: Request,
     bulk_data: BulkProgressUpdateRequest,
     current_user: dict = Depends(get_current_user),

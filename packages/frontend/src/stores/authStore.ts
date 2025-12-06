@@ -39,10 +39,16 @@ function createAuthStore(): AuthStore {
   });
 
   let refreshTimer: ReturnType<typeof setTimeout> | null = null;
+  let isRefreshing = false;
+  const authChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('auth-channel') : null;
 
   async function refreshAccessToken() {
+    if (isRefreshing) return;
+
+    isRefreshing = true;
     const refreshToken = safeStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN);
     if (refreshToken === null) {
+      isRefreshing = false;
       logoutUser();
       return;
     }
@@ -55,9 +61,13 @@ function createAuthStore(): AuthStore {
         username: currentState.username ?? data.user.username,
         refreshToken: data.refresh_token,
       });
+      authChannel?.postMessage({ type: 'token-refreshed' });
     } catch (error) {
       logger.error('Token refresh failed:', error);
       logoutUser();
+      authChannel?.postMessage({ type: 'logout' });
+    } finally {
+      isRefreshing = false;
     }
   }
 
@@ -139,6 +149,14 @@ function createAuthStore(): AuthStore {
 
   if (typeof window !== 'undefined') {
     checkToken();
+
+    authChannel?.addEventListener('message', (event) => {
+      if (event.data.type === 'token-refreshed') {
+        checkToken();
+      } else if (event.data.type === 'logout') {
+        logoutUser();
+      }
+    });
   }
 
   return {
@@ -146,6 +164,7 @@ function createAuthStore(): AuthStore {
     login: async (username: string, password: string) => {
       const data = await api.login({ username, password });
       setUser({ token: data.token, username: data.user.username, refreshToken: data.refresh_token });
+      authChannel?.postMessage({ type: 'token-refreshed' });
       return data;
     },
     logout: async () => {
@@ -158,11 +177,13 @@ function createAuthStore(): AuthStore {
         }
       }
       logoutUser();
+      authChannel?.postMessage({ type: 'logout' });
     },
     logoutUser,
     register: async (username: string, password: string) => {
       const data = await api.register({ username, password });
       setUser({ token: data.token, username: data.user.username, refreshToken: data.refresh_token });
+      authChannel?.postMessage({ type: 'token-refreshed' });
       return data;
     },
     deleteAccount: async () => {
@@ -171,6 +192,7 @@ function createAuthStore(): AuthStore {
 
       await api.deleteAccount(state.token);
       logoutUser();
+      authChannel?.postMessage({ type: 'logout' });
     },
   };
 }

@@ -5,61 +5,15 @@ from core.database import execute_write_transaction, query_db
 from core.error_handler import handle_api_errors
 from core.security import require_admin
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from pydantic import BaseModel, Field
-from utils import convert_keys_to_camel_case
+from generated.schemas import VocabularyItemCreate, VocabularyItemDetailResponse, VocabularyItemUpdate
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
 
 
-class VocabularyItemCreate(BaseModel):
-    source_text: str = Field(alias="sourceText")
-    source_language: str = Field(alias="sourceLanguage")
-    target_text: str = Field(alias="targetText")
-    target_language: str = Field(alias="targetLanguage")
-    list_name: str = Field(alias="listName")
-    difficulty_level: str | None = Field(alias="difficultyLevel", default=None)
-    source_usage_example: str | None = Field(alias="sourceUsageExample", default=None)
-    target_usage_example: str | None = Field(alias="targetUsageExample", default=None)
-
-    class Config:
-        populate_by_name = True
-
-
-class VocabularyItemUpdate(BaseModel):
-    source_text: str | None = Field(alias="sourceText", default=None)
-    target_text: str | None = Field(alias="targetText", default=None)
-    source_usage_example: str | None = Field(alias="sourceUsageExample", default=None)
-    target_usage_example: str | None = Field(alias="targetUsageExample", default=None)
-    is_active: bool | None = Field(alias="isActive", default=None)
-    list_name: str | None = Field(alias="listName", default=None)
-    difficulty_level: str | None = Field(alias="difficultyLevel", default=None)
-
-    class Config:
-        populate_by_name = True
-
-
-class VocabularyItemDetailResponse(BaseModel):
-    id: str
-    source_text: str = Field(alias="sourceText")
-    source_language: str = Field(alias="sourceLanguage")
-    target_text: str = Field(alias="targetText")
-    target_language: str = Field(alias="targetLanguage")
-    list_name: str = Field(alias="listName")
-    difficulty_level: str | None = Field(alias="difficultyLevel")
-    source_usage_example: str | None = Field(alias="sourceUsageExample")
-    target_usage_example: str | None = Field(alias="targetUsageExample")
-    is_active: bool = Field(alias="isActive")
-    created_at: str = Field(alias="createdAt")
-    updated_at: str = Field(alias="updatedAt")
-
-    class Config:
-        populate_by_name = True
-
-
 @router.get("/vocabulary/search", response_model=list[VocabularyItemDetailResponse])
 @handle_api_errors("Search vocabulary")
-async def search_vocabulary(
+def search_vocabulary(
     query: str = Query(..., min_length=1, max_length=100),
     limit: int = Query(50, ge=1, le=500),
     current_admin: dict = Depends(require_admin),
@@ -94,20 +48,22 @@ async def search_vocabulary(
         (query, version_id, query, query, query, query, limit),
     )
 
-    output = []
-    for item in results:
-        item_dict = dict(item)
-        item_dict["id"] = str(item_dict["id"])
-        item_dict["created_at"] = item_dict["created_at"].isoformat()
-        item_dict["updated_at"] = item_dict["updated_at"].isoformat()
-        output.append(convert_keys_to_camel_case(item_dict))
-
-    return output
+    return [
+        VocabularyItemDetailResponse.model_validate(
+            {
+                **dict(item),
+                "id": str(item["id"]),
+                "created_at": item["created_at"].isoformat(),
+                "updated_at": item["updated_at"].isoformat(),
+            }
+        )
+        for item in results
+    ]
 
 
 @router.get("/vocabulary/{item_id}", response_model=VocabularyItemDetailResponse)
 @handle_api_errors("Get vocabulary item")
-async def get_vocabulary_item(
+def get_vocabulary_item(
     item_id: str,
     current_admin: dict = Depends(require_admin),
 ) -> VocabularyItemDetailResponse:
@@ -127,17 +83,19 @@ async def get_vocabulary_item(
             detail="Vocabulary item not found",
         )
 
-    item_dict = dict(item)
-    item_dict["id"] = str(item_dict["id"])
-    item_dict["created_at"] = item_dict["created_at"].isoformat()
-    item_dict["updated_at"] = item_dict["updated_at"].isoformat()
-
-    return convert_keys_to_camel_case(item_dict)  # type: ignore[no-any-return]
+    return VocabularyItemDetailResponse.model_validate(
+        {
+            **dict(item),
+            "id": str(item["id"]),
+            "created_at": item["created_at"].isoformat(),
+            "updated_at": item["updated_at"].isoformat(),
+        }
+    )
 
 
 @router.post("/vocabulary", status_code=status.HTTP_201_CREATED)
 @handle_api_errors("Create vocabulary item")
-async def create_vocabulary_item(
+def create_vocabulary_item(
     item_data: VocabularyItemCreate,
     current_admin: dict = Depends(require_admin),
 ) -> dict[str, str]:
@@ -228,7 +186,7 @@ def _collect_field_updates(
 
 @router.put("/vocabulary/{item_id}")
 @handle_api_errors("Update vocabulary item")
-async def update_vocabulary_item(
+def update_vocabulary_item(
     item_id: str,
     item_data: VocabularyItemUpdate,
     current_admin: dict = Depends(require_admin),
@@ -278,7 +236,7 @@ async def update_vocabulary_item(
 
 @router.delete("/vocabulary/{item_id}")
 @handle_api_errors("Delete vocabulary item")
-async def delete_vocabulary_item(
+def delete_vocabulary_item(
     item_id: str,
     current_admin: dict = Depends(require_admin),
 ) -> dict[str, str]:
@@ -321,7 +279,7 @@ async def delete_vocabulary_item(
 
 @router.get("/vocabulary", response_model=list[VocabularyItemDetailResponse])
 @handle_api_errors("List vocabulary")
-async def list_vocabulary(
+def list_vocabulary(
     list_name: str | None = None,
     limit: int = Query(100, ge=1, le=1000),
     offset: int = Query(0, ge=0),
@@ -359,12 +317,14 @@ async def list_vocabulary(
             (version_id, limit, offset),
         )
 
-    output = []
-    for item in results:
-        item_dict = dict(item)
-        item_dict["id"] = str(item_dict["id"])
-        item_dict["created_at"] = item_dict["created_at"].isoformat()
-        item_dict["updated_at"] = item_dict["updated_at"].isoformat()
-        output.append(convert_keys_to_camel_case(item_dict))
-
-    return output
+    return [
+        VocabularyItemDetailResponse.model_validate(
+            {
+                **dict(item),
+                "id": str(item["id"]),
+                "created_at": item["created_at"].isoformat(),
+                "updated_at": item["updated_at"].isoformat(),
+            }
+        )
+        for item in results
+    ]

@@ -1,7 +1,6 @@
 # Generated files - use directory patterns to avoid maintaining file lists
 **/generated/
-packages/domain/schemas/
-packages/backend/openapi.json
+lingua-quiz-schema.json
 
 # Build artifacts
 **/dist/

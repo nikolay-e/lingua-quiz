@@ -261,7 +261,7 @@
   onMount(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent): void => {
       if ($authStore.token && quizStore.hasPendingChanges()) {
-        quizStore.flushImmediately($authStore.token);
+        quizStore.flushImmediately($authStore.token, true);
         e.preventDefault();
         e.returnValue = '';
       }
@@ -269,7 +269,7 @@
 
     const handleVisibilityChange = (): void => {
       if (document.hidden && $authStore.token && $quizStore.quizManager) {
-        quizStore.flushImmediately($authStore.token);
+        quizStore.flushImmediately($authStore.token, true);
       }
     };
 

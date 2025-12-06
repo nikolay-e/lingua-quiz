@@ -2,7 +2,7 @@
 # Lingua Quiz :: Makefile
 # ===================================================================================
 .DEFAULT_GOAL := help
-.PHONY: help openapi domain-schema generate-all
+.PHONY: help openapi generate-backend generate-all
 
 # ===================================================================================
 # HELP
@@ -17,16 +17,29 @@ help: ## Show this help message
 # ===================================================================================
 # CODE GENERATION
 # ===================================================================================
-openapi: ## Generate OpenAPI schema from backend
-	@echo "--> Generating OpenAPI spec from FastAPI app..."
+openapi: ## Generate unified OpenAPI schema (single source of truth)
+	@echo "--> Generating unified OpenAPI schema (single source of truth)..."
 	@SKIP_DB_INIT=1 JWT_SECRET=$${JWT_SECRET:-openapi-placeholder-secret} python packages/backend/scripts/export_openapi.py
 
-domain-schema: ## Generate JSON Schemas for domain models
-	@echo "--> Generating domain JSON Schemas from Pydantic models..."
-	@SKIP_DB_INIT=1 JWT_SECRET=$${JWT_SECRET:-domain-schema-placeholder} SCHEMA_OUTPUT_DIR=packages/domain/schemas python packages/backend/scripts/export_domain_schema.py
+generate-backend: openapi ## Generate backend Pydantic models from OpenAPI schema
+	@echo "--> Generating backend Pydantic models from OpenAPI schema..."
+	@python -m datamodel_code_generator \
+		--input lingua-quiz-schema.json \
+		--output packages/backend/src/generated/schemas.py \
+		--output-model-type pydantic_v2.BaseModel \
+		--field-constraints \
+		--use-standard-collections \
+		--use-annotated \
+		--use-double-quotes \
+		--target-python-version 3.12 \
+		--capitalise-enum-members \
+		--enum-field-as-literal one \
+		--snake-case-field \
+		--use-schema-description
+	@echo "✅ Generated: packages/backend/src/generated/schemas.py"
 
-generate-all: ## Regenerate all schemas, clients, and models
+generate-all: ## Regenerate all schemas, clients, and models from OpenAPI schema
 	@$(MAKE) openapi
-	@$(MAKE) domain-schema
-	@npm run generate:api
+	@$(MAKE) generate-backend
 	@npm run generate:domain
+	@npm run generate:api

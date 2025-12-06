@@ -14,6 +14,7 @@ export interface Queues {
 
 export class QueueManager {
   private queues: Queues;
+  private static readonly MAX_QUEUE_POSITION = 10000;
 
   constructor(translations: Array<{ id: string }>, initialProgress: ProgressEntry[]) {
     this.queues = {
@@ -69,7 +70,7 @@ export class QueueManager {
     const queue = this.queues[level];
     const insertIndex = Math.min(position, queue.length);
     queue.splice(insertIndex, 0, translationId);
-    return insertIndex;
+    return position;
   }
 
   moveWordToLevel(translationId: string, oldLevel: LevelStatus, newLevel: LevelStatus): number {
@@ -88,7 +89,8 @@ export class QueueManager {
     positionIncrement: number,
   ): number {
     this.removeFromQueue(level, translationId);
-    const newPosition = isCorrect ? positionIncrement * consecutiveCorrect : focusLoopSize;
+    const uncappedPosition = isCorrect ? positionIncrement * consecutiveCorrect : focusLoopSize;
+    const newPosition = Math.min(uncappedPosition, QueueManager.MAX_QUEUE_POSITION);
     return this.insertIntoQueue(level, translationId, newPosition);
   }
 

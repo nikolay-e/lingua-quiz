@@ -4,7 +4,7 @@ import logging
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from schemas.tts import TTSLanguagesResponse, TTSRequest, TTSResponse
+from generated.schemas import TTSLanguagesResponse, TTSRequest, TTSResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
@@ -23,7 +23,7 @@ def get_tts_service():
 @router.post("/synthesize", response_model=TTSResponse)
 @limiter.limit("100/minute")
 @handle_api_errors("TTS synthesis")
-async def synthesize_speech(
+def synthesize_speech(
     request: Request,
     tts_data: TTSRequest,
     current_user: dict = Depends(get_current_user),
@@ -50,7 +50,7 @@ async def synthesize_speech(
 @router.get("/languages", response_model=TTSLanguagesResponse)
 @limiter.limit("100/minute")
 @handle_api_errors("Get TTS languages")
-async def get_tts_languages(request: Request, current_user: dict = Depends(get_current_user)) -> TTSLanguagesResponse:
+def get_tts_languages(request: Request, current_user: dict = Depends(get_current_user)) -> TTSLanguagesResponse:
     tts_service = get_tts_service()
     return TTSLanguagesResponse(
         available=tts_service.is_available(),

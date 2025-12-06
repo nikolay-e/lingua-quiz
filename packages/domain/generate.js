@@ -7,31 +7,19 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const repoRoot = path.resolve(__dirname, '..', '..');
-const schemaDir = path.resolve(__dirname, 'schemas');
+const schemaPath = path.join(repoRoot, 'lingua-quiz-schema.json');
 const outputDir = path.resolve(__dirname, 'src', 'generated');
 const outputFile = path.join(outputDir, 'domain.ts');
 
 fs.mkdirSync(outputDir, { recursive: true });
 
-const schemaFiles = fs
-  .readdirSync(schemaDir)
-  .filter((file) => file.endsWith('.schema.json'))
-  .map((file) => path.join(schemaDir, file))
-  .sort();
-
-if (schemaFiles.length === 0) {
-  console.warn('No schema files found in packages/domain-schema. Did you run `make domain-schema`?');
+if (!fs.existsSync(schemaPath)) {
+  console.error('OpenAPI schema not found. Run `make openapi` first.');
   process.exit(1);
 }
 
-const banner = `// Auto-generated from JSON Schemas. Do not edit manually.
+const banner = `// Auto-generated from OpenAPI schema (lingua-quiz-schema.json). Do not edit manually.
 `;
-
-const pascalCase = (input) =>
-  input
-    .replace(/[-_]+/g, ' ')
-    .replace(/\s+./g, (match) => match.trim().toUpperCase())
-    .replace(/^\w/, (c) => c.toUpperCase());
 
 const stripTitles = (node) => {
   if (node && typeof node === 'object') {
@@ -41,8 +29,8 @@ const stripTitles = (node) => {
     if (node.properties) {
       Object.values(node.properties).forEach(stripTitles);
     }
-    if (node.definitions) {
-      Object.values(node.definitions).forEach(stripTitles);
+    if (node.definitions || node.$defs) {
+      Object.values(node.definitions || node.$defs).forEach(stripTitles);
     }
     if (Array.isArray(node.anyOf)) node.anyOf.forEach(stripTitles);
     if (Array.isArray(node.oneOf)) node.oneOf.forEach(stripTitles);
@@ -50,17 +38,49 @@ const stripTitles = (node) => {
   }
 };
 
+const rewriteRefs = (node) => {
+  if (node && typeof node === 'object') {
+    if ('$ref' in node && typeof node.$ref === 'string') {
+      node.$ref = node.$ref.replace('#/components/schemas/', '#/$defs/');
+    }
+    if (node.properties) {
+      Object.values(node.properties).forEach(rewriteRefs);
+    }
+    if (node.items) {
+      rewriteRefs(node.items);
+    }
+    if (Array.isArray(node.anyOf)) node.anyOf.forEach(rewriteRefs);
+    if (Array.isArray(node.oneOf)) node.oneOf.forEach(rewriteRefs);
+    if (Array.isArray(node.allOf)) node.allOf.forEach(rewriteRefs);
+  }
+};
+
 const compileSchemas = async () => {
+  const openapi = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
+  const schemas = openapi.components?.schemas || {};
+
+  if (Object.keys(schemas).length === 0) {
+    console.error('No schemas found in OpenAPI spec components.');
+    process.exit(1);
+  }
+
   const chunks = [];
 
-  for (const schemaPath of schemaFiles) {
-    const raw = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
-    stripTitles(raw);
-    const typeName = raw.title ? raw.title : pascalCase(path.basename(schemaPath).replace('.schema.json', ''));
+  for (const [typeName, schema] of Object.entries(schemas)) {
+    const schemaCopy = JSON.parse(JSON.stringify(schema));
+    rewriteRefs(schemaCopy);
 
-    const compiled = await compile(raw, typeName, {
+    if (schemaCopy.definitions) {
+      delete schemaCopy.definitions;
+    }
+    schemaCopy.$defs = JSON.parse(JSON.stringify(schemas));
+    Object.values(schemaCopy.$defs).forEach(rewriteRefs);
+
+    stripTitles(schemaCopy);
+
+    const compiled = await compile(schemaCopy, typeName, {
       bannerComment: '',
-      unreachableDefinitions: false,
+      unreachableDefinitions: true,
       additionalProperties: false,
       style: {
         singleQuote: true,
@@ -70,7 +90,7 @@ const compileSchemas = async () => {
   }
 
   fs.writeFileSync(outputFile, `${banner + chunks.join('\n\n')}\n`);
-  console.info(`✅ Generated ${path.relative(repoRoot, outputFile)}`);
+  console.info(`✅ Generated ${path.relative(repoRoot, outputFile)} from OpenAPI schema`);
 };
 
 await compileSchemas();

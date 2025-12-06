@@ -5,7 +5,7 @@ from core.database import execute_write_transaction, query_db
 from core.error_handler import handle_api_errors
 from core.security import create_access_token, create_refresh_token, get_current_user, hash_password, verify_password, verify_refresh_token
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from schemas.user import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
+from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
@@ -34,7 +34,7 @@ login_limiter = Limiter(key_func=get_username_for_rate_limit)
 )
 @limiter.limit("3/minute;10/hour")
 @handle_api_errors("Registration")
-async def register_user(request: Request, user_data: UserRegistration) -> TokenResponse:
+def register_user(request: Request, user_data: UserRegistration) -> TokenResponse:
     logger.info(f"Starting registration for user: {user_data.username}")
 
     existing_user = query_db("SELECT id FROM users WHERE username = %s", (user_data.username,), one=True)
@@ -81,7 +81,7 @@ async def register_user(request: Request, user_data: UserRegistration) -> TokenR
 @router.post("/login", response_model=TokenResponse)
 @login_limiter.limit("5/minute;10/hour")
 @handle_api_errors("Login")
-async def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
+def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
     request.state.username = user_data.username
     logger.info(f"Login attempt for user: {user_data.username}")
     user = query_db(
@@ -119,7 +119,7 @@ async def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
 @router.post("/refresh", response_model=TokenResponse)
 @limiter.limit("100/15minutes")
 @handle_api_errors("Token refresh")
-async def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest) -> TokenResponse:
+def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest) -> TokenResponse:
     logger.info("Access token refresh attempt")
     user_data = verify_refresh_token(refresh_request.refresh_token)
 
@@ -160,7 +160,7 @@ async def refresh_access_token(request: Request, refresh_request: RefreshTokenRe
 
 @router.delete("/delete-account")
 @handle_api_errors("Account deletion")
-async def delete_account(
+def delete_account(
     current_user: dict = Depends(get_current_user),
 ) -> dict[str, str]:
     logger.info(f"Account deletion request for user: {current_user['username']}")

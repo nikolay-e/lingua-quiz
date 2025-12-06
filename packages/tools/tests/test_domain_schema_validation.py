@@ -7,11 +7,11 @@ import yaml
 
 @pytest.fixture(scope="module")
 def schemas():
-    """Load domain schemas for validation."""
-    root = Path(__file__).resolve().parents[2] / "domain-schema"
-    vocab_schema = yaml.safe_load((root / "vocabulary_item.schema.json").read_text())
-    progress_schema = yaml.safe_load((root / "user_progress.schema.json").read_text())
-    return {"vocabulary": vocab_schema, "progress": progress_schema}
+    """Load domain schemas from unified OpenAPI spec."""
+    root = Path(__file__).resolve().parents[3]
+    openapi = yaml.safe_load((root / "lingua-quiz-schema.json").read_text())
+    schemas_dict = openapi["components"]["schemas"]
+    return {"vocabulary": schemas_dict["VocabularyItemResponse"], "progress": schemas_dict["UserProgressResponse"]}
 
 
 def test_vocabulary_item_schema_accepts_sample(schemas):

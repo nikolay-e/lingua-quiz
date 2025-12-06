@@ -4,10 +4,9 @@ from core.database import query_db
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from schemas.vocabulary import VocabularyItemResponse, WordListResponse
+from generated.schemas import VocabularyItemResponse, WordListResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
-from utils import convert_keys_to_camel_case
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["Vocabulary"])
@@ -17,7 +16,7 @@ limiter = Limiter(key_func=get_remote_address)
 @router.get("/word-lists", response_model=list[WordListResponse])
 @limiter.limit("100/minute")
 @handle_api_errors("Get word lists")
-async def get_word_lists(request: Request, current_user: dict = Depends(get_current_user)) -> list[WordListResponse]:
+def get_word_lists(request: Request, current_user: dict = Depends(get_current_user)) -> list[WordListResponse]:
     logger.debug(f"Fetching word lists for user: {current_user['username']}")
     active_version_id = query_db("SELECT get_active_version_id()", one=True)
     if not active_version_id:
@@ -36,13 +35,13 @@ async def get_word_lists(request: Request, current_user: dict = Depends(get_curr
            ORDER BY list_name""",
         (version_id,),
     )
-    return [convert_keys_to_camel_case(dict(item)) for item in lists]
+    return [WordListResponse.model_validate(dict(item)) for item in lists]
 
 
 @router.get("/translations", response_model=list[VocabularyItemResponse])
 @limiter.limit("100/minute")
 @handle_api_errors("Get translations")
-async def get_translations(request: Request, list_name: str, current_user: dict = Depends(get_current_user)) -> list[VocabularyItemResponse]:
+def get_translations(request: Request, list_name: str, current_user: dict = Depends(get_current_user)) -> list[VocabularyItemResponse]:
     active_version_id = query_db("SELECT get_active_version_id()", one=True)
     if not active_version_id:
         raise HTTPException(
@@ -61,10 +60,4 @@ async def get_translations(request: Request, list_name: str, current_user: dict 
         (list_name, version_id),
     )
 
-    result = []
-    for t in translations:
-        item_dict = dict(t)
-        item_dict["id"] = str(item_dict["id"])
-        result.append(convert_keys_to_camel_case(item_dict))
-
-    return result
+    return [VocabularyItemResponse.model_validate({**dict(t), "id": str(t["id"])}) for t in translations]

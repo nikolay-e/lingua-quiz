@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate OpenAPI specification from the FastAPI app without hitting external services."""
+"""Generate unified OpenAPI specification as single source of truth."""
 
 from __future__ import annotations
 
@@ -14,7 +14,6 @@ def main() -> None:
     backend_root = repo_root / "packages" / "backend"
     src_path = backend_root / "src"
 
-    # Ensure required env vars are set so imports succeed without external services.
     os.environ.setdefault("JWT_SECRET", "openapi-placeholder-secret")
     os.environ.setdefault("SKIP_DB_INIT", "1")
 
@@ -22,14 +21,14 @@ def main() -> None:
 
     try:
         from main import app
-    except Exception as exc:  # pragma: no cover - defensive logging for generation script
+    except Exception as exc:
         raise RuntimeError(f"Failed to import FastAPI app for OpenAPI generation: {exc}") from exc
 
     spec = app.openapi()
 
-    output_path = backend_root / "openapi.json"
+    output_path = repo_root / "lingua-quiz-schema.json"
     output_path.write_text(json.dumps(spec, indent=2) + "\n")
-    print(f"✅ OpenAPI spec written to {output_path}")
+    print(f"✅ Unified OpenAPI schema (single source of truth): {output_path.relative_to(repo_root)}")
 
 
 if __name__ == "__main__":

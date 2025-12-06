@@ -22,7 +22,7 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/lingua_quiz # pragma: allowlist secret
       JWT_SECRET: dev-jwt-secret-change-in-production # pragma: allowlist secret
-      CORS_ALLOWED_ORIGINS: http://localhost,http://frontend
+      CORS_ALLOWED_ORIGINS: http://localhost:8080,http://localhost,http://frontend
       PORT: 9000
       DB_HOST: postgres
       DB_PORT: 5432

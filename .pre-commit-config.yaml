@@ -39,12 +39,12 @@ repos:
 
       # Auto-fixable hygiene
       - id: trailing-whitespace
-        exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$)
+        exclude: (/generated/|^lingua-quiz-schema\.json$)
       - id: end-of-file-fixer
-        exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$)
+        exclude: (/generated/|^lingua-quiz-schema\.json$)
       - id: mixed-line-ending
         args: ['--fix=lf']
-        exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$)
+        exclude: (/generated/|^lingua-quiz-schema\.json$)
 
   # =============================================================================
   # STAGE 2: Schema & CI Configuration Validation (<1 second)
@@ -67,14 +67,14 @@ repos:
 
   # =============================================================================
   # STAGE 2b: API Contracts & Schema Generation
-  # Ensures OpenAPI, domain schemas, and TS clients stay in sync with backend
+  # Ensures unified OpenAPI schema stays valid
   # =============================================================================
   - repo: https://github.com/python-openapi/openapi-spec-validator
     rev: 0.8.0b1
     hooks:
       - id: openapi-spec-validator
-        name: Validate backend OpenAPI spec
-        files: ^packages/backend/openapi\.json$
+        name: Validate unified OpenAPI schema
+        files: ^lingua-quiz-schema\.json$
 
   # =============================================================================
   # STAGE 3: Security - Secrets Scanning (<3 seconds)
@@ -168,7 +168,7 @@ repos:
         name: Format JS/TS/Svelte with Prettier
         args: ['--write']
         files: \.(js|jsx|ts|tsx|svelte|json|css|scss|html|md)$
-        exclude: (^packages/domain/schemas/|/generated/|^packages/backend/openapi\.json$|/(dist|build|node_modules)/|^package-lock\.json$|^flux/.*/flux-system/)
+        exclude: (/generated/|^lingua-quiz-schema\.json$|/(dist|build|node_modules)/|^package-lock\.json$|^flux/.*/flux-system/)
 
   - repo: local
     hooks:

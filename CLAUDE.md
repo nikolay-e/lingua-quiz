@@ -41,9 +41,8 @@ npm run typecheck       # Type checking
 npm test                # Run E2E tests
 
 # Code generation
-make generate-all       # Regenerate all schemas and clients
-make openapi            # Generate OpenAPI schema from backend
-make domain-schema      # Generate JSON Schemas for domain models
+make generate-all       # Regenerate all schemas, types, and clients
+make openapi            # Generate unified OpenAPI schema (single source of truth)
 ```
 
 ## System Architecture

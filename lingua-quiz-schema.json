@@ -1065,7 +1065,14 @@
             "title": "Audiodata"
           },
           "contentType": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Contenttype",
             "default": "audio/mpeg"
           },
@@ -1097,7 +1104,14 @@
             "title": "Refresh Token"
           },
           "expires_in": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Expires In",
             "default": "15m"
           },
@@ -1231,7 +1245,14 @@
             "title": "Username"
           },
           "is_admin": {
-            "type": "boolean",
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Is Admin",
             "default": false
           }
