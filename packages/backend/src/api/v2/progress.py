@@ -1,9 +1,9 @@
 import logging
 
-from core.database import execute_write_transaction, query_db
+from core.database import execute_write_transaction, get_active_version, query_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, Request
 from generated.schemas import BulkProgressUpdateRequest, ProgressUpdateRequest, UserProgressResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -22,15 +22,7 @@ def get_user_progress(
     current_user: dict = Depends(get_current_user),
 ) -> list[UserProgressResponse]:
     if list_name:
-        active_version_id = query_db("SELECT get_active_version_id()", one=True)
-        if not active_version_id:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="No active content version found",
-            )
-
-        version_id = active_version_id["get_active_version_id"]
-
+        version_id = get_active_version()
         progress = query_db(
             """SELECT up.vocabulary_item_id, up.level, up.queue_position,
                       up.correct_count, up.incorrect_count, up.consecutive_correct,
@@ -55,16 +47,7 @@ def get_user_progress(
             (current_user["user_id"],),
         )
 
-    return [
-        UserProgressResponse.model_validate(
-            {
-                **dict(p),
-                "vocabulary_item_id": str(p["vocabulary_item_id"]),
-                "last_practiced": (p["last_practiced"].isoformat() if p.get("last_practiced") else None),
-            }
-        )
-        for p in progress
-    ]
+    return serialize_rows(progress, UserProgressResponse) or []
 
 
 @router.post("/progress")

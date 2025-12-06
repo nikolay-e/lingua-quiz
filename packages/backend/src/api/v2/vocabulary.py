@@ -1,9 +1,9 @@
 import logging
 
-from core.database import query_db
+from core.database import get_active_version, query_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, Request
 from generated.schemas import VocabularyItemResponse, WordListResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -16,17 +16,12 @@ limiter = Limiter(key_func=get_remote_address)
 @router.get("/word-lists", response_model=list[WordListResponse])
 @limiter.limit("100/minute")
 @handle_api_errors("Get word lists")
-def get_word_lists(request: Request, current_user: dict = Depends(get_current_user)) -> list[WordListResponse]:
+def get_word_lists(
+    request: Request,
+    current_user: dict = Depends(get_current_user),
+    version_id: int = Depends(get_active_version),
+) -> list[WordListResponse]:
     logger.debug(f"Fetching word lists for user: {current_user['username']}")
-    active_version_id = query_db("SELECT get_active_version_id()", one=True)
-    if not active_version_id:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="No active content version found",
-        )
-
-    version_id = active_version_id["get_active_version_id"]
-
     lists = query_db(
         """SELECT list_name, COUNT(*) as word_count
            FROM vocabulary_items
@@ -35,22 +30,18 @@ def get_word_lists(request: Request, current_user: dict = Depends(get_current_us
            ORDER BY list_name""",
         (version_id,),
     )
-    return [WordListResponse.model_validate(dict(item)) for item in lists]
+    return serialize_rows(lists, WordListResponse) or []
 
 
 @router.get("/translations", response_model=list[VocabularyItemResponse])
 @limiter.limit("100/minute")
 @handle_api_errors("Get translations")
-def get_translations(request: Request, list_name: str, current_user: dict = Depends(get_current_user)) -> list[VocabularyItemResponse]:
-    active_version_id = query_db("SELECT get_active_version_id()", one=True)
-    if not active_version_id:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="No active content version found",
-        )
-
-    version_id = active_version_id["get_active_version_id"]
-
+def get_translations(
+    request: Request,
+    list_name: str,
+    current_user: dict = Depends(get_current_user),
+    version_id: int = Depends(get_active_version),
+) -> list[VocabularyItemResponse]:
     translations = query_db(
         """SELECT id, source_text, source_language, target_text, target_language,
                   list_name, source_usage_example, target_usage_example
@@ -60,4 +51,4 @@ def get_translations(request: Request, list_name: str, current_user: dict = Depe
         (list_name, version_id),
     )
 
-    return [VocabularyItemResponse.model_validate({**dict(t), "id": str(t["id"])}) for t in translations]
+    return serialize_rows(translations, VocabularyItemResponse) or []

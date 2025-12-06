@@ -8,11 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 def validate_origin(request: Request) -> None:
-    """Validate request origin to prevent CSRF attacks.
-
-    For state-changing requests (POST, PUT, DELETE, PATCH), ensure the Origin
-    or Referer header matches allowed origins.
-    """
     if request.method in {"GET", "HEAD", "OPTIONS"}:
         return
 

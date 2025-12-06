@@ -9,8 +9,6 @@ from .word_validator import WordValidator
 
 
 class NormalizationStage(ProcessingStage):
-    """Stage 1: Normalize text."""
-
     def __init__(self, normalizer: UniversalNormalizer):
         self.normalizer = normalizer
 
@@ -24,8 +22,6 @@ class NormalizationStage(ProcessingStage):
 
 
 class ValidationStage(ProcessingStage):
-    """Stage 2: Validate word (length, blacklist, patterns)."""
-
     def __init__(self, validator: WordValidator):
         self.validator = validator
 
@@ -47,8 +43,6 @@ class ValidationStage(ProcessingStage):
 
 
 class LemmatizationStage(ProcessingStage):
-    """Stage 3: Get lemma."""
-
     def __init__(self, lemmatization_service: LemmatizationService):
         self.lemmatization_service = lemmatization_service
 
@@ -62,8 +56,6 @@ class LemmatizationStage(ProcessingStage):
 
 
 class NLPAnalysisStage(ProcessingStage):
-    """Stage 4: POS tagging, morphology, frequency, NER filtering."""
-
     def __init__(self, nlp_model: Any, language_code: str, ner_frequency_threshold: float):
         self.nlp_model = nlp_model
         self.language_code = language_code
@@ -111,8 +103,6 @@ class NLPAnalysisStage(ProcessingStage):
 
 
 class InflectionFilteringStage(ProcessingStage):
-    """Stage 5: Filter inflections by frequency ratio."""
-
     def __init__(
         self,
         language_code: str,
@@ -175,8 +165,6 @@ class InflectionFilteringStage(ProcessingStage):
 
 
 class CategorizationStage(ProcessingStage):
-    """Stage 6: Assign category by POS tag."""
-
     def __init__(self, pos_categories: dict[str, list[str]]):
         self.pos_categories = pos_categories
 
@@ -199,8 +187,6 @@ class CategorizationStage(ProcessingStage):
 
 
 class StatisticsCollectionStage(ProcessingStage):
-    """Stage 7: Collect filtering statistics."""
-
     def __init__(self, stats_collector: "FilteringStatsCollector | None"):
         self.stats_collector = stats_collector
 
@@ -215,8 +201,6 @@ class StatisticsCollectionStage(ProcessingStage):
 
 
 class FilteringStatsCollector:
-    """Collects filtering statistics during processing."""
-
     def __init__(self, max_examples: int = 10):
         self.max_examples = max_examples
         self.by_category: dict[str, int] = {}

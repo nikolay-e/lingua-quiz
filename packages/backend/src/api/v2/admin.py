@@ -1,7 +1,7 @@
 import json
 import logging
 
-from core.database import execute_write_transaction, query_db
+from core.database import execute_write_transaction, get_active_version, query_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import require_admin
 from fastapi import APIRouter, Depends, HTTPException, Query, status
@@ -17,16 +17,8 @@ def search_vocabulary(
     query: str = Query(..., min_length=1, max_length=100),
     limit: int = Query(50, ge=1, le=500),
     current_admin: dict = Depends(require_admin),
+    version_id: int = Depends(get_active_version),
 ) -> list[VocabularyItemDetailResponse]:
-    active_version_id = query_db("SELECT get_active_version_id()", one=True)
-    if not active_version_id:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="No active content version found",
-        )
-
-    version_id = active_version_id["get_active_version_id"]
-
     results = query_db(
         """SELECT id, source_text, source_language, target_text, target_language,
                   list_name, difficulty_level, source_usage_example, target_usage_example,
@@ -48,17 +40,7 @@ def search_vocabulary(
         (query, version_id, query, query, query, query, limit),
     )
 
-    return [
-        VocabularyItemDetailResponse.model_validate(
-            {
-                **dict(item),
-                "id": str(item["id"]),
-                "created_at": item["created_at"].isoformat(),
-                "updated_at": item["updated_at"].isoformat(),
-            }
-        )
-        for item in results
-    ]
+    return serialize_rows(results, VocabularyItemDetailResponse) or []
 
 
 @router.get("/vocabulary/{item_id}", response_model=VocabularyItemDetailResponse)
@@ -83,14 +65,7 @@ def get_vocabulary_item(
             detail="Vocabulary item not found",
         )
 
-    return VocabularyItemDetailResponse.model_validate(
-        {
-            **dict(item),
-            "id": str(item["id"]),
-            "created_at": item["created_at"].isoformat(),
-            "updated_at": item["updated_at"].isoformat(),
-        }
-    )
+    return serialize_rows(item, VocabularyItemDetailResponse, one=True)
 
 
 @router.post("/vocabulary", status_code=status.HTTP_201_CREATED)
@@ -98,16 +73,8 @@ def get_vocabulary_item(
 def create_vocabulary_item(
     item_data: VocabularyItemCreate,
     current_admin: dict = Depends(require_admin),
+    version_id: int = Depends(get_active_version),
 ) -> dict[str, str]:
-    active_version_id = query_db("SELECT get_active_version_id()", one=True)
-    if not active_version_id:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="No active content version found",
-        )
-
-    version_id = active_version_id["get_active_version_id"]
-
     result = execute_write_transaction(
         """INSERT INTO vocabulary_items
            (version_id, source_text, source_language, target_text, target_language,
@@ -146,7 +113,7 @@ def create_vocabulary_item(
         ),
     )
 
-    return {"message": "Vocabulary item created", "id": str(result["id"])}
+    return {"message": "Vocabulary item created", "id": result["id"]}
 
 
 def _collect_field_updates(
@@ -284,16 +251,8 @@ def list_vocabulary(
     limit: int = Query(100, ge=1, le=1000),
     offset: int = Query(0, ge=0),
     current_admin: dict = Depends(require_admin),
+    version_id: int = Depends(get_active_version),
 ) -> list[VocabularyItemDetailResponse]:
-    active_version_id = query_db("SELECT get_active_version_id()", one=True)
-    if not active_version_id:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="No active content version found",
-        )
-
-    version_id = active_version_id["get_active_version_id"]
-
     if list_name:
         results = query_db(
             """SELECT id, source_text, source_language, target_text, target_language,
@@ -317,14 +276,4 @@ def list_vocabulary(
             (version_id, limit, offset),
         )
 
-    return [
-        VocabularyItemDetailResponse.model_validate(
-            {
-                **dict(item),
-                "id": str(item["id"]),
-                "created_at": item["created_at"].isoformat(),
-                "updated_at": item["updated_at"].isoformat(),
-            }
-        )
-        for item in results
-    ]
+    return serialize_rows(results, VocabularyItemDetailResponse) or []

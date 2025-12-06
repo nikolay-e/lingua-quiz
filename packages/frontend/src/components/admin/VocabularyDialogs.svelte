@@ -5,9 +5,7 @@
   import { Textarea } from '$lib/components/ui/textarea';
   import { Label } from '$lib/components/ui/label';
   import * as Dialog from '$lib/components/ui/dialog';
-  import * as Select from '$lib/components/ui/select';
-
-  type LanguageOption = { value: string; label: string };
+  import SelectField from '../ui/SelectField.svelte';
 
   type Props = {
     isEditDialogOpen: boolean;
@@ -94,29 +92,11 @@
       <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
         <div class="grid" style="gap: var(--spacing-xs);">
           <Label>List Name</Label>
-          <Select.Root type="single" bind:value={editForm.listName}>
-            <Select.Trigger>
-              {listNameOptions.find((l: LanguageOption) => l.value === editForm.listName)?.label || editForm.listName}
-            </Select.Trigger>
-            <Select.Content>
-              {#each listNameOptions as list (list.value)}
-                <Select.Item value={list.value}>{list.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
+          <SelectField bind:value={editForm.listName} options={listNameOptions} placeholder={editForm.listName} />
         </div>
         <div class="grid" style="gap: var(--spacing-xs);">
           <Label>Difficulty Level</Label>
-          <Select.Root type="single" bind:value={editForm.difficultyLevel}>
-            <Select.Trigger>
-              {difficultyOptions.find((d: LanguageOption) => d.value === editForm.difficultyLevel)?.label || 'Select'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each difficultyOptions as diff (diff.value)}
-                <Select.Item value={diff.value}>{diff.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
+          <SelectField bind:value={editForm.difficultyLevel} options={difficultyOptions} placeholder="Select" />
         </div>
       </div>
     </div>
@@ -150,58 +130,22 @@
       <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
         <div class="grid" style="gap: var(--spacing-xs);">
           <Label>Source Language</Label>
-          <Select.Root type="single" bind:value={createForm.sourceLanguage}>
-            <Select.Trigger>
-              {languageOptions.find((l: LanguageOption) => l.value === createForm.sourceLanguage)?.label || 'Select'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each languageOptions as lang (lang.value)}
-                <Select.Item value={lang.value}>{lang.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
+          <SelectField bind:value={createForm.sourceLanguage} options={languageOptions} placeholder="Select" />
         </div>
         <div class="grid" style="gap: var(--spacing-xs);">
           <Label>Target Language</Label>
-          <Select.Root type="single" bind:value={createForm.targetLanguage}>
-            <Select.Trigger>
-              {languageOptions.find((l: LanguageOption) => l.value === createForm.targetLanguage)?.label || 'Select'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each languageOptions as lang (lang.value)}
-                <Select.Item value={lang.value}>{lang.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
+          <SelectField bind:value={createForm.targetLanguage} options={languageOptions} placeholder="Select" />
         </div>
       </div>
 
       <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
         <div class="grid" style="gap: var(--spacing-xs);">
           <Label>List Name *</Label>
-          <Select.Root type="single" bind:value={createForm.listName}>
-            <Select.Trigger>
-              {listNameOptions.find((l: LanguageOption) => l.value === createForm.listName)?.label || 'Select list'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each listNameOptions as list (list.value)}
-                <Select.Item value={list.value}>{list.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
+          <SelectField bind:value={createForm.listName} options={listNameOptions} placeholder="Select list" />
         </div>
         <div class="grid" style="gap: var(--spacing-xs);">
           <Label>Difficulty Level</Label>
-          <Select.Root type="single" bind:value={createForm.difficultyLevel}>
-            <Select.Trigger>
-              {difficultyOptions.find((d: LanguageOption) => d.value === createForm.difficultyLevel)?.label || 'Select'}
-            </Select.Trigger>
-            <Select.Content>
-              {#each difficultyOptions as diff (diff.value)}
-                <Select.Item value={diff.value}>{diff.label}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
+          <SelectField bind:value={createForm.difficultyLevel} options={difficultyOptions} placeholder="Select" />
         </div>
       </div>
 

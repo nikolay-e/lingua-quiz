@@ -97,4 +97,23 @@ export const handleApiError = (error: unknown): never => {
   throw error instanceof Error ? error : new Error('Request failed');
 };
 
+export async function executeApiCall<T>(
+  operation: () => Promise<T>,
+  options?: { token?: string; requireAuth?: boolean },
+): Promise<T> {
+  const { token, requireAuth = false } = options ?? {};
+
+  if (token !== undefined) {
+    setAuthToken(token);
+  } else if (requireAuth) {
+    throw new Error('Authentication required but no token provided');
+  }
+
+  try {
+    return await operation();
+  } catch (error) {
+    return handleApiError(error);
+  }
+}
+
 export { apiBaseUrl, getServerAddress };

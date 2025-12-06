@@ -1,18 +1,12 @@
 import logging
 import os
+from typing import Any, cast
 
-from core.config import (
-    DB_HOST,
-    DB_NAME,
-    DB_PASSWORD,
-    DB_POOL_MAX_SIZE,
-    DB_POOL_MIN_SIZE,
-    DB_PORT,
-    DB_USER,
-)
+from core.config import DB_HOST, DB_NAME, DB_PASSWORD, DB_POOL_MAX_SIZE, DB_POOL_MIN_SIZE, DB_PORT, DB_USER
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from psycopg2.pool import SimpleConnectionPool
+from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +41,15 @@ def put_db(conn):
 
 def query_db(query, args=(), one=False):
     query_upper = query.strip().upper()
-    write_keywords = ["INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "TRUNCATE"]
+    write_keywords = [
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "CREATE",
+        "DROP",
+        "ALTER",
+        "TRUNCATE",
+    ]
 
     for keyword in write_keywords:
         if query_upper.startswith(keyword):
@@ -132,3 +134,25 @@ def execute_write_transaction(query, args=(), fetch_results=False, one=False):
                     conn.close()
                 except Exception:  # nosec B110
                     pass
+
+
+def get_active_version() -> int:
+    from fastapi import HTTPException, status
+
+    result = query_db("SELECT get_active_version_id()", one=True)
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="No active content version found",
+        )
+    return int(result["get_active_version_id"])
+
+
+def serialize_rows[T: BaseModel](results: Any, model: type[T], one: bool = False) -> list[T] | T | None:
+    if results is None:
+        return None
+
+    if one:
+        return cast(T, model.model_validate(dict(results)))
+
+    return cast(list[T], [model.model_validate(dict(item)) for item in results])

@@ -23,7 +23,7 @@ import {
   validateVocabularyItem,
   validateWordList,
 } from '@lingua-quiz/domain';
-import { handleApiError, setAuthToken } from './apiClientConfig';
+import { executeApiCall, setAuthToken } from './apiClientConfig';
 
 const mapAuthResponse = (response: TokenResponse): AuthResponse => ({
   token: response.token,
@@ -52,40 +52,31 @@ const validateMany = <T>(data: T[], validator: ValidatorFn, label: string): T[] 
   return data;
 };
 
-const execute = async <T>(operation: () => Promise<T>, token?: string): Promise<T> => {
-  if (token !== undefined) {
-    setAuthToken(token);
-  }
-  try {
-    return await operation();
-  } catch (error) {
-    return handleApiError(error);
-  }
-};
-
 const api = {
   login: async (params: { username: string; password: string }): Promise<AuthResponse> => {
     setAuthToken(undefined);
-    return execute(() => AuthenticationService.loginUserApiAuthLoginPost(params).then(mapAuthResponse));
+    return executeApiCall(() => AuthenticationService.loginUserApiAuthLoginPost(params).then(mapAuthResponse));
   },
 
   register: async (params: { username: string; password: string }): Promise<AuthResponse> => {
     setAuthToken(undefined);
-    return execute(() => AuthenticationService.registerUserApiAuthRegisterPost(params).then(mapAuthResponse));
+    return executeApiCall(() => AuthenticationService.registerUserApiAuthRegisterPost(params).then(mapAuthResponse));
   },
 
   refreshToken: async (params: { refresh_token: string }): Promise<AuthResponse> => {
     setAuthToken(undefined);
-    return execute(() => AuthenticationService.refreshAccessTokenApiAuthRefreshPost(params).then(mapAuthResponse));
+    return executeApiCall(() =>
+      AuthenticationService.refreshAccessTokenApiAuthRefreshPost(params).then(mapAuthResponse),
+    );
   },
 
   fetchWordLists: (token: string): Promise<WordList[]> =>
-    execute(
+    executeApiCall(
       () =>
         VocabularyService.getWordListsApiWordListsGet().then((data) =>
           validateMany(data, validateWordList, 'wordList'),
         ),
-      token,
+      { token },
     ),
 
   saveProgress: (
@@ -98,7 +89,7 @@ const api = {
       incorrectCount: number;
     },
   ): Promise<Record<string, string>> =>
-    execute(() => ProgressService.saveUserProgressApiUserProgressPost(payload), token),
+    executeApiCall(() => ProgressService.saveUserProgressApiUserProgressPost(payload), { token }),
 
   saveBulkProgress: (
     token: string,
@@ -110,66 +101,69 @@ const api = {
       incorrectCount: number;
     }>,
   ): Promise<void> =>
-    execute(async () => {
-      const response = await fetch('/api/user/progress/bulk', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ items }),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${await response.text()}`);
-      }
-    }, token),
+    executeApiCall(
+      async () => {
+        const response = await fetch('/api/user/progress/bulk', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ items }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+        }
+      },
+      { token },
+    ),
 
   synthesizeSpeech: (token: string, data: { text: string; language: string }): Promise<TTSResponse> =>
-    execute(
+    executeApiCall(
       () =>
         TextToSpeechService.synthesizeSpeechApiTtsSynthesizePost(data).then((res) =>
           validateOne(res, validateTtsResponse, 'ttsResponse'),
         ),
-      token,
+      { token },
     ),
 
   getTTSLanguages: (token: string): Promise<TTSLanguagesResponse> =>
-    execute(
+    executeApiCall(
       () =>
         TextToSpeechService.getTtsLanguagesApiTtsLanguagesGet().then((res) =>
           validateOne(res, validateTtsLanguages, 'ttsLanguages'),
         ),
-      token,
+      { token },
     ),
 
   deleteAccount: (token: string): Promise<Record<string, string>> =>
-    execute(() => AuthenticationService.deleteAccountApiAuthDeleteAccountDelete(), token),
+    executeApiCall(() => AuthenticationService.deleteAccountApiAuthDeleteAccountDelete(), { token }),
 
   fetchTranslations: (token: string, listName: string): Promise<Translation[]> =>
-    execute(
+    executeApiCall(
       () =>
         VocabularyService.getTranslationsApiTranslationsGet(listName).then((data) =>
           validateMany(data, validateVocabularyItem, 'translation'),
         ),
-      token,
+      { token },
     ),
 
   fetchUserProgress: (token: string, listName?: string): Promise<UserProgress[]> =>
-    execute(
+    executeApiCall(
       () =>
         ProgressService.getUserProgressApiUserProgressGet(listName ?? null).then((data) =>
           validateMany(data, validateUserProgress, 'userProgress'),
         ),
-      token,
+      { token },
     ),
 
   fetchContentVersion: (token: string): Promise<ContentVersion> =>
-    execute(
+    executeApiCall(
       () =>
         ContentVersionService.getActiveContentVersionApiContentVersionGet().then((res) =>
           validateOne(res, validateContentVersion, 'contentVersion'),
         ),
-      token,
+      { token },
     ),
 };
 

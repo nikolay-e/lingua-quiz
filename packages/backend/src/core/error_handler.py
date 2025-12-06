@@ -13,23 +13,6 @@ logger = logging.getLogger(__name__)
 def handle_api_errors(
     operation_name: str,
 ) -> Callable[[Callable[..., T]], Callable[..., T]]:
-    """
-    Decorator to handle common API errors consistently across all endpoints.
-
-    Args:
-        operation_name: Human-readable name of the operation for logging
-
-    Returns:
-        Decorated function with error handling
-
-    Example:
-        @router.post("/login")
-        @handle_api_errors("Login")
-        async def login_user(...) -> TokenResponse:
-            # Business logic only, no try/except needed
-            ...
-    """
-
     def decorator(func: Callable[..., T]) -> Callable[..., T]:
         @wraps(func)
         async def async_wrapper(*args: Any, **kwargs: Any) -> T:

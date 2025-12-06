@@ -98,7 +98,6 @@ class VocabularyProcessor:
     def _build_pipeline(
         self, existing_words: set[str], filter_inflections: bool, stats_collector: FilteringStatsCollector | None
     ) -> ProcessingPipeline:
-        """Build processing pipeline with 7 stages."""
         stages = [
             NormalizationStage(self.normalizer),
             ValidationStage(self.validator),
@@ -180,7 +179,6 @@ class VocabularyProcessor:
         )
 
     def _context_to_processed_word(self, context: ProcessingContext) -> ProcessedWord:
-        """Convert ProcessingContext to ProcessedWord."""
         reason = self._generate_reason(
             context.word, context.lemma, context.pos_tag, context.morphology, context.metadata.get("rank")
         )

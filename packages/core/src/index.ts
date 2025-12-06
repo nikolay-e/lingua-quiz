@@ -1,15 +1,3 @@
-/**
- * @lingua-quiz/core - Core business logic for Lingua Quiz
- *
- * A portable, headless quiz engine that can be used across different platforms:
- * - Web applications (React, Vue, Svelte)
- * - Mobile apps (React Native, NativeScript)
- * - Desktop applications (Electron)
- * - Server-side implementations
- *
- * This package contains NO UI dependencies and focuses purely on business logic.
- */
-
 import {
   F,
   K,
@@ -72,12 +60,6 @@ export interface InitialState {
   currentLevel?: PracticeLevel;
 }
 
-/**
- * Core quiz engine that manages state, progress tracking, and question generation
- *
- * This is a headless class with no UI dependencies, making it perfectly portable
- * across different platforms and frameworks.
- */
 export class QuizManager {
   private queueManager: QueueManager;
   private levelEngine: LevelEngine;
@@ -86,12 +68,6 @@ export class QuizManager {
   private opts: Required<QuizOptions>;
   private submissionStartTime: number | null = null;
 
-  /**
-   * Creates a new QuizManager instance
-   * @param translations - Array of translation pairs
-   * @param initialState - Initial state for progress and settings
-   * @param options - Configuration options for the quiz behavior
-   */
   constructor(translations: Translation[], initialState: InitialState = {}, options: QuizOptions = {}) {
     this.opts = {
       maxFocusWords: options.maxFocusWords ?? MAX_FOCUS_POOL_SIZE,
@@ -126,10 +102,6 @@ export class QuizManager {
     this.queueManager.replenishFocusPool(this.opts.maxFocusWords);
   }
 
-  /**
-   * Gets the next question from the current level's queue
-   * @returns The next question or null if no questions available, with level adjustment info
-   */
   getNextQuestion = (): { question: QuizQuestion | null; levelAdjusted?: boolean; newLevel?: PracticeLevel } => {
     if (!this.levelEngine.hasWordsForLevel(this.currentLevel)) {
       const newLevel = this.levelEngine.getLowestAvailablePracticeLevel();
@@ -148,9 +120,6 @@ export class QuizManager {
     return { question: this.generateQuestion() };
   };
 
-  /**
-   * Generates a question based on current level and available words
-   */
   private generateQuestion = (): QuizQuestion | null => {
     const candidateId = this.levelEngine.pickCandidateForLevel(this.currentLevel);
 
@@ -181,11 +150,6 @@ export class QuizManager {
     };
   };
 
-  /**
-   * Sets the current practice level with validation
-   * @param level - The desired practice level
-   * @returns Object indicating success and any level adjustment made
-   */
   setLevel = (level: PracticeLevel): { success: boolean; actualLevel: PracticeLevel; message?: string } => {
     if (this.levelEngine.hasWordsForLevel(level)) {
       this.currentLevel = level;
@@ -202,9 +166,6 @@ export class QuizManager {
     };
   };
 
-  /**
-   * Gets the usage example based on question type and direction
-   */
   private getUsageExample = (
     questionType: QuestionType,
     direction: QuestionDirection,
@@ -217,12 +178,6 @@ export class QuizManager {
     return example ?? undefined;
   };
 
-  /**
-   * Submits an answer and updates progress
-   * @param translationId - ID of the translation being answered
-   * @param userAnswer - The user's submitted answer
-   * @returns Result of the submission including correctness and level changes
-   */
   submitAnswer = (translationId: string, userAnswer: string): SubmissionResult => {
     const p = this.stateManager.getProgress(translationId);
     const t = this.stateManager.getTranslation(translationId);
@@ -293,10 +248,6 @@ export class QuizManager {
     };
   };
 
-  /**
-   * Gets the current state of the quiz manager
-   * @returns Current quiz state
-   */
   getState = (): QuizState => ({
     translations: this.stateManager.getAllTranslations(),
     progress: this.stateManager.getAllProgress(),
@@ -304,20 +255,10 @@ export class QuizManager {
     queues: this.queueManager.getQueues(),
   });
 
-  /**
-   * Gets a translation by ID
-   * @param id - Translation ID
-   * @returns Translation or undefined if not found
-   */
   getTranslation = (id: string): Translation | undefined => {
     return this.stateManager.getTranslation(id);
   };
 
-  /**
-   * Gets a translation formatted for display according to documentation rules
-   * @param id - Translation ID
-   * @returns Translation with formatted display text or undefined if not found
-   */
   getTranslationForDisplay = (id: string): { source: string; target: string } | undefined => {
     const translation = this.stateManager.getTranslation(id);
     if (translation === undefined) return undefined;
@@ -328,26 +269,14 @@ export class QuizManager {
     };
   };
 
-  /**
-   * Checks if the quiz is complete (all words at target level)
-   * @returns True if quiz is complete
-   */
   isQuizComplete = (): boolean => {
     return this.stateManager.isQuizComplete(this.opts.enableUsageExamples);
   };
 
-  /**
-   * Gets quiz completion percentage
-   * @returns Completion percentage (0-100)
-   */
   getCompletionPercentage = (): number => {
     return this.stateManager.getCompletionPercentage(this.opts.enableUsageExamples);
   };
 
-  /**
-   * Gets statistics for the current quiz session
-   * @returns Quiz statistics
-   */
   getStatistics = (): {
     totalWords: number;
     levelCounts: Record<string, number>;
@@ -357,26 +286,14 @@ export class QuizManager {
     return this.stateManager.getStatistics(this.opts.enableUsageExamples);
   };
 
-  /**
-   * Gets current practice level
-   */
   getCurrentLevel = (): PracticeLevel => this.currentLevel;
 
-  /**
-   * Gets quiz options/configuration
-   */
   getOptions = (): Required<QuizOptions> => ({ ...this.opts });
 
-  /**
-   * Gets all words grouped by their current level for bulk persistence
-   * @returns Map of levels to arrays of translation IDs
-   */
   getWordsByLevel = (): Record<LevelStatus, string[]> => {
     return this.queueManager.getWordsByLevel();
   };
 }
-
-// Export all modules
 export * from './constants';
 export * from './answer-comparison';
 export * from './types';

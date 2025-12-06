@@ -6,6 +6,7 @@ from api.v2 import admin, auth, progress, tts, version, vocabulary
 from core.config import CORS_ALLOWED_ORIGINS, PORT
 from core.csrf import validate_origin
 from core.database import query_db
+from core.json_encoder import CustomJSONResponse
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -24,6 +25,7 @@ app = FastAPI(
     version="4.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    default_response_class=CustomJSONResponse,
 )
 
 app.add_middleware(

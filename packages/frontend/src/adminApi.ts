@@ -5,39 +5,45 @@ import {
   type VocabularyItemUpdate,
 } from './generated/api';
 import type { AdminVocabularyItem } from './api-types';
-import { handleApiError, setAuthToken } from './apiClientConfig';
-
-const execute = async <T>(token: string, operation: () => Promise<T>): Promise<T> => {
-  setAuthToken(token);
-  try {
-    return await operation();
-  } catch (error) {
-    return handleApiError(error);
-  }
-};
+import { executeApiCall } from './apiClientConfig';
 
 const adminApi = {
   searchVocabulary: (token: string, query: string, limit = 50): Promise<AdminVocabularyItem[]> =>
-    execute(token, () => AdminService.searchVocabularyApiAdminVocabularySearchGet(query, limit)),
+    executeApiCall(() => AdminService.searchVocabularyApiAdminVocabularySearchGet(query, limit), {
+      token,
+      requireAuth: true,
+    }),
 
   getVocabularyItem: (token: string, itemId: string): Promise<AdminVocabularyItem> =>
-    execute(token, () => AdminService.getVocabularyItemApiAdminVocabularyItemIdGet(itemId)),
+    executeApiCall(() => AdminService.getVocabularyItemApiAdminVocabularyItemIdGet(itemId), {
+      token,
+      requireAuth: true,
+    }),
 
   createVocabularyItem: (token: string, data: VocabularyItemCreate): Promise<Record<string, string>> =>
-    execute(token, () => AdminService.createVocabularyItemApiAdminVocabularyPost(data)),
+    executeApiCall(() => AdminService.createVocabularyItemApiAdminVocabularyPost(data), { token, requireAuth: true }),
 
   updateVocabularyItem: (token: string, itemId: string, data: VocabularyItemUpdate): Promise<Record<string, string>> =>
-    execute(token, () => AdminService.updateVocabularyItemApiAdminVocabularyItemIdPut(itemId, data)),
+    executeApiCall(() => AdminService.updateVocabularyItemApiAdminVocabularyItemIdPut(itemId, data), {
+      token,
+      requireAuth: true,
+    }),
 
   deleteVocabularyItem: (token: string, itemId: string): Promise<Record<string, string>> =>
-    execute(token, () => AdminService.deleteVocabularyItemApiAdminVocabularyItemIdDelete(itemId)),
+    executeApiCall(() => AdminService.deleteVocabularyItemApiAdminVocabularyItemIdDelete(itemId), {
+      token,
+      requireAuth: true,
+    }),
 
   listVocabulary: (
     token: string,
     options: { listName?: string; limit?: number; offset?: number } = {},
   ): Promise<AdminVocabularyItem[]> => {
     const { listName, limit = 100, offset } = options;
-    return execute(token, () => AdminService.listVocabularyApiAdminVocabularyGet(listName ?? null, limit, offset));
+    return executeApiCall(() => AdminService.listVocabularyApiAdminVocabularyGet(listName ?? null, limit, offset), {
+      token,
+      requireAuth: true,
+    });
   },
 };
 

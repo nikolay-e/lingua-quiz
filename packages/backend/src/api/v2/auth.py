@@ -15,7 +15,6 @@ limiter = Limiter(key_func=get_remote_address)
 
 
 def get_username_for_rate_limit(request: Request) -> str:
-    """Extract username from login request body for per-user rate limiting."""
     try:
         if hasattr(request.state, "username"):
             return f"login:{request.state.username}"

@@ -229,9 +229,11 @@ class FullReportGenerator:
         return {
             "words_in_range": words_in_range,
             "words_out_of_range": words_out_of_range,
-            "coverage_percent": round(words_in_range / (words_in_range + words_out_of_range) * 100, 1)
-            if (words_in_range + words_out_of_range) > 0
-            else 0,
+            "coverage_percent": (
+                round(words_in_range / (words_in_range + words_out_of_range) * 100, 1)
+                if (words_in_range + words_out_of_range) > 0
+                else 0
+            ),
             "by_target_level": level_counts,
             "words_to_move": {level: words[:20] for level, words in by_target_level.items()},
         }
