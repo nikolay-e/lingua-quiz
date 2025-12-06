@@ -89,6 +89,9 @@ COPY packages/frontend/ ./packages/frontend/
 # More efficient than removing and reinstalling all dependencies
 RUN npm install --workspaces
 
+# Generate API client from OpenAPI schema
+RUN npm run generate:api
+
 # Build frontend with environment variables
 RUN cd packages/frontend && \
     VITE_APP_VERSION=${APP_VERSION} \
