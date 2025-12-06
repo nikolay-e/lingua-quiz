@@ -30,7 +30,6 @@ const schemas = (openapi as { components?: { schemas?: Record<string, JSONSchema
 
 export const validateVocabularyItem = compile<unknown>(schemas.VocabularyItemResponse as JSONSchema7);
 export const validateWordList = compile<unknown>(schemas.WordListResponse as JSONSchema7);
-export const validateUser = compile<unknown>(schemas.UserResponse as JSONSchema7);
 export const validateUserProgress = compile<unknown>(schemas.UserProgressResponse as JSONSchema7);
 export const validateProgressUpdate = compile<unknown>(schemas.ProgressUpdateRequest as JSONSchema7);
 export const validateContentVersion = compile<unknown>(schemas.ContentVersionResponse as JSONSchema7);

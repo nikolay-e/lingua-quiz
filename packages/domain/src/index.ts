@@ -7,7 +7,6 @@ export type {
   VocabularyItemResponse as VocabularyItem,
   UserProgressResponse as UserProgress,
   WordListResponse as WordList,
-  UserResponse as User,
   ContentVersionResponse as ContentVersion,
   TTSLanguagesResponse as TtsLanguages,
   TTSResponse as TtsResponse,
