@@ -64,6 +64,8 @@ WORKDIR /app
 # Layer 1: Copy all package manifests for better caching
 # For a monorepo, install all dependencies at once for better cache efficiency
 COPY package.json package-lock.json ./
+# Copy OpenAPI schema (needed for domain package prepare script)
+COPY lingua-quiz-schema.json ./
 # Copy domain fully first (needed for npm ci prepare script)
 COPY packages/domain/ ./packages/domain/
 COPY packages/core/package.json ./packages/core/
