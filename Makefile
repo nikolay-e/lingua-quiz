@@ -30,6 +30,7 @@ openapi: openapi-info ## Alias for openapi-info (shows schema info)
 
 generate-backend: ## Generate backend Pydantic models from OpenAPI schema
 	@echo "--> Generating backend Pydantic models from OpenAPI schema..."
+	@mkdir -p packages/backend/src/generated
 	@python -m datamodel_code_generator \
 		--input lingua-quiz-schema.json \
 		--output packages/backend/src/generated/schemas.py \
