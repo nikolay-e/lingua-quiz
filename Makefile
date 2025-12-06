@@ -18,6 +18,7 @@ help: ## Show this help message
 # CODE GENERATION
 # ===================================================================================
 openapi: ## Generate unified OpenAPI schema (single source of truth)
+	@python packages/backend/scripts/prepare_stubs.py
 	@echo "--> Generating unified OpenAPI schema (single source of truth)..."
 	@SKIP_DB_INIT=1 JWT_SECRET=$${JWT_SECRET:-openapi-placeholder-secret} python packages/backend/scripts/export_openapi.py
 

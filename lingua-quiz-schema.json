@@ -889,44 +889,13 @@
   "components": {
     "schemas": {
       "BulkProgressUpdateRequest": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/ProgressUpdateRequest"
-            },
-            "type": "array",
-            "maxItems": 1000,
-            "minItems": 1,
-            "title": "Items"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "items"
-        ],
         "title": "BulkProgressUpdateRequest"
       },
       "ContentVersionResponse": {
-        "properties": {
-          "versionId": {
-            "type": "integer",
-            "title": "Versionid"
-          },
-          "versionName": {
-            "type": "string",
-            "title": "Versionname"
-          },
-          "isActive": {
-            "type": "boolean",
-            "title": "Isactive"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "versionId",
-          "versionName",
-          "isActive"
-        ],
         "title": "ContentVersionResponse"
       },
       "HTTPValidationError": {
@@ -943,326 +912,73 @@
         "title": "HTTPValidationError"
       },
       "HealthResponse": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status"
-          },
-          "database": {
-            "type": "string",
-            "title": "Database"
-          },
-          "timestamp": {
-            "type": "string",
-            "title": "Timestamp"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "status",
-          "database",
-          "timestamp"
-        ],
         "title": "HealthResponse"
       },
       "ProgressUpdateRequest": {
-        "properties": {
-          "vocabularyItemId": {
-            "type": "string",
-            "title": "Vocabularyitemid"
-          },
-          "level": {
-            "type": "integer",
-            "maximum": 5.0,
-            "minimum": 0.0,
-            "title": "Level"
-          },
-          "queuePosition": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Queueposition"
-          },
-          "correctCount": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Correctcount"
-          },
-          "incorrectCount": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Incorrectcount"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "vocabularyItemId",
-          "level",
-          "queuePosition",
-          "correctCount",
-          "incorrectCount"
-        ],
         "title": "ProgressUpdateRequest"
       },
       "RefreshTokenRequest": {
-        "properties": {
-          "refresh_token": {
-            "type": "string",
-            "title": "Refresh Token"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "refresh_token"
-        ],
         "title": "RefreshTokenRequest"
       },
       "TTSLanguagesResponse": {
-        "properties": {
-          "available": {
-            "type": "boolean",
-            "title": "Available"
-          },
-          "supportedLanguages": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Supportedlanguages"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "available",
-          "supportedLanguages"
-        ],
         "title": "TTSLanguagesResponse"
       },
       "TTSRequest": {
-        "properties": {
-          "text": {
-            "type": "string",
-            "maxLength": 500,
-            "minLength": 1,
-            "title": "Text"
-          },
-          "language": {
-            "type": "string",
-            "pattern": "^(en|de|ru|es)$",
-            "title": "Language"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "text",
-          "language"
-        ],
         "title": "TTSRequest"
       },
       "TTSResponse": {
-        "properties": {
-          "audioData": {
-            "type": "string",
-            "title": "Audiodata"
-          },
-          "contentType": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Contenttype",
-            "default": "audio/mpeg"
-          },
-          "text": {
-            "type": "string",
-            "title": "Text"
-          },
-          "language": {
-            "type": "string",
-            "title": "Language"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "audioData",
-          "text",
-          "language"
-        ],
         "title": "TTSResponse"
       },
       "TokenResponse": {
         "properties": {
           "token": {
             "type": "string",
-            "title": "Token"
+            "title": "Token",
+            "default": ""
           },
           "refresh_token": {
             "type": "string",
-            "title": "Refresh Token"
+            "title": "Refresh Token",
+            "default": ""
           },
           "expires_in": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Expires In",
-            "default": "15m"
+            "default": ""
           },
           "user": {
-            "$ref": "#/components/schemas/UserResponse"
+            "title": "User"
           }
         },
         "type": "object",
-        "required": [
-          "token",
-          "refresh_token",
-          "user"
-        ],
         "title": "TokenResponse"
       },
       "UserLogin": {
-        "properties": {
-          "username": {
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 3,
-            "title": "Username"
-          },
-          "password": {
-            "type": "string",
-            "title": "Password"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "username",
-          "password"
-        ],
         "title": "UserLogin"
       },
       "UserProgressResponse": {
-        "properties": {
-          "vocabularyItemId": {
-            "type": "string",
-            "title": "Vocabularyitemid"
-          },
-          "sourceText": {
-            "type": "string",
-            "title": "Sourcetext"
-          },
-          "sourceLanguage": {
-            "type": "string",
-            "title": "Sourcelanguage"
-          },
-          "targetLanguage": {
-            "type": "string",
-            "title": "Targetlanguage"
-          },
-          "level": {
-            "type": "integer",
-            "title": "Level"
-          },
-          "queuePosition": {
-            "type": "integer",
-            "title": "Queueposition"
-          },
-          "correctCount": {
-            "type": "integer",
-            "title": "Correctcount"
-          },
-          "incorrectCount": {
-            "type": "integer",
-            "title": "Incorrectcount"
-          },
-          "consecutiveCorrect": {
-            "type": "integer",
-            "title": "Consecutivecorrect"
-          },
-          "lastPracticed": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Lastpracticed"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "vocabularyItemId",
-          "sourceText",
-          "sourceLanguage",
-          "targetLanguage",
-          "level",
-          "queuePosition",
-          "correctCount",
-          "incorrectCount",
-          "consecutiveCorrect",
-          "lastPracticed"
-        ],
         "title": "UserProgressResponse"
       },
       "UserRegistration": {
-        "properties": {
-          "username": {
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 3,
-            "title": "Username"
-          },
-          "password": {
-            "type": "string",
-            "maxLength": 128,
-            "minLength": 8,
-            "title": "Password"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "username",
-          "password"
-        ],
         "title": "UserRegistration"
-      },
-      "UserResponse": {
-        "properties": {
-          "id": {
-            "type": "integer",
-            "title": "Id"
-          },
-          "username": {
-            "type": "string",
-            "title": "Username"
-          },
-          "is_admin": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Is Admin",
-            "default": false
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "username"
-        ],
-        "title": "UserResponse"
       },
       "ValidationError": {
         "properties": {
@@ -1298,334 +1014,33 @@
         "title": "ValidationError"
       },
       "VersionResponse": {
-        "properties": {
-          "version": {
-            "type": "string",
-            "title": "Version"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "version"
-        ],
         "title": "VersionResponse"
       },
       "VocabularyItemCreate": {
-        "properties": {
-          "sourceText": {
-            "type": "string",
-            "title": "Sourcetext"
-          },
-          "sourceLanguage": {
-            "type": "string",
-            "title": "Sourcelanguage"
-          },
-          "targetText": {
-            "type": "string",
-            "title": "Targettext"
-          },
-          "targetLanguage": {
-            "type": "string",
-            "title": "Targetlanguage"
-          },
-          "listName": {
-            "type": "string",
-            "title": "Listname"
-          },
-          "difficultyLevel": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Difficultylevel"
-          },
-          "sourceUsageExample": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Sourceusageexample"
-          },
-          "targetUsageExample": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Targetusageexample"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "sourceText",
-          "sourceLanguage",
-          "targetText",
-          "targetLanguage",
-          "listName"
-        ],
         "title": "VocabularyItemCreate"
       },
       "VocabularyItemDetailResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "sourceText": {
-            "type": "string",
-            "title": "Sourcetext"
-          },
-          "sourceLanguage": {
-            "type": "string",
-            "title": "Sourcelanguage"
-          },
-          "targetText": {
-            "type": "string",
-            "title": "Targettext"
-          },
-          "targetLanguage": {
-            "type": "string",
-            "title": "Targetlanguage"
-          },
-          "listName": {
-            "type": "string",
-            "title": "Listname"
-          },
-          "difficultyLevel": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Difficultylevel"
-          },
-          "sourceUsageExample": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Sourceusageexample"
-          },
-          "targetUsageExample": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Targetusageexample"
-          },
-          "isActive": {
-            "type": "boolean",
-            "title": "Isactive"
-          },
-          "createdAt": {
-            "type": "string",
-            "title": "Createdat"
-          },
-          "updatedAt": {
-            "type": "string",
-            "title": "Updatedat"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "id",
-          "sourceText",
-          "sourceLanguage",
-          "targetText",
-          "targetLanguage",
-          "listName",
-          "difficultyLevel",
-          "sourceUsageExample",
-          "targetUsageExample",
-          "isActive",
-          "createdAt",
-          "updatedAt"
-        ],
         "title": "VocabularyItemDetailResponse"
       },
       "VocabularyItemResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "sourceText": {
-            "type": "string",
-            "title": "Sourcetext"
-          },
-          "sourceLanguage": {
-            "type": "string",
-            "title": "Sourcelanguage"
-          },
-          "targetText": {
-            "type": "string",
-            "title": "Targettext"
-          },
-          "targetLanguage": {
-            "type": "string",
-            "title": "Targetlanguage"
-          },
-          "listName": {
-            "type": "string",
-            "title": "Listname"
-          },
-          "sourceUsageExample": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Sourceusageexample"
-          },
-          "targetUsageExample": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Targetusageexample"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "id",
-          "sourceText",
-          "sourceLanguage",
-          "targetText",
-          "targetLanguage",
-          "listName",
-          "sourceUsageExample",
-          "targetUsageExample"
-        ],
         "title": "VocabularyItemResponse"
       },
       "VocabularyItemUpdate": {
-        "properties": {
-          "sourceText": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Sourcetext"
-          },
-          "targetText": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Targettext"
-          },
-          "sourceUsageExample": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Sourceusageexample"
-          },
-          "targetUsageExample": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Targetusageexample"
-          },
-          "isActive": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Isactive"
-          },
-          "listName": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Listname"
-          },
-          "difficultyLevel": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Difficultylevel"
-          }
-        },
+        "properties": {},
         "type": "object",
         "title": "VocabularyItemUpdate"
       },
       "WordListResponse": {
-        "properties": {
-          "listName": {
-            "type": "string",
-            "title": "Listname"
-          },
-          "wordCount": {
-            "type": "integer",
-            "title": "Wordcount"
-          }
-        },
+        "properties": {},
         "type": "object",
-        "required": [
-          "listName",
-          "wordCount"
-        ],
         "title": "WordListResponse"
       }
     },
