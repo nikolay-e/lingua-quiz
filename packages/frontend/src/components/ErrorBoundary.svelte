@@ -46,7 +46,7 @@
     <div class="error-content">
       <div class="error-icon">⚠️</div>
       <h2>Something went wrong</h2>
-      <p class="error-message">{errorMessage}</p>
+      <p class="error-message text-sm">{errorMessage}</p>
       <Button onclick={retry} variant="default">
         <RotateCcw size={16} /> Reload Page
       </Button>
@@ -83,6 +83,5 @@
   .error-message {
     color: var(--color-text-muted);
     margin-bottom: var(--spacing-lg);
-    font-size: var(--font-size-sm);
   }
 </style>

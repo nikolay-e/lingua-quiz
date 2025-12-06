@@ -9,8 +9,8 @@
     <header class="feed-item__header">
       <div class="header-content">
         <div class="header-text">
-          {#if title}<h3>{title}</h3>{/if}
-          {#if subtitle}<p class="subtitle">{subtitle}</p>{/if}
+          {#if title}<h3 class="text-lg">{title}</h3>{/if}
+          {#if subtitle}<p class="subtitle text-sm">{subtitle}</p>{/if}
         </div>
         {#if $$slots.headerAction}
           <div class="header-action">
@@ -53,13 +53,11 @@
     margin: 0;
     margin-block-end: var(--spacing-xs);
     color: var(--text-color);
-    font-size: var(--font-size-lg);
   }
 
   .header-text .subtitle {
     margin: 0;
     opacity: 0.8;
-    font-size: var(--font-size-sm);
   }
 
   .feed-item__body :global(.full-width) {

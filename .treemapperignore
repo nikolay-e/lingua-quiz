@@ -1,22 +1,121 @@
-.dockerignore
+# Lock files & dependencies
 package-lock.json
-*eslint*
-*test*
-*.md
-*lint*
-*ignore*
-.flake8
-.nvmrc
-.pre-commit-config.yaml
-*prettier*
+**/package-lock.json
+node_modules
+**/node_modules
+
+# Generated code & schemas
+generated
+**/generated
+packages/backend/src/generated/
+packages/frontend/src/generated/
+packages/domain/dist/
+packages/core/dist/
+
+# Build artifacts
+*/dist
+*/build
+*/.next
+**/*.egg-info
+**/*.dist-info
+
+# Cache directories
+__pycache__
+**/__pycache__
+.mypy_cache
+**/.mypy_cache
+.ruff_cache
+**/.ruff_cache
+.pytest_cache
+**/.pytest_cache
 *_cache*
-*.secrets*
-*sops*
+.DS_Store
+
+# Virtual environments
+venv
+**/venv
+packages/tools/venv
+
+# Database/ORM
+packages/backend/alembic/versions/
+packages/backend/alembic/__pycache__
+alembic.ini
+packages/backend/alembic.ini
+
+# TypeScript configuration
+tsconfig*.json
+**/tsconfig*.json
+
+# Build tool configs
+vite.config.ts
+**/vite.config.ts
+playwright.config.ts
+**/playwright.config.ts
+components.json
+**/components.json
+
+# Linting & formatting configs
+*eslint*
+*prettier*
+*lint*
+.flake8
 .sqlfluff
-*.txt
-*.json
-*.csv
-vocab_tools
+.stylelintrc.json
+.markdownlint*
+.yamllint*
+.gitlint
+
+# CI/CD & deployment
+.github/
+Dockerfile
+docker-compose*.yml
+.dockerignore
+nginx*.conf
+
+# Security & secrets
+.secrets*
+*sops*
+.env*
+
+# Python project configs
+pyproject.toml
+**/pyproject.toml
+requirements*.txt
+.pre-commit-config.yaml
+
+# Other configs
+.nvmrc
+.jscpd.json
+
+# Documentation
+*.md
+CLAUDE.md
+**/README.md
+
+# Ignore patterns
+*ignore
+
+# Test files & E2E
+*test*
 e2e
 *playwright*
-generated
+**/*test*
+**/*.test.*
+**/*.spec.*
+*.snap
+*snapshots*
+
+# Data files (non-code)
+*.txt
+*.csv
+packages/tools/frequency_lists/
+packages/tools/data/
+
+# Vocabulary tools (data pipeline)
+vocab_tools
+
+# Misc
+package.json
+**/package.json
+analysis_history.json
+reports/

@@ -36,8 +36,8 @@
 <div class="learning-progress-container flex-col gap-lg">
   {#if selectedQuiz}
     <div class="current-level-display flex-align-center gap-sm">
-      <span class="level-label">Current Practice Level:</span>
-      <span class="level-description">{getLevelDescription(currentLevel)}</span>
+      <span class="text-sm font-medium text-foreground">Current Practice Level:</span>
+      <span class="text-sm font-semibold text-primary">{getLevelDescription(currentLevel)}</span>
     </div>
   {/if}
 
@@ -53,9 +53,9 @@
             <div class="header-info">
               <span class="fold-icon">
                 {#if foldedLists[levelData.id]}
-                  <ChevronRight size={14} />
+                  <ChevronRight size={16} />
                 {:else}
-                  <ChevronDown size={14} />
+                  <ChevronDown size={16} />
                 {/if}
               </span>
               <levelData.icon size={16} />
@@ -107,18 +107,6 @@
 
   .current-level-display:hover {
     box-shadow: var(--shadow-md);
-  }
-
-  .level-label {
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: var(--font-size-sm);
-  }
-
-  .level-description {
-    font-weight: 600;
-    color: var(--primary-color);
-    font-size: var(--font-size-sm);
   }
 
   .learning-progress {
@@ -196,7 +184,6 @@
   }
 
   .fold-icon {
-    font-size: var(--font-size-sm);
     margin-inline-end: var(--spacing-sm);
     transition: transform var(--transition-speed-fast) ease;
     color: var(--text-color);

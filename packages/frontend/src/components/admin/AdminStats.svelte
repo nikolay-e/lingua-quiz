@@ -16,11 +16,9 @@
 </script>
 
 {#if stats.total > 0}
-  <div class="grid md:grid-cols-2 lg:grid-cols-4" style="gap: var(--spacing-md);">
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
     <Card.Root>
-      <Card.Header
-        class="flex flex-row items-center justify-between space-y-0"
-        style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
+      <Card.Header class="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
         <Card.Title class="text-sm font-medium">Total Items</Card.Title>
         <svg
           class="size-4 text-muted-foreground"
@@ -35,15 +33,13 @@
               002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
         </svg>
       </Card.Header>
-      <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
+      <Card.Content class="p-4 pt-0">
         <div class="text-2xl font-bold">{stats.total}</div>
       </Card.Content>
     </Card.Root>
 
     <Card.Root>
-      <Card.Header
-        class="flex flex-row items-center justify-between space-y-0"
-        style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
+      <Card.Header class="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
         <Card.Title class="text-sm font-medium">Active Items</Card.Title>
         <svg
           class="size-4 text-success"
@@ -57,15 +53,13 @@
             d="M5 13l4 4L19 7" />
         </svg>
       </Card.Header>
-      <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
+      <Card.Content class="p-4 pt-0">
         <div class="text-2xl font-bold text-success">{stats.active}</div>
       </Card.Content>
     </Card.Root>
 
     <Card.Root>
-      <Card.Header
-        class="flex flex-row items-center justify-between space-y-0"
-        style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
+      <Card.Header class="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
         <Card.Title class="text-sm font-medium">Inactive Items</Card.Title>
         <svg
           class="size-4 text-destructive"
@@ -79,15 +73,13 @@
             d="M6 18L18 6M6 6l12 12" />
         </svg>
       </Card.Header>
-      <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
+      <Card.Content class="p-4 pt-0">
         <div class="text-2xl font-bold text-destructive">{stats.inactive}</div>
       </Card.Content>
     </Card.Root>
 
     <Card.Root>
-      <Card.Header
-        class="flex flex-row items-center justify-between space-y-0"
-        style="padding: var(--spacing-md); padding-block-end: var(--spacing-xs);">
+      <Card.Header class="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
         <Card.Title class="text-sm font-medium">Languages</Card.Title>
         <svg
           class="size-4 text-muted-foreground"
@@ -102,7 +94,7 @@
               5C11.783 10.77 8.07 15.61 3 18.129" />
         </svg>
       </Card.Header>
-      <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
+      <Card.Content class="p-4 pt-0">
         <div class="text-2xl font-bold">{stats.languageCount}</div>
       </Card.Content>
     </Card.Root>

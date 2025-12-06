@@ -33,7 +33,7 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
 
 # Generate Pydantic models from OpenAPI schema
 COPY lingua-quiz-schema.json /tmp/lingua-quiz-schema.json
-RUN pip install --no-cache-dir datamodel-code-generator==0.27.1 \
+RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
     && mkdir -p ./generated \
     && python -m datamodel_code_generator \
         --input /tmp/lingua-quiz-schema.json \
@@ -43,7 +43,7 @@ RUN pip install --no-cache-dir datamodel-code-generator==0.27.1 \
         --use-standard-collections \
         --use-annotated \
         --use-double-quotes \
-        --target-python-version 3.12 \
+        --target-python-version 3.14 \
         --capitalise-enum-members \
         --enum-field-as-literal one \
         --snake-case-field \

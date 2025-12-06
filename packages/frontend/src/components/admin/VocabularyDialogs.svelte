@@ -64,16 +64,16 @@
       <Dialog.Title>Edit Vocabulary Item</Dialog.Title>
       <Dialog.Description>Make changes to the vocabulary item. Click save when you're done.</Dialog.Description>
     </Dialog.Header>
-    <div class="grid" style="gap: var(--spacing-md); padding-block: var(--spacing-md);">
-      <div class="grid" style="gap: var(--spacing-xs);">
+    <div class="grid gap-4 py-4">
+      <div class="grid gap-1">
         <Label for="edit-source">Source Text</Label>
         <Input id="edit-source" bind:value={editForm.sourceText} />
       </div>
-      <div class="grid" style="gap: var(--spacing-xs);">
+      <div class="grid gap-1">
         <Label for="edit-target">Target Text</Label>
         <Input id="edit-target" bind:value={editForm.targetText} />
       </div>
-      <div class="grid" style="gap: var(--spacing-xs);">
+      <div class="grid gap-1">
         <Label for="edit-source-example">Source Example</Label>
         <Textarea
           id="edit-source-example"
@@ -81,7 +81,7 @@
           rows={3}
           placeholder="Enter usage example..." />
       </div>
-      <div class="grid" style="gap: var(--spacing-xs);">
+      <div class="grid gap-1">
         <Label for="edit-target-example">Target Example</Label>
         <Textarea
           id="edit-target-example"
@@ -89,12 +89,12 @@
           rows={3}
           placeholder="Enter translation example..." />
       </div>
-      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
-        <div class="grid" style="gap: var(--spacing-xs);">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="grid gap-1">
           <Label>List Name</Label>
           <SelectField bind:value={editForm.listName} options={listNameOptions} placeholder={editForm.listName} />
         </div>
-        <div class="grid" style="gap: var(--spacing-xs);">
+        <div class="grid gap-1">
           <Label>Difficulty Level</Label>
           <SelectField bind:value={editForm.difficultyLevel} options={difficultyOptions} placeholder="Select" />
         </div>
@@ -115,41 +115,41 @@
       <Dialog.Title>Create New Vocabulary Item</Dialog.Title>
       <Dialog.Description>Add a new vocabulary item to the database.</Dialog.Description>
     </Dialog.Header>
-    <div class="grid" style="gap: var(--spacing-md); padding-block: var(--spacing-md);">
-      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
-        <div class="grid" style="gap: var(--spacing-xs);">
+    <div class="grid gap-4 py-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="grid gap-1">
           <Label for="create-source">Source Text *</Label>
           <Input id="create-source" bind:value={createForm.sourceText} required />
         </div>
-        <div class="grid" style="gap: var(--spacing-xs);">
+        <div class="grid gap-1">
           <Label for="create-target">Target Text *</Label>
           <Input id="create-target" bind:value={createForm.targetText} required />
         </div>
       </div>
 
-      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
-        <div class="grid" style="gap: var(--spacing-xs);">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="grid gap-1">
           <Label>Source Language</Label>
           <SelectField bind:value={createForm.sourceLanguage} options={languageOptions} placeholder="Select" />
         </div>
-        <div class="grid" style="gap: var(--spacing-xs);">
+        <div class="grid gap-1">
           <Label>Target Language</Label>
           <SelectField bind:value={createForm.targetLanguage} options={languageOptions} placeholder="Select" />
         </div>
       </div>
 
-      <div class="grid grid-cols-2" style="gap: var(--spacing-md);">
-        <div class="grid" style="gap: var(--spacing-xs);">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="grid gap-1">
           <Label>List Name *</Label>
           <SelectField bind:value={createForm.listName} options={listNameOptions} placeholder="Select list" />
         </div>
-        <div class="grid" style="gap: var(--spacing-xs);">
+        <div class="grid gap-1">
           <Label>Difficulty Level</Label>
           <SelectField bind:value={createForm.difficultyLevel} options={difficultyOptions} placeholder="Select" />
         </div>
       </div>
 
-      <div class="grid" style="gap: var(--spacing-xs);">
+      <div class="grid gap-1">
         <Label for="create-source-example">Source Example</Label>
         <Textarea
           id="create-source-example"
@@ -157,7 +157,7 @@
           rows={3}
           placeholder="Enter usage example..." />
       </div>
-      <div class="grid" style="gap: var(--spacing-xs);">
+      <div class="grid gap-1">
         <Label for="create-target-example">Target Example</Label>
         <Textarea
           id="create-target-example"

@@ -64,8 +64,8 @@
       onkeydown={(e) => handleKeyDown(e, () => onLogoutCancel?.())}
     >
       <AlertTriangle size={20} class="warning-icon" />
-      <span id="logout-confirm-title" class="confirm-title">Unsaved progress</span>
-      <span id="logout-confirm-desc" class="confirm-desc">Log out anyway?</span>
+      <span id="logout-confirm-title" class="confirm-title text-base">Unsaved progress</span>
+      <span id="logout-confirm-desc" class="confirm-desc text-sm">Log out anyway?</span>
       <div class="confirm-actions">
         <Button
           bind:ref={logoutConfirmRef}
@@ -99,8 +99,8 @@
         onkeydown={(e) => handleKeyDown(e, () => (showDeleteConfirm = false))}
       >
         <AlertTriangle size={20} class="warning-icon" />
-        <span id="delete-confirm-title" class="confirm-title">Delete account?</span>
-        <span id="delete-confirm-desc" class="confirm-desc">This action cannot be undone.</span>
+        <span id="delete-confirm-title" class="confirm-title text-base">Delete account?</span>
+        <span id="delete-confirm-desc" class="confirm-desc text-sm">This action cannot be undone.</span>
         <div class="confirm-actions">
           <Button
             bind:ref={confirmButtonRef}
@@ -143,11 +143,9 @@
 
   .confirm-title {
     font-weight: 600;
-    font-size: var(--font-size-base);
   }
 
   .confirm-desc {
-    font-size: var(--font-size-sm);
     color: var(--color-text-muted);
   }
 

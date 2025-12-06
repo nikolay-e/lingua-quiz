@@ -99,7 +99,7 @@
         <div class="requirements-list">
           {#each passwordValidation as req (req.label)}
             <div class="requirement {req.valid ? 'valid' : ''}">
-              <span class="requirement-icon {req.valid ? 'valid' : ''}">
+              <span class="requirement-icon text-sm {req.valid ? 'valid' : ''}">
                 {req.valid ? '✓' : '○'}
               </span>
               <span>{req.label}</span>
@@ -160,7 +160,6 @@
       transform var(--transition-speed-fast) ease,
       color var(--transition-speed-fast) ease;
     color: var(--input-border-color);
-    font-size: var(--font-size-sm);
   }
 
   .requirement.valid {

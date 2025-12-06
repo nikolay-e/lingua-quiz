@@ -287,14 +287,14 @@
   }
 </script>
 
-<main id="main-content" class="min-h-screen bg-background" style="padding: var(--spacing-md);">
-  <div class="mx-auto max-w-7xl" style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
-    <header class="flex flex-col md:flex-row md:items-center md:justify-between" style="gap: var(--spacing-md);">
+<main id="main-content" class="min-h-screen bg-background p-4">
+  <div class="mx-auto max-w-7xl flex flex-col gap-6">
+    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <div>
         <h1 class="text-3xl font-bold text-primary">Vocabulary Management</h1>
         <p class="text-muted-foreground">Search, create, and manage vocabulary items</p>
       </div>
-      <Button onclick={openCreateDialog} size="lg" class="w-full md:w-auto">
+      <Button onclick={openCreateDialog} class="w-full md:w-auto">
         <svg
           class="mr-2 size-5"
           fill="none"

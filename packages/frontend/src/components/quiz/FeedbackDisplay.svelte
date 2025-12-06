@@ -33,8 +33,8 @@
 {#if feedback}
   <div class="feedback-container" role="alert" aria-live="polite">
     <div class="feedback-text {isSuccess ? 'success' : 'error'} flex-center gap-sm text-center">
-      <span class="feedback-icon" aria-hidden="true"></span>
-      <span class="feedback-message">
+      <span class="feedback-icon text-lg" aria-hidden="true"></span>
+      <span class="feedback-message text-base">
         {feedbackMessage}
       </span>
     </div>
@@ -89,14 +89,6 @@
 
   .feedback-text .feedback-icon::before {
     color: inherit;
-  }
-
-  .feedback-icon {
-    font-size: var(--font-size-lg);
-  }
-
-  .feedback-message {
-    font-size: var(--font-size-base);
   }
 
   .usage-examples {

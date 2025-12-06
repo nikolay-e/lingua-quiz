@@ -43,12 +43,11 @@
     <span>{ttsState.isPlaying ? 'Playing…' : 'Listen'}</span>
   </Button>
 {:else}
-  <span class="tts-muted" aria-live="polite">TTS unavailable for {language || 'this language'}</span>
+  <span class="tts-muted text-sm" aria-live="polite">TTS unavailable for {language || 'this language'}</span>
 {/if}
 
 <style>
   .tts-muted {
     color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
   }
 </style>

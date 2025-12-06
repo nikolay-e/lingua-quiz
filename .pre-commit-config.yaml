@@ -238,7 +238,10 @@ repos:
         args: ['-i', '2', '-ci', '-bn', '-w']
 
   # =============================================================================
-  # STAGE 9: Docker (<1 second)
+  # STAGE 9: Docker
+  # - Lint Dockerfiles: <1 second
+  # - Validate docker-compose: <1 second
+  # - Build images (pre-push): 3-5 minutes
   # =============================================================================
   - repo: https://github.com/hadolint/hadolint
     rev: v2.14.0
@@ -268,6 +271,15 @@ repos:
         language: system
         files: ^docker-compose.*\.(yml|yaml)$
         pass_filenames: false
+
+      # Build all Docker images to ensure they compile successfully
+      - id: docker-build-all
+        name: Build Docker images (backend, frontend, tests)
+        entry: bash -c 'echo "Building backend..." && docker build --target backend -t lingua-quiz-backend:test . && echo "Building frontend..." && docker build --target frontend -t lingua-quiz-frontend:test . && echo "Building test container..." && docker build --target integration-e2e-tests -t lingua-quiz-tests:test . && echo "All images built successfully"'
+        language: system
+        files: ^(Dockerfile|docker-compose.*\.(yml|yaml)|packages/(backend|frontend|core|domain|tests)/.*|lingua-quiz-schema\.json|nginx\.conf|package(-lock)?\.json)$
+        pass_filenames: false
+        stages: [pre-push]
 
   # =============================================================================
   # STAGE 10: YAML & Markdown (<3 seconds)
@@ -353,7 +365,8 @@ repos:
 # Performance Targets
 # =============================================================================
 # - Pre-commit median: <20 seconds
-# - Pre-push median: <30 seconds
+# - Pre-push median: 3-5 minutes (Docker builds dominate, but run only before push)
 # - Bypass rate: <5-10% per month
 #
 # If hooks are too slow, move to pre-push or CI
+# Docker builds run only on pre-push to avoid slowing down commits

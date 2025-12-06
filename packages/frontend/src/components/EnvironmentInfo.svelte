@@ -3,7 +3,7 @@
   const version = import.meta.env.VITE_APP_VERSION || 'dev';
 </script>
 
-<div class="environment-info">
+<div class="environment-info text-sm">
   <span
     class="env-label"
     class:production={environment === 'production'}
@@ -20,7 +20,6 @@
     justify-content: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-md) var(--spacing-sm);
-    font-size: var(--font-size-sm);
     font-family: monospace;
     opacity: 0.6;
     transition: opacity var(--transition-speed-fast);

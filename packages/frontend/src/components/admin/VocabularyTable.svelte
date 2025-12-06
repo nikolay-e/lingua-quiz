@@ -47,10 +47,10 @@
 
 {#if items.length > 0}
   <Card.Root>
-    <Card.Header style="padding: var(--spacing-md);">
+    <Card.Header class="p-4">
       <Card.Title>Search Results</Card.Title>
     </Card.Header>
-    <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
+    <Card.Content class="p-4 pt-0">
       <div class="overflow-x-auto">
         <Table.Root data-admin-table>
           <Table.Header>
@@ -78,7 +78,7 @@
                   <Badge variant="outline">{item.listName}</Badge>
                 </Table.Cell>
                 <Table.Cell data-label="Languages">
-                  <div class="flex" style="gap: 4px;">
+                  <div class="flex gap-1">
                     <Badge variant="secondary" class="text-xs">{item.sourceLanguage.toUpperCase()}</Badge>
                     <span class="text-muted-foreground">→</span>
                     <Badge variant="secondary" class="text-xs">{item.targetLanguage.toUpperCase()}</Badge>
@@ -92,7 +92,7 @@
                   {/if}
                 </Table.Cell>
                 <Table.Cell class="text-right" data-label="Actions">
-                  <div class="flex justify-end" style="gap: var(--spacing-xs);">
+                  <div class="flex justify-end gap-1">
                     <Button variant="outline" size="sm" onclick={() => handleEdit(item)}>
                       <svg
                         class="mr-1 size-4"
@@ -132,10 +132,10 @@
   </Card.Root>
 {:else}
   <Card.Root>
-    <Card.Header style="padding: var(--spacing-md);">
+    <Card.Header class="p-4">
       <Card.Title>Search Results</Card.Title>
     </Card.Header>
-    <Card.Content style="padding: var(--spacing-md); padding-block-start: 0;">
+    <Card.Content class="p-4 pt-0">
       <p class="text-muted-foreground">No results found</p>
     </Card.Content>
   </Card.Root>

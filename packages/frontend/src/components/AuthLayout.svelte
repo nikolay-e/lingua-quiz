@@ -17,7 +17,7 @@
   </FeedCard>
 
   <FeedCard>
-    <div class="auth-content">
+    <div class="auth-content text-xl">
       {@render children()}
     </div>
   </FeedCard>
@@ -41,7 +41,6 @@
   }
 
   .auth-content :global(h2) {
-    font-size: var(--font-size-xl);
     text-align: center;
     margin: 0;
   }

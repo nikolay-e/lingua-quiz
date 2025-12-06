@@ -40,8 +40,6 @@
   }
 </script>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
-
 {#key auth.isAuthenticated}
   {#if auth.isAuthenticated}
     {#if currentPage === PAGES.ADMIN && auth.isAdmin}
@@ -106,27 +104,6 @@
 <EnvironmentInfo />
 
 <style>
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    padding: var(--spacing-sm) var(--spacing-md);
-    background: var(--color-primary);
-    color: var(--color-primary-foreground);
-    z-index: 9999;
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 500;
-    transition: top var(--transition-speed-fast) ease;
-
-    &:focus {
-      top: var(--spacing-sm);
-      left: var(--spacing-sm);
-      outline: 2px solid var(--color-ring);
-      outline-offset: 2px;
-    }
-  }
-
   .admin-nav {
     position: fixed;
     top: max(var(--spacing-sm), env(safe-area-inset-top, 0px));

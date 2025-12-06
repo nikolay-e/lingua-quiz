@@ -12,13 +12,13 @@
 
 {#if currentQuestion}
   <div class="question">
-    <span id="word" class="question-text" lang={questionLanguage}>
+    <span id="word" class="question-text text-xl" lang={questionLanguage}>
       {currentQuestion.questionText}
     </span>
   </div>
 {:else}
   <div class="question">
-    <span id="word" class="question-text">No more questions available.</span>
+    <span id="word" class="question-text text-xl">No more questions available.</span>
   </div>
 {/if}
 
@@ -37,7 +37,6 @@
   }
 
   .question-text {
-    font-size: var(--font-size-xl);
     font-weight: bold;
     color: var(--color-secondary);
     text-align: center;

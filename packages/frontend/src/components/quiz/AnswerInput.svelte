@@ -43,8 +43,15 @@
     type="button"
     variant="default"
     onclick={onSubmit}
-    {disabled}>
+    {disabled}
+    class="w-full">
     <Send size={16} />
     {disabled ? 'Submitting…' : 'Submit'}
   </Button>
 </div>
+
+<style>
+  input {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+</style>

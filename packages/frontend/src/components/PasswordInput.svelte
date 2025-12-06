@@ -50,9 +50,9 @@
     aria-label={showPassword ? 'Hide password' : 'Show password'}
   >
     {#if showPassword}
-      <EyeOff size={18} />
+      <EyeOff size={16} />
     {:else}
-      <Eye size={18} />
+      <Eye size={16} />
     {/if}
   </button>
 </div>

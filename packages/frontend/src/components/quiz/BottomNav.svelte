@@ -23,7 +23,7 @@
       aria-label="Back to menu"
     >
       <Home size={20} />
-      <span class="nav-label">Menu</span>
+      <span class="text-sm">Menu</span>
     </Button>
     <Button
       variant="ghost"
@@ -33,19 +33,20 @@
       aria-label={showProgress ? 'Hide progress' : 'Show progress'}
     >
       <BarChart2 size={20} />
-      <span class="nav-label">Progress</span>
+      <span class="text-sm">Progress</span>
+    </Button>
+  {:else}
+    <Button
+      variant="ghost"
+      size="sm"
+      class="nav-button"
+      onclick={onLogout}
+      aria-label="Log out"
+    >
+      <LogOut size={20} />
+      <span class="text-sm">Logout</span>
     </Button>
   {/if}
-  <Button
-    variant="ghost"
-    size="sm"
-    class="nav-button"
-    onclick={onLogout}
-    aria-label="Log out"
-  >
-    <LogOut size={20} />
-    <span class="nav-label">Logout</span>
-  </Button>
 </nav>
 
 <style>
@@ -79,9 +80,5 @@
     min-height: 56px;
     min-width: 64px;
     padding: var(--spacing-xs);
-  }
-
-  .nav-label {
-    font-size: var(--font-size-sm);
   }
 </style>

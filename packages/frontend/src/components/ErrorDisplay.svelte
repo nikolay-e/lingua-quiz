@@ -15,7 +15,7 @@
 <div class="error-display" role="alert">
   <div class="error-content">
     <AlertCircle size={24} class="error-icon" />
-    <p class="error-message">{message}</p>
+    <p class="error-message text-sm">{message}</p>
   </div>
   <div class="error-actions">
     {#if onRetry}
@@ -58,7 +58,6 @@
   .error-message {
     margin: 0;
     color: var(--color-error-text, hsl(0deg 84% 30%));
-    font-size: var(--font-size-sm);
     line-height: 1.5;
   }
 

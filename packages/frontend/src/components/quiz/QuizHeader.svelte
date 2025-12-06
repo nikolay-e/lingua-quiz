@@ -27,7 +27,7 @@
       <label for="quiz-select" class="sr-only">Select a quiz</label>
       <select
         id="quiz-select"
-        class="quiz-select"
+        class="quiz-select text-base"
         bind:value={selected}
         onchange={handleQuizSelect}
         disabled={loading}
@@ -45,7 +45,7 @@
     <div class="selected-quiz-header flex-between gap-md">
       <div class="quiz-info flex-align-center gap-xs">
         <BookOpen size={16} />
-        <span class="quiz-name">{selectedQuiz}</span>
+        <span class="quiz-name text-lg">{selectedQuiz}</span>
       </div>
       <Button variant="outline" size="sm" onclick={onBackToMenu}>
         <ArrowLeft size={16} />
@@ -66,7 +66,6 @@
     border: 2px solid var(--input-border-color);
     border-radius: var(--radius-md);
     padding: var(--spacing-sm);
-    font-size: var(--font-size-base);
     transition: border-color var(--transition-speed) ease;
 
     &:focus-visible {
@@ -95,6 +94,5 @@
   .quiz-name {
     font-weight: 600;
     color: var(--primary-color);
-    font-size: var(--font-size-lg);
   }
 </style>

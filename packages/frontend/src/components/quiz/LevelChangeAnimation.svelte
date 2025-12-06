@@ -33,8 +33,8 @@
     aria-live="polite"
   >
     <div class="animation-content">
-      <div class="icon">{isLevelUp ? '⬆️' : '⬇️'}</div>
-      <div class="text">{isLevelUp ? 'Level Up!' : 'Level Down'}</div>
+      <div class="icon text-xl">{isLevelUp ? '⬆️' : '⬇️'}</div>
+      <div class="text text-lg">{isLevelUp ? 'Level Up!' : 'Level Down'}</div>
     </div>
   </div>
 {/if}
@@ -79,14 +79,6 @@
   .level-down .animation-content {
     border-color: #f87171;
     color: #dc2626;
-  }
-
-  .icon {
-    font-size: var(--font-size-xl);
-  }
-
-  .text {
-    font-size: var(--font-size-lg);
   }
 
   @keyframes level-up-animation {

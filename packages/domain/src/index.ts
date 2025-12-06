@@ -5,6 +5,7 @@ export * from './schemaArb';
 
 export type {
   VocabularyItemResponse as VocabularyItem,
+  UserResponse as User,
   UserProgressResponse as UserProgress,
   WordListResponse as WordList,
   ContentVersionResponse as ContentVersion,

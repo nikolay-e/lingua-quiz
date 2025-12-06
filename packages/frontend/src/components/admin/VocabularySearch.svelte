@@ -55,12 +55,12 @@
 </script>
 
 <Card.Root>
-  <Card.Header style="padding: var(--spacing-md);">
+  <Card.Header class="p-4">
     <Card.Title>Search Vocabulary</Card.Title>
     <Card.Description>Search by source or target text using full-text search</Card.Description>
   </Card.Header>
-  <Card.Content class="flex flex-col gap-4" style="padding: var(--spacing-md); padding-block-start: 0;">
-    <div class="flex flex-col md:flex-row" style="gap: var(--spacing-md);">
+  <Card.Content class="flex flex-col gap-4 p-4 pt-0">
+    <div class="flex flex-col md:flex-row gap-4">
       <div class="relative flex-1">
         <Input
           type="text"
@@ -92,8 +92,8 @@
 
     {#if showFilters}
       <Separator />
-      <div class="flex flex-col md:flex-row md:items-center" style="gap: var(--spacing-md);">
-        <div class="flex items-center" style="gap: var(--spacing-xs);">
+      <div class="flex flex-col md:flex-row md:items-center gap-4">
+        <div class="flex items-center gap-1">
           <Label class="text-sm font-medium">Language:</Label>
           <Select.Root type="single" bind:value={filterLanguage}>
             <Select.Trigger class="w-40">
@@ -111,7 +111,7 @@
           </Select.Root>
         </div>
 
-        <div class="flex items-center" style="gap: var(--spacing-xs);">
+        <div class="flex items-center gap-1">
           <Label class="text-sm font-medium">Status:</Label>
           <Select.Root type="single" bind:value={filterStatus}>
             <Select.Trigger class="w-32">
@@ -131,7 +131,7 @@
           </Select.Root>
         </div>
 
-        <div class="flex items-center" style="gap: var(--spacing-xs);">
+        <div class="flex items-center gap-1">
           <Label class="text-sm font-medium">Sort by:</Label>
           <Select.Root type="single" bind:value={sortBy}>
             <Select.Trigger class="w-32">
@@ -151,7 +151,7 @@
           </Select.Root>
         </div>
 
-        <div class="flex items-center" style="gap: var(--spacing-xs);">
+        <div class="flex items-center gap-1">
           <Label class="text-sm font-medium">Order:</Label>
           <Select.Root type="single" bind:value={sortOrder}>
             <Select.Trigger class="w-32">

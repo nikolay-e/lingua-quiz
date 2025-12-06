@@ -315,13 +315,13 @@
   {#key selectedQuiz}
     <main id="main-content" class="feed">
       {#if liveStatus}
-        <div class="status-banner">{liveStatus}</div>
+        <div class="bg-muted text-foreground border border-border rounded-md px-3 py-2 mb-3 text-sm">{liveStatus}</div>
       {/if}
 
-      <FeedCard title={selectedQuiz ?? null}>
+      <FeedCard title={null}>
         {#if !selectedQuiz}
           <header class="flex-align-center gap-sm mb-md">
-            <h1 class="logo"><Languages size={28} /> LinguaQuiz</h1>
+            <h1 class="m-0 text-primary text-xl"><Languages size={28} /> LinguaQuiz</h1>
           </header>
         {/if}
         <div class="stack">
@@ -389,7 +389,7 @@
               onValueChange={(v) => (userAnswer = v)}
             />
             {#if liveStatus && isSubmitting}
-              <p class="status-hint">{liveStatus}</p>
+              <p class="mt-2 text-muted-foreground text-sm">{liveStatus}</p>
             {/if}
           </FeedCard>
         {/if}
@@ -454,12 +454,6 @@
 </ErrorBoundary>
 
 <style>
-  .logo {
-    margin: 0;
-    color: var(--primary-color);
-    font-size: var(--font-size-xl);
-  }
-
   .feature-link {
     text-decoration: none;
     color: inherit;
@@ -472,21 +466,5 @@
       transform: translateY(-1px);
       box-shadow: var(--shadow-button-hover);
     }
-  }
-
-  .status-banner {
-    background: var(--color-muted);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
-    font-size: var(--font-size-sm);
-  }
-
-  .status-hint {
-    margin-top: var(--spacing-xs);
-    color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
   }
 </style>
