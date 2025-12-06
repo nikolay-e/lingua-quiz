@@ -31,6 +31,26 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
     && pip install --no-cache-dir -r requirements.txt \
     && apk --purge del .build-deps
 
+# Generate Pydantic models from OpenAPI schema
+COPY lingua-quiz-schema.json /tmp/lingua-quiz-schema.json
+RUN pip install --no-cache-dir datamodel-code-generator==0.27.1 \
+    && mkdir -p ./generated \
+    && python -m datamodel_code_generator \
+        --input /tmp/lingua-quiz-schema.json \
+        --output ./generated/schemas.py \
+        --output-model-type pydantic_v2.BaseModel \
+        --field-constraints \
+        --use-standard-collections \
+        --use-annotated \
+        --use-double-quotes \
+        --target-python-version 3.12 \
+        --capitalise-enum-members \
+        --enum-field-as-literal one \
+        --snake-case-field \
+        --use-schema-description \
+    && pip uninstall -y datamodel-code-generator \
+    && rm /tmp/lingua-quiz-schema.json
+
 # Copy application source code
 COPY --chown=appuser:appuser packages/backend/src/ ./
 COPY --chown=appuser:appuser packages/backend/alembic/ ./alembic/
