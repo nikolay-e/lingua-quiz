@@ -130,6 +130,8 @@ export default defineConfig({
   resolve: {
     alias: {
       $lib: path.resolve('./src/lib'),
+      // Resolve OpenAPI schema for domain package validators
+      '../../../lingua-quiz-schema.json': path.resolve('../../lingua-quiz-schema.json'),
     },
   },
 });
