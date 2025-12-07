@@ -11,8 +11,8 @@ class TestQuizFlowE2E:
         page.goto(FRONTEND_URL)
         expect(page).to_have_title("LinguaQuiz - Advanced Language Learning")
 
-        page.get_by_label("Username").fill(test_user["username"])
-        page.get_by_label("Password").fill(test_user["password"])
+        page.get_by_role("textbox", name="Username").fill(test_user["username"])
+        page.get_by_role("textbox", name="Password").fill(test_user["password"])
         page.get_by_role("button", name="Log in").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
@@ -39,8 +39,8 @@ class TestQuizFlowE2E:
         page.get_by_role("button", name="Log out").click()
         expect(page.locator("text=Log in")).to_be_visible()
 
-        page.get_by_label("Username").fill(test_user["username"])
-        page.get_by_label("Password").fill(test_user["password"])
+        page.get_by_role("textbox", name="Username").fill(test_user["username"])
+        page.get_by_role("textbox", name="Password").fill(test_user["password"])
         page.get_by_role("button", name="Log in").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
@@ -53,8 +53,8 @@ class TestQuizFlowE2E:
 
     def test_answer_validation_and_feedback(self, page: Page, test_user: dict[str, str]) -> None:
         page.goto(FRONTEND_URL)
-        page.get_by_label("Username").fill(test_user["username"])
-        page.get_by_label("Password").fill(test_user["password"])
+        page.get_by_role("textbox", name="Username").fill(test_user["username"])
+        page.get_by_role("textbox", name="Password").fill(test_user["password"])
         page.get_by_role("button", name="Log in").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
@@ -70,8 +70,8 @@ class TestQuizFlowE2E:
 
     def test_debounced_bulk_save(self, page: Page, test_user: dict[str, str]) -> None:
         page.goto(FRONTEND_URL)
-        page.get_by_label("Username").fill(test_user["username"])
-        page.get_by_label("Password").fill(test_user["password"])
+        page.get_by_role("textbox", name="Username").fill(test_user["username"])
+        page.get_by_role("textbox", name="Password").fill(test_user["password"])
         page.get_by_role("button", name="Log in").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
@@ -94,8 +94,8 @@ class TestQuizFlowE2E:
 
     def test_level_progression(self, page: Page, test_user: dict[str, str]) -> None:
         page.goto(FRONTEND_URL)
-        page.get_by_label("Username").fill(test_user["username"])
-        page.get_by_label("Password").fill(test_user["password"])
+        page.get_by_role("textbox", name="Username").fill(test_user["username"])
+        page.get_by_role("textbox", name="Password").fill(test_user["password"])
         page.get_by_role("button", name="Log in").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
