@@ -13,7 +13,7 @@ class TestQuizFlowE2E:
 
         page.get_by_role("textbox", name="Username").fill(test_user["username"])
         page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Log in").click()
+        page.get_by_role("button", name="Sign In").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
 
@@ -37,11 +37,11 @@ class TestQuizFlowE2E:
         page.get_by_role("button", name="End Session").click()
 
         page.get_by_role("button", name="Log out").click()
-        expect(page.locator("text=Log in")).to_be_visible()
+        expect(page.locator("text=Sign In")).to_be_visible()
 
         page.get_by_role("textbox", name="Username").fill(test_user["username"])
         page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Log in").click()
+        page.get_by_role("button", name="Sign In").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
 
@@ -55,7 +55,7 @@ class TestQuizFlowE2E:
         page.goto(FRONTEND_URL)
         page.get_by_role("textbox", name="Username").fill(test_user["username"])
         page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Log in").click()
+        page.get_by_role("button", name="Sign In").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
         page.get_by_role("button", name="Start Practice").first.click()
@@ -72,7 +72,7 @@ class TestQuizFlowE2E:
         page.goto(FRONTEND_URL)
         page.get_by_role("textbox", name="Username").fill(test_user["username"])
         page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Log in").click()
+        page.get_by_role("button", name="Sign In").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
 
@@ -96,7 +96,7 @@ class TestQuizFlowE2E:
         page.goto(FRONTEND_URL)
         page.get_by_role("textbox", name="Username").fill(test_user["username"])
         page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Log in").click()
+        page.get_by_role("button", name="Sign In").click()
 
         expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
         page.get_by_role("button", name="Start Practice").first.click()
