@@ -123,7 +123,7 @@ class TestRegistration:
         page.click("button:has-text('Create Account')")
         expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
 
-        page.click("button:has-text('Log Out')")
+        page.get_by_role("button", name="Log out").click()
         expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
         page.click("text=Register here")
@@ -151,7 +151,7 @@ class TestAuthentication:
         page.click("button:has-text('Create Account')")
         expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
 
-        page.click("button:has-text('Log Out')")
+        page.get_by_role("button", name="Log out").click()
         expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
         page.fill("#username", test_user["username"])
@@ -177,10 +177,10 @@ class TestQuizInterface:
         logged_in_page.screenshot(path=str(SCREENSHOTS_DIR / "11_quiz_page.png"))
 
     def test_logout_button_present(self, logged_in_page: Page):
-        expect(logged_in_page.locator("button:has-text('Logout')")).to_be_visible(timeout=10000)
+        expect(logged_in_page.get_by_role("button", name="Log out")).to_be_visible(timeout=10000)
 
     def test_logout_functionality(self, logged_in_page: Page):
-        logged_in_page.click("button:has-text('Logout')")
+        logged_in_page.get_by_role("button", name="Log out").click()
         expect(logged_in_page.get_by_test_id("login-title")).to_have_text("Sign In", timeout=10000)
         logged_in_page.screenshot(path=str(SCREENSHOTS_DIR / "12_after_logout.png"))
 

@@ -65,5 +65,5 @@ class AuthPage(BasePage):
         return self
 
     def logout(self):
-        self.page.click("button:has-text('Log Out')")
+        self.page.get_by_role("button", name="Log out").click()
         return self

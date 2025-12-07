@@ -47,5 +47,5 @@ class QuizPage(BasePage):
         return self
 
     def expect_logout_button_visible(self, timeout: int = 10000):
-        expect(self.page.locator("button:has-text('Logout')")).to_be_visible(timeout=timeout)
+        expect(self.page.get_by_role("button", name="Log out")).to_be_visible(timeout=timeout)
         return self

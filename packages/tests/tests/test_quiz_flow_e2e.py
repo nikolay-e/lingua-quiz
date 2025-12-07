@@ -33,7 +33,7 @@ class TestQuizFlowE2E:
         page.get_by_role("button", name="Menu").click()
         page.get_by_role("button", name="End Session").click()
 
-        page.get_by_role("button", name="Logout").click()
+        page.get_by_role("button", name="Log out").click()
         expect(page.locator("text=Log in")).to_be_visible()
 
         page.get_by_label("Username").fill(test_user["username"])
