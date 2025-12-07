@@ -73,7 +73,8 @@ export class QuizService {
   }
 
   async loadWordLists(token: string): Promise<WordList[] | null> {
-    const versionChanged = await this.withAuthHandling(async () => {
+    let versionChanged = false;
+    try {
       const currentVersion = await api.fetchContentVersion(token);
       const savedVersion = safeStorage.getItem(STORAGE_KEYS.CONTENT_VERSION);
       const currentVersionId = currentVersion.versionId.toString();
@@ -81,14 +82,15 @@ export class QuizService {
       if (savedVersion !== null && parseInt(savedVersion) !== currentVersion.versionId) {
         logger.info(`Content version changed: ${savedVersion} -> ${currentVersionId}. Clearing cache.`);
         safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
-        return true;
+        versionChanged = true;
+      } else {
+        safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
       }
+    } catch (error) {
+      logger.warn('Failed to fetch content version, continuing without version check:', error);
+    }
 
-      safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
-      return false;
-    });
-
-    if (versionChanged === true) {
+    if (versionChanged) {
       this.progressMap.clear();
     }
 
