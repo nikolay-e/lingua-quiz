@@ -9,7 +9,7 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
 class TestQuizFlowE2E:
     def test_full_quiz_session_with_progress_persistence(self, page: Page, test_user: dict[str, str]) -> None:
         page.goto(FRONTEND_URL)
-        expect(page).to_have_title("Lingua Quiz")
+        expect(page).to_have_title("LinguaQuiz - Advanced Language Learning")
 
         page.get_by_label("Username").fill(test_user["username"])
         page.get_by_label("Password").fill(test_user["password"])
