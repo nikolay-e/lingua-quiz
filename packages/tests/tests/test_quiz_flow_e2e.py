@@ -1,11 +1,14 @@
+import os
 import time
 
 from playwright.sync_api import Page, expect
 
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
+
 
 class TestQuizFlowE2E:
     def test_full_quiz_session_with_progress_persistence(self, page: Page, test_user: dict[str, str]) -> None:
-        page.goto("/")
+        page.goto(FRONTEND_URL)
         expect(page).to_have_title("Lingua Quiz")
 
         page.get_by_label("Username").fill(test_user["username"])
@@ -49,7 +52,7 @@ class TestQuizFlowE2E:
         assert "correct" in stats_text.lower() or "total" in stats_text.lower()
 
     def test_answer_validation_and_feedback(self, page: Page, test_user: dict[str, str]) -> None:
-        page.goto("/")
+        page.goto(FRONTEND_URL)
         page.get_by_label("Username").fill(test_user["username"])
         page.get_by_label("Password").fill(test_user["password"])
         page.get_by_role("button", name="Log in").click()
@@ -66,7 +69,7 @@ class TestQuizFlowE2E:
         expect(page.locator("text=Incorrect")).to_be_visible(timeout=2000)
 
     def test_debounced_bulk_save(self, page: Page, test_user: dict[str, str]) -> None:
-        page.goto("/")
+        page.goto(FRONTEND_URL)
         page.get_by_label("Username").fill(test_user["username"])
         page.get_by_label("Password").fill(test_user["password"])
         page.get_by_role("button", name="Log in").click()
@@ -90,7 +93,7 @@ class TestQuizFlowE2E:
         assert "/api/user/progress/bulk" in request.url
 
     def test_level_progression(self, page: Page, test_user: dict[str, str]) -> None:
-        page.goto("/")
+        page.goto(FRONTEND_URL)
         page.get_by_label("Username").fill(test_user["username"])
         page.get_by_label("Password").fill(test_user["password"])
         page.get_by_role("button", name="Log in").click()
