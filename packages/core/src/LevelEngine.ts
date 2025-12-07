@@ -1,5 +1,6 @@
 import type { QueueManager, LevelStatus } from './QueueManager';
 import type { ProgressEntry } from './types';
+import { getNextLevel, getPreviousLevel, LEVEL_QUEUE_MAP } from './constants';
 
 export type PracticeLevel = Extract<LevelStatus, 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4'>;
 export type QuestionDirection = 'normal' | 'reverse';
@@ -21,26 +22,10 @@ export class LevelEngine {
   }
 
   hasWordsForLevel(level: PracticeLevel): boolean {
-    switch (level) {
-      case 'LEVEL_1':
-        return this.queueManager.getQueueLength('LEVEL_0') > 0 || this.queueManager.getQueueLength('LEVEL_1') > 0;
-      case 'LEVEL_2':
-        return this.queueManager.getQueueLength('LEVEL_2') > 0;
-      case 'LEVEL_3':
-        return (
-          this.queueManager.getQueueLength('LEVEL_3') > 0 ||
-          this.queueManager.getQueueLength('LEVEL_4') > 0 ||
-          this.queueManager.getQueueLength('LEVEL_5') > 0
-        );
-      case 'LEVEL_4':
-        return (
-          this.queueManager.getQueueLength('LEVEL_3') > 0 ||
-          this.queueManager.getQueueLength('LEVEL_4') > 0 ||
-          this.queueManager.getQueueLength('LEVEL_5') > 0
-        );
-      default:
-        return false;
-    }
+    const levelNum = parseInt(level.replace('LEVEL_', ''));
+    const queues = LEVEL_QUEUE_MAP[levelNum];
+    if (!queues) return false;
+    return queues.some((queue) => this.queueManager.getQueueLength(queue) > 0);
   }
 
   getLowestAvailablePracticeLevel(): PracticeLevel {
@@ -52,30 +37,16 @@ export class LevelEngine {
   }
 
   pickCandidateForLevel(level: PracticeLevel): string | null {
-    switch (level) {
-      case 'LEVEL_1':
-        if (this.queueManager.getQueueLength('LEVEL_1') > 0) {
-          return this.queueManager.pickFromQueue('LEVEL_1');
-        }
-        if (this.queueManager.getQueueLength('LEVEL_0') > 0) {
-          return this.queueManager.pickFromQueue('LEVEL_0');
-        }
-        return null;
-      case 'LEVEL_2':
-        return this.queueManager.pickFromQueue('LEVEL_2');
-      case 'LEVEL_3':
-      case 'LEVEL_4':
-        if (this.queueManager.getQueueLength('LEVEL_3') > 0) {
-          return this.queueManager.pickFromQueue('LEVEL_3');
-        }
-        if (this.queueManager.getQueueLength('LEVEL_4') > 0) {
-          return this.queueManager.pickFromQueue('LEVEL_4');
-        }
-        if (this.queueManager.getQueueLength('LEVEL_5') > 0) {
-          return this.queueManager.pickFromQueue('LEVEL_5');
-        }
-        return null;
+    const levelNum = parseInt(level.replace('LEVEL_', ''));
+    const queues = LEVEL_QUEUE_MAP[levelNum];
+    if (!queues) return null;
+
+    for (const queue of queues) {
+      if (this.queueManager.getQueueLength(queue) > 0) {
+        return this.queueManager.pickFromQueue(queue);
+      }
     }
+    return null;
   }
 
   checkLevelProgression(
@@ -85,38 +56,14 @@ export class LevelEngine {
     minHistoryForDegradation: number,
   ): LevelStatus | null {
     if (progress.consecutiveCorrect >= correctAnswersToLevelUp) {
-      return this.getNextLevel(progress.level);
+      return getNextLevel(progress.level);
     }
 
     const recentMistakes = progress.recentHistory.filter((h) => h === false).length;
     if (recentMistakes >= mistakesToLevelDown && progress.recentHistory.length >= minHistoryForDegradation) {
-      return this.getPreviousLevel(progress.level);
+      return getPreviousLevel(progress.level);
     }
 
     return null;
-  }
-
-  getNextLevel(currentLevel: LevelStatus): LevelStatus | null {
-    const levelMap: Record<LevelStatus, LevelStatus> = {
-      LEVEL_0: 'LEVEL_1',
-      LEVEL_1: 'LEVEL_2',
-      LEVEL_2: 'LEVEL_3',
-      LEVEL_3: 'LEVEL_4',
-      LEVEL_4: 'LEVEL_5',
-      LEVEL_5: 'LEVEL_5',
-    };
-    return levelMap[currentLevel] === currentLevel ? null : levelMap[currentLevel];
-  }
-
-  getPreviousLevel(currentLevel: LevelStatus): LevelStatus | null {
-    const levelMap: Record<LevelStatus, LevelStatus> = {
-      LEVEL_5: 'LEVEL_4',
-      LEVEL_4: 'LEVEL_3',
-      LEVEL_3: 'LEVEL_2',
-      LEVEL_2: 'LEVEL_1',
-      LEVEL_1: 'LEVEL_0',
-      LEVEL_0: 'LEVEL_0',
-    };
-    return levelMap[currentLevel] === currentLevel ? null : levelMap[currentLevel];
   }
 }

@@ -1,3 +1,4 @@
+import { createZeroLevelCounts } from '@lingua-quiz/domain';
 import type { Translation, ProgressEntry } from './types';
 
 export class StateManager {
@@ -59,14 +60,7 @@ export class StateManager {
     }
 
     const allProgress = this.getProgressArray();
-    const levelCounts: Record<string, number> = {
-      LEVEL_0: 0,
-      LEVEL_1: 0,
-      LEVEL_2: 0,
-      LEVEL_3: 0,
-      LEVEL_4: 0,
-      LEVEL_5: 0,
-    };
+    const levelCounts = createZeroLevelCounts();
 
     allProgress.forEach((p) => {
       const currentCount = levelCounts[p.level] ?? 0;

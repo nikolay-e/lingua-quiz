@@ -3,6 +3,7 @@ import type { QuizManager, QuizQuestion, SubmissionResult } from '@lingua-quiz/c
 import type { WordList } from '../api-types';
 import { logger } from '../lib/utils/logger';
 import { quizService } from '../lib/services/QuizService';
+import { extractErrorMessage } from '../lib/utils/error';
 
 interface QuizState {
   wordLists: WordList[];
@@ -54,8 +55,11 @@ function createQuizStore(): QuizStore {
           update((state) => ({ ...state, wordLists: result, loading: false }));
         }
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Failed to load word lists';
-        update((state) => ({ ...state, error: message, loading: false }));
+        update((state) => ({
+          ...state,
+          error: extractErrorMessage(error, 'Failed to load word lists'),
+          loading: false,
+        }));
       }
     },
 
@@ -73,8 +77,7 @@ function createQuizStore(): QuizStore {
           }));
         }
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Failed to start quiz';
-        update((state) => ({ ...state, error: message, loading: false }));
+        update((state) => ({ ...state, error: extractErrorMessage(error, 'Failed to start quiz'), loading: false }));
       }
     },
 

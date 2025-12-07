@@ -1,5 +1,6 @@
 export * from './generated/domain';
 export * from './levels';
+export * from './levelUtils';
 export * from './validators';
 export * from './schemaArb';
 

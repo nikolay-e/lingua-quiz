@@ -164,6 +164,7 @@ export default [
       '**/packages/word-processing/venv/',
       '**/packages/frontend/src/lib/components/ui/**', // Auto-generated shadcn-svelte components
       '**/packages/frontend/src/generated/**', // Auto-generated API client
+      '**/*.svelte.ts', // Svelte 5 runes files - checked by svelte-check
     ],
   },
 

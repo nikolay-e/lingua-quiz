@@ -4,6 +4,8 @@ import api from '../api';
 import { STORAGE_KEYS } from '../lib/constants';
 import { safeStorage } from '../lib/utils/safeStorage';
 import { logger } from '../lib/utils/logger';
+import { isBrowser } from '../lib/utils/ssr';
+import { clearTimer } from '../lib/utils/timer';
 import type { AuthResponse } from '../api-types';
 
 interface AuthState {
@@ -72,10 +74,7 @@ function createAuthStore(): AuthStore {
   }
 
   function scheduleTokenRefresh() {
-    if (refreshTimer !== null) {
-      clearTimeout(refreshTimer);
-      refreshTimer = null;
-    }
+    refreshTimer = clearTimer(refreshTimer);
 
     const expirationStr = safeStorage.getItem(STORAGE_KEYS.TOKEN_EXPIRATION);
     if (expirationStr === null) return;
@@ -140,14 +139,11 @@ function createAuthStore(): AuthStore {
     safeStorage.removeItem(STORAGE_KEYS.TOKEN);
     safeStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
     safeStorage.removeItem(STORAGE_KEYS.TOKEN_EXPIRATION);
-    if (refreshTimer !== null) {
-      clearTimeout(refreshTimer);
-      refreshTimer = null;
-    }
+    refreshTimer = clearTimer(refreshTimer);
     set({ token: null, username: null, isAuthenticated: false, isAdmin: false });
   }
 
-  if (typeof window !== 'undefined') {
+  if (isBrowser()) {
     checkToken();
 
     authChannel?.addEventListener('message', (event) => {

@@ -7,6 +7,7 @@
   import { ttsService } from '../lib/services/ttsService';
   import { STORAGE_KEYS } from '../lib/constants';
   import { toast } from 'svelte-sonner';
+  import { extractErrorMessage } from '../lib/utils/error';
 
   import QuizHeader from '../components/quiz/QuizHeader.svelte';
   import QuestionDisplay from '../components/quiz/QuestionDisplay.svelte';
@@ -58,6 +59,13 @@
 
   const foldedLists = $state<Record<string, boolean>>(initialFoldedLists);
 
+  function resetQuizSession() {
+    feedback = null;
+    usageExamples = null;
+    userAnswer = '';
+    questionForFeedback = null;
+  }
+
   function toggleFold(levelId: string) {
     foldedLists[levelId] = !foldedLists[levelId];
     safeStorage.setItem(STORAGE_KEYS.FOLDED_LISTS, JSON.stringify(foldedLists));
@@ -94,10 +102,7 @@
 
   async function handleQuizSelect(quiz: string): Promise<void> {
     quizStore.reset();
-    feedback = null;
-    usageExamples = null;
-    userAnswer = '';
-    questionForFeedback = null;
+    resetQuizSession();
     liveStatus = 'Loading quiz...';
 
     if (!quiz) {
@@ -117,8 +122,7 @@
       answerInputRef?.focus();
     } catch (error: unknown) {
       console.error('Failed to start quiz:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Failed to start quiz. Please try again.';
-      feedback = { message: errorMessage, isSuccess: false } as QuizFeedback;
+      feedback = { message: extractErrorMessage(error, 'Failed to start quiz. Please try again.'), isSuccess: false } as QuizFeedback;
     }
     liveStatus = '';
   }
@@ -143,10 +147,7 @@
     }
 
     quizStore.reset();
-    feedback = null;
-    usageExamples = null;
-    userAnswer = '';
-    questionForFeedback = null;
+    resetQuizSession();
   }
 
   async function submitAnswer(): Promise<void> {
@@ -186,8 +187,7 @@
       }
     } catch (error: unknown) {
       console.error('Error submitting answer:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Error submitting answer.';
-      feedback = { message: errorMessage, isSuccess: false } as QuizFeedback;
+      feedback = { message: extractErrorMessage(error, 'Error submitting answer.'), isSuccess: false } as QuizFeedback;
     } finally {
       isSubmitting = false;
       liveStatus = '';
@@ -218,8 +218,7 @@
       await authStore.deleteAccount();
       toast.success('Your account has been deleted');
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : 'Failed to delete account';
-      toast.error(message);
+      toast.error(extractErrorMessage(error, 'Failed to delete account'));
     }
   }
 
@@ -231,8 +230,7 @@
       await quizStore.loadWordLists($authStore.token);
     } catch (error) {
       console.error('Failed to load word lists:', error);
-      const message = error instanceof Error ? error.message : 'Failed to load quizzes';
-      loadError = message;
+      loadError = extractErrorMessage(error, 'Failed to load quizzes');
     }
   }
 
@@ -288,9 +286,7 @@
 
   function handleKeydown(e: KeyboardEvent): void {
     if (e.key === 'Enter' && !isSubmitting && feedback && currentQuestion) {
-      feedback = null;
-      usageExamples = null;
-      questionForFeedback = null;
+      resetQuizSession();
       tick().then(() => answerInputRef?.focus());
     }
   }

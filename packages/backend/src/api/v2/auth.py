@@ -1,38 +1,21 @@
-import hashlib
 import logging
 from typing import TYPE_CHECKING
 
+from core.auth_helpers import build_access_token, create_and_store_refresh_token, revoke_refresh_token
 from core.database import execute_write_transaction, query_db
 from core.error_handler import handle_api_errors
-from core.security import create_access_token, create_refresh_token, get_current_user, hash_password, verify_password, verify_refresh_token
+from core.schema_loader import load_schemas
+from core.security import get_current_user, hash_password, verify_password, verify_refresh_token
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
 if TYPE_CHECKING:
     from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
-else:
-    try:
-        from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
-    except ImportError:
-        import os
 
-        if os.getenv("FAIL_ON_MISSING_GENERATED", "false").lower() == "true":
-            raise
-
-        from pydantic import BaseModel
-
-        logging.warning(
-            "generated.schemas not found in auth.py. "
-            "Run 'make generate-all' to generate Pydantic models from OpenAPI schema. "
-            "Using placeholder models with no validation."
-        )
-
-        class _PlaceholderModel(BaseModel):
-            class Config:
-                extra = "allow"
-
-        RefreshTokenRequest = TokenResponse = UserLogin = UserRegistration = UserResponse = _PlaceholderModel  # type: ignore
+RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse = load_schemas(
+    "RefreshTokenRequest", "TokenResponse", "UserLogin", "UserRegistration", "UserResponse"
+)
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
@@ -86,13 +69,8 @@ def register_user(request: Request, user_data: UserRegistration) -> TokenRespons
     is_admin = result.get("is_admin", False)
     logger.info(f"Successfully created user {user_data.username} with id {user_id}")
 
-    token = create_access_token(data={"userId": user_id, "sub": user_data.username, "isAdmin": is_admin})
-
-    refresh_token, token_hash, expires_at = create_refresh_token()
-    execute_write_transaction(
-        "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
-        (user_id, token_hash, expires_at),
-    )
+    token = build_access_token(user_id, user_data.username, is_admin)
+    refresh_token = create_and_store_refresh_token(user_id)
 
     return TokenResponse(
         token=token,
@@ -122,13 +100,8 @@ def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
         )
 
     is_admin = user.get("is_admin", False)
-    token = create_access_token(data={"userId": user["id"], "sub": user["username"], "isAdmin": is_admin})
-
-    refresh_token, token_hash, expires_at = create_refresh_token()
-    execute_write_transaction(
-        "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
-        (user["id"], token_hash, expires_at),
-    )
+    token = build_access_token(user["id"], user["username"], is_admin)
+    refresh_token = create_and_store_refresh_token(user["id"])
 
     logger.info(f"Successful login for user: {user_data.username}")
 
@@ -157,20 +130,10 @@ def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest)
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
 
     is_admin = user.get("is_admin", False)
-    new_access_token = create_access_token(data={"userId": user["id"], "sub": user["username"], "isAdmin": is_admin})
+    new_access_token = build_access_token(user["id"], user["username"], is_admin)
 
-    new_refresh_token, token_hash, expires_at = create_refresh_token()
-    old_token_hash = hashlib.sha256(refresh_request.refresh_token.encode()).hexdigest()
-
-    execute_write_transaction(
-        "UPDATE refresh_tokens SET revoked_at = NOW() WHERE token_hash = %s",
-        (old_token_hash,),
-    )
-
-    execute_write_transaction(
-        "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES (%s, %s, %s)",
-        (user["id"], token_hash, expires_at),
-    )
+    revoke_refresh_token(refresh_request.refresh_token)
+    new_refresh_token = create_and_store_refresh_token(user["id"])
 
     logger.info(f"Access token refreshed for user: {user['username']}")
 

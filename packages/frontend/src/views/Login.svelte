@@ -9,6 +9,7 @@
   import { Button } from '$lib/components/ui/button';
   import { Label } from '$lib/components/ui/label';
   import { LogIn } from 'lucide-svelte';
+  import { extractErrorMessage } from '../lib/utils/error';
 
   const dispatch = createEventDispatcher<{ navigate: { page: 'register' } }>();
 
@@ -26,7 +27,7 @@
       await authStore.login(username, password);
       message = 'Login successful!';
     } catch (error: unknown) {
-      message = error instanceof Error ? error.message : 'Login failed. Please try again.';
+      message = extractErrorMessage(error, 'Login failed. Please try again.');
     } finally {
       isLoading = false;
     }

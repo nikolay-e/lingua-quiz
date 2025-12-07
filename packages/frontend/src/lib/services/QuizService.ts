@@ -4,6 +4,9 @@ import type { WordList } from '../../api-types';
 import { STORAGE_KEYS } from '../constants';
 import { safeStorage } from '../utils/safeStorage';
 import { logger } from '../utils/logger';
+import { isBrowser } from '../utils/ssr';
+import { clearTimer } from '../utils/timer';
+import { extractErrorMessage } from '../utils/error';
 
 export type SaveErrorCallback = (message: string) => void;
 
@@ -53,7 +56,7 @@ export class QuizService {
       this.logoutCallback?.();
       return { isUnauthorized: true, message: 'Your session has expired. Please log in again.' };
     }
-    return { isUnauthorized: false, message: error instanceof Error ? error.message : 'Unknown error' };
+    return { isUnauthorized: false, message: extractErrorMessage(error, 'Unknown error') };
   }
 
   async withAuthHandling<T>(operation: () => Promise<T>, onError?: (message: string) => void): Promise<T | null> {
@@ -231,10 +234,7 @@ export class QuizService {
   }
 
   private debouncedSave(token: string, manager: QuizManager): void {
-    if (this.debounceTimer !== null) {
-      clearTimeout(this.debounceTimer);
-    }
-
+    this.debounceTimer = clearTimer(this.debounceTimer);
     this.debounceTimer = setTimeout(() => this.bulkSaveProgress(token, manager), this.DEBOUNCE_DELAY);
   }
 
@@ -247,10 +247,7 @@ export class QuizService {
     const itemsToSave = new Map(this.progressMap);
     this.progressMap.clear();
 
-    if (this.debounceTimer !== null) {
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = null;
-    }
+    this.debounceTimer = clearTimer(this.debounceTimer);
 
     try {
       const items = Array.from(itemsToSave.entries()).map(([vocabularyItemId, progress]) => ({
@@ -281,18 +278,12 @@ export class QuizService {
   }
 
   cleanup(): void {
-    if (this.debounceTimer !== null) {
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = null;
-    }
+    this.debounceTimer = clearTimer(this.debounceTimer);
     this.progressMap.clear();
   }
 
   async saveAndCleanup(token: string, manager: QuizManager | null): Promise<void> {
-    if (this.debounceTimer !== null) {
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = null;
-    }
+    this.debounceTimer = clearTimer(this.debounceTimer);
     if (manager !== null) {
       await this.bulkSaveProgress(token, manager).catch((err: unknown) =>
         logger.error('Failed to save progress on stop:', err),
@@ -347,11 +338,7 @@ export class QuizService {
 
   flushImmediately(token: string, manager: QuizManager | null, isUnloading = false): void {
     this.persistPendingToStorage();
-
-    if (this.debounceTimer !== null) {
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = null;
-    }
+    this.debounceTimer = clearTimer(this.debounceTimer);
 
     if (manager !== null && this.progressMap.size > 0) {
       if (isUnloading && typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
@@ -375,7 +362,7 @@ export class QuizService {
 
     if (items.length === 0) return;
 
-    const apiBaseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+    const apiBaseUrl = isBrowser() ? window.location.origin : '';
     const url = `${apiBaseUrl}/api/user/progress/bulk`;
     const payload = JSON.stringify({ items });
 

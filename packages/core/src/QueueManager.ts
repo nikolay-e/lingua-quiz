@@ -1,35 +1,20 @@
-import type { LevelKey } from '@lingua-quiz/domain';
+import { type LevelKey, LEVEL_KEYS, createEmptyLevelArrays } from '@lingua-quiz/domain';
 import type { ProgressEntry } from './types';
 
 export type LevelStatus = LevelKey;
 
-export interface Queues {
-  LEVEL_0: string[];
-  LEVEL_1: string[];
-  LEVEL_2: string[];
-  LEVEL_3: string[];
-  LEVEL_4: string[];
-  LEVEL_5: string[];
-}
+export type Queues = Record<LevelKey, string[]>;
 
 export class QueueManager {
   private queues: Queues;
   private static readonly MAX_QUEUE_POSITION = 10000;
 
   constructor(translations: Array<{ id: string }>, initialProgress: ProgressEntry[]) {
-    this.queues = {
-      LEVEL_0: [],
-      LEVEL_1: [],
-      LEVEL_2: [],
-      LEVEL_3: [],
-      LEVEL_4: [],
-      LEVEL_5: [],
-    };
+    this.queues = createEmptyLevelArrays();
 
     const progressMap = new Map(initialProgress.map((p) => [p.translationId, p]));
     const levelGroups: Map<LevelStatus, Array<{ id: string; queuePosition: number }>> = new Map();
-    const levels: LevelStatus[] = ['LEVEL_0', 'LEVEL_1', 'LEVEL_2', 'LEVEL_3', 'LEVEL_4', 'LEVEL_5'];
-    levels.forEach((level) => levelGroups.set(level, []));
+    LEVEL_KEYS.forEach((level) => levelGroups.set(level, []));
 
     translations.forEach((t, index) => {
       const progress = progressMap.get(t.id);
@@ -41,7 +26,7 @@ export class QueueManager {
       }
     });
 
-    levels.forEach((level) => {
+    LEVEL_KEYS.forEach((level) => {
       const group = levelGroups.get(level);
       if (group !== undefined) {
         group.sort((a, b) => a.queuePosition - b.queuePosition);
@@ -115,13 +100,9 @@ export class QueueManager {
   }
 
   getWordsByLevel(): Record<LevelStatus, string[]> {
-    return {
-      LEVEL_0: [...this.queues.LEVEL_0],
-      LEVEL_1: [...this.queues.LEVEL_1],
-      LEVEL_2: [...this.queues.LEVEL_2],
-      LEVEL_3: [...this.queues.LEVEL_3],
-      LEVEL_4: [...this.queues.LEVEL_4],
-      LEVEL_5: [...this.queues.LEVEL_5],
-    };
+    return Object.fromEntries(LEVEL_KEYS.map((level) => [level, [...this.queues[level]]])) as Record<
+      LevelStatus,
+      string[]
+    >;
   }
 }

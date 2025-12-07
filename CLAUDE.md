@@ -1,5 +1,7 @@
 # CLAUDE.md - lingua-quiz
 
+> Extends [../CLAUDE.md](../CLAUDE.md) - inherits workspace conventions (integration tests only, no docstrings, Russian communication)
+
 ## Project Overview
 
 Language learning web application using spaced repetition for vocabulary mastery.

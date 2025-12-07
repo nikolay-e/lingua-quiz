@@ -1,5 +1,7 @@
 # word-processing
 
+> Extends [../../../CLAUDE.md](../../../CLAUDE.md) - inherits workspace conventions
+
 Многоязычная система генерации и валидации CEFR-словарей для LinguaQuiz.
 
 ## Архитектура: 3 основных модуля

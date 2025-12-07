@@ -13,6 +13,8 @@ await generate({
   output: outputPath,
   httpClient: 'fetch',
   useUnionTypes: true,
+  exportModels: false,
+  exportSchemas: false,
 });
 
 console.info('✅ Generated TypeScript client from OpenAPI');

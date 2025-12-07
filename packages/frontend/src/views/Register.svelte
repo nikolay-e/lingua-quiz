@@ -10,6 +10,7 @@
   import { Button } from '$lib/components/ui/button';
   import { Label } from '$lib/components/ui/label';
   import { UserPlus } from 'lucide-svelte';
+  import { extractErrorMessage } from '../lib/utils/error';
 
   interface PasswordRequirement {
     id: string;
@@ -59,7 +60,7 @@
       username = '';
       password = '';
     } catch (error: unknown) {
-      message = error instanceof Error ? error.message : 'Registration failed. Please try again.';
+      message = extractErrorMessage(error, 'Registration failed. Please try again.');
     } finally {
       isLoading = false;
     }

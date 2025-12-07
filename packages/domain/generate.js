@@ -64,32 +64,28 @@ const compileSchemas = async () => {
     process.exit(1);
   }
 
-  const chunks = [];
+  const schemasCopy = JSON.parse(JSON.stringify(schemas));
+  Object.values(schemasCopy).forEach(rewriteRefs);
 
-  for (const [typeName, schema] of Object.entries(schemas)) {
-    const schemaCopy = JSON.parse(JSON.stringify(schema));
-    rewriteRefs(schemaCopy);
+  const wrapperSchema = {
+    type: 'object',
+    $defs: schemasCopy,
+  };
 
-    if (schemaCopy.definitions) {
-      delete schemaCopy.definitions;
-    }
-    schemaCopy.$defs = JSON.parse(JSON.stringify(schemas));
-    Object.values(schemaCopy.$defs).forEach(rewriteRefs);
+  stripTitles(wrapperSchema);
 
-    stripTitles(schemaCopy);
+  let compiled = await compile(wrapperSchema, 'DomainTypes', {
+    bannerComment: '',
+    unreachableDefinitions: true,
+    additionalProperties: false,
+    style: {
+      singleQuote: true,
+    },
+  });
 
-    const compiled = await compile(schemaCopy, typeName, {
-      bannerComment: '',
-      unreachableDefinitions: true,
-      additionalProperties: false,
-      style: {
-        singleQuote: true,
-      },
-    });
-    chunks.push(compiled);
-  }
+  compiled = compiled.replace(/export interface DomainTypes \{[^}]*\}\n*/g, '');
 
-  fs.writeFileSync(outputFile, `${banner + chunks.join('\n\n')}\n`);
+  fs.writeFileSync(outputFile, `${banner}${compiled}\n`);
   console.info(`✅ Generated ${path.relative(repoRoot, outputFile)} from OpenAPI schema`);
 };
 
