@@ -35,6 +35,7 @@ generate-backend: ## Generate backend Pydantic models from OpenAPI schema
 		--input lingua-quiz-schema.json \
 		--output packages/backend/src/generated/schemas.py \
 		--output-model-type pydantic_v2.BaseModel \
+		--base-class core.base_model.APIBaseModel \
 		--field-constraints \
 		--use-standard-collections \
 		--use-annotated \

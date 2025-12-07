@@ -31,14 +31,18 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
     && pip install --no-cache-dir -r requirements.txt \
     && apk --purge del .build-deps
 
+# Copy base model first (needed for code generation)
+COPY --chown=appuser:appuser packages/backend/src/core/base_model.py ./core/
+
 # Generate Pydantic models from OpenAPI schema
 COPY lingua-quiz-schema.json /tmp/lingua-quiz-schema.json
 RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
     && mkdir -p ./generated \
-    && python -m datamodel_code_generator \
+    && PYTHONPATH=/home/appuser python -m datamodel_code_generator \
         --input /tmp/lingua-quiz-schema.json \
         --output ./generated/schemas.py \
         --output-model-type pydantic_v2.BaseModel \
+        --base-class core.base_model.APIBaseModel \
         --field-constraints \
         --use-standard-collections \
         --use-annotated \
