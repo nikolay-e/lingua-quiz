@@ -3,7 +3,7 @@ import datetime
 import logging
 
 from api.v2 import admin, auth, progress, tts, version, vocabulary
-from core.config import CORS_ALLOWED_ORIGINS, PORT
+from core.config import CORS_ALLOWED_ORIGINS, PORT, RATE_LIMIT_ENABLED
 from core.csrf import validate_origin
 from core.database import query_db
 from core.json_encoder import CustomJSONResponse
@@ -63,7 +63,7 @@ async def add_security_headers(request: Request, call_next):
     return response
 
 
-limiter = Limiter(key_func=get_remote_address)
+limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 

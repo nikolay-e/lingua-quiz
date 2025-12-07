@@ -1,6 +1,7 @@
 import logging
 from typing import TYPE_CHECKING
 
+from core.config import RATE_LIMIT_ENABLED
 from core.database import execute_write_transaction, get_active_version, query_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
@@ -35,7 +36,7 @@ else:
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/user", tags=["Progress"])
-limiter = Limiter(key_func=get_remote_address)
+limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
 
 @router.get("/progress", response_model=list[UserProgressResponse])

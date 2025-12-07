@@ -29,6 +29,7 @@ services:
       POSTGRES_DB: lingua_quiz_test
       MIGRATE: 'true'
       DOCKER_ENVIRONMENT: 'true'
+      RATE_LIMIT_ENABLED: 'false'
     ports:
       - '9000:9000'
     depends_on:

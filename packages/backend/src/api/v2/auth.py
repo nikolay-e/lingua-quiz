@@ -2,6 +2,7 @@ import logging
 from typing import TYPE_CHECKING
 
 from core.auth_helpers import build_access_token, create_and_store_refresh_token, revoke_refresh_token
+from core.config import RATE_LIMIT_ENABLED
 from core.database import execute_write_transaction, query_db
 from core.error_handler import handle_api_errors
 from core.schema_loader import load_schemas
@@ -19,7 +20,7 @@ RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse = 
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
-limiter = Limiter(key_func=get_remote_address)
+limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
 
 def get_username_for_rate_limit(request: Request) -> str:
@@ -31,7 +32,7 @@ def get_username_for_rate_limit(request: Request) -> str:
         return f"ip:{get_remote_address(request)}"
 
 
-login_limiter = Limiter(key_func=get_username_for_rate_limit)
+login_limiter = Limiter(key_func=get_username_for_rate_limit, enabled=RATE_LIMIT_ENABLED)
 
 
 @router.post(

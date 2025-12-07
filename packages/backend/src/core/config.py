@@ -54,3 +54,8 @@ CORS_ALLOWED_ORIGINS = os.getenv(
 
 if "*" in CORS_ALLOWED_ORIGINS:
     logger.warning("CORS is open to all origins (*) - this is insecure for production!")
+
+# Rate limiting configuration
+RATE_LIMIT_ENABLED = os.getenv("RATE_LIMIT_ENABLED", "true").lower() == "true"
+if not RATE_LIMIT_ENABLED:
+    logger.warning("Rate limiting is DISABLED - this is insecure for production!")

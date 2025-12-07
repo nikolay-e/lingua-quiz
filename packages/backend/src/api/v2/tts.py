@@ -1,6 +1,7 @@
 import base64
 import logging
 
+from core.config import RATE_LIMIT_ENABLED
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, Request, status
@@ -10,7 +11,7 @@ from slowapi.util import get_remote_address
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/tts", tags=["Text-to-Speech"])
-limiter = Limiter(key_func=get_remote_address)
+limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
 
 def get_tts_service():
