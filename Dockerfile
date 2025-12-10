@@ -127,7 +127,7 @@ RUN cd packages/frontend && \
 # FRONTEND PRODUCTION STAGE
 # ======================================================================================
 # Pinned to specific version for reproducible builds
-FROM nginx:1.29.3-alpine AS frontend
+FROM nginx:1.29.4-alpine AS frontend
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
