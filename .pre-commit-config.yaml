@@ -135,6 +135,16 @@ repos:
         files: ^packages/(backend|tools)/
         stages: [pre-push]
 
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: v2.14
+    hooks:
+      - id: vulture
+        name: Dead code detection (vulture)
+        args: ['packages/backend/src', 'packages/tools/vocab_tools', '--min-confidence', '100', '--exclude', 'venv,generated,__pycache__']
+        pass_filenames: false
+        files: ^packages/(backend|tools)/.*\.py$
+        stages: [pre-push]
+
   - repo: https://github.com/trailofbits/pip-audit
     rev: v2.9.0
     hooks:
@@ -193,6 +203,14 @@ repos:
         language: system
         files: \.(js|jsx|ts|tsx|svelte|py)$
         pass_filenames: false
+
+      - id: knip
+        name: Dead code detection (knip)
+        entry: npx knip --no-progress --no-config-hints
+        language: system
+        files: \.(js|jsx|ts|tsx|svelte)$
+        pass_filenames: false
+        stages: [pre-push]
 
       - id: typescript-check
         name: TypeScript type checking

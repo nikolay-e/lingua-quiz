@@ -31,6 +31,11 @@
   const totalWords = $derived(
     Object.values(levelWordLists).reduce((sum, level) => sum + level.count, 0),
   );
+
+  function getProgressText(count: number, total: number): string {
+    const percent = total > 0 ? Math.round((count / total) * 100) : 0;
+    return `${count} of ${total} words (${percent}%)`;
+  }
 </script>
 
 <div class="learning-progress-container flex-col gap-lg">
@@ -67,6 +72,8 @@
               aria-valuenow={levelData.count}
               aria-valuemin="0"
               aria-valuemax={totalWords}
+              aria-valuetext={getProgressText(levelData.count, totalWords)}
+              aria-label="{levelData.label} progress"
             >
               <div
                 class="progress-fill"

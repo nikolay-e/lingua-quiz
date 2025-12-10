@@ -47,7 +47,9 @@ def search_vocabulary(
     results = query_db(
         """SELECT id, source_text, source_language, target_text, target_language,
                   list_name, difficulty_level, source_usage_example, target_usage_example,
-                  is_active, created_at, updated_at,
+                  is_active,
+                  TO_CHAR(created_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as created_at,
+                  TO_CHAR(updated_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as updated_at,
                   ts_rank(
                     to_tsvector('simple', source_text || ' ' || target_text),
                     plainto_tsquery('simple', %s)
@@ -77,7 +79,9 @@ def get_vocabulary_item(
     item = query_db(
         """SELECT id, source_text, source_language, target_text, target_language,
                   list_name, difficulty_level, source_usage_example, target_usage_example,
-                  is_active, created_at, updated_at
+                  is_active,
+                  TO_CHAR(created_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as created_at,
+                  TO_CHAR(updated_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as updated_at
            FROM vocabulary_items
            WHERE id = %s""",
         (item_id,),
@@ -282,7 +286,9 @@ def list_vocabulary(
         results = query_db(
             """SELECT id, source_text, source_language, target_text, target_language,
                       list_name, difficulty_level, source_usage_example, target_usage_example,
-                      is_active, created_at, updated_at
+                      is_active,
+                      TO_CHAR(created_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as created_at,
+                      TO_CHAR(updated_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as updated_at
                FROM vocabulary_items
                WHERE version_id = %s AND list_name = %s
                ORDER BY source_text
@@ -293,7 +299,9 @@ def list_vocabulary(
         results = query_db(
             """SELECT id, source_text, source_language, target_text, target_language,
                       list_name, difficulty_level, source_usage_example, target_usage_example,
-                      is_active, created_at, updated_at
+                      is_active,
+                      TO_CHAR(created_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as created_at,
+                      TO_CHAR(updated_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as updated_at
                FROM vocabulary_items
                WHERE version_id = %s
                ORDER BY list_name, source_text

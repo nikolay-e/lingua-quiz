@@ -38,8 +38,8 @@
     flex-direction: column;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background-color: var(--color-error-bg, hsl(0deg 84% 95%));
-    border: 1px solid var(--color-error-border, hsl(0deg 84% 80%));
+    background-color: var(--color-error-bg);
+    border: 1px solid var(--color-error-border);
     border-radius: var(--radius-md);
   }
 
@@ -50,14 +50,14 @@
   }
 
   .error-content :global(.error-icon) {
-    color: var(--color-error, hsl(0deg 84% 60%));
+    color: var(--color-error);
     flex-shrink: 0;
     margin-top: 2px;
   }
 
   .error-message {
     margin: 0;
-    color: var(--color-error-text, hsl(0deg 84% 30%));
+    color: var(--color-error-text);
     line-height: 1.5;
   }
 
@@ -65,14 +65,5 @@
     display: flex;
     gap: var(--spacing-sm);
     justify-content: flex-end;
-  }
-
-  :global([data-theme='dark']) .error-display {
-    background-color: hsl(0deg 50% 15%);
-    border-color: hsl(0deg 50% 30%);
-  }
-
-  :global([data-theme='dark']) .error-message {
-    color: hsl(0deg 70% 80%);
   }
 </style>

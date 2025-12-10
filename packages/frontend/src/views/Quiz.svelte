@@ -22,7 +22,7 @@
   import ErrorDisplay from '../components/ErrorDisplay.svelte';
   import QuizSkeleton from '../components/quiz/QuizSkeleton.svelte';
   import BottomNav from '../components/quiz/BottomNav.svelte';
-  import { Languages } from 'lucide-svelte';
+  import QuizWelcome from '../components/quiz/QuizWelcome.svelte';
 
   let userAnswer = $state('');
   let showProgress = $state(true);
@@ -34,9 +34,12 @@
 
   let showLevelAnimation = $state(false);
   let isLevelUp = $state(true);
-  let liveStatus = $state('');
+  let levelChangeFrom = $state<string | undefined>(undefined);
+  let levelChangeTo = $state<string | undefined>(undefined);
   let loadError = $state<string | null>(null);
   let lastSelectedQuiz = $state<string | null>(null);
+  let questionNumber = $state(0);
+  let totalQuestions = $state(0);
 
   const initialFoldedLists: Record<string, boolean> = {};
   LEVEL_CONFIG.forEach(level => {
@@ -64,6 +67,29 @@
     usageExamples = null;
     userAnswer = '';
     questionForFeedback = null;
+  }
+
+  function handleNextQuestion(): void {
+    resetQuizSession();
+    questionNumber++;
+    tick().then(() => answerInputRef?.focus());
+  }
+
+  async function handleSkip(): Promise<void> {
+    if (!currentQuestion || isSubmitting) return;
+    questionForFeedback = currentQuestion;
+    const result = await quizStore.submitAnswer($authStore.token!, '');
+    if (result) {
+      feedback = result;
+      if ('translation' in result && result.translation) {
+        usageExamples = {
+          source: result.translation.sourceUsageExample || '',
+          target: result.translation.targetUsageExample || '',
+        };
+      }
+      userAnswer = '';
+      quizStore.getNextQuestion();
+    }
   }
 
   function toggleFold(levelId: string) {
@@ -103,17 +129,18 @@
   async function handleQuizSelect(quiz: string): Promise<void> {
     quizStore.reset();
     resetQuizSession();
-    liveStatus = 'Loading quiz...';
+    questionNumber = 0;
+    totalQuestions = 0;
 
-    if (!quiz) {
-      liveStatus = '';
-      return;
-    }
+    if (!quiz) return;
 
     lastSelectedQuiz = quiz;
 
     try {
       await quizStore.startQuiz($authStore.token!, quiz);
+      const state = $quizStore.quizManager?.getState();
+      totalQuestions = state?.translations?.length ?? 0;
+      questionNumber = 1;
       const question: QuizQuestion | null = await quizStore.getNextQuestion();
       if (!question) {
         feedback = { message: 'No questions available for this quiz.', isSuccess: false } as QuizFeedback;
@@ -122,9 +149,11 @@
       answerInputRef?.focus();
     } catch (error: unknown) {
       console.error('Failed to start quiz:', error);
-      feedback = { message: extractErrorMessage(error, 'Failed to start quiz. Please try again.'), isSuccess: false } as QuizFeedback;
+      feedback = {
+        message: extractErrorMessage(error, 'Failed to start quiz. Please try again.'),
+        isSuccess: false,
+      } as QuizFeedback;
     }
-    liveStatus = '';
   }
 
   function retryLastOperation(): void {
@@ -135,17 +164,13 @@
 
   async function handleBackToMenu(): Promise<void> {
     if ($authStore.token && $quizStore.quizManager) {
-      liveStatus = 'Saving progress...';
       try {
         await quizStore.saveAndCleanup($authStore.token);
       } catch (error) {
         console.error('Failed to save progress before returning to menu:', error);
         toast.error('Could not save all progress.');
-      } finally {
-        liveStatus = '';
       }
     }
-
     quizStore.reset();
     resetQuizSession();
   }
@@ -155,7 +180,6 @@
 
     isSubmitting = true;
     questionForFeedback = currentQuestion;
-    liveStatus = 'Submitting answer...';
 
     try {
       const result = await quizStore.submitAnswer($authStore.token!, userAnswer);
@@ -172,9 +196,11 @@
         }
 
         if ('levelChange' in result && result.levelChange) {
-          const fromLevel = parseInt(result.levelChange.from.replace('LEVEL_', ''));
-          const toLevel = parseInt(result.levelChange.to.replace('LEVEL_', ''));
-          isLevelUp = toLevel > fromLevel;
+          const fromNum = parseInt(result.levelChange.from.replace('LEVEL_', ''));
+          const toNum = parseInt(result.levelChange.to.replace('LEVEL_', ''));
+          isLevelUp = toNum > fromNum;
+          levelChangeFrom = result.levelChange.from;
+          levelChangeTo = result.levelChange.to;
           showLevelAnimation = true;
         }
 
@@ -190,7 +216,6 @@
       feedback = { message: extractErrorMessage(error, 'Error submitting answer.'), isSuccess: false } as QuizFeedback;
     } finally {
       isSubmitting = false;
-      liveStatus = '';
     }
   }
 
@@ -286,39 +311,18 @@
 
   function handleKeydown(e: KeyboardEvent): void {
     if (e.key === 'Enter' && !isSubmitting && feedback && currentQuestion) {
-      resetQuizSession();
-      tick().then(() => answerInputRef?.focus());
-    }
-  }
-
-  function handleClick(e: MouseEvent): void {
-    if (currentQuestion && answerInputRef && !isSubmitting) {
-      const target = e.target as HTMLElement;
-      const isClickOnInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
-      const isClickOnButton = target.closest('button') !== null;
-      const isClickOnLink = target.closest('a') !== null;
-
-      if (!isClickOnInput && !isClickOnButton && !isClickOnLink) {
-        tick().then(() => answerInputRef?.focus());
-      }
+      handleNextQuestion();
     }
   }
 </script>
 
-<svelte:window on:keydown={handleKeydown} on:click={handleClick} />
+<svelte:window onkeydown={handleKeydown} />
 
 <ErrorBoundary>
-  {#key selectedQuiz}
-    <main id="main-content" class="feed">
-      {#if liveStatus}
-        <div class="bg-muted text-foreground border border-border rounded-md px-3 py-2 mb-3 text-sm">{liveStatus}</div>
-      {/if}
-
+  <main id="main-content" class="feed">
       <FeedCard title={null}>
         {#if !selectedQuiz}
-          <header class="flex-align-center gap-sm mb-md">
-            <h1 class="m-0 text-primary text-xl"><Languages size={28} /> LinguaQuiz</h1>
-          </header>
+          <QuizWelcome />
         {/if}
         <div class="stack">
           <QuizHeader
@@ -334,25 +338,6 @@
               onRetry={loadWordLists}
               retryLabel="Reload quizzes"
             />
-          {:else if !selectedQuiz}
-            <div class="text-center p-xl">
-              <div class="welcome-icon mb-md">🎯</div>
-              <h3>Welcome to LinguaQuiz!</h3>
-              <p class="muted mb-lg">Start learning with these features:</p>
-              <div class="stack">
-                <a
-                  href="https://github.com/nikolay-e/lingua-quiz/blob/main/CLAUDE.md#learning-algorithm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="feature feature-link"
-                  aria-label="Adaptive learning algorithm (opens in new window)"
-                >
-                  ✨ Adaptive learning algorithm
-                </a>
-                <div class="feature">📊 Track your progress in real-time</div>
-                <div class="feature">🎧 Listen to pronunciations</div>
-              </div>
-            </div>
           {/if}
         </div>
       </FeedCard>
@@ -371,22 +356,21 @@
                 />
               {/if}
             </svelte:fragment>
-            <QuestionDisplay {currentQuestion} />
+            <QuestionDisplay {currentQuestion} {questionNumber} {totalQuestions} />
           </FeedCard>
         {/if}
 
-        {#if currentQuestion}
+        {#if currentQuestion && !feedback}
           <FeedCard dense>
             <AnswerInput
               bind:this={answerInputRef}
               value={userAnswer}
               disabled={isSubmitting}
+              isLoading={isSubmitting}
               onSubmit={submitAnswer}
               onValueChange={(v) => (userAnswer = v)}
+              onSkip={handleSkip}
             />
-            {#if liveStatus && isSubmitting}
-              <p class="mt-2 text-muted-foreground text-sm">{liveStatus}</p>
-            {/if}
           </FeedCard>
         {/if}
 
@@ -397,6 +381,7 @@
               {usageExamples}
               {questionForFeedback}
               onRetry={retryLastOperation}
+              onNext={handleNextQuestion}
             />
           </FeedCard>
         {/if}
@@ -428,17 +413,14 @@
         />
       </FeedCard>
     </main>
-  {/key}
 
   <LevelChangeAnimation
     bind:isVisible={showLevelAnimation}
     {isLevelUp}
+    fromLevel={levelChangeFrom}
+    toLevel={levelChangeTo}
     onComplete={() => (showLevelAnimation = false)}
   />
-
-  <div class="sr-only" aria-live="polite">
-    {liveStatus}
-  </div>
 
   <BottomNav
     {selectedQuiz}
@@ -448,19 +430,3 @@
     onLogout={handleLogoutClick}
   />
 </ErrorBoundary>
-
-<style>
-  .feature-link {
-    text-decoration: none;
-    color: inherit;
-    transition: all var(--transition-speed) ease;
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--primary-color);
-      color: var(--color-primary-foreground);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-button-hover);
-    }
-  }
-</style>

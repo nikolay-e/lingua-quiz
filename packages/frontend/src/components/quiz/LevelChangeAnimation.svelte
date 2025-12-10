@@ -2,13 +2,18 @@
   interface Props {
     isVisible?: boolean;
     isLevelUp?: boolean;
+    fromLevel?: string;
+    toLevel?: string;
     onComplete?: () => void;
   }
 
   // eslint-disable-next-line prefer-const -- Svelte 5 requires let for $bindable props
-  let { isVisible = $bindable(false), isLevelUp = true, onComplete }: Props = $props();
+  let { isVisible = $bindable(false), isLevelUp = true, fromLevel, toLevel, onComplete }: Props =
+    $props();
 
   let animationElement = $state<HTMLDivElement | null>(null);
+
+  const levelLabel = (level: string | undefined) => level?.replace('LEVEL_', 'Level ') ?? '';
 
   $effect(() => {
     if (!isVisible || !animationElement) return;
@@ -33,8 +38,13 @@
     aria-live="polite"
   >
     <div class="animation-content">
-      <div class="icon text-xl">{isLevelUp ? '⬆️' : '⬇️'}</div>
-      <div class="text text-lg">{isLevelUp ? 'Level Up!' : 'Level Down'}</div>
+      <div class="icon">{isLevelUp ? '⬆️' : '⬇️'}</div>
+      <div class="text-content">
+        <div class="title">{isLevelUp ? 'Level Up!' : 'Level Down'}</div>
+        {#if fromLevel && toLevel}
+          <div class="levels">{levelLabel(fromLevel)} → {levelLabel(toLevel)}</div>
+        {/if}
+      </div>
     </div>
   </div>
 {/if}
@@ -67,18 +77,36 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    font-weight: bold;
     opacity: 0.95;
   }
 
+  .icon {
+    font-size: 1.5rem;
+  }
+
+  .text-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: var(--font-size-lg);
+  }
+
+  .levels {
+    font-size: var(--font-size-sm);
+    opacity: 0.8;
+  }
+
   .level-up .animation-content {
-    border-color: #4ade80;
-    color: #059669;
+    border-color: var(--color-level-up-border);
+    color: var(--color-level-up);
   }
 
   .level-down .animation-content {
-    border-color: #f87171;
-    color: #dc2626;
+    border-color: var(--color-level-down-border);
+    color: var(--color-level-down);
   }
 
   @keyframes level-up-animation {

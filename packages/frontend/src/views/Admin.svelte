@@ -327,9 +327,9 @@
       items={filteredResults}
       {sortBy}
       {sortOrder}
-      onedit={(e) => openEditDialog(e.detail)}
-      ondelete={(e) => openDeleteDialog(e.detail)}
-      onsort={(e) => toggleSort(e.detail)} />
+      onEdit={openEditDialog}
+      onDelete={openDeleteDialog}
+      onSort={toggleSort} />
   </div>
 </main>
 

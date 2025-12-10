@@ -87,7 +87,7 @@ export class QuizService {
         safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
       }
     } catch (error) {
-      logger.warn('Failed to fetch content version, continuing without version check:', error);
+      logger.warn('Failed to fetch content version, continuing without version check:', { error });
     }
 
     if (versionChanged) {
@@ -237,7 +237,11 @@ export class QuizService {
 
   private debouncedSave(token: string, manager: QuizManager): void {
     this.debounceTimer = clearTimer(this.debounceTimer);
-    this.debounceTimer = setTimeout(() => this.bulkSaveProgress(token, manager), this.DEBOUNCE_DELAY);
+    this.debounceTimer = setTimeout(() => {
+      this.bulkSaveProgress(token, manager).catch((err) => {
+        logger.error('Debounced save failed:', err);
+      });
+    }, this.DEBOUNCE_DELAY);
   }
 
   async bulkSaveProgress(token: string, manager: QuizManager | null): Promise<void> {

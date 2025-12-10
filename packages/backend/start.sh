@@ -20,6 +20,12 @@ if [ "$MIGRATE" = "true" ]; then
   }
 fi
 
+SEED_TEST_DATA="${SEED_TEST_DATA:-false}"
+if [ "$SEED_TEST_DATA" = "true" ]; then
+  echo "Seeding test data..."
+  python seed_test_data.py
+fi
+
 if [ -n "$UVICORN_WORKERS" ]; then
   WORKERS=$UVICORN_WORKERS
 else

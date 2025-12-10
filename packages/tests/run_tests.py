@@ -26,6 +26,9 @@ def main():
     print(f"Skip TTS Tests: {skip_tts}")
     print()
 
+    # Parallel workers (default 8 for powerful machines)
+    workers = os.getenv("PYTEST_WORKERS", "8")
+
     # Run pytest with proper configuration
     cmd = [
         sys.executable,
@@ -36,7 +39,9 @@ def main():
         "--tb=short",  # Short traceback format
         "--html=reports/test_report.html",  # HTML report
         "--self-contained-html",  # Embed CSS/JS in HTML report
-        "-x",  # Stop on first failure
+        "-n",
+        workers,  # Parallel execution
+        "--dist=loadfile",  # Distribute by file for max parallelism
     ]
 
     # Add markers for different test types

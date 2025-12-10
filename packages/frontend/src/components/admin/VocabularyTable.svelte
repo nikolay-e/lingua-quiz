@@ -11,37 +11,16 @@
     items: AdminVocabularyItem[];
     sortBy: string;
     sortOrder: string;
-    onedit?: (event: CustomEvent<AdminVocabularyItem>) => void;
-    ondelete?: (event: CustomEvent<AdminVocabularyItem>) => void;
-    onsort?: (event: CustomEvent<SortColumn>) => void;
+    onEdit?: (item: AdminVocabularyItem) => void;
+    onDelete?: (item: AdminVocabularyItem) => void;
+    onSort?: (column: SortColumn) => void;
   }
 
-  const { items, sortBy, sortOrder, onedit, ondelete, onsort }: Props = $props();
+  const { items, sortBy, sortOrder, onEdit, onDelete, onSort }: Props = $props();
 
   function getSortIcon(column: SortColumn): string {
     if (sortBy !== column) return '↕';
     return sortOrder === 'asc' ? '↑' : '↓';
-  }
-
-  function handleEdit(item: AdminVocabularyItem) {
-    if (onedit) {
-      const event = new CustomEvent('edit', { detail: item });
-      onedit(event);
-    }
-  }
-
-  function handleDelete(item: AdminVocabularyItem) {
-    if (ondelete) {
-      const event = new CustomEvent('delete', { detail: item });
-      ondelete(event);
-    }
-  }
-
-  function handleSort(column: SortColumn) {
-    if (onsort) {
-      const event = new CustomEvent('sort', { detail: column });
-      onsort(event);
-    }
   }
 </script>
 
@@ -55,13 +34,13 @@
         <Table.Root data-admin-table>
           <Table.Header>
             <Table.Row>
-              <Table.Head class="cursor-pointer hover:text-primary" onclick={() => handleSort('source')}>
+              <Table.Head class="cursor-pointer hover:text-primary" onclick={() => onSort?.('source')}>
                 Source Text {getSortIcon('source')}
               </Table.Head>
-              <Table.Head class="cursor-pointer hover:text-primary" onclick={() => handleSort('target')}>
+              <Table.Head class="cursor-pointer hover:text-primary" onclick={() => onSort?.('target')}>
                 Target Text {getSortIcon('target')}
               </Table.Head>
-              <Table.Head class="cursor-pointer hover:text-primary" onclick={() => handleSort('list')}>
+              <Table.Head class="cursor-pointer hover:text-primary" onclick={() => onSort?.('list')}>
                 List Name {getSortIcon('list')}
               </Table.Head>
               <Table.Head>Languages</Table.Head>
@@ -93,12 +72,13 @@
                 </Table.Cell>
                 <Table.Cell class="text-right" data-label="Actions">
                   <div class="flex justify-end gap-1">
-                    <Button variant="outline" size="sm" onclick={() => handleEdit(item)}>
+                    <Button variant="outline" size="sm" onclick={() => onEdit?.(item)}>
                       <svg
                         class="mr-1 size-4"
                         fill="none"
                         stroke="currentColor"
-                        viewBox="0 0 24 24">
+                        viewBox="0 0 24 24"
+                        aria-hidden="true">
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
@@ -107,12 +87,13 @@
                       </svg>
                       Edit
                     </Button>
-                    <Button variant="destructive" size="sm" onclick={() => handleDelete(item)}>
+                    <Button variant="destructive" size="sm" onclick={() => onDelete?.(item)}>
                       <svg
                         class="mr-1 size-4"
                         fill="none"
                         stroke="currentColor"
-                        viewBox="0 0 24 24">
+                        viewBox="0 0 24 24"
+                        aria-hidden="true">
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"

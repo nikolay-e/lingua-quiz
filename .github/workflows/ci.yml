@@ -15,101 +15,68 @@ env:
   REGISTRY: ghcr.io/${{ github.repository }}
 
 jobs:
-  pre-commit:
+  lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     permissions:
       contents: read
-
     steps:
       - uses: actions/checkout@v6
 
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
-          cache: 'pip'
-          cache-dependency-path: |
-            .pre-commit-config.yaml
 
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
           cache: 'npm'
 
-      - run: npm ci --prefer-offline
-
       - uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
-          restore-keys: |
-            pre-commit-${{ runner.os }}-
 
-      - run: pip install --no-cache-dir pre-commit isort datamodel-code-generator
+      - name: Install dependencies
+        run: |
+          npm ci --prefer-offline
+          pip install --no-cache-dir pre-commit datamodel-code-generator -r packages/backend/requirements.txt
 
-      - name: Install backend dependencies for schema generation
-        run: pip install --no-cache-dir -r packages/backend/requirements.txt
+      - name: Run pre-commit
+        run: pre-commit run --all-files --show-diff-on-failure --color=always
 
-      - name: Regenerate schemas and clients
-        run: make generate-all
-
-      - name: Build core package for type checking
-        run: npm run build --workspace @lingua-quiz/core
-
-      - name: Domain property-based tests
+      - name: Run domain tests
         run: npm run test --workspace @lingua-quiz/domain
-
-      - run: pre-commit run --all-files --show-diff-on-failure --color=always
 
   build:
     runs-on: ubuntu-latest
-    needs: pre-commit
-    timeout-minutes: 20
+    timeout-minutes: 15
     permissions:
       contents: read
       packages: write
       security-events: write
-
     strategy:
       fail-fast: true
       matrix:
         service: [backend, frontend, integration-e2e-tests]
-
+    outputs:
+      tag: ${{ steps.tag.outputs.value }}
+      sha: ${{ steps.tag.outputs.commit_sha }}
     steps:
       - uses: actions/checkout@v6
 
       - name: Generate image tag
         id: tag
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          GITHUB_SHA: ${{ github.sha }}
-          REF_NAME: ${{ github.ref_name }}
         run: |
-          # Format: {ref}-{short-sha}
-          # e.g., main-5db1366 or pr-243-5db1366
-          # Deterministic builds: no timestamp, reproducible from commit SHA
-
-          # Use head SHA for PRs (persistent), github.sha for branches
-          if [ "$EVENT_NAME" == "pull_request" ]; then
-            # For PRs: use head.sha (persistent commit) instead of merge_commit_sha (temporary)
-            COMMIT_SHA="$PR_HEAD_SHA"
-            REF="pr-${PR_NUMBER}"
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            SHA="${{ github.event.pull_request.head.sha }}"
+            REF="pr-${{ github.event.pull_request.number }}"
           else
-            # For branches: use github.sha (already persistent)
-            COMMIT_SHA="$GITHUB_SHA"
-            REF=$(echo "$REF_NAME" | sed 's/\//-/g')
+            SHA="${{ github.sha }}"
+            REF=$(echo "${{ github.ref_name }}" | sed 's/\//-/g')
           fi
-
-          SHORT_SHA=$(echo "${COMMIT_SHA}" | cut -c1-7)
-
-          TAG="${REF}-${SHORT_SHA}"
-          {
-            echo "value=${TAG}"
-            echo "commit_sha=${COMMIT_SHA}"
-          } >> "$GITHUB_OUTPUT"
-          echo "Generated image tag: ${TAG} (commit: ${COMMIT_SHA})"
+          echo "value=${REF}-${SHA:0:7}" >> "$GITHUB_OUTPUT"
+          echo "commit_sha=${SHA}" >> "$GITHUB_OUTPUT"
 
       - uses: docker/setup-buildx-action@v3
 
@@ -119,7 +86,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push image
+      - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -138,97 +105,67 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Run Trivy vulnerability scanner
+      - name: Trivy scan
         uses: aquasecurity/trivy-action@0.33.1
         with:
           image-ref: ${{ env.REGISTRY }}/lingua-quiz-${{ matrix.service }}:${{ steps.tag.outputs.value }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH'
+          format: sarif
+          output: trivy-results.sarif
+          severity: CRITICAL,HIGH
 
-      - name: Upload Trivy results to GitHub Security
+      - name: Upload Trivy results
         uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: trivy-results.sarif
 
-  integration-test:
+  test:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [lint, build]
     timeout-minutes: 15
     permissions:
       contents: read
       packages: read
-    env:
-      CI: true
-
     steps:
       - uses: actions/checkout@v6
 
-      - uses: docker/login-action@v3.6.0
+      - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Generate image tag
-        id: tag
+      - name: Pull and tag images
         env:
-          EVENT_NAME: ${{ github.event_name }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          GITHUB_SHA: ${{ github.sha }}
-          REF_NAME: ${{ github.ref_name }}
+          TAG: ${{ needs.build.outputs.tag }}
         run: |
-          # Reconstruct tag (same logic as build job)
-          if [ "$EVENT_NAME" == "pull_request" ]; then
-            COMMIT_SHA="$PR_HEAD_SHA"
-            REF="pr-${PR_NUMBER}"
-          else
-            COMMIT_SHA="$GITHUB_SHA"
-            REF=$(echo "$REF_NAME" | sed 's/\//-/g')
-          fi
-          SHORT_SHA=$(echo "${COMMIT_SHA}" | cut -c1-7)
-          TAG="${REF}-${SHORT_SHA}"
-          echo "value=${TAG}" >> "$GITHUB_OUTPUT"
-          echo "Using image tag: ${TAG}"
-
-      - name: Pull images for integration testing
-        env:
-          TAG: ${{ steps.tag.outputs.value }}
-        run: |
-          # Pull all images from build job
-          docker pull "${{ env.REGISTRY }}/lingua-quiz-backend:${TAG}"
-          docker pull "${{ env.REGISTRY }}/lingua-quiz-frontend:${TAG}"
-          docker pull "${{ env.REGISTRY }}/lingua-quiz-integration-e2e-tests:${TAG}"
-
-          # Re-tag for docker-compose
+          for svc in backend frontend integration-e2e-tests; do
+            docker pull "${{ env.REGISTRY }}/lingua-quiz-${svc}:${TAG}"
+          done
           docker tag "${{ env.REGISTRY }}/lingua-quiz-backend:${TAG}" lingua-quiz-backend:latest
           docker tag "${{ env.REGISTRY }}/lingua-quiz-frontend:${TAG}" lingua-quiz-frontend:latest
           docker tag "${{ env.REGISTRY }}/lingua-quiz-integration-e2e-tests:${TAG}" lingua-quiz-tests:latest
 
       - name: Run tests
         run: |
-          mkdir -p test-reports
-          chmod 777 test-reports
-          docker compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from tests
+          mkdir -p test-reports && chmod 777 test-reports
+          docker compose --profile test-all up --no-build --abort-on-container-exit --exit-code-from test-all
 
-      - name: Upload test reports
+      - name: Upload reports
         if: always()
         uses: actions/upload-artifact@v5
         with:
-          name: test-reports-${{ github.run_id }}
+          name: test-reports
           path: test-reports/
           retention-days: 1
-          compression-level: 6
 
       - name: Cleanup
         if: always()
-        run: docker compose -f docker-compose.test.yml down -v
+        run: docker compose --profile test-all down -v
 
-  create-staging-deployment:
+  deploy-staging:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, test]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     timeout-minutes: 5
     permissions:
@@ -236,38 +173,21 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Get image tag from build
-        id: tag
-        run: |
-          # Reconstruct tag (same logic as build job)
-          # Format: {ref}-{short-sha}
-          # Deterministic builds: no timestamp, reproducible from commit SHA
-          COMMIT_SHA="${{ github.sha }}"
-          SHORT_SHA=$(echo "${COMMIT_SHA}" | cut -c1-7)
-          REF=$(echo "${{ github.ref_name }}" | sed 's/\//-/g')
-          TAG="${REF}-${SHORT_SHA}"
-          {
-            echo "value=${TAG}"
-            echo "commit_sha=${COMMIT_SHA}"
-          } >> "$GITHUB_OUTPUT"
-          echo "Generated image tag: ${TAG}"
-
-      - name: Create staging deployment
-        id: deployment
+      - name: Create deployment
         uses: ./.github/actions/create-deployment
         with:
-          environment: 'staging'
-          ref: ${{ steps.tag.outputs.commit_sha }}
+          environment: staging
+          ref: ${{ needs.build.outputs.sha }}
           is-production: 'false'
           is-transient: 'false'
-          description: 'Staging deployment ${{ steps.tag.outputs.value }}'
+          description: 'Staging deployment ${{ needs.build.outputs.tag }}'
           payload: |
             {
-              "image_tag": "${{ steps.tag.outputs.value }}",
-              "commit_sha": "${{ steps.tag.outputs.commit_sha }}",
+              "image_tag": "${{ needs.build.outputs.tag }}",
+              "commit_sha": "${{ needs.build.outputs.sha }}",
               "deployed_by": "argocd-image-updater",
               "deployment_type": "automated"
             }
           environment-url: 'https://test-lingua-quiz.nikolay-eremeev.com'
-          initial-status: 'in_progress'
+          initial-status: in_progress
           status-description: 'ArgoCD Image Updater is detecting new image'

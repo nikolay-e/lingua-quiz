@@ -1,7 +1,6 @@
 <script lang="ts">
+  import { push } from 'svelte-spa-router';
   import { authStore } from '../stores';
-  import { createEventDispatcher } from 'svelte';
-
   import AuthLayout from '../components/AuthLayout.svelte';
   import PasswordInput from '../components/PasswordInput.svelte';
   import AuthMessage from '../components/AuthMessage.svelte';
@@ -9,7 +8,7 @@
   import { Input } from '$lib/components/ui/input';
   import { Button } from '$lib/components/ui/button';
   import { Label } from '$lib/components/ui/label';
-  import { UserPlus } from 'lucide-svelte';
+  import { UserPlus, Loader2 } from 'lucide-svelte';
   import { extractErrorMessage } from '../lib/utils/error';
 
   interface PasswordRequirement {
@@ -22,12 +21,10 @@
     valid: boolean;
   }
 
-  const dispatch = createEventDispatcher<{ navigate: { page: 'login' | 'register' } }>();
-
-  let username = '';
-  let password = '';
-  let message = '';
-  let isLoading = false;
+  let username = $state('');
+  let password = $state('');
+  let message = $state('');
+  let isLoading = $state(false);
 
   const passwordRequirements: PasswordRequirement[] = [
     { id: 'length', label: 'At least 8 characters long', test: (pwd: string) => pwd.length >= 8 },
@@ -37,12 +34,14 @@
     { id: 'special', label: 'Contains at least one special character', test: (pwd: string) => /[!@#$%^&*()_\-+=[\]{};:'",.<>/?\\|`~]/.test(pwd) },
   ];
 
-  $: passwordValidation = passwordRequirements.map(req => ({
-    ...req,
-    valid: req.test(password),
-  })) as PasswordValidation[];
+  const passwordValidation = $derived(
+    passwordRequirements.map((req) => ({
+      ...req,
+      valid: req.test(password),
+    })) as PasswordValidation[],
+  );
 
-  $: isPasswordValid = passwordValidation.every((req: PasswordValidation) => req.valid);
+  const isPasswordValid = $derived(passwordValidation.every((req: PasswordValidation) => req.valid));
 
   async function handleSubmit(e: Event) {
     e.preventDefault();
@@ -67,13 +66,17 @@
   }
 
   function navigateToLogin() {
-    dispatch('navigate', { page: 'login' });
+    push('/login');
   }
 </script>
 
 <AuthLayout>
-  <h2>Create Account</h2>
-  <form on:submit={handleSubmit} aria-busy={isLoading} class="form-compact">
+  <h2 id="register-title">Create Account</h2>
+  <form
+onsubmit={handleSubmit}
+aria-busy={isLoading}
+aria-labelledby="register-title"
+class="form-compact">
     <div class="input-group">
       <Label for="register-username">Username</Label>
       <Input
@@ -81,6 +84,7 @@
         id="register-username"
         bind:value={username}
         required
+        aria-required="true"
         disabled={isLoading}
         autocomplete="username"
       />
@@ -92,6 +96,7 @@
       id="register-password"
       label="Password"
       autocomplete="new-password"
+      invalid={password.length > 0 && !isPasswordValid}
     />
 
     {#if password}
@@ -111,7 +116,13 @@
     {/if}
 
     <Button type="submit" disabled={!isPasswordValid || isLoading} class="w-full">
-      <UserPlus size={16} /> Create Account
+      {#if isLoading}
+        <Loader2 size={16} class="animate-spin" />
+        <span>Creating account...</span>
+      {:else}
+        <UserPlus size={16} />
+        <span>Create Account</span>
+      {/if}
     </Button>
   </form>
 

@@ -6,6 +6,8 @@ from alembic import command  # type: ignore[attr-defined]
 import psycopg2
 import pytest
 
+pytestmark = pytest.mark.integration
+
 
 def test_upgrade_creates_all_tables(migrated_db):
     cursor = migrated_db.cursor()

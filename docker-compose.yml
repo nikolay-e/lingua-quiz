@@ -5,6 +5,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres # pragma: allowlist secret
       POSTGRES_DB: lingua_quiz
+    command: postgres -c max_connections=200 -c shared_buffers=256MB
     ports:
       - '5432:5432'
     volumes:
@@ -16,6 +17,7 @@ services:
       retries: 5
 
   backend:
+    image: lingua-quiz-backend:latest
     build:
       context: .
       target: backend
@@ -31,6 +33,9 @@ services:
       POSTGRES_DB: lingua_quiz
       MIGRATE: 'true'
       DOCKER_ENVIRONMENT: 'true'
+      RATE_LIMIT_ENABLED: 'false'
+      SEED_TEST_DATA: 'true'
+      UVICORN_WORKERS: '4'
     ports:
       - '9000:9000'
     depends_on:
@@ -44,6 +49,7 @@ services:
       start_period: 30s
 
   frontend:
+    image: lingua-quiz-frontend:latest
     build:
       context: .
       target: frontend
@@ -59,6 +65,61 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  test-all:
+    image: lingua-quiz-tests:latest
+    build:
+      context: .
+      target: integration-e2e-tests
+    profiles: [test-all]
+    environment:
+      API_URL: http://backend:9000/api
+      FRONTEND_URL: http://frontend:80
+      SKIP_TTS_TESTS: 'true'
+      DB_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./test-reports:/home/pwuser/reports
+    depends_on:
+      frontend:
+        condition: service_healthy
+
+  test-api:
+    image: lingua-quiz-tests:latest
+    build:
+      context: .
+      target: integration-e2e-tests
+    profiles: [test-api]
+    environment:
+      API_URL: http://backend:9000/api
+      SKIP_TTS_TESTS: 'true'
+      TEST_TYPE: integration
+      DB_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./test-reports:/home/pwuser/reports
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  test-ui:
+    image: lingua-quiz-tests:latest
+    build:
+      context: .
+      target: integration-e2e-tests
+    profiles: [test-ui]
+    environment:
+      API_URL: http://backend:9000/api
+      FRONTEND_URL: http://frontend:80
+      SKIP_TTS_TESTS: 'true'
+      TEST_TYPE: e2e
+    volumes:
+      - ./test-reports:/home/pwuser/reports
+    depends_on:
+      frontend:
+        condition: service_healthy
 
 volumes:
   postgres_data:

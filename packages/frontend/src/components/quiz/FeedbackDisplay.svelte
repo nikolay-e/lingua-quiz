@@ -1,7 +1,7 @@
 <script lang="ts">
   import { formatForDisplay, type SubmissionResult, type QuizQuestion } from '@lingua-quiz/core';
   import { Button } from '$lib/components/ui/button';
-  import { RefreshCw } from 'lucide-svelte';
+  import { RefreshCw, ArrowRight } from 'lucide-svelte';
   import type { QuizFeedback } from '../../api-types';
 
   interface Props {
@@ -9,9 +9,12 @@
     usageExamples?: { source: string; target: string } | null;
     questionForFeedback?: QuizQuestion | null;
     onRetry?: () => void;
+    onNext?: () => void;
   }
 
-  const { feedback = null, usageExamples = null, questionForFeedback = null, onRetry }: Props = $props();
+  const { feedback = null, usageExamples = null, questionForFeedback = null, onRetry, onNext }: Props = $props();
+
+  const isSubmissionResult = $derived(feedback && 'isCorrect' in feedback);
 
   const isSuccess = $derived.by(() => {
     if (!feedback) return false;
@@ -52,6 +55,15 @@
           <RefreshCw size={16} />
           <span>Try again</span>
         </Button>
+      </div>
+    {/if}
+    {#if isSubmissionResult && onNext}
+      <div class="next-action">
+        <Button variant="default" onclick={onNext} class="w-full">
+          <span>Next Question</span>
+          <ArrowRight size={16} />
+        </Button>
+        <p class="hint">or press Enter</p>
       </div>
     {/if}
   </div>
@@ -106,5 +118,21 @@
     padding: var(--spacing-sm);
     display: flex;
     justify-content: center;
+  }
+
+  .next-action {
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--spacing-sm);
+  }
+
+  .hint {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted-foreground);
+    margin: 0;
   }
 </style>

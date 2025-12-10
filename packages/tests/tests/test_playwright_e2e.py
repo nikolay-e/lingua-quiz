@@ -1,22 +1,21 @@
 import os
 from pathlib import Path
-import random
-import string
+from typing import TypedDict
 
 from playwright.sync_api import Page, expect
 import pytest
+from utils import random_password, random_username
+
+pytestmark = pytest.mark.e2e
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
 API_URL = os.getenv("API_URL", "http://backend:9000/api")
 SCREENSHOTS_DIR = Path("/home/pwuser/reports/screenshots")
 
 
-def generate_random_username():
-    return "test_" + "".join(random.choices(string.ascii_lowercase + string.digits, k=8))
-
-
-def generate_valid_password():
-    return "Test@123" + "".join(random.choices(string.ascii_lowercase, k=4))
+class PlaywrightTestUser(TypedDict):
+    username: str
+    password: str
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -25,11 +24,11 @@ def setup_screenshots_dir():
 
 
 @pytest.fixture
-def test_user():
-    return {
-        "username": generate_random_username(),
-        "password": generate_valid_password(),
-    }
+def test_user() -> PlaywrightTestUser:
+    return PlaywrightTestUser(
+        username=random_username(),
+        password=random_password(),
+    )
 
 
 class TestLoginPage:
@@ -238,3 +237,121 @@ class TestResponsiveness:
 
         expect(page.locator("h2")).to_have_text("Sign In")
         page.screenshot(path=str(SCREENSHOTS_DIR / "16_desktop_login.png"))
+
+
+class TestErrorHandling:
+    def test_login_error_displays_message(self, page: Page):
+        page.goto(FRONTEND_URL)
+        page.fill("#username", "invalid_user")
+        page.fill("#password", "InvalidPass123!")
+        page.click("button:has-text('Sign In')")
+
+        error_locator = page.locator(".error-message").or_(page.locator("[role='alert']")).or_(page.locator("text=Unauthorized"))
+        expect(error_locator).to_be_visible(timeout=10000)
+        page.screenshot(path=str(SCREENSHOTS_DIR / "17_login_error_message.png"))
+
+    def test_login_error_recovery(self, page: Page, test_user):
+        page.goto(FRONTEND_URL)
+        page.fill("#username", "wrong_user")
+        page.fill("#password", "WrongPass123!")
+        page.click("button:has-text('Sign In')")
+
+        error_locator = page.locator(".error-message").or_(page.locator("[role='alert']")).or_(page.locator("text=Unauthorized"))
+        expect(error_locator).to_be_visible(timeout=10000)
+
+        page.click("text=Register here")
+        page.fill("#register-username", test_user["username"])
+        page.fill("#register-password", test_user["password"])
+        page.click("button:has-text('Create Account')")
+
+        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+
+    def test_register_short_username_error(self, page: Page):
+        page.goto(FRONTEND_URL)
+        page.click("text=Register here")
+
+        page.fill("#register-username", "ab")
+        page.fill("#register-password", "ValidPass123!")
+        page.click("button:has-text('Create Account')")
+
+        error_locator = page.locator(".error-message").or_(page.locator("[role='alert']")).or_(page.locator("text=must be at least"))
+        expect(error_locator.first).to_be_visible(timeout=10000)
+        page.screenshot(path=str(SCREENSHOTS_DIR / "18_register_short_username.png"))
+
+    def test_register_weak_password_shows_requirements(self, page: Page):
+        page.goto(FRONTEND_URL)
+        page.click("text=Register here")
+
+        page.fill("#register-password", "weak")
+
+        expect(page.locator("text=At least 8 characters long")).to_be_visible()
+        expect(page.locator("text=Contains at least one uppercase letter")).to_be_visible()
+        expect(page.locator("text=Contains at least one number")).to_be_visible()
+
+        page.screenshot(path=str(SCREENSHOTS_DIR / "19_weak_password_requirements.png"))
+
+    def test_register_password_no_number_error(self, page: Page):
+        page.goto(FRONTEND_URL)
+        page.click("text=Register here")
+
+        page.fill("#register-password", "WeakPassword!")
+
+        expect(page.locator("text=Contains at least one number")).to_be_visible()
+
+    def test_register_password_no_special_char_error(self, page: Page):
+        page.goto(FRONTEND_URL)
+        page.click("text=Register here")
+
+        page.fill("#register-password", "WeakPassword1")
+
+        expect(page.locator("text=Contains at least one special character")).to_be_visible()
+
+    def test_form_clears_error_on_retry(self, page: Page, test_user):
+        page.goto(FRONTEND_URL)
+        page.fill("#username", "nonexistent")
+        page.fill("#password", "WrongPass123!")
+        page.click("button:has-text('Sign In')")
+
+        error_locator = page.locator(".error-message").or_(page.locator("[role='alert']")).or_(page.locator("text=Unauthorized"))
+        expect(error_locator).to_be_visible(timeout=10000)
+
+        page.fill("#username", "")
+        page.fill("#password", "")
+
+        page.click("text=Register here")
+        page.fill("#register-username", test_user["username"])
+        page.fill("#register-password", test_user["password"])
+        page.click("button:has-text('Create Account')")
+
+        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+
+
+class TestSessionManagement:
+    def test_session_persists_on_page_refresh(self, page: Page, test_user):
+        page.goto(FRONTEND_URL)
+        page.click("text=Register here")
+        page.fill("#register-username", test_user["username"])
+        page.fill("#register-password", test_user["password"])
+        page.click("button:has-text('Create Account')")
+        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+
+        page.reload()
+        page.wait_for_load_state("networkidle")
+
+        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+
+    def test_logout_clears_session(self, page: Page, test_user):
+        page.goto(FRONTEND_URL)
+        page.click("text=Register here")
+        page.fill("#register-username", test_user["username"])
+        page.fill("#register-password", test_user["password"])
+        page.click("button:has-text('Create Account')")
+        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+
+        page.get_by_role("button", name="Log out").click()
+        expect(page.get_by_test_id("login-title")).to_have_text("Sign In", timeout=10000)
+
+        page.reload()
+        page.wait_for_load_state("networkidle")
+
+        expect(page.get_by_test_id("login-title")).to_have_text("Sign In")

@@ -91,12 +91,22 @@
       </div>
       <div class="grid grid-cols-2 gap-4">
         <div class="grid gap-1">
-          <Label>List Name</Label>
-          <SelectField bind:value={editForm.listName} options={listNameOptions} placeholder={editForm.listName} />
+          <Label for="edit-list-name">List Name</Label>
+          <SelectField
+            id="edit-list-name"
+            bind:value={editForm.listName}
+            options={listNameOptions}
+            placeholder={editForm.listName}
+          />
         </div>
         <div class="grid gap-1">
-          <Label>Difficulty Level</Label>
-          <SelectField bind:value={editForm.difficultyLevel} options={difficultyOptions} placeholder="Select" />
+          <Label for="edit-difficulty">Difficulty Level</Label>
+          <SelectField
+            id="edit-difficulty"
+            bind:value={editForm.difficultyLevel}
+            options={difficultyOptions}
+            placeholder="Select"
+          />
         </div>
       </div>
     </div>
@@ -119,33 +129,62 @@
       <div class="grid grid-cols-2 gap-4">
         <div class="grid gap-1">
           <Label for="create-source">Source Text *</Label>
-          <Input id="create-source" bind:value={createForm.sourceText} required />
+          <Input
+id="create-source"
+bind:value={createForm.sourceText}
+required
+aria-required="true" />
         </div>
         <div class="grid gap-1">
           <Label for="create-target">Target Text *</Label>
-          <Input id="create-target" bind:value={createForm.targetText} required />
+          <Input
+id="create-target"
+bind:value={createForm.targetText}
+required
+aria-required="true" />
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-4">
         <div class="grid gap-1">
-          <Label>Source Language</Label>
-          <SelectField bind:value={createForm.sourceLanguage} options={languageOptions} placeholder="Select" />
+          <Label for="create-source-lang">Source Language</Label>
+          <SelectField
+            id="create-source-lang"
+            bind:value={createForm.sourceLanguage}
+            options={languageOptions}
+            placeholder="Select"
+          />
         </div>
         <div class="grid gap-1">
-          <Label>Target Language</Label>
-          <SelectField bind:value={createForm.targetLanguage} options={languageOptions} placeholder="Select" />
+          <Label for="create-target-lang">Target Language</Label>
+          <SelectField
+            id="create-target-lang"
+            bind:value={createForm.targetLanguage}
+            options={languageOptions}
+            placeholder="Select"
+          />
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-4">
         <div class="grid gap-1">
-          <Label>List Name *</Label>
-          <SelectField bind:value={createForm.listName} options={listNameOptions} placeholder="Select list" />
+          <Label for="create-list-name">List Name *</Label>
+          <SelectField
+            id="create-list-name"
+            bind:value={createForm.listName}
+            options={listNameOptions}
+            placeholder="Select list"
+            ariaLabel="Select list name (required)"
+          />
         </div>
         <div class="grid gap-1">
-          <Label>Difficulty Level</Label>
-          <SelectField bind:value={createForm.difficultyLevel} options={difficultyOptions} placeholder="Select" />
+          <Label for="create-difficulty">Difficulty Level</Label>
+          <SelectField
+            id="create-difficulty"
+            bind:value={createForm.difficultyLevel}
+            options={difficultyOptions}
+            placeholder="Select"
+          />
         </div>
       </div>
 

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": [],
+      "project": []
+    },
+    "packages/frontend": {
+      "entry": ["src/main.ts", "src/App.svelte"],
+      "project": ["src/**/*.{ts,svelte}"],
+      "ignore": ["src/lib/components/ui/**"]
+    },
+    "packages/core": {
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.ts"]
+    },
+    "packages/domain": {
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.ts"]
+    }
+  },
+  "ignore": ["**/generated/**", "**/node_modules/**"],
+  "ignoreDependencies": ["sort-package-json"],
+  "ignoreBinaries": ["check_image"],
+  "ignoreExportsUsedInFile": true
+}

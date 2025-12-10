@@ -3,7 +3,12 @@
   import FeedCard from '../FeedCard.svelte';
 </script>
 
-<div class="quiz-skeleton">
+<div
+class="quiz-skeleton"
+role="status"
+aria-busy="true"
+aria-label="Loading quiz content">
+  <span class="sr-only">Loading quiz, please wait...</span>
   <FeedCard>
     <div class="header-skeleton">
       <Skeleton class="h-8 w-48" />

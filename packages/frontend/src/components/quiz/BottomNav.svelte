@@ -63,7 +63,8 @@
     padding-bottom: max(var(--spacing-xs), env(safe-area-inset-bottom, 0px));
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 -2px 8px rgb(0 0 0 / 0.1);
+    box-shadow: var(--shadow-nav);
+    height: var(--bottom-nav-height);
   }
 
   @media (width <= 767px) {

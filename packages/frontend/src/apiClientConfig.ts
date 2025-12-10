@@ -115,5 +115,3 @@ export async function executeApiCall<T>(
     return handleApiError(error);
   }
 }
-
-export { apiBaseUrl, getServerAddress };

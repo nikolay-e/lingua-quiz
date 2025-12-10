@@ -1,40 +1,18 @@
-# ======================================================================================
-# BASE STAGES
-# ======================================================================================
-
-# --- Python Base Stage for Backend & Tests ---
-# Establishes a common foundation for both the backend and test stages to reduce duplication.
-# Using alpine for reliable builds, pinned to specific version for reproducibility
-FROM python:3.15.0a2-alpine AS python-base
+FROM python:3.14.1-alpine AS python-base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
-
-# Install common system dependencies
 RUN apk add --no-cache curl netcat-openbsd
-
-# Create a non-root user for security
 RUN adduser -D -h /home/appuser appuser
 WORKDIR /home/appuser
 
-# ======================================================================================
-# BACKEND STAGE
-# ======================================================================================
 FROM python-base AS backend
-
-# Layer 1: System runtime dependencies (rarely changes)
 RUN apk add --no-cache postgresql-libs
-
-# Layer 2: Python package installation (changes only when requirements.txt changes)
-# Install build-time deps, install packages, then remove build-time deps in one command
 COPY --chown=appuser:appuser packages/backend/requirements.txt ./
 RUN apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
     && pip install --no-cache-dir -r requirements.txt \
     && apk --purge del .build-deps
 
-# Copy base model first (needed for code generation)
 COPY --chown=appuser:appuser packages/backend/src/core/base_model.py ./core/
-
-# Generate Pydantic models from OpenAPI schema
 COPY lingua-quiz-schema.json /tmp/lingua-quiz-schema.json
 RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
     && mkdir -p ./generated \
@@ -55,109 +33,71 @@ RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
     && pip uninstall -y datamodel-code-generator \
     && rm /tmp/lingua-quiz-schema.json
 
-# Copy application source code
 COPY --chown=appuser:appuser packages/backend/src/ ./
 COPY --chown=appuser:appuser packages/backend/alembic/ ./alembic/
 COPY --chown=appuser:appuser packages/backend/alembic.ini ./
-
-# Copy startup script
-COPY --chown=appuser:appuser packages/backend/start.sh ./
+COPY --chown=appuser:appuser packages/backend/start.sh packages/backend/seed_test_data.py ./
 RUN chmod +x ./start.sh
-
 USER appuser
-
 EXPOSE 9000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:9000/api/health || exit 1
-
 CMD ["./start.sh"]
 
-
-# ======================================================================================
-# FRONTEND BUILDER STAGE
-# ======================================================================================
-# Pinned to specific version for reproducible builds
-FROM node:25.2.1-slim AS frontend-builder
-
-# Build arguments for version and environment
+FROM node:24-slim AS frontend-builder
 ARG APP_VERSION=dev
 ARG APP_ENVIRONMENT=development
-
 WORKDIR /app
-
-# Layer 1: Copy all package manifests for better caching
-# For a monorepo, install all dependencies at once for better cache efficiency
-COPY package.json package-lock.json ./
-# Copy OpenAPI schema (needed for domain package prepare script)
-COPY lingua-quiz-schema.json ./
-# Copy domain fully first (needed for npm ci prepare script)
+COPY package.json package-lock.json lingua-quiz-schema.json ./
 COPY packages/domain/ ./packages/domain/
 COPY packages/core/package.json ./packages/core/
 COPY packages/frontend/package.json ./packages/frontend/
-
-# Layer 2: Install dependencies (changes only when package manifests change)
-# This also builds domain via prepare script
 RUN npm ci
-
-# Copy and build packages in dependency order: core → frontend
-# Domain is already built by npm ci prepare script
-
 COPY packages/core/ ./packages/core/
-RUN cd packages/core && npm run build
-
-# Copy and build the 'frontend' application
+RUN npm run build --workspace @lingua-quiz/core
 COPY packages/frontend/ ./packages/frontend/
-# Fix npm optional dependencies bug by cleaning and reinstalling
-# Layer 3: Update workspace links after core build
-# This updates the symlinks in node_modules to point to the built core package
-# More efficient than removing and reinstalling all dependencies
-RUN npm install --workspaces
-
-# Generate API client from OpenAPI schema
-RUN npm run generate:api
-
-# Build frontend with environment variables
-RUN cd packages/frontend && \
+RUN npm run generate:api && \
     VITE_APP_VERSION=${APP_VERSION} \
     VITE_APP_ENVIRONMENT=${APP_ENVIRONMENT} \
-    npm run build
+    npm run build --workspace @lingua-quiz/frontend
 
-
-# ======================================================================================
-# FRONTEND PRODUCTION STAGE
-# ======================================================================================
-# Pinned to specific version for reproducible builds
 FROM nginx:1.29.4-alpine AS frontend
-
-# Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copy the built Svelte application from the builder stage
 COPY --from=frontend-builder /app/packages/frontend/dist /usr/share/nginx/html
-
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
-
-# ======================================================================================
-# INTEGRATION AND E2E TESTS STAGE
-# ======================================================================================
-FROM mcr.microsoft.com/playwright/python:v1.57.0-noble AS integration-e2e-tests
-
+FROM mcr.microsoft.com/playwright/python:v1.55.0-noble AS integration-e2e-tests
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
-
 WORKDIR /home/pwuser
-
-# Install test dependencies
 COPY packages/tests/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy test suite with correct ownership
+COPY --chown=pwuser:pwuser packages/backend/src/core/base_model.py ./backend/src/core/
+COPY --chown=pwuser:pwuser packages/backend/alembic/ ./backend/alembic/
+COPY --chown=pwuser:pwuser packages/backend/alembic.ini ./backend/alembic.ini
+COPY lingua-quiz-schema.json /tmp/lingua-quiz-schema.json
+RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
+    && mkdir -p ./backend/src/generated \
+    && PYTHONPATH=/home/pwuser/backend/src python -m datamodel_code_generator \
+        --input /tmp/lingua-quiz-schema.json \
+        --output ./backend/src/generated/schemas.py \
+        --output-model-type pydantic_v2.BaseModel \
+        --base-class core.base_model.APIBaseModel \
+        --field-constraints \
+        --use-standard-collections \
+        --use-annotated \
+        --use-double-quotes \
+        --target-python-version 3.12 \
+        --capitalise-enum-members \
+        --enum-field-as-literal one \
+        --snake-case-field \
+        --use-schema-description \
+    && pip uninstall -y datamodel-code-generator \
+    && rm /tmp/lingua-quiz-schema.json
+
 COPY --chown=pwuser:pwuser packages/tests/ ./
-
 RUN mkdir -p reports && chown -R pwuser:pwuser /home/pwuser
-
 USER pwuser
-
 CMD ["python3", "run_tests.py"]

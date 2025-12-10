@@ -52,7 +52,7 @@ def get_user_progress(
         progress = query_db(
             """SELECT up.vocabulary_item_id, up.level, up.queue_position,
                       up.correct_count, up.incorrect_count, up.consecutive_correct,
-                      up.last_practiced_at as last_practiced,
+                      TO_CHAR(up.last_practiced_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as last_practiced,
                       vi.source_text, vi.source_language, vi.target_language
                FROM user_progress up
                JOIN vocabulary_items vi ON up.vocabulary_item_id = vi.id
@@ -64,7 +64,7 @@ def get_user_progress(
         progress = query_db(
             """SELECT up.vocabulary_item_id, up.level, up.queue_position,
                       up.correct_count, up.incorrect_count, up.consecutive_correct,
-                      up.last_practiced_at as last_practiced,
+                      TO_CHAR(up.last_practiced_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as last_practiced,
                       vi.source_text, vi.source_language, vi.target_language
                FROM user_progress up
                JOIN vocabulary_items vi ON up.vocabulary_item_id = vi.id

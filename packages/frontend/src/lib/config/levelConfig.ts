@@ -60,12 +60,3 @@ export const LEVEL_CONFIG: readonly LevelConfigItem[] = [
       `Fully Mastered (${sourceLanguage} ⟷ ${targetLanguage})`,
   },
 ] as const;
-
-export function getLevelConfig(levelKey: LevelKey): LevelConfigItem | undefined {
-  return LEVEL_CONFIG.find((config) => config.key === levelKey);
-}
-
-export function getLevelDescription(levelKey: LevelKey, sourceLanguage: string, targetLanguage: string): string {
-  const config = getLevelConfig(levelKey);
-  return config?.description(sourceLanguage, targetLanguage) ?? '';
-}

@@ -10,6 +10,7 @@
     id?: string;
     label?: string;
     autocomplete?: 'current-password' | 'new-password';
+    invalid?: boolean;
   }
 
   /* eslint-disable prefer-const */
@@ -20,6 +21,7 @@
     id = 'password',
     label = '',
     autocomplete = 'current-password',
+    invalid = false,
   }: Props = $props();
   /* eslint-enable prefer-const */
 
@@ -39,15 +41,19 @@
     bind:value
     {placeholder}
     required
+    aria-required="true"
+    aria-invalid={invalid}
     {disabled}
     {id}
     {autocomplete}
+    class={invalid ? 'invalid' : ''}
   />
   <button
     type="button"
     class="toggle-password-btn"
     onclick={togglePasswordVisibility}
     aria-label={showPassword ? 'Hide password' : 'Show password'}
+    {disabled}
   >
     {#if showPassword}
       <EyeOff size={16} />
@@ -56,3 +62,18 @@
     {/if}
   </button>
 </div>
+
+<style>
+  :global(.invalid) {
+    border-color: var(--color-error) !important;
+  }
+
+  :global(.invalid:focus-visible) {
+    box-shadow: 0 0 0 3px rgb(231 76 60 / 0.2) !important;
+  }
+
+  .toggle-password-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+</style>

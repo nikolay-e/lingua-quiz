@@ -59,7 +59,7 @@ class LanguageLevelCompleter(Completer):
             "russian-b2",
         ]
 
-    def get_completions(self, document: Document, complete_event):
+    def get_completions(self, document: Document, _complete_event):
         word = document.text_before_cursor.lower()
 
         for option in self.options:

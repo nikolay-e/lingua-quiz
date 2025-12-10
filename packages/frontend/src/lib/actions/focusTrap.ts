@@ -4,7 +4,7 @@ export function focusTrap(node: HTMLElement) {
   const trap = createFocusTrap(node, {
     escapeDeactivates: true,
     allowOutsideClick: true,
-    initialFocus: node.querySelector('[data-autofocus]') as HTMLElement | undefined,
+    initialFocus: (node.querySelector('[data-autofocus]') as HTMLElement | null) ?? false,
     fallbackFocus: node,
   });
 

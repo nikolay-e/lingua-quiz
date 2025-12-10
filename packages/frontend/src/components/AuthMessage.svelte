@@ -19,10 +19,10 @@
 {#if message}
   <p
     {id}
-    class="text-center"
+    class="text-center {variant === 'error' ? 'error-message' : ''}"
     style:color={messageColor}
-    role="status"
-    aria-live="polite">
+    role={variant === 'error' ? 'alert' : 'status'}
+    aria-live={variant === 'error' ? 'assertive' : 'polite'}>
     {message}
   </p>
 {/if}

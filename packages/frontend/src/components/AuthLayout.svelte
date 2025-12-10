@@ -32,6 +32,9 @@
 
   header h1 {
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
   }
 
   .auth-content {
