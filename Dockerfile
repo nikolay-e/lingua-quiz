@@ -1,4 +1,4 @@
-FROM python:3.14.1-alpine AS python-base
+FROM python:3.15.0a2-alpine AS python-base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 RUN apk add --no-cache curl netcat-openbsd
