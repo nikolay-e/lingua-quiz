@@ -2,6 +2,7 @@ import base64
 import hashlib
 import logging
 import os
+from typing import ClassVar
 
 from google.cloud import texttospeech
 from google.oauth2 import service_account
@@ -11,6 +12,13 @@ logger = logging.getLogger(__name__)
 
 
 class TTSService:
+    LANGUAGE_NAME_TO_CODE: ClassVar[dict[str, str]] = {
+        "english": "en",
+        "german": "de",
+        "russian": "ru",
+        "spanish": "es",
+    }
+
     def __init__(self, db_pool):
         self.client = None
         self.db_pool = db_pool
@@ -75,6 +83,12 @@ class TTSService:
     def is_available(self) -> bool:
         return self.client is not None
 
+    def _normalize_language(self, language: str) -> str:
+        lang_lower = language.lower()
+        if lang_lower in self.LANGUAGE_NAME_TO_CODE:
+            return self.LANGUAGE_NAME_TO_CODE[lang_lower]
+        return lang_lower
+
     def _get_content_key(self, text: str, language: str) -> str:
         return hashlib.md5(f"{text}_{language}".encode(), usedforsecurity=False).hexdigest()
 
@@ -131,6 +145,7 @@ class TTSService:
         assert self.client is not None
 
         text = text.strip()
+        language = self._normalize_language(language)
         if len(text) > 500:
             return None
 
@@ -166,4 +181,6 @@ class TTSService:
             return None
 
     def get_supported_languages(self) -> list:
-        return list(self.voice_configs.keys())
+        codes = list(self.voice_configs.keys())
+        names = [name.capitalize() for name in self.LANGUAGE_NAME_TO_CODE]
+        return codes + names
