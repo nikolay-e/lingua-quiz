@@ -123,6 +123,8 @@ class TestProgressPersistence:
 
         page.wait_for_timeout(1500)
 
+        page.get_by_role("button", name="Back to Menu").click()
+        page.wait_for_timeout(500)
         page.get_by_role("button", name="Log out").click()
         expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
@@ -216,16 +218,16 @@ class TestRevealAnswerNoProgression:
         page.get_by_role("button", name="Show Answer").click()
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
 
-        feedback_text = page.locator(".feedback-text")
-        expect(feedback_text).to_have_class(r".*revealed.*")
+        feedback_text = page.locator(".feedback-text.revealed")
+        expect(feedback_text).to_be_visible()
 
     def test_show_answer_then_check_answer_different_behavior(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
 
         page.get_by_role("button", name="Show Answer").click()
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-        revealed_feedback = page.locator(".feedback-text")
-        expect(revealed_feedback).to_have_class(r".*revealed.*")
+        revealed_feedback = page.locator(".feedback-text.revealed")
+        expect(revealed_feedback).to_be_visible()
 
         page.get_by_role("button", name="Next Question").click()
         expect(page.locator(".question-text")).to_be_visible(timeout=3000)
@@ -233,5 +235,5 @@ class TestRevealAnswerNoProgression:
         page.get_by_placeholder("Type your answer...").fill("wrong answer")
         page.get_by_role("button", name="Check Answer").click()
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-        checked_feedback = page.locator(".feedback-text")
-        expect(checked_feedback).to_have_class(r".*error.*")
+        checked_feedback = page.locator(".feedback-text.error")
+        expect(checked_feedback).to_be_visible()
