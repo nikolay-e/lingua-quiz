@@ -15,10 +15,10 @@ limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
 
 def get_tts_service():
-    from core.database import db_pool
+    from core.database import tts_db_pool
     from tts_service import TTSService
 
-    return TTSService(db_pool)
+    return TTSService(tts_db_pool)
 
 
 @router.post("/synthesize", response_model=TTSResponse)

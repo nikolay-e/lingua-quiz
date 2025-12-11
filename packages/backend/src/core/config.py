@@ -13,6 +13,15 @@ DB_PASSWORD = os.getenv("POSTGRES_PASSWORD", "password")
 DB_POOL_MIN_SIZE = int(os.getenv("DB_POOL_MIN_SIZE", "10"))
 DB_POOL_MAX_SIZE = int(os.getenv("DB_POOL_MAX_SIZE", "30"))
 
+# TTS Database configuration (shared across environments)
+TTS_DB_HOST = os.getenv("TTS_DB_HOST", DB_HOST)
+TTS_DB_PORT = int(os.getenv("TTS_DB_PORT", DB_PORT))
+TTS_DB_NAME = os.getenv("TTS_DB_NAME", DB_NAME)
+TTS_DB_USER = os.getenv("TTS_DB_USER", DB_USER)
+TTS_DB_PASSWORD = os.getenv("TTS_DB_PASSWORD", DB_PASSWORD)
+TTS_DB_POOL_MIN_SIZE = int(os.getenv("TTS_DB_POOL_MIN_SIZE", "2"))
+TTS_DB_POOL_MAX_SIZE = int(os.getenv("TTS_DB_POOL_MAX_SIZE", "10"))
+
 # JWT configuration
 
 

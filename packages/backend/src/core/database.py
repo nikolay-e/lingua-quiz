@@ -2,7 +2,22 @@ import logging
 import os
 from typing import Any, cast
 
-from core.config import DB_HOST, DB_NAME, DB_PASSWORD, DB_POOL_MAX_SIZE, DB_POOL_MIN_SIZE, DB_PORT, DB_USER
+from core.config import (
+    DB_HOST,
+    DB_NAME,
+    DB_PASSWORD,
+    DB_POOL_MAX_SIZE,
+    DB_POOL_MIN_SIZE,
+    DB_PORT,
+    DB_USER,
+    TTS_DB_HOST,
+    TTS_DB_NAME,
+    TTS_DB_PASSWORD,
+    TTS_DB_POOL_MAX_SIZE,
+    TTS_DB_POOL_MIN_SIZE,
+    TTS_DB_PORT,
+    TTS_DB_USER,
+)
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from psycopg2.pool import SimpleConnectionPool
@@ -15,6 +30,7 @@ SKIP_DB_INIT = os.getenv("SKIP_DB_INIT", "false").lower() in {"1", "true", "yes"
 if SKIP_DB_INIT:
     logger.info("Skipping database pool initialization because SKIP_DB_INIT is set")
     db_pool = None
+    tts_db_pool = None
 else:
     db_pool = SimpleConnectionPool(
         DB_POOL_MIN_SIZE,
@@ -25,6 +41,17 @@ else:
         user=DB_USER,
         password=DB_PASSWORD,
     )
+
+    tts_db_pool = SimpleConnectionPool(
+        TTS_DB_POOL_MIN_SIZE,
+        TTS_DB_POOL_MAX_SIZE,
+        host=TTS_DB_HOST,
+        port=TTS_DB_PORT,
+        database=TTS_DB_NAME,
+        user=TTS_DB_USER,
+        password=TTS_DB_PASSWORD,
+    )
+    logger.info("TTS database pool initialized (host=%s, db=%s)", TTS_DB_HOST, TTS_DB_NAME)
 
 
 def get_db():
