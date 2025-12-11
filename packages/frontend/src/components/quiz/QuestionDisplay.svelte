@@ -1,35 +1,58 @@
 <script lang="ts">
   import type { QuizQuestion } from '@lingua-quiz/core';
+  import { LEVEL_CONFIG } from '../../lib/config/levelConfig';
+  import type { LevelWordLists } from '../../api-types';
 
   interface Props {
     currentQuestion?: QuizQuestion | null;
-    questionNumber?: number;
-    totalQuestions?: number;
+    levelWordLists?: LevelWordLists;
   }
 
-  const { currentQuestion = null, questionNumber, totalQuestions }: Props = $props();
+  const { currentQuestion = null, levelWordLists = {} }: Props = $props();
 
   const questionLanguage = $derived(currentQuestion?.sourceLanguage || 'en');
-  const showProgress = $derived(questionNumber !== undefined && totalQuestions !== undefined && totalQuestions > 0);
+
+  const levelInfo = $derived.by(() => {
+    if (!currentQuestion) return null;
+    const config = LEVEL_CONFIG.find((c) => c.key === currentQuestion.level);
+    if (!config) return null;
+    return {
+      label: config.label,
+      description: config.description(currentQuestion.sourceLanguage, currentQuestion.targetLanguage),
+      id: config.id,
+    };
+  });
+
+  const totalWords = $derived(
+    Object.values(levelWordLists).reduce((sum, level) => sum + level.count, 0),
+  );
+
+  const currentLevelCount = $derived.by(() => {
+    if (!levelInfo) return 0;
+    return levelWordLists[levelInfo.id]?.count ?? 0;
+  });
+
+  const completionPercent = $derived(
+    totalWords > 0 ? Math.round(((totalWords - currentLevelCount) / totalWords) * 100) : 0,
+  );
 </script>
 
 {#if currentQuestion}
   <div class="question-wrapper">
-    {#if showProgress}
-      <div class="progress-indicator">
-        <span class="progress-text">Question {questionNumber} of {totalQuestions}</span>
-        <div
-          class="progress-bar-mini"
-          role="progressbar"
-          aria-valuenow={questionNumber}
-          aria-valuemin="1"
-          aria-valuemax={totalQuestions}
-        >
-          <div
-            class="progress-fill-mini"
-            style="width: {(questionNumber! / totalQuestions!) * 100}%"
-          ></div>
-        </div>
+    {#if levelInfo}
+      <div class="level-indicator">
+        <span class="level-text">{levelInfo.description}</span>
+        <span class="level-percent">{completionPercent}%</span>
+      </div>
+      <div
+        class="progress-bar"
+        role="progressbar"
+        aria-valuenow={completionPercent}
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-label="Level completion progress"
+      >
+        <div class="progress-fill" style="width: {completionPercent}%"></div>
       </div>
     {/if}
     <div class="question">
@@ -52,29 +75,34 @@
     gap: var(--spacing-xs);
   }
 
-  .progress-indicator {
+  .level-indicator {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: var(--spacing-sm);
   }
 
-  .progress-text {
+  .level-text {
     font-size: var(--font-size-sm);
     color: var(--color-muted-foreground);
-    white-space: nowrap;
   }
 
-  .progress-bar-mini {
-    flex: 1;
+  .level-percent {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted-foreground);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .progress-bar {
+    width: 100%;
     height: 4px;
     background: var(--color-muted);
     border-radius: 2px;
     overflow: hidden;
   }
 
-  .progress-fill-mini {
+  .progress-fill {
     height: 100%;
-    background: var(--color-primary);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
     transition: width 0.3s ease;
   }
 

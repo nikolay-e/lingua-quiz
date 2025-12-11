@@ -1,5 +1,5 @@
 import api from '../../api';
-import { QuizManager, type QuizQuestion, type SubmissionResult } from '@lingua-quiz/core';
+import { QuizManager, type QuizQuestion, type SubmissionResult, type RevealResult } from '@lingua-quiz/core';
 import type { WordList } from '../../api-types';
 import { STORAGE_KEYS } from '../constants';
 import { safeStorage } from '../utils/safeStorage';
@@ -73,28 +73,26 @@ export class QuizService {
   }
 
   async loadWordLists(token: string): Promise<WordList[] | null> {
-    let versionChanged = false;
-    try {
-      const currentVersion = await api.fetchContentVersion(token);
+    const [versionResult, wordListsResult] = await Promise.all([
+      api.fetchContentVersion(token).catch((error) => {
+        logger.warn('Failed to fetch content version, continuing without version check:', { error });
+        return null;
+      }),
+      this.withAuthHandling(() => api.fetchWordLists(token)),
+    ]);
+
+    if (versionResult !== null) {
       const savedVersion = safeStorage.getItem(STORAGE_KEYS.CONTENT_VERSION);
-      const currentVersionId = currentVersion.versionId.toString();
+      const currentVersionId = versionResult.versionId.toString();
 
-      if (savedVersion !== null && parseInt(savedVersion) !== currentVersion.versionId) {
+      if (savedVersion !== null && parseInt(savedVersion) !== versionResult.versionId) {
         logger.info(`Content version changed: ${savedVersion} -> ${currentVersionId}. Clearing cache.`);
-        safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
-        versionChanged = true;
-      } else {
-        safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
+        this.progressMap.clear();
       }
-    } catch (error) {
-      logger.warn('Failed to fetch content version, continuing without version check:', { error });
+      safeStorage.setItem(STORAGE_KEYS.CONTENT_VERSION, currentVersionId);
     }
 
-    if (versionChanged) {
-      this.progressMap.clear();
-    }
-
-    return this.withAuthHandling(() => api.fetchWordLists(token));
+    return wordListsResult;
   }
 
   async startQuiz(token: string, quizName: string): Promise<QuizSession | null> {
@@ -173,6 +171,10 @@ export class QuizService {
       const questionResult = manager.getNextQuestion();
       return { manager, currentQuestion: questionResult.question };
     });
+  }
+
+  revealAnswer(manager: QuizManager, question: QuizQuestion): RevealResult | null {
+    return manager.revealAnswer(question.translationId);
   }
 
   submitAnswer(manager: QuizManager, question: QuizQuestion, answer: string, token: string): SubmissionResult | null {

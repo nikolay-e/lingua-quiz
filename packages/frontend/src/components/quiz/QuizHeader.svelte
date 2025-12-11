@@ -56,10 +56,6 @@
 </div>
 
 <style>
-  .quiz-select-container {
-    margin-block-start: var(--spacing-md);
-  }
-
   .quiz-select {
     background-color: var(--container-bg);
     color: var(--text-color);
@@ -82,7 +78,7 @@
   }
 
   .selected-quiz-header {
-    margin-block-start: var(--spacing-md);
+    /* No margin - FeedCard provides consistent padding */
   }
 
   .quiz-info {

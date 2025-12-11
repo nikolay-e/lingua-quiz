@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, tick, onDestroy } from 'svelte';
   import { authStore, quizStore, levelWordLists, safeStorage } from '../stores';
-  import type { SubmissionResult, QuizQuestion } from '@lingua-quiz/core';
+  import type { SubmissionResult, QuizQuestion, RevealResult } from '@lingua-quiz/core';
   import type { QuizFeedback } from '../api-types';
   import { LEVEL_CONFIG } from '../lib/config/levelConfig';
   import { ttsService } from '../lib/services/ttsService';
@@ -27,7 +27,7 @@
   let userAnswer = $state('');
   let showProgress = $state(true);
   let answerInputRef: ReturnType<typeof AnswerInput> | undefined = $state();
-  let feedback = $state<SubmissionResult | QuizFeedback | null>(null);
+  let feedback = $state<SubmissionResult | QuizFeedback | RevealResult | null>(null);
   let usageExamples = $state<{ source: string; target: string } | null>(null);
   let isSubmitting = $state(false);
   let questionForFeedback = $state<QuizQuestion | null>(null);
@@ -38,8 +38,6 @@
   let levelChangeTo = $state<string | undefined>(undefined);
   let loadError = $state<string | null>(null);
   let lastSelectedQuiz = $state<string | null>(null);
-  let questionNumber = $state(0);
-  let totalQuestions = $state(0);
 
   const initialFoldedLists: Record<string, boolean> = {};
   LEVEL_CONFIG.forEach(level => {
@@ -71,22 +69,19 @@
 
   function handleNextQuestion(): void {
     resetQuizSession();
-    questionNumber++;
     tick().then(() => answerInputRef?.focus());
   }
 
-  async function handleSkip(): Promise<void> {
+  function handleSkip(): void {
     if (!currentQuestion || isSubmitting) return;
     questionForFeedback = currentQuestion;
-    const result = await quizStore.submitAnswer($authStore.token!, '');
+    const result = quizStore.revealAnswer();
     if (result) {
       feedback = result;
-      if ('translation' in result && result.translation) {
-        usageExamples = {
-          source: result.translation.sourceUsageExample || '',
-          target: result.translation.targetUsageExample || '',
-        };
-      }
+      usageExamples = {
+        source: result.translation.sourceUsageExample || '',
+        target: result.translation.targetUsageExample || '',
+      };
       userAnswer = '';
       quizStore.getNextQuestion();
     }
@@ -129,8 +124,6 @@
   async function handleQuizSelect(quiz: string): Promise<void> {
     quizStore.reset();
     resetQuizSession();
-    questionNumber = 0;
-    totalQuestions = 0;
 
     if (!quiz) return;
 
@@ -138,9 +131,6 @@
 
     try {
       await quizStore.startQuiz($authStore.token!, quiz);
-      const state = $quizStore.quizManager?.getState();
-      totalQuestions = state?.translations?.length ?? 0;
-      questionNumber = 1;
       const question: QuizQuestion | null = await quizStore.getNextQuestion();
       if (!question) {
         feedback = { message: 'No questions available for this quiz.', isSuccess: false } as QuizFeedback;
@@ -270,9 +260,11 @@
 
     (async () => {
       if ($authStore.token) {
-        await quizStore.restorePending($authStore.token);
-        await ttsService.initializeLanguages($authStore.token);
-        await loadWordLists();
+        await Promise.all([
+          quizStore.restorePending($authStore.token),
+          ttsService.initializeLanguages($authStore.token),
+          loadWordLists(),
+        ]);
       }
       await tick();
       answerInputRef?.focus();
@@ -356,7 +348,7 @@
                 />
               {/if}
             </svelte:fragment>
-            <QuestionDisplay {currentQuestion} {questionNumber} {totalQuestions} />
+            <QuestionDisplay {currentQuestion} levelWordLists={$levelWordLists} />
           </FeedCard>
         {/if}
 
@@ -401,17 +393,19 @@
         {/if}
       {/if}
 
-      <FeedCard dense>
-        <UserActions
-          {username}
-          showDeleteOption={!selectedQuiz}
-          onLogout={handleLogoutClick}
-          onDeleteAccount={handleDeleteAccount}
-          showLogoutConfirm={showLogoutConfirm}
-          onLogoutConfirm={performLogout}
-          onLogoutCancel={cancelLogout}
-        />
-      </FeedCard>
+      {#if !selectedQuiz}
+        <FeedCard dense>
+          <UserActions
+            {username}
+            showDeleteOption={true}
+            onLogout={handleLogoutClick}
+            onDeleteAccount={handleDeleteAccount}
+            showLogoutConfirm={showLogoutConfirm}
+            onLogoutConfirm={performLogout}
+            onLogoutCancel={cancelLogout}
+          />
+        </FeedCard>
+      {/if}
     </main>
 
   <LevelChangeAnimation

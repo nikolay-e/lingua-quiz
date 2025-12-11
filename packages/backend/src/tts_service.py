@@ -76,7 +76,7 @@ class TTSService:
         return self.client is not None
 
     def _get_content_key(self, text: str, language: str) -> str:
-        return hashlib.md5(f"{text}_{language}".encode()).hexdigest()
+        return hashlib.md5(f"{text}_{language}".encode(), usedforsecurity=False).hexdigest()
 
     def _get_from_storage(self, text: str, language: str) -> bytes | None:
         conn = None
@@ -128,6 +128,7 @@ class TTSService:
     def synthesize_speech(self, text: str, language: str) -> bytes | None:
         if not self.is_available() or not text.strip():
             return None
+        assert self.client is not None
 
         text = text.strip()
         if len(text) > 500:
@@ -156,7 +157,7 @@ class TTSService:
                 ),
             )
 
-            audio_content = response.audio_content
+            audio_content: bytes = response.audio_content
             self._save_to_storage(text, language, audio_content)
             return audio_content
 

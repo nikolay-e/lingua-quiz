@@ -1,5 +1,5 @@
 import { writable, get, type Writable } from 'svelte/store';
-import type { QuizManager, QuizQuestion, SubmissionResult } from '@lingua-quiz/core';
+import type { QuizManager, QuizQuestion, SubmissionResult, RevealResult } from '@lingua-quiz/core';
 import type { WordList } from '../api-types';
 import { logger } from '../lib/utils/logger';
 import { quizService } from '../lib/services/QuizService';
@@ -21,6 +21,7 @@ interface QuizStore {
   startQuiz: (token: string, quizName: string) => Promise<void>;
   getNextQuestion: () => QuizQuestion | null;
   submitAnswer: (token: string, answer: string) => Promise<SubmissionResult | null>;
+  revealAnswer: () => RevealResult | null;
   setLevel: (
     level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4',
   ) => Promise<{ success: boolean; actualLevel: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4'; message?: string }>;
@@ -103,6 +104,13 @@ function createQuizStore(): QuizStore {
         logger.error('Failed to submit answer:', error);
         throw error;
       }
+    },
+
+    revealAnswer: () => {
+      const state = get(store);
+      if (state.quizManager === null || state.currentQuestion === null) return null;
+
+      return quizService.revealAnswer(state.quizManager, state.currentQuestion);
     },
 
     setLevel: async (level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4', token?: string) => {

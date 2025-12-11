@@ -93,7 +93,9 @@
             </div>
           {:else}
             <div class="foldable-content">
-              <p class="no-words text-center opacity-60 p-md">No words in this level yet.</p>
+              <ol class="word-list">
+                <li class="word-item empty-item">No words in this level yet.</li>
+              </ol>
             </div>
           {/if}
         {/if}
@@ -135,8 +137,10 @@
     border-bottom: 1px solid var(--input-border-color);
   }
 
-  .no-words {
+  .word-list li.empty-item {
+    color: var(--color-muted-foreground);
     font-style: italic;
+    list-style: none;
   }
 
   .foldable-header {

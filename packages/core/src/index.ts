@@ -39,6 +39,11 @@ export interface SubmissionResult {
   responseTimeMs?: number;
 }
 
+export interface RevealResult {
+  correctAnswerText: string;
+  translation: Translation;
+}
+
 export interface QuizState {
   translations: Translation[];
   progress: ProgressEntry[];
@@ -176,6 +181,21 @@ export class QuizManager {
     }
     const example = direction === 'normal' ? translation.sourceUsageExample : translation.targetUsageExample;
     return example ?? undefined;
+  };
+
+  revealAnswer = (translationId: string): RevealResult => {
+    const t = this.stateManager.getTranslation(translationId);
+    if (t === undefined) throw new Error('Translation not found');
+
+    const direction = this.levelEngine.getDirection(this.currentLevel);
+    const correctAnswerText = direction === 'normal' ? t.targetText : t.sourceText;
+
+    this.submissionStartTime = null;
+
+    return {
+      correctAnswerText,
+      translation: t,
+    };
   };
 
   submitAnswer = (translationId: string, userAnswer: string): SubmissionResult => {

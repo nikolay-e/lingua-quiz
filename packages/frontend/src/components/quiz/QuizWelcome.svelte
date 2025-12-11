@@ -10,16 +10,14 @@
   <div class="welcome-icon mb-md">🎯</div>
   <h3>Welcome to LinguaQuiz!</h3>
   <p class="muted mb-lg">Start learning with these features:</p>
-  <div class="stack">
+  <div class="stack mb-lg">
     <a
       href="https://github.com/nikolay-e/lingua-quiz/blob/main/CLAUDE.md#learning-algorithm"
       target="_blank"
       rel="noopener noreferrer"
       class="feature feature-link"
       aria-label="Adaptive learning algorithm (opens in new window)"
-    >
-      ✨ Adaptive learning algorithm
-    </a>
+    >✨ Adaptive learning algorithm</a>
     <div class="feature">📊 Track your progress in real-time</div>
     <div class="feature">🎧 Listen to pronunciations</div>
   </div>
