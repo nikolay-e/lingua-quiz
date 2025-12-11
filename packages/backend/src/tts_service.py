@@ -157,9 +157,9 @@ class TTSService:
                 ),
             )
 
-            audio_content: bytes = response.audio_content
-            self._save_to_storage(text, language, audio_content)
-            return audio_content
+            new_audio: bytes = response.audio_content
+            self._save_to_storage(text, language, new_audio)
+            return new_audio
 
         except Exception as e:
             logger.error(f"TTS synthesis failed for '{text}' in {language}: {e}")
