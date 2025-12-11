@@ -44,7 +44,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:9000/api/health || exit 1
 CMD ["./start.sh"]
 
-FROM node:24-slim AS frontend-builder
+FROM node:25-slim AS frontend-builder
 ARG APP_VERSION=dev
 ARG APP_ENVIRONMENT=development
 WORKDIR /app
