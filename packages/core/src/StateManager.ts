@@ -18,9 +18,7 @@ export class StateManager {
   }
 
   private getProgressArray(): ProgressEntry[] {
-    if (this.progressArrayCache === null) {
-      this.progressArrayCache = Array.from(this.progress.values());
-    }
+    this.progressArrayCache ??= Array.from(this.progress.values());
     return this.progressArrayCache;
   }
 
@@ -63,8 +61,7 @@ export class StateManager {
     const levelCounts = createZeroLevelCounts();
 
     allProgress.forEach((p) => {
-      const currentCount = levelCounts[p.level] ?? 0;
-      levelCounts[p.level] = currentCount + 1;
+      levelCounts[p.level] = levelCounts[p.level] + 1;
     });
 
     const targetLevel = enableUsageExamples ? 'LEVEL_5' : 'LEVEL_3';

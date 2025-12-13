@@ -13,9 +13,28 @@ MIGRATE="${MIGRATE:-false}"
 echo "MIGRATE variable is set to: $MIGRATE"
 
 if [ "$MIGRATE" = "true" ]; then
-  echo "Running Alembic migrations..."
+  echo "Running Alembic migrations for main database..."
   alembic upgrade head || {
     echo "ERROR: Alembic migration failed"
+    exit 1
+  }
+fi
+
+MIGRATE_WORDS="${MIGRATE_WORDS:-false}"
+echo "MIGRATE_WORDS variable is set to: $MIGRATE_WORDS"
+
+if [ "$MIGRATE_WORDS" = "true" ]; then
+  echo "Waiting for words database at ${WORDS_DB_HOST:-$DB_HOST}:${WORDS_DB_PORT:-$DB_PORT}..."
+  while ! nc -z ${WORDS_DB_HOST:-$DB_HOST} ${WORDS_DB_PORT:-$DB_PORT}; do
+    echo "Words database not ready, waiting..."
+    sleep 2
+  done
+  echo "Words database is ready!"
+  sleep 1
+
+  echo "Running Alembic migrations for words database..."
+  alembic -c alembic-words.ini upgrade head || {
+    echo "ERROR: Words database migration failed"
     exit 1
   }
 fi

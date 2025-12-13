@@ -8,12 +8,19 @@ import psycopg2
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 from generated.schemas import VocabularyItemCreate
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    print("DATABASE_URL not set, skipping seed")
+WORDS_DB_HOST = os.getenv("WORDS_DB_HOST", os.getenv("DB_HOST", "localhost"))
+WORDS_DB_PORT = os.getenv("WORDS_DB_PORT", os.getenv("DB_PORT", "5432"))
+WORDS_DB_NAME = os.getenv("WORDS_DB_NAME", "linguaquiz_words")
+WORDS_DB_USER = os.getenv("WORDS_DB_USER", os.getenv("POSTGRES_USER", "postgres"))
+WORDS_DB_PASSWORD = os.getenv("WORDS_DB_PASSWORD", os.getenv("POSTGRES_PASSWORD", ""))
+
+WORDS_DATABASE_URL = f"postgresql://{WORDS_DB_USER}:{WORDS_DB_PASSWORD}@{WORDS_DB_HOST}:{WORDS_DB_PORT}/{WORDS_DB_NAME}"
+
+if not WORDS_DB_USER:
+    print("WORDS_DB credentials not set, skipping seed")
     sys.exit(0)
 
-conn = psycopg2.connect(DATABASE_URL)
+conn = psycopg2.connect(WORDS_DATABASE_URL)
 cur = conn.cursor()
 
 cur.execute("SELECT COUNT(*) FROM vocabulary_items")

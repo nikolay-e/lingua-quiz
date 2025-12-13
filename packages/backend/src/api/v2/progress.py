@@ -2,7 +2,7 @@ import logging
 from typing import TYPE_CHECKING
 
 from core.config import RATE_LIMIT_ENABLED
-from core.database import execute_write_transaction, get_active_version, query_db, serialize_rows
+from core.database import execute_write_transaction, get_active_version, query_db, query_words_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, Request
@@ -47,33 +47,55 @@ def get_user_progress(
     list_name: str | None = None,
     current_user: dict = Depends(get_current_user),
 ) -> list[UserProgressResponse]:
+    progress_data = query_db(
+        """SELECT vocabulary_item_id, level, queue_position,
+                  correct_count, incorrect_count, consecutive_correct,
+                  TO_CHAR(last_practiced_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as last_practiced
+           FROM user_progress
+           WHERE user_id = %s
+           ORDER BY last_practiced_at DESC""",
+        (current_user["user_id"],),
+    )
+
+    if not progress_data:
+        return []
+
+    vocab_item_ids = [item["vocabulary_item_id"] for item in progress_data]
+    placeholders = ", ".join(["%s"] * len(vocab_item_ids))
+
     if list_name:
         version_id = get_active_version()
-        progress = query_db(
-            """SELECT up.vocabulary_item_id, up.level, up.queue_position,
-                      up.correct_count, up.incorrect_count, up.consecutive_correct,
-                      TO_CHAR(up.last_practiced_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as last_practiced,
-                      vi.source_text, vi.source_language, vi.target_language
-               FROM user_progress up
-               JOIN vocabulary_items vi ON up.vocabulary_item_id = vi.id
-               WHERE up.user_id = %s AND vi.list_name = %s AND vi.version_id = %s AND vi.is_active = TRUE
-               ORDER BY up.last_practiced_at DESC""",
-            (current_user["user_id"], list_name, version_id),
+        vocab_items = query_words_db(
+            f"""SELECT id, source_text, source_language, target_language, list_name
+               FROM vocabulary_items
+               WHERE id IN ({placeholders}) AND list_name = %s AND version_id = %s AND is_active = TRUE""",  # nosec B608
+            (*tuple(vocab_item_ids), list_name, version_id),
         )
     else:
-        progress = query_db(
-            """SELECT up.vocabulary_item_id, up.level, up.queue_position,
-                      up.correct_count, up.incorrect_count, up.consecutive_correct,
-                      TO_CHAR(up.last_practiced_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as last_practiced,
-                      vi.source_text, vi.source_language, vi.target_language
-               FROM user_progress up
-               JOIN vocabulary_items vi ON up.vocabulary_item_id = vi.id
-               WHERE up.user_id = %s
-               ORDER BY up.last_practiced_at DESC""",
-            (current_user["user_id"],),
+        vocab_items = query_words_db(
+            f"""SELECT id, source_text, source_language, target_language, list_name
+               FROM vocabulary_items
+               WHERE id IN ({placeholders}) AND is_active = TRUE""",  # nosec B608
+            tuple(vocab_item_ids),
         )
 
-    return serialize_rows(progress, UserProgressResponse) or []
+    vocab_map = {str(item["id"]): item for item in vocab_items}
+
+    combined_results = []
+    for progress_item in progress_data:
+        vocab_id = str(progress_item["vocabulary_item_id"])
+        if vocab_id in vocab_map:
+            vocab_item = vocab_map[vocab_id]
+            combined_results.append(
+                {
+                    **progress_item,
+                    "source_text": vocab_item["source_text"],
+                    "source_language": vocab_item["source_language"],
+                    "target_language": vocab_item["target_language"],
+                }
+            )
+
+    return serialize_rows(combined_results, UserProgressResponse) or []
 
 
 @router.post("/progress")

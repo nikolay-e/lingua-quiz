@@ -2,7 +2,7 @@ import json
 import logging
 from typing import TYPE_CHECKING
 
-from core.database import execute_write_transaction, get_active_version, query_db, serialize_rows
+from core.database import execute_words_write_transaction, get_active_version, query_words_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import require_admin
 from fastapi import APIRouter, Depends, HTTPException, Query, status
@@ -44,7 +44,7 @@ def search_vocabulary(
     current_admin: dict = Depends(require_admin),
     version_id: int = Depends(get_active_version),
 ) -> list[VocabularyItemDetailResponse]:
-    results = query_db(
+    results = query_words_db(
         """SELECT id, source_text, source_language, target_text, target_language,
                   list_name, difficulty_level, source_usage_example, target_usage_example,
                   is_active,
@@ -76,7 +76,7 @@ def get_vocabulary_item(
     item_id: str,
     current_admin: dict = Depends(require_admin),
 ) -> VocabularyItemDetailResponse:
-    item = query_db(
+    item = query_words_db(
         """SELECT id, source_text, source_language, target_text, target_language,
                   list_name, difficulty_level, source_usage_example, target_usage_example,
                   is_active,
@@ -104,7 +104,7 @@ def create_vocabulary_item(
     current_admin: dict = Depends(require_admin),
     version_id: int = Depends(get_active_version),
 ) -> dict[str, str]:
-    result = execute_write_transaction(
+    result = execute_words_write_transaction(
         """INSERT INTO vocabulary_items
            (version_id, source_text, source_language, target_text, target_language,
             list_name, difficulty_level, source_usage_example, target_usage_example)
@@ -125,7 +125,7 @@ def create_vocabulary_item(
         one=True,
     )
 
-    execute_write_transaction(
+    execute_words_write_transaction(
         """INSERT INTO content_changelog
            (version_id, change_type, vocabulary_item_id, new_values, changed_by)
            VALUES (%s, 'ADD', %s, %s::jsonb, %s)""",
@@ -187,7 +187,7 @@ def update_vocabulary_item(
     item_data: VocabularyItemUpdate,
     current_admin: dict = Depends(require_admin),
 ) -> dict[str, str]:
-    existing_item = query_db(
+    existing_item = query_words_db(
         "SELECT id, source_text, target_text, source_usage_example, target_usage_example, is_active, list_name, difficulty_level, version_id FROM vocabulary_items WHERE id = %s",
         (item_id,),
         one=True,
@@ -209,12 +209,12 @@ def update_vocabulary_item(
 
     update_values.append(item_id)
     # Safe: update_fields contains only predefined strings, values are parameterized
-    execute_write_transaction(
+    execute_words_write_transaction(
         f"UPDATE vocabulary_items SET {', '.join(update_fields)} WHERE id = %s",  # nosec B608
         tuple(update_values),
     )
 
-    execute_write_transaction(
+    execute_words_write_transaction(
         """INSERT INTO content_changelog
            (version_id, change_type, vocabulary_item_id, old_values, new_values, changed_by)
            VALUES (%s, 'UPDATE', %s, %s::jsonb, %s::jsonb, %s)""",
@@ -236,7 +236,7 @@ def delete_vocabulary_item(
     item_id: str,
     current_admin: dict = Depends(require_admin),
 ) -> dict[str, str]:
-    existing_item = query_db(
+    existing_item = query_words_db(
         "SELECT id, source_text, target_text, version_id FROM vocabulary_items WHERE id = %s",
         (item_id,),
         one=True,
@@ -248,12 +248,12 @@ def delete_vocabulary_item(
             detail="Vocabulary item not found",
         )
 
-    execute_write_transaction(
+    execute_words_write_transaction(
         "UPDATE vocabulary_items SET is_active = FALSE WHERE id = %s",
         (item_id,),
     )
 
-    execute_write_transaction(
+    execute_words_write_transaction(
         """INSERT INTO content_changelog
            (version_id, change_type, vocabulary_item_id, old_values, changed_by)
            VALUES (%s, 'DELETE', %s, %s::jsonb, %s)""",
@@ -283,7 +283,7 @@ def list_vocabulary(
     version_id: int = Depends(get_active_version),
 ) -> list[VocabularyItemDetailResponse]:
     if list_name:
-        results = query_db(
+        results = query_words_db(
             """SELECT id, source_text, source_language, target_text, target_language,
                       list_name, difficulty_level, source_usage_example, target_usage_example,
                       is_active,
@@ -296,7 +296,7 @@ def list_vocabulary(
             (version_id, list_name, limit, offset),
         )
     else:
-        results = query_db(
+        results = query_words_db(
             """SELECT id, source_text, source_language, target_text, target_language,
                       list_name, difficulty_level, source_usage_example, target_usage_example,
                       is_active,

@@ -22,6 +22,15 @@ TTS_DB_PASSWORD = os.getenv("TTS_DB_PASSWORD", DB_PASSWORD)
 TTS_DB_POOL_MIN_SIZE = int(os.getenv("TTS_DB_POOL_MIN_SIZE", "2"))
 TTS_DB_POOL_MAX_SIZE = int(os.getenv("TTS_DB_POOL_MAX_SIZE", "10"))
 
+# Words Database configuration (shared across environments)
+WORDS_DB_HOST = os.getenv("WORDS_DB_HOST", DB_HOST)
+WORDS_DB_PORT = int(os.getenv("WORDS_DB_PORT", DB_PORT))
+WORDS_DB_NAME = os.getenv("WORDS_DB_NAME", "linguaquiz_words")
+WORDS_DB_USER = os.getenv("WORDS_DB_USER", DB_USER)
+WORDS_DB_PASSWORD = os.getenv("WORDS_DB_PASSWORD", DB_PASSWORD)
+WORDS_DB_POOL_MIN_SIZE = int(os.getenv("WORDS_DB_POOL_MIN_SIZE", "5"))
+WORDS_DB_POOL_MAX_SIZE = int(os.getenv("WORDS_DB_POOL_MAX_SIZE", "20"))
+
 # JWT configuration
 
 

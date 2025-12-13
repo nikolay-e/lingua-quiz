@@ -10,6 +10,7 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./packages/backend/init-words-db.sh:/docker-entrypoint-initdb.d/init-words-db.sh:ro
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 5s
@@ -32,6 +33,12 @@ services:
       POSTGRES_PASSWORD: postgres # pragma: allowlist secret
       POSTGRES_DB: lingua_quiz
       MIGRATE: 'true'
+      WORDS_DB_HOST: postgres
+      WORDS_DB_PORT: 5432
+      WORDS_DB_NAME: linguaquiz_words
+      WORDS_DB_USER: postgres
+      WORDS_DB_PASSWORD: postgres # pragma: allowlist secret
+      MIGRATE_WORDS: 'true'
       DOCKER_ENVIRONMENT: 'true'
       RATE_LIMIT_ENABLED: 'false'
       SEED_TEST_DATA: 'true'
@@ -80,7 +87,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - ./test-reports:/home/pwuser/reports
+      - ./test-reports:/home/pwuser/tests/reports
     depends_on:
       frontend:
         condition: service_healthy
@@ -99,7 +106,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - ./test-reports:/home/pwuser/reports
+      - ./test-reports:/home/pwuser/tests/reports
     depends_on:
       backend:
         condition: service_healthy
@@ -116,7 +123,7 @@ services:
       SKIP_TTS_TESTS: 'true'
       TEST_TYPE: e2e
     volumes:
-      - ./test-reports:/home/pwuser/reports
+      - ./test-reports:/home/pwuser/tests/reports
     depends_on:
       frontend:
         condition: service_healthy

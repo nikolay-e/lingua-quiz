@@ -43,7 +43,6 @@ test-reports/
 *.lcov
 playwright-report/
 test-results/
-tests/
 
 # Documentation
 *.md

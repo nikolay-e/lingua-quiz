@@ -17,6 +17,13 @@ from core.config import (
     TTS_DB_POOL_MIN_SIZE,
     TTS_DB_PORT,
     TTS_DB_USER,
+    WORDS_DB_HOST,
+    WORDS_DB_NAME,
+    WORDS_DB_PASSWORD,
+    WORDS_DB_POOL_MAX_SIZE,
+    WORDS_DB_POOL_MIN_SIZE,
+    WORDS_DB_PORT,
+    WORDS_DB_USER,
 )
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -31,6 +38,7 @@ if SKIP_DB_INIT:
     logger.info("Skipping database pool initialization because SKIP_DB_INIT is set")
     db_pool = None
     tts_db_pool = None
+    words_db_pool = None
 else:
     db_pool = SimpleConnectionPool(
         DB_POOL_MIN_SIZE,
@@ -53,6 +61,17 @@ else:
     )
     logger.info("TTS database pool initialized (host=%s, db=%s)", TTS_DB_HOST, TTS_DB_NAME)
 
+    words_db_pool = SimpleConnectionPool(
+        WORDS_DB_POOL_MIN_SIZE,
+        WORDS_DB_POOL_MAX_SIZE,
+        host=WORDS_DB_HOST,
+        port=WORDS_DB_PORT,
+        database=WORDS_DB_NAME,
+        user=WORDS_DB_USER,
+        password=WORDS_DB_PASSWORD,
+    )
+    logger.info("Words database pool initialized (host=%s, db=%s)", WORDS_DB_HOST, WORDS_DB_NAME)
+
 
 def get_db():
     if db_pool is None:
@@ -64,6 +83,18 @@ def put_db(conn):
     if db_pool is None:
         raise RuntimeError("Database pool is not initialized")
     db_pool.putconn(conn)
+
+
+def get_words_db():
+    if words_db_pool is None:
+        raise RuntimeError("Words database pool is not initialized")
+    return words_db_pool.getconn()
+
+
+def put_words_db(conn):
+    if words_db_pool is None:
+        raise RuntimeError("Words database pool is not initialized")
+    words_db_pool.putconn(conn)
 
 
 def query_db(query, args=(), one=False):
@@ -163,10 +194,107 @@ def execute_write_transaction(query, args=(), fetch_results=False, one=False):
                     pass
 
 
+def query_words_db(query, args=(), one=False):
+    query_upper = query.strip().upper()
+    write_keywords = [
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "CREATE",
+        "DROP",
+        "ALTER",
+        "TRUNCATE",
+    ]
+
+    for keyword in write_keywords:
+        if query_upper.startswith(keyword):
+            raise ValueError(f"query_words_db() detected a write operation starting with '{keyword}'. Use execute_words_write_transaction() instead.")
+
+    conn = None
+    try:
+        conn = get_words_db()
+        if not conn:
+            raise Exception("Failed to get words database connection")
+
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(query, args)
+            rv = cur.fetchall()
+            return (rv[0] if rv else None) if one else rv
+
+    except psycopg2.pool.PoolError as e:
+        logger.error(f"Words database connection pool error: {e}")
+        if conn:
+            try:
+                conn.rollback()
+            except Exception:  # nosec B110
+                pass
+        raise
+    except Exception as e:
+        logger.error(f"Words database query error: {e}")
+        if conn:
+            try:
+                conn.rollback()
+            except Exception:  # nosec B110
+                pass
+        raise
+    finally:
+        if conn:
+            try:
+                put_words_db(conn)
+            except Exception as e:
+                logger.critical(f"Failed to return words connection to pool: {e}")
+                try:
+                    conn.close()
+                except Exception:  # nosec B110
+                    pass
+
+
+def execute_words_write_transaction(query, args=(), fetch_results=False, one=False):
+    conn = None
+    try:
+        conn = get_words_db()
+        if not conn:
+            raise Exception("Failed to get words database connection")
+
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(query, args)
+
+            if fetch_results:
+                rv = cur.fetchall()
+                conn.commit()
+                return (rv[0] if rv else None) if one else rv
+
+            row_count = cur.rowcount
+            conn.commit()
+            return row_count
+
+    except psycopg2.pool.PoolError as e:
+        logger.error(f"Words database connection pool error: {e}")
+        raise
+    except Exception as e:
+        logger.error(f"Words database execute error: {e}")
+        if conn:
+            try:
+                conn.rollback()
+            except Exception:  # nosec B110
+                pass
+        raise
+    finally:
+        if conn:
+            try:
+                put_words_db(conn)
+            except Exception as e:
+                logger.critical(f"Failed to return words connection to pool: {e}")
+                try:
+                    conn.close()
+                except Exception:  # nosec B110
+                    pass
+
+
 def get_active_version() -> int:
     from fastapi import HTTPException, status
 
-    result = query_db("SELECT get_active_version_id()", one=True)
+    result = query_words_db("SELECT get_active_version_id()", one=True)
     if not result:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

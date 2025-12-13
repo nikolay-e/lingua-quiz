@@ -8,7 +8,7 @@ from typing import TypedDict
 from playwright.sync_api import Page
 
 BACKEND_DIR_LOCAL = Path(__file__).parent.parent.parent / "backend"
-BACKEND_DIR_DOCKER = Path("/home/pwuser/backend")
+BACKEND_DIR_DOCKER = Path("/home/pwuser/tests/backend")
 BACKEND_DIR = BACKEND_DIR_DOCKER if BACKEND_DIR_DOCKER.exists() else BACKEND_DIR_LOCAL
 
 BACKEND_SRC = BACKEND_DIR / "src"
@@ -47,7 +47,10 @@ def browser_context_args(browser_context_args):
 
 @pytest.fixture
 def page(page: Page) -> Page:
-    page.on("console", lambda msg: print(f"[BROWSER {msg.type.upper()}] {msg.text}") if msg.type == "error" else None)
+    page.on(
+        "console",
+        lambda msg: (print(f"[BROWSER {msg.type.upper()}] {msg.text}") if msg.type == "error" else None),
+    )
     page.on("pageerror", lambda err: print(f"[PAGE ERROR] {err}"))
     return page
 
@@ -248,5 +251,75 @@ def migrated_db(clean_db, alembic_config, db_connection):
     command.downgrade(alembic_config, "base")
     try:
         db_connection.commit()
+    except Exception:
+        pass
+
+
+@pytest.fixture(scope="session")
+def words_test_db_name():
+    return "linguaquiz_words_migration_test"
+
+
+@pytest.fixture(scope="session")
+def words_test_database(postgres_connection, words_test_db_name):
+    cursor = postgres_connection.cursor()
+    cursor.execute(f"DROP DATABASE IF EXISTS {words_test_db_name}")
+    cursor.execute(f"CREATE DATABASE {words_test_db_name}")
+    yield
+    cursor.execute(f"DROP DATABASE IF EXISTS {words_test_db_name}")
+    cursor.close()
+
+
+@pytest.fixture
+def words_db_connection(words_test_database, words_test_db_name, test_db_credentials):
+    conn = psycopg2.connect(database=words_test_db_name, **test_db_credentials)
+    yield conn
+    conn.close()
+
+
+@pytest.fixture
+def clean_words_db(words_db_connection):
+    cursor = words_db_connection.cursor()
+    cursor.execute(
+        """
+        SELECT tablename FROM pg_tables
+        WHERE schemaname = 'public'
+    """
+    )
+    tables = cursor.fetchall()
+    for (table,) in tables:
+        cursor.execute(f'DROP TABLE IF EXISTS "{table}" CASCADE')
+    cursor.execute("DROP FUNCTION IF EXISTS update_updated_at_column() CASCADE")
+    cursor.execute("DROP FUNCTION IF EXISTS get_active_version_id() CASCADE")
+    cursor.execute('DROP EXTENSION IF EXISTS "pg_trgm" CASCADE')
+    cursor.execute('DROP EXTENSION IF EXISTS "uuid-ossp" CASCADE')
+    words_db_connection.commit()
+    cursor.close()
+
+
+@pytest.fixture
+def words_alembic_config(words_test_db_name, test_db_credentials):
+    alembic_ini = BACKEND_DIR / "alembic-words.ini"
+    config = Config(str(alembic_ini))
+    db_url = (
+        f"postgresql://{test_db_credentials['user']}:{test_db_credentials['password']}"
+        f"@{test_db_credentials['host']}:{test_db_credentials['port']}/{words_test_db_name}"
+    )
+    config.set_main_option("sqlalchemy.url", db_url)
+    return config
+
+
+@pytest.fixture
+def migrated_words_db(clean_words_db, words_alembic_config, words_db_connection):
+    command.upgrade(words_alembic_config, "head")
+    words_db_connection.commit()
+    yield words_db_connection
+    try:
+        words_db_connection.rollback()
+    except Exception:
+        pass
+    command.downgrade(words_alembic_config, "base")
+    try:
+        words_db_connection.commit()
     except Exception:
         pass

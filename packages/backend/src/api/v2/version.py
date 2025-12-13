@@ -1,7 +1,7 @@
 import logging
 
 from core.config import RATE_LIMIT_ENABLED
-from core.database import query_db
+from core.database import query_words_db
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, Request, status
@@ -18,7 +18,7 @@ limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 @limiter.limit("100/minute")
 @handle_api_errors("Get content version")
 def get_active_content_version(request: Request, current_user: dict = Depends(get_current_user)) -> ContentVersionResponse:
-    version = query_db(
+    version = query_words_db(
         "SELECT id as version_id, version_name, is_active FROM content_versions WHERE is_active = TRUE LIMIT 1",
         one=True,
     )

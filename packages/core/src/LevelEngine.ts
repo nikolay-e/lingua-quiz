@@ -24,7 +24,7 @@ export class LevelEngine {
   hasWordsForLevel(level: PracticeLevel): boolean {
     const levelNum = parseInt(level.replace('LEVEL_', ''));
     const queues = LEVEL_QUEUE_MAP[levelNum];
-    if (!queues) return false;
+    if (queues === undefined) return false;
     return queues.some((queue) => this.queueManager.getQueueLength(queue) > 0);
   }
 
@@ -39,11 +39,12 @@ export class LevelEngine {
   pickCandidateForLevel(level: PracticeLevel): string | null {
     const levelNum = parseInt(level.replace('LEVEL_', ''));
     const queues = LEVEL_QUEUE_MAP[levelNum];
-    if (!queues) return null;
+    if (queues === undefined) return null;
 
     for (const queue of queues) {
-      if (this.queueManager.getQueueLength(queue) > 0) {
-        return this.queueManager.pickFromQueue(queue);
+      const queueLength = this.queueManager.getQueueLength(queue);
+      if (queueLength > 0) {
+        return this.queueManager.pickFromQueue(queue, queueLength);
       }
     }
     return null;

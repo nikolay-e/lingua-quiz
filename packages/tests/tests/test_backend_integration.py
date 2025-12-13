@@ -31,7 +31,7 @@ from generated.schemas import (  # noqa: E402
 )
 import pytest  # noqa: E402
 from tests.conftest import API_URL, SKIP_TTS_TESTS, AuthenticatedUser  # noqa: E402
-from utils import random_password, random_username  # noqa: E402
+from utils import random_password, random_username, random_word  # noqa: E402
 
 
 @pytest.mark.integration
@@ -385,7 +385,7 @@ class TestAdminVocabulary:
 
     def test_admin_create_vocabulary_item(self, admin_api_client):
         vocab_item = VocabularyItemCreate(
-            source_text="integration_test_word",
+            source_text=random_word("integration"),
             source_language="en",
             target_text="интеграционное_тестовое_слово",
             target_language="ru",
@@ -406,10 +406,11 @@ class TestAdminVocabulary:
         return data["id"]
 
     def test_admin_get_vocabulary_item(self, admin_api_client):
+        source_word = random_word("get")
         create_response = admin_api_client.post(
             f"{API_URL}/admin/vocabulary",
             json=VocabularyItemCreate(
-                source_text="get_test_word",
+                source_text=source_word,
                 source_language="en",
                 target_text="тестовое_слово_для_получения",
                 target_language="ru",
@@ -423,13 +424,13 @@ class TestAdminVocabulary:
         assert response.status_code == 200
         item = VocabularyItemDetailResponse.model_validate(response.json())
         assert item.id == item_id
-        assert item.source_text == "get_test_word"
+        assert item.source_text == source_word
 
     def test_admin_update_vocabulary_item(self, admin_api_client):
         create_response = admin_api_client.post(
             f"{API_URL}/admin/vocabulary",
             json=VocabularyItemCreate(
-                source_text="update_test_word",
+                source_text=random_word("update"),
                 source_language="en",
                 target_text="слово_для_обновления",
                 target_language="ru",
@@ -459,7 +460,7 @@ class TestAdminVocabulary:
         create_response = admin_api_client.post(
             f"{API_URL}/admin/vocabulary",
             json=VocabularyItemCreate(
-                source_text="delete_test_word",
+                source_text=random_word("delete"),
                 source_language="en",
                 target_text="слово_для_удаления",
                 target_language="ru",

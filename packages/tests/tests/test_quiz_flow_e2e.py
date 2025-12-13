@@ -179,7 +179,14 @@ class TestRevealAnswerNoProgression:
 
         def get_level_counts() -> dict[str, int]:
             counts = {}
-            for level_id in ["LEVEL_0", "LEVEL_1", "LEVEL_2", "LEVEL_3", "LEVEL_4", "LEVEL_5"]:
+            for level_id in [
+                "LEVEL_0",
+                "LEVEL_1",
+                "LEVEL_2",
+                "LEVEL_3",
+                "LEVEL_4",
+                "LEVEL_5",
+            ]:
                 level_section = page.locator(f"#{level_id}")
                 if level_section.count() > 0:
                     header_text = level_section.locator(".foldable-header").text_content()
@@ -237,3 +244,26 @@ class TestRevealAnswerNoProgression:
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
         checked_feedback = page.locator(".feedback-text.error")
         expect(checked_feedback).to_be_visible()
+
+    def test_word_variety_in_queue(self, page: Page, test_user: AuthenticatedUser) -> None:
+        login_and_start_quiz(page, test_user)
+
+        unique_questions: set[str] = set()
+        iterations = 30
+
+        for _ in range(iterations):
+            question_text = page.locator(".question-text").text_content()
+            if question_text:
+                unique_questions.add(question_text.strip())
+
+            page.get_by_role("button", name="Show Answer").click()
+            expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
+            page.get_by_role("button", name="Next Question").click()
+            expect(page.locator(".question-text")).to_be_visible(timeout=3000)
+
+        min_expected_unique_words = 10
+        assert len(unique_questions) >= min_expected_unique_words, (
+            f"Expected at least {min_expected_unique_words} unique words in {iterations} iterations, "
+            f"but only saw {len(unique_questions)} unique words. "
+            f"This suggests the queue is only cycling through a small subset of words."
+        )

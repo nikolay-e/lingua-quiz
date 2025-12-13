@@ -24,12 +24,33 @@ def test_upgrade_creates_all_tables(migrated_db):
 
     expected_tables = [
         "alembic_version",
-        "content_changelog",
-        "content_versions",
         "refresh_tokens",
         "tts_cache",
         "user_progress",
         "users",
+    ]
+
+    assert sorted(tables) == sorted(expected_tables)
+    cursor.close()
+
+
+def test_words_db_creates_all_tables(migrated_words_db):
+    cursor = migrated_words_db.cursor()
+
+    cursor.execute(
+        """
+        SELECT tablename FROM pg_tables
+        WHERE schemaname = 'public'
+        ORDER BY tablename
+    """
+    )
+
+    tables = [row[0] for row in cursor.fetchall()]
+
+    expected_tables = [
+        "alembic_version",
+        "content_changelog",
+        "content_versions",
         "vocabulary_items",
     ]
 
@@ -73,8 +94,8 @@ def test_extensions_installed(migrated_db):
     cursor.close()
 
 
-def test_content_versions_table_structure(migrated_db):
-    cursor = migrated_db.cursor()
+def test_content_versions_table_structure(migrated_words_db):
+    cursor = migrated_words_db.cursor()
 
     cursor.execute(
         """
@@ -152,8 +173,8 @@ def test_users_table_constraints(migrated_db):
     cursor.close()
 
 
-def test_vocabulary_items_with_uuid_and_version(migrated_db):
-    cursor = migrated_db.cursor()
+def test_vocabulary_items_with_uuid_and_version(migrated_words_db):
+    cursor = migrated_words_db.cursor()
 
     cursor.execute("SELECT id FROM content_versions WHERE is_active = TRUE")
     version_id = cursor.fetchone()[0]
@@ -188,12 +209,12 @@ def test_vocabulary_items_with_uuid_and_version(migrated_db):
     assert row[1] == "привет"
     assert row[2] is True
 
-    migrated_db.commit()
+    migrated_words_db.commit()
     cursor.close()
 
 
-def test_vocabulary_items_unique_constraint(migrated_db):
-    cursor = migrated_db.cursor()
+def test_vocabulary_items_unique_constraint(migrated_words_db):
+    cursor = migrated_words_db.cursor()
 
     cursor.execute("SELECT id FROM content_versions WHERE is_active = TRUE")
     version_id = cursor.fetchone()[0]
@@ -206,7 +227,7 @@ def test_vocabulary_items_unique_constraint(migrated_db):
     """,
         (version_id,),
     )
-    migrated_db.commit()
+    migrated_words_db.commit()
 
     with pytest.raises(psycopg2.errors.UniqueViolation):
         cursor.execute(
@@ -217,28 +238,29 @@ def test_vocabulary_items_unique_constraint(migrated_db):
         """,
             (version_id,),
         )
-        migrated_db.commit()
+        migrated_words_db.commit()
 
-    migrated_db.rollback()
+    migrated_words_db.rollback()
     cursor.close()
 
 
-def test_user_progress_table(migrated_db):
-    cursor = migrated_db.cursor()
+def test_user_progress_table(migrated_db, migrated_words_db):
+    main_cursor = migrated_db.cursor()
+    words_cursor = migrated_words_db.cursor()
 
-    cursor.execute("SELECT id FROM content_versions WHERE is_active = TRUE")
-    version_id = cursor.fetchone()[0]
+    words_cursor.execute("SELECT id FROM content_versions WHERE is_active = TRUE")
+    version_id = words_cursor.fetchone()[0]
 
-    cursor.execute(
+    main_cursor.execute(
         """
         INSERT INTO users (username, password, is_admin)
         VALUES ('progressuser', 'hashedpw', FALSE)
         RETURNING id
     """
     )
-    user_id = cursor.fetchone()[0]
+    user_id = main_cursor.fetchone()[0]
 
-    cursor.execute(
+    words_cursor.execute(
         """
         INSERT INTO vocabulary_items
         (version_id, source_language, target_language, source_text, target_text, list_name)
@@ -247,9 +269,9 @@ def test_user_progress_table(migrated_db):
     """,
         (version_id,),
     )
-    vocab_id = cursor.fetchone()[0]
+    vocab_id = words_cursor.fetchone()[0]
 
-    cursor.execute(
+    main_cursor.execute(
         """
         INSERT INTO user_progress
         (user_id, vocabulary_item_id, level, queue_position, consecutive_correct, correct_count, incorrect_count, recent_history)
@@ -259,30 +281,33 @@ def test_user_progress_table(migrated_db):
         (user_id, vocab_id),
     )
 
-    progress = cursor.fetchone()
+    progress = main_cursor.fetchone()
     assert progress[0] == user_id
     assert progress[1] == vocab_id
 
     migrated_db.commit()
-    cursor.close()
+    migrated_words_db.commit()
+    main_cursor.close()
+    words_cursor.close()
 
 
-def test_user_progress_check_constraints(migrated_db):
-    cursor = migrated_db.cursor()
+def test_user_progress_check_constraints(migrated_db, migrated_words_db):
+    main_cursor = migrated_db.cursor()
+    words_cursor = migrated_words_db.cursor()
 
-    cursor.execute("SELECT id FROM content_versions WHERE is_active = TRUE")
-    version_id = cursor.fetchone()[0]
+    words_cursor.execute("SELECT id FROM content_versions WHERE is_active = TRUE")
+    version_id = words_cursor.fetchone()[0]
 
-    cursor.execute(
+    main_cursor.execute(
         """
         INSERT INTO users (username, password, is_admin)
         VALUES ('constraintuser', 'hashedpw', FALSE)
         RETURNING id
     """
     )
-    user_id = cursor.fetchone()[0]
+    user_id = main_cursor.fetchone()[0]
 
-    cursor.execute(
+    words_cursor.execute(
         """
         INSERT INTO vocabulary_items
         (version_id, source_language, target_language, source_text, target_text, list_name)
@@ -291,10 +316,11 @@ def test_user_progress_check_constraints(migrated_db):
     """,
         (version_id,),
     )
-    vocab_id = cursor.fetchone()[0]
+    vocab_id = words_cursor.fetchone()[0]
+    migrated_words_db.commit()
 
     with pytest.raises(psycopg2.errors.CheckViolation):
-        cursor.execute(
+        main_cursor.execute(
             """
             INSERT INTO user_progress
             (user_id, vocabulary_item_id, level, queue_position)
@@ -306,7 +332,7 @@ def test_user_progress_check_constraints(migrated_db):
     migrated_db.rollback()
 
     with pytest.raises(psycopg2.errors.CheckViolation):
-        cursor.execute(
+        main_cursor.execute(
             """
             INSERT INTO user_progress
             (user_id, vocabulary_item_id, level, queue_position)
@@ -317,7 +343,8 @@ def test_user_progress_check_constraints(migrated_db):
         migrated_db.commit()
     migrated_db.rollback()
 
-    cursor.close()
+    main_cursor.close()
+    words_cursor.close()
 
 
 def test_refresh_tokens_table(migrated_db):
@@ -400,8 +427,8 @@ def test_refresh_tokens_cascade_delete(migrated_db):
     cursor.close()
 
 
-def test_updated_at_trigger(migrated_db):
-    cursor = migrated_db.cursor()
+def test_updated_at_trigger(migrated_words_db):
+    cursor = migrated_words_db.cursor()
 
     cursor.execute("SELECT id FROM content_versions WHERE is_active = TRUE")
     version_id = cursor.fetchone()[0]
@@ -417,7 +444,7 @@ def test_updated_at_trigger(migrated_db):
     )
 
     vocab_id, initial_updated_at = cursor.fetchone()
-    migrated_db.commit()
+    migrated_words_db.commit()
 
     cursor.execute(
         """
@@ -430,15 +457,15 @@ def test_updated_at_trigger(migrated_db):
     )
 
     new_updated_at = cursor.fetchone()[0]
-    migrated_db.commit()
+    migrated_words_db.commit()
 
     assert new_updated_at > initial_updated_at
 
     cursor.close()
 
 
-def test_get_active_version_id_function(migrated_db):
-    cursor = migrated_db.cursor()
+def test_get_active_version_id_function(migrated_words_db):
+    cursor = migrated_words_db.cursor()
 
     cursor.execute("SELECT get_active_version_id()")
     version_id = cursor.fetchone()[0]
@@ -486,8 +513,8 @@ def test_tts_cache_table(migrated_db):
     cursor.close()
 
 
-def test_content_changelog_table(migrated_db):
-    cursor = migrated_db.cursor()
+def test_content_changelog_table(migrated_words_db):
+    cursor = migrated_words_db.cursor()
 
     cursor.execute("SELECT id FROM content_versions WHERE is_active = TRUE")
     version_id = cursor.fetchone()[0]
@@ -536,12 +563,12 @@ def test_content_changelog_table(migrated_db):
     assert row[0] == "UPDATE"
     assert row[1] == "admin"
 
-    migrated_db.commit()
+    migrated_words_db.commit()
     cursor.close()
 
 
-def test_vocabulary_items_indexes_exist(migrated_db):
-    cursor = migrated_db.cursor()
+def test_vocabulary_items_indexes_exist(migrated_words_db):
+    cursor = migrated_words_db.cursor()
 
     cursor.execute(
         """

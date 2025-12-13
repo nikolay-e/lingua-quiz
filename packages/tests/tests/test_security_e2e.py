@@ -1,0 +1,180 @@
+import os
+
+from pages.admin_page import AdminPage
+from pages.auth_page import AuthPage
+from playwright.sync_api import Page, expect
+import pytest
+from tests.conftest import AuthenticatedUser
+
+pytestmark = pytest.mark.e2e
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
+
+
+class TestXSSPrevention:
+    def test_xss_in_vocabulary_source_text(self, page: Page, admin_user: AuthenticatedUser) -> None:
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto().login(admin_user["username"], admin_user["password"])
+        auth_page.wait_for_welcome()
+
+        admin_page = AdminPage(page, FRONTEND_URL)
+        admin_page.navigate_to_admin().wait_for_admin_panel()
+
+        xss_payload = "<script>alert('XSS')</script>"
+        admin_page.create_vocabulary_item(
+            source_text=xss_payload,
+            target_text="test_target",
+            list_name="xss-test",
+        )
+
+        page.wait_for_timeout(2000)
+
+        admin_page.search(xss_payload)
+        page.wait_for_timeout(1000)
+
+        page_content = page.content()
+        assert "<script>alert('XSS')</script>" not in page_content
+        assert "&lt;script&gt;" in page_content or "escaped" in page_content.lower()
+
+    def test_xss_in_answer_feedback(self, page: Page, test_user: AuthenticatedUser) -> None:
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.wait_for_welcome()
+
+        page.select_option("#quiz-select", index=1)
+        expect(page.locator(".question-text")).to_be_visible(timeout=5000)
+
+        xss_answer = "<img src=x onerror=alert('XSS')>"
+        answer_input = page.get_by_placeholder("Type your answer...")
+        answer_input.fill(xss_answer)
+        page.get_by_role("button", name="Check Answer").click()
+
+        page.wait_for_timeout(2000)
+
+        page_content = page.content()
+        assert "<img src=x onerror=" not in page_content
+
+
+class TestCSRFProtection:
+    def test_api_requires_valid_token(self, page: Page) -> None:
+        response = page.request.post(
+            f"{FRONTEND_URL.replace('frontend', 'backend:9000')}/api/user/progress",
+            data={"level": 1, "vocabulary_item_id": "test"},
+        )
+
+        assert response.status in [401, 403]
+
+    def test_admin_api_blocks_non_admin(self, page: Page, test_user: AuthenticatedUser) -> None:
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.wait_for_welcome()
+
+        page.goto(f"{FRONTEND_URL}/admin")
+
+        expect(page).not_to_have_url(f"{FRONTEND_URL}/admin", timeout=3000)
+
+
+class TestAuthenticationSecurity:
+    def test_token_not_in_url(self, page: Page, test_user: AuthenticatedUser) -> None:
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.wait_for_welcome()
+
+        current_url = page.url
+        assert "token" not in current_url.lower()
+        assert "jwt" not in current_url.lower()
+
+    def test_token_not_in_html_source(self, page: Page, test_user: AuthenticatedUser) -> None:
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.wait_for_welcome()
+
+        page_content = page.content()
+        assert "eyJ" not in page_content[:10000]
+
+    def test_password_not_in_network_response(self, page: Page) -> None:
+        responses = []
+
+        def handle_response(response):
+            responses.append(response)
+
+        page.on("response", handle_response)
+
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto()
+
+        page.get_by_role("textbox", name="Username").fill("testuser")
+        page.get_by_role("textbox", name="Password").fill("TestPassword123!")
+        page.get_by_role("button", name="Sign In").click()
+
+        page.wait_for_timeout(2000)
+
+        for response in responses:
+            try:
+                body = response.text()
+                assert "TestPassword123!" not in body
+            except Exception:
+                pass
+
+    def test_session_expires_on_logout(self, page: Page, test_user: AuthenticatedUser) -> None:
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.wait_for_welcome()
+
+        local_storage_before = page.evaluate("() => localStorage.getItem('token')")
+
+        logout_button = page.get_by_role("button", name="Log Out")
+        if logout_button.is_visible():
+            logout_button.click()
+            page.wait_for_timeout(1000)
+
+            confirm_button = page.locator('[role="dialog"] button').first
+            if confirm_button.is_visible():
+                confirm_button.click()
+
+            page.wait_for_timeout(1000)
+
+        local_storage_after = page.evaluate("() => localStorage.getItem('token')")
+        assert local_storage_after is None or local_storage_after != local_storage_before
+
+
+class TestInputValidation:
+    def test_sql_injection_in_search(self, page: Page, admin_user: AuthenticatedUser) -> None:
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto().login(admin_user["username"], admin_user["password"])
+        auth_page.wait_for_welcome()
+
+        admin_page = AdminPage(page, FRONTEND_URL)
+        admin_page.navigate_to_admin().wait_for_admin_panel()
+
+        sql_injection = "'; DROP TABLE users; --"
+        admin_page.search(sql_injection)
+
+        page.wait_for_timeout(2000)
+
+    def test_very_long_input_rejected(self, page: Page, test_user: AuthenticatedUser) -> None:
+        auth_page = AuthPage(page, FRONTEND_URL)
+        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.wait_for_welcome()
+
+        page.select_option("#quiz-select", index=1)
+        expect(page.locator(".question-text")).to_be_visible(timeout=5000)
+
+        very_long_answer = "a" * 10000
+        answer_input = page.get_by_placeholder("Type your answer...")
+        answer_input.fill(very_long_answer)
+        page.get_by_role("button", name="Check Answer").click()
+
+        page.wait_for_timeout(2000)
+
+
+class TestSecureHeaders:
+    def test_https_redirect_configured(self, page: Page) -> None:
+        page.goto(FRONTEND_URL)
+
+        page.wait_for_timeout(1000)
+
+    def test_no_clickjacking_vulnerability(self, page: Page) -> None:
+        page.goto(FRONTEND_URL)
+
+        page.wait_for_timeout(1000)

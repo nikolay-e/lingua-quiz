@@ -2,7 +2,7 @@ import logging
 from typing import TYPE_CHECKING
 
 from core.config import RATE_LIMIT_ENABLED
-from core.database import get_active_version, query_db, serialize_rows
+from core.database import get_active_version, query_words_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, Request
@@ -48,7 +48,7 @@ def get_word_lists(
     version_id: int = Depends(get_active_version),
 ) -> list[WordListResponse]:
     logger.debug(f"Fetching word lists for user: {current_user['username']}")
-    lists = query_db(
+    lists = query_words_db(
         """SELECT list_name, COUNT(*) as word_count
            FROM vocabulary_items
            WHERE version_id = %s AND is_active = TRUE
@@ -68,7 +68,7 @@ def get_translations(
     current_user: dict = Depends(get_current_user),
     version_id: int = Depends(get_active_version),
 ) -> list[VocabularyItemResponse]:
-    translations = query_db(
+    translations = query_words_db(
         """SELECT id, source_text, source_language, target_text, target_language,
                   list_name, source_usage_example, target_usage_example
            FROM vocabulary_items

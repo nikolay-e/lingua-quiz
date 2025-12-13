@@ -1,4 +1,4 @@
-FROM python:3.15.0a2-alpine AS python-base
+FROM python:3.13-alpine AS python-base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 RUN apk add --no-cache curl netcat-openbsd
@@ -8,7 +8,7 @@ WORKDIR /home/appuser
 FROM python-base AS backend
 RUN apk add --no-cache postgresql-libs
 COPY --chown=appuser:appuser packages/backend/requirements.txt ./
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
+RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev postgresql-dev linux-headers \
     && pip install --no-cache-dir -r requirements.txt \
     && apk --purge del .build-deps
 
@@ -36,6 +36,8 @@ RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
 COPY --chown=appuser:appuser packages/backend/src/ ./
 COPY --chown=appuser:appuser packages/backend/alembic/ ./alembic/
 COPY --chown=appuser:appuser packages/backend/alembic.ini ./
+COPY --chown=appuser:appuser packages/backend/alembic-words/ ./alembic-words/
+COPY --chown=appuser:appuser packages/backend/alembic-words.ini ./
 COPY --chown=appuser:appuser packages/backend/start.sh packages/backend/seed_test_data.py ./
 RUN chmod +x ./start.sh
 USER appuser
@@ -70,13 +72,15 @@ CMD ["nginx", "-g", "daemon off;"]
 FROM mcr.microsoft.com/playwright/python:v1.57.0-noble AS integration-e2e-tests
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
-WORKDIR /home/pwuser
+WORKDIR /home/pwuser/tests
 COPY packages/tests/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --chown=pwuser:pwuser packages/backend/src/core/base_model.py ./backend/src/core/
 COPY --chown=pwuser:pwuser packages/backend/alembic/ ./backend/alembic/
 COPY --chown=pwuser:pwuser packages/backend/alembic.ini ./backend/alembic.ini
+COPY --chown=pwuser:pwuser packages/backend/alembic-words/ ./backend/alembic-words/
+COPY --chown=pwuser:pwuser packages/backend/alembic-words.ini ./backend/alembic-words.ini
 COPY lingua-quiz-schema.json /tmp/lingua-quiz-schema.json
 RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
     && mkdir -p ./backend/src/generated \
@@ -98,6 +102,6 @@ RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
     && rm /tmp/lingua-quiz-schema.json
 
 COPY --chown=pwuser:pwuser packages/tests/ ./
-RUN mkdir -p reports && chown -R pwuser:pwuser /home/pwuser
+RUN mkdir -p reports && chown -R pwuser:pwuser /home/pwuser/tests
 USER pwuser
 CMD ["python3", "run_tests.py"]
