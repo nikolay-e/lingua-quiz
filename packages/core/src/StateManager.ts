@@ -19,7 +19,7 @@ export class StateManager {
 
   private getProgressArray(): ProgressEntry[] {
     this.progressArrayCache ??= Array.from(this.progress.values());
-    return this.progressArrayCache;
+    return this.progressArrayCache.map((p) => ({ ...p, recentHistory: [...p.recentHistory] }));
   }
 
   getTranslation(id: string): Translation | undefined {
@@ -27,7 +27,8 @@ export class StateManager {
   }
 
   getProgress(id: string): ProgressEntry | undefined {
-    return this.progress.get(id);
+    const progress = this.progress.get(id);
+    return progress !== undefined ? { ...progress, recentHistory: [...progress.recentHistory] } : undefined;
   }
 
   getAllProgress(): ProgressEntry[] {

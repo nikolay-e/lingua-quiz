@@ -58,15 +58,14 @@ export class QueueManager {
   insertIntoQueue(level: LevelStatus, translationId: string, position: number): number {
     const queue = this.queues[level];
     const insertIndex = Math.min(position, queue.length);
-    queue.splice(insertIndex, 0, translationId);
+    this.queues[level] = [...queue.slice(0, insertIndex), translationId, ...queue.slice(insertIndex)];
     return position;
   }
 
   moveWordToLevel(translationId: string, oldLevel: LevelStatus, newLevel: LevelStatus): number {
     this.removeFromQueue(oldLevel, translationId);
-    const newQueue = this.queues[newLevel];
-    newQueue.push(translationId);
-    return newQueue.length - 1;
+    this.queues[newLevel] = [...this.queues[newLevel], translationId];
+    return this.queues[newLevel].length - 1;
   }
 
   updatePosition(
@@ -100,7 +99,7 @@ export class QueueManager {
   }
 
   getQueues(): Queues {
-    return this.queues;
+    return Object.fromEntries(LEVEL_KEYS.map((level) => [level, [...this.queues[level]]])) as Queues;
   }
 
   getWordsByLevel(): Record<LevelStatus, string[]> {
