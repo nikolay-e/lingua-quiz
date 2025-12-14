@@ -55,17 +55,15 @@
         <span>Check Answer</span>
       {/if}
     </Button>
-    {#if onSkip}
-      <Button
-        type="button"
-        variant="outline"
-        onclick={onSkip}
-        disabled={isLoading}
-        class="skip-btn">
-        <Eye size={16} />
-        <span>Show Answer</span>
-      </Button>
-    {/if}
+    <Button
+      type="button"
+      variant="outline"
+      onclick={onSkip}
+      disabled={!onSkip || isLoading}
+      class="skip-btn">
+      <Eye size={16} />
+      <span>Show Answer</span>
+    </Button>
   </div>
 </form>
 
@@ -82,15 +80,13 @@
 
   .button-row {
     display: flex;
+    flex-direction: column;
     gap: var(--spacing-sm);
   }
 
-  .button-row :global(.submit-btn) {
-    flex: 2;
-  }
-
+  .button-row :global(.submit-btn),
   .button-row :global(.skip-btn) {
-    flex: 1;
+    width: 100%;
   }
 
   @keyframes spin {
