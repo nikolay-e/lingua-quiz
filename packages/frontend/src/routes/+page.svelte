@@ -1,28 +1,27 @@
 <script lang="ts">
   import { onMount, tick, onDestroy } from 'svelte';
-  import { authStore, quizStore, levelWordLists, safeStorage } from '../stores';
+  import { authStore, quizStore, levelWordLists, uiPreferencesStore } from '$stores';
   import type { SubmissionResult, QuizQuestion, RevealResult } from '@lingua-quiz/core';
-  import type { QuizFeedback } from '../api-types';
-  import { LEVEL_CONFIG } from '../lib/config/levelConfig';
-  import { ttsService } from '../lib/services/ttsService';
-  import { STORAGE_KEYS } from '../lib/constants';
+  import type { QuizFeedback } from '$src/api-types';
+  import { ttsService } from '$lib/services/ttsService';
   import { toast } from 'svelte-sonner';
-  import { extractErrorMessage } from '../lib/utils/error';
+  import { extractErrorMessage } from '$lib/utils/error';
+  import { logger } from '$lib/utils/logger';
 
-  import QuizHeader from '../components/quiz/QuizHeader.svelte';
-  import QuestionDisplay from '../components/quiz/QuestionDisplay.svelte';
-  import FeedbackDisplay from '../components/quiz/FeedbackDisplay.svelte';
-  import LearningProgress from '../components/quiz/LearningProgress.svelte';
-  import FeedCard from '../components/FeedCard.svelte';
-  import LevelChangeAnimation from '../components/quiz/LevelChangeAnimation.svelte';
-  import AnswerInput from '../components/quiz/AnswerInput.svelte';
-  import TTSButton from '../components/quiz/TTSButton.svelte';
-  import UserActions from '../components/quiz/UserActions.svelte';
-  import ErrorBoundary from '../components/ErrorBoundary.svelte';
-  import ErrorDisplay from '../components/ErrorDisplay.svelte';
-  import QuizSkeleton from '../components/quiz/QuizSkeleton.svelte';
-  import BottomNav from '../components/quiz/BottomNav.svelte';
-  import QuizWelcome from '../components/quiz/QuizWelcome.svelte';
+  import QuizHeader from '$components/quiz/QuizHeader.svelte';
+  import QuestionDisplay from '$components/quiz/QuestionDisplay.svelte';
+  import FeedbackDisplay from '$components/quiz/FeedbackDisplay.svelte';
+  import LearningProgress from '$components/quiz/LearningProgress.svelte';
+  import FeedCard from '$components/FeedCard.svelte';
+  import LevelChangeAnimation from '$components/quiz/LevelChangeAnimation.svelte';
+  import AnswerInput from '$components/quiz/AnswerInput.svelte';
+  import TTSButton from '$components/quiz/TTSButton.svelte';
+  import UserActions from '$components/quiz/UserActions.svelte';
+  import ErrorBoundary from '$components/ErrorBoundary.svelte';
+  import ErrorDisplay from '$components/ErrorDisplay.svelte';
+  import QuizSkeleton from '$components/quiz/QuizSkeleton.svelte';
+  import BottomNav from '$components/quiz/BottomNav.svelte';
+  import QuizWelcome from '$components/quiz/QuizWelcome.svelte';
 
   let userAnswer = $state('');
   let showProgress = $state(true);
@@ -39,26 +38,8 @@
   let loadError = $state<string | null>(null);
   let lastSelectedQuiz = $state<string | null>(null);
 
-  const initialFoldedLists: Record<string, boolean> = {};
-  LEVEL_CONFIG.forEach(level => {
-    initialFoldedLists[level.id] = true;
-  });
-
-  const savedFoldStates = safeStorage.getItem(STORAGE_KEYS.FOLDED_LISTS);
-  if (savedFoldStates) {
-    try {
-      const saved = JSON.parse(savedFoldStates);
-      Object.keys(initialFoldedLists).forEach(key => {
-        if (key in saved) {
-          initialFoldedLists[key] = saved[key];
-        }
-      });
-    } catch {
-    // Ignore parsing errors for corrupted localStorage
-    }
-  }
-
-  const foldedLists = $state<Record<string, boolean>>(initialFoldedLists);
+  const foldedListsStore = uiPreferencesStore.foldedLists;
+  const foldedLists = $derived($foldedListsStore);
 
   function resetQuizSession() {
     feedback = null;
@@ -88,8 +69,7 @@
   }
 
   function toggleFold(levelId: string) {
-    foldedLists[levelId] = !foldedLists[levelId];
-    safeStorage.setItem(STORAGE_KEYS.FOLDED_LISTS, JSON.stringify(foldedLists));
+    uiPreferencesStore.toggleFold(levelId);
   }
 
   const wordLists = $derived($quizStore.wordLists);
@@ -138,7 +118,7 @@
       await tick();
       answerInputRef?.focus();
     } catch (error: unknown) {
-      console.error('Failed to start quiz:', error);
+      logger.error('Failed to start quiz:', error);
       feedback = {
         message: extractErrorMessage(error, 'Failed to start quiz. Please try again.'),
         isSuccess: false,
@@ -156,8 +136,8 @@
     if ($authStore.token && $quizStore.quizManager) {
       try {
         await quizStore.saveAndCleanup($authStore.token);
-      } catch (error) {
-        console.error('Failed to save progress before returning to menu:', error);
+      } catch (error: unknown) {
+        logger.error('Failed to save progress before returning to menu:', error);
         toast.error('Could not save all progress.');
       }
     }
@@ -202,7 +182,7 @@
         answerInputRef?.focus();
       }
     } catch (error: unknown) {
-      console.error('Error submitting answer:', error);
+      logger.error('Error submitting answer:', error);
       feedback = { message: extractErrorMessage(error, 'Error submitting answer.'), isSuccess: false } as QuizFeedback;
     } finally {
       isSubmitting = false;
@@ -243,13 +223,14 @@
     loadError = null;
     try {
       await quizStore.loadWordLists($authStore.token);
-    } catch (error) {
-      console.error('Failed to load word lists:', error);
+    } catch (error: unknown) {
+      logger.error('Failed to load word lists:', error);
       loadError = extractErrorMessage(error, 'Failed to load quizzes');
     }
   }
 
   onMount(() => {
+    // Set up error callbacks
     quizStore.setSaveErrorCallback((message) => {
       toast.error(message);
     });
@@ -258,6 +239,7 @@
       toast.error(message);
     });
 
+    // Initialize quiz data
     (async () => {
       if ($authStore.token) {
         await Promise.all([
@@ -269,11 +251,10 @@
       await tick();
       answerInputRef?.focus();
     })().catch((error) => {
-      console.error('Failed to initialize quiz:', error);
+      logger.error('Failed to initialize quiz:', error);
     });
-  });
 
-  onMount(() => {
+    // Set up event handlers for saving progress
     const handleBeforeUnload = (e: BeforeUnloadEvent): void => {
       if ($authStore.token && quizStore.hasPendingChanges()) {
         quizStore.flushImmediately($authStore.token, true);
@@ -291,6 +272,7 @@
     window.addEventListener('beforeunload', handleBeforeUnload);
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
+    // Cleanup
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
@@ -312,10 +294,13 @@
 
 <ErrorBoundary>
   <main id="main-content" class="feed">
-      <FeedCard title={null}>
-        {#if !selectedQuiz}
+      {#if !selectedQuiz}
+        <FeedCard title={null}>
           <QuizWelcome />
-        {/if}
+        </FeedCard>
+      {/if}
+
+      <FeedCard title={null}>
         <div class="stack">
           <QuizHeader
             {wordLists}

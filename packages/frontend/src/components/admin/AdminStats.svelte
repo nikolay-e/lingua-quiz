@@ -57,29 +57,27 @@
   </svg>
 {/snippet}
 
-{#if stats.total > 0}
-  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <StatCard
-      title="Total Items"
-      value={stats.total}
-      icon={clipboardIcon}
-    />
-    <StatCard
-      title="Active Items"
-      value={stats.active}
-      icon={checkIcon}
-      colorClass="text-success"
-    />
-    <StatCard
-      title="Inactive Items"
-      value={stats.inactive}
-      icon={crossIcon}
-      colorClass="text-destructive"
-    />
-    <StatCard
-      title="Languages"
-      value={stats.languageCount}
-      icon={languagesIcon}
-    />
-  </div>
-{/if}
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+  <StatCard
+    title="Total Items"
+    value={stats.total}
+    icon={clipboardIcon}
+  />
+  <StatCard
+    title="Active Items"
+    value={stats.active}
+    icon={checkIcon}
+    colorClass="text-success"
+  />
+  <StatCard
+    title="Inactive Items"
+    value={stats.inactive}
+    icon={crossIcon}
+    colorClass="text-destructive"
+  />
+  <StatCard
+    title="Languages"
+    value={stats.languageCount}
+    icon={languagesIcon}
+  />
+</div>

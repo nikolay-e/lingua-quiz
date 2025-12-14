@@ -11,13 +11,16 @@
    ============================================ */
 
 @theme {
+  /* Base colors */
+  --color-white: #ffffff;
+
   /* Core colors */
   --color-primary: #4a90e2;
   --color-secondary: #f39c12;
   --color-success: #27ae60;
   --color-error: #e74c3c;
   --color-background: #f4f7f9;
-  --color-surface: #fff;
+  --color-surface: var(--color-white);
   --color-border: #e2e8f0;
   --color-input-border: #ddd;
   --color-text: #333;
@@ -39,8 +42,8 @@
   --color-popover: var(--color-surface);
   --color-popover-foreground: var(--color-text);
   --color-destructive: var(--color-error);
-  --color-destructive-foreground: #fff;
-  --color-primary-foreground: #ffffff;
+  --color-destructive-foreground: var(--color-white);
+  --color-primary-foreground: var(--color-white);
   --color-secondary-foreground: #111827;
 
   /* Font */

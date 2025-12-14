@@ -21,7 +21,7 @@
   const actualValueColorClass = $derived(valueColorClass ?? colorClass);
 </script>
 
-<Card.Root>
+<Card.Root class="stats-card">
   <Card.Header class="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
     <Card.Title class="text-sm font-medium">{title}</Card.Title>
     <span class="size-4 {colorClass}">

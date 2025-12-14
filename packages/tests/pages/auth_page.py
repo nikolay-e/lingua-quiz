@@ -4,9 +4,13 @@ from .base_page import BasePage
 
 
 class AuthPage(BasePage):
-    def fill_login(self, username: str, password: str):
-        self.page.fill("#username", username)
-        self.page.fill("#password", password)
+    def goto_login(self):
+        self.goto("/login")
+        return self
+
+    def fill_login(self, username: str, password: str, timeout: int = 30000):
+        self.page.fill("#username", username, timeout=timeout)
+        self.page.fill("#password", password, timeout=timeout)
         return self
 
     def fill_login_by_label(self, username: str, password: str):
@@ -35,8 +39,8 @@ class AuthPage(BasePage):
         self.page.click("text=Register here")
         return self
 
-    def login(self, username: str, password: str):
-        self.fill_login(username, password)
+    def login(self, username: str, password: str, timeout: int = 30000):
+        self.fill_login(username, password, timeout=timeout)
         self.click_sign_in()
         return self
 

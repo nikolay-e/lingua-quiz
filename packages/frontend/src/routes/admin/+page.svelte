@@ -1,14 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { authStore } from '../stores';
-  import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '../adminApi';
-  import type { AdminVocabularyItem } from '../api-types';
+  import { authStore } from '$stores';
+  import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '$src/adminApi';
+  import type { AdminVocabularyItem } from '$src/api-types';
   import { toast } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
-  import AdminStats from '../components/admin/AdminStats.svelte';
-  import VocabularySearch from '../components/admin/VocabularySearch.svelte';
-  import VocabularyTable from '../components/admin/VocabularyTable.svelte';
-  import VocabularyDialogs from '../components/admin/VocabularyDialogs.svelte';
+  import AdminStats from '$components/admin/AdminStats.svelte';
+  import VocabularySearch from '$components/admin/VocabularySearch.svelte';
+  import VocabularyTable from '$components/admin/VocabularyTable.svelte';
+  import VocabularyDialogs from '$components/admin/VocabularyDialogs.svelte';
+  import { extractErrorMessage } from '$lib/utils/error';
+  import { LANGUAGE_OPTIONS, DIFFICULTY_OPTIONS, LIST_NAME_OPTIONS } from '$lib/config/adminConfig';
 
   let token: string | null = null;
   let searchQuery = $state('');
@@ -62,39 +64,9 @@
   let sortBy = $state<'source' | 'target' | 'list'>('source');
   let sortOrder = $state<'asc' | 'desc'>('asc');
 
-  const languageOptions = [
-    { value: 'en', label: 'English' },
-    { value: 'de', label: 'German' },
-    { value: 'es', label: 'Spanish' },
-    { value: 'ru', label: 'Russian' },
-  ];
-
-  const difficultyOptions = [
-    { value: 'A1', label: 'A1 - Beginner' },
-    { value: 'A2', label: 'A2 - Elementary' },
-    { value: 'B1', label: 'B1 - Intermediate' },
-    { value: 'B2', label: 'B2 - Upper Intermediate' },
-    { value: 'C1', label: 'C1 - Advanced' },
-    { value: 'C2', label: 'C2 - Proficiency' },
-  ];
-
-  const listNameOptions = [
-    { value: 'english-russian-a0', label: 'English-Russian A0' },
-    { value: 'english-russian-a1', label: 'English-Russian A1' },
-    { value: 'english-russian-a2', label: 'English-Russian A2' },
-    { value: 'english-russian-b1', label: 'English-Russian B1' },
-    { value: 'english-russian-b2', label: 'English-Russian B2' },
-    { value: 'german-russian-a0', label: 'German-Russian A0' },
-    { value: 'german-russian-a1', label: 'German-Russian A1' },
-    { value: 'german-russian-a2', label: 'German-Russian A2' },
-    { value: 'german-russian-b1', label: 'German-Russian B1' },
-    { value: 'german-russian-b2', label: 'German-Russian B2' },
-    { value: 'spanish-russian-a0', label: 'Spanish-Russian A0' },
-    { value: 'spanish-russian-a1', label: 'Spanish-Russian A1' },
-    { value: 'spanish-russian-a2', label: 'Spanish-Russian A2' },
-    { value: 'spanish-russian-b1', label: 'Spanish-Russian B1' },
-    { value: 'spanish-russian-b2', label: 'Spanish-Russian B2' },
-  ];
+  const languageOptions = LANGUAGE_OPTIONS;
+  const difficultyOptions = DIFFICULTY_OPTIONS;
+  const listNameOptions = LIST_NAME_OPTIONS;
 
   const filteredResults = $derived.by(() => {
     let results = [...searchResults];
@@ -150,8 +122,8 @@
       const results = await adminApi.searchVocabulary(token, searchQuery);
       searchResults = results;
       toast.success(`Found ${results.length} items`);
-    } catch (e) {
-      const message = e instanceof Error ? e.message : 'Search failed';
+    } catch (error: unknown) {
+      const message = extractErrorMessage(error, 'Search failed');
       toast.error(message);
       searchResults = [];
     } finally {
@@ -202,8 +174,8 @@
 
       toast.success('Item updated successfully');
       isEditDialogOpen = false;
-    } catch (e) {
-      const message = e instanceof Error ? e.message : 'Update failed';
+    } catch (error: unknown) {
+      const message = extractErrorMessage(error, 'Update failed');
       toast.error(message);
     } finally {
       loading = false;
@@ -244,8 +216,8 @@
       await adminApi.createVocabularyItem(token, payload);
       toast.success('Item created successfully');
       isCreateDialogOpen = false;
-    } catch (e) {
-      const message = e instanceof Error ? e.message : 'Create failed';
+    } catch (error: unknown) {
+      const message = extractErrorMessage(error, 'Create failed');
       toast.error(message);
     } finally {
       loading = false;
@@ -269,8 +241,8 @@
       toast.success('Item deleted successfully');
       isDeleteDialogOpen = false;
       itemToDelete = null;
-    } catch (e) {
-      const message = e instanceof Error ? e.message : 'Delete failed';
+    } catch (error: unknown) {
+      const message = extractErrorMessage(error, 'Delete failed');
       toast.error(message);
     } finally {
       loading = false;
@@ -321,6 +293,7 @@
       {searchLoading}
       {languageOptions}
       {listNameOptions}
+      showFilters={true}
       onsearch={handleSearch} />
 
     <VocabularyTable

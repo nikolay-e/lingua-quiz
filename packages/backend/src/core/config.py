@@ -40,14 +40,17 @@ def _load_jwt_secret() -> str:
         try:
             secret = secret_file.read_text(encoding="utf-8").strip()
             if secret:
-                logger.info("Loaded JWT_SECRET from file: %s", secret_file)
+                # nosemgrep: python.lang.security.audit.logging.logger-credential-leak.python-logger-credential-disclosure
+                logger.info("Loaded JWT_SECRET from file: %s", secret_file)  # Only logs file path, not secret
                 return secret
         except Exception as e:
-            logger.error("Failed to read JWT_SECRET from file %s: %s", secret_file, e)
+            # nosemgrep: python.lang.security.audit.logging.logger-credential-leak.python-logger-credential-disclosure
+            logger.error("Failed to read JWT_SECRET from file %s: %s", secret_file, e)  # Only logs file path, not secret
 
     secret = os.getenv("JWT_SECRET")  # type: ignore[assignment]
     if secret:
-        logger.warning(
+        # nosemgrep: python.lang.security.audit.logging.logger-credential-leak.python-logger-credential-disclosure
+        logger.warning(  # Only logs file path, not secret
             "Using JWT_SECRET from environment variable. For production, use Kubernetes Secrets mounted at %s",
             secret_file,
         )

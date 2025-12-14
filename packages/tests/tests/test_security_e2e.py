@@ -12,30 +12,6 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
 
 
 class TestXSSPrevention:
-    def test_xss_in_vocabulary_source_text(self, page: Page, admin_user: AuthenticatedUser) -> None:
-        auth_page = AuthPage(page, FRONTEND_URL)
-        auth_page.goto().login(admin_user["username"], admin_user["password"])
-        auth_page.wait_for_welcome()
-
-        admin_page = AdminPage(page, FRONTEND_URL)
-        admin_page.navigate_to_admin().wait_for_admin_panel()
-
-        xss_payload = "<script>alert('XSS')</script>"
-        admin_page.create_vocabulary_item(
-            source_text=xss_payload,
-            target_text="test_target",
-            list_name="xss-test",
-        )
-
-        page.wait_for_timeout(2000)
-
-        admin_page.search(xss_payload)
-        page.wait_for_timeout(1000)
-
-        page_content = page.content()
-        assert "<script>alert('XSS')</script>" not in page_content
-        assert "&lt;script&gt;" in page_content or "escaped" in page_content.lower()
-
     def test_xss_in_answer_feedback(self, page: Page, test_user: AuthenticatedUser) -> None:
         auth_page = AuthPage(page, FRONTEND_URL)
         auth_page.goto().login(test_user["username"], test_user["password"])

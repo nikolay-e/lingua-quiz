@@ -53,6 +53,7 @@
     class="toggle-password-btn"
     onclick={togglePasswordVisibility}
     aria-label={showPassword ? 'Hide password' : 'Show password'}
+    tabindex="-1"
     {disabled}
   >
     {#if showPassword}

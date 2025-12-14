@@ -24,6 +24,8 @@ interface AuthStore {
   deleteAccount: () => Promise<void>;
 }
 
+type AuthChannelMessage = { type: 'token-refreshed' } | { type: 'logout' };
+
 type QuizStoreSaveCallback = (token: string) => Promise<void>;
 
 let quizStoreSaveCallback: QuizStoreSaveCallback | null = null;
@@ -64,7 +66,7 @@ function createAuthStore(): AuthStore {
         refreshToken: data.refresh_token,
       });
       authChannel?.postMessage({ type: 'token-refreshed' });
-    } catch (error) {
+    } catch (error: unknown) {
       logger.error('Token refresh failed:', error);
       logoutUser();
       authChannel?.postMessage({ type: 'logout' });
@@ -129,8 +131,8 @@ function createAuthStore(): AuthStore {
       const isAdmin = payload.isAdmin ?? false;
       set({ token: data.token, username: data.username, isAuthenticated: true, isAdmin });
       scheduleTokenRefresh();
-    } catch (e) {
-      logger.error('Failed to parse token expiration:', e);
+    } catch (error: unknown) {
+      logger.error('Failed to parse token expiration:', error);
       set({ token: data.token, username: data.username, isAuthenticated: true, isAdmin: false });
     }
   }
@@ -146,10 +148,10 @@ function createAuthStore(): AuthStore {
   if (isBrowser()) {
     checkToken();
 
-    authChannel?.addEventListener('message', (event) => {
+    authChannel?.addEventListener('message', (event: MessageEvent<AuthChannelMessage>) => {
       if (event.data.type === 'token-refreshed') {
         checkToken();
-      } else if (event.data.type === 'logout') {
+      } else {
         logoutUser();
       }
     });
@@ -168,7 +170,7 @@ function createAuthStore(): AuthStore {
       if (state.token !== null && quizStoreSaveCallback !== null) {
         try {
           await quizStoreSaveCallback(state.token);
-        } catch (error) {
+        } catch (error: unknown) {
           logger.error('Failed to save quiz progress during logout:', error);
         }
       }

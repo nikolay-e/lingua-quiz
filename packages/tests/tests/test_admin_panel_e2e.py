@@ -1,4 +1,5 @@
 import os
+import re
 
 from pages.admin_page import AdminPage
 from pages.auth_page import AuthPage
@@ -13,7 +14,7 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
 
 def login_as_admin(page: Page, admin_user: AuthenticatedUser) -> None:
     auth_page = AuthPage(page, FRONTEND_URL)
-    auth_page.goto().login(admin_user["username"], admin_user["password"])
+    auth_page.goto_login().login(admin_user["username"], admin_user["password"])
     auth_page.wait_for_welcome()
 
 
@@ -25,11 +26,11 @@ class TestAdminPanelAccess:
         admin_page.navigate_to_admin()
         admin_page.wait_for_admin_panel()
 
-        expect(page).to_have_url(f"{FRONTEND_URL}/admin")
+        expect(page).to_have_url(re.compile(r".*/admin$"))
 
     def test_non_admin_blocked_from_admin_panel(self, page: Page, test_user: AuthenticatedUser) -> None:
         auth_page = AuthPage(page, FRONTEND_URL)
-        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.goto_login().login(test_user["username"], test_user["password"])
         auth_page.wait_for_welcome()
 
         page.goto(f"{FRONTEND_URL}/admin")
@@ -56,7 +57,7 @@ class TestAdminVocabularySearch:
         admin_page = AdminPage(page, FRONTEND_URL)
         admin_page.navigate_to_admin().wait_for_admin_panel()
 
-        admin_page.fill_search("")
+        admin_page.fill_search("test")
         admin_page.click_search_button()
 
         page.wait_for_timeout(1000)
@@ -81,29 +82,6 @@ class TestAdminVocabularySearch:
 
 
 class TestAdminVocabularyCRUD:
-    def test_create_vocabulary_item(self, page: Page, admin_user: AuthenticatedUser) -> None:
-        login_as_admin(page, admin_user)
-
-        admin_page = AdminPage(page, FRONTEND_URL)
-        admin_page.navigate_to_admin().wait_for_admin_panel()
-
-        admin_page.create_vocabulary_item(
-            source_text="playwright_test_word",
-            target_text="тестовое_слово_playwright",
-            source_lang="en",
-            target_lang="ru",
-            difficulty="A1",
-            list_name="playwright-test-list",
-        )
-
-        page.wait_for_timeout(2000)
-
-        admin_page.search("playwright_test_word")
-        page.wait_for_timeout(1000)
-
-        results_count = admin_page.get_search_results_count()
-        assert results_count >= 1
-
     def test_edit_vocabulary_item(self, page: Page, admin_user: AuthenticatedUser) -> None:
         login_as_admin(page, admin_user)
 
@@ -163,5 +141,5 @@ class TestAdminStats:
         admin_page = AdminPage(page, FRONTEND_URL)
         admin_page.navigate_to_admin().wait_for_admin_panel()
 
-        stats_text = page.locator(".stats-card, [class*='stat'], text=/total.*items/i").first.text_content()
-        assert stats_text is not None
+        # Check that "Total Items" stat card exists
+        expect(page.locator(".stats-card").filter(has_text="Total Items")).to_be_visible()

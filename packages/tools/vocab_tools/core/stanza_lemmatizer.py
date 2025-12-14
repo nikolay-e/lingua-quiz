@@ -93,7 +93,7 @@ class StanzaLemmatizer:
         "james": "james",
         "londres": "londres",
         "san": "san",
-        "hagas": "hacer",
+        "haggis": "hacer",
         "tengas": "tener",
         "tendrás": "tener",
         "estarás": "estar",

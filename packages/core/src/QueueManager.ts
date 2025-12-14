@@ -12,11 +12,18 @@ export class QueueManager {
   constructor(translations: Array<{ id: string }>, initialProgress: ProgressEntry[]) {
     this.queues = createEmptyLevelArrays();
 
+    const seen = new Set<string>();
+    const uniqueTranslations = translations.filter((t) => {
+      if (seen.has(t.id)) return false;
+      seen.add(t.id);
+      return true;
+    });
+
     const progressMap = new Map(initialProgress.map((p) => [p.translationId, p]));
     const levelGroups: Map<LevelStatus, Array<{ id: string; queuePosition: number }>> = new Map();
     LEVEL_KEYS.forEach((level) => levelGroups.set(level, []));
 
-    translations.forEach((t, index) => {
+    uniqueTranslations.forEach((t, index) => {
       const progress = progressMap.get(t.id);
       const level = progress?.level ?? 'LEVEL_0';
       const queuePosition = progress?.queuePosition ?? index;
@@ -45,10 +52,7 @@ export class QueueManager {
 
   removeFromQueue(level: LevelStatus, translationId: string): void {
     const queue = this.queues[level];
-    const index = queue.indexOf(translationId);
-    if (index > -1) {
-      queue.splice(index, 1);
-    }
+    this.queues[level] = queue.filter((id) => id !== translationId);
   }
 
   insertIntoQueue(level: LevelStatus, translationId: string, position: number): number {

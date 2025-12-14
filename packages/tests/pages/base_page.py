@@ -8,12 +8,12 @@ class BasePage:
         self.page = page
         self.base_url = base_url
 
-    def goto(self, path: str = "/"):
-        self.page.goto(f"{self.base_url}{path}")
+    def goto(self, path: str = "/", timeout: int | None = None):
+        self.page.goto(f"{self.base_url}{path}", timeout=timeout)
         return self
 
-    def wait_for_load(self):
-        self.page.wait_for_load_state("networkidle")
+    def wait_for_load(self, timeout: int | None = None):
+        self.page.wait_for_load_state("networkidle", timeout=timeout)
         return self
 
     def screenshot(self, name: str, screenshots_dir: Path):

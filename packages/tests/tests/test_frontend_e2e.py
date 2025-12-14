@@ -19,9 +19,6 @@ class TestAuthenticationFlow:
         response = web_session.get(FRONTEND_URL)
         soup = BeautifulSoup(response.text, "html.parser")
 
-        app_div = soup.find("div", {"id": "app"})
-        assert app_div is not None, "App container div not found"
-
         scripts = soup.find_all("script")
         any("app" in script.get("src", "") for script in scripts if script.get("src"))
 
@@ -29,6 +26,10 @@ class TestAuthenticationFlow:
 
         viewport_meta = soup.find("meta", {"name": "viewport"})
         assert viewport_meta is not None, "Viewport meta tag missing"
+
+        body = soup.find("body")
+        assert body is not None, "Body tag not found"
+        assert body.get("data-sveltekit-preload-data") is not None, "SvelteKit preload data attribute missing"
 
     def test_login_form_exists(self, web_session):
         response = web_session.get(FRONTEND_URL)
@@ -45,11 +46,12 @@ class TestAuthenticationFlow:
         response = web_session.get(FRONTEND_URL)
         soup = BeautifulSoup(response.text, "html.parser")
 
-        app_div = soup.find("div", {"id": "app"})
-        assert app_div is not None, "App container for client-side routing not found"
-
         scripts = soup.find_all("script")
         assert len(scripts) > 0, "No JavaScript for SPA navigation found"
+
+        body = soup.find("body")
+        assert body is not None, "Body tag not found"
+        assert body.get("data-sveltekit-preload-data") is not None, "SvelteKit app container for client-side routing not found"
 
 
 @pytest.mark.e2e
@@ -70,8 +72,9 @@ class TestQuizInterface:
         response = web_session.get(FRONTEND_URL)
         soup = BeautifulSoup(response.text, "html.parser")
 
-        app_div = soup.find("div", {"id": "app"})
-        assert app_div is not None, "App container for level selection not found"
+        body = soup.find("body")
+        assert body is not None, "Body tag not found"
+        assert body.get("data-sveltekit-preload-data") is not None, "SvelteKit app container for level selection not found"
 
         description_meta = soup.find("meta", {"name": "description"})
         description_content = description_meta.get("content", "").lower() if description_meta else ""

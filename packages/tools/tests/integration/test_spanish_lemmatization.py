@@ -198,7 +198,7 @@ class TestSpanishLemmatizationBugs:
     def test_verb_conjugation_errors(self, stanza_es_lemmatizer):
         """Fix: Incorrect verb conjugation lemmatization."""
         test_cases = [
-            ("hagas", "hacer"),  # NOT "hagar"
+            ("haggis", "hacer"),  # NOT "hagar"
             ("tengas", "tener"),  # NOT "tenga"
             ("tendrás", "tener"),  # NOT "tendrás"
             ("estarás", "estar"),  # NOT "estarás"

@@ -1,5 +1,7 @@
 """Backend API integration tests."""
 
+# ruff: noqa: E402
+
 from pathlib import Path
 import sys
 
@@ -10,7 +12,7 @@ BACKEND_SRC = BACKEND_DIR / "src"
 if str(BACKEND_SRC) not in sys.path:
     sys.path.append(str(BACKEND_SRC))
 
-from generated.schemas import (  # noqa: E402
+from generated.schemas import (
     BulkProgressUpdateRequest,
     ContentVersionResponse,
     HealthResponse,
@@ -29,9 +31,9 @@ from generated.schemas import (  # noqa: E402
     VocabularyItemUpdate,
     WordListResponse,
 )
-import pytest  # noqa: E402
-from tests.conftest import API_URL, SKIP_TTS_TESTS, AuthenticatedUser  # noqa: E402
-from utils import random_password, random_username, random_word  # noqa: E402
+import pytest
+from tests.conftest import API_URL, SKIP_TTS_TESTS, AuthenticatedUser
+from utils import random_password, random_username, random_word
 
 
 @pytest.mark.integration
@@ -74,7 +76,7 @@ class TestAuthentication:
     def test_user_registration_duplicate(self, api_client, test_user: AuthenticatedUser):
         registration = UserRegistration(
             username=test_user["username"],
-            password="DifferentPass123!",
+            password="DifferentPass123!",  # pragma: allowlist secret
         )
 
         response = api_client.post(
@@ -105,7 +107,7 @@ class TestAuthentication:
     def test_user_login_invalid_credentials(self, api_client, test_user: AuthenticatedUser):
         login = UserLogin(
             username=test_user["username"],
-            password="WrongPassword123!",
+            password="WrongPassword123!",  # pragma: allowlist secret
         )
 
         response = api_client.post(
@@ -510,7 +512,10 @@ class TestInputValidation:
     def test_username_too_short(self, api_client):
         response = api_client.post(
             f"{API_URL}/auth/register",
-            json={"username": "ab", "password": "ValidPass123!"},
+            json={
+                "username": "ab",
+                "password": "ValidPass123!",  # pragma: allowlist secret
+            },
         )
         assert response.status_code == 422
         data = response.json()
@@ -519,7 +524,10 @@ class TestInputValidation:
     def test_username_too_long(self, api_client):
         response = api_client.post(
             f"{API_URL}/auth/register",
-            json={"username": "a" * 51, "password": "ValidPass123!"},
+            json={
+                "username": "a" * 51,
+                "password": "ValidPass123!",  # pragma: allowlist secret
+            },
         )
         assert response.status_code == 422
 
@@ -676,7 +684,7 @@ class TestSecurityBasic:
             f"{API_URL}/auth/login",
             json={
                 "username": "admin'; DROP TABLE users; --",
-                "password": "password123",
+                "password": "password123",  # pragma: allowlist secret
             },
         )
         assert response.status_code in [401, 422]
@@ -713,9 +721,7 @@ class TestSecurityBasic:
         assert response.status_code in [401, 403]
 
     def test_expired_token_format(self, api_client):
-        fake_expired_token = (
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImV4cCI6MH0.invalid_signature"  # gitleaks:allow
-        )
+        fake_expired_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImV4cCI6MH0.invalid_signature"  # pragma: allowlist secret  # gitleaks:allow
         response = api_client.get(
             f"{API_URL}/user/progress",
             headers={"Authorization": f"Bearer {fake_expired_token}"},

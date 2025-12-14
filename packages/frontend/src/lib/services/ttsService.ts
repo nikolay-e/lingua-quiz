@@ -1,4 +1,5 @@
 import api from '../../api';
+import { logger } from '../utils/logger';
 
 export interface TTSState {
   isAvailable: boolean;
@@ -47,7 +48,7 @@ export class TTSService {
         supportedLanguages: ttsData.supportedLanguages,
       });
     } catch (error: unknown) {
-      console.warn('Failed to load TTS languages:', error);
+      logger.warn('Failed to load TTS languages:', { error });
       this.updateState({
         isAvailable: false,
         supportedLanguages: [],
@@ -91,7 +92,7 @@ export class TTSService {
 
       await this.currentAudio.play();
     } catch (error: unknown) {
-      console.error('TTS playback failed:', error);
+      logger.error('TTS playback failed:', error);
       this.updateState({ isPlaying: false });
       this.errorCallback?.('Failed to synthesize speech. Please try again.');
     }

@@ -1,14 +1,14 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    svelte(),
-    VitePWA({
+    sveltekit(),
+    SvelteKitPWA({
       strategies: 'generateSW',
       registerType: 'autoUpdate',
       devOptions: {
@@ -60,20 +60,32 @@ export default defineConfig({
       manifest: {
         name: 'LinguaQuiz',
         short_name: 'LinguaQuiz',
-        description: 'Interactive language learning quiz application',
+        description: 'Advanced language learning with spaced repetition',
+        start_url: '/',
+        scope: '/',
         theme_color: '#4a90e2',
         background_color: '#f4f7f9',
         display: 'standalone',
+        orientation: 'portrait-primary',
+        categories: ['education', 'language'],
         icons: [
           {
             src: '/favicon/android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any',
           },
           {
             src: '/favicon/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: '/favicon/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
       },
@@ -114,7 +126,7 @@ export default defineConfig({
         intro: '',
         outro: '',
         manualChunks: {
-          vendor: ['svelte', 'svelte/store'],
+          vendor: ['svelte'],
           'ui-components': ['bits-ui', 'lucide-svelte'],
         },
       },

@@ -11,7 +11,7 @@ from collections.abc import Sequence
 from alembic import op  # type: ignore[attr-defined]
 
 # revision identifiers, used by Alembic.
-revision: str = "755d17920f61"
+revision: str = "755d17920f61"  # pragma: allowlist secret
 down_revision: str | Sequence[str] | None = "aaaa6665a37c"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None

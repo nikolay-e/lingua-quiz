@@ -62,7 +62,7 @@ export class QuizService {
   async withAuthHandling<T>(operation: () => Promise<T>, onError?: (message: string) => void): Promise<T | null> {
     try {
       return await operation();
-    } catch (error) {
+    } catch (error: unknown) {
       const errorInfo = this.handleAuthError(error);
       onError?.(errorInfo.message);
       if (!errorInfo.isUnauthorized) {
@@ -225,13 +225,13 @@ export class QuizService {
       if (token !== undefined) {
         try {
           await this.bulkSaveProgress(token, manager);
-        } catch (error) {
+        } catch (error: unknown) {
           logger.error('Failed to save progress before level change:', error);
         }
       }
 
       return manager.setLevel(level);
-    } catch (error) {
+    } catch (error: unknown) {
       logger.error('Failed to set level:', error);
       return { success: false, actualLevel: 'LEVEL_1' as const, message: 'Failed to set level' };
     }
@@ -269,7 +269,7 @@ export class QuizService {
       if (items.length > 0) {
         await api.saveBulkProgress(token, items);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       const errorInfo = this.handleAuthError(error);
       if (!errorInfo.isUnauthorized) {
         logger.error('Bulk save error:', error);

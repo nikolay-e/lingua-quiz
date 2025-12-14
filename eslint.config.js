@@ -374,6 +374,8 @@ export default [
           singleline: 3,
         },
       ],
+      // SvelteKit navigation
+      'svelte/no-navigation-without-resolve': 'off', // We use goto() correctly with await/void
       // TypeScript in Svelte
       'no-unused-vars': 'off',
       'no-undef': 'off',

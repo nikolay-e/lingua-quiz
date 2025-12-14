@@ -104,4 +104,4 @@ RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
 COPY --chown=pwuser:pwuser packages/tests/ ./
 RUN mkdir -p reports && chown -R pwuser:pwuser /home/pwuser/tests
 USER pwuser
-CMD ["python3", "run_tests.py"]
+CMD ["python3", "test_runner.py"]

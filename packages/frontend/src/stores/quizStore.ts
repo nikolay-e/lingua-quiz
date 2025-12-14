@@ -55,7 +55,7 @@ function createQuizStore(): QuizStore {
         if (result !== null) {
           update((state) => ({ ...state, wordLists: result, loading: false }));
         }
-      } catch (error) {
+      } catch (error: unknown) {
         update((state) => ({
           ...state,
           error: extractErrorMessage(error, 'Failed to load word lists'),
@@ -77,7 +77,7 @@ function createQuizStore(): QuizStore {
             currentQuestion: result.currentQuestion,
           }));
         }
-      } catch (error) {
+      } catch (error: unknown) {
         update((state) => ({ ...state, error: extractErrorMessage(error, 'Failed to start quiz'), loading: false }));
       }
     },
@@ -100,7 +100,7 @@ function createQuizStore(): QuizStore {
       try {
         const feedback = quizService.submitAnswer(state.quizManager, state.currentQuestion, answer, token);
         return feedback;
-      } catch (error) {
+      } catch (error: unknown) {
         logger.error('Failed to submit answer:', error);
         throw error;
       }

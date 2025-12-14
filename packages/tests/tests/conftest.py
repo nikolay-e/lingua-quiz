@@ -47,11 +47,27 @@ def browser_context_args(browser_context_args):
 
 @pytest.fixture
 def page(page: Page) -> Page:
-    page.on(
-        "console",
-        lambda msg: (print(f"[BROWSER {msg.type.upper()}] {msg.text}") if msg.type == "error" else None),
-    )
-    page.on("pageerror", lambda err: print(f"[PAGE ERROR] {err}"))
+    def log_console(msg):
+        msg_type = msg.type.upper()
+        location = msg.location
+        loc_info = f"{location.get('url', 'unknown')}:{location.get('lineNumber', '?')}" if location else "unknown"
+        print(f"[BROWSER {msg_type}] [{loc_info}] {msg.text}")
+
+    def log_page_error(err):
+        print(f"[PAGE ERROR] {err}")
+
+    def log_request(request):
+        if "/admin" in request.url or "admin" in request.url.lower():
+            print(f"[REQUEST] {request.method} {request.url}")
+
+    def log_response(response):
+        if "/admin" in response.url or "admin" in response.url.lower():
+            print(f"[RESPONSE] {response.status} {response.url}")
+
+    page.on("console", log_console)
+    page.on("pageerror", log_page_error)
+    page.on("request", log_request)
+    page.on("response", log_response)
     return page
 
 

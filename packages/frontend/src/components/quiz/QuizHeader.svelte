@@ -77,10 +77,6 @@
     }
   }
 
-  .selected-quiz-header {
-    /* No margin - FeedCard provides consistent padding */
-  }
-
   .quiz-info {
     :global(svg) {
       color: var(--primary-color);

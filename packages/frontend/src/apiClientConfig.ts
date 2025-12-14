@@ -1,4 +1,5 @@
 import { ApiError, OpenAPI } from './generated/api';
+import { extractErrorMessage } from './lib/utils/error';
 
 declare global {
   interface Window {
@@ -39,42 +40,6 @@ export const setAuthToken = (token?: string): void => {
   OpenAPI.TOKEN = token ?? undefined;
 };
 
-const extractErrorMessage = (body: unknown): string | undefined => {
-  if (body === null || body === undefined) return undefined;
-
-  if (typeof body === 'string') {
-    return body;
-  }
-
-  if (typeof body === 'object') {
-    const typedBody = body as { message?: string; detail?: unknown };
-    if (typeof typedBody.message === 'string' && typedBody.message !== '') {
-      return typedBody.message;
-    }
-
-    if (typeof typedBody.detail === 'string' && typedBody.detail !== '') {
-      return typedBody.detail;
-    }
-
-    if (Array.isArray(typedBody.detail)) {
-      const collected = typedBody.detail
-        .map((item) => {
-          if (typeof item === 'string') return item;
-          if (item != null && typeof item === 'object') {
-            const obj = item as { msg?: string; message?: string };
-            return obj.msg ?? obj.message ?? '';
-          }
-          return '';
-        })
-        .filter((msg) => msg !== '')
-        .join(', ');
-      return collected !== '' ? collected : undefined;
-    }
-  }
-
-  return undefined;
-};
-
 export const handleApiError = (error: unknown): never => {
   if (error instanceof ApiError) {
     if (error.status === 401) {
@@ -87,11 +52,8 @@ export const handleApiError = (error: unknown): never => {
       throw new Error('Resource not found');
     }
 
-    const message = extractErrorMessage(error.body);
-    if (message !== undefined) {
-      throw new Error(message);
-    }
-    throw new Error(`Request failed with status ${error.status}`);
+    const message = extractErrorMessage(error.body, `Request failed with status ${error.status}`);
+    throw new Error(message);
   }
 
   throw error instanceof Error ? error : new Error('Request failed');
@@ -111,7 +73,7 @@ export async function executeApiCall<T>(
 
   try {
     return await operation();
-  } catch (error) {
+  } catch (error: unknown) {
     return handleApiError(error);
   }
 }
