@@ -1,37 +1,71 @@
 <script lang="ts">
-  import Router, { push, location } from 'svelte-spa-router';
-  import { authStore, quizStore, themeStore } from './stores';
-  import { routes } from './routes';
-  import EnvironmentInfo from './components/EnvironmentInfo.svelte';
+  import type { Snippet } from 'svelte';
+  import { beforeNavigate, goto } from '$app/navigation';
+  import { page } from '$app/stores';
+  import { authStore, quizStore, themeStore } from '$stores';
+  import EnvironmentInfo from '$components/EnvironmentInfo.svelte';
   import { Toaster } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
+  import '$src/app.css';
+
+  interface Props {
+    children: Snippet;
+  }
+
+  const { children }: Props = $props();
 
   const auth = $derived($authStore);
+  const currentPath = $derived($page.url.pathname);
+  const isAdminPage = $derived(currentPath === '/admin');
+  const isQuizPage = $derived(currentPath === '/' || currentPath === '/quiz');
+
   $effect(() => void $themeStore);
 
-  $effect(() => {
-    if (!auth.isAuthenticated) {
-      quizStore.reset();
-      if ($location !== '/login' && $location !== '/register') {
-        push('/login');
-      }
-    } else if ($location === '/login' || $location === '/register') {
-      push('/');
+  // Auth guard via beforeNavigate
+  beforeNavigate(({ to, cancel }) => {
+    const protectedRoutes = ['/', '/quiz', '/admin'];
+    const publicRoutes = ['/login', '/register'];
+    const targetPath = to?.url.pathname;
+
+    if (!auth.isAuthenticated && targetPath && protectedRoutes.includes(targetPath)) {
+      cancel();
+
+      goto('/login');
+      return;
+    }
+
+    // Redirect authenticated users from login/register
+    if (auth.isAuthenticated && targetPath && publicRoutes.includes(targetPath)) {
+      cancel();
+
+      goto('/');
+      return;
+    }
+
+    // Admin guard
+    if (targetPath === '/admin' && !auth.isAdmin) {
+      cancel();
+
+      goto('/');
     }
   });
 
-  function navigateToQuiz() {
-    push('/');
+  // Reset quiz when logging out
+  $effect(() => {
+    if (!auth.isAuthenticated) {
+      quizStore.reset();
+    }
+  });
+
+  async function navigateToQuiz() {
+    await goto('/');
   }
 
-  function navigateToAdmin() {
+  async function navigateToAdmin() {
     if (auth.isAdmin) {
-      push('/admin');
+      await goto('/admin');
     }
   }
-
-  const isAdminPage = $derived($location === '/admin');
-  const isQuizPage = $derived($location === '/' || $location === '/quiz');
 </script>
 
 {#if auth.isAuthenticated && isAdminPage && auth.isAdmin}
@@ -77,7 +111,7 @@
   </div>
 {/if}
 
-<Router {routes} />
+{@render children()}
 
 <Toaster richColors position="top-right" />
 <EnvironmentInfo />

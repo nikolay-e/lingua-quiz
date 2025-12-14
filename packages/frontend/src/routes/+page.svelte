@@ -1,28 +1,28 @@
 <script lang="ts">
   import { onMount, tick, onDestroy } from 'svelte';
-  import { authStore, quizStore, levelWordLists, safeStorage } from '../stores';
+  import { authStore, quizStore, levelWordLists, safeStorage } from '$stores';
   import type { SubmissionResult, QuizQuestion, RevealResult } from '@lingua-quiz/core';
-  import type { QuizFeedback } from '../api-types';
-  import { LEVEL_CONFIG } from '../lib/config/levelConfig';
-  import { ttsService } from '../lib/services/ttsService';
-  import { STORAGE_KEYS } from '../lib/constants';
+  import type { QuizFeedback } from '$src/api-types';
+  import { LEVEL_CONFIG } from '$lib/config/levelConfig';
+  import { ttsService } from '$lib/services/ttsService';
+  import { STORAGE_KEYS } from '$lib/constants';
   import { toast } from 'svelte-sonner';
-  import { extractErrorMessage } from '../lib/utils/error';
+  import { extractErrorMessage } from '$lib/utils/error';
 
-  import QuizHeader from '../components/quiz/QuizHeader.svelte';
-  import QuestionDisplay from '../components/quiz/QuestionDisplay.svelte';
-  import FeedbackDisplay from '../components/quiz/FeedbackDisplay.svelte';
-  import LearningProgress from '../components/quiz/LearningProgress.svelte';
-  import FeedCard from '../components/FeedCard.svelte';
-  import LevelChangeAnimation from '../components/quiz/LevelChangeAnimation.svelte';
-  import AnswerInput from '../components/quiz/AnswerInput.svelte';
-  import TTSButton from '../components/quiz/TTSButton.svelte';
-  import UserActions from '../components/quiz/UserActions.svelte';
-  import ErrorBoundary from '../components/ErrorBoundary.svelte';
-  import ErrorDisplay from '../components/ErrorDisplay.svelte';
-  import QuizSkeleton from '../components/quiz/QuizSkeleton.svelte';
-  import BottomNav from '../components/quiz/BottomNav.svelte';
-  import QuizWelcome from '../components/quiz/QuizWelcome.svelte';
+  import QuizHeader from '$components/quiz/QuizHeader.svelte';
+  import QuestionDisplay from '$components/quiz/QuestionDisplay.svelte';
+  import FeedbackDisplay from '$components/quiz/FeedbackDisplay.svelte';
+  import LearningProgress from '$components/quiz/LearningProgress.svelte';
+  import FeedCard from '$components/FeedCard.svelte';
+  import LevelChangeAnimation from '$components/quiz/LevelChangeAnimation.svelte';
+  import AnswerInput from '$components/quiz/AnswerInput.svelte';
+  import TTSButton from '$components/quiz/TTSButton.svelte';
+  import UserActions from '$components/quiz/UserActions.svelte';
+  import ErrorBoundary from '$components/ErrorBoundary.svelte';
+  import ErrorDisplay from '$components/ErrorDisplay.svelte';
+  import QuizSkeleton from '$components/quiz/QuizSkeleton.svelte';
+  import BottomNav from '$components/quiz/BottomNav.svelte';
+  import QuizWelcome from '$components/quiz/QuizWelcome.svelte';
 
   let userAnswer = $state('');
   let showProgress = $state(true);

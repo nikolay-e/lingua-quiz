@@ -1,14 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { authStore } from '../stores';
-  import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '../adminApi';
-  import type { AdminVocabularyItem } from '../api-types';
+  import { authStore } from '$stores';
+  import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '$src/adminApi';
+  import type { AdminVocabularyItem } from '$src/api-types';
   import { toast } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
-  import AdminStats from '../components/admin/AdminStats.svelte';
-  import VocabularySearch from '../components/admin/VocabularySearch.svelte';
-  import VocabularyTable from '../components/admin/VocabularyTable.svelte';
-  import VocabularyDialogs from '../components/admin/VocabularyDialogs.svelte';
+  import AdminStats from '$components/admin/AdminStats.svelte';
+  import VocabularySearch from '$components/admin/VocabularySearch.svelte';
+  import VocabularyTable from '$components/admin/VocabularyTable.svelte';
+  import VocabularyDialogs from '$components/admin/VocabularyDialogs.svelte';
 
   let token: string | null = null;
   let searchQuery = $state('');

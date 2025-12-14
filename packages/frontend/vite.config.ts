@@ -1,14 +1,14 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    svelte(),
-    VitePWA({
+    sveltekit(),
+    SvelteKitPWA({
       strategies: 'generateSW',
       registerType: 'autoUpdate',
       devOptions: {
@@ -114,7 +114,7 @@ export default defineConfig({
         intro: '',
         outro: '',
         manualChunks: {
-          vendor: ['svelte', 'svelte/store'],
+          vendor: ['svelte'],
           'ui-components': ['bits-ui', 'lucide-svelte'],
         },
       },

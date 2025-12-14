@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { push } from 'svelte-spa-router';
-  import { authStore } from '../stores';
-  import AuthLayout from '../components/AuthLayout.svelte';
-  import PasswordInput from '../components/PasswordInput.svelte';
-  import AuthMessage from '../components/AuthMessage.svelte';
-  import AuthNavLink from '../components/AuthNavLink.svelte';
+  import { goto } from '$app/navigation';
+  import { authStore } from '$stores';
+  import AuthLayout from '$components/AuthLayout.svelte';
+  import PasswordInput from '$components/PasswordInput.svelte';
+  import AuthMessage from '$components/AuthMessage.svelte';
+  import AuthNavLink from '$components/AuthNavLink.svelte';
   import { Input } from '$lib/components/ui/input';
   import { Button } from '$lib/components/ui/button';
   import { Label } from '$lib/components/ui/label';
   import { UserPlus, Loader2 } from 'lucide-svelte';
-  import { extractErrorMessage } from '../lib/utils/error';
+  import { extractErrorMessage } from '$lib/utils/error';
 
   interface PasswordRequirement {
     id: string;
@@ -65,8 +65,8 @@
     }
   }
 
-  function navigateToLogin() {
-    push('/login');
+  async function navigateToLogin() {
+    await goto('/login');
   }
 </script>
 

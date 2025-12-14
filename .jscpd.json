@@ -10,7 +10,8 @@
     "**/env/**",
     "**/__pycache__/**",
     "**/generated/**",
-    "**/.git/**"
+    "**/.git/**",
+    "**/.svelte-kit/**"
   ],
   "format": ["javascript", "typescript", "python"],
   "minLines": 6,

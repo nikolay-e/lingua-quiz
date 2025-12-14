@@ -1,14 +1,15 @@
 {
   "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "svelte": true,
   "workspaces": {
     ".": {
       "entry": [],
       "project": []
     },
     "packages/frontend": {
-      "entry": ["src/main.ts", "src/App.svelte"],
+      "entry": ["src/routes/**/*.svelte", "src/app.html", "svelte.config.js", "vite.config.ts"],
       "project": ["src/**/*.{ts,svelte}"],
-      "ignore": ["src/lib/components/ui/**"]
+      "ignore": ["src/lib/components/ui/**", ".svelte-kit/**"]
     },
     "packages/core": {
       "entry": ["src/index.ts"],
