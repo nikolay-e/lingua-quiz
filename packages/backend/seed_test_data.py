@@ -34,7 +34,7 @@ if count > 0:
 cur.execute("SELECT id FROM content_versions WHERE is_active = TRUE LIMIT 1")
 row = cur.fetchone()
 if not row:
-    cur.execute("INSERT INTO content_versions (name, is_active) VALUES ('test', TRUE) RETURNING id")
+    cur.execute("INSERT INTO content_versions (version_name, is_active) VALUES ('test', TRUE) RETURNING id")
     version_id = cur.fetchone()[0]
 else:
     version_id = row[0]
