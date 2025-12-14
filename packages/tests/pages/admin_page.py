@@ -12,7 +12,7 @@ class AdminPage(BasePage):
         return self
 
     def wait_for_admin_panel(self, timeout: int = 5000):
-        expect(self.page.locator("h1, h2").filter(has_text="Admin")).to_be_visible(timeout=timeout)
+        expect(self.page.locator("h1, h2").filter(has_text="Vocabulary Management")).to_be_visible(timeout=timeout)
         return self
 
     def fill_search(self, query: str):
