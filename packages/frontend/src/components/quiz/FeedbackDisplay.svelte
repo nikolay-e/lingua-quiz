@@ -6,13 +6,12 @@
 
   interface Props {
     feedback?: SubmissionResult | QuizFeedback | RevealResult | null;
-    usageExamples?: { source: string; target: string } | null;
     questionForFeedback?: QuizQuestion | null;
     onRetry?: () => void;
     onNext?: () => void;
   }
 
-  const { feedback = null, usageExamples = null, questionForFeedback = null, onRetry, onNext }: Props = $props();
+  const { feedback = null, questionForFeedback = null, onRetry, onNext }: Props = $props();
 
   const isSubmissionResult = $derived(feedback && 'isCorrect' in feedback);
   const isRevealResult = $derived(feedback && 'correctAnswerText' in feedback && !('isCorrect' in feedback) && !('isSuccess' in feedback));
@@ -61,14 +60,6 @@
         </Button>
       {/if}
     </div>
-    {#if usageExamples}
-      <div class="usage-examples">
-        <div class="example-container flex-col gap-sm">
-          <p>{usageExamples.source}</p>
-          <p>{usageExamples.target}</p>
-        </div>
-      </div>
-    {/if}
   </div>
 {/if}
 
@@ -133,18 +124,5 @@
 
   .button-row :global(.retry-btn) {
     flex: 1;
-  }
-
-  .usage-examples {
-    padding: var(--spacing-sm);
-    border-top: 1px solid var(--color-border);
-    margin-top: var(--spacing-xs);
-  }
-
-  .example-container p {
-    background-color: var(--example-bg);
-    padding: var(--spacing-xs);
-    border-radius: var(--radius-md);
-    margin: 0;
   }
 </style>

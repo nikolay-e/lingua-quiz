@@ -11,6 +11,7 @@
   import QuizHeader from '$components/quiz/QuizHeader.svelte';
   import QuestionDisplay from '$components/quiz/QuestionDisplay.svelte';
   import FeedbackDisplay from '$components/quiz/FeedbackDisplay.svelte';
+  import UsageExamples from '$components/quiz/UsageExamples.svelte';
   import LearningProgress from '$components/quiz/LearningProgress.svelte';
   import FeedCard from '$components/FeedCard.svelte';
   import LevelChangeAnimation from '$components/quiz/LevelChangeAnimation.svelte';
@@ -43,7 +44,6 @@
 
   function resetQuizSession() {
     feedback = null;
-    usageExamples = null;
     userAnswer = '';
     questionForFeedback = null;
   }
@@ -157,12 +157,13 @@
       if (result) {
         feedback = result;
         if ('translation' in result && result.translation) {
-          usageExamples = {
-            source: result.translation.sourceUsageExample || '',
-            target: result.translation.targetUsageExample || '',
-          };
-        } else {
-          usageExamples = null;
+          const hasExamples = result.translation.sourceUsageExample || result.translation.targetUsageExample;
+          if (hasExamples) {
+            usageExamples = {
+              source: result.translation.sourceUsageExample || '',
+              target: result.translation.targetUsageExample || '',
+            };
+          }
         }
 
         if ('levelChange' in result && result.levelChange) {
@@ -355,11 +356,16 @@
           <FeedCard dense>
             <FeedbackDisplay
               {feedback}
-              {usageExamples}
               {questionForFeedback}
               onRetry={retryLastOperation}
               onNext={handleNextQuestion}
             />
+          </FeedCard>
+        {/if}
+
+        {#if selectedQuiz && usageExamples}
+          <FeedCard dense>
+            <UsageExamples examples={usageExamples} />
           </FeedCard>
         {/if}
 
