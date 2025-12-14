@@ -1,8 +1,8 @@
 """Pytest configuration and fixtures for integration tests."""
 
 import os
-import sys
 from pathlib import Path
+import sys
 from typing import TypedDict
 
 from playwright.sync_api import Page
@@ -15,12 +15,12 @@ BACKEND_SRC = BACKEND_DIR / "src"
 if str(BACKEND_SRC) not in sys.path:
     sys.path.append(str(BACKEND_SRC))
 
-import psycopg2  # noqa: E402
-import pytest  # noqa: E402
-import requests  # noqa: E402
 from alembic import command  # noqa: E402
 from alembic.config import Config  # noqa: E402
 from generated.schemas import TokenResponse, UserRegistration  # noqa: E402
+import psycopg2  # noqa: E402
+import pytest  # noqa: E402
+import requests  # noqa: E402
 from utils import random_password, random_username  # noqa: E402
 
 API_URL = os.getenv("API_URL", "http://localhost:9000/api")
@@ -50,11 +50,7 @@ def page(page: Page) -> Page:
     def log_console(msg):
         msg_type = msg.type.upper()
         location = msg.location
-        loc_info = (
-            f"{location.get('url', 'unknown')}:{location.get('lineNumber', '?')}"
-            if location
-            else "unknown"
-        )
+        loc_info = f"{location.get('url', 'unknown')}:{location.get('lineNumber', '?')}" if location else "unknown"
         print(f"[BROWSER {msg_type}] [{loc_info}] {msg.text}")
 
     def log_page_error(err):

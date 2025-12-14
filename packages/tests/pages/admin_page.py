@@ -15,18 +15,12 @@ class AdminPage(BasePage):
 
     def wait_for_admin_panel(self, timeout: int = 15000):
         try:
-            expect(
-                self.page.locator("h1, h2").filter(has_text="Vocabulary Management")
-            ).to_be_visible(timeout=timeout)
+            expect(self.page.locator("h1, h2").filter(has_text="Vocabulary Management")).to_be_visible(timeout=timeout)
         except AssertionError:
             print(f"[DEBUG] URL: {self.page.url}")
             print(f"[DEBUG] Title: {self.page.title()}")
-            print(
-                f"[DEBUG] All h1/h2 texts: {[el.text_content() for el in self.page.locator('h1, h2').all()]}"
-            )
-            print(
-                f"[DEBUG] Body text (first 500 chars): {self.page.locator('body').text_content()[:500]}"
-            )
+            print(f"[DEBUG] All h1/h2 texts: {[el.text_content() for el in self.page.locator('h1, h2').all()]}")
+            print(f"[DEBUG] Body text (first 500 chars): {self.page.locator('body').text_content()[:500]}")
             self.page.screenshot(path="/home/pwuser/tests/reports/admin-fail-debug.png")
             print("[DEBUG] Screenshot saved to reports/admin-fail-debug.png")
             raise
@@ -151,7 +145,5 @@ class AdminPage(BasePage):
         return self
 
     def expect_no_access_error(self):
-        expect(
-            self.page.locator("text=/forbidden|not authorized|access denied/i")
-        ).to_be_visible(timeout=3000)
+        expect(self.page.locator("text=/forbidden|not authorized|access denied/i")).to_be_visible(timeout=3000)
         return self

@@ -4,7 +4,7 @@ import Login from '../views/Login.svelte';
 import Register from '../views/Register.svelte';
 import Quiz from '../views/Quiz.svelte';
 import Admin from '../views/Admin.svelte';
-import { authGuard, adminGuard } from './guards';
+import { authGuard } from './guards';
 
 // Type assertion needed for Svelte 5 compatibility with svelte-spa-router
 // svelte-spa-router expects Svelte 4 class components, but Svelte 5 uses function components
@@ -26,7 +26,7 @@ export const routes: RouteDefinition = {
     conditions: [authGuard],
   }) as WrappedComponent,
 
-  '/admin': Admin,
+  '/admin': asComponent(Admin),
 
   '*': asComponent(Login),
 };

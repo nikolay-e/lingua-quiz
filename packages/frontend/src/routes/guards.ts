@@ -10,17 +10,3 @@ export function authGuard(): boolean {
   }
   return true;
 }
-
-export function adminGuard(): boolean {
-  const auth = get(authStore);
-  console.log('[GUARD] adminGuard - isAdmin:', auth.isAdmin, 'username:', auth.username, 'token:', auth.token ? 'exists' : 'missing');
-  console.error('[GUARD ERROR] adminGuard called - isAdmin:', auth.isAdmin);
-  if (!auth.isAdmin) {
-    console.log('[GUARD] adminGuard BLOCKING ACCESS');
-    console.error('[GUARD ERROR] adminGuard BLOCKING - isAdmin is false');
-    return false;
-  }
-  console.log('[GUARD] adminGuard ALLOWING ACCESS');
-  console.error('[GUARD ERROR] adminGuard ALLOWING - isAdmin is true');
-  return true;
-}
