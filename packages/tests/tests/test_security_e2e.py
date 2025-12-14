@@ -57,8 +57,9 @@ class TestXSSPrevention:
 
 class TestCSRFProtection:
     def test_api_requires_valid_token(self, page: Page) -> None:
+        api_url = os.getenv("API_URL", "http://backend:9000/api")
         response = page.request.post(
-            f"{FRONTEND_URL.replace('frontend', 'backend:9000')}/api/user/progress",
+            f"{api_url}/user/progress",
             data={"level": 1, "vocabulary_item_id": "test"},
         )
 

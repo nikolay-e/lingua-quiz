@@ -51,7 +51,7 @@ class TestMobileBottomNavigation:
             progress_button.click()
             page.wait_for_timeout(500)
 
-            progress_panel = page.locator("[class*='progress'], [class*='learning-progress']")
+            progress_panel = page.locator("[class*='progress-panel'], [class*='learning-progress-panel'], [class*='progress-view']").first
             expect(progress_panel).to_be_visible(timeout=2000)
 
 
