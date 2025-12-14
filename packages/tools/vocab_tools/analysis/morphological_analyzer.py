@@ -28,7 +28,7 @@ class MorphologicalFeatures:
             ("Gender", {"Masc": "masculine", "Fem": "feminine", "Neut": "neuter"}),
             ("Case", {"Nom": "nominative", "Gen": "genitive", "Dat": "dative", "Acc": "accusative"}),
             ("Number", {"Sing": "singular", "Plur": "plural"}),
-            ("Tense", {"Past": "past", "Pres": "present", "Fut": "future"}),
+            ("Tense", {"Past": "past", "Press": "present", "Fut": "future"}),
             ("Mood", {"Ind": "indicative", "Imp": "imperative"}),
             ("VerbForm", {"Inf": "infinitive", "Part": "participle", "Ger": "gerund"}),
         ]
@@ -118,7 +118,7 @@ class MorphologicalAnalyzer:
             ]
 
         if features.pos == "VERB":
-            return features.raw_features.get("Tense") not in [None, "Pres"] or features.raw_features.get(
+            return features.raw_features.get("Tense") not in [None, "Press"] or features.raw_features.get(
                 "VerbForm"
             ) not in [None, "Fin", "Inf"]
 

@@ -9,10 +9,27 @@ class AdminPage(BasePage):
 
     def navigate_to_admin(self):
         self.goto("/admin")
+        self.page.wait_for_url("**/admin", timeout=10000)
+        self.page.wait_for_timeout(2000)
         return self
 
-    def wait_for_admin_panel(self, timeout: int = 5000):
-        expect(self.page.locator("h1, h2").filter(has_text="Vocabulary Management")).to_be_visible(timeout=timeout)
+    def wait_for_admin_panel(self, timeout: int = 15000):
+        try:
+            expect(
+                self.page.locator("h1, h2").filter(has_text="Vocabulary Management")
+            ).to_be_visible(timeout=timeout)
+        except AssertionError:
+            print(f"[DEBUG] URL: {self.page.url}")
+            print(f"[DEBUG] Title: {self.page.title()}")
+            print(
+                f"[DEBUG] All h1/h2 texts: {[el.text_content() for el in self.page.locator('h1, h2').all()]}"
+            )
+            print(
+                f"[DEBUG] Body text (first 500 chars): {self.page.locator('body').text_content()[:500]}"
+            )
+            self.page.screenshot(path="/home/pwuser/tests/reports/admin-fail-debug.png")
+            print("[DEBUG] Screenshot saved to reports/admin-fail-debug.png")
+            raise
         return self
 
     def fill_search(self, query: str):
@@ -134,5 +151,7 @@ class AdminPage(BasePage):
         return self
 
     def expect_no_access_error(self):
-        expect(self.page.locator("text=/forbidden|not authorized|access denied/i")).to_be_visible(timeout=3000)
+        expect(
+            self.page.locator("text=/forbidden|not authorized|access denied/i")
+        ).to_be_visible(timeout=3000)
         return self

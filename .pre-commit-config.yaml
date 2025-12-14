@@ -19,6 +19,13 @@ repos:
       - id: check-added-large-files
         args: ['--maxkb=1024']
 
+      # Python-specific checks
+      - id: check-ast
+      - id: check-docstring-first
+      - id: name-tests-test
+        args: ['--pytest-test-first']
+        exclude: ^packages/tests/(fixtures|pages|utils)/
+
       # File format checks
       - id: check-yaml
         exclude: ^(helm/.*\.yaml|flux/.*/flux-system/.*)$
@@ -33,6 +40,7 @@ repos:
       - id: mixed-line-ending
         args: ['--fix=lf']
         exclude: (/generated/|^lingua-quiz-schema\.json$)
+      - id: fix-byte-order-marker
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.35.0
@@ -61,6 +69,14 @@ repos:
     hooks:
       - id: gitleaks
         name: Scan for secrets (gitleaks)
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        name: Detect secrets (baseline-based)
+        args: ['--baseline', '.secrets.baseline']
+        exclude: (/generated/|^lingua-quiz-schema\.json$|^package-lock\.json$)
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.5
@@ -91,8 +107,8 @@ repos:
         name: Type check Python with mypy
         args: ['--python-version=3.13', '--check-untyped-defs', '--ignore-missing-imports', '--no-warn-unused-ignores']
         additional_dependencies: ['types-requests', 'types-PyYAML']
-        files: ^packages/backend/
-        stages: [pre-push]
+        files: ^packages/backend/src/
+        exclude: ^packages/backend/(alembic|alembic-words)/
 
   - repo: https://github.com/PyCQA/bandit
     rev: 1.9.0
@@ -101,7 +117,22 @@ repos:
         name: Security scan Python (bandit)
         args: ['-q', '-r', '-x', 'tests,*/test_*.py,*/conftest.py', '--skip', 'B101,B108,B110,B404,B603']
         files: ^packages/(backend|tools)/
-        stages: [pre-push]
+
+  - repo: https://github.com/returntocorp/semgrep
+    rev: v1.89.0
+    hooks:
+      - id: semgrep
+        name: Semgrep (AST-based security)
+        args:
+          [
+            '--config=p/security-audit',
+            '--config=p/python',
+            '--error',
+            '--skip-unknown-extensions',
+            '--metrics=off',
+          ]
+        files: ^packages/(backend|tools)/
+        exclude: (/generated/|/tests/)
 
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.14
@@ -119,7 +150,24 @@ repos:
           ]
         pass_filenames: false
         files: ^packages/(backend|tools)/.*\.py$
-        stages: [pre-push]
+
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.3.4
+    hooks:
+      - id: pylint
+        name: Pylint (duplicate code detection)
+        args:
+          [
+            '--disable=all',
+            '--enable=duplicate-code',
+            '--min-similarity-lines=10',
+            '--ignore-comments=yes',
+            '--ignore-docstrings=yes',
+            '--ignore-imports=yes',
+          ]
+        files: ^packages/(backend|tools)/
+        exclude: (/generated/|/tests/|alembic.*/env\.py$)
+        additional_dependencies: ['types-PyYAML', 'types-aiofiles', 'types-requests']
 
   - repo: https://github.com/trailofbits/pip-audit
     rev: v2.9.0
@@ -127,7 +175,6 @@ repos:
       - id: pip-audit
         name: Python dependency vulnerability audit
         args: ['-r', 'packages/backend/requirements.txt', '-r', 'packages/tools/requirements.txt']
-        stages: [pre-push]
 
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: 4.0.0a2
@@ -180,7 +227,6 @@ repos:
         language: system
         files: \.(js|jsx|ts|tsx|svelte)$
         pass_filenames: false
-        stages: [pre-push]
 
       - id: typescript-check
         name: TypeScript type checking
@@ -188,7 +234,6 @@ repos:
         language: system
         files: \.(ts|tsx|svelte)$
         pass_filenames: false
-        stages: [pre-push]
 
       # Svelte-specific type checking
       - id: svelte-check
@@ -197,7 +242,15 @@ repos:
         language: system
         files: \.(svelte)$
         pass_filenames: false
-        stages: [pre-push]
+
+      # TypeScript type coverage enforcement
+      - id: type-coverage
+        name: Type coverage check (>=85%)
+        entry: npx type-coverage --at-least 85 --ignore-catch --ignore-files "**/*.test.ts" "**/*.spec.ts" "**/generated/**"
+        language: system
+        files: \.(ts|tsx)$
+        exclude: /generated/
+        pass_filenames: false
 
       # NPM security audit for production dependencies
       - id: npm-audit
@@ -206,7 +259,6 @@ repos:
         language: system
         files: ^package(-lock)?\.json$
         pass_filenames: false
-        stages: [pre-push]
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
@@ -258,7 +310,6 @@ repos:
         language: system
         files: ^(Dockerfile|docker-compose.*\.(yml|yaml)|packages/(backend|frontend|core|domain|tests)/.*|lingua-quiz-schema\.json|nginx\.conf|package(-lock)?\.json)$
         pass_filenames: false
-        stages: [pre-push]
 
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.37.1
@@ -276,6 +327,18 @@ repos:
         name: Lint and fix Markdown files
         args: ['--fix', '--config', '.markdownlint.yaml']
         files: \.(md|markdown)$
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        name: Spell checking
+        args:
+          [
+            '--write-changes',
+            '--ignore-words-list=crate,nd,ser,llm,async,cli,theses,ba,te,tha,ue,refreshin,ist,lief,calle,cliente,flor,inicial,soler,afterall',
+          ]
+        exclude: ^(\.git/|\.venv/|venv/|node_modules/|/generated/|^lingua-quiz-schema\.json$|^package-lock\.json$|packages/tools/data/subtitle_frequencies/|packages/tools/data/reference/cefr/)
 
   - repo: local
     hooks:
@@ -316,27 +379,3 @@ repos:
         name: Validate commit message
         stages: [commit-msg]
         args: ['--msg-filename']
-# =============================================================================
-# Installation Instructions
-# =============================================================================
-# Run these commands to enable all hook types:
-#
-#   pre-commit install
-#   pre-commit install --hook-type commit-msg
-#   pre-commit install --hook-type pre-push
-#
-# Optional: Enable auto-update monthly
-#   pre-commit autoupdate
-#
-# Optional: Run manually on all files
-#   pre-commit run --all-files
-#
-# =============================================================================
-# Performance Targets
-# =============================================================================
-# - Pre-commit median: <20 seconds
-# - Pre-push median: 3-5 minutes (Docker builds dominate, but run only before push)
-# - Bypass rate: <5-10% per month
-#
-# If hooks are too slow, move to pre-push or CI
-# Docker builds run only on pre-push to avoid slowing down commits

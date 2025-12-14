@@ -111,7 +111,7 @@ Each preview environment gets its own database on the shared PostgreSQL instance
 SSL certificates are automatically provisioned using cert-manager and Let's Encrypt:
 
 - Certificate issuer: `letsencrypt-prod`
-- Certificate secret: `preview-pr-<NUMBER>-tls`
+- Certificate secret: `preview-pr-<NUMBER>-tls` <!-- pragma: allowlist secret -->
 - Initial certificate generation may take 1-2 minutes
 
 ### Monitoring Preview Environments

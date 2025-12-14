@@ -85,7 +85,7 @@ services:
       SKIP_TTS_TESTS: 'true'
       DB_HOST: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: postgres  # pragma: allowlist secret
     volumes:
       - ./test-reports:/home/pwuser/tests/reports
     depends_on:
@@ -104,7 +104,7 @@ services:
       TEST_TYPE: integration
       DB_HOST: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: postgres  # pragma: allowlist secret
     volumes:
       - ./test-reports:/home/pwuser/tests/reports
     depends_on:

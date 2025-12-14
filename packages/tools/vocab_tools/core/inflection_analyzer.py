@@ -62,11 +62,11 @@ class SpanishInflectionGenerator(InflectionReasonGenerator):
             return base_reason
 
         if pos_tag == "VERB":
-            if "Tense=Pres" in morphology and "Person=1" in morphology:
+            if "Tense=Press" in morphology and "Person=1" in morphology:
                 return f"First person present of '{lemma}'"
-            if "Tense=Pres" in morphology and "Person=2" in morphology:
+            if "Tense=Press" in morphology and "Person=2" in morphology:
                 return f"Second person present of '{lemma}'"
-            if "Tense=Pres" in morphology and "Person=3" in morphology:
+            if "Tense=Press" in morphology and "Person=3" in morphology:
                 return f"Third person present of '{lemma}'"
             if "Tense=Imp" in morphology:
                 return f"Imperfect tense of '{lemma}'"

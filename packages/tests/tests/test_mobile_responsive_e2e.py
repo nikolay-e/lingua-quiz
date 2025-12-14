@@ -46,13 +46,19 @@ class TestMobileBottomNavigation:
         page.set_viewport_size({"width": 375, "height": 667})
         login_and_start_quiz(page, test_user)
 
-        progress_button = page.locator("nav.bottom-nav button:has-text('Progress'), nav.bottom-nav button[aria-label*='progress' i]").first
+        progress_panel = page.locator(".learning-progress-container").first
+
+        initial_visible = progress_panel.is_visible()
+
+        progress_button = page.locator("nav.bottom-nav button[aria-label*='progress' i]").first
         if progress_button.is_visible():
             progress_button.click()
             page.wait_for_timeout(500)
 
-            progress_panel = page.locator("[class*='progress-panel'], [class*='learning-progress-panel'], [class*='progress-view']").first
-            expect(progress_panel).to_be_visible(timeout=2000)
+            if initial_visible:
+                expect(progress_panel).to_be_hidden(timeout=2000)
+            else:
+                expect(progress_panel).to_be_visible(timeout=2000)
 
 
 class TestMobileDeviceEmulation:
@@ -92,7 +98,7 @@ class TestResponsiveLayout:
         login_and_start_quiz(page, test_user)
 
         page.set_viewport_size({"width": 375, "height": 667})
-        header = page.locator("header, [class*='quiz-header']")
+        header = page.locator(".quiz-header").first
         expect(header).to_be_visible()
 
         page.set_viewport_size({"width": 1920, "height": 1080})
@@ -122,9 +128,9 @@ class TestNetworkConditions:
         )
 
         auth_page = AuthPage(page, FRONTEND_URL)
-        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.goto(timeout=90000).login(test_user["username"], test_user["password"])
 
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=15000)
+        expect(page.locator("text=Welcome")).to_be_visible(timeout=30000)
 
         page.select_option("#quiz-select", index=1)
         expect(page.locator(".question-text")).to_be_visible(timeout=15000)

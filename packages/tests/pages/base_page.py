@@ -8,8 +8,8 @@ class BasePage:
         self.page = page
         self.base_url = base_url
 
-    def goto(self, path: str = "/"):
-        self.page.goto(f"{self.base_url}{path}")
+    def goto(self, path: str = "/", timeout: int | None = None):
+        self.page.goto(f"{self.base_url}{path}", timeout=timeout)
         return self
 
     def wait_for_load(self):

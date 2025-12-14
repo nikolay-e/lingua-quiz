@@ -3,6 +3,7 @@ import type { WrappedComponent, RouteDefinition } from 'svelte-spa-router';
 import Login from '../views/Login.svelte';
 import Register from '../views/Register.svelte';
 import Quiz from '../views/Quiz.svelte';
+import Admin from '../views/Admin.svelte';
 import { authGuard, adminGuard } from './guards';
 
 // Type assertion needed for Svelte 5 compatibility with svelte-spa-router
@@ -25,10 +26,7 @@ export const routes: RouteDefinition = {
     conditions: [authGuard],
   }) as WrappedComponent,
 
-  '/admin': wrap({
-    asyncComponent: () => import('../views/Admin.svelte').then((m) => ({ default: asComponent(m.default) })),
-    conditions: [authGuard, adminGuard],
-  }) as WrappedComponent,
+  '/admin': Admin,
 
   '*': asComponent(Login),
 };

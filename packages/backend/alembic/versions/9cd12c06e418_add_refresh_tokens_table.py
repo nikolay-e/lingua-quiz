@@ -11,15 +11,16 @@ from collections.abc import Sequence
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "9cd12c06e418"
-down_revision: str | Sequence[str] | None = "bee616b9c42f"
+revision: str = "9cd12c06e418"  # pragma: allowlist secret
+down_revision: str | Sequence[str] | None = "bee616b9c42f"  # pragma: allowlist secret
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
     """Upgrade schema."""
-    op.execute("""
+    op.execute(
+        """
         CREATE TABLE IF NOT EXISTS refresh_tokens (
             id BIGSERIAL PRIMARY KEY,
             user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -29,7 +30,8 @@ def upgrade() -> None:
             revoked_at TIMESTAMPTZ,
             device_info TEXT
         )
-    """)
+    """
+    )
 
     op.execute("CREATE INDEX IF NOT EXISTS idx_refresh_tokens_user ON refresh_tokens(user_id)")
     op.execute("CREATE INDEX IF NOT EXISTS idx_refresh_tokens_hash ON refresh_tokens(token_hash)")

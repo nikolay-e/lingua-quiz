@@ -287,7 +287,7 @@ coma
 comedor
 comenzar
 comer
-comercial
+commercial
 comercio
 cometer
 comida
@@ -322,7 +322,7 @@ construcción
 consultar
 contacto
 contar
-contener
+container
 contento
 contestar
 contestar
@@ -351,7 +351,7 @@ costumbre
 crecer
 creer
 crema
-cristal
+crystal
 cristiano
 cruz
 cruzar
@@ -458,7 +458,7 @@ distinto
 divertido
 divertirse
 divorciado
-doble
+double
 docena
 documento
 dólar
@@ -639,7 +639,7 @@ fontanero
 forma
 formal
 foro
-foto
+photo
 fotocopia
 fotocopiadora
 fotografía
@@ -766,7 +766,7 @@ imaginar
 impermeable
 importante
 importar
-imposible
+impossible
 impresionante
 impresora
 imprimir
@@ -843,7 +843,7 @@ junio
 junto
 jurídico
 justicia
-jus
+just
 
 to
 kilo
@@ -1035,7 +1035,7 @@ modo
 mojado
 molestar
 molesto
-momento
+memento
 moneda
 monja
 mono
@@ -1103,7 +1103,7 @@ ni
 niebla
 nieta
 nieto
-nieve
+naive
 ninguno
 niña
 niño
@@ -1156,7 +1156,7 @@ ocho
 odiar
 oeste
 oferta
-oficial
+official
 oficina
 oficio
 ofrecer
@@ -1356,7 +1356,7 @@ posada
 poseer
 posesivo
 posibilidad
-posible
+possible
 positivo
 postal
 postre
@@ -1408,8 +1408,8 @@ producir
 producto
 productor
 profesión
-profesional
-profesor
+professional
+professor
 profesora
 profundo
 programa
@@ -1509,7 +1509,7 @@ reflexivo
 refresco
 refugio
 regalo
-regalar
+regular
 régimen
 región
 regla
@@ -1547,7 +1547,7 @@ respecto
 respetar
 respirar
 responder
-responsable
+responsible
 respuesta
 restaurante
 resto
@@ -1669,7 +1669,7 @@ separar
 septiembre
 séptimo
 ser
-serie
+series
 serio
 servilleta
 servir
@@ -1953,7 +1953,7 @@ vaqueros
 variación
 variar
 variedad
-varios
+various
 varón
 vasco
 vaso
@@ -1966,7 +1966,7 @@ veinte
 vela
 velocidad
 vencer
-vender
+vendor
 vendedor
 venir
 venta
