@@ -13,7 +13,7 @@ await generate({
   output: outputPath,
   httpClient: 'fetch',
   useUnionTypes: true,
-  exportModels: false,
+  exportModels: true,
   exportSchemas: false,
 });
 

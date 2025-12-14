@@ -7,6 +7,19 @@ default_language_version:
 fail_fast: false # Run all hooks to get complete feedback
 
 repos:
+  # =============================================================================
+  # STAGE 0: Code Generation (must run first)
+  # =============================================================================
+  - repo: local
+    hooks:
+      - id: generate-code
+        name: Generate code from OpenAPI schema
+        entry: make generate-all
+        language: system
+        files: ^lingua-quiz-schema\.json$
+        pass_filenames: false
+        always_run: true  # Always run to ensure generated files exist
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -203,7 +216,7 @@ repos:
 
       - id: eslint
         name: Lint JS/TS/Svelte with ESLint
-        entry: npm run lint:fix
+        entry: bash -c 'export NODE_OPTIONS="--max-old-space-size=8192" && npm run lint:fix'
         language: system
         files: \.(js|jsx|ts|tsx|svelte)$
         pass_filenames: false

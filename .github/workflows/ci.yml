@@ -42,8 +42,13 @@ jobs:
           npm ci --prefer-offline
           pip install --no-cache-dir pre-commit datamodel-code-generator -r packages/backend/requirements.txt
 
+      - name: Generate code from OpenAPI schema
+        run: make generate-all
+
       - name: Run pre-commit
         run: pre-commit run --all-files --show-diff-on-failure --color=always
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Run domain tests
         run: npm run test --workspace @lingua-quiz/domain
