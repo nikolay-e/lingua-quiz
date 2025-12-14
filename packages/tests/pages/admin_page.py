@@ -40,11 +40,20 @@ class AdminPage(BasePage):
         return self
 
     def select_language_filter(self, language: str):
-        self.page.locator("select#language-filter").select_option(language)
+        self.page.get_by_text("Language:").locator("..").get_by_role("combobox").click()
+        language_map = {
+            "en": "English",
+            "de": "German",
+            "es": "Spanish",
+            "ru": "Russian",
+        }
+        self.page.get_by_role("option", name=language_map.get(language, language)).click()
         return self
 
     def select_status_filter(self, status: str):
-        self.page.locator("select#status-filter").select_option(status)
+        self.page.get_by_text("Status:").locator("..").get_by_role("combobox").click()
+        status_map = {"active": "Active", "inactive": "Inactive", "all": "All"}
+        self.page.get_by_role("option", name=status_map.get(status, status)).click()
         return self
 
     def click_create_button(self):
@@ -63,12 +72,29 @@ class AdminPage(BasePage):
         dialog = self.page.locator('[role="dialog"]')
         expect(dialog).to_be_visible(timeout=3000)
 
-        dialog.locator('input[name="source_text"]').fill(source_text)
-        dialog.locator('input[name="target_text"]').fill(target_text)
-        dialog.locator('select[name="source_language"]').select_option(source_lang)
-        dialog.locator('select[name="target_language"]').select_option(target_lang)
-        dialog.locator('select[name="difficulty"]').select_option(difficulty)
-        dialog.locator('input[name="list_name"]').fill(list_name)
+        dialog.locator("#create-source").fill(source_text)
+        dialog.locator("#create-target").fill(target_text)
+
+        dialog.locator("#create-source-lang").click()
+        lang_map = {"en": "English", "de": "German", "es": "Spanish", "ru": "Russian"}
+        self.page.get_by_role("option", name=lang_map.get(source_lang, source_lang)).click()
+
+        dialog.locator("#create-target-lang").click()
+        self.page.get_by_role("option", name=lang_map.get(target_lang, target_lang)).click()
+
+        dialog.locator("#create-difficulty").click()
+        diff_map = {
+            "A1": "A1 - Beginner",
+            "A2": "A2 - Elementary",
+            "B1": "B1 - Intermediate",
+            "B2": "B2 - Upper Intermediate",
+            "C1": "C1 - Advanced",
+            "C2": "C2 - Proficiency",
+        }
+        self.page.get_by_role("option", name=diff_map.get(difficulty, difficulty)).click()
+
+        dialog.locator("#create-list-name").click()
+        self.page.get_by_role("option", name=list_name, exact=False).first.click()
         return self
 
     def click_save_in_dialog(self):
@@ -95,9 +121,9 @@ class AdminPage(BasePage):
         expect(dialog).to_be_visible(timeout=3000)
 
         if source_text:
-            dialog.locator('input[name="source_text"]').fill(source_text)
+            dialog.locator("#edit-source").fill(source_text)
         if target_text:
-            dialog.locator('input[name="target_text"]').fill(target_text)
+            dialog.locator("#edit-target").fill(target_text)
         return self
 
     def edit_vocabulary_item(self, row_index: int = 0, **kwargs):
@@ -128,13 +154,7 @@ class AdminPage(BasePage):
         return self
 
     def get_search_results_count(self) -> int:
-        count_text = self.page.locator("text=/\\d+ items found/").text_content()
-        if count_text:
-            import re
-
-            match = re.search(r"(\d+)", count_text)
-            return int(match.group(1)) if match else 0
-        return 0
+        return self.get_table_row_count()
 
     def get_table_row_count(self) -> int:
         return self.page.locator("table tbody tr").count()

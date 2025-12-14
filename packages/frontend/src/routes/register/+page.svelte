@@ -56,8 +56,7 @@
     try {
       await authStore.register(username, password);
       message = 'Registration successful! Redirecting...';
-      username = '';
-      password = '';
+      await goto('/');
     } catch (error: unknown) {
       message = extractErrorMessage(error, 'Registration failed. Please try again.');
     } finally {

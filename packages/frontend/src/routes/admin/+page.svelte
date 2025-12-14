@@ -321,6 +321,7 @@
       {searchLoading}
       {languageOptions}
       {listNameOptions}
+      showFilters={true}
       onsearch={handleSearch} />
 
     <VocabularyTable

@@ -64,7 +64,7 @@
       <div class="relative flex-1">
         <Input
           type="text"
-          placeholder="Enter search term..."
+          placeholder="Search vocabulary..."
           bind:value={searchQuery}
           onkeydown={handleKeyDown}
           class="pr-10"

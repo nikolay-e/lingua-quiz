@@ -312,10 +312,13 @@
 
 <ErrorBoundary>
   <main id="main-content" class="feed">
-      <FeedCard title={null}>
-        {#if !selectedQuiz}
+      {#if !selectedQuiz}
+        <FeedCard title={null}>
           <QuizWelcome />
-        {/if}
+        </FeedCard>
+      {/if}
+
+      <FeedCard title={null}>
         <div class="stack">
           <QuizHeader
             {wordLists}

@@ -26,6 +26,7 @@
     try {
       await authStore.login(username, password);
       message = 'Login successful!';
+      await goto('/');
     } catch (error: unknown) {
       message = extractErrorMessage(error, 'Login failed. Please try again.');
       hasError = true;

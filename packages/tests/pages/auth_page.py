@@ -4,6 +4,10 @@ from .base_page import BasePage
 
 
 class AuthPage(BasePage):
+    def goto_login(self):
+        self.goto("/login")
+        return self
+
     def fill_login(self, username: str, password: str):
         self.page.fill("#username", username)
         self.page.fill("#password", password)

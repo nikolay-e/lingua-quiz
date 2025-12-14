@@ -1,4 +1,5 @@
 import os
+import re
 
 from pages.admin_page import AdminPage
 from pages.auth_page import AuthPage
@@ -13,7 +14,7 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
 
 def login_as_admin(page: Page, admin_user: AuthenticatedUser) -> None:
     auth_page = AuthPage(page, FRONTEND_URL)
-    auth_page.goto().login(admin_user["username"], admin_user["password"])
+    auth_page.goto_login().login(admin_user["username"], admin_user["password"])
     auth_page.wait_for_welcome()
 
 
@@ -25,11 +26,11 @@ class TestAdminPanelAccess:
         admin_page.navigate_to_admin()
         admin_page.wait_for_admin_panel()
 
-        expect(page).to_have_url(f"{FRONTEND_URL}/admin")
+        expect(page).to_have_url(re.compile(r".*/admin$"))
 
     def test_non_admin_blocked_from_admin_panel(self, page: Page, test_user: AuthenticatedUser) -> None:
         auth_page = AuthPage(page, FRONTEND_URL)
-        auth_page.goto().login(test_user["username"], test_user["password"])
+        auth_page.goto_login().login(test_user["username"], test_user["password"])
         auth_page.wait_for_welcome()
 
         page.goto(f"{FRONTEND_URL}/admin")
@@ -163,5 +164,5 @@ class TestAdminStats:
         admin_page = AdminPage(page, FRONTEND_URL)
         admin_page.navigate_to_admin().wait_for_admin_panel()
 
-        stats_text = page.locator(".stats-card, [class*='stat'], text=/total.*items/i").first.text_content()
-        assert stats_text is not None
+        # Check that "Total Items" stat card exists
+        expect(page.locator(".stats-card").filter(has_text="Total Items")).to_be_visible()
