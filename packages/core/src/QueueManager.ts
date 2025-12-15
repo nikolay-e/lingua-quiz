@@ -82,12 +82,13 @@ export class QueueManager {
     return this.insertIntoQueue(level, translationId, newPosition);
   }
 
-  replenishFocusPool(maxFocusWords: number): string[] {
+  replenishFocusPool(maxFocusWords: number, excludeId?: string): string[] {
     const level1Count = this.queues.LEVEL_1.length;
     const needed = maxFocusWords - level1Count;
     if (needed <= 0) return [];
 
-    const wordsToPromote = this.queues.LEVEL_0.slice(0, needed);
+    const availableWords = excludeId ? this.queues.LEVEL_0.filter((id) => id !== excludeId) : this.queues.LEVEL_0;
+    const wordsToPromote = availableWords.slice(0, needed);
     for (const translationId of wordsToPromote) {
       this.moveWordToLevel(translationId, 'LEVEL_0', 'LEVEL_1');
     }

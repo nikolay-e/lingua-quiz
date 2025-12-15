@@ -251,9 +251,9 @@ export class QuizManager {
       }
     }
 
-    this.queueManager.replenishFocusPool(this.opts.maxFocusWords);
-
     const finalProgress = this.stateManager.getProgress(translationId);
+    const shouldExclude = finalProgress?.level === 'LEVEL_0';
+    this.queueManager.replenishFocusPool(this.opts.maxFocusWords, shouldExclude ? translationId : undefined);
 
     return {
       isCorrect,

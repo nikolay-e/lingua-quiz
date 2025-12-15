@@ -338,16 +338,16 @@
           </FeedCard>
         {/if}
 
-        {#if currentQuestion && !feedback}
+        {#if currentQuestion}
           <FeedCard dense>
             <AnswerInput
               bind:this={answerInputRef}
               value={userAnswer}
-              disabled={isSubmitting}
+              disabled={isSubmitting || !!feedback}
               isLoading={isSubmitting}
               onSubmit={submitAnswer}
               onValueChange={(v) => (userAnswer = v)}
-              onSkip={handleSkip}
+              onSkip={feedback ? undefined : handleSkip}
             />
           </FeedCard>
         {/if}
