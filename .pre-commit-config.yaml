@@ -18,7 +18,7 @@ repos:
         language: system
         files: ^lingua-quiz-schema\.json$
         pass_filenames: false
-        always_run: true  # Always run to ensure generated files exist
+        always_run: true # Always run to ensure generated files exist
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0

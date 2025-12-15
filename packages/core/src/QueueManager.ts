@@ -87,7 +87,8 @@ export class QueueManager {
     const needed = maxFocusWords - level1Count;
     if (needed <= 0) return [];
 
-    const availableWords = excludeId ? this.queues.LEVEL_0.filter((id) => id !== excludeId) : this.queues.LEVEL_0;
+    const availableWords =
+      excludeId !== undefined ? this.queues.LEVEL_0.filter((id) => id !== excludeId) : this.queues.LEVEL_0;
     const wordsToPromote = availableWords.slice(0, needed);
     for (const translationId of wordsToPromote) {
       this.moveWordToLevel(translationId, 'LEVEL_0', 'LEVEL_1');

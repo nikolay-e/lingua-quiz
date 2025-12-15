@@ -1,0 +1,221 @@
+import { describe, it, expect } from 'vitest';
+import { QuizManager, Translation } from '../src/index';
+
+describe('Core Functionality Tests', () => {
+  const sampleTranslations: Translation[] = [
+    {
+      id: 1,
+      sourceText: 'hello',
+      sourceLanguage: 'en',
+      sourceUsageExample: 'Hello world!',
+      targetText: 'привет',
+      targetLanguage: 'ru',
+      targetUsageExample: 'Привет мир!',
+    },
+    {
+      id: 2,
+      sourceText: 'world',
+      sourceLanguage: 'en',
+      sourceUsageExample: 'Hello world!',
+      targetText: 'мир',
+      targetLanguage: 'ru',
+      targetUsageExample: 'Привет мир!',
+    },
+    {
+      id: 3,
+      sourceText: 'cat',
+      sourceLanguage: 'en',
+      targetText: 'кот',
+      targetLanguage: 'ru',
+    },
+  ];
+
+  describe('QuizManager Edge Cases', () => {
+    it('should handle empty translation list', () => {
+      const emptyQuiz = new QuizManager([]);
+      const result = emptyQuiz.getNextQuestion();
+
+      expect(result.question).toBeNull();
+    });
+
+    it('should handle single translation efficiently', () => {
+      const singleTranslation = [sampleTranslations[0]];
+      const singleQuiz = new QuizManager(singleTranslation);
+
+      const result = singleQuiz.getNextQuestion();
+      expect(result.question).toBeTruthy();
+      expect(result.question?.translationId).toBe(1);
+    });
+
+    it('should handle invalid translation IDs in submitAnswer', () => {
+      const quizManager = new QuizManager(sampleTranslations);
+
+      expect(() => {
+        quizManager.submitAnswer(999, 'any answer');
+      }).toThrow('Translation or progress not found');
+    });
+
+    it('should maintain consistency during rapid operations', () => {
+      const quizManager = new QuizManager(sampleTranslations);
+
+      for (let i = 0; i < 20; i++) {
+        const result = quizManager.getNextQuestion();
+        if (result.question) {
+          const correctAnswers = ['привет', 'мир', 'кот'];
+          const answer = i % 3 === 0 ? 'wrong' : correctAnswers[result.question.translationId - 1];
+          quizManager.submitAnswer(result.question.translationId, answer);
+        }
+      }
+
+      const finalResult = quizManager.getNextQuestion();
+      expect(finalResult.question).toBeTruthy();
+    });
+  });
+
+  describe('Custom Options Edge Cases', () => {
+    it('should handle zero maxFocusWords', () => {
+      const zeroFocusQuiz = new QuizManager(sampleTranslations, {}, { maxFocusWords: 0 });
+      const state = zeroFocusQuiz.getState();
+
+      const level1Count = state.progress.filter((p) => p.level === 'LEVEL_1').length;
+      expect(level1Count).toBe(0);
+    });
+
+    it('should handle custom correctAnswersToLevelUp', () => {
+      const customQuiz = new QuizManager(sampleTranslations, {}, { correctAnswersToLevelUp: 1 });
+
+      const result = customQuiz.getNextQuestion();
+      if (result.question) {
+        const { translationId } = result.question;
+
+        let correctAnswer: string;
+        if (translationId === 1) {
+          correctAnswer = 'привет';
+        } else if (translationId === 2) {
+          correctAnswer = 'мир';
+        } else {
+          correctAnswer = 'кот';
+        }
+        const submissionResult = customQuiz.submitAnswer(translationId, correctAnswer);
+
+        const state = customQuiz.getState();
+        const progress = state.progress.find((p) => p.translationId === translationId);
+
+        expect(submissionResult.isCorrect).toBe(true);
+        expect(submissionResult.levelChange).toBeDefined();
+        expect(progress?.consecutiveCorrect).toBe(0);
+        expect(progress?.level).toBe('LEVEL_2');
+      }
+    });
+
+    it('should handle large numbers of translations efficiently', () => {
+      const manyTranslations: Translation[] = Array.from({ length: 100 }, (_, i) => ({
+        id: i + 1,
+        sourceText: `word${i}`,
+        sourceLanguage: 'en',
+        targetText: `слово${i}`,
+        targetLanguage: 'ru',
+      }));
+
+      const startTime = Date.now();
+      const largeQuiz = new QuizManager(manyTranslations);
+      const result = largeQuiz.getNextQuestion();
+      const endTime = Date.now();
+
+      expect(endTime - startTime).toBeLessThan(1000);
+      expect(result.question).toBeTruthy();
+    });
+  });
+
+  describe('State Management', () => {
+    it('should restore state correctly', () => {
+      const originalQuiz = new QuizManager(sampleTranslations);
+
+      const result = originalQuiz.getNextQuestion();
+      if (result.question) {
+        originalQuiz.submitAnswer(result.question.translationId, 'привет');
+      }
+
+      const savedState = originalQuiz.getState();
+      const restoredQuiz = new QuizManager(sampleTranslations, savedState);
+
+      const originalState = originalQuiz.getState();
+      const restoredState = restoredQuiz.getState();
+
+      expect(restoredState.currentLevel).toBe(originalState.currentLevel);
+      expect(restoredState.progress.length).toBe(originalState.progress.length);
+    });
+
+    it('should handle level switching edge cases', () => {
+      const quizManager = new QuizManager(sampleTranslations);
+
+      const result = quizManager.setLevel('LEVEL_5');
+
+      expect(result.success).toBe(false);
+      expect(result.actualLevel).toBeDefined();
+      expect(result.message).toContain('no available words');
+    });
+  });
+
+  describe('Algorithm Implementation', () => {
+    it('should progress words through levels correctly', () => {
+      const quizManager = new QuizManager(sampleTranslations);
+
+      const result = quizManager.getNextQuestion();
+      if (result.question) {
+        const { translationId } = result.question;
+        let correctAnswer: string;
+        if (translationId === 1) {
+          correctAnswer = 'привет';
+        } else if (translationId === 2) {
+          correctAnswer = 'мир';
+        } else {
+          correctAnswer = 'кот';
+        }
+
+        let submissionResult: ReturnType<typeof quizManager.submitAnswer> | undefined;
+        for (let i = 0; i < 3; i++) {
+          submissionResult = quizManager.submitAnswer(translationId, correctAnswer);
+        }
+
+        const state = quizManager.getState();
+        const progress = state.progress.find((p) => p.translationId === translationId);
+
+        expect(submissionResult?.isCorrect).toBe(true);
+        expect(submissionResult?.levelChange).toBeDefined();
+        expect(progress?.consecutiveCorrect).toBe(0);
+        expect(progress?.level).toBe('LEVEL_2');
+      }
+    });
+
+    it('should handle mixed performance patterns', () => {
+      const quizManager = new QuizManager(sampleTranslations);
+
+      for (let i = 0; i < 8; i++) {
+        const result = quizManager.getNextQuestion();
+        if (result.question) {
+          const { translationId } = result.question;
+          let correctAnswer: string;
+          if (translationId === 1) {
+            correctAnswer = 'привет';
+          } else if (translationId === 2) {
+            correctAnswer = 'мир';
+          } else {
+            correctAnswer = 'кот';
+          }
+          const answer = i % 2 === 0 ? correctAnswer : 'wrong';
+
+          quizManager.submitAnswer(translationId, answer);
+        }
+      }
+
+      const state = quizManager.getState();
+
+      expect(state.progress.length).toBe(3);
+      state.progress.forEach((p) => {
+        expect(['LEVEL_0', 'LEVEL_1', 'LEVEL_2', 'LEVEL_3', 'LEVEL_4', 'LEVEL_5']).toContain(p.level);
+        expect(p.consecutiveCorrect).toBeGreaterThanOrEqual(0);
+      });
+    });
+  });
+});

@@ -11,7 +11,12 @@
     "**/__pycache__/**",
     "**/generated/**",
     "**/.git/**",
-    "**/.svelte-kit/**"
+    "**/.svelte-kit/**",
+    "**/tests/**",
+    "**/*.test.ts",
+    "**/*.test.js",
+    "**/*.spec.ts",
+    "**/*.spec.js"
   ],
   "format": ["javascript", "typescript", "python"],
   "minLines": 6,

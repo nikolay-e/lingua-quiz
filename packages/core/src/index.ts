@@ -104,7 +104,15 @@ export class QuizManager {
     this.levelEngine = new LevelEngine(this.queueManager);
 
     this.currentLevel = initialState.currentLevel ?? 'LEVEL_1';
-    this.queueManager.replenishFocusPool(this.opts.maxFocusWords);
+    const promotedWords = this.queueManager.replenishFocusPool(this.opts.maxFocusWords);
+
+    // Update progress.level for promoted words to keep progress in sync with queues
+    for (const translationId of promotedWords) {
+      this.stateManager.updateProgress(translationId, {
+        level: 'LEVEL_1',
+        queuePosition: this.queueManager.getQueues().LEVEL_1.indexOf(translationId),
+      });
+    }
   }
 
   getNextQuestion = (): { question: QuizQuestion | null; levelAdjusted?: boolean; newLevel?: PracticeLevel } => {
@@ -253,7 +261,18 @@ export class QuizManager {
 
     const finalProgress = this.stateManager.getProgress(translationId);
     const shouldExclude = finalProgress?.level === 'LEVEL_0';
-    this.queueManager.replenishFocusPool(this.opts.maxFocusWords, shouldExclude ? translationId : undefined);
+    const promotedWords = this.queueManager.replenishFocusPool(
+      this.opts.maxFocusWords,
+      shouldExclude ? translationId : undefined,
+    );
+
+    // Update progress.level for promoted words to keep progress in sync with queues
+    for (const promotedId of promotedWords) {
+      this.stateManager.updateProgress(promotedId, {
+        level: 'LEVEL_1',
+        queuePosition: this.queueManager.getQueues().LEVEL_1.indexOf(promotedId),
+      });
+    }
 
     return {
       isCorrect,
