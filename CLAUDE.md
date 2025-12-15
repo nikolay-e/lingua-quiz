@@ -1,6 +1,6 @@
 # CLAUDE.md - lingua-quiz
 
-> Extends [../CLAUDE.md](../CLAUDE.md) - inherits workspace conventions (integration tests only, no docstrings, Russian communication)
+> Extends [../CLAUDE.md](../CLAUDE.md)
 
 ## Project Overview
 
@@ -8,7 +8,7 @@ Language learning web application using spaced repetition for vocabulary mastery
 
 Full-stack application with Svelte frontend and Python backend.
 
-**Live Demo:** [lingua-quiz.nikolay-eremeev.com](https://lingua-quiz.nikolay-eremeev.com/)
+**Live Demo:** [staging.lingua-quiz.org](https://staging.lingua-quiz.org/)
 
 ## Tech Stack
 
