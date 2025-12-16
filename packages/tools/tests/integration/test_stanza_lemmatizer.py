@@ -100,31 +100,31 @@ class TestStanzaLemmatizer:
         assert result1 == result2
 
 
-class TestIntegrationWithLemmatizer:
-    def test_lemmatizer_uses_stanza_when_enabled(self):
-        from vocab_tools.core.lemmatizer import Lemmatizer
+class TestLemmatizationService:
+    def test_service_lemmatizes_english(self):
+        from vocab_tools.core.lemmatization_service import get_lemmatization_service
 
-        lemmatizer = Lemmatizer(use_stanza=True)
-        result = lemmatizer.get_lemma("running", "en")
+        service = get_lemmatization_service("en")
+        result = service.lemmatize("running")
 
         assert isinstance(result, str)
         assert len(result) > 0
 
-    def test_lemmatizer_fallback_to_spacy(self, spacy_en_model):
-        from vocab_tools.core.lemmatizer import Lemmatizer
+    def test_service_fallback_works(self, spacy_en_model):
+        from vocab_tools.core.lemmatization_service import get_lemmatization_service
 
-        lemmatizer = Lemmatizer(use_stanza=False)
-        result = lemmatizer.get_lemma("running", "en")
+        service = get_lemmatization_service("en")
+        result = service.lemmatize("running")
 
         assert isinstance(result, str)
         assert result in ["run", "running"]
 
-    def test_batch_lemmatization_with_stanza(self, sample_words_english):
-        from vocab_tools.core.lemmatizer import Lemmatizer
+    def test_batch_lemmatization(self):
+        from vocab_tools.core.lemmatization_service import get_lemmatization_service
 
-        lemmatizer = Lemmatizer(use_stanza=True)
-        result = lemmatizer.lemmatize_word_list(sample_words_english, "en")
+        service = get_lemmatization_service("en")
+        words = ["running", "cats", "better"]
+        result = service.lemmatize_batch(words)
 
         assert isinstance(result, list)
-        assert len(result) > 0
-        assert len(result) <= len(sample_words_english)
+        assert len(result) == len(words)

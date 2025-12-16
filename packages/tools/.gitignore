@@ -48,3 +48,4 @@ analysis_history.json
 frequency_lists/
 *.log
 reports/
+.hypothesis

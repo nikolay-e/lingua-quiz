@@ -18,6 +18,94 @@ from ..config.constants import LEMMATIZATION_BATCH_SIZE
 LanguageCodeType = Literal["en", "es", "de", "ru"]
 
 
+SPANISH_LEMMA_FALLBACK: dict[str, str] = {
+    "estabas": "estar",
+    "estaba": "estar",
+    "estaban": "estar",
+    "estuve": "estar",
+    "estuvo": "estar",
+    "estuviste": "estar",
+    "estarás": "estar",
+    "estará": "estar",
+    "estarían": "estar",
+    "está": "estar",
+    "quieras": "querer",
+    "quiera": "querer",
+    "quieran": "querer",
+    "quiso": "querer",
+    "quisiste": "querer",
+    "quisiera": "querer",
+    "queréis": "querer",
+    "hablado": "hablar",
+    "llegado": "llegar",
+    "tomado": "tomar",
+    "ganado": "ganar",
+    "olvidado": "olvidar",
+    "preparado": "preparar",
+    "pedido": "pedir",
+    "unido": "unir",
+    "viste": "ver",
+    "vio": "ver",
+    "vieron": "ver",
+    "visto": "ver",
+    "comiendo": "comer",
+    "comido": "comer",
+    "tengo": "tener",
+    "tienes": "tener",
+    "tiene": "tener",
+    "tienen": "tener",
+    "tenía": "tener",
+    "tenías": "tener",
+    "tengas": "tener",
+    "tendrás": "tener",
+    "eres": "ser",
+    "era": "ser",
+    "eras": "ser",
+    "fue": "ser",
+    "fuiste": "ir",
+    "fueron": "ir",
+    "vayas": "ir",
+    "vaya": "ir",
+    "vamos": "ir",
+    "vámonos": "ir",
+    "irás": "ir",
+    "irá": "ir",
+    "vais": "ir",
+    "conocí": "conocer",
+    "conoció": "conocer",
+    "conociste": "conocer",
+    "vete": "ir",
+    "cállate": "callar",
+    "quédate": "quedar",
+    "espera": "esperar",
+    "mira": "mirar",
+    "ven": "venir",
+    "di": "decir",
+    "dijo": "decir",
+    "dijiste": "decir",
+    "dijeron": "decir",
+    "irme": "ir",
+    "irte": "ir",
+    "darme": "dar",
+    "darte": "dar",
+    "darle": "dar",
+    "verme": "ver",
+    "verte": "ver",
+    "escucharme": "escuchar",
+    "bonita": "bonito",
+    "bonitas": "bonito",
+    "bonitos": "bonito",
+    "grandes": "grande",
+    "rojas": "rojo",
+    "rojos": "rojo",
+    "roja": "rojo",
+    "gatos": "gato",
+    "perros": "perro",
+    "casas": "casa",
+    "libros": "libro",
+}
+
+
 class LemmatizationService:
     """
     Thread-safe centralized lemmatization service.
@@ -237,21 +325,25 @@ class LemmatizationService:
     def _lemmatize_with_model(self, word: str) -> str:
         """Lemmatize single word with loaded model."""
         is_stanza = hasattr(self._nlp_model, "lemmatize")
+        lemma = word
 
         if is_stanza:
             try:
-                return self._nlp_model.lemmatize(word).lower()
+                lemma = self._nlp_model.lemmatize(word).lower()
             except Exception:
-                return word
+                lemma = word
         else:
-            # spaCy
             try:
                 doc = self._nlp_model(word)
                 if doc and len(doc) > 0:
-                    return doc[0].lemma_.lower()
+                    lemma = doc[0].lemma_.lower()
             except Exception:
-                pass
-            return word
+                lemma = word
+
+        if self.language_code == "es" and lemma == word:
+            lemma = SPANISH_LEMMA_FALLBACK.get(word, lemma)
+
+        return lemma
 
     def _lemmatize_batch_with_model(self, words: list[str]) -> list[str]:
         """Batch lemmatization with loaded model."""
@@ -262,21 +354,22 @@ class LemmatizationService:
                 lemmas = self._nlp_model.lemmatize_batch(words)
                 return [lemma.lower() for lemma in lemmas]
             except Exception:
-                # Fallback to single word processing
                 return [self._lemmatize_with_model(w) for w in words]
         else:
-            # spaCy batch processing
             try:
                 docs = list(self._nlp_model.pipe(words, disable=["parser", "ner"]))
                 results = []
                 for i, doc in enumerate(docs):
+                    word = words[i]
                     if doc and len(doc) > 0:
-                        results.append(doc[0].lemma_.lower())
+                        lemma = doc[0].lemma_.lower()
                     else:
-                        results.append(words[i])
+                        lemma = word
+                    if self.language_code == "es" and lemma == word:
+                        lemma = SPANISH_LEMMA_FALLBACK.get(word, lemma)
+                    results.append(lemma)
                 return results
             except Exception:
-                # Fallback to single word processing
                 return [self._lemmatize_with_model(w) for w in words]
 
     def _validate_lemma_with_wordfreq(self, word: str, lemma: str) -> str:

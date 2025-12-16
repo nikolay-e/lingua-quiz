@@ -1,5 +1,6 @@
 <script lang="ts">
   import FeedCard from './FeedCard.svelte';
+  import EnvironmentInfo from './EnvironmentInfo.svelte';
   import { Languages } from 'lucide-svelte';
 
   interface Props {
@@ -21,6 +22,8 @@
       {@render children()}
     </div>
   </FeedCard>
+
+  <EnvironmentInfo />
 </main>
 
 <style>
