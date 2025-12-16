@@ -7,7 +7,7 @@
       "project": []
     },
     "packages/frontend": {
-      "entry": ["src/routes/**/*.svelte", "src/app.html", "svelte.config.js", "vite.config.ts"],
+      "entry": ["src/routes/**/*.svelte", "src/app.html", "svelte.config.js", "vite.config.ts", "src/lib/pwa/index.ts"],
       "project": ["src/**/*.{ts,svelte}"],
       "ignore": [".svelte-kit/**"],
       "paths": {

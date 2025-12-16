@@ -23,7 +23,6 @@
   "dependencies": {
     "@lingua-quiz/core": "file:../core",
     "@lingua-quiz/domain": "file:../domain",
-    "focus-trap": "^7.6.6",
     "jwt-decode": "^4.0.0"
   },
   "devDependencies": {

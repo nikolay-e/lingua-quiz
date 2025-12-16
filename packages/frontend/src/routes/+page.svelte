@@ -7,6 +7,11 @@
   import { toast } from 'svelte-sonner';
   import { extractErrorMessage } from '$lib/utils/error';
   import { logger } from '$lib/utils/logger';
+  import {
+    requestWakeLock,
+    releaseWakeLock,
+    reacquireWakeLockOnVisibilityChange,
+  } from '$lib/pwa';
 
   import QuizHeader from '$components/quiz/QuizHeader.svelte';
   import QuestionDisplay from '$components/quiz/QuestionDisplay.svelte';
@@ -117,6 +122,8 @@
       }
       await tick();
       answerInputRef?.focus();
+
+      await requestWakeLock();
     } catch (error: unknown) {
       logger.error('Failed to start quiz:', error);
       feedback = {
@@ -143,6 +150,8 @@
     }
     quizStore.reset();
     resetQuizSession();
+
+    await releaseWakeLock();
   }
 
   async function submitAnswer(): Promise<void> {
@@ -264,9 +273,13 @@
       }
     };
 
-    const handleVisibilityChange = (): void => {
+    const handleVisibilityChange = async (): Promise<void> => {
       if (document.hidden && $authStore.token && $quizStore.quizManager) {
         quizStore.flushImmediately($authStore.token, true);
+      }
+
+      if (!document.hidden && selectedQuiz) {
+        await reacquireWakeLockOnVisibilityChange();
       }
     };
 

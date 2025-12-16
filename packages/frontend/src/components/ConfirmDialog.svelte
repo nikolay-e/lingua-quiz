@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import { AlertTriangle } from 'lucide-svelte';
-  import { focusTrap } from '$lib/actions/focusTrap';
   import type { Component } from 'svelte';
 
   interface Props {
@@ -32,33 +31,42 @@
     descId = 'confirm-dialog-desc',
   }: Props = $props();
 
+  let dialogRef = $state<HTMLDialogElement | null>(null);
   let confirmButtonRef = $state<HTMLButtonElement | null>(null);
   const IconComponent = $derived(icon ?? AlertTriangle);
 
   $effect(() => {
-    if (open && confirmButtonRef) {
-      confirmButtonRef.focus();
+    if (!dialogRef) return;
+
+    if (open) {
+      dialogRef.showModal();
+      confirmButtonRef?.focus();
+    } else {
+      dialogRef.close();
     }
   });
 
-  function handleKeyDown(e: KeyboardEvent) {
-    if (e.key === 'Escape') {
-      e.preventDefault();
+  function handleCancel(e: Event) {
+    e.preventDefault();
+    oncancel();
+  }
+
+  function handleClick(e: MouseEvent) {
+    if (e.target === dialogRef) {
       oncancel();
     }
   }
 </script>
 
-{#if open}
-  <div
-    use:focusTrap
-    class="confirm-dialog"
-    role="alertdialog"
-    aria-labelledby={titleId}
-    aria-describedby={descId}
-    tabindex="-1"
-    onkeydown={handleKeyDown}
-  >
+<dialog
+  bind:this={dialogRef}
+  class="confirm-dialog"
+  aria-labelledby={titleId}
+  aria-describedby={descId}
+  oncancel={handleCancel}
+  onclick={handleClick}
+>
+  <div class="confirm-dialog-content">
     <IconComponent size={20} class="warning-icon" />
     <span id={titleId} class="confirm-title text-base">{title}</span>
     <span id={descId} class="confirm-desc text-sm">{description}</span>
@@ -76,19 +84,48 @@
       </Button>
     </div>
   </div>
-{/if}
+</dialog>
 
 <style>
   .confirm-dialog {
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: 0;
+    max-width: min(90vw, 400px);
+    background: transparent;
+  }
+
+  .confirm-dialog::backdrop {
+    background: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .confirm-dialog[open] {
+    animation: dialog-appear 0.2s ease-out;
+  }
+
+  @keyframes dialog-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .confirm-dialog-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-xs);
-    padding: var(--spacing-md);
-    background-color: var(--color-muted);
+    padding: var(--spacing-lg);
+    background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     text-align: center;
+    box-shadow: var(--shadow-xl);
   }
 
   .confirm-dialog :global(.warning-icon) {
@@ -106,6 +143,12 @@
   .confirm-actions {
     display: flex;
     gap: var(--spacing-sm);
-    margin-top: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .confirm-dialog[open] {
+      animation: none;
+    }
   }
 </style>

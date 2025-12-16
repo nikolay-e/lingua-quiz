@@ -1,7 +1,6 @@
 <script lang="ts">
   import { LEVEL_CONFIG } from '../../lib/config/levelConfig';
   import type { LevelWordLists } from '../../api-types';
-  import { ChevronRight, ChevronDown } from 'lucide-svelte';
 
   interface Props {
     selectedQuiz?: string | null;
@@ -48,58 +47,38 @@
 
   <section class="learning-progress">
     {#each Object.values(levelWordLists) as levelData (levelData.id)}
-      <div id="{levelData.id}" class="foldable-section">
-        <button
-          class="foldable-header"
-          onclick={() => onToggleFold?.(levelData.id)}
-          aria-expanded={!foldedLists[levelData.id]}
-        >
-          <div class="header-content">
-            <div class="header-info">
-              <span class="fold-icon">
-                {#if foldedLists[levelData.id]}
-                  <ChevronRight size={16} />
-                {:else}
-                  <ChevronDown size={16} />
-                {/if}
-              </span>
-              <levelData.icon size={16} />
+      <details
+        id={levelData.id}
+        class="level-details"
+        open={!foldedLists[levelData.id]}
+        ontoggle={() => onToggleFold?.(levelData.id)}
+      >
+        <summary class="level-summary">
+          <div class="summary-content">
+            <div class="summary-info">
+              <levelData.icon size={16} aria-hidden="true" />
               <span>{levelData.label} ({levelData.count})</span>
             </div>
-            <div
-              class="progress-bar"
-              role="progressbar"
-              aria-valuenow={levelData.count}
-              aria-valuemin="0"
-              aria-valuemax={totalWords}
-              aria-valuetext={getProgressText(levelData.count, totalWords)}
-              aria-label="{levelData.label} progress"
-            >
-              <div
-                class="progress-fill"
-                style="width: {totalWords > 0 ? (levelData.count / totalWords) * 100 : 0}%"
-              ></div>
-            </div>
+            <progress
+              class="level-progress"
+              value={levelData.count}
+              max={totalWords}
+              aria-label="{levelData.label}: {getProgressText(levelData.count, totalWords)}"
+            >{getProgressText(levelData.count, totalWords)}</progress>
           </div>
-        </button>
-        {#if !foldedLists[levelData.id]}
+        </summary>
+        <div class="level-content">
           {#if levelData.words.length > 0}
-            <div class="foldable-content">
-              <ol id="{levelData.id}-list" class="word-list">
-                {#each levelData.words as word (word)}
-                  <li class="word-item">{word}</li>
-                {/each}
-              </ol>
-            </div>
+            <ol id="{levelData.id}-list" class="word-list">
+              {#each levelData.words as word (word)}
+                <li class="word-item">{word}</li>
+              {/each}
+            </ol>
           {:else}
-            <div class="foldable-content">
-              <ol class="word-list">
-                <li class="word-item empty-item">No words in this level yet.</li>
-              </ol>
-            </div>
+            <p class="empty-message">No words in this level yet.</p>
           {/if}
-        {/if}
-      </div>
+        </div>
+      </details>
     {/each}
   </section>
 </div>
@@ -122,11 +101,107 @@
     flex: 1;
     overflow-y: auto;
     min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .level-details {
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .level-summary {
+    cursor: pointer;
+    user-select: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    transition: all var(--transition-speed) ease;
+    list-style: none;
+  }
+
+  .level-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .level-summary::marker {
+    display: none;
+    content: '';
+  }
+
+  .level-summary:hover {
+    background-color: color-mix(in oklch, var(--color-primary) 10%, transparent);
+  }
+
+  .level-summary:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: -2px;
+  }
+
+  .summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .summary-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .summary-info::before {
+    content: '▶';
+    font-size: 0.65em;
+    transition: transform var(--transition-speed-fast) ease;
+  }
+
+  .level-details[open] .summary-info::before {
+    transform: rotate(90deg);
+  }
+
+  .level-progress {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    appearance: none;
+    background: var(--color-muted);
+  }
+
+  .level-progress::-webkit-progress-bar {
+    background: var(--color-muted);
+    border-radius: 2px;
+  }
+
+  .level-progress::-webkit-progress-value {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .level-progress::-moz-progress-bar {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: 2px;
+  }
+
+  .level-content {
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-lg);
+    animation: content-reveal 0.2s ease-out;
+  }
+
+  @keyframes content-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .word-list {
-    padding-inline-start: var(--spacing-2xl);
-    margin-block-start: var(--spacing-sm);
+    padding-inline-start: var(--spacing-xl);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
@@ -137,82 +212,23 @@
     border-bottom: 1px solid var(--input-border-color);
   }
 
-  .word-list li.empty-item {
+  .word-list li:last-child {
+    border-bottom: none;
+  }
+
+  .empty-message {
     color: var(--color-muted-foreground);
     font-style: italic;
-    list-style: none;
+    font-size: var(--font-size-sm);
   }
 
-  .foldable-header {
-    cursor: pointer;
-    user-select: none;
-    background: none;
-    border: 1px solid var(--input-border-color);
-    color: var(--text-color);
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-radius: var(--radius-sm);
-    transition: all var(--transition-speed) ease;
-    width: 100%;
-    text-align: left;
-  }
-
-  .foldable-header:hover {
-    background-color: color-mix(in oklch, var(--color-primary) 10%, transparent);
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-  }
-
-  .foldable-header:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-  }
-
-  .header-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-    width: 100%;
-  }
-
-  .header-info {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-  }
-
-  .progress-bar {
-    width: 100%;
-    height: 4px;
-    background: var(--color-muted);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-    transition: width 0.3s ease;
-  }
-
-  .fold-icon {
-    margin-inline-end: var(--spacing-sm);
-    transition: transform var(--transition-speed-fast) ease;
-    color: var(--text-color);
-    opacity: 0.6;
-  }
-
-  .foldable-content {
-    animation: fade-in var(--transition-speed) ease;
-    margin-block-start: var(--spacing-sm);
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
+  @media (prefers-reduced-motion: reduce) {
+    .level-content {
+      animation: none;
     }
 
-    to {
-      opacity: 1;
+    .summary-info::before {
+      transition: none;
     }
   }
 </style>

@@ -42,18 +42,14 @@
     {#if levelInfo}
       <div class="level-indicator">
         <span class="level-text">{levelInfo.description}</span>
-        <span class="level-percent">{completionPercent}%</span>
+        <output class="level-percent">{completionPercent}%</output>
       </div>
-      <div
-        class="progress-bar"
-        role="progressbar"
-        aria-valuenow={completionPercent}
-        aria-valuemin="0"
-        aria-valuemax="100"
-        aria-label="Level completion progress"
-      >
-        <div class="progress-fill" style="width: {completionPercent}%"></div>
-      </div>
+      <progress
+        class="completion-progress"
+        value={completionPercent}
+        max="100"
+        aria-label="Level completion: {completionPercent}%"
+      >{completionPercent}%</progress>
     {/if}
     <div class="question">
       <span id="word" class="question-text" lang={questionLanguage}>
@@ -92,18 +88,28 @@
     font-weight: var(--font-weight-medium);
   }
 
-  .progress-bar {
+  .completion-progress {
     width: 100%;
-    height: 4px;
+    height: 6px;
+    border-radius: 3px;
+    appearance: none;
     background: var(--color-muted);
-    border-radius: 2px;
-    overflow: hidden;
   }
 
-  .progress-fill {
-    height: 100%;
+  .completion-progress::-webkit-progress-bar {
+    background: var(--color-muted);
+    border-radius: 3px;
+  }
+
+  .completion-progress::-webkit-progress-value {
     background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: 3px;
     transition: width 0.3s ease;
+  }
+
+  .completion-progress::-moz-progress-bar {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: 3px;
   }
 
   .question {

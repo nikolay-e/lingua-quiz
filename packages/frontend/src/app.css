@@ -568,6 +568,54 @@
       opacity: 1;
     }
   }
+
+  /* Shimmer effect for skeleton loading */
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-muted) 0%,
+      color-mix(in oklch, var(--color-muted) 80%, white) 50%,
+      var(--color-muted) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Container query wrapper for responsive components */
+  .quiz-container {
+    container-type: inline-size;
+    container-name: quiz;
+  }
+
+  .card-container {
+    container-type: inline-size;
+    container-name: card;
+  }
+
+  /* Container query responsive styles */
+  @container quiz (min-width: 400px) {
+    .quiz-actions {
+      flex-direction: row;
+      gap: var(--spacing-md);
+    }
+  }
+
+  @container card (min-width: 300px) {
+    .card-header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
 }
 
 /* ============================================
