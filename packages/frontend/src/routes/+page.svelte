@@ -353,26 +353,24 @@
 
         {#if currentQuestion}
           <FeedCard dense>
-            <AnswerInput
-              bind:this={answerInputRef}
-              value={userAnswer}
-              disabled={isSubmitting || !!feedback}
-              isLoading={isSubmitting}
-              onSubmit={submitAnswer}
-              onValueChange={(v) => (userAnswer = v)}
-              onSkip={feedback ? undefined : handleSkip}
-            />
-          </FeedCard>
-        {/if}
-
-        {#if feedback}
-          <FeedCard dense>
-            <FeedbackDisplay
-              {feedback}
-              {questionForFeedback}
-              onRetry={retryLastOperation}
-              onNext={handleNextQuestion}
-            />
+            {#if feedback}
+              <FeedbackDisplay
+                {feedback}
+                {questionForFeedback}
+                onRetry={retryLastOperation}
+                onNext={handleNextQuestion}
+              />
+            {:else}
+              <AnswerInput
+                bind:this={answerInputRef}
+                value={userAnswer}
+                disabled={isSubmitting}
+                isLoading={isSubmitting}
+                onSubmit={submitAnswer}
+                onValueChange={(v) => (userAnswer = v)}
+                onSkip={handleSkip}
+              />
+            {/if}
           </FeedCard>
         {/if}
 
