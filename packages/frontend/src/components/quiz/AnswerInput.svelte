@@ -76,6 +76,7 @@
 
   input {
     padding: var(--spacing-sm) var(--spacing-md);
+    min-height: 2.5rem;
   }
 
   .button-row {

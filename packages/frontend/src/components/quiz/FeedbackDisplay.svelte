@@ -102,6 +102,7 @@
     justify-content: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm) var(--spacing-md);
+    min-height: 2.5rem;
     font-weight: bold;
     background-color: var(--container-bg);
     border: 2px solid var(--input-border-color);
@@ -198,15 +199,13 @@
 
   .button-row {
     display: flex;
+    flex-direction: column;
     gap: var(--spacing-sm);
   }
 
-  .button-row :global(.next-btn) {
-    flex: 1;
-  }
-
+  .button-row :global(.next-btn),
   .button-row :global(.retry-btn) {
-    flex: 1;
+    width: 100%;
   }
 
   @media (prefers-reduced-motion: reduce) {
