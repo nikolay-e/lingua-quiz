@@ -76,13 +76,13 @@ class TestARIAAttributes:
     def test_progress_bar_has_aria_attributes(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
 
-        progress_bar = page.locator('[role="progressbar"]').first
+        progress_bar = page.locator("progress").first
         expect(progress_bar).to_be_visible(timeout=3000)
 
-        aria_valuenow = progress_bar.get_attribute("aria-valuenow")
-        aria_valuemax = progress_bar.get_attribute("aria-valuemax")
-        assert aria_valuenow is not None
-        assert aria_valuemax is not None
+        value = progress_bar.get_attribute("value")
+        max_value = progress_bar.get_attribute("max")
+        assert value is not None
+        assert max_value is not None
 
     def test_buttons_have_accessible_names(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
