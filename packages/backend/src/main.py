@@ -3,7 +3,7 @@ import datetime
 import logging
 
 from api.v2 import admin, auth, progress, tts, version, vocabulary
-from core.config import CORS_ALLOWED_ORIGINS, PORT, RATE_LIMIT_ENABLED
+from core.config import APP_VERSION, CORS_ALLOWED_ORIGINS, PORT, RATE_LIMIT_ENABLED
 from core.csrf import validate_origin
 from core.database import query_db
 from core.json_encoder import CustomJSONResponse
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI(
     title="LinguaQuiz API",
     description="Language learning quiz backend with automated spaced repetition",
-    version="4.0.0",
+    version=APP_VERSION,
     docs_url="/docs",
     redoc_url="/redoc",
     default_response_class=CustomJSONResponse,
@@ -94,7 +94,7 @@ async def health_check():
 
 @app.get("/api/version", response_model=VersionResponse, tags=["Health"])
 async def get_version():
-    return VersionResponse(version="4.0.0")
+    return VersionResponse(version=APP_VERSION)
 
 
 @app.exception_handler(ValidationError)

@@ -6,6 +6,10 @@ RUN adduser -D -h /home/appuser appuser
 WORKDIR /home/appuser
 
 FROM python-base AS backend
+ARG APP_VERSION=dev
+ARG APP_ENVIRONMENT=development
+ENV APP_VERSION=${APP_VERSION} \
+    APP_ENVIRONMENT=${APP_ENVIRONMENT}
 RUN apk add --no-cache postgresql-libs
 COPY --chown=appuser:appuser packages/backend/requirements.txt ./
 RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev postgresql-dev linux-headers \

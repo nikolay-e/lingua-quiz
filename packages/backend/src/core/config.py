@@ -80,3 +80,7 @@ if "*" in CORS_ALLOWED_ORIGINS:
 RATE_LIMIT_ENABLED = os.getenv("RATE_LIMIT_ENABLED", "true").lower() == "true"
 if not RATE_LIMIT_ENABLED:
     logger.warning("Rate limiting is DISABLED - this is insecure for production!")
+
+# Application version (injected at Docker build time)
+APP_VERSION = os.getenv("APP_VERSION", "dev")
+APP_ENVIRONMENT = os.getenv("APP_ENVIRONMENT", "development")
