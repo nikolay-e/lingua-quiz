@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 from core.config import RATE_LIMIT_ENABLED
 from core.database import execute_write_transaction, get_active_version, query_db, query_words_db, serialize_rows
 from core.error_handler import handle_api_errors
+from core.logging import get_logger
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, Request
 from slowapi import Limiter
@@ -34,7 +35,7 @@ else:
 
         BulkProgressUpdateRequest = ProgressUpdateRequest = UserProgressResponse = _PlaceholderModel  # type: ignore
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 router = APIRouter(prefix="/api/user", tags=["Progress"])
 limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
@@ -47,6 +48,10 @@ def get_user_progress(
     list_name: str | None = None,
     current_user: dict = Depends(get_current_user),
 ) -> list[UserProgressResponse]:
+    logger.debug(
+        "Fetching user progress",
+        extra={"user_id": current_user["user_id"], "list_name": list_name},
+    )
     progress_data = query_db(
         """SELECT vocabulary_item_id, level, queue_position,
                   correct_count, incorrect_count, consecutive_correct,
@@ -106,6 +111,14 @@ def save_user_progress(
     progress_data: ProgressUpdateRequest,
     current_user: dict = Depends(get_current_user),
 ) -> dict[str, str]:
+    logger.debug(
+        "Saving single progress",
+        extra={
+            "user_id": current_user["user_id"],
+            "vocabulary_item_id": progress_data.vocabulary_item_id,
+            "level": progress_data.level,
+        },
+    )
     execute_write_transaction(
         """INSERT INTO user_progress
                (user_id, vocabulary_item_id, level, queue_position, correct_count, incorrect_count, last_practiced_at)
@@ -138,6 +151,11 @@ def save_bulk_progress(
     bulk_data: BulkProgressUpdateRequest,
     current_user: dict = Depends(get_current_user),
 ) -> dict[str, str]:
+    item_count = len(bulk_data.items) if bulk_data.items else 0
+    logger.info(
+        "Saving bulk progress",
+        extra={"user_id": current_user["user_id"], "item_count": item_count},
+    )
     if not bulk_data.items:
         return {"message": "No items to update"}
 

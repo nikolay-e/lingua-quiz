@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 
 from core.database import execute_words_write_transaction, get_active_version, query_words_db, serialize_rows
 from core.error_handler import handle_api_errors
+from core.logging import get_logger
 from core.security import require_admin
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 
@@ -32,7 +33,7 @@ else:
 
         VocabularyItemCreate = VocabularyItemDetailResponse = VocabularyItemUpdate = _PlaceholderModel  # type: ignore
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
 
 
@@ -44,6 +45,10 @@ def search_vocabulary(
     current_admin: dict = Depends(require_admin),
     version_id: int = Depends(get_active_version),
 ) -> list[VocabularyItemDetailResponse]:
+    logger.info(
+        "Admin vocabulary search",
+        extra={"admin": current_admin["username"], "query": query, "limit": limit},
+    )
     results = query_words_db(
         """SELECT id, source_text, source_language, target_text, target_language,
                   list_name, difficulty_level, source_usage_example, target_usage_example,
@@ -104,6 +109,14 @@ def create_vocabulary_item(
     current_admin: dict = Depends(require_admin),
     version_id: int = Depends(get_active_version),
 ) -> dict[str, str]:
+    logger.info(
+        "Admin creating vocabulary item",
+        extra={
+            "admin": current_admin["username"],
+            "source_text": item_data.source_text,
+            "list_name": item_data.list_name,
+        },
+    )
     result = execute_words_write_transaction(
         """INSERT INTO vocabulary_items
            (version_id, source_text, source_language, target_text, target_language,
@@ -187,6 +200,10 @@ def update_vocabulary_item(
     item_data: VocabularyItemUpdate,
     current_admin: dict = Depends(require_admin),
 ) -> dict[str, str]:
+    logger.info(
+        "Admin updating vocabulary item",
+        extra={"admin": current_admin["username"], "item_id": item_id},
+    )
     existing_item = query_words_db(
         "SELECT id, source_text, target_text, source_usage_example, target_usage_example, is_active, list_name, difficulty_level, version_id FROM vocabulary_items WHERE id = %s",
         (item_id,),
@@ -236,6 +253,10 @@ def delete_vocabulary_item(
     item_id: str,
     current_admin: dict = Depends(require_admin),
 ) -> dict[str, str]:
+    logger.info(
+        "Admin deleting vocabulary item",
+        extra={"admin": current_admin["username"], "item_id": item_id},
+    )
     existing_item = query_words_db(
         "SELECT id, source_text, target_text, version_id FROM vocabulary_items WHERE id = %s",
         (item_id,),

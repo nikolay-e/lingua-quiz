@@ -1,5 +1,5 @@
-import logging
 import os
+import time
 from typing import Any, cast
 
 from core.config import (
@@ -10,6 +10,7 @@ from core.config import (
     DB_POOL_MIN_SIZE,
     DB_PORT,
     DB_USER,
+    SLOW_QUERY_THRESHOLD_MS,
     TTS_DB_HOST,
     TTS_DB_NAME,
     TTS_DB_PASSWORD,
@@ -25,12 +26,19 @@ from core.config import (
     WORDS_DB_PORT,
     WORDS_DB_USER,
 )
+from core.logging import get_logger
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from psycopg2.pool import SimpleConnectionPool
 from pydantic import BaseModel
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
+
+
+def _get_query_fingerprint(query: str, max_length: int = 50) -> str:
+    normalized = " ".join(query.split())
+    return normalized[:max_length] + "..." if len(normalized) > max_length else normalized
+
 
 SKIP_DB_INIT = os.getenv("SKIP_DB_INIT", "false").lower() in {"1", "true", "yes"}
 
@@ -114,6 +122,8 @@ def query_db(query, args=(), one=False):
             raise ValueError(f"query_db() detected a write operation starting with '{keyword}'. Use execute_write_transaction() instead.")
 
     conn = None
+    start_time = time.perf_counter()
+    query_fingerprint = _get_query_fingerprint(query)
     try:
         conn = get_db()
         if not conn:
@@ -122,10 +132,27 @@ def query_db(query, args=(), one=False):
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(query, args)
             rv = cur.fetchall()
+            duration_ms = (time.perf_counter() - start_time) * 1000
+
+            if duration_ms >= SLOW_QUERY_THRESHOLD_MS:
+                logger.warning(
+                    "Slow query detected",
+                    extra={
+                        "query": query_fingerprint,
+                        "duration_ms": round(duration_ms, 2),
+                        "row_count": len(rv),
+                        "db": "main",
+                    },
+                )
+
             return (rv[0] if rv else None) if one else rv
 
     except psycopg2.pool.PoolError as e:
-        logger.error(f"Connection pool error: {e}")
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.error(
+            "Connection pool error",
+            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": "main"},
+        )
         if conn:
             try:
                 conn.rollback()
@@ -133,7 +160,11 @@ def query_db(query, args=(), one=False):
                 pass
         raise
     except Exception as e:
-        logger.error(f"Database query error: {e}")
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.error(
+            "Database query error",
+            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": "main"},
+        )
         if conn:
             try:
                 conn.rollback()
@@ -154,6 +185,8 @@ def query_db(query, args=(), one=False):
 
 def execute_write_transaction(query, args=(), fetch_results=False, one=False):
     conn = None
+    start_time = time.perf_counter()
+    query_fingerprint = _get_query_fingerprint(query)
     try:
         conn = get_db()
         if not conn:
@@ -165,17 +198,51 @@ def execute_write_transaction(query, args=(), fetch_results=False, one=False):
             if fetch_results:
                 rv = cur.fetchall()
                 conn.commit()
+                duration_ms = (time.perf_counter() - start_time) * 1000
+
+                if duration_ms >= SLOW_QUERY_THRESHOLD_MS:
+                    logger.warning(
+                        "Slow write query detected",
+                        extra={
+                            "query": query_fingerprint,
+                            "duration_ms": round(duration_ms, 2),
+                            "row_count": len(rv),
+                            "db": "main",
+                        },
+                    )
+
                 return (rv[0] if rv else None) if one else rv
 
             row_count = cur.rowcount
             conn.commit()
+            duration_ms = (time.perf_counter() - start_time) * 1000
+
+            if duration_ms >= SLOW_QUERY_THRESHOLD_MS:
+                logger.warning(
+                    "Slow write query detected",
+                    extra={
+                        "query": query_fingerprint,
+                        "duration_ms": round(duration_ms, 2),
+                        "rows_affected": row_count,
+                        "db": "main",
+                    },
+                )
+
             return row_count
 
     except psycopg2.pool.PoolError as e:
-        logger.error(f"Connection pool error: {e}")
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.error(
+            "Connection pool error",
+            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": "main"},
+        )
         raise
     except Exception as e:
-        logger.error(f"Database execute error: {e}")
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.error(
+            "Database write error",
+            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": "main"},
+        )
         if conn:
             try:
                 conn.rollback()
@@ -211,6 +278,8 @@ def query_words_db(query, args=(), one=False):
             raise ValueError(f"query_words_db() detected a write operation starting with '{keyword}'. Use execute_words_write_transaction() instead.")
 
     conn = None
+    start_time = time.perf_counter()
+    query_fingerprint = _get_query_fingerprint(query)
     try:
         conn = get_words_db()
         if not conn:
@@ -219,10 +288,27 @@ def query_words_db(query, args=(), one=False):
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(query, args)
             rv = cur.fetchall()
+            duration_ms = (time.perf_counter() - start_time) * 1000
+
+            if duration_ms >= SLOW_QUERY_THRESHOLD_MS:
+                logger.warning(
+                    "Slow query detected",
+                    extra={
+                        "query": query_fingerprint,
+                        "duration_ms": round(duration_ms, 2),
+                        "row_count": len(rv),
+                        "db": "words",
+                    },
+                )
+
             return (rv[0] if rv else None) if one else rv
 
     except psycopg2.pool.PoolError as e:
-        logger.error(f"Words database connection pool error: {e}")
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.error(
+            "Words database pool error",
+            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": "words"},
+        )
         if conn:
             try:
                 conn.rollback()
@@ -230,7 +316,11 @@ def query_words_db(query, args=(), one=False):
                 pass
         raise
     except Exception as e:
-        logger.error(f"Words database query error: {e}")
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.error(
+            "Words database query error",
+            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": "words"},
+        )
         if conn:
             try:
                 conn.rollback()
@@ -251,6 +341,8 @@ def query_words_db(query, args=(), one=False):
 
 def execute_words_write_transaction(query, args=(), fetch_results=False, one=False):
     conn = None
+    start_time = time.perf_counter()
+    query_fingerprint = _get_query_fingerprint(query)
     try:
         conn = get_words_db()
         if not conn:
@@ -262,17 +354,51 @@ def execute_words_write_transaction(query, args=(), fetch_results=False, one=Fal
             if fetch_results:
                 rv = cur.fetchall()
                 conn.commit()
+                duration_ms = (time.perf_counter() - start_time) * 1000
+
+                if duration_ms >= SLOW_QUERY_THRESHOLD_MS:
+                    logger.warning(
+                        "Slow write query detected",
+                        extra={
+                            "query": query_fingerprint,
+                            "duration_ms": round(duration_ms, 2),
+                            "row_count": len(rv),
+                            "db": "words",
+                        },
+                    )
+
                 return (rv[0] if rv else None) if one else rv
 
             row_count = cur.rowcount
             conn.commit()
+            duration_ms = (time.perf_counter() - start_time) * 1000
+
+            if duration_ms >= SLOW_QUERY_THRESHOLD_MS:
+                logger.warning(
+                    "Slow write query detected",
+                    extra={
+                        "query": query_fingerprint,
+                        "duration_ms": round(duration_ms, 2),
+                        "rows_affected": row_count,
+                        "db": "words",
+                    },
+                )
+
             return row_count
 
     except psycopg2.pool.PoolError as e:
-        logger.error(f"Words database connection pool error: {e}")
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.error(
+            "Words database pool error",
+            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": "words"},
+        )
         raise
     except Exception as e:
-        logger.error(f"Words database execute error: {e}")
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.error(
+            "Words database write error",
+            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": "words"},
+        )
         if conn:
             try:
                 conn.rollback()

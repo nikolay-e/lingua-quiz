@@ -5,10 +5,12 @@ import uuid
 
 import bcrypt
 from core.config import JWT_ACCESS_TOKEN_EXPIRES_MINUTES, JWT_REFRESH_TOKEN_EXPIRES_DAYS, JWT_SECRET
+from core.logging import get_logger
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 import jwt
 
+logger = get_logger("security.auth")
 security = HTTPBearer()
 
 
@@ -42,6 +44,7 @@ def verify_refresh_token(token: str) -> dict:
     from core.database import query_db
 
     token_hash = hashlib.sha256(token.encode()).hexdigest()
+    token_prefix = token_hash[:8]
 
     token_data = query_db(
         """
@@ -54,19 +57,29 @@ def verify_refresh_token(token: str) -> dict:
     )
 
     if not token_data:
+        logger.warning("Invalid refresh token: token not found", extra={"token_prefix": token_prefix})
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
 
     stored_hash = token_data["token_hash"]
     if not secrets.compare_digest(token_hash, stored_hash):
+        logger.warning("Invalid refresh token: hash mismatch", extra={"token_prefix": token_prefix})
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
 
     if token_data["revoked_at"] is not None:
+        logger.warning(
+            "Revoked refresh token used",
+            extra={"token_prefix": token_prefix, "user_id": token_data["user_id"]},
+        )
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Refresh token has been revoked",
         )
 
     if token_data["expires_at"] < datetime.datetime.now(datetime.UTC):
+        logger.warning(
+            "Expired refresh token used",
+            extra={"token_prefix": token_prefix, "user_id": token_data["user_id"]},
+        )
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Refresh token has expired")
 
     return {"user_id": token_data["user_id"]}
@@ -75,6 +88,7 @@ def verify_refresh_token(token: str) -> dict:
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
 ) -> dict:
+    token_prefix = credentials.credentials[:8] if credentials.credentials else "none"
     try:
         payload = jwt.decode(credentials.credentials, JWT_SECRET, algorithms=["HS256"])
         user_id = payload.get("userId")
@@ -82,6 +96,7 @@ async def get_current_user(
         is_admin = payload.get("isAdmin", False)
 
         if user_id is None or username is None:
+            logger.warning("Invalid token payload: missing userId or sub", extra={"token_prefix": token_prefix})
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid token payload",
@@ -90,8 +105,10 @@ async def get_current_user(
         return {"user_id": user_id, "username": username, "is_admin": is_admin}
 
     except jwt.ExpiredSignatureError:
+        logger.warning("Expired access token used", extra={"token_prefix": token_prefix})
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token has expired")
-    except jwt.PyJWTError:
+    except jwt.PyJWTError as e:
+        logger.warning("Invalid JWT token", extra={"token_prefix": token_prefix, "error": str(e)})
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
 
 
@@ -105,9 +122,17 @@ async def require_admin(current_user: dict = Depends(get_current_user)) -> dict:
     )
 
     if not user or not user.get("is_admin"):
+        logger.warning(
+            "Admin access denied",
+            extra={"user_id": current_user["user_id"], "username": current_user["username"]},
+        )
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Admin access required",
         )
 
+    logger.info(
+        "Admin access granted",
+        extra={"user_id": current_user["user_id"], "username": current_user["username"]},
+    )
     return current_user

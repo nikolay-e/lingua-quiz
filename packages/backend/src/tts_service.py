@@ -1,14 +1,31 @@
 import base64
 import hashlib
-import logging
 import os
+import time
 from typing import ClassVar
 
+from core.logging import get_logger
 from google.cloud import texttospeech
 from google.oauth2 import service_account
 from psycopg2.extras import RealDictCursor
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
+
+
+class TTSError(Exception):
+    pass
+
+
+class TTSUnavailableError(TTSError):
+    pass
+
+
+class TTSLanguageNotSupportedError(TTSError):
+    pass
+
+
+class TTSAPIError(TTSError):
+    pass
 
 
 class TTSService:
@@ -94,6 +111,7 @@ class TTSService:
 
     def _get_from_storage(self, text: str, language: str) -> bytes | None:
         conn = None
+        start_time = time.perf_counter()
         try:
             content_key = self._get_content_key(text, language)
             conn = self.db_pool.getconn()
@@ -103,8 +121,21 @@ class TTSService:
                     (content_key,),
                 )
                 result = cur.fetchone()
+                duration_ms = (time.perf_counter() - start_time) * 1000
                 if result:
+                    logger.debug(
+                        "TTS cache hit",
+                        extra={
+                            "language": language,
+                            "text_length": len(text),
+                            "duration_ms": round(duration_ms, 2),
+                        },
+                    )
                     return bytes(result["audio_data"])
+                logger.debug(
+                    "TTS cache miss",
+                    extra={"language": language, "text_length": len(text)},
+                )
         except Exception as e:
             logger.error(f"TTS storage read error: {e}")
         finally:
@@ -141,12 +172,14 @@ class TTSService:
 
     def synthesize_speech(self, text: str, language: str) -> bytes | None:
         if not self.is_available() or not text.strip():
+            logger.warning("TTS synthesis skipped: service unavailable or empty text")
             return None
         assert self.client is not None
 
         text = text.strip()
         language = self._normalize_language(language)
         if len(text) > 500:
+            logger.warning("TTS synthesis skipped: text too long", extra={"text_length": len(text)})
             return None
 
         audio_content = self._get_from_storage(text, language)
@@ -155,9 +188,13 @@ class TTSService:
 
         voice_config = self.voice_configs.get(language)
         if not voice_config:
-            logger.error(f"Language '{language}' not supported for TTS")
+            logger.warning(
+                "TTS language not supported",
+                extra={"language": language, "supported": list(self.voice_configs.keys())},
+            )
             return None
 
+        start_time = time.perf_counter()
         try:
             response = self.client.synthesize_speech(
                 input=texttospeech.SynthesisInput(text=text),
@@ -171,13 +208,35 @@ class TTSService:
                     effects_profile_id=["telephony-class-application"],
                 ),
             )
+            duration_ms = (time.perf_counter() - start_time) * 1000
 
             new_audio: bytes = response.audio_content
             self._save_to_storage(text, language, new_audio)
+
+            logger.info(
+                "TTS synthesis success",
+                extra={
+                    "language": language,
+                    "text_length": len(text),
+                    "audio_size_bytes": len(new_audio),
+                    "duration_ms": round(duration_ms, 2),
+                },
+            )
             return new_audio
 
         except Exception as e:
-            logger.error(f"TTS synthesis failed for '{text}' in {language}: {e}")
+            duration_ms = (time.perf_counter() - start_time) * 1000
+            error_type = type(e).__name__
+            logger.error(
+                "TTS synthesis failed",
+                extra={
+                    "language": language,
+                    "text_length": len(text),
+                    "error_type": error_type,
+                    "error": str(e),
+                    "duration_ms": round(duration_ms, 2),
+                },
+            )
             return None
 
     def get_supported_languages(self) -> list:

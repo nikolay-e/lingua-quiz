@@ -2,7 +2,7 @@ import logging
 import os
 from pathlib import Path
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)  # Standard logger used during config loading
 
 # Database configuration
 DB_HOST = os.getenv("DB_HOST", "localhost")
@@ -89,3 +89,10 @@ APP_ENVIRONMENT = os.getenv("APP_ENVIRONMENT", "development")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 if LOG_LEVEL not in ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"):
     LOG_LEVEL = "INFO"
+
+LOG_JSON_FORMAT = os.getenv("LOG_JSON_FORMAT", "false").lower() in ("true", "1", "yes")
+if APP_ENVIRONMENT in ("production", "staging"):
+    LOG_JSON_FORMAT = True
+
+# Slow query threshold (milliseconds)
+SLOW_QUERY_THRESHOLD_MS = int(os.getenv("SLOW_QUERY_THRESHOLD_MS", "100"))

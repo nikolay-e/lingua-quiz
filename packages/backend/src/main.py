@@ -1,26 +1,42 @@
 #!/usr/bin/env python3
 import datetime
-import logging
 
 from api.v2 import admin, auth, progress, tts, version, vocabulary
-from core.config import APP_VERSION, CORS_ALLOWED_ORIGINS, LOG_LEVEL, PORT, RATE_LIMIT_ENABLED
+from core.config import APP_VERSION, CORS_ALLOWED_ORIGINS, LOG_JSON_FORMAT, LOG_LEVEL, PORT, RATE_LIMIT_ENABLED
 from core.csrf import validate_origin
 from core.database import query_db
 from core.json_encoder import CustomJSONResponse
+from core.logging import configure_logging, get_logger
+from core.request_logging import RequestLoggingMiddleware
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from generated.schemas import HealthResponse, VersionResponse
 from pydantic import ValidationError
-from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
-logging.basicConfig(
-    level=getattr(logging, LOG_LEVEL),
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-)
-logger = logging.getLogger(__name__)
+configure_logging(log_level=LOG_LEVEL, json_format=LOG_JSON_FORMAT)
+logger = get_logger(__name__)
+
+
+async def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded):
+    client_ip = get_remote_address(request)
+    logger.warning(
+        "Rate limit exceeded",
+        extra={
+            "client_ip": client_ip,
+            "path": request.url.path,
+            "method": request.method,
+            "limit": str(exc.detail) if hasattr(exc, "detail") else "unknown",
+        },
+    )
+    return JSONResponse(
+        status_code=429,
+        content={"detail": "Rate limit exceeded. Please try again later."},
+    )
+
 
 app = FastAPI(
     title="LinguaQuiz API",
@@ -30,6 +46,8 @@ app = FastAPI(
     redoc_url="/redoc",
     default_response_class=CustomJSONResponse,
 )
+
+app.add_middleware(RequestLoggingMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
@@ -68,7 +86,7 @@ async def add_security_headers(request: Request, call_next):
 
 limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 
 app.include_router(auth.router)
 app.include_router(vocabulary.router)
