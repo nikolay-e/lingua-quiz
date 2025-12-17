@@ -1,3 +1,5 @@
+import { logger } from '../utils/logger';
+
 interface ShareProgressData {
   wordsLearned: number;
   masteredWords: number;
@@ -41,6 +43,7 @@ export async function shareProgress(data: ShareProgressData): Promise<boolean> {
     if (error instanceof Error && error.name === 'AbortError') {
       return false;
     }
+    logger.error('Failed to share progress', { error });
     throw error;
   }
 }
@@ -83,7 +86,8 @@ export async function shareAchievement(achievementTitle: string, achievementDesc
   try {
     await navigator.share(shareData);
     return true;
-  } catch {
+  } catch (error) {
+    logger.debug('Failed to share achievement', { error });
     return false;
   }
 }

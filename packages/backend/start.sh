@@ -50,6 +50,9 @@ if [ -n "$UVICORN_WORKERS" ]; then
 else
   WORKERS=1
 fi
-echo "Starting uvicorn with $WORKERS workers..."
 
-exec uvicorn main:app --host 0.0.0.0 --port 9000 --workers $WORKERS --log-level info
+# Convert LOG_LEVEL to lowercase for uvicorn (default: info)
+UVICORN_LOG_LEVEL=$(echo "${LOG_LEVEL:-info}" | tr '[:upper:]' '[:lower:]')
+echo "Starting uvicorn with $WORKERS workers, log level: $UVICORN_LOG_LEVEL..."
+
+exec uvicorn main:app --host 0.0.0.0 --port 9000 --workers $WORKERS --log-level "$UVICORN_LOG_LEVEL"

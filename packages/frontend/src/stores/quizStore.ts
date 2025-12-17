@@ -56,6 +56,7 @@ function createQuizStore(): QuizStore {
           update((state) => ({ ...state, wordLists: result, loading: false }));
         }
       } catch (error: unknown) {
+        logger.error('Failed to load word lists', { error });
         update((state) => ({
           ...state,
           error: extractErrorMessage(error, 'Failed to load word lists'),
@@ -78,6 +79,7 @@ function createQuizStore(): QuizStore {
           }));
         }
       } catch (error: unknown) {
+        logger.error('Failed to start quiz', { error, quizName });
         update((state) => ({ ...state, error: extractErrorMessage(error, 'Failed to start quiz'), loading: false }));
       }
     },

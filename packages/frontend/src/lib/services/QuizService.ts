@@ -335,11 +335,13 @@ export class QuizService {
       }
 
       if (this.progressMap.size > 0) {
-        await this.bulkSaveProgress(token, null).catch(() => {
+        await this.bulkSaveProgress(token, null).catch((error) => {
+          logger.warn('Failed to restore pending progress from bulk save', { error });
           this.persistPendingToStorage();
         });
       }
-    } catch {
+    } catch (error) {
+      logger.warn('Failed to parse pending progress from storage', { error });
       safeStorage.removeItem(STORAGE_KEYS.PENDING_PROGRESS);
     }
   }
@@ -352,7 +354,8 @@ export class QuizService {
       if (isUnloading && typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
         this.sendBeaconSave(token);
       } else {
-        this.bulkSaveProgress(token, manager).catch(() => {
+        this.bulkSaveProgress(token, manager).catch((error) => {
+          logger.warn('Failed to flush progress immediately', { error });
           this.persistPendingToStorage();
         });
       }

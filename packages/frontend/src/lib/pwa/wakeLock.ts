@@ -1,3 +1,5 @@
+import { logger } from '../utils/logger';
+
 let wakeLock: WakeLockSentinel | null = null;
 
 export function isWakeLockSupported(): boolean {
@@ -17,7 +19,8 @@ export async function requestWakeLock(): Promise<boolean> {
     });
 
     return true;
-  } catch {
+  } catch (error) {
+    logger.debug('Wake lock request failed', { error });
     return false;
   }
 }

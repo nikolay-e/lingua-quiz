@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { Button } from '$lib/components/ui/button';
   import { RotateCcw } from 'lucide-svelte';
+  import { logger } from '$lib/utils/logger';
 
   interface Props {
     children: import('svelte').Snippet;
@@ -15,12 +16,19 @@
   function handleError(event: ErrorEvent) {
     hasError = true;
     errorMessage = event.message || 'An unexpected error occurred';
+    logger.error('Unhandled error caught by ErrorBoundary', {
+      message: event.message,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    });
     event.preventDefault();
   }
 
   function handleRejection(event: PromiseRejectionEvent) {
     hasError = true;
     errorMessage = event.reason?.message || 'An unexpected error occurred';
+    logger.error('Unhandled promise rejection caught by ErrorBoundary', event.reason);
     event.preventDefault();
   }
 

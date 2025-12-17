@@ -3,7 +3,7 @@ import datetime
 import logging
 
 from api.v2 import admin, auth, progress, tts, version, vocabulary
-from core.config import APP_VERSION, CORS_ALLOWED_ORIGINS, PORT, RATE_LIMIT_ENABLED
+from core.config import APP_VERSION, CORS_ALLOWED_ORIGINS, LOG_LEVEL, PORT, RATE_LIMIT_ENABLED
 from core.csrf import validate_origin
 from core.database import query_db
 from core.json_encoder import CustomJSONResponse
@@ -16,7 +16,10 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL),
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(

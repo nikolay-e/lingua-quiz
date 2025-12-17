@@ -28,7 +28,8 @@ def get_username_for_rate_limit(request: Request) -> str:
         if hasattr(request.state, "username"):
             return f"login:{request.state.username}"
         return f"ip:{get_remote_address(request)}"
-    except Exception:
+    except Exception as e:
+        logger.debug(f"Failed to get username for rate limit: {e}")
         return f"ip:{get_remote_address(request)}"
 
 

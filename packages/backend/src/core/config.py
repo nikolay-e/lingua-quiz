@@ -84,3 +84,8 @@ if not RATE_LIMIT_ENABLED:
 # Application version (injected at Docker build time)
 APP_VERSION = os.getenv("APP_VERSION", "dev")
 APP_ENVIRONMENT = os.getenv("APP_ENVIRONMENT", "development")
+
+# Logging configuration
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
+if LOG_LEVEL not in ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"):
+    LOG_LEVEL = "INFO"

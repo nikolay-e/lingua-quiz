@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 import { LEVEL_CONFIG } from '$lib/config/levelConfig';
 import { STORAGE_KEYS } from '$lib/constants';
 import { safeStorage } from '../utils/safeStorage';
+import { logger } from '../utils/logger';
 
 function createUIPreferencesStore() {
   const initialFoldedLists: Record<string, boolean> = {};
@@ -24,8 +25,8 @@ function createUIPreferencesStore() {
           }
         });
       }
-    } catch {
-      // Ignore parsing errors for corrupted localStorage
+    } catch (error) {
+      logger.warn('Failed to parse UI preferences from localStorage', { error });
     }
   }
 
