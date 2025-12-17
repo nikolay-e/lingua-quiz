@@ -1,6 +1,6 @@
 fastapi==0.124.2
 uvicorn[standard]==0.38.0
-python-multipart==0.0.20
+python-multipart==0.0.21
 slowapi==0.1.9
 psycopg2-binary==2.9.11
 bcrypt==5.0.0
