@@ -83,6 +83,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    min-height: calc(var(--touch-target-min) * 2 + var(--spacing-sm));
   }
 
   .button-row :global(.submit-btn),

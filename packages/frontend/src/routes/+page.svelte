@@ -26,11 +26,10 @@
   import ErrorBoundary from '$components/ErrorBoundary.svelte';
   import ErrorDisplay from '$components/ErrorDisplay.svelte';
   import QuizSkeleton from '$components/quiz/QuizSkeleton.svelte';
-  import BottomNav from '$components/quiz/BottomNav.svelte';
   import QuizWelcome from '$components/quiz/QuizWelcome.svelte';
 
   let userAnswer = $state('');
-  let showProgress = $state(true);
+  const showProgress = true;
   let answerInputRef: ReturnType<typeof AnswerInput> | undefined = $state();
   let feedback = $state<SubmissionResult | QuizFeedback | RevealResult | null>(null);
   let usageExamples = $state<{ source: string; target: string } | null>(null);
@@ -418,11 +417,4 @@
     onComplete={() => (showLevelAnimation = false)}
   />
 
-  <BottomNav
-    {selectedQuiz}
-    {showProgress}
-    onBackToMenu={handleBackToMenu}
-    onToggleProgress={() => (showProgress = !showProgress)}
-    onLogout={handleLogoutClick}
-  />
 </ErrorBoundary>
