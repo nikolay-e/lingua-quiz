@@ -77,6 +77,9 @@
   input {
     padding: var(--spacing-sm) var(--spacing-md);
     min-height: 2.5rem;
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--container-bg);
   }
 
   .button-row {

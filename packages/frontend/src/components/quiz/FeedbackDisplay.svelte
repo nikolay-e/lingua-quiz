@@ -105,7 +105,7 @@
     min-height: 2.5rem;
     font-weight: bold;
     background-color: var(--container-bg);
-    border: 2px solid var(--input-border-color);
+    border: 1px solid var(--input-border-color);
     border-radius: var(--radius-md);
     text-align: center;
   }
@@ -114,6 +114,7 @@
     color: var(--success-color);
     border-color: var(--success-color);
     background-color: color-mix(in oklch, var(--success-color) 10%, var(--container-bg));
+    box-shadow: 0 0 0 1px var(--success-color);
     animation: success-pulse 0.4s ease-out;
   }
 
@@ -127,6 +128,7 @@
     color: var(--error-color);
     border-color: var(--error-color);
     background-color: color-mix(in oklch, var(--error-color) 10%, var(--container-bg));
+    box-shadow: 0 0 0 1px var(--error-color);
     animation: shake 0.5s ease-out;
   }
 
