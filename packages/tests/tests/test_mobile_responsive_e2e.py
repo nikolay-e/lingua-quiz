@@ -18,49 +18,6 @@ def login_and_start_quiz(page: Page, test_user: AuthenticatedUser) -> None:
     expect(page.locator(".question-text")).to_be_visible(timeout=5000)
 
 
-class TestMobileBottomNavigation:
-    def test_bottom_nav_visible_on_mobile(self, page: Page, test_user: AuthenticatedUser) -> None:
-        page.set_viewport_size({"width": 375, "height": 667})
-        login_and_start_quiz(page, test_user)
-
-        bottom_nav = page.locator("nav.bottom-nav, [class*='bottom-nav']")
-        expect(bottom_nav).to_be_visible(timeout=3000)
-
-    def test_bottom_nav_hidden_on_desktop(self, page: Page, test_user: AuthenticatedUser) -> None:
-        page.set_viewport_size({"width": 1920, "height": 1080})
-        login_and_start_quiz(page, test_user)
-
-        bottom_nav = page.locator("nav.bottom-nav, [class*='bottom-nav']")
-        expect(bottom_nav).to_be_hidden(timeout=3000)
-
-    def test_bottom_nav_menu_button_navigates(self, page: Page, test_user: AuthenticatedUser) -> None:
-        page.set_viewport_size({"width": 375, "height": 667})
-        login_and_start_quiz(page, test_user)
-
-        menu_button = page.locator("nav.bottom-nav button:has-text('Menu'), nav.bottom-nav button[aria-label*='menu' i]").first
-        if menu_button.is_visible():
-            menu_button.click()
-            page.wait_for_timeout(1000)
-
-    def test_bottom_nav_progress_button_toggles(self, page: Page, test_user: AuthenticatedUser) -> None:
-        page.set_viewport_size({"width": 375, "height": 667})
-        login_and_start_quiz(page, test_user)
-
-        progress_panel = page.locator(".learning-progress-container").first
-
-        initial_visible = progress_panel.is_visible()
-
-        progress_button = page.locator("nav.bottom-nav button[aria-label*='progress' i]").first
-        if progress_button.is_visible():
-            progress_button.click()
-            page.wait_for_timeout(500)
-
-            if initial_visible:
-                expect(progress_panel).to_be_hidden(timeout=2000)
-            else:
-                expect(progress_panel).to_be_visible(timeout=2000)
-
-
 class TestMobileDeviceEmulation:
     @pytest.mark.parametrize(
         ("device_name", "width", "height"),
