@@ -1047,7 +1047,7 @@
           },
           "language": {
             "type": "string",
-            "pattern": "^(en|de|ru|es)$",
+            "pattern": "^(en|de|ru|es|English|German|Russian|Spanish)$",
             "title": "Language"
           }
         },

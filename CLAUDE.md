@@ -40,13 +40,18 @@ lingua-quiz/
 npm run format          # Format all code
 npm run lint            # Lint all code
 npm run typecheck       # Type checking
-npm test                # Run E2E tests
+
+# Testing (ONLY via docker compose)
+docker compose --profile test-all up --build    # Run all tests
+docker compose --profile test-all run --rm test-all pytest tests/test_backend_integration.py -v  # Run specific tests
 
 # Code generation
 make generate-all       # Regenerate all schemas, types, and clients from OpenAPI
 make openapi-generate   # Regenerate OpenAPI schema from backend code
 make openapi            # Show OpenAPI schema management info
 ```
+
+**Testing Policy:** All tests MUST be run via `docker compose --profile test-all`. Never run tests directly on the host machine.
 
 ## Setup After Clone
 
