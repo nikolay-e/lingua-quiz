@@ -1,111 +1,12 @@
 from difflib import SequenceMatcher
 
+from ..core.transliteration_mappings import DE_TO_CY, EN_TO_CY, ES_TO_CY
+
 
 class TransliterationDetector:
-    # English to Cyrillic mapping
-    EN_TO_CY = {
-        "a": "а",
-        "b": "б",
-        "c": "к",
-        "d": "д",
-        "e": "е",
-        "f": "ф",
-        "g": "г",
-        "h": "х",
-        "i": "и",
-        "j": "дж",
-        "k": "к",
-        "l": "л",
-        "m": "м",
-        "n": "н",
-        "o": "о",
-        "p": "п",
-        "r": "р",
-        "s": "с",
-        "t": "т",
-        "u": "у",
-        "v": "в",
-        "w": "в",
-        "x": "кс",
-        "y": "и",
-        "z": "з",
-        "ch": "ч",
-        "sh": "ш",
-        "th": "т",
-        "ph": "ф",
-        "ee": "и",
-        "oo": "у",
-    }
-
-    # Spanish to Cyrillic mapping
-    ES_TO_CY = {
-        "a": "а",
-        "b": "б",
-        "v": "в",
-        "g": "г",
-        "d": "д",
-        "e": "е",
-        "z": "з",
-        "i": "и",
-        "k": "к",
-        "l": "л",
-        "m": "м",
-        "n": "н",
-        "o": "о",
-        "p": "п",
-        "r": "р",
-        "s": "с",
-        "t": "т",
-        "u": "у",
-        "f": "ф",
-        "h": "х",
-        "c": "к",
-        "y": "и",
-        "j": "х",
-        "ch": "ч",
-        "sh": "ш",
-        "zh": "ж",
-        "ts": "ц",
-        "ya": "я",
-        "yu": "ю",
-    }
-
-    # German to Cyrillic mapping
-    DE_TO_CY = {
-        "a": "а",
-        "ä": "э",
-        "b": "б",
-        "c": "к",
-        "d": "д",
-        "e": "е",
-        "f": "ф",
-        "g": "г",
-        "h": "х",
-        "i": "и",
-        "j": "й",
-        "k": "к",
-        "l": "л",
-        "m": "м",
-        "n": "н",
-        "o": "о",
-        "ö": "ё",
-        "p": "п",
-        "r": "р",
-        "s": "с",
-        "ß": "сс",
-        "t": "т",
-        "u": "у",
-        "ü": "ю",
-        "v": "ф",
-        "w": "в",
-        "x": "кс",
-        "y": "и",
-        "z": "ц",
-        "ch": "х",
-        "sch": "ш",
-        "tsch": "ч",
-    }
-
+    EN_TO_CY = EN_TO_CY
+    ES_TO_CY = ES_TO_CY
+    DE_TO_CY = DE_TO_CY
     CY_TO_ES = {v: k for k, v in ES_TO_CY.items()}
 
     def __init__(self, similarity_threshold: float = 0.7):

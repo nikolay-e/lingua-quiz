@@ -1,35 +1,19 @@
 <script lang="ts">
   import { formatForDisplay, type SubmissionResult, type QuizQuestion, type RevealResult } from '@lingua-quiz/core';
-  import { tick } from 'svelte';
   import { Button } from '$lib/components/ui/button';
-  import { RefreshCw, ArrowRight } from 'lucide-svelte';
+  import { RefreshCw } from 'lucide-svelte';
   import type { QuizFeedback } from '../../api-types';
 
   interface Props {
     feedback?: SubmissionResult | QuizFeedback | RevealResult | null;
     questionForFeedback?: QuizQuestion | null;
     onRetry?: () => void;
-    onNext?: () => void;
   }
 
-  const { feedback = null, questionForFeedback = null, onRetry, onNext }: Props = $props();
+  const { feedback = null, questionForFeedback = null, onRetry }: Props = $props();
 
-  let nextButtonRef = $state<HTMLButtonElement | null>(null);
   let retryButtonRef = $state<HTMLButtonElement | null>(null);
 
-  $effect(() => {
-    if (feedback === null) return;
-
-    tick().then(() => {
-      if (nextButtonRef !== null) {
-        nextButtonRef.focus();
-      } else if (retryButtonRef !== null) {
-        retryButtonRef.focus();
-      }
-    });
-  });
-
-  const isSubmissionResult = $derived(feedback && 'isCorrect' in feedback);
   const isRevealResult = $derived(feedback && 'correctAnswerText' in feedback && !('isCorrect' in feedback) && !('isSuccess' in feedback));
 
   const isSuccess = $derived.by(() => {
@@ -62,30 +46,17 @@
       <span class="feedback-icon" aria-hidden="true"></span>
       <span class="feedback-message">{feedbackMessage}</span>
     </div>
-    <div class="button-row">
-      {#if showRetry}
-        <Button
-          variant="outline"
-          onclick={onRetry}
-          class="retry-btn"
-          bind:ref={retryButtonRef}
-        >
-          <RefreshCw size={16} />
-          <span>Try again</span>
-        </Button>
-      {/if}
-      {#if (isSubmissionResult || isRevealResult) && onNext}
-        <Button
-          variant="default"
-          onclick={onNext}
-          class="next-btn"
-          bind:ref={nextButtonRef}
-        >
-          <span>Next Question</span>
-          <ArrowRight size={16} />
-        </Button>
-      {/if}
-    </div>
+    {#if showRetry}
+      <Button
+        variant="outline"
+        onclick={onRetry}
+        class="retry-btn"
+        bind:ref={retryButtonRef}
+      >
+        <RefreshCw size={16} />
+        <span>Try again</span>
+      </Button>
+    {/if}
   </div>
 {/if}
 
@@ -199,15 +170,7 @@
     }
   }
 
-  .button-row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    min-height: calc(var(--touch-target-min) * 2 + var(--spacing-sm));
-  }
-
-  .button-row :global(.next-btn),
-  .button-row :global(.retry-btn) {
+  :global(.retry-btn) {
     width: 100%;
   }
 

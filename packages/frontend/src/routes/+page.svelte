@@ -42,19 +42,25 @@
   let levelChangeTo = $state<string | undefined>(undefined);
   let loadError = $state<string | null>(null);
   let lastSelectedQuiz = $state<string | null>(null);
+  let awaitingNextInput = $state(false);
 
   const foldedListsStore = uiPreferencesStore.foldedLists;
   const foldedLists = $derived($foldedListsStore);
 
-  function resetQuizSession() {
+  function resetQuizSession(clearAnswer = true) {
     feedback = null;
-    userAnswer = '';
+    if (clearAnswer) userAnswer = '';
     questionForFeedback = null;
+    awaitingNextInput = false;
   }
 
-  function handleNextQuestion(): void {
-    resetQuizSession();
-    tick().then(() => answerInputRef?.focus());
+  function handleValueChange(v: string): void {
+    if (awaitingNextInput) {
+      feedback = null;
+      questionForFeedback = null;
+      awaitingNextInput = false;
+    }
+    userAnswer = v;
   }
 
   function handleSkip(): void {
@@ -63,12 +69,14 @@
     const result = quizStore.revealAnswer();
     if (result) {
       feedback = result;
+      awaitingNextInput = true;
       usageExamples = {
         source: result.translation.sourceUsageExample || '',
         target: result.translation.targetUsageExample || '',
       };
       userAnswer = '';
       quizStore.getNextQuestion();
+      tick().then(() => answerInputRef?.focus());
     }
   }
 
@@ -164,6 +172,7 @@
 
       if (result) {
         feedback = result;
+        awaitingNextInput = true;
         if ('translation' in result && result.translation) {
           const hasExamples = result.translation.sourceUsageExample || result.translation.targetUsageExample;
           if (hasExamples) {
@@ -296,14 +305,7 @@
     ttsService.destroy();
   });
 
-  function handleKeydown(e: KeyboardEvent): void {
-    if (e.key === 'Enter' && !isSubmitting && feedback && currentQuestion) {
-      handleNextQuestion();
-    }
-  }
 </script>
-
-<svelte:window onkeydown={handleKeydown} />
 
 <ErrorBoundary>
   <main id="main-content" class="feed">
@@ -357,19 +359,17 @@
                 {feedback}
                 {questionForFeedback}
                 onRetry={retryLastOperation}
-                onNext={handleNextQuestion}
-              />
-            {:else}
-              <AnswerInput
-                bind:this={answerInputRef}
-                value={userAnswer}
-                disabled={isSubmitting}
-                isLoading={isSubmitting}
-                onSubmit={submitAnswer}
-                onValueChange={(v) => (userAnswer = v)}
-                onSkip={handleSkip}
               />
             {/if}
+            <AnswerInput
+              bind:this={answerInputRef}
+              value={userAnswer}
+              disabled={isSubmitting}
+              isLoading={isSubmitting}
+              onSubmit={submitAnswer}
+              onValueChange={handleValueChange}
+              onSkip={handleSkip}
+            />
           </FeedCard>
         {/if}
 
