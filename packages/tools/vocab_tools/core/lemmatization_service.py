@@ -311,9 +311,9 @@ class LemmatizationService:
         if uncached_words:
             lemmas = self._lemmatize_batch_with_model(uncached_words)
 
-            # Validate and cache results
-            for idx, lemma in zip(uncached_indices, lemmas, strict=False):
-                word_lower = uncached_words[uncached_indices.index(idx)]
+            # Validate and cache results - use enumerate for O(1) indexing
+            for i, (idx, lemma) in enumerate(zip(uncached_indices, lemmas, strict=False)):
+                word_lower = uncached_words[i]
                 validated = self._validate_lemma_with_wordfreq(word_lower, lemma)
                 results[idx] = validated
 

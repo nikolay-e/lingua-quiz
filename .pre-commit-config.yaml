@@ -7,19 +7,6 @@ default_language_version:
 fail_fast: false # Run all hooks to get complete feedback
 
 repos:
-  # =============================================================================
-  # STAGE 0: Code Generation (must run first)
-  # =============================================================================
-  - repo: local
-    hooks:
-      - id: generate-code
-        name: Generate code from OpenAPI schema
-        entry: make generate-all
-        language: system
-        files: ^lingua-quiz-schema\.json$
-        pass_filenames: false
-        always_run: true # Always run to ensure generated files exist
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -343,7 +330,7 @@ repos:
         args:
           [
             '--write-changes',
-            '--ignore-words-list=crate,nd,ser,llm,async,cli,theses,ba,te,tha,ue,refreshin,ist,lief,calle,cliente,flor,inicial,soler,afterall',
+            '--ignore-words-list=crate,nd,ser,llm,async,cli,theses,ba,te,tha,ue,refreshin,ist,lief,calle,cliente,flor,inicial,soler,afterall,ture,ure',
           ]
         exclude: ^(\.git/|\.venv/|venv/|node_modules/|/generated/|^lingua-quiz-schema\.json$|^package-lock\.json$|packages/tools/data/subtitle_frequencies/|packages/tools/data/reference/cefr/)
 

@@ -16,7 +16,6 @@
     "predev": "npm run build --workspace=@lingua-quiz/core",
     "dev": "vite dev",
     "format": "prettier --write .",
-    "generate:api": "node ./scripts/generate-api.js",
     "lint": "prettier --check . && eslint .",
     "preview": "vite preview"
   },
@@ -34,7 +33,6 @@
     "bits-ui": "^2.14.4",
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.561.0",
-    "openapi-typescript-codegen": "^0.29.0",
     "svelte": "^5.45.10",
     "svelte-check": "^4.3.4",
     "svelte-sonner": "^1.0.7",

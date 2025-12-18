@@ -1,15 +1,14 @@
-import logging
-
 from core.config import RATE_LIMIT_ENABLED
 from core.database import query_words_db
 from core.error_handler import handle_api_errors
+from core.logging import get_logger
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from generated.schemas import ContentVersionResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 router = APIRouter(prefix="/api", tags=["Content Version"])
 limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 

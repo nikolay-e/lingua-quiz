@@ -1,10 +1,10 @@
-import logging
 from urllib.parse import urlparse
 
 from core.config import CORS_ALLOWED_ORIGINS
+from core.logging import get_logger
 from fastapi import HTTPException, Request, status
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 def validate_origin(request: Request) -> None:

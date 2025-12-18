@@ -1,29 +1,11 @@
 import os
 from pathlib import Path
 
-LANGUAGE_ALIASES = {
-    "es": "es",
-    "spanish": "es",
-    "español": "es",
-    "de": "de",
-    "german": "de",
-    "deutsch": "de",
-    "en": "en",
-    "english": "en",
-    "ru": "ru",
-    "russian": "ru",
-    "русский": "ru",
-}
-
-LEVEL_ALIASES = {
-    "a0": "A0",
-    "a1": "A1",
-    "a2": "A2",
-    "b1": "B1",
-    "b2": "B2",
-    "c1": "C1",
-    "c2": "C2",
-}
+from ..config.constants import (
+    LANGUAGE_ALIASES,
+    LANGUAGE_CODE_TO_NAME,
+    LEVEL_ALIASES,
+)
 
 MIGRATION_FILE_PATTERNS = [
     "v3_{language}_{level}.json",
@@ -197,3 +179,8 @@ def resolve_full_config(alias: str | None = None) -> dict:
             pass
 
     return config
+
+
+def get_list_name(lang_code: str, level: str) -> str:
+    lang_name = LANGUAGE_CODE_TO_NAME.get(lang_code, lang_code.title())
+    return f"{lang_name} Russian {level.upper()}"

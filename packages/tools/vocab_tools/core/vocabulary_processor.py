@@ -160,8 +160,7 @@ class VocabularyProcessor:
                 filtered_count = self._handle_duplicate(
                     processed, seen_lemmas, processed_words, categories, filtered_count, stats_collector
                 )
-                if processed.lemma not in seen_lemmas or seen_lemmas[processed.lemma] != processed:
-                    continue
+                continue
 
             processed_words.append(processed)
             categories[processed.category].append(processed)

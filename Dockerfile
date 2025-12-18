@@ -16,27 +16,6 @@ RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev postgresql-dev lin
     && pip install --no-cache-dir -r requirements.txt \
     && apk --purge del .build-deps
 
-COPY --chown=appuser:appuser packages/backend/src/core/base_model.py ./core/
-COPY lingua-quiz-schema.json /tmp/lingua-quiz-schema.json
-RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
-    && mkdir -p ./generated \
-    && PYTHONPATH=/home/appuser python -m datamodel_code_generator \
-        --input /tmp/lingua-quiz-schema.json \
-        --output ./generated/schemas.py \
-        --output-model-type pydantic_v2.BaseModel \
-        --base-class core.base_model.APIBaseModel \
-        --field-constraints \
-        --use-standard-collections \
-        --use-annotated \
-        --use-double-quotes \
-        --target-python-version 3.14 \
-        --capitalise-enum-members \
-        --enum-field-as-literal one \
-        --snake-case-field \
-        --use-schema-description \
-    && pip uninstall -y datamodel-code-generator \
-    && rm /tmp/lingua-quiz-schema.json
-
 COPY --chown=appuser:appuser packages/backend/src/ ./
 COPY --chown=appuser:appuser packages/backend/alembic/ ./alembic/
 COPY --chown=appuser:appuser packages/backend/alembic.ini ./
@@ -54,7 +33,7 @@ FROM node:25-slim AS frontend-builder
 ARG APP_VERSION=dev
 ARG APP_ENVIRONMENT=development
 WORKDIR /app
-COPY package.json package-lock.json lingua-quiz-schema.json ./
+COPY package.json package-lock.json ./
 COPY packages/domain/ ./packages/domain/
 COPY packages/core/package.json ./packages/core/
 COPY packages/frontend/package.json ./packages/frontend/
@@ -62,8 +41,7 @@ RUN npm ci
 COPY packages/core/ ./packages/core/
 RUN npm run build --workspace @lingua-quiz/core
 COPY packages/frontend/ ./packages/frontend/
-RUN npm run generate:api && \
-    VITE_APP_VERSION=${APP_VERSION} \
+RUN VITE_APP_VERSION=${APP_VERSION} \
     VITE_APP_ENVIRONMENT=${APP_ENVIRONMENT} \
     npm run build --workspace @lingua-quiz/frontend
 
@@ -80,30 +58,11 @@ WORKDIR /home/pwuser/tests
 COPY packages/tests/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY --chown=pwuser:pwuser packages/backend/src/core/base_model.py ./backend/src/core/
+COPY --chown=pwuser:pwuser packages/backend/src/ ./backend/src/
 COPY --chown=pwuser:pwuser packages/backend/alembic/ ./backend/alembic/
 COPY --chown=pwuser:pwuser packages/backend/alembic.ini ./backend/alembic.ini
 COPY --chown=pwuser:pwuser packages/backend/alembic-words/ ./backend/alembic-words/
 COPY --chown=pwuser:pwuser packages/backend/alembic-words.ini ./backend/alembic-words.ini
-COPY lingua-quiz-schema.json /tmp/lingua-quiz-schema.json
-RUN pip install --no-cache-dir datamodel-code-generator==0.41.0 \
-    && mkdir -p ./backend/src/generated \
-    && PYTHONPATH=/home/pwuser/backend/src python -m datamodel_code_generator \
-        --input /tmp/lingua-quiz-schema.json \
-        --output ./backend/src/generated/schemas.py \
-        --output-model-type pydantic_v2.BaseModel \
-        --base-class core.base_model.APIBaseModel \
-        --field-constraints \
-        --use-standard-collections \
-        --use-annotated \
-        --use-double-quotes \
-        --target-python-version 3.12 \
-        --capitalise-enum-members \
-        --enum-field-as-literal one \
-        --snake-case-field \
-        --use-schema-description \
-    && pip uninstall -y datamodel-code-generator \
-    && rm /tmp/lingua-quiz-schema.json
 
 COPY --chown=pwuser:pwuser packages/tests/ ./
 RUN mkdir -p reports && chown -R pwuser:pwuser /home/pwuser/tests

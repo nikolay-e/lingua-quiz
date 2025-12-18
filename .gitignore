@@ -102,11 +102,6 @@ packages/core/tests/*.js
 # Frontend app types
 packages/frontend/src/app.d.ts
 
-# Generated code (regenerate with `make generate-all`)
-packages/backend/src/generated/
-packages/domain/src/generated/
-packages/frontend/src/generated/
-
 # TODO files (local task tracking)
 TODO.md
 *TODO.md
@@ -116,3 +111,4 @@ TODO*.md
 packages/word-processing/frequency_lists/*.json
 packages/word-processing/frequency_lists/*_top*.csv
 packages/word-processing/data/subtitle_frequencies/*_lemmatized.csv
+packages/tools/generated_vocabularies/

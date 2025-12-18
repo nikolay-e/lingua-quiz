@@ -60,15 +60,15 @@ cefr_levels:
     description: 'Medium frequency - complex topics and abstract ideas'
 
   c1:
-    words: 5000
-    rank_range: [7001, 12000]
+    words: 4000
+    rank_range: [6001, 10000]
     zipf_threshold: 2.0
     coverage_target: '+2% (total ~98%)'
     description: 'Lower frequency - fluent and spontaneous expression'
 
   c2:
-    words: 8000
-    rank_range: [12001, 20000]
+    words: 4000
+    rank_range: [10001, 14000]
     zipf_threshold: 1.5
     coverage_target: '+1% (total ~99%)'
     description: 'Rare words - near-native proficiency'

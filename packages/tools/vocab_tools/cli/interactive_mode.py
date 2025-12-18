@@ -230,12 +230,8 @@ def run_interactive_mode():
                 generate._generate_impl(language=language)
 
             elif command == "fill":
-                lang_level = prompt_language_level("fill")
-                if lang_level:
-                    console.print()
-                    from .commands.fill import fill
-
-                    fill(language_level=lang_level)
+                console.print("\n[yellow]The 'fill' command is not yet implemented.[/yellow]")
+                console.print("[dim]Use 'analyze' to identify missing words instead.[/dim]")
 
             else:
                 console.print(f"\n[yellow]Unknown command: {command}[/yellow]")

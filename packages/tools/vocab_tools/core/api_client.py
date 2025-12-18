@@ -18,6 +18,10 @@ class VocabularyEntry:
     is_active: bool = True
 
 
+class MissingCredentialsError(Exception):
+    pass
+
+
 class StagingAPIClient:
     def __init__(
         self,
@@ -26,18 +30,31 @@ class StagingAPIClient:
         username: str | None = None,
         password: str | None = None,
     ):
-        self.base_url = base_url or os.environ.get("STAGING_API_URL", "https://test-lingua-quiz.nikolay-eremeev.com")
+        self.base_url = base_url or os.environ.get("STAGING_API_URL", "https://staging.lingua-quiz.org")
         self.token = token or os.environ.get("STAGING_API_TOKEN")
 
         if not self.token:
-            username = username or os.environ.get("STAGING_API_USERNAME", "admin")
-            password = password or os.environ.get("STAGING_API_PASSWORD", "admin123")
+            username = username or os.environ.get("STAGING_API_USERNAME")
+            password = password or os.environ.get("STAGING_API_PASSWORD")
+
+            if not username or not password:
+                raise MissingCredentialsError(
+                    "API credentials not configured. Set environment variables:\n"
+                    "  STAGING_API_TOKEN (preferred) or\n"
+                    "  STAGING_API_USERNAME and STAGING_API_PASSWORD"
+                )
+
             self.token = self._login(username, password)
 
     def _login(self, username: str, password: str) -> str:
         url = f"{self.base_url}/api/auth/login"
+        headers = {
+            "Content-Type": "application/json",
+            "Origin": self.base_url,
+        }
         response = requests.post(
             url,
+            headers=headers,
             json={"username": username, "password": password},
             timeout=30,
         )
@@ -49,6 +66,7 @@ class StagingAPIClient:
         return {
             "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json",
+            "Origin": self.base_url,
         }
 
     def create_vocabulary_item(

@@ -1,24 +1,15 @@
-import logging
-from typing import TYPE_CHECKING
-
 from core.auth_helpers import build_access_token, create_and_store_refresh_token, revoke_refresh_token
 from core.config import RATE_LIMIT_ENABLED
 from core.database import execute_write_transaction, query_db
 from core.error_handler import handle_api_errors
-from core.schema_loader import load_schemas
+from core.logging import get_logger, user_id_var
 from core.security import get_current_user, hash_password, verify_password, verify_refresh_token
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
-if TYPE_CHECKING:
-    from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
-
-RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse = load_schemas(
-    "RefreshTokenRequest", "TokenResponse", "UserLogin", "UserRegistration", "UserResponse"
-)
-
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
 limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
@@ -69,7 +60,8 @@ def register_user(request: Request, user_data: UserRegistration) -> TokenRespons
 
     user_id = result["id"]
     is_admin = result.get("is_admin", False)
-    logger.info(f"Successfully created user {user_data.username} with id {user_id}")
+    user_id_var.set(str(user_id))
+    logger.info(f"Successfully created user {user_data.username}")
 
     token = build_access_token(user_id, user_data.username, is_admin)
     refresh_token = create_and_store_refresh_token(user_id)
@@ -102,10 +94,11 @@ def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
         )
 
     is_admin = user.get("is_admin", False)
+    user_id_var.set(str(user["id"]))
     token = build_access_token(user["id"], user["username"], is_admin)
     refresh_token = create_and_store_refresh_token(user["id"])
 
-    logger.info(f"Successful login for user: {user_data.username}")
+    logger.info("Successful login")
 
     return TokenResponse(
         token=token,

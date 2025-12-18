@@ -1,13 +1,13 @@
 from collections.abc import Callable
 from functools import wraps
-import logging
 from typing import Any, TypeVar
 
+from core.logging import get_logger
 from fastapi import HTTPException
 
 T = TypeVar("T")
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 def handle_api_errors(

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class AnalysisDefaults(BaseModel):
@@ -81,10 +81,13 @@ class POSCategories(BaseModel):
 
 
 class LanguageConfig(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
     name: str
     wordfreq_code: str
     spacy_models: list[str] = Field(min_length=1)
     stanza_code: str | None = None
+    max_word_length: int | None = Field(default=None, ge=5, le=100)
 
     normalization: Normalization
     inflection_patterns: InflectionPatterns
@@ -103,10 +106,13 @@ class LanguageConfig(BaseModel):
 
 
 class Config(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
     analysis_defaults: AnalysisDefaults
     cefr_levels: dict[str, CEFRLevel]
     cefr_cumulative_totals: dict[str, int]
     languages: dict[str, LanguageConfig]
+    essential_vocabulary_categories: list[str] = Field(default_factory=list)
 
     @field_validator("cefr_levels")
     @classmethod
