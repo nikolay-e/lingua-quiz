@@ -40,10 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci --prefer-offline
-          pip install --no-cache-dir pre-commit datamodel-code-generator -r packages/backend/requirements.txt
-
-      - name: Generate code from OpenAPI schema
-        run: make generate-all
+          pip install --no-cache-dir pre-commit -r packages/backend/requirements.txt
 
       - name: Run pre-commit
         run: pre-commit run --all-files --show-diff-on-failure --color=always
