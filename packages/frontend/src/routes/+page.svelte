@@ -354,6 +354,15 @@
 
         {#if currentQuestion}
           <FeedCard dense>
+            <AnswerInput
+              bind:this={answerInputRef}
+              value={userAnswer}
+              disabled={isSubmitting}
+              isLoading={isSubmitting}
+              onSubmit={submitAnswer}
+              onValueChange={handleValueChange}
+              onSkip={handleSkip}
+            />
             {#if feedback}
               <FeedbackDisplay
                 {feedback}
