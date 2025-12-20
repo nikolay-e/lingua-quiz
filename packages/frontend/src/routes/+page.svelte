@@ -7,6 +7,7 @@
   import { toast } from 'svelte-sonner';
   import { extractErrorMessage } from '$lib/utils/error';
   import { logger } from '$lib/utils/logger';
+  import { isTouchDevice } from '$lib/utils/device';
   import {
     requestWakeLock,
     releaseWakeLock,
@@ -108,7 +109,7 @@
   const currentLanguage = $derived(direction === 'normal' ? sourceLanguage : targetLanguage);
 
   $effect(() => {
-    if (answerInputRef && currentQuestion) {
+    if (answerInputRef && currentQuestion && !isTouchDevice()) {
       void answerInputRef.focus();
     }
   });
@@ -127,7 +128,7 @@
       if (!question) {
         feedback = { message: 'No questions available for this quiz.', isSuccess: false } as QuizFeedback;
       }
-      await answerInputRef?.focus();
+      if (!isTouchDevice()) await answerInputRef?.focus();
       await requestWakeLock();
     } catch (error: unknown) {
       logger.error('Failed to start quiz:', error);
@@ -262,7 +263,7 @@
           loadWordLists(),
         ]);
       }
-      await answerInputRef?.focus();
+      if (!isTouchDevice()) await answerInputRef?.focus();
     })().catch((error) => {
       logger.error('Failed to initialize quiz:', error);
     });
