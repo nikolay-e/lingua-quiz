@@ -23,6 +23,7 @@
 
     return () => {
       unsubscribe();
+      ttsService.stopCurrentAudio();
     };
   });
 

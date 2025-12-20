@@ -337,11 +337,13 @@
           <FeedCard dense title="Translate">
             {#snippet headerAction()}
               {#if currentQuestion}
-                <TTSButton
-                  token={$authStore.token!}
-                  text={currentQuestion.questionText}
-                  language={currentLanguage}
-                />
+                {#key currentQuestion.questionText}
+                  <TTSButton
+                    token={$authStore.token!}
+                    text={currentQuestion.questionText}
+                    language={currentLanguage}
+                  />
+                {/key}
               {/if}
             {/snippet}
             <QuestionDisplay {currentQuestion} levelWordLists={$levelWordLists} />
