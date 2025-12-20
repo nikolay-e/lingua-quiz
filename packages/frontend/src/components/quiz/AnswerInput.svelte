@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from 'svelte';
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
   import { Send, Eye, Loader2 } from 'lucide-svelte';
@@ -21,7 +22,8 @@
     if (!disabled && !isLoading) onSubmit();
   }
 
-  export function focus() {
+  export async function focus() {
+    await tick();
     inputElement?.focus();
   }
 </script>

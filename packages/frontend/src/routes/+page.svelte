@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, tick, onDestroy } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { authStore, quizStore, levelWordLists, uiPreferencesStore } from '$stores';
   import type { SubmissionResult, QuizQuestion, RevealResult } from '@lingua-quiz/core';
   import type { QuizFeedback } from '$src/api-types';
@@ -76,7 +76,7 @@
       };
       userAnswer = '';
       quizStore.getNextQuestion();
-      tick().then(() => answerInputRef?.focus());
+      void answerInputRef?.focus();
     }
   }
 
@@ -109,7 +109,7 @@
 
   $effect(() => {
     if (answerInputRef && currentQuestion) {
-      answerInputRef.focus();
+      void answerInputRef.focus();
     }
   });
 
@@ -127,9 +127,7 @@
       if (!question) {
         feedback = { message: 'No questions available for this quiz.', isSuccess: false } as QuizFeedback;
       }
-      await tick();
-      answerInputRef?.focus();
-
+      await answerInputRef?.focus();
       await requestWakeLock();
     } catch (error: unknown) {
       logger.error('Failed to start quiz:', error);
@@ -195,9 +193,7 @@
         userAnswer = '';
 
         quizStore.getNextQuestion();
-
-        await tick();
-        answerInputRef?.focus();
+        await answerInputRef?.focus();
       }
     } catch (error: unknown) {
       logger.error('Error submitting answer:', error);
@@ -266,8 +262,7 @@
           loadWordLists(),
         ]);
       }
-      await tick();
-      answerInputRef?.focus();
+      await answerInputRef?.focus();
     })().catch((error) => {
       logger.error('Failed to initialize quiz:', error);
     });
