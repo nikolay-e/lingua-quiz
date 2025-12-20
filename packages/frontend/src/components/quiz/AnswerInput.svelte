@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
+  import { Input } from '$lib/components/ui/input';
   import { Send, Eye, Loader2 } from 'lucide-svelte';
 
   interface Props {
@@ -25,12 +26,12 @@
   }
 </script>
 
-<form class="answer-input-container" onsubmit={handleFormSubmit}>
+<form class="flex flex-col gap-3" onsubmit={handleFormSubmit}>
   <label for="answer-input" class="sr-only">Your answer</label>
-  <input
+  <Input
     id="answer-input"
     type="text"
-    bind:this={inputElement}
+    bind:ref={inputElement}
     {value}
     oninput={(e) => onValueChange(e.currentTarget.value)}
     placeholder="Type your answer..."
@@ -39,14 +40,15 @@
     autocomplete="off"
     autocorrect="off"
     autocapitalize="off"
-    spellcheck="false"
+    spellcheck={false}
   />
-  <div class="button-row">
+  <div class="flex flex-col gap-3">
     <Button
       type="submit"
       variant="default"
       disabled={disabled || isLoading}
-      class="submit-btn">
+      class="w-full"
+    >
       {#if isLoading}
         <Loader2 size={16} class="animate-spin" />
         <span>Checking...</span>
@@ -60,50 +62,10 @@
       variant="outline"
       onclick={onSkip}
       disabled={!onSkip || isLoading}
-      class="skip-btn">
+      class="w-full"
+    >
       <Eye size={16} />
       <span>Show Answer</span>
     </Button>
   </div>
 </form>
-
-<style>
-  .answer-input-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
-  input {
-    padding: var(--spacing-sm) var(--spacing-md);
-    min-height: 2.5rem;
-    border: 1px solid var(--input-border-color);
-    border-radius: var(--radius-md);
-    background-color: var(--container-bg);
-  }
-
-  .button-row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    min-height: calc(var(--touch-target-min) * 2 + var(--spacing-sm));
-  }
-
-  .button-row :global(.submit-btn),
-  .button-row :global(.skip-btn) {
-    width: 100%;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  :global(.animate-spin) {
-    animation: spin 1s linear infinite;
-  }
-</style>

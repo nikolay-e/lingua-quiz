@@ -3,10 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export type ProgressUpdateRequest = {
-    vocabularyItemId: string;
-    level: number;
-    queuePosition: number;
-    correctCount: number;
-    incorrectCount: number;
+  vocabularyItemId: string;
+  level: number;
+  queuePosition: number;
+  correctCount: number;
+  incorrectCount: number;
 };
-

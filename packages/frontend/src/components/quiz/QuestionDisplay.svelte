@@ -38,111 +38,52 @@
 </script>
 
 {#if currentQuestion}
-  <div class="question-wrapper">
+  <div class="flex flex-col gap-2">
     {#if levelInfo}
-      <div class="level-indicator">
-        <span class="level-text">{levelInfo.description}</span>
-        <output class="level-percent">{completionPercent}%</output>
+      <div class="flex justify-between items-center">
+        <span class="text-sm text-muted-foreground">{levelInfo.description}</span>
+        <output class="text-sm text-muted-foreground font-medium">
+          {completionPercent}%
+        </output>
       </div>
       <progress
-        class="completion-progress"
+        class="w-full h-1.5 rounded-full appearance-none bg-muted
+               [&::-webkit-progress-bar]:bg-muted
+               [&::-webkit-progress-bar]:rounded-full
+               [&::-webkit-progress-value]:bg-primary
+               [&::-webkit-progress-value]:rounded-full
+               [&::-webkit-progress-value]:transition-all
+               [&::-moz-progress-bar]:bg-primary
+               [&::-moz-progress-bar]:rounded-full"
         value={completionPercent}
         max="100"
         aria-label="Level completion: {completionPercent}%"
       >{completionPercent}%</progress>
     {/if}
-    <div class="question">
-      <span id="word" class="question-text" lang={questionLanguage}>
+    <div
+      class="flex flex-col items-center justify-center min-h-20 px-6 py-4
+             bg-primary/5 rounded-lg"
+    >
+      <span
+        id="word"
+        class="text-[clamp(1.25rem,4vw,1.75rem)] font-bold text-primary
+               text-center break-words hyphens-auto"
+        lang={questionLanguage}
+      >
         {currentQuestion.questionText}
       </span>
     </div>
   </div>
 {:else}
-  <div class="question empty">
-    <span id="word" class="question-text empty-text">No more questions available.</span>
-    <p class="empty-hint">Select another quiz or check back later.</p>
+  <div
+    class="flex flex-col items-center justify-center min-h-20 px-6 py-4
+           bg-muted/50 rounded-lg opacity-70"
+  >
+    <span id="word" class="text-lg font-bold text-muted-foreground text-center">
+      No more questions available.
+    </span>
+    <p class="text-sm text-muted-foreground mt-2">
+      Select another quiz or check back later.
+    </p>
   </div>
 {/if}
-
-<style>
-  .question-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-  }
-
-  .level-indicator {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .level-text {
-    font-size: var(--font-size-sm);
-    color: var(--color-muted-foreground);
-  }
-
-  .level-percent {
-    font-size: var(--font-size-sm);
-    color: var(--color-muted-foreground);
-    font-weight: var(--font-weight-medium);
-  }
-
-  .completion-progress {
-    width: 100%;
-    height: 6px;
-    border-radius: 3px;
-    appearance: none;
-    background: var(--color-muted);
-  }
-
-  .completion-progress::-webkit-progress-bar {
-    background: var(--color-muted);
-    border-radius: 3px;
-  }
-
-  .completion-progress::-webkit-progress-value {
-    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-    border-radius: 3px;
-    transition: width 0.3s ease;
-  }
-
-  .completion-progress::-moz-progress-bar {
-    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-    border-radius: 3px;
-  }
-
-  .question {
-    padding: var(--spacing-md) var(--spacing-lg);
-    background: linear-gradient(135deg, var(--color-feature-gradient-start), var(--color-feature-gradient-end));
-    border-radius: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
-  }
-
-  .question-text {
-    font-size: clamp(1.25rem, 4vw, 1.75rem);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
-    text-align: center;
-    overflow-wrap: anywhere;
-    hyphens: auto;
-  }
-
-  .empty {
-    opacity: 0.7;
-  }
-
-  .empty-text {
-    font-size: var(--font-size-lg);
-  }
-
-  .empty-hint {
-    font-size: var(--font-size-sm);
-    color: var(--color-muted-foreground);
-    margin: var(--spacing-xs) 0 0;
-  }
-</style>

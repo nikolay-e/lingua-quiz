@@ -3,8 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type HealthResponse = {
-    status: string;
-    database: string;
-    timestamp: string;
+  status: string;
+  database: string;
+  timestamp: string;
 };
-

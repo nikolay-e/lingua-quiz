@@ -3,6 +3,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type VersionResponse = {
-    version: string;
+  version: string;
 };
-

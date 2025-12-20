@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type TTSLanguagesResponse = {
-    available: boolean;
-    supportedLanguages: Array<string>;
+  available: boolean;
+  supportedLanguages: Array<string>;
 };
-

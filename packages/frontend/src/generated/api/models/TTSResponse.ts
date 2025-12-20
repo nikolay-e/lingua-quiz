@@ -3,9 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export type TTSResponse = {
-    audioData: string;
-    contentType?: (string | null);
-    text: string;
-    language: string;
+  audioData: string;
+  contentType?: string | null;
+  text: string;
+  language: string;
 };
-

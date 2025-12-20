@@ -1,66 +1,55 @@
 <script lang="ts">
-  export let title: string | null = null;
-  export let subtitle: string | null = null;
-  export let dense: boolean = false;
+  import { cn } from '$lib/utils';
+  import type { Snippet } from 'svelte';
+
+  interface Props {
+    title?: string | null;
+    subtitle?: string | null;
+    dense?: boolean;
+    class?: string;
+    headerAction?: Snippet;
+    children?: Snippet;
+  }
+
+  const {
+    title = null,
+    subtitle = null,
+    dense = false,
+    class: className,
+    headerAction,
+    children,
+  }: Props = $props();
 </script>
 
-<article class="feed-item {dense ? 'dense' : ''}">
-  {#if title || subtitle || $$slots.headerAction}
-    <header class="feed-item__header">
-      <div class="header-content">
-        <div class="header-text">
-          {#if title}<h3 class="text-lg">{title}</h3>{/if}
-          {#if subtitle}<p class="subtitle text-sm">{subtitle}</p>{/if}
+<article
+  class={cn(
+    'bg-card border border-border rounded-lg shadow-sm',
+    dense ? 'p-4' : 'p-6',
+    className,
+  )}
+>
+  {#if title || subtitle || headerAction}
+    <header class="mb-3">
+      <div class="flex justify-between items-center gap-4">
+        <div>
+          {#if title}
+            <h3 class="text-lg font-semibold text-foreground mb-1">{title}</h3>
+          {/if}
+          {#if subtitle}
+            <p class="text-sm text-muted-foreground">{subtitle}</p>
+          {/if}
         </div>
-        {#if $$slots.headerAction}
-          <div class="header-action">
-            <slot name="headerAction" />
+        {#if headerAction}
+          <div class="shrink-0">
+            {@render headerAction()}
           </div>
         {/if}
       </div>
     </header>
   {/if}
-  <div class="feed-item__body">
-    <slot />
+  <div>
+    {#if children}
+      {@render children()}
+    {/if}
   </div>
 </article>
-
-<style>
-  .feed-item {
-    background: var(--container-bg);
-    border: 1px solid var(--input-border-color);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-md);
-    padding: var(--spacing-lg);
-  }
-
-  .feed-item.dense {
-    padding: var(--spacing-md);
-  }
-
-  .feed-item__header {
-    margin-block-end: var(--spacing-sm);
-  }
-
-  .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-md);
-  }
-
-  .header-text h3 {
-    margin: 0;
-    margin-block-end: var(--spacing-xs);
-    color: var(--text-color);
-  }
-
-  .header-text .subtitle {
-    margin: 0;
-    opacity: 0.8;
-  }
-
-  .feed-item__body :global(.full-width) {
-    width: 100%;
-  }
-</style>

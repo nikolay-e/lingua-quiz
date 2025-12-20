@@ -21,13 +21,13 @@
   }
 </script>
 
-<div class="quiz-header">
+<div>
   {#if !selectedQuiz}
-    <div class="quiz-select-container">
+    <div>
       <label for="quiz-select" class="sr-only">Select a quiz</label>
       <select
         id="quiz-select"
-        class="quiz-select text-base"
+        class="w-full text-base"
         bind:value={selected}
         onchange={handleQuizSelect}
         disabled={loading}
@@ -42,10 +42,10 @@
       </select>
     </div>
   {:else}
-    <div class="selected-quiz-header flex-between gap-md">
-      <div class="quiz-info flex-align-center gap-xs">
+    <div class="flex justify-between items-center gap-4">
+      <div class="flex items-center gap-2 text-primary">
         <BookOpen size={16} />
-        <span class="quiz-name text-lg">{selectedQuiz}</span>
+        <span class="text-lg font-semibold">{selectedQuiz}</span>
       </div>
       <Button variant="outline" size="sm" onclick={onBackToMenu}>
         <ArrowLeft size={16} />
@@ -54,37 +54,3 @@
     </div>
   {/if}
 </div>
-
-<style>
-  .quiz-select {
-    background-color: var(--container-bg);
-    color: var(--text-color);
-    border: 2px solid var(--input-border-color);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-sm);
-    transition: border-color var(--transition-speed) ease;
-
-    &:focus-visible {
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgb(74 144 226 / 0.2);
-    }
-
-    &:disabled {
-      background-color: var(--color-disabled-bg);
-      color: var(--color-disabled-text);
-      border-color: var(--color-disabled-border);
-      cursor: not-allowed;
-    }
-  }
-
-  .quiz-info {
-    :global(svg) {
-      color: var(--primary-color);
-    }
-  }
-
-  .quiz-name {
-    font-weight: 600;
-    color: var(--primary-color);
-  }
-</style>

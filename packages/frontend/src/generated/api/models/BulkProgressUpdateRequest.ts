@@ -4,6 +4,5 @@
 /* eslint-disable */
 import type { ProgressUpdateRequest } from './ProgressUpdateRequest';
 export type BulkProgressUpdateRequest = {
-    items: Array<ProgressUpdateRequest>;
+  items: Array<ProgressUpdateRequest>;
 };
-

@@ -4,9 +4,8 @@
 /* eslint-disable */
 import type { UserResponse } from './UserResponse';
 export type TokenResponse = {
-    token: string;
-    refresh_token: string;
-    expires_in?: (string | null);
-    user: UserResponse;
+  token: string;
+  refresh_token: string;
+  expires_in?: string | null;
+  user: UserResponse;
 };
-

@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type TTSRequest = {
-    text: string;
-    language: string;
+  text: string;
+  language: string;
 };
-

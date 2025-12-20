@@ -3,15 +3,14 @@
 /* tslint:disable */
 /* eslint-disable */
 export type UserProgressResponse = {
-    vocabularyItemId: string;
-    sourceText: string;
-    sourceLanguage: string;
-    targetLanguage: string;
-    level: number;
-    queuePosition: number;
-    correctCount: number;
-    incorrectCount: number;
-    consecutiveCorrect: number;
-    lastPracticed: (string | null);
+  vocabularyItemId: string;
+  sourceText: string;
+  sourceLanguage: string;
+  targetLanguage: string;
+  level: number;
+  queuePosition: number;
+  correctCount: number;
+  incorrectCount: number;
+  consecutiveCorrect: number;
+  lastPracticed: string | null;
 };
-

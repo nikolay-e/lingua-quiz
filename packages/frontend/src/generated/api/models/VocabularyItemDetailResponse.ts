@@ -3,17 +3,16 @@
 /* tslint:disable */
 /* eslint-disable */
 export type VocabularyItemDetailResponse = {
-    id: string;
-    sourceText: string;
-    sourceLanguage: string;
-    targetText: string;
-    targetLanguage: string;
-    listName: string;
-    difficultyLevel: (string | null);
-    sourceUsageExample: (string | null);
-    targetUsageExample: (string | null);
-    isActive: boolean;
-    createdAt: string;
-    updatedAt: string;
+  id: string;
+  sourceText: string;
+  sourceLanguage: string;
+  targetText: string;
+  targetLanguage: string;
+  listName: string;
+  difficultyLevel: string | null;
+  sourceUsageExample: string | null;
+  targetUsageExample: string | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
-

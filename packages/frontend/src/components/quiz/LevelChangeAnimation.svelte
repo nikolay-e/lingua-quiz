@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { cn } from '$lib/utils';
+  import { ArrowUp, ArrowDown } from 'lucide-svelte';
+
   interface Props {
     isVisible?: boolean;
     isLevelUp?: boolean;
@@ -24,7 +27,7 @@
 
     const timer = setTimeout(() => {
       onComplete?.();
-    }, 1500);
+    }, 1200);
 
     return () => clearTimeout(timer);
   });
@@ -33,121 +36,32 @@
 {#if isVisible}
   <div
     bind:this={animationElement}
-    class="level-change-animation {isLevelUp ? 'level-up' : 'level-down'}"
+    class={cn(
+      'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none',
+      isLevelUp ? 'animate-level-up' : 'animate-level-down',
+    )}
     role="alert"
     aria-live="polite"
   >
-    <div class="animation-content">
-      <div class="icon">{isLevelUp ? '⬆️' : '⬇️'}</div>
-      <div class="text-content">
-        <div class="title">{isLevelUp ? 'Level Up!' : 'Level Down'}</div>
+    <div
+      class={cn(
+        'flex items-center gap-3 px-6 py-4 rounded-lg border-2 bg-card/95 backdrop-blur-sm shadow-lg',
+        isLevelUp ? 'border-success text-success' : 'border-destructive text-destructive',
+      )}
+    >
+      <span class="text-2xl">
+        {#if isLevelUp}
+          <ArrowUp size={24} />
+        {:else}
+          <ArrowDown size={24} />
+        {/if}
+      </span>
+      <div class="flex flex-col">
+        <span class="font-bold text-lg">{isLevelUp ? 'Level Up!' : 'Level Down'}</span>
         {#if fromLevel && toLevel}
-          <div class="levels">{levelLabel(fromLevel)} → {levelLabel(toLevel)}</div>
+          <span class="text-sm opacity-80">{levelLabel(fromLevel)} → {levelLabel(toLevel)}</span>
         {/if}
       </div>
     </div>
   </div>
 {/if}
-
-<style>
-  .level-change-animation {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    pointer-events: none;
-  }
-
-  .level-up {
-    animation: level-up-animation 1.5s ease-out forwards;
-  }
-
-  .level-down {
-    animation: level-down-animation 1.5s ease-out forwards;
-  }
-
-  .animation-content {
-    background: var(--color-surface);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-md) var(--spacing-xl);
-    box-shadow: var(--shadow-xl);
-    backdrop-filter: blur(10px);
-    border: 2px solid;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    opacity: 0.95;
-  }
-
-  .icon {
-    font-size: 1.5rem;
-  }
-
-  .text-content {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .title {
-    font-weight: bold;
-    font-size: var(--font-size-lg);
-  }
-
-  .levels {
-    font-size: var(--font-size-sm);
-    opacity: 0.8;
-  }
-
-  .level-up .animation-content {
-    border-color: var(--color-level-up-border);
-    color: var(--color-level-up);
-  }
-
-  .level-down .animation-content {
-    border-color: var(--color-level-down-border);
-    color: var(--color-level-down);
-  }
-
-  @keyframes level-up-animation {
-    0% {
-      transform: translate(-50%, -50%) scale(0.5);
-      opacity: 0;
-    }
-
-    20% {
-      transform: translate(-50%, -50%) scale(1.2);
-      opacity: 1;
-    }
-
-    40% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    100% {
-      transform: translate(-50%, -60%) scale(1);
-      opacity: 0;
-    }
-  }
-
-  @keyframes level-down-animation {
-    0% {
-      transform: translate(-50%, -50%) scale(0.5);
-      opacity: 0;
-    }
-
-    20% {
-      transform: translate(-50%, -50%) scale(1.2);
-      opacity: 1;
-    }
-
-    40% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    100% {
-      transform: translate(-50%, -40%) scale(1);
-      opacity: 0;
-    }
-  }
-</style>

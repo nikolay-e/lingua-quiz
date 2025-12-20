@@ -46,11 +46,10 @@
     {disabled}
     {id}
     {autocomplete}
-    class={invalid ? 'invalid' : ''}
   />
   <button
     type="button"
-    class="toggle-password-btn"
+    class="toggle-password-btn disabled:opacity-50 disabled:cursor-not-allowed"
     onclick={togglePasswordVisibility}
     aria-label={showPassword ? 'Hide password' : 'Show password'}
     tabindex="-1"
@@ -63,18 +62,3 @@
     {/if}
   </button>
 </div>
-
-<style>
-  :global(.invalid) {
-    border-color: var(--color-error) !important;
-  }
-
-  :global(.invalid:focus-visible) {
-    box-shadow: 0 0 0 3px rgb(231 76 60 / 0.2) !important;
-  }
-
-  .toggle-password-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-</style>

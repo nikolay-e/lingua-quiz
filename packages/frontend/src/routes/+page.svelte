@@ -339,7 +339,7 @@
       {:else}
         {#if selectedQuiz}
           <FeedCard dense title="Translate">
-            <svelte:fragment slot="headerAction">
+            {#snippet headerAction()}
               {#if currentQuestion}
                 <TTSButton
                   token={$authStore.token!}
@@ -347,7 +347,7 @@
                   language={currentLanguage}
                 />
               {/if}
-            </svelte:fragment>
+            {/snippet}
             <QuestionDisplay {currentQuestion} levelWordLists={$levelWordLists} />
           </FeedCard>
         {/if}

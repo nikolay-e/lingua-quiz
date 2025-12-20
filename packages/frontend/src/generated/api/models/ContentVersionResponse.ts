@@ -3,8 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type ContentVersionResponse = {
-    versionId: number;
-    versionName: string;
-    isActive: boolean;
+  versionId: number;
+  versionName: string;
+  isActive: boolean;
 };
-
