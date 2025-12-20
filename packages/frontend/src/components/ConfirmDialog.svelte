@@ -133,7 +133,7 @@
   }
 
   .confirm-title {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
   .confirm-desc {

@@ -66,8 +66,7 @@
     >
       <span
         id="word"
-        class="text-[clamp(1.25rem,4vw,1.75rem)] font-bold text-primary
-               text-center break-words hyphens-auto"
+        class="text-xl font-bold text-primary text-center break-words hyphens-auto"
         lang={questionLanguage}
       >
         {currentQuestion.questionText}

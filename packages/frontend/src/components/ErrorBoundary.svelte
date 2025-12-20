@@ -79,7 +79,7 @@
   }
 
   .error-icon {
-    font-size: 3rem;
+    font-size: var(--font-size-2xl);
     margin-bottom: var(--spacing-md);
   }
 

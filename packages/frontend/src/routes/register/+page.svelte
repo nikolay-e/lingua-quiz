@@ -145,7 +145,7 @@ class="form-compact">
 
   .password-requirements-title {
     margin-block-end: var(--spacing-xs);
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
   }
 
   .requirements-list {

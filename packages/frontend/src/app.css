@@ -91,6 +91,7 @@
     --shadow-md: 0 2px 4px rgb(0 0 0 / 8%);
 
     /* Fluid font size scale using clamp() */
+    --font-size-xs: clamp(0.625rem, 0.6rem + 0.2vw, 0.75rem);
     --font-size-sm: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
     --font-size-base: clamp(0.875rem, 0.8rem + 0.4vw, 1rem);
     --font-size-lg: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
