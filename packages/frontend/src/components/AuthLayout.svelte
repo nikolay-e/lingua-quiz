@@ -11,8 +11,10 @@
 
 <main id="main-content" class="feed">
   <FeedCard dense>
-    <header>
-      <h1><Languages size={28} /> LinguaQuiz</h1>
+    <header class="flex items-center gap-2">
+      <h1 class="m-0 text-primary text-xl flex items-center gap-1">
+        <Languages size={28} /> LinguaQuiz
+      </h1>
     </header>
   </FeedCard>
 
@@ -24,19 +26,6 @@
 </main>
 
 <style>
-  header {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-  }
-
-  header h1 {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-  }
-
   .auth-content {
     display: flex;
     flex-direction: column;
