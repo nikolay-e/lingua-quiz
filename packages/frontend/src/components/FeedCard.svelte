@@ -47,7 +47,7 @@
       </div>
     </header>
   {/if}
-  <div>
+  <div class="flex flex-col gap-3">
     {#if children}
       {@render children()}
     {/if}
