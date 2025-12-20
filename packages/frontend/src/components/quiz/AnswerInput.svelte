@@ -44,12 +44,22 @@
     autocapitalize="off"
     spellcheck={false}
   />
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-row gap-3">
+    <Button
+      type="button"
+      variant="outline"
+      onclick={onSkip}
+      disabled={!onSkip || isLoading}
+      class="flex-1"
+    >
+      <Eye size={16} />
+      <span>Show Answer</span>
+    </Button>
     <Button
       type="submit"
       variant="default"
       disabled={disabled || isLoading}
-      class="w-full"
+      class="flex-1"
     >
       {#if isLoading}
         <Loader2 size={16} class="animate-spin" />
@@ -58,16 +68,6 @@
         <Send size={16} />
         <span>Check Answer</span>
       {/if}
-    </Button>
-    <Button
-      type="button"
-      variant="outline"
-      onclick={onSkip}
-      disabled={!onSkip || isLoading}
-      class="w-full"
-    >
-      <Eye size={16} />
-      <span>Show Answer</span>
     </Button>
   </div>
 </form>

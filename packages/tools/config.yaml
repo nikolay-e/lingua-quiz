@@ -354,7 +354,7 @@ languages:
           'i',
         ]
       inflection_frequency_ratio: 0.7 # English has low inflection (strict filtering)
-      raw_frequency_multiplier: 2.0 # Multiplier for raw subtitle data (less inflections)
+      raw_frequency_multiplier: 3.0 # Multiplier for raw subtitle data (increased to ensure 14k target)
       test_whitelist: ['book', 'table', 'chair', 'cat', 'dog', 'house', 'eat', 'run', 'have'] # For integration tests only
       exclude_patterns:
         - "^\\w'\\w+" # Contractions like don't, can't
