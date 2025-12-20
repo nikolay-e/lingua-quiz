@@ -370,15 +370,6 @@
                 onRetry={retryLastOperation}
               />
             {/if}
-            <AnswerInput
-              bind:this={answerInputRef}
-              value={userAnswer}
-              disabled={isSubmitting}
-              isLoading={isSubmitting}
-              onSubmit={submitAnswer}
-              onValueChange={handleValueChange}
-              onSkip={handleSkip}
-            />
           </FeedCard>
         {/if}
 
