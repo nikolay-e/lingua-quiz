@@ -134,15 +134,17 @@ def get_smart_top_n(command: str, level: str | None = None, language: str | None
     config_loader = get_config_loader()
 
     if level is None:
-        level = "a1"
+        # For generate command, default to full CEFR vocabulary (C2 = 14000 words)
+        # For other commands, default to A1
+        level = "c2" if command == "generate" else "a1"
 
     cumulative_total = config_loader.get_cumulative_total(level)
 
     if command == "analyze":
         return cumulative_total
     if command == "generate":
-        multiplier = config_loader.get_raw_frequency_multiplier(language) if language else 2.5
-        return int(cumulative_total * multiplier)
+        # Return raw target count; multiplier applied separately for source fetching
+        return cumulative_total
     if command == "gap_analysis":
         return cumulative_total
     return 1500

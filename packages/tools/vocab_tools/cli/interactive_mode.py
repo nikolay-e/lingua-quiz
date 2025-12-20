@@ -1,5 +1,7 @@
+from pathlib import Path
+
 from prompt_toolkit import prompt
-from prompt_toolkit.completion import Completer, Completion, WordCompleter
+from prompt_toolkit.completion import Completer, Completion, PathCompleter, WordCompleter
 from prompt_toolkit.document import Document
 from prompt_toolkit.formatted_text import HTML
 from prompt_toolkit.styles import Style
@@ -113,8 +115,11 @@ def display_welcome():
 
     commands = [
         ("analyze", "Analyze vocabulary and generate comprehensive report"),
+        ("export", "Export vocabulary from database to JSON files"),
         ("generate", "Generate frequency word lists from subtitle data"),
-        ("fill", "Fill placeholder entries with missing words"),
+        ("import", "Import vocabulary from JSON files to database"),
+        ("sync", "Synchronize vocabulary between files and database"),
+        ("validate", "Validate vocabulary data quality"),
         ("exit", "Exit interactive mode"),
     ]
 
@@ -127,7 +132,7 @@ def display_welcome():
 
 def prompt_command() -> str | None:
     completer = WordCompleter(
-        ["analyze", "generate", "fill", "exit"],
+        ["analyze", "export", "generate", "import", "sync", "validate", "exit"],
         ignore_case=True,
         sentence=True,
     )
@@ -205,6 +210,47 @@ def prompt_language(command_name: str) -> str | None:
         return None
 
 
+def prompt_path(command_name: str, message: str = "Path", default: str = ".") -> Path | None:
+    console.print(f"\n[dim]Command: {command_name}[/dim]")
+
+    completer = PathCompleter(only_directories=True, expanduser=True)
+
+    try:
+        path_str = prompt(
+            HTML(f"<ansicyan><b>{message}:</b></ansicyan> "),
+            completer=completer,
+            complete_while_typing=True,
+            style=style,
+            default=default,
+        ).strip()
+
+        return Path(path_str).expanduser() if path_str else Path(default)
+
+    except (KeyboardInterrupt, EOFError):
+        console.print("\n[yellow]Cancelled[/yellow]")
+        return None
+
+
+def prompt_yes_no(message: str, default: bool = False) -> bool:
+    default_str = "Y/n" if default else "y/N"
+    try:
+        answer = (
+            prompt(
+                HTML(f"<ansicyan><b>{message}</b></ansicyan> [{default_str}]: "),
+                style=style,
+            )
+            .strip()
+            .lower()
+        )
+
+        if not answer:
+            return default
+        return answer in ("y", "yes", "да")
+
+    except (KeyboardInterrupt, EOFError):
+        return False
+
+
 def run_interactive_mode():
     display_welcome()
 
@@ -224,14 +270,108 @@ def run_interactive_mode():
 
                     analyze(language_level=lang_level, format="all", top_n=None, output_dir=None)
 
+            elif command == "export":
+                console.print("\n[dim]Command: export[/dim]")
+                console.print("[dim]Leave empty to export all lists[/dim]")
+
+                completer = LanguageLevelCompleter()
+                try:
+                    lang_level = (
+                        prompt(
+                            HTML("<ansicyan><b>List (optional):</b></ansicyan> "),
+                            completer=completer,
+                            complete_while_typing=True,
+                            style=style,
+                        )
+                        .strip()
+                        .lower()
+                    )
+                except (KeyboardInterrupt, EOFError):
+                    console.print("\n[yellow]Cancelled[/yellow]")
+                    continue
+
+                output_path = prompt_path("export", "Output directory", "./exported_vocabularies")
+                if output_path:
+                    console.print()
+                    from .commands.export import export
+
+                    export(
+                        list_name=lang_level if lang_level else None,
+                        output=output_path,
+                        format="json",
+                        include_inactive=False,
+                    )
+
             elif command == "generate":
                 language = prompt_language("generate")
                 console.print()
                 generate._generate_impl(language=language)
 
-            elif command == "fill":
-                console.print("\n[yellow]The 'fill' command is not yet implemented.[/yellow]")
-                console.print("[dim]Use 'analyze' to identify missing words instead.[/dim]")
+            elif command == "import":
+                input_path = prompt_path("import", "Input file/directory", "./exported_vocabularies")
+                if input_path:
+                    dry_run = prompt_yes_no("Dry run (preview only)?", default=True)
+                    update = prompt_yes_no("Update existing words?", default=False)
+
+                    console.print()
+                    from .commands.import_cmd import import_vocabulary
+
+                    import_vocabulary(
+                        input_path=input_path,
+                        dry_run=dry_run,
+                        update_existing=update,
+                        skip_existing=True,
+                        batch_size=50,
+                    )
+
+            elif command == "sync":
+                sync_path = prompt_path("sync", "Directory to sync", "./vocabularies")
+                if sync_path:
+                    dry_run = prompt_yes_no("Dry run (preview only)?", default=True)
+
+                    console.print()
+                    from .commands.sync import sync
+
+                    sync(
+                        directory=sync_path,
+                        list_name=None,
+                        dry_run=dry_run,
+                        pull_only=False,
+                        push_only=False,
+                        force=False,
+                    )
+
+            elif command == "validate":
+                console.print("\n[dim]Command: validate[/dim]")
+                console.print("[dim]Leave empty to validate all lists[/dim]")
+
+                completer = LanguageLevelCompleter()
+                try:
+                    lang_level = (
+                        prompt(
+                            HTML("<ansicyan><b>List (optional):</b></ansicyan> "),
+                            completer=completer,
+                            complete_while_typing=True,
+                            style=style,
+                        )
+                        .strip()
+                        .lower()
+                    )
+                except (KeyboardInterrupt, EOFError):
+                    console.print("\n[yellow]Cancelled[/yellow]")
+                    continue
+
+                console.print()
+                from .commands.validate import validate
+
+                validate(
+                    list_name=lang_level if lang_level else None,
+                    check_duplicates=True,
+                    check_quality=True,
+                    check_syntax=True,
+                    cross_file=True,
+                    verbose=False,
+                )
 
             else:
                 console.print(f"\n[yellow]Unknown command: {command}[/yellow]")

@@ -31,10 +31,11 @@ def _generate_impl(
         languages = ["en", "de", "es", "ru"]
 
     if top_n is None:
+        # Default to full CEFR vocabulary (C2 = 14000 words base)
         if len(languages) == 1:
-            top_n = get_smart_top_n("generate", level="a1", language=languages[0])
+            top_n = get_smart_top_n("generate", level=None, language=languages[0])
         else:
-            top_n = get_smart_top_n("generate", level="a1", language=None)
+            top_n = get_smart_top_n("generate", level=None, language=None)
     if output_dir is None:
         output_dir = get_smart_output_dir("generate")
 

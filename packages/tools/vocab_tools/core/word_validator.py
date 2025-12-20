@@ -3,8 +3,8 @@ import re
 
 class WordValidator:
     def __init__(self, config: dict):
-        self.min_length = config.get("min_word_length", 2)
-        self.max_length = config.get("max_word_length", 20)
+        self.min_length = config.get("min_word_length") or 2
+        self.max_length = config.get("max_word_length") or 20
         self.skip_words = set(config.get("skip_words", []))
         self.blacklist = config.get("blacklist", {})
 

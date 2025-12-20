@@ -280,13 +280,13 @@ vocab-tools analyze spanish-a1 --format json
 vocab-tools analyze de-b1 --top-n 2000 --output ./reports
 ```
 
-**Validate** - Валидация миграций:
+**Validate** - Валидация словарей в базе:
 
 ```bash
-vocab-tools validate
-vocab-tools validate --only structure
-vocab-tools validate --only quality
-vocab-tools validate --format json
+vocab-tools validate                    # Валидация всех списков
+vocab-tools validate es-a1              # Конкретный список
+vocab-tools validate --no-cross-file    # Без кросс-файловых проверок
+vocab-tools validate -v                 # Подробный вывод
 ```
 
 **Generate** - Генерация частотных списков:
@@ -310,6 +310,35 @@ vocab-tools fill spanish-a1
 vocab-tools history
 vocab-tools history --limit 20
 vocab-tools history --format json
+```
+
+**Export** - Экспорт словарей из базы в JSON:
+
+```bash
+vocab-tools export es-a1                    # Экспорт конкретного списка
+vocab-tools export                          # Экспорт всех списков
+vocab-tools export es-a1 -o ./backup        # Указать директорию
+vocab-tools export --include-inactive       # Включить неактивные слова
+```
+
+**Import** - Импорт словарей из JSON в базу:
+
+```bash
+vocab-tools import ./vocabularies/es-a1.json          # Импорт файла
+vocab-tools import ./vocabularies/                    # Импорт директории
+vocab-tools import ./data/es-a1.json --dry-run       # Превью без изменений
+vocab-tools import ./data/ --update                   # Обновить существующие
+```
+
+**Sync** - Двунаправленная синхронизация:
+
+```bash
+vocab-tools sync ./vocabularies             # Синхронизация директории
+vocab-tools sync ./data -l es-a1            # Конкретный список
+vocab-tools sync ./data --pull              # Только скачать из базы
+vocab-tools sync ./data --push              # Только загрузить в базу
+vocab-tools sync ./data --dry-run           # Превью изменений
+vocab-tools sync ./data --force             # Перезаписать при конфликтах
 ```
 
 ### Автокомплит для shell
