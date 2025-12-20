@@ -368,12 +368,9 @@
                 onRetry={retryLastOperation}
               />
             {/if}
-          </FeedCard>
-        {/if}
-
-        {#if selectedQuiz && usageExamples}
-          <FeedCard dense>
-            <UsageExamples examples={usageExamples} />
+            {#if usageExamples}
+              <UsageExamples examples={usageExamples} />
+            {/if}
           </FeedCard>
         {/if}
 
