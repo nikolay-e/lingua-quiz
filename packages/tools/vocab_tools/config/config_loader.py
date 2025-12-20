@@ -105,6 +105,12 @@ class ConfigLoader:
             return 2.5  # Default fallback
         return lang_config.filtering.raw_frequency_multiplier
 
+    def get_ner_whitelist(self, language_code: str) -> set[str]:
+        lang_config = self._config.get_language(language_code)
+        if not lang_config:
+            return set()
+        return set(lang_config.filtering.ner_whitelist)
+
 
 def get_config_loader() -> ConfigLoader:
     return ConfigLoader()

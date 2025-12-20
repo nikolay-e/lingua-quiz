@@ -56,10 +56,17 @@ class LemmatizationStage(ProcessingStage):
 
 
 class NLPAnalysisStage(ProcessingStage):
-    def __init__(self, nlp_model: Any, language_code: str, ner_frequency_threshold: float):
+    def __init__(
+        self,
+        nlp_model: Any,
+        language_code: str,
+        ner_frequency_threshold: float,
+        ner_whitelist: set[str] | None = None,
+    ):
         self.nlp_model = nlp_model
         self.language_code = language_code
         self.ner_frequency_threshold = ner_frequency_threshold
+        self.ner_whitelist = ner_whitelist or set()
 
     def process(self, context: ProcessingContext) -> ProcessingContext:
         doc = self.nlp_model(context.word)
@@ -73,6 +80,10 @@ class NLPAnalysisStage(ProcessingStage):
         context.pos_tag = token.pos_
         context.morphology = self._extract_morphology(token)
         context.frequency = word_frequency(context.word, self.language_code)
+
+        word_lower = context.word.lower()
+        if word_lower in self.ner_whitelist:
+            return context
 
         if context.pos_tag == "PROPN":
             context.should_filter = True

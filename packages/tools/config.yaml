@@ -467,7 +467,185 @@ languages:
         ]
       interjections: ['oh', 'ok', 'ah', 'ach', 'hm', 'eh', 'na', 'hä', 'ey', 'xd', 'ähm', 'mmm']
       slang: ['nen', 'nem', 'ka', 'ned']
-      anglicisms: ['of', 'and', 'the', 'in', 'on', 'at']
+      anglicisms:
+        [
+          'of',
+          'and',
+          'the',
+          'in',
+          'on',
+          'at',
+          'it',
+          'photo',
+          'machine',
+          'commander',
+          'roger',
+          'la',
+          'show',
+          'team',
+          'baby',
+          'story',
+          'party',
+          'job',
+          'okay',
+          'cool',
+          'sorry',
+          'stop',
+          'go',
+          'come',
+          'check',
+          'define',
+          'equal',
+          'wrote',
+          'detective',
+          'lieutenant',
+          'sergeant',
+          'captain',
+          'sir',
+          'miss',
+          'mom',
+          'dad',
+          'man',
+          'boy',
+          'girl',
+          'love',
+          'like',
+          'just',
+          'really',
+          'right',
+          'well',
+          'now',
+          'here',
+          'there',
+          'where',
+          'when',
+          'what',
+          'who',
+          'how',
+          'why',
+          'end',
+          'find',
+        ]
+      ocr_errors: ['lhre', 'lhr', 'lch', 'lst', 'lm', 'ln']
+      verb_inflections:
+        [
+          # 1st/3rd person singular irregular
+          'weiß',
+          'mag',
+          'kann',
+          'muss',
+          'darf',
+          'soll',
+          'will',
+          # 2nd person singular (du-forms)
+          'nimmst',
+          'gibst',
+          'siehst',
+          'gehst',
+          'kommst',
+          'machst',
+          'sagst',
+          'weißt',
+          'willst',
+          'kannst',
+          'musst',
+          'darfst',
+          'sollst',
+          'magst',
+          'hältst',
+          'fährst',
+          'läufst',
+          'schläfst',
+          'trägst',
+          'fällst',
+          'fängst',
+          'lässt',
+          'isst',
+          'vergisst',
+          'triffst',
+          'sprichst',
+          'brichst',
+          'stichst',
+          'stirbst',
+          'hilfst',
+          'wirfst',
+          'wirst',
+          'fühlst',
+          'denkst',
+          'bringst',
+          'findest',
+          'bleibst',
+          'schreibst',
+          'rufst',
+          'ziehst',
+          # 3rd person singular (er/sie/es-forms)
+          'zieht',
+          'gibt',
+          'nimmt',
+          'sieht',
+          'hält',
+          'fährt',
+          'läuft',
+          'schläft',
+          'trägt',
+          'fällt',
+          'fängt',
+          'lässt',
+          'isst',
+          'vergisst',
+          'trifft',
+          'spricht',
+          'bricht',
+          'sticht',
+          'stirbt',
+          'hilft',
+          'wirft',
+          # Imperatives (du-form)
+          'gib',
+          'nimm',
+          'sieh',
+          'lies',
+          'iss',
+          'vergiss',
+          'triff',
+          'sprich',
+          'brich',
+          'stich',
+          'stirb',
+          'hilf',
+          'wirf',
+          'guck',
+          'schau',
+          'hör',
+          'sag',
+          'mach',
+          'komm',
+          'geh',
+          'bleib',
+          'warte',
+          'halt',
+          'lass',
+          'fahr',
+          'lauf',
+          'schlaf',
+          'freu',
+          'zeig',
+          'frag',
+          'ruf',
+          'zieh',
+          'denk',
+          'bring',
+          'find',
+          # Konjunktiv II
+          'solltest',
+          'könntest',
+          'würdest',
+          'müsstest',
+          'dürftest',
+          'wolltest',
+          'hättest',
+          'wärst',
+        ]
       proper_nouns:
         [
           'deutschland',
@@ -485,6 +663,38 @@ languages:
           'schmidt',
           'müller',
           'weber',
+          'johnny',
+          'ryan',
+          'amanda',
+          'max',
+          'joe',
+          'tom',
+          'bob',
+          'jim',
+          'sam',
+          'jack',
+          'mike',
+          'john',
+          'paul',
+          'david',
+          'steve',
+          'frank',
+          'charlie',
+          'harry',
+          'george',
+          'henry',
+          'ben',
+          'al',
+          'billy',
+          'tommy',
+          'jimmy',
+          'danny',
+          'eddie',
+          'joey',
+          'bobby',
+          'freddy',
+          'teddy',
+          'willy',
         ]
       too_short: ['of', 'to', 'eh', 'er', 're', 'ne', 'ad', 'et', 'un', 'at', 'op', 'us', 'ii']
 
@@ -522,6 +732,29 @@ languages:
         ]
       inflection_frequency_ratio: 0.2 # German has high inflection (relaxed filtering)
       raw_frequency_multiplier: 3.0 # Multiplier for raw subtitle data (high inflections)
+      ner_whitelist:
+        [
+          # Common words incorrectly tagged as named entities
+          'essen', # verb "to eat" (confused with city Essen)
+          'stadt', # "city" (tagged as LOC)
+          'paar', # "pair/couple" (tagged as PER)
+          'sohn', # "son" (tagged as PER)
+          'leid', # "sorrow" (tagged as LOC)
+          'teufel', # "devil" (tagged as PER)
+          'wieso', # "why" (tagged as entity)
+          'wessen', # "whose" (tagged as entity)
+          'orden', # "order/medal" (tagged as ORG)
+          'halt', # "stop/just" (tagged as entity)
+          'ernst', # "serious" (tagged as PER)
+          'mark', # "mark" (currency, tagged as PER)
+          'reich', # "rich/empire" (tagged as entity)
+          'mutter', # "mother" (tagged as PER)
+          'vater', # "father" (tagged as PER)
+          'bruder', # "brother" (tagged as PER)
+          'schwester', # "sister" (tagged as PER)
+          'herr', # "Mr./lord" (tagged as PER)
+          'frau', # "Mrs./woman" (tagged as PER)
+        ]
       test_whitelist: ['Buch', 'Tisch', 'Stuhl', 'Katze', 'Hund', 'Haus', 'essen', 'laufen', 'haben'] # For integration tests only
       exclude_patterns:
         - "^\\d+$"

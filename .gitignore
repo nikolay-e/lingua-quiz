@@ -3,7 +3,7 @@ analysis_history.json
 
 # CLAUDE-related files
 .claude/
-
+generated_vocabularies
 # Dependency directories
 node_modules/
 .venv

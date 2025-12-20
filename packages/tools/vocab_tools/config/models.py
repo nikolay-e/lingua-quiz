@@ -58,6 +58,8 @@ class Blacklist(BaseModel):
     proper_nouns: list[str]
     technical: list[str] = Field(default_factory=list)
     lemma_errors: list[str] = Field(default_factory=list)
+    ocr_errors: list[str] = Field(default_factory=list)
+    verb_inflections: list[str] = Field(default_factory=list)
     too_short: list[str] = Field(default_factory=list)
 
 
@@ -68,6 +70,7 @@ class Filtering(BaseModel):
     raw_frequency_multiplier: float = Field(default=2.5, ge=1.0, le=10.0)
     test_whitelist: list[str]
     ner_frequency_threshold: float | None = Field(default=None, ge=0, le=1)
+    ner_whitelist: list[str] = Field(default_factory=list)
     exclude_patterns: list[str] = Field(default_factory=list)
 
 
@@ -179,6 +182,8 @@ class Config(BaseModel):
         all_words.extend(blacklist.proper_nouns)
         all_words.extend(blacklist.technical)
         all_words.extend(blacklist.lemma_errors)
+        all_words.extend(blacklist.ocr_errors)
+        all_words.extend(blacklist.verb_inflections)
         all_words.extend(blacklist.too_short)
 
         return all_words
