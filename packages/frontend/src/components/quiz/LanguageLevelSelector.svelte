@@ -47,7 +47,10 @@
   };
 
   function parseListName(list: WordList): ParsedList | null {
-    const match = list.listName.match(/^(\w+)-(\w+)-([a-c]\d)$/i);
+    // Match formats: "English Russian A1" or "english-russian-a1"
+    const spaceMatch = list.listName.match(/^(\w+)\s+(\w+)\s+([A-Ca-c]\d)$/);
+    const hyphenMatch = list.listName.match(/^(\w+)-(\w+)-([A-Ca-c]\d)$/);
+    const match = spaceMatch || hyphenMatch;
     if (!match || !match[1] || !match[2] || !match[3]) return null;
     return {
       source: match[1].toLowerCase(),
