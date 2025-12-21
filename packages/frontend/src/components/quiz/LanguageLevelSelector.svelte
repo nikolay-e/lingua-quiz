@@ -70,7 +70,7 @@
   let selectedTarget = $state<string | undefined>(undefined);
   let selectedLevel = $state<string | undefined>(undefined);
 
-  const targetLanguages = $derived(() => {
+  const targetLanguages = $derived.by(() => {
     if (!selectedSource) return [];
     return [
       ...new Set(
@@ -79,7 +79,7 @@
     ].sort();
   });
 
-  const availableLevels = $derived(() => {
+  const availableLevels = $derived.by(() => {
     if (!selectedSource || !selectedTarget) return [];
     return parsedLists
       .filter((p) => p.source === selectedSource && p.target === selectedTarget)
@@ -87,7 +87,7 @@
       .sort((a, b) => a.level.localeCompare(b.level));
   });
 
-  const selectedList = $derived(() => {
+  const selectedList = $derived.by(() => {
     if (!selectedSource || !selectedTarget || !selectedLevel) return null;
     return parsedLists.find(
       (p) =>
@@ -113,9 +113,8 @@
   }
 
   function handleStart(): void {
-    const list = selectedList();
-    if (list) {
-      onSelect(list.listName);
+    if (selectedList) {
+      onSelect(selectedList.listName);
     }
   }
 
@@ -186,7 +185,7 @@
             {/if}
           </SelectTrigger>
           <SelectContent>
-            {#each targetLanguages() as lang (lang)}
+            {#each targetLanguages as lang (lang)}
               <SelectItem value={lang}>{formatLanguage(lang)}</SelectItem>
             {/each}
           </SelectContent>
@@ -212,7 +211,7 @@
             {/if}
           </SelectTrigger>
           <SelectContent>
-            {#each availableLevels() as { level, wordCount } (level)}
+            {#each availableLevels as { level, wordCount } (level)}
               <SelectItem value={level}>
                 <span class="level-option">
                   <span>{formatLevel(level)}</span>
@@ -225,7 +224,7 @@
       </div>
     </div>
 
-    {#if selectedList()}
+    {#if selectedList}
       <div class="start-section">
         <Button size="default" class="start-button" onclick={handleStart}>
           <Play size={18} />
