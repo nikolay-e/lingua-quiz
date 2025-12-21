@@ -61,6 +61,11 @@
     "deleteConfirmDesc": "This will permanently delete your account and all your learning progress. This action cannot be undone.",
     "language": "Language",
     "languageDesc": "Choose your preferred interface language",
+    "theme": "Theme",
+    "themeDesc": "Choose your preferred display mode",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
     "cancel": "Cancel"
   },
   "quiz": {

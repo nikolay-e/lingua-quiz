@@ -61,6 +61,11 @@
     "deleteConfirmDesc": "Dies wird dein Konto und deinen gesamten Lernfortschritt dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
     "language": "Sprache",
     "languageDesc": "Wähle deine bevorzugte Oberflächensprache",
+    "theme": "Design",
+    "themeDesc": "Wähle deinen bevorzugten Anzeigemodus",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel",
+    "themeSystem": "System",
     "cancel": "Abbrechen"
   },
   "quiz": {

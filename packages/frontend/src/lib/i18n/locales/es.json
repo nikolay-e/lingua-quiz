@@ -61,6 +61,11 @@
     "deleteConfirmDesc": "Esto eliminará permanentemente tu cuenta y todo tu progreso de aprendizaje. Esta acción no se puede deshacer.",
     "language": "Idioma",
     "languageDesc": "Elige tu idioma de interfaz preferido",
+    "theme": "Tema",
+    "themeDesc": "Elige tu modo de visualización preferido",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "themeSystem": "Sistema",
     "cancel": "Cancelar"
   },
   "quiz": {

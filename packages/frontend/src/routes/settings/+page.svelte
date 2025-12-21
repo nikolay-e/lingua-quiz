@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { authStore } from '$stores';
+  import { authStore, themeStore } from '$stores';
   import { toast } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
@@ -12,15 +12,26 @@
     SelectItem,
     SelectTrigger,
   } from '$lib/components/ui/select';
-  import { ArrowLeft, KeyRound, Trash2, Eye, EyeOff, Loader2, LogOut, User, Globe } from 'lucide-svelte';
+  import { ArrowLeft, KeyRound, Trash2, Eye, EyeOff, Loader2, LogOut, User, Globe, Sun, Moon, Monitor } from 'lucide-svelte';
   import ConfirmDialog from '$components/ConfirmDialog.svelte';
   import { extractErrorMessage } from '$lib/utils/error';
   import { _, locale } from 'svelte-i18n';
   import { setLocale, getSupportedLocales, LOCALE_NAMES, type SupportedLocale } from '$lib/i18n';
+  import { THEME_MODES, type ThemeMode } from '$lib/constants';
   import api from '$src/api';
 
   const auth = $derived($authStore);
   const currentLocale = $derived($locale as SupportedLocale);
+  const theme = $derived($themeStore);
+  const currentThemeMode = $derived(theme.mode);
+
+  const THEME_MODE_NAMES: Record<ThemeMode, string> = {
+    [THEME_MODES.LIGHT]: 'settings.themeLight',
+    [THEME_MODES.DARK]: 'settings.themeDark',
+    [THEME_MODES.SYSTEM]: 'settings.themeSystem',
+  };
+
+  const THEME_MODES_LIST: ThemeMode[] = [THEME_MODES.SYSTEM, THEME_MODES.LIGHT, THEME_MODES.DARK];
 
   let currentPassword = $state('');
   let newPassword = $state('');
@@ -49,6 +60,12 @@
   function handleLanguageChange(value: string | undefined): void {
     if (value) {
       setLocale(value as SupportedLocale);
+    }
+  }
+
+  function handleThemeChange(value: string | undefined): void {
+    if (value === THEME_MODES.LIGHT || value === THEME_MODES.DARK || value === THEME_MODES.SYSTEM) {
+      themeStore.setMode(value);
     }
   }
 
@@ -141,6 +158,36 @@
             <SelectContent>
               {#each getSupportedLocales() as loc (loc)}
                 <SelectItem value={loc}>{LOCALE_NAMES[loc]}</SelectItem>
+              {/each}
+            </SelectContent>
+          </Select>
+        </Card.Content>
+      </Card.Root>
+    </section>
+
+    <section class="settings-section">
+      <Card.Root>
+        <Card.Header>
+          <div class="section-title">
+            {#if currentThemeMode === THEME_MODES.DARK}
+              <Moon size={20} class="section-icon" />
+            {:else if currentThemeMode === THEME_MODES.LIGHT}
+              <Sun size={20} class="section-icon" />
+            {:else}
+              <Monitor size={20} class="section-icon" />
+            {/if}
+            <Card.Title>{$_('settings.theme')}</Card.Title>
+          </div>
+          <Card.Description>{$_('settings.themeDesc')}</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <Select type="single" value={currentThemeMode} onValueChange={handleThemeChange}>
+            <SelectTrigger class="w-full">
+              <span>{$_(THEME_MODE_NAMES[currentThemeMode])}</span>
+            </SelectTrigger>
+            <SelectContent>
+              {#each THEME_MODES_LIST as mode (mode)}
+                <SelectItem value={mode}>{$_(THEME_MODE_NAMES[mode])}</SelectItem>
               {/each}
             </SelectContent>
           </Select>

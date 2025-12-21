@@ -1,68 +1,77 @@
 import { writable, type Writable } from 'svelte/store';
-import { STORAGE_KEYS, THEMES } from '../lib/constants';
+import { STORAGE_KEYS, THEME_MODES, type ThemeMode } from '../lib/constants';
 import { safeStorage } from '../lib/utils/safeStorage';
 
 interface ThemeState {
-  isDarkMode: boolean;
+  mode: ThemeMode;
+  resolvedTheme: 'light' | 'dark';
 }
 
 interface ThemeStore {
   subscribe: Writable<ThemeState>['subscribe'];
-  toggleTheme: () => void;
-  clearPreference: () => void;
+  setMode: (mode: ThemeMode) => void;
+}
+
+function getSystemPreference(): boolean {
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
+}
+
+function resolveTheme(mode: ThemeMode): 'light' | 'dark' {
+  if (mode === THEME_MODES.SYSTEM) {
+    return getSystemPreference() ? 'dark' : 'light';
+  }
+  return mode;
 }
 
 function createThemeStore(): ThemeStore {
-  const getInitialTheme = () => {
-    if (typeof window === 'undefined') return false;
-    const savedTheme = safeStorage.getItem(STORAGE_KEYS.THEME);
-    if (savedTheme !== null) return savedTheme === THEMES.DARK;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const getInitialMode = (): ThemeMode => {
+    if (typeof window === 'undefined') return THEME_MODES.SYSTEM;
+    const savedMode = safeStorage.getItem(STORAGE_KEYS.THEME);
+    if (savedMode === THEME_MODES.LIGHT || savedMode === THEME_MODES.DARK || savedMode === THEME_MODES.SYSTEM) {
+      return savedMode;
+    }
+    return THEME_MODES.SYSTEM;
   };
 
-  const applyTheme = (isDark: boolean) => {
+  const applyTheme = (resolved: 'light' | 'dark') => {
     if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', resolved);
     }
   };
 
-  const initialTheme = getInitialTheme();
+  const initialMode = getInitialMode();
+  const initialResolved = resolveTheme(initialMode);
 
-  const { subscribe, set, update } = writable({
-    isDarkMode: initialTheme,
+  const { subscribe, set } = writable<ThemeState>({
+    mode: initialMode,
+    resolvedTheme: initialResolved,
   });
 
-  applyTheme(initialTheme);
+  applyTheme(initialResolved);
 
   if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', (e) => {
-      if (safeStorage.getItem(STORAGE_KEYS.THEME) === null) {
-        const isDark = e.matches;
-        applyTheme(isDark);
-        set({ isDarkMode: isDark });
+    mediaQuery.addEventListener('change', () => {
+      const currentMode = safeStorage.getItem(STORAGE_KEYS.THEME) ?? THEME_MODES.SYSTEM;
+      if (currentMode === THEME_MODES.SYSTEM) {
+        const resolved = resolveTheme(THEME_MODES.SYSTEM);
+        applyTheme(resolved);
+        set({ mode: THEME_MODES.SYSTEM, resolvedTheme: resolved });
       }
     });
   }
 
   return {
     subscribe,
-    toggleTheme: () => {
-      update((state) => {
-        const newTheme = !state.isDarkMode;
-        safeStorage.setItem(STORAGE_KEYS.THEME, newTheme ? 'dark' : 'light');
-        applyTheme(newTheme);
-        return { isDarkMode: newTheme };
-      });
-    },
-    clearPreference: () => {
-      safeStorage.removeItem(STORAGE_KEYS.THEME);
-      const systemPreference =
-        typeof window !== 'undefined' &&
-        typeof window.matchMedia === 'function' &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
-      applyTheme(systemPreference);
-      set({ isDarkMode: systemPreference });
+    setMode: (mode: ThemeMode) => {
+      safeStorage.setItem(STORAGE_KEYS.THEME, mode);
+      const resolved = resolveTheme(mode);
+      applyTheme(resolved);
+      set({ mode, resolvedTheme: resolved });
     },
   };
 }
