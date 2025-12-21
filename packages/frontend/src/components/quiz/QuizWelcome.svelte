@@ -7,7 +7,6 @@
 </header>
 
 <div class="text-center p-xl">
-  <div class="welcome-icon mb-md">🎯</div>
   <h3>Welcome to LinguaQuiz!</h3>
   <p class="muted mb-lg">Start learning with these features:</p>
   <div class="stack mb-lg">
@@ -17,9 +16,9 @@
       rel="noopener noreferrer"
       class="feature feature-link"
       aria-label="Adaptive learning algorithm (opens in new window)"
-    >✨ Adaptive learning algorithm</a>
-    <div class="feature">📊 Track your progress in real-time</div>
-    <div class="feature">🎧 Listen to pronunciations</div>
+    >Adaptive learning algorithm</a>
+    <div class="feature">Track your progress in real-time</div>
+    <div class="feature">Listen to pronunciations</div>
   </div>
 </div>
 

@@ -203,7 +203,7 @@ repos:
 
       - id: eslint
         name: Lint JS/TS/Svelte with ESLint
-        entry: bash -c 'export NODE_OPTIONS="--max-old-space-size=8192" && npm run lint:fix'
+        entry: bash -c 'npx --workspace=@lingua-quiz/frontend svelte-kit sync && export NODE_OPTIONS="--max-old-space-size=8192" && npm run lint:fix'
         language: system
         files: \.(js|jsx|ts|tsx|svelte)$
         pass_filenames: false

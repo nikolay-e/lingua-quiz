@@ -527,8 +527,7 @@ languages:
           'find',
         ]
       ocr_errors: ['lhre', 'lhr', 'lch', 'lst', 'lm', 'ln']
-      verb_inflections:
-        [
+      verb_inflections: [
           # 1st/3rd person singular irregular
           'weiß',
           'mag',
@@ -732,8 +731,7 @@ languages:
         ]
       inflection_frequency_ratio: 0.2 # German has high inflection (relaxed filtering)
       raw_frequency_multiplier: 3.0 # Multiplier for raw subtitle data (high inflections)
-      ner_whitelist:
-        [
+      ner_whitelist: [
           # Common words incorrectly tagged as named entities
           'essen', # verb "to eat" (confused with city Essen)
           'stadt', # "city" (tagged as LOC)

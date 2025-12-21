@@ -2,6 +2,7 @@
   import type { WordList } from '../../api-types';
   import { Button } from '$lib/components/ui/button';
   import { BookOpen, ArrowLeft } from 'lucide-svelte';
+  import LanguageLevelSelector from './LanguageLevelSelector.svelte';
 
   interface Props {
     wordLists?: WordList[];
@@ -13,34 +14,18 @@
 
   const { wordLists = [], selectedQuiz = null, loading = false, onSelect, onBackToMenu }: Props = $props();
 
-  let selected = $state('');
-
-  function handleQuizSelect(): void {
-    if (!selected) return;
-    onSelect?.(selected);
+  function handleSelect(listName: string): void {
+    onSelect?.(listName);
   }
 </script>
 
 <div>
   {#if !selectedQuiz}
-    <div>
-      <label for="quiz-select" class="sr-only">Select a quiz</label>
-      <select
-        id="quiz-select"
-        class="w-full text-base"
-        bind:value={selected}
-        onchange={handleQuizSelect}
-        disabled={loading}
-        aria-label="Select a quiz to start learning"
-      >
-        <option value="" disabled>
-          {loading ? 'Loading quizzes...' : 'Select a quiz to start learning'}
-        </option>
-        {#each wordLists as list (list.listName)}
-          <option value={list.listName}>{list.listName}</option>
-        {/each}
-      </select>
-    </div>
+    <LanguageLevelSelector
+      {wordLists}
+      {loading}
+      onSelect={handleSelect}
+    />
   {:else}
     <div class="flex justify-between items-center gap-4">
       <div class="flex items-center gap-2 text-primary">

@@ -66,7 +66,7 @@ function buildShareText(data: ShareProgressData): string {
   }
 
   if (data.streakDays !== undefined && data.streakDays > 1) {
-    parts.push(`${data.streakDays} day streak 🔥`);
+    parts.push(`${data.streakDays} day streak`);
   }
 
   return parts.join(' • ');
@@ -79,7 +79,7 @@ export async function shareAchievement(achievementTitle: string, achievementDesc
 
   const shareData: ShareData = {
     title: `lingua-quiz: ${achievementTitle}`,
-    text: `${achievementDescription} 🎉`,
+    text: achievementDescription,
     url: window.location.origin,
   };
 
