@@ -1,21 +1,12 @@
 import os
 
-from pages.auth_page import AuthPage
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import AuthenticatedUser
+from tests.conftest import AuthenticatedUser, login_and_start_quiz, login_user, start_quiz_with_cascading_selectors
 
 pytestmark = pytest.mark.e2e
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
-
-
-def login_and_start_quiz(page: Page, test_user: AuthenticatedUser) -> None:
-    auth_page = AuthPage(page, FRONTEND_URL)
-    auth_page.goto().login(test_user["username"], test_user["password"])
-    auth_page.wait_for_welcome()
-    page.select_option("#quiz-select", index=1)
-    expect(page.locator(".question-text")).to_be_visible(timeout=5000)
 
 
 class TestMobileDeviceEmulation:
@@ -38,12 +29,7 @@ class TestMobileDeviceEmulation:
     ) -> None:
         page.set_viewport_size({"width": width, "height": height})
 
-        auth_page = AuthPage(page, FRONTEND_URL)
-        auth_page.goto().login(test_user["username"], test_user["password"])
-        auth_page.wait_for_welcome()
-
-        page.select_option("#quiz-select", index=1)
-        expect(page.locator(".question-text")).to_be_visible(timeout=5000)
+        login_and_start_quiz(page, test_user)
 
         page.get_by_placeholder("Type your answer...").fill("test")
         page.get_by_role("button", name="Check Answer").click()
@@ -73,9 +59,7 @@ class TestResponsiveLayout:
 
 class TestNetworkConditions:
     def test_offline_mode_shows_error(self, page: Page, test_user: AuthenticatedUser) -> None:
-        auth_page = AuthPage(page, FRONTEND_URL)
-        auth_page.goto().login(test_user["username"], test_user["password"])
-        auth_page.wait_for_welcome()
+        login_user(page, test_user["username"], test_user["password"])
 
         client = page.context.new_cdp_session(page)
         client.send(
@@ -88,5 +72,8 @@ class TestNetworkConditions:
             },
         )
 
-        page.select_option("#quiz-select", index=1)
+        try:
+            start_quiz_with_cascading_selectors(page)
+        except Exception:
+            pass
         page.wait_for_timeout(3000)

@@ -122,41 +122,50 @@
     --color-error-border: rgb(239 68 68 / 30%);
     --color-error-text: #b91c1c;
   }
+}
 
-  /* Dark theme overrides */
-  [data-theme='dark'] {
-    --color-primary: #5ba3f5;
-    --color-secondary: #f5b041;
-    --color-success: #2ecc71;
-    --color-error: #e67e73;
-    --color-background: #1a1a1a;
-    --color-surface: #2a2a2a;
-    --color-border: #3a3a3a;
-    --color-input-border: #444;
-    --color-text: #e0e0e0;
-    --color-text-muted: rgb(224 224 224 / 75%);
-    --color-disabled-bg: #222;
-    --color-disabled-text: #8a8a8a;
-    --color-disabled-border: #333;
-    --color-primary-foreground: #0f172a;
-    --color-secondary-foreground: #0f172a;
+/* ============================================
+   DARK THEME - Outside layers to override @theme values
+   @theme generates unlayered CSS, so dark overrides must also be unlayered
+   ============================================ */
 
-    /* shadcn-svelte overrides */
-    --color-muted: #27272a;
-    --color-muted-foreground: #a1a1aa;
-    --color-accent-foreground: #fafafa;
-    --color-popover: var(--color-surface);
-    --color-popover-foreground: var(--color-text);
+[data-theme='dark'] {
+  --color-primary: #5ba3f5;
+  --color-secondary: #f5b041;
+  --color-success: #2ecc71;
+  --color-error: #e67e73;
+  --color-background: #1a1a1a;
+  --color-surface: #2a2a2a;
+  --color-border: #3a3a3a;
+  --color-input-border: #444;
+  --color-text: #e0e0e0;
+  --color-text-muted: rgb(224 224 224 / 75%);
+  --color-disabled-bg: #222;
+  --color-disabled-text: #8a8a8a;
+  --color-disabled-border: #333;
+  --color-primary-foreground: #0f172a;
+  --color-secondary-foreground: #0f172a;
 
-    /* Level change animation colors */
-    --color-level-up: #34d399;
-    --color-level-down: #f87171;
+  /* shadcn-svelte overrides */
+  --color-muted: #27272a;
+  --color-muted-foreground: #a1a1aa;
+  --color-accent-foreground: #fafafa;
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-text);
 
-    /* Deprecated dark theme aliases */
-    --color-error-bg: rgb(239 68 68 / 15%);
-    --color-error-border: rgb(239 68 68 / 40%);
-    --color-error-text: #fca5a5;
-  }
+  /* Level change animation colors */
+  --color-level-up: #34d399;
+  --color-level-down: #f87171;
+
+  /* Deprecated dark theme aliases */
+  --color-error-bg: rgb(239 68 68 / 15%);
+  --color-error-border: rgb(239 68 68 / 40%);
+  --color-error-text: #fca5a5;
+}
+
+/* Dark theme select arrow (SVG with light stroke) */
+[data-theme='dark'] select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
 }
 
 /* ============================================
@@ -320,10 +329,6 @@
     }
   }
 
-  [data-theme='dark'] select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-  }
-
   /* Global invalid state styling for form controls */
   input[aria-invalid='true'],
   textarea[aria-invalid='true'],
@@ -460,7 +465,8 @@
   }
 
   .feature {
-    display: block;
+    display: flex;
+    align-items: center;
     /* Fallback for browsers without color-mix support */
     background: rgb(74 144 226 / 8%);
     background: color-mix(in oklch, var(--color-primary) 8%, var(--color-surface));
@@ -469,6 +475,7 @@
     color: var(--color-primary);
     font-weight: var(--font-weight-medium);
     border-left: 3px solid var(--color-primary);
+    transition: transform var(--transition-speed) ease;
   }
 
   .form-compact {

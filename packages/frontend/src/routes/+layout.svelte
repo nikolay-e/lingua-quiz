@@ -21,7 +21,12 @@
   const isQuizPage = $derived(currentPath === '/' || currentPath === '/quiz');
   const i18nReady = $derived(!$isLoading);
 
-  $effect(() => void $themeStore);
+  $effect(() => {
+    const { resolvedTheme } = $themeStore;
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', resolvedTheme);
+    }
+  });
 
   // Auth guard via beforeNavigate
   beforeNavigate(({ to, cancel }) => {

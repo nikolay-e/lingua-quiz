@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 from typing import TypedDict
 
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 BACKEND_DIR_LOCAL = Path(__file__).parent.parent.parent / "backend"
 BACKEND_DIR_DOCKER = Path("/home/pwuser/tests/backend")
@@ -27,6 +27,47 @@ API_URL = os.getenv("API_URL", "http://localhost:9000/api")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:80")
 TIMEOUT = int(os.getenv("TIMEOUT", "30"))
 SKIP_TTS_TESTS = os.getenv("SKIP_TTS_TESTS", "false").lower() == "true"
+
+
+def login_user(page: Page, username: str, password: str) -> None:
+    page.goto(FRONTEND_URL)
+    expect(page).to_have_title("LinguaQuiz - Advanced Language Learning")
+    page.get_by_role("textbox", name="Username").fill(username)
+    page.get_by_role("textbox", name="Password").fill(password)
+    page.get_by_role("button", name="Sign In").click()
+    expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
+
+
+def start_quiz_with_cascading_selectors(page: Page) -> None:
+    selector_triggers = page.locator('[data-slot="select-trigger"]')
+    expect(selector_triggers.first).to_be_visible(timeout=5000)
+
+    selector_triggers.nth(0).click()
+    page.locator('[data-slot="select-item"]').first.click()
+    page.wait_for_timeout(200)
+
+    selector_triggers.nth(1).click()
+    page.locator('[data-slot="select-item"]').first.click()
+    page.wait_for_timeout(200)
+
+    selector_triggers.nth(2).click()
+    page.locator('[data-slot="select-item"]').first.click()
+    page.wait_for_timeout(200)
+
+    page.get_by_role("button", name="Start Learning").click()
+    expect(page.locator(".question-text")).to_be_visible(timeout=5000)
+
+
+def login_and_start_quiz(page: Page, test_user: "AuthenticatedUser") -> None:
+    login_user(page, test_user["username"], test_user["password"])
+    start_quiz_with_cascading_selectors(page)
+
+
+def logout_user(page: Page) -> None:
+    page.get_by_role("link", name="Settings").click()
+    expect(page.locator("h2")).to_have_text("Settings", timeout=5000)
+    page.get_by_role("button", name="Log Out").click()
+    expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
 
 class AuthenticatedUser(TypedDict):

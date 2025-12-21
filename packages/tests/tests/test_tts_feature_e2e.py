@@ -1,22 +1,13 @@
 import os
 
-from pages.auth_page import AuthPage
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import AuthenticatedUser
+from tests.conftest import AuthenticatedUser, login_and_start_quiz
 
 pytestmark = pytest.mark.e2e
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
 SKIP_TTS_TESTS = os.getenv("SKIP_TTS_TESTS", "false").lower() == "true"
-
-
-def login_and_start_quiz(page: Page, test_user: AuthenticatedUser) -> None:
-    auth_page = AuthPage(page, FRONTEND_URL)
-    auth_page.goto().login(test_user["username"], test_user["password"])
-    auth_page.wait_for_welcome()
-    page.select_option("#quiz-select", index=1)
-    expect(page.locator(".question-text")).to_be_visible(timeout=5000)
 
 
 class TestTTSButton:

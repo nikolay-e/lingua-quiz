@@ -3,25 +3,11 @@ import re
 
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import AuthenticatedUser
+from tests.conftest import AuthenticatedUser, login_and_start_quiz, login_user, start_quiz_with_cascading_selectors
 
 pytestmark = pytest.mark.e2e
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
-
-
-def login_and_start_quiz(page: Page, test_user: AuthenticatedUser) -> None:
-    page.goto(FRONTEND_URL)
-    expect(page).to_have_title("LinguaQuiz - Advanced Language Learning")
-
-    page.get_by_role("textbox", name="Username").fill(test_user["username"])
-    page.get_by_role("textbox", name="Password").fill(test_user["password"])
-    page.get_by_role("button", name="Sign In").click()
-
-    expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
-
-    page.select_option("#quiz-select", index=1)
-    expect(page.locator(".question-text")).to_be_visible(timeout=5000)
 
 
 class TestQuizFlowE2E:
@@ -78,8 +64,7 @@ class TestQuizFlowE2E:
         page.get_by_role("button", name="Back to Menu").click()
         expect(page.locator("text=Welcome")).to_be_visible(timeout=3000)
 
-        page.select_option("#quiz-select", index=1)
-        expect(page.locator(".question-text")).to_be_visible(timeout=5000)
+        start_quiz_with_cascading_selectors(page)
 
     def test_answer_input_clears_after_submit(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
@@ -105,14 +90,7 @@ class TestQuizFlowE2E:
 
 class TestProgressPersistence:
     def test_progress_saved_between_sessions(self, page: Page, test_user: AuthenticatedUser) -> None:
-        page.goto(FRONTEND_URL)
-        page.get_by_role("textbox", name="Username").fill(test_user["username"])
-        page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Sign In").click()
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
-
-        page.select_option("#quiz-select", index=1)
-        expect(page.locator(".question-text")).to_be_visible(timeout=5000)
+        login_and_start_quiz(page, test_user)
 
         for _ in range(3):
             page.get_by_placeholder("Type your answer...").fill("test")
@@ -125,52 +103,47 @@ class TestProgressPersistence:
 
         page.get_by_role("button", name="Back to Menu").click()
         page.wait_for_timeout(500)
-        page.get_by_role("button", name="Log out").click()
+        page.get_by_role("link", name="Settings").click()
+        page.get_by_role("button", name="Log Out").click()
         expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
-        page.get_by_role("textbox", name="Username").fill(test_user["username"])
-        page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Sign In").click()
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
+        login_user(page, test_user["username"], test_user["password"])
 
 
 class TestQuizListSelection:
-    def test_quiz_list_dropdown_populated(self, page: Page, test_user: AuthenticatedUser) -> None:
-        page.goto(FRONTEND_URL)
-        page.get_by_role("textbox", name="Username").fill(test_user["username"])
-        page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Sign In").click()
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
+    def test_cascading_selectors_populated(self, page: Page, test_user: AuthenticatedUser) -> None:
+        login_user(page, test_user["username"], test_user["password"])
 
-        quiz_select = page.locator("#quiz-select")
-        expect(quiz_select).to_be_visible()
+        selector_triggers = page.locator('[data-slot="select-trigger"]')
+        expect(selector_triggers.first).to_be_visible(timeout=5000)
 
-        options = quiz_select.locator("option")
+        selector_triggers.nth(0).click()
+        options = page.locator('[data-slot="select-item"]')
+        expect(options.first).to_be_visible(timeout=3000)
         option_count = options.count()
         assert option_count >= 1
 
-    def test_different_quiz_lists_have_different_content(self, page: Page, test_user: AuthenticatedUser) -> None:
-        page.goto(FRONTEND_URL)
-        page.get_by_role("textbox", name="Username").fill(test_user["username"])
-        page.get_by_role("textbox", name="Password").fill(test_user["password"])
-        page.get_by_role("button", name="Sign In").click()
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
+    def test_cascading_selectors_flow(self, page: Page, test_user: AuthenticatedUser) -> None:
+        login_user(page, test_user["username"], test_user["password"])
 
-        quiz_select = page.locator("#quiz-select")
-        options = quiz_select.locator("option")
+        selector_triggers = page.locator('[data-slot="select-trigger"]')
+        expect(selector_triggers.first).to_be_visible(timeout=5000)
 
-        if options.count() < 3:
-            pytest.skip("Not enough quiz lists for comparison")
+        selector_triggers.nth(0).click()
+        page.locator('[data-slot="select-item"]').first.click()
+        page.wait_for_timeout(200)
 
-        page.select_option("#quiz-select", index=1)
-        expect(page.locator(".question-text")).to_be_visible(timeout=5000)
-        _first_list_question = page.locator(".question-text").text_content()
+        selector_triggers.nth(1).click()
+        options = page.locator('[data-slot="select-item"]')
+        expect(options.first).to_be_visible(timeout=3000)
+        assert options.count() >= 1
+        options.first.click()
+        page.wait_for_timeout(200)
 
-        page.get_by_role("button", name="Back to Menu").click()
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=3000)
-
-        page.select_option("#quiz-select", index=2)
-        expect(page.locator(".question-text")).to_be_visible(timeout=5000)
+        selector_triggers.nth(2).click()
+        level_options = page.locator('[data-slot="select-item"]')
+        expect(level_options.first).to_be_visible(timeout=3000)
+        assert level_options.count() >= 1
 
 
 class TestRevealAnswerNoProgression:

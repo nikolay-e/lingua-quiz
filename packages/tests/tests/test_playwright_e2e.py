@@ -4,6 +4,7 @@ from typing import TypedDict
 
 from playwright.sync_api import Page, expect
 import pytest
+from tests.conftest import logout_user
 from utils import random_password, random_username
 
 pytestmark = pytest.mark.e2e
@@ -122,8 +123,7 @@ class TestRegistration:
         page.click("button:has-text('Create Account')")
         expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
 
-        page.get_by_role("button", name="Log out").click()
-        expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
+        logout_user(page)
 
         page.click("text=Register here")
         page.fill("#register-username", test_user["username"])
@@ -150,8 +150,7 @@ class TestAuthentication:
         page.click("button:has-text('Create Account')")
         expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
 
-        page.get_by_role("button", name="Log out").click()
-        expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
+        logout_user(page)
 
         page.fill("#username", test_user["username"])
         page.fill("#password", test_user["password"])
@@ -176,11 +175,11 @@ class TestQuizInterface:
         logged_in_page.screenshot(path=str(SCREENSHOTS_DIR / "11_quiz_page.png"))
 
     def test_logout_button_present(self, logged_in_page: Page):
-        expect(logged_in_page.get_by_role("button", name="Log out")).to_be_visible(timeout=10000)
+        logged_in_page.get_by_role("link", name="Settings").click()
+        expect(logged_in_page.get_by_role("button", name="Log Out")).to_be_visible(timeout=10000)
 
     def test_logout_functionality(self, logged_in_page: Page):
-        logged_in_page.get_by_role("button", name="Log out").click()
-        expect(logged_in_page.get_by_test_id("login-title")).to_have_text("Sign In", timeout=10000)
+        logout_user(logged_in_page)
         logged_in_page.screenshot(path=str(SCREENSHOTS_DIR / "12_after_logout.png"))
 
     def test_language_selector_visible(self, logged_in_page: Page):
@@ -348,8 +347,7 @@ class TestSessionManagement:
         page.click("button:has-text('Create Account')")
         expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
 
-        page.get_by_role("button", name="Log out").click()
-        expect(page.get_by_test_id("login-title")).to_have_text("Sign In", timeout=10000)
+        logout_user(page)
 
         page.reload()
         page.wait_for_load_state("networkidle")
