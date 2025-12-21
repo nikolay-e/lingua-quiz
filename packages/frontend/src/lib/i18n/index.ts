@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { init, register, getLocaleFromNavigator, locale } from 'svelte-i18n';
+import { init, register, getLocaleFromNavigator, locale, waitLocale } from 'svelte-i18n';
 
 const STORAGE_KEY = 'lingua-quiz-locale';
 const DEFAULT_LOCALE = 'en';
@@ -30,10 +30,19 @@ function getInitialLocale(): string {
   return DEFAULT_LOCALE;
 }
 
-void init({
-  fallbackLocale: DEFAULT_LOCALE,
-  initialLocale: getInitialLocale(),
-});
+let initialized = false;
+
+export async function initI18n(): Promise<void> {
+  if (initialized) return;
+  initialized = true;
+
+  await init({
+    fallbackLocale: DEFAULT_LOCALE,
+    initialLocale: getInitialLocale(),
+  });
+
+  await waitLocale();
+}
 
 export function setLocale(newLocale: SupportedLocale): void {
   void locale.set(newLocale);

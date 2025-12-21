@@ -7,7 +7,6 @@
   import { Toaster } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
   import { _ } from 'svelte-i18n';
-  import '$lib/i18n';
   import '$src/app.css';
 
   interface Props {
