@@ -95,7 +95,7 @@
         <div class="px-4 pb-4 pt-2 animate-content-reveal">
           {#if levelData.words.length > 0}
             <ol id="{levelData.id}-list" class="pl-8 flex flex-col gap-2">
-              {#each levelData.words as word (word)}
+              {#each levelData.words as word, wordIndex (`${levelData.id}-${wordIndex}`)}
                 <li class="py-2 border-b border-border last:border-b-0 text-sm">{word}</li>
               {/each}
             </ol>

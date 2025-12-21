@@ -377,6 +377,11 @@ export default [
           singleline: 3,
         },
       ],
+      // Each block keys - CRITICAL: prevents Svelte 5 runtime error
+      // "Cannot read properties of undefined (reading 'prev')"
+      // Note: ESLint can only check syntax, not runtime duplicate values
+      'svelte/require-each-key': 'error',
+      'svelte/valid-each-key': 'error',
       // SvelteKit navigation
       'svelte/no-navigation-without-resolve': 'off', // We use goto() correctly with await/void
       // TypeScript in Svelte
