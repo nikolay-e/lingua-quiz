@@ -65,49 +65,51 @@
     wordLists.map(parseListName).filter((p): p is ParsedList => p !== null),
   );
 
-  const sourceLanguages = $derived(
-    [...new Set(parsedLists.map((p) => p.source))].sort(),
+  // Target = language you already know (second word in "English Russian A1")
+  const knownLanguages = $derived(
+    [...new Set(parsedLists.map((p) => p.target))].sort(),
   );
 
-  let selectedSource = $state<string | undefined>(undefined);
-  let selectedTarget = $state<string | undefined>(undefined);
+  let selectedKnown = $state<string | undefined>(undefined);
+  let selectedLearning = $state<string | undefined>(undefined);
   let selectedLevel = $state<string | undefined>(undefined);
 
-  const targetLanguages = $derived.by(() => {
-    if (!selectedSource) return [];
+  // Source = language you're learning (first word in "English Russian A1")
+  const learningLanguages = $derived.by(() => {
+    if (!selectedKnown) return [];
     return [
       ...new Set(
-        parsedLists.filter((p) => p.source === selectedSource).map((p) => p.target),
+        parsedLists.filter((p) => p.target === selectedKnown).map((p) => p.source),
       ),
     ].sort();
   });
 
   const availableLevels = $derived.by(() => {
-    if (!selectedSource || !selectedTarget) return [];
+    if (!selectedKnown || !selectedLearning) return [];
     return parsedLists
-      .filter((p) => p.source === selectedSource && p.target === selectedTarget)
+      .filter((p) => p.target === selectedKnown && p.source === selectedLearning)
       .map((p) => ({ level: p.level, wordCount: p.wordCount }))
       .sort((a, b) => a.level.localeCompare(b.level));
   });
 
   const selectedList = $derived.by(() => {
-    if (!selectedSource || !selectedTarget || !selectedLevel) return null;
+    if (!selectedKnown || !selectedLearning || !selectedLevel) return null;
     return parsedLists.find(
       (p) =>
-        p.source === selectedSource &&
-        p.target === selectedTarget &&
+        p.target === selectedKnown &&
+        p.source === selectedLearning &&
         p.level === selectedLevel,
     );
   });
 
-  function handleSourceChange(value: string | undefined): void {
-    selectedSource = value;
-    selectedTarget = undefined;
+  function handleKnownChange(value: string | undefined): void {
+    selectedKnown = value;
+    selectedLearning = undefined;
     selectedLevel = undefined;
   }
 
-  function handleTargetChange(value: string | undefined): void {
-    selectedTarget = value;
+  function handleLearningChange(value: string | undefined): void {
+    selectedLearning = value;
     selectedLevel = undefined;
   }
 
@@ -153,49 +155,49 @@
           <Languages size={18} class="label-icon" />
           <span>I speak</span>
         </div>
-        <Select type="single" value={selectedSource} onValueChange={handleSourceChange}>
+        <Select type="single" value={selectedKnown} onValueChange={handleKnownChange}>
           <SelectTrigger class="selector-trigger">
-            {#if selectedSource}
-              <span>{formatLanguage(selectedSource)}</span>
+            {#if selectedKnown}
+              <span>{formatLanguage(selectedKnown)}</span>
             {:else}
               <span class="placeholder">Select language</span>
             {/if}
           </SelectTrigger>
           <SelectContent>
-            {#each sourceLanguages as lang (lang)}
+            {#each knownLanguages as lang (lang)}
               <SelectItem value={lang}>{formatLanguage(lang)}</SelectItem>
             {/each}
           </SelectContent>
         </Select>
       </div>
 
-      <div class="selector-row" class:disabled={!selectedSource}>
+      <div class="selector-row" class:disabled={!selectedKnown}>
         <div class="selector-label">
           <BookOpen size={18} class="label-icon" />
           <span>I learn</span>
         </div>
         <Select
           type="single"
-          value={selectedTarget}
-          onValueChange={handleTargetChange}
-          disabled={!selectedSource}
+          value={selectedLearning}
+          onValueChange={handleLearningChange}
+          disabled={!selectedKnown}
         >
           <SelectTrigger class="selector-trigger">
-            {#if selectedTarget}
-              <span>{formatLanguage(selectedTarget)}</span>
+            {#if selectedLearning}
+              <span>{formatLanguage(selectedLearning)}</span>
             {:else}
               <span class="placeholder">Select language</span>
             {/if}
           </SelectTrigger>
           <SelectContent>
-            {#each targetLanguages as lang (lang)}
+            {#each learningLanguages as lang (lang)}
               <SelectItem value={lang}>{formatLanguage(lang)}</SelectItem>
             {/each}
           </SelectContent>
         </Select>
       </div>
 
-      <div class="selector-row" class:disabled={!selectedTarget}>
+      <div class="selector-row" class:disabled={!selectedLearning}>
         <div class="selector-label">
           <GraduationCap size={18} class="label-icon" />
           <span>Level</span>
@@ -204,7 +206,7 @@
           type="single"
           value={selectedLevel}
           onValueChange={handleLevelChange}
-          disabled={!selectedTarget}
+          disabled={!selectedLearning}
         >
           <SelectTrigger class="selector-trigger">
             {#if selectedLevel}
