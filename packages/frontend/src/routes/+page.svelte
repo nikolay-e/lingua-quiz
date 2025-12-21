@@ -204,34 +204,6 @@
     }
   }
 
-  let showLogoutConfirm = $state(false);
-
-  function handleLogoutClick(): void {
-    if (quizStore.hasPendingChanges()) {
-      showLogoutConfirm = true;
-    } else {
-      performLogout();
-    }
-  }
-
-  async function performLogout(): Promise<void> {
-    showLogoutConfirm = false;
-    await authStore.logout();
-  }
-
-  function cancelLogout(): void {
-    showLogoutConfirm = false;
-  }
-
-  async function handleDeleteAccount(): Promise<void> {
-    try {
-      await authStore.deleteAccount();
-      toast.success('Your account has been deleted');
-    } catch (error: unknown) {
-      toast.error(extractErrorMessage(error, 'Failed to delete account'));
-    }
-  }
-
   async function loadWordLists(): Promise<void> {
     if (!$authStore.token) return;
 
@@ -391,15 +363,7 @@
 
       {#if !selectedQuiz}
         <FeedCard dense>
-          <UserActions
-            {username}
-            showDeleteOption={true}
-            onLogout={handleLogoutClick}
-            onDeleteAccount={handleDeleteAccount}
-            showLogoutConfirm={showLogoutConfirm}
-            onLogoutConfirm={performLogout}
-            onLogoutCancel={cancelLogout}
-          />
+          <UserActions {username} />
         </FeedCard>
       {/if}
     </main>

@@ -54,6 +54,11 @@ class TTSResponse(APIBaseModel):
     language: Annotated[str, Field(title="Language")]
 
 
+class PasswordChangeRequest(APIBaseModel):
+    current_password: Annotated[str, Field(alias="currentPassword", title="Current Password")]
+    new_password: Annotated[str, Field(alias="newPassword", max_length=128, min_length=8, title="New Password")]
+
+
 class UserLogin(APIBaseModel):
     username: Annotated[str, Field(max_length=50, min_length=3, title="Username")]
     password: Annotated[str, Field(title="Password")]

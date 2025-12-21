@@ -139,6 +139,26 @@ const api = {
   deleteAccount: (token: string): Promise<Record<string, string>> =>
     executeApiCall(() => AuthenticationService.deleteAccountApiAuthDeleteAccountDelete(), { token }),
 
+  changePassword: (token: string, currentPassword: string, newPassword: string): Promise<Record<string, string>> =>
+    executeApiCall(
+      async () => {
+        const response = await fetch('/api/auth/change-password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ currentPassword, newPassword }),
+        });
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ detail: response.statusText }));
+          throw new Error(errorData.detail || `HTTP ${response.status}`);
+        }
+        return response.json();
+      },
+      { token },
+    ),
+
   fetchTranslations: (token: string, listName: string): Promise<Translation[]> =>
     executeApiCall(
       () =>

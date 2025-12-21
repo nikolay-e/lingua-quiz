@@ -5,7 +5,14 @@ from core.error_handler import handle_api_errors
 from core.logging import get_logger, user_id_var
 from core.security import get_current_user, hash_password, verify_password, verify_refresh_token
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from generated.schemas import RefreshTokenRequest, TokenResponse, UserLogin, UserRegistration, UserResponse
+from generated.schemas import (
+    PasswordChangeRequest,
+    RefreshTokenRequest,
+    TokenResponse,
+    UserLogin,
+    UserRegistration,
+    UserResponse,
+)
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
@@ -138,6 +145,39 @@ def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest)
         expires_in="15m",
         user=UserResponse(id=user["id"], username=user["username"], is_admin=is_admin),
     )
+
+
+@router.post("/change-password")
+@limiter.limit("3/hour")
+@handle_api_errors("Password change")
+def change_password(
+    request: Request,
+    password_data: PasswordChangeRequest,
+    current_user: dict = Depends(get_current_user),
+) -> dict[str, str]:
+    logger.info(f"Password change request for user: {current_user['username']}")
+
+    user = query_db(
+        "SELECT password FROM users WHERE id = %s",
+        (current_user["user_id"],),
+        one=True,
+    )
+
+    if not user or not verify_password(password_data.current_password, user["password"]):
+        logger.warning(f"Password change failed - invalid current password for user: {current_user['username']}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Current password is incorrect",
+        )
+
+    new_hashed_password = hash_password(password_data.new_password)
+    execute_write_transaction(
+        "UPDATE users SET password = %s WHERE id = %s",
+        (new_hashed_password, current_user["user_id"]),
+    )
+
+    logger.info(f"Password successfully changed for user: {current_user['username']}")
+    return {"message": "Password changed successfully"}
 
 
 @router.delete("/delete-account")

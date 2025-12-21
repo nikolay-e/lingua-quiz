@@ -23,7 +23,7 @@
 
   // Auth guard via beforeNavigate
   beforeNavigate(({ to, cancel }) => {
-    const protectedRoutes = ['/', '/quiz', '/admin'];
+    const protectedRoutes = ['/', '/quiz', '/admin', '/settings'];
     const publicRoutes = ['/login', '/register'];
     const targetPath = to?.url.pathname;
 
@@ -59,7 +59,7 @@
 
   // Initial auth check - redirect to login if not authenticated
   $effect(() => {
-    const protectedRoutes = ['/', '/quiz', '/admin'];
+    const protectedRoutes = ['/', '/quiz', '/admin', '/settings'];
     const publicRoutes = ['/login', '/register'];
 
     if (!auth.isAuthenticated && protectedRoutes.includes(currentPath)) {
