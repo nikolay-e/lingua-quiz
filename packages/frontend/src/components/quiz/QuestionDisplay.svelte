@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { QuizQuestion } from '@lingua-quiz/core';
   import { LEVEL_CONFIG } from '../../lib/config/levelConfig';
+  import { _ } from 'svelte-i18n';
   import type { LevelWordLists } from '../../api-types';
 
   interface Props {
@@ -79,10 +80,10 @@
            bg-muted/50 rounded-lg opacity-70"
   >
     <span id="word" class="text-lg font-bold text-muted-foreground text-center">
-      No more questions available.
+      {$_('quiz.noQuestions')}
     </span>
     <p class="text-sm text-muted-foreground mt-2">
-      Select another quiz or check back later.
+      {$_('quiz.noQuestionsDesc')}
     </p>
   </div>
 {/if}

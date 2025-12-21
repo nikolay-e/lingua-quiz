@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Languages } from 'lucide-svelte';
+  import { _ } from 'svelte-i18n';
 </script>
 
 <header class="flex-align-center gap-sm mb-md">
@@ -7,18 +8,18 @@
 </header>
 
 <div class="text-center p-xl">
-  <h3>Welcome to LinguaQuiz!</h3>
-  <p class="muted mb-lg">Start learning with these features:</p>
+  <h3>{$_('quiz.welcome')}</h3>
+  <p class="muted mb-lg">{$_('quiz.welcomeDesc')}</p>
   <div class="stack mb-lg">
     <a
       href="https://github.com/nikolay-e/lingua-quiz/blob/main/CLAUDE.md#learning-algorithm"
       target="_blank"
       rel="noopener noreferrer"
       class="feature feature-link"
-      aria-label="Adaptive learning algorithm (opens in new window)"
-    >Adaptive learning algorithm</a>
-    <div class="feature">Track your progress in real-time</div>
-    <div class="feature">Listen to pronunciations</div>
+      aria-label="{$_('quiz.featureAdaptive')} (opens in new window)"
+    >{$_('quiz.featureAdaptive')}</a>
+    <div class="feature">{$_('quiz.featureProgress')}</div>
+    <div class="feature">{$_('quiz.featureTTS')}</div>
   </div>
 </div>
 

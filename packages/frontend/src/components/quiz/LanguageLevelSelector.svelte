@@ -8,6 +8,7 @@
   } from '$lib/components/ui/select';
   import { Button } from '$lib/components/ui/button';
   import { Languages, GraduationCap, BookOpen, Play } from 'lucide-svelte';
+  import { _ } from 'svelte-i18n';
 
   interface Props {
     wordLists: WordList[];
@@ -16,27 +17,6 @@
   }
 
   const { wordLists, loading = false, onSelect }: Props = $props();
-
-  const LANGUAGE_LABELS: Record<string, string> = {
-    english: 'English',
-    german: 'German',
-    spanish: 'Spanish',
-    russian: 'Russian',
-    en: 'English',
-    de: 'German',
-    es: 'Spanish',
-    ru: 'Russian',
-  };
-
-  const LEVEL_LABELS: Record<string, string> = {
-    a0: 'A0 — Cognates',
-    a1: 'A1 — Beginner',
-    a2: 'A2 — Elementary',
-    b1: 'B1 — Intermediate',
-    b2: 'B2 — Upper Intermediate',
-    c1: 'C1 — Advanced',
-    c2: 'C2 — Proficiency',
-  };
 
   type ParsedList = {
     source: string;
@@ -47,7 +27,6 @@
   };
 
   function parseListName(list: WordList): ParsedList | null {
-    // Match formats: "English Russian A1" or "english-russian-a1"
     const spaceMatch = list.listName.match(/^(\w+)\s+(\w+)\s+([A-Ca-c]\d)$/);
     const hyphenMatch = list.listName.match(/^(\w+)-(\w+)-([A-Ca-c]\d)$/);
     const match = spaceMatch || hyphenMatch;
@@ -65,7 +44,6 @@
     wordLists.map(parseListName).filter((p): p is ParsedList => p !== null),
   );
 
-  // Target = language you already know (second word in "English Russian A1")
   const knownLanguages = $derived(
     [...new Set(parsedLists.map((p) => p.target))].sort(),
   );
@@ -74,7 +52,6 @@
   let selectedLearning = $state<string | undefined>(undefined);
   let selectedLevel = $state<string | undefined>(undefined);
 
-  // Source = language you're learning (first word in "English Russian A1")
   const learningLanguages = $derived.by(() => {
     if (!selectedKnown) return [];
     return [
@@ -124,11 +101,11 @@
   }
 
   function formatLanguage(code: string): string {
-    return LANGUAGE_LABELS[code] || code.charAt(0).toUpperCase() + code.slice(1);
+    return $_(`languages.${code}`);
   }
 
   function formatLevel(level: string): string {
-    return LEVEL_LABELS[level] || level.toUpperCase();
+    return $_(`levels.${level}`);
   }
 </script>
 
@@ -153,14 +130,14 @@
       <div class="selector-row">
         <div class="selector-label">
           <Languages size={18} class="label-icon" />
-          <span>I speak</span>
+          <span>{$_('quiz.iSpeak')}</span>
         </div>
         <Select type="single" value={selectedKnown} onValueChange={handleKnownChange}>
           <SelectTrigger class="selector-trigger">
             {#if selectedKnown}
               <span>{formatLanguage(selectedKnown)}</span>
             {:else}
-              <span class="placeholder">Select language</span>
+              <span class="placeholder">{$_('quiz.selectLanguage')}</span>
             {/if}
           </SelectTrigger>
           <SelectContent>
@@ -174,7 +151,7 @@
       <div class="selector-row" class:disabled={!selectedKnown}>
         <div class="selector-label">
           <BookOpen size={18} class="label-icon" />
-          <span>I learn</span>
+          <span>{$_('quiz.iLearn')}</span>
         </div>
         <Select
           type="single"
@@ -186,7 +163,7 @@
             {#if selectedLearning}
               <span>{formatLanguage(selectedLearning)}</span>
             {:else}
-              <span class="placeholder">Select language</span>
+              <span class="placeholder">{$_('quiz.selectLanguage')}</span>
             {/if}
           </SelectTrigger>
           <SelectContent>
@@ -200,7 +177,7 @@
       <div class="selector-row" class:disabled={!selectedLearning}>
         <div class="selector-label">
           <GraduationCap size={18} class="label-icon" />
-          <span>Level</span>
+          <span>{$_('quiz.level')}</span>
         </div>
         <Select
           type="single"
@@ -212,7 +189,7 @@
             {#if selectedLevel}
               <span>{formatLevel(selectedLevel)}</span>
             {:else}
-              <span class="placeholder">Select level</span>
+              <span class="placeholder">{$_('quiz.selectLevel')}</span>
             {/if}
           </SelectTrigger>
           <SelectContent>
@@ -220,7 +197,7 @@
               <SelectItem value={level}>
                 <span class="level-option">
                   <span>{formatLevel(level)}</span>
-                  <span class="word-count">{wordCount} words</span>
+                  <span class="word-count">{wordCount} {$_('quiz.words')}</span>
                 </span>
               </SelectItem>
             {/each}
@@ -233,7 +210,7 @@
       <div class="start-section">
         <Button size="default" class="start-button" onclick={handleStart}>
           <Play size={18} />
-          <span>Start Learning</span>
+          <span>{$_('quiz.startLearning')}</span>
         </Button>
       </div>
     {/if}

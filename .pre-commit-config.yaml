@@ -69,6 +69,7 @@ repos:
     hooks:
       - id: gitleaks
         name: Scan for secrets (gitleaks)
+        exclude: ^\.secrets\.baseline$
 
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.5.0
@@ -330,7 +331,7 @@ repos:
         args:
           [
             '--write-changes',
-            '--ignore-words-list=crate,nd,ser,llm,async,cli,theses,ba,te,tha,ue,refreshin,ist,lief,calle,cliente,flor,inicial,soler,afterall,ture,ure,sie,bein',
+            '--ignore-words-list=crate,nd,ser,llm,async,cli,theses,ba,te,tha,ue,refreshin,ist,lief,calle,cliente,flor,inicial,soler,afterall,ture,ure,sie,bein,alle,oder,deine,als,aktion,deines,vor,aktive,caracteres',
           ]
         exclude: ^(\.git/|\.venv/|venv/|node_modules/|/generated/|^lingua-quiz-schema\.json$|^package-lock\.json$|packages/tools/data/subtitle_frequencies/|packages/tools/data/reference/cefr/)
 

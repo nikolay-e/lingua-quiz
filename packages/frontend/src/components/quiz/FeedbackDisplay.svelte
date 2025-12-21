@@ -3,6 +3,7 @@
   import { Button } from '$lib/components/ui/button';
   import { RefreshCw, Check, X, Circle } from 'lucide-svelte';
   import { cn } from '$lib/utils';
+  import { _ } from 'svelte-i18n';
   import type { QuizFeedback } from '../../api-types';
 
   interface Props {
@@ -64,7 +65,7 @@
         bind:ref={retryButtonRef}
       >
         <RefreshCw size={16} />
-        <span>Try again</span>
+        <span>{$_('quiz.tryAgain')}</span>
       </Button>
     {/if}
   </div>

@@ -10,6 +10,7 @@
   import { Label } from '$lib/components/ui/label';
   import { LogIn, Loader2 } from 'lucide-svelte';
   import { extractErrorMessage } from '$lib/utils/error';
+  import { _ } from 'svelte-i18n';
 
   let username = $state('');
   let password = $state('');
@@ -25,10 +26,10 @@
 
     try {
       await authStore.login(username, password);
-      message = 'Login successful!';
+      message = $_('auth.loginSuccess');
       await goto('/');
     } catch (error: unknown) {
-      message = extractErrorMessage(error, 'Login failed. Please try again.');
+      message = extractErrorMessage(error, $_('auth.loginFailed'));
       hasError = true;
     } finally {
       isLoading = false;
@@ -41,14 +42,14 @@
 </script>
 
 <AuthLayout>
-  <h2 id="login-title" data-testid="login-title">Sign In</h2>
+  <h2 id="login-title" data-testid="login-title">{$_('auth.signIn')}</h2>
   <form
 onsubmit={handleSubmit}
 aria-busy={isLoading}
 aria-labelledby="login-title"
 class="form-compact">
     <div class="input-group">
-      <Label for="username">Username</Label>
+      <Label for="username">{$_('auth.username')}</Label>
       <Input
         type="text"
         id="username"
@@ -66,7 +67,7 @@ class="form-compact">
       bind:value={password}
       disabled={isLoading}
       id="password"
-      label="Password"
+      label={$_('auth.password')}
       autocomplete="current-password"
       invalid={hasError}
     />
@@ -74,19 +75,19 @@ class="form-compact">
     <Button type="submit" disabled={isLoading} class="w-full">
       {#if isLoading}
         <Loader2 size={16} class="animate-spin" />
-        <span>Signing in...</span>
+        <span>{$_('auth.signingIn')}</span>
       {:else}
         <LogIn size={16} />
-        <span>Sign In</span>
+        <span>{$_('auth.signIn')}</span>
       {/if}
     </Button>
   </form>
 
-  <AuthMessage {message} variant={message.includes('successful') ? 'success' : 'error'} id="login-message" />
+  <AuthMessage {message} variant={!hasError ? 'success' : 'error'} id="login-message" />
 
   <AuthNavLink
-    text="Need an account?"
-    linkText="Register here"
+    text={$_('auth.needAccount')}
+    linkText={$_('auth.registerHere')}
     onClick={navigateToRegister}
   />
 </AuthLayout>

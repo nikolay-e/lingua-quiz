@@ -6,12 +6,21 @@
   import { Input } from '$lib/components/ui/input';
   import { Label } from '$lib/components/ui/label';
   import * as Card from '$lib/components/ui/card';
-  import { ArrowLeft, KeyRound, Trash2, Eye, EyeOff, Loader2, LogOut, User } from 'lucide-svelte';
+  import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+  } from '$lib/components/ui/select';
+  import { ArrowLeft, KeyRound, Trash2, Eye, EyeOff, Loader2, LogOut, User, Globe } from 'lucide-svelte';
   import ConfirmDialog from '$components/ConfirmDialog.svelte';
   import { extractErrorMessage } from '$lib/utils/error';
+  import { _, locale } from 'svelte-i18n';
+  import { setLocale, getSupportedLocales, LOCALE_NAMES, type SupportedLocale } from '$lib/i18n';
   import api from '$src/api';
 
   const auth = $derived($authStore);
+  const currentLocale = $derived($locale as SupportedLocale);
 
   let currentPassword = $state('');
   let newPassword = $state('');
@@ -24,11 +33,11 @@
   let isDeletingAccount = $state(false);
 
   const passwordRequirements = $derived([
-    { label: 'At least 8 characters', valid: newPassword.length >= 8 },
-    { label: 'Contains uppercase letter', valid: /[A-Z]/.test(newPassword) },
-    { label: 'Contains lowercase letter', valid: /[a-z]/.test(newPassword) },
-    { label: 'Contains number', valid: /\d/.test(newPassword) },
-    { label: 'Contains special character', valid: /[!@#$%^&*()_\-+=[\]{}`;:'",.\\|<>/?~]/.test(newPassword) },
+    { labelKey: 'settings.reqLength', valid: newPassword.length >= 8 },
+    { labelKey: 'settings.reqUppercase', valid: /[A-Z]/.test(newPassword) },
+    { labelKey: 'settings.reqLowercase', valid: /[a-z]/.test(newPassword) },
+    { labelKey: 'settings.reqNumber', valid: /\d/.test(newPassword) },
+    { labelKey: 'settings.reqSpecial', valid: /[!@#$%^&*()_\-+=[\]{}`;:'",.\\|<>/?~]/.test(newPassword) },
   ]);
 
   const isPasswordValid = $derived(passwordRequirements.every((r) => r.valid));
@@ -37,18 +46,24 @@
     currentPassword.length > 0 && isPasswordValid && doPasswordsMatch && !isChangingPassword,
   );
 
+  function handleLanguageChange(value: string | undefined): void {
+    if (value) {
+      setLocale(value as SupportedLocale);
+    }
+  }
+
   async function handleChangePassword(): Promise<void> {
     if (!canSubmitPassword || !auth.token) return;
 
     isChangingPassword = true;
     try {
       await api.changePassword(auth.token, currentPassword, newPassword);
-      toast.success('Password changed successfully');
+      toast.success($_('settings.passwordChanged'));
       currentPassword = '';
       newPassword = '';
       confirmPassword = '';
     } catch (error: unknown) {
-      toast.error(extractErrorMessage(error, 'Failed to change password'));
+      toast.error(extractErrorMessage(error, $_('settings.passwordChangeFailed')));
     } finally {
       isChangingPassword = false;
     }
@@ -59,9 +74,9 @@
     isDeletingAccount = true;
     try {
       await authStore.deleteAccount();
-      toast.success('Your account has been deleted');
+      toast.success($_('settings.accountDeleted'));
     } catch (error: unknown) {
-      toast.error(extractErrorMessage(error, 'Failed to delete account'));
+      toast.error(extractErrorMessage(error, $_('settings.deleteAccountFailed')));
       isDeletingAccount = false;
     }
   }
@@ -85,10 +100,10 @@
         class="back-button"
       >
         <ArrowLeft size={18} />
-        <span>Back</span>
+        <span>{$_('nav.back')}</span>
       </Button>
-      <h1>Settings</h1>
-      <p class="text-muted-foreground">Manage your account settings</p>
+      <h1>{$_('settings.title')}</h1>
+      <p class="text-muted-foreground">{$_('settings.subtitle')}</p>
     </header>
 
     <section class="settings-section">
@@ -96,14 +111,14 @@
         <Card.Header>
           <div class="section-title">
             <User size={20} class="section-icon" />
-            <Card.Title>Account</Card.Title>
+            <Card.Title>{$_('settings.account')}</Card.Title>
           </div>
-          <Card.Description>Logged in as {auth.username}</Card.Description>
+          <Card.Description>{$_('settings.loggedInAs', { values: { username: auth.username } })}</Card.Description>
         </Card.Header>
         <Card.Content>
           <Button variant="outline" onclick={handleLogout} class="w-full">
             <LogOut size={16} />
-            <span>Log Out</span>
+            <span>{$_('settings.logOut')}</span>
           </Button>
         </Card.Content>
       </Card.Root>
@@ -113,15 +128,39 @@
       <Card.Root>
         <Card.Header>
           <div class="section-title">
-            <KeyRound size={20} class="section-icon" />
-            <Card.Title>Change Password</Card.Title>
+            <Globe size={20} class="section-icon" />
+            <Card.Title>{$_('settings.language')}</Card.Title>
           </div>
-          <Card.Description>Update your password to keep your account secure</Card.Description>
+          <Card.Description>{$_('settings.languageDesc')}</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <Select type="single" value={currentLocale} onValueChange={handleLanguageChange}>
+            <SelectTrigger class="w-full">
+              <span>{LOCALE_NAMES[currentLocale]}</span>
+            </SelectTrigger>
+            <SelectContent>
+              {#each getSupportedLocales() as loc (loc)}
+                <SelectItem value={loc}>{LOCALE_NAMES[loc]}</SelectItem>
+              {/each}
+            </SelectContent>
+          </Select>
+        </Card.Content>
+      </Card.Root>
+    </section>
+
+    <section class="settings-section">
+      <Card.Root>
+        <Card.Header>
+          <div class="section-title">
+            <KeyRound size={20} class="section-icon" />
+            <Card.Title>{$_('settings.changePassword')}</Card.Title>
+          </div>
+          <Card.Description>{$_('settings.changePasswordDesc')}</Card.Description>
         </Card.Header>
         <Card.Content>
           <form class="password-form" onsubmit={(e) => { e.preventDefault(); handleChangePassword(); }}>
             <div class="form-field">
-              <Label for="current-password">Current Password</Label>
+              <Label for="current-password">{$_('settings.currentPassword')}</Label>
               <div class="password-input-wrapper">
                 <Input
                   id="current-password"
@@ -134,7 +173,7 @@
                   type="button"
                   class="toggle-password"
                   onclick={() => (showCurrentPassword = !showCurrentPassword)}
-                  aria-label={showCurrentPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showCurrentPassword ? $_('settings.hidePassword') : $_('settings.showPassword')}
                 >
                   {#if showCurrentPassword}
                     <EyeOff size={18} />
@@ -146,7 +185,7 @@
             </div>
 
             <div class="form-field">
-              <Label for="new-password">New Password</Label>
+              <Label for="new-password">{$_('settings.newPassword')}</Label>
               <div class="password-input-wrapper">
                 <Input
                   id="new-password"
@@ -160,7 +199,7 @@
                   type="button"
                   class="toggle-password"
                   onclick={() => (showNewPassword = !showNewPassword)}
-                  aria-label={showNewPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showNewPassword ? $_('settings.hidePassword') : $_('settings.showPassword')}
                 >
                   {#if showNewPassword}
                     <EyeOff size={18} />
@@ -171,10 +210,10 @@
               </div>
               {#if newPassword.length > 0}
                 <ul class="password-requirements">
-                  {#each passwordRequirements as req (req.label)}
+                  {#each passwordRequirements as req (req.labelKey)}
                     <li class:valid={req.valid}>
                       <span class="requirement-icon">{req.valid ? '✓' : '○'}</span>
-                      <span>{req.label}</span>
+                      <span>{$_(req.labelKey)}</span>
                     </li>
                   {/each}
                 </ul>
@@ -182,7 +221,7 @@
             </div>
 
             <div class="form-field">
-              <Label for="confirm-password">Confirm New Password</Label>
+              <Label for="confirm-password">{$_('settings.confirmPassword')}</Label>
               <div class="password-input-wrapper">
                 <Input
                   id="confirm-password"
@@ -196,7 +235,7 @@
                   type="button"
                   class="toggle-password"
                   onclick={() => (showConfirmPassword = !showConfirmPassword)}
-                  aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showConfirmPassword ? $_('settings.hidePassword') : $_('settings.showPassword')}
                 >
                   {#if showConfirmPassword}
                     <EyeOff size={18} />
@@ -206,16 +245,16 @@
                 </button>
               </div>
               {#if confirmPassword.length > 0 && !doPasswordsMatch}
-                <p class="error-message">Passwords do not match</p>
+                <p class="error-message">{$_('settings.passwordMismatch')}</p>
               {/if}
             </div>
 
             <Button type="submit" disabled={!canSubmitPassword} class="submit-button">
               {#if isChangingPassword}
                 <Loader2 size={16} class="animate-spin" />
-                <span>Changing...</span>
+                <span>{$_('settings.changing')}</span>
               {:else}
-                <span>Change Password</span>
+                <span>{$_('settings.changePassword')}</span>
               {/if}
             </Button>
           </form>
@@ -228,15 +267,15 @@
         <Card.Header>
           <div class="section-title">
             <Trash2 size={20} class="section-icon danger" />
-            <Card.Title>Danger Zone</Card.Title>
+            <Card.Title>{$_('settings.dangerZone')}</Card.Title>
           </div>
-          <Card.Description>Irreversible actions that affect your account</Card.Description>
+          <Card.Description>{$_('settings.dangerZoneDesc')}</Card.Description>
         </Card.Header>
         <Card.Content>
           <div class="danger-action">
             <div class="danger-info">
-              <h4>Delete Account</h4>
-              <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+              <h4>{$_('settings.deleteAccount')}</h4>
+              <p>{$_('settings.deleteAccountDesc')}</p>
             </div>
             <Button
               variant="destructive"
@@ -245,10 +284,10 @@
             >
               {#if isDeletingAccount}
                 <Loader2 size={16} class="animate-spin" />
-                <span>Deleting...</span>
+                <span>{$_('settings.deleting')}</span>
               {:else}
                 <Trash2 size={16} />
-                <span>Delete Account</span>
+                <span>{$_('settings.deleteAccount')}</span>
               {/if}
             </Button>
           </div>
@@ -260,10 +299,9 @@
   {#if showDeleteConfirm}
     <ConfirmDialog
       open={showDeleteConfirm}
-      title="Delete account?"
-      description="This will permanently delete your account and all your learning progress.
-        This action cannot be undone."
-      confirmLabel="Delete Account"
+      title={$_('settings.deleteConfirmTitle')}
+      description={$_('settings.deleteConfirmDesc')}
+      confirmLabel={$_('settings.deleteAccount')}
       onconfirm={handleDeleteAccount}
       oncancel={() => (showDeleteConfirm = false)}
       titleId="delete-account-title"

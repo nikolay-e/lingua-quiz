@@ -22,7 +22,8 @@
   "dependencies": {
     "@lingua-quiz/core": "file:../core",
     "@lingua-quiz/domain": "file:../domain",
-    "jwt-decode": "^4.0.0"
+    "jwt-decode": "^4.0.0",
+    "svelte-i18n": "^4.0.1"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.10",

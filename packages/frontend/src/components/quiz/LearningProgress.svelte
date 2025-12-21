@@ -1,6 +1,7 @@
 <script lang="ts">
   import { LEVEL_CONFIG } from '../../lib/config/levelConfig';
   import { ChevronRight } from 'lucide-svelte';
+  import { _ } from 'svelte-i18n';
   import type { LevelWordLists } from '../../api-types';
 
   interface Props {
@@ -44,7 +45,7 @@
       class="flex items-center gap-3 bg-card border border-border rounded-lg
              px-4 py-3 shadow-sm transition-shadow hover:shadow-md"
     >
-      <span class="text-sm font-medium text-foreground">Current Practice Level:</span>
+      <span class="text-sm font-medium text-foreground">{$_('quiz.currentLevel')}</span>
       <span class="text-sm font-semibold text-primary">
         {getLevelDescription(currentLevel)}
       </span>
@@ -99,7 +100,7 @@
               {/each}
             </ol>
           {:else}
-            <p class="text-muted-foreground italic text-sm">No words in this level yet.</p>
+            <p class="text-muted-foreground italic text-sm">{$_('quiz.noWordsYet')}</p>
           {/if}
         </div>
       </details>

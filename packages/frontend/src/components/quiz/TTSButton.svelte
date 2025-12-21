@@ -3,6 +3,7 @@
   import { Button } from '$lib/components/ui/button';
   import { ttsService, type TTSState } from '../../lib/services/ttsService';
   import { Volume2 } from 'lucide-svelte';
+  import { _ } from 'svelte-i18n';
 
   interface Props {
     token: string;
@@ -39,12 +40,12 @@
     class={ttsState.isPlaying ? 'speaking' : ''}
     onclick={handlePlay}
     disabled={ttsState.isPlaying}
-    aria-label="Listen to pronunciation">
+    aria-label={$_('quiz.listenPronunciation')}>
     <Volume2 size={16} />
-    <span>{ttsState.isPlaying ? 'Playing…' : 'Listen'}</span>
+    <span>{ttsState.isPlaying ? $_('quiz.playing') : $_('quiz.listen')}</span>
   </Button>
 {:else}
-  <span class="tts-muted text-sm" aria-live="polite">TTS unavailable for {language || 'this language'}</span>
+  <span class="tts-muted text-sm" aria-live="polite">{$_('quiz.ttsUnavailable', { values: { language: language || 'this language' } })}</span>
 {/if}
 
 <style>

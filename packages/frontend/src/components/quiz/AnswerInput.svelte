@@ -3,6 +3,7 @@
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
   import { Send, Eye, Loader2 } from 'lucide-svelte';
+  import { _ } from 'svelte-i18n';
 
   interface Props {
     value: string;
@@ -29,14 +30,14 @@
 </script>
 
 <form class="flex flex-col gap-3" onsubmit={handleFormSubmit}>
-  <label for="answer-input" class="sr-only">Your answer</label>
+  <label for="answer-input" class="sr-only">{$_('quiz.yourAnswer')}</label>
   <Input
     id="answer-input"
     type="text"
     bind:ref={inputElement}
     {value}
     oninput={(e) => onValueChange(e.currentTarget.value)}
-    placeholder="Type your answer..."
+    placeholder={$_('quiz.typeAnswer')}
     disabled={disabled || isLoading}
     aria-describedby="word"
     autocomplete="off"
@@ -53,7 +54,7 @@
       class="flex-1"
     >
       <Eye size={16} />
-      <span>Show Answer</span>
+      <span>{$_('quiz.showAnswer')}</span>
     </Button>
     <Button
       type="submit"
@@ -63,10 +64,10 @@
     >
       {#if isLoading}
         <Loader2 size={16} class="animate-spin" />
-        <span>Checking...</span>
+        <span>{$_('quiz.checking')}</span>
       {:else}
         <Send size={16} />
-        <span>Check Answer</span>
+        <span>{$_('quiz.checkAnswer')}</span>
       {/if}
     </Button>
   </div>

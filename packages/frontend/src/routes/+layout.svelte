@@ -6,6 +6,8 @@
   import EnvironmentInfo from '$components/EnvironmentInfo.svelte';
   import { Toaster } from 'svelte-sonner';
   import { Button } from '$lib/components/ui/button';
+  import { _ } from 'svelte-i18n';
+  import '$lib/i18n';
   import '$src/app.css';
 
   interface Props {
@@ -98,7 +100,7 @@
             stroke-width="2"
             d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        Back to Quiz
+        {$_('nav.backToQuiz')}
       </Button>
     </div>
   {:else if auth.isAuthenticated && auth.isAdmin && isQuizPage}
@@ -121,7 +123,7 @@
             stroke-width="2"
             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
-        Admin Panel
+        {$_('nav.adminPanel')}
       </Button>
     </div>
   {/if}

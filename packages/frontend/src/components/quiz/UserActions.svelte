@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import { Button } from '$lib/components/ui/button';
   import { Settings } from 'lucide-svelte';
+  import { _ } from 'svelte-i18n';
 
   interface Props {
     username: string | null;
@@ -17,6 +18,6 @@
 <div class="actions">
   <Button variant="outline" onclick={navigateToSettings} class="w-full">
     <Settings size={16} />
-    <span>Settings ({username})</span>
+    <span>{$_('common.settings')} ({username})</span>
   </Button>
 </div>

@@ -2,6 +2,7 @@
   import type { WordList } from '../../api-types';
   import { Button } from '$lib/components/ui/button';
   import { BookOpen, ArrowLeft } from 'lucide-svelte';
+  import { _ } from 'svelte-i18n';
   import LanguageLevelSelector from './LanguageLevelSelector.svelte';
 
   interface Props {
@@ -34,7 +35,7 @@
       </div>
       <Button variant="outline" size="sm" onclick={onBackToMenu}>
         <ArrowLeft size={16} />
-        <span>Back to Menu</span>
+        <span>{$_('nav.backToMenu')}</span>
       </Button>
     </div>
   {/if}
