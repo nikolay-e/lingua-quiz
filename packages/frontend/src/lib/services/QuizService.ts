@@ -130,6 +130,7 @@ export class QuizService {
         targetLanguage: word.targetLanguage,
         targetUsageExample: word.targetUsageExample ?? '',
         listName: word.listName,
+        difficultyLevel: word.difficultyLevel,
       }));
 
       const progress = orderedTranslations.map((word, index) => {
