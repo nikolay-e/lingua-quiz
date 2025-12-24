@@ -94,7 +94,8 @@ def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
     )
 
     if not user or not verify_password(user_data.password, user["password"]):
-        logger.warning(f"Invalid login attempt for user: {user_data.username}")
+        client_ip = request.client.host if request.client else "unknown"
+        logger.warning(f"Invalid login attempt for user: {user_data.username} from {client_ip}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid username or password",
@@ -164,7 +165,8 @@ def change_password(
     )
 
     if not user or not verify_password(password_data.current_password, user["password"]):
-        logger.warning(f"Password change failed - invalid current password for user: {current_user['username']}")
+        client_ip = request.client.host if request.client else "unknown"
+        logger.warning(f"Password change failed - invalid current password for user: {current_user['username']} from {client_ip}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Current password is incorrect",
