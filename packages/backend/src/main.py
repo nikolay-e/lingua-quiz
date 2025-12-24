@@ -77,6 +77,8 @@ async def add_security_headers(request: Request, call_next):
     permissions_policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
     response.headers["Permissions-Policy"] = permissions_policy
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    csp_policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    response.headers["Content-Security-Policy"] = csp_policy
     if request.url.path.startswith("/api/"):
         response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
         response.headers["Pragma"] = "no-cache"
@@ -120,9 +122,16 @@ async def get_version():
 
 @app.exception_handler(ValidationError)
 async def validation_exception_handler(request: Request, exc: ValidationError):
+    logger.warning(
+        "Validation error",
+        extra={
+            "path": request.url.path,
+            "errors": exc.errors(),
+        },
+    )
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={"detail": exc.errors()},
+        content={"detail": "Invalid request data"},
     )
 
 

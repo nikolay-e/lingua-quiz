@@ -1,3 +1,5 @@
+import re
+
 from core.auth_helpers import build_access_token, create_and_store_refresh_token, revoke_refresh_token
 from core.config import RATE_LIMIT_ENABLED
 from core.database import execute_write_transaction, query_db
@@ -34,6 +36,29 @@ def get_username_for_rate_limit(request: Request) -> str:
 login_limiter = Limiter(key_func=get_username_for_rate_limit, enabled=RATE_LIMIT_ENABLED)
 
 
+def validate_password_complexity(password: str) -> None:
+    if len(password) < 8:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password does not meet security requirements",
+        )
+    if not re.search(r"[A-Z]", password):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password does not meet security requirements",
+        )
+    if not re.search(r"[a-z]", password):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password does not meet security requirements",
+        )
+    if not re.search(r"\d", password):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password does not meet security requirements",
+        )
+
+
 @router.post(
     "/register",
     response_model=TokenResponse,
@@ -44,11 +69,13 @@ login_limiter = Limiter(key_func=get_username_for_rate_limit, enabled=RATE_LIMIT
 def register_user(request: Request, user_data: UserRegistration) -> TokenResponse:
     logger.info(f"Starting registration for user: {user_data.username}")
 
+    validate_password_complexity(user_data.password)
+
     existing_user = query_db("SELECT id FROM users WHERE username = %s", (user_data.username,), one=True)
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Username already exists",
+            detail="Registration failed",
         )
 
     hashed_password = hash_password(user_data.password)
@@ -93,12 +120,16 @@ def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
         one=True,
     )
 
-    if not user or not verify_password(user_data.password, user["password"]):
+    dummy_hash = "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYFj.N/ssuy"
+    password_hash = user["password"] if user else dummy_hash
+    password_valid = verify_password(user_data.password, password_hash)
+
+    if not user or not password_valid:
         client_ip = request.client.host if request.client else "unknown"
         logger.warning(f"Invalid login attempt for user: {user_data.username} from {client_ip}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid username or password",
+            detail="Invalid credentials",
         )
 
     is_admin = user.get("is_admin", False)
@@ -158,6 +189,8 @@ def change_password(
 ) -> dict[str, str]:
     logger.info(f"Password change request for user: {current_user['username']}")
 
+    validate_password_complexity(password_data.new_password)
+
     user = query_db(
         "SELECT password FROM users WHERE id = %s",
         (current_user["user_id"],),
@@ -169,7 +202,7 @@ def change_password(
         logger.warning(f"Password change failed - invalid current password for user: {current_user['username']} from {client_ip}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Current password is incorrect",
+            detail="Authentication failed",
         )
 
     new_hashed_password = hash_password(password_data.new_password)
