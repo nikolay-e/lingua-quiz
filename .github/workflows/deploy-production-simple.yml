@@ -241,7 +241,7 @@ jobs:
               "deployed_by": "github-actions",
               "deployment_type": "manual"
             }
-          environment-url: 'https://lingua-quiz.nikolay-eremeev.com'
+          environment-url: 'https://lingua-quiz.org'
           initial-status: 'in_progress'
           status-description: 'Deploying v${{ steps.version.outputs.new }} to production via ArgoCD'
 
@@ -252,7 +252,7 @@ jobs:
           deployment-id: ${{ steps.deployment.outputs.deployment-id }}
           status: 'success'
           description: '✅ Deployed v${{ steps.version.outputs.new }} to production'
-          environment-url: 'https://lingua-quiz.nikolay-eremeev.com'
+          environment-url: 'https://lingua-quiz.org'
 
       - name: Create GitHub Release
         uses: actions/github-script@v8
@@ -278,8 +278,8 @@ jobs:
             releaseNotes += `- \`ghcr.io/${{ github.repository }}/lingua-quiz-frontend:${{ steps.version.outputs.tag }}\`\n\n`;
 
             releaseNotes += `**Links:**\n`;
-            releaseNotes += `- Production: https://lingua-quiz.nikolay-eremeev.com\n`;
-            releaseNotes += `- Health Check: https://lingua-quiz.nikolay-eremeev.com/api/health\n`;
+            releaseNotes += `- Production: https://lingua-quiz.org\n`;
+            releaseNotes += `- Health Check: https://lingua-quiz.org/api/health\n`;
 
             if (previousTag) {
               const compareUrl = `https://github.com/${{ github.repository }}/compare/${previousTag}...${{ steps.version.outputs.tag }}`;
@@ -319,8 +319,8 @@ jobs:
             echo "- Frontend: \`${{ env.REGISTRY }}/lingua-quiz-frontend:${{ steps.version.outputs.tag }}\`"
             echo ""
             echo "### Links"
-            echo "- **Production URL:** https://lingua-quiz.nikolay-eremeev.com"
-            echo "- **Health Check:** https://lingua-quiz.nikolay-eremeev.com/api/health"
+            echo "- **Production URL:** https://lingua-quiz.org"
+            echo "- **Health Check:** https://lingua-quiz.org/api/health"
             echo "- **GitHub Release:** https://github.com/${{ github.repository }}/releases/tag/${{ steps.version.outputs.tag }}"
             echo ""
             echo "### Deployment Steps Completed"

@@ -34,7 +34,7 @@ jobs:
             }
 
             const prNumber = pr.number;
-            const previewUrl = `https://lingua-quiz-pr-${prNumber}.nikolay-eremeev.com`;
+            const previewUrl = `https://pr-${prNumber}.lingua-quiz.org`;
             const environment = `preview-pr-${prNumber}`;
 
             core.setOutput('pr_number', prNumber);

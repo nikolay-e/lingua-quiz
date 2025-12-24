@@ -23,7 +23,7 @@ Automatically deploys preview environments for each pull request:
 - Triggers on PR opened, synchronized, or reopened
 - Creates a dedicated namespace `preview-pr-<NUMBER>`
 - Deploys the application with PR-specific configuration
-- Preview URL: `https://<PR_NUMBER>.lingua-quiz.nikolay-eremeev.com`
+- Preview URL: `https://pr-<PR_NUMBER>.lingua-quiz.org`
 - Automatically copies GHCR registry secret from staging
 - Posts deployment status as PR comment
 
@@ -76,7 +76,7 @@ A Personal Access Token (PAT) with write access to the GitOps repository.
    - Manifests are committed to the GitOps repository
    - Flux CD detects changes and deploys to cluster
    - A Kubernetes Job automatically copies registry secrets
-   - Preview environment becomes available at `https://<PR_NUMBER>.lingua-quiz.nikolay-eremeev.com`
+   - Preview environment becomes available at `https://pr-<PR_NUMBER>.lingua-quiz.org`
 
 2. **On PR Update:**
    - New images are built with updated code

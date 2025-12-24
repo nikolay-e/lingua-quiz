@@ -123,7 +123,7 @@ jobs:
           PR_NUMBER: ${{ steps.pr.outputs.number }}
           IMAGE_TAG: ${{ steps.pr.outputs.head_sha }}
         run: |
-          PREVIEW_DOMAIN="lingua-quiz-pr-${PR_NUMBER}.nikolay-eremeev.com"
+          PREVIEW_DOMAIN="pr-${PR_NUMBER}.lingua-quiz.org"
 
           echo "Creating preview environment for PR #${PR_NUMBER}"
           echo "  Image tag: ${IMAGE_TAG}"
@@ -170,7 +170,7 @@ jobs:
           else
             git commit -m "feat: deploy preview environment for PR #${PR_NUMBER}
 
-          Preview URL: https://lingua-quiz-pr-${PR_NUMBER}.nikolay-eremeev.com
+          Preview URL: https://pr-${PR_NUMBER}.lingua-quiz.org
           Commit: ${IMAGE_TAG}
 
           🤖 Automated deployment via GitHub Actions"
@@ -193,9 +193,9 @@ jobs:
             {
               "pr_number": ${{ steps.pr.outputs.number }},
               "commit_sha": "${{ steps.pr.outputs.head_sha }}",
-              "preview_url": "https://lingua-quiz-pr-${{ steps.pr.outputs.number }}.nikolay-eremeev.com"
+              "preview_url": "https://pr-${{ steps.pr.outputs.number }}.lingua-quiz.org"
             }
-          environment-url: 'https://lingua-quiz-pr-${{ steps.pr.outputs.number }}.nikolay-eremeev.com'
+          environment-url: 'https://pr-${{ steps.pr.outputs.number }}.lingua-quiz.org'
           initial-status: 'in_progress'
           status-description: 'ArgoCD is syncing the preview environment (~2 min)'
 
@@ -210,7 +210,7 @@ jobs:
             const prNumber = parseInt(process.env.PR_NUMBER);
             const imageTag = process.env.IMAGE_TAG;
             const deploymentId = process.env.DEPLOYMENT_ID;
-            const previewUrl = `https://lingua-quiz-pr-${prNumber}.nikolay-eremeev.com`;
+            const previewUrl = `https://pr-${prNumber}.lingua-quiz.org`;
             const environmentUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/deployments`;
 
             const comment = `## 🚀 Preview Environment Deploying

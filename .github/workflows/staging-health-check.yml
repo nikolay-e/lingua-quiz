@@ -29,7 +29,7 @@ jobs:
         continue-on-error: true
         run: |
           echo "Waiting for staging environment to become accessible..."
-          STAGING_URL="https://test-lingua-quiz.nikolay-eremeev.com"
+          STAGING_URL="https://staging.lingua-quiz.org"
 
           MAX_ATTEMPTS=18  # ~12 minutes total with exponential backoff (after initial 90s delay)
           INITIAL_WAIT=5   # Start with 5 seconds
@@ -87,4 +87,4 @@ jobs:
           environment: 'staging'
           status: ${{ steps.wait.outputs.success == 'true' && 'success' || 'failure' }}
           description: ${{ steps.wait.outputs.success == 'true' && '✅ Staging environment is ready and accessible' || '❌ Staging deployment failed to become accessible' }}
-          environment-url: 'https://test-lingua-quiz.nikolay-eremeev.com'
+          environment-url: 'https://staging.lingua-quiz.org'
