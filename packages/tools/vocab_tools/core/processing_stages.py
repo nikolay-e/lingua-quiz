@@ -3,6 +3,7 @@ from typing import Any
 from wordfreq import word_frequency
 
 from .base_normalizer import UniversalNormalizer
+from .frequency_service import get_frequency_service
 from .lemmatization_service import LemmatizationService
 from .processing_pipeline import ProcessingContext, ProcessingStage
 from .word_validator import WordValidator
@@ -53,6 +54,55 @@ class LemmatizationStage(ProcessingStage):
     @property
     def name(self) -> str:
         return "lemmatization"
+
+
+class ForeignLanguageFilterStage(ProcessingStage):
+    def __init__(self, language_code: str, filters: list[dict[str, Any]]):
+        self.native_service = None
+        self.filters = []
+
+        if filters:
+            self.native_service = get_frequency_service(language_code)
+            for config in filters:
+                language = config.get("language")
+                if not language:
+                    continue
+                self.filters.append(
+                    {
+                        "language": language,
+                        "service": get_frequency_service(language),
+                        "min_foreign_zipf": float(config.get("min_foreign_zipf", 4.0)),
+                        "max_native_zipf": float(config.get("max_native_zipf", 3.0)),
+                        "min_zipf_delta": float(config.get("min_zipf_delta", 1.5)),
+                    }
+                )
+
+    def process(self, context: ProcessingContext) -> ProcessingContext:
+        if not self.filters:
+            return context
+
+        candidate = (context.lemma or context.normalized or context.word).lower()
+        if not candidate:
+            return context
+
+        native_zipf = self.native_service.get_zipf(candidate) if self.native_service else 0.0
+
+        for config in self.filters:
+            foreign_zipf = config["service"].get_zipf(candidate)
+            if (
+                foreign_zipf >= config["min_foreign_zipf"]
+                and native_zipf <= config["max_native_zipf"]
+                and (foreign_zipf - native_zipf) >= config["min_zipf_delta"]
+            ):
+                context.should_filter = True
+                context.filter_reason = f"foreign_language:{config['language']}"
+                break
+
+        return context
+
+    @property
+    def name(self) -> str:
+        return "foreign_language_filter"
 
 
 class NLPAnalysisStage(ProcessingStage):

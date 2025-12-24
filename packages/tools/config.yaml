@@ -6,6 +6,9 @@ analysis_defaults:
   frequency_threshold: 1.0e-7
   top_words_count: 1000
   id_gap_threshold: 100 # Maximum gap in ID sequences before warning
+  ner_frequency_threshold: 0.0005
+  dedup_frequency_replacement_margin: 1.2
+  pipeline: ['normalize', 'validate', 'lemmatize', 'foreign_filter', 'nlp', 'inflection_filter', 'categorize', 'stats']
 
 # CEFR Cumulative Totals (for vocabulary analysis)
 # When analyzing level X, compare against cumulative lemma count (current + all previous levels)
@@ -386,6 +389,25 @@ languages:
       comma_separator: true
       special_chars: ['ä', 'ö', 'ü', 'ß']
 
+    morphology:
+      plural_singular_suffix_pairs:
+        - ['ern', '']
+        - ['er', '']
+        - ['en', '']
+        - ['en', 'e']
+        - ['n', '']
+        - ['e', '']
+        - ['s', '']
+        - ['nen', '']
+      umlaut_pairs:
+        'ä': 'a'
+        'ö': 'o'
+        'ü': 'u'
+      reverse_umlauts:
+        'a': 'ä'
+        'o': 'ö'
+        'u': 'ü'
+
     inflection_patterns:
       case_noun: ['es$', 'en$', 'em$', 'er$', 's$', 'n$']
       plural: ['e$', 'en$', 'er$', 'n$', 's$']
@@ -501,7 +523,12 @@ languages:
           'lieutenant',
           'sergeant',
           'captain',
+          'college',
+          'hi',
+          'my',
           'sir',
+          'madame',
+          'lady',
           'miss',
           'mom',
           'dad',
@@ -827,6 +854,99 @@ languages:
         ]
       reason: 'Common Spanish verbs, prepositions, and function words with short lemmas (2-3 chars)'
 
+    lemmatization:
+      word_zipf_delta_threshold: 2.0
+      exceptions_map:
+        bonita: bonito
+        bonitas: bonito
+        bonitos: bonito
+        casas: casa
+        comido: comer
+        comiendo: comer
+        conociste: conocer
+        conoció: conocer
+        conocí: conocer
+        cállate: callar
+        darle: dar
+        darme: dar
+        darte: dar
+        di: decir
+        decirme: decir
+        dijeron: decir
+        dijiste: decir
+        dijo: decir
+        era: ser
+        eras: ser
+        eres: ser
+        escucharme: escuchar
+        encanta: encantar
+        espera: esperar
+        estaba: estar
+        estaban: estar
+        estabas: estar
+        estará: estar
+        estarás: estar
+        estarían: estar
+        estuve: estar
+        estuviste: estar
+        estuvo: estar
+        está: estar
+        fue: ser
+        fueron: ir
+        fuiste: ir
+        ganado: ganar
+        gatos: gato
+        grandes: grande
+        hablado: hablar
+        irme: ir
+        irte: ir
+        irá: ir
+        irás: ir
+        libros: libro
+        llegado: llegar
+        mira: mirar
+        necesito: necesitar
+        olvidado: olvidar
+        pedido: pedir
+        perros: perro
+        preparado: preparar
+        queréis: querer
+        quiera: querer
+        quieran: querer
+        quieras: querer
+        quiero: querer
+        quisiera: querer
+        quisiste: querer
+        quiso: querer
+        quédate: quedar
+        roja: rojo
+        rojas: rojo
+        rojos: rojo
+        tendrás: tener
+        tengas: tener
+        tengo: tener
+        tenía: tener
+        tenías: tener
+        tiene: tener
+        tienen: tener
+        tienes: tener
+        tomado: tomar
+        unido: unir
+        vais: ir
+        vamos: ir
+        vaya: ir
+        vayas: ir
+        ven: venir
+        verme: ver
+        verte: ver
+        vete: ir
+        vieron: ver
+        vino: venir
+        vio: ver
+        viste: ver
+        visto: ver
+        vámonos: ir
+
     inflection_exceptions:
       # Keep inflected forms that are commonly taught separately or have distinct meanings
       irregular_verbs:
@@ -910,6 +1030,18 @@ languages:
           'video',
           'photo',
           'blog',
+          'possible',
+          'impossible',
+          'official',
+          'professor',
+          'double',
+          'vendor',
+          'my',
+          'hi',
+          'college',
+          'madame',
+          'lady',
+          'sir',
         ]
       slang: ['pa', 'po', 'che', 'tío', 'tía', 'pibe']
       proper_nouns:
@@ -990,6 +1122,11 @@ languages:
         ]
       inflection_frequency_ratio: 0.4 # Spanish has medium inflection (balanced filtering)
       raw_frequency_multiplier: 3.1 # Multiplier for raw subtitle data (compensate lemma deduplication + B2 shortfall)
+      foreign_language_filters:
+        - language: 'en'
+          min_foreign_zipf: 4.0
+          max_native_zipf: 4.0
+          min_zipf_delta: 1.5
       ner_frequency_threshold: 0.0005
       test_whitelist: ['libro', 'mesa', 'silla', 'gato', 'perro', 'casa', 'estar', 'comer', 'tener'] # For integration tests only
       exclude_patterns:

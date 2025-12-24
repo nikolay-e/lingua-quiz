@@ -1,3 +1,5 @@
+import os
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 import typer
@@ -67,8 +69,8 @@ def _process_language(
     levels: list[str],
     output_dir: Path,
     config_loader,
-    progress,
-    main_task,
+    progress=None,
+    main_task=None,
 ) -> dict[str, dict]:
     results = {}
 
@@ -76,12 +78,14 @@ def _process_language(
     max_rank = 20000
     fetch_count = int(max_rank * multiplier * 1.5)
 
-    progress.update(main_task, description=f" {language.upper()}: Loading NLP models...")
+    if progress is not None and main_task is not None:
+        progress.update(main_task, description=f" {language.upper()}: Loading NLP models...")
 
     processor = VocabularyProcessor(language, silent=True)
     source = SubtitleFrequencySource(language, top_n=fetch_count, lemmatize=True)
 
-    progress.update(main_task, description=f" {language.upper()}: Processing vocabulary...")
+    if progress is not None and main_task is not None:
+        progress.update(main_task, description=f" {language.upper()}: Processing vocabulary...")
 
     vocab = processor.process_words(
         source,
@@ -93,7 +97,8 @@ def _process_language(
     all_words = vocab.words
 
     for level in levels:
-        progress.update(main_task, description=f" {language.upper()} {level.upper()}...")
+        if progress is not None and main_task is not None:
+            progress.update(main_task, description=f" {language.upper()} {level.upper()}...")
 
         result = _generate_level_vocabulary(
             language=language,
@@ -103,15 +108,34 @@ def _process_language(
             config_loader=config_loader,
         )
         results[level] = result
-        progress.advance(main_task)
+        if progress is not None and main_task is not None:
+            progress.advance(main_task)
 
     return results
+
+
+def _process_language_worker(
+    language: str,
+    levels: list[str],
+    output_dir: str,
+) -> tuple[str, dict[str, dict]]:
+    config_loader = get_config_loader()
+    results = _process_language(
+        language=language,
+        levels=levels,
+        output_dir=Path(output_dir),
+        config_loader=config_loader,
+        progress=None,
+        main_task=None,
+    )
+    return language, results
 
 
 def _generate_impl(
     language: str | None = None,
     level: str | None = None,
     output_dir: Path | None = None,
+    workers: int | None = None,
 ) -> None:
     config_loader = get_config_loader()
 
@@ -125,11 +149,25 @@ def _generate_impl(
 
     total_tasks = len(languages) * len(levels)
 
+    if workers is None:
+        cpu_count = os.cpu_count() or 1
+        max_workers = min(cpu_count, len(languages))
+    else:
+        if workers < 1:
+            print_error("Workers must be >= 1")
+            raise typer.Exit(1)
+        max_workers = min(workers, len(languages))
+
     print_header(
         "GENERATING CEFR VOCABULARY LISTS",
         f"Languages: {', '.join(lang.upper() for lang in languages)}",
     )
     console.print(f"Levels: [cyan]{', '.join(lvl.upper() for lvl in levels)}[/cyan]")
+    if max_workers > 1:
+        if workers and max_workers < workers:
+            console.print(f"Workers: [cyan]{max_workers}[/cyan] [dim](capped by languages)[/dim]")
+        else:
+            console.print(f"Workers: [cyan]{max_workers}[/cyan]")
     console.print(f"Total combinations: [cyan]{total_tasks}[/cyan]")
     console.print(f"Output directory: [cyan]{output_dir}[/cyan]")
     console.print("[dim]Note: A0 (transliterations) requires existing translations - use 'detect-a0' command[/dim]\n")
@@ -146,25 +184,41 @@ def _generate_impl(
     ) as progress:
         main_task = progress.add_task(f"Processing {total_tasks} combinations...", total=total_tasks)
 
-        for lang in languages:
-            try:
-                results = _process_language(
-                    language=lang,
-                    levels=levels,
-                    output_dir=output_dir,
-                    config_loader=config_loader,
-                    progress=progress,
-                    main_task=main_task,
-                )
-                all_results[lang] = results
+        if max_workers > 1 and len(languages) > 1:
+            with ProcessPoolExecutor(max_workers=max_workers) as executor:
+                futures = {
+                    executor.submit(_process_language_worker, lang, levels, str(output_dir)): lang
+                    for lang in languages
+                }
+                for future in as_completed(futures):
+                    lang = futures[future]
+                    try:
+                        _, results = future.result()
+                        all_results[lang] = results
+                    except Exception as e:
+                        all_results[lang] = {lvl: {"status": "error", "error": str(e)} for lvl in levels}
+                    progress.advance(main_task, advance=len(levels))
+                    progress.update(main_task, description=f" Completed {lang.upper()} ({len(levels)} levels)")
+        else:
+            for lang in languages:
+                try:
+                    results = _process_language(
+                        language=lang,
+                        levels=levels,
+                        output_dir=output_dir,
+                        config_loader=config_loader,
+                        progress=progress,
+                        main_task=main_task,
+                    )
+                    all_results[lang] = results
 
-            except Exception as e:
-                for lvl in levels:
-                    if lvl not in all_results.get(lang, {}):
-                        if lang not in all_results:
-                            all_results[lang] = {}
-                        all_results[lang][lvl] = {"status": "error", "error": str(e)}
-                        progress.advance(main_task)
+                except Exception as e:
+                    for lvl in levels:
+                        if lvl not in all_results.get(lang, {}):
+                            if lang not in all_results:
+                                all_results[lang] = {}
+                            all_results[lang][lvl] = {"status": "error", "error": str(e)}
+                            progress.advance(main_task)
 
     table = Table(title="Generation Results", show_header=True)
     table.add_column("Language", style="cyan")
@@ -226,6 +280,12 @@ def generate_all(
         "-o",
         help="Output directory (auto-detected if not specified)",
     ),
+    workers: int | None = typer.Option(
+        None,
+        "--workers",
+        "-j",
+        help="Number of parallel worker processes (default: min(cpu, languages)). Use 1 to disable parallelism.",
+    ),
 ) -> None:
     if language:
         language = language.lower()
@@ -241,4 +301,4 @@ def generate_all(
             console.print(f"\n[yellow]Available:[/yellow] {', '.join(CEFR_LEVELS)}\n")
             raise typer.Exit(1)
 
-    _generate_impl(language=language, level=level, output_dir=output_dir)
+    _generate_impl(language=language, level=level, output_dir=output_dir, workers=workers)

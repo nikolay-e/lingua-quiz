@@ -265,7 +265,14 @@ class StanzaLemmatizer:
                 if base in self.SPANISH_IRREGULAR_FORMS:
                     return self.SPANISH_IRREGULAR_FORMS[base]
 
+                if base.endswith(("ar", "er", "ir")):
+                    return base
+
                 if base.endswith(("ando", "endo", "iendo")):
+                    base_no_accent = self._remove_accents(base)
+                    return self._lemmatize_without_postprocessing(base_no_accent)
+
+                if base.endswith(("a", "e")):
                     base_no_accent = self._remove_accents(base)
                     return self._lemmatize_without_postprocessing(base_no_accent)
 

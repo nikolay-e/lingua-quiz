@@ -75,3 +75,39 @@ logs/
 *.bak
 tmp/
 .cache/
+
+# Development configuration
+docker-compose.yml
+docker-compose.*.yml
+nginx.local.conf
+Makefile
+
+# Claude AI tools
+.claude/
+
+# Pre-commit hooks
+.pre-commit-config.yaml
+
+# Generated data
+analysis_history.json
+generated_vocabularies/
+packages/tools/generated_vocabularies/
+
+# Tree mapper output
+tree.tmp
+directory_tree.yaml
+
+# SSH keys (prevent accidental exposure)
+*id_rsa*
+*id_ed25519*
+*.key
+*.pem
+
+# Secrets baseline
+.secrets.baseline
+
+# Renovate
+renovate.json
+
+# TypeScript build info
+*.tsbuildinfo

@@ -7,6 +7,9 @@ class AnalysisDefaults(BaseModel):
     frequency_threshold: float = Field(gt=0)
     top_words_count: int = Field(ge=100)
     id_gap_threshold: int = Field(ge=10)
+    ner_frequency_threshold: float | None = Field(default=0.0005, ge=0, le=1)
+    dedup_frequency_replacement_margin: float = Field(default=1.2, ge=1.0, le=10.0)
+    pipeline: list[str] = Field(default_factory=list)
 
 
 class CEFRLevel(BaseModel):
@@ -43,9 +46,26 @@ class InflectionPatterns(BaseModel):
     third_person: list[str] = Field(default_factory=list)
 
 
+class MorphologyConfig(BaseModel):
+    plural_singular_suffix_pairs: list[tuple[str, str]] = Field(default_factory=list)
+    umlaut_pairs: dict[str, str] = Field(default_factory=dict)
+    reverse_umlauts: dict[str, str] = Field(default_factory=dict)
+
+
 class LemmatizationExceptions(BaseModel):
     short_lemmas: list[str]
     reason: str
+
+
+class LemmatizationConfig(BaseModel):
+    exceptions_map: dict[str, str] = Field(default_factory=dict)
+    word_zipf_delta_threshold: float | None = Field(default=1.0, ge=0, le=10)
+
+
+class InflectionExceptions(BaseModel):
+    irregular_verbs: list[str] = Field(default_factory=list)
+    aspectual_pairs_keep_both: bool | None = None
+    reason: str | None = None
 
 
 class Blacklist(BaseModel):
@@ -63,6 +83,13 @@ class Blacklist(BaseModel):
     too_short: list[str] = Field(default_factory=list)
 
 
+class ForeignLanguageFilter(BaseModel):
+    language: str
+    min_foreign_zipf: float = Field(default=4.0, ge=0, le=10)
+    max_native_zipf: float = Field(default=3.0, ge=0, le=10)
+    min_zipf_delta: float = Field(default=1.5, ge=0, le=10)
+
+
 class Filtering(BaseModel):
     min_word_length: int = Field(ge=1, le=10)
     short_word_whitelist: list[str]
@@ -72,6 +99,8 @@ class Filtering(BaseModel):
     ner_frequency_threshold: float | None = Field(default=None, ge=0, le=1)
     ner_whitelist: list[str] = Field(default_factory=list)
     exclude_patterns: list[str] = Field(default_factory=list)
+    foreign_language_filters: list[ForeignLanguageFilter] = Field(default_factory=list)
+    pipeline_override: list[str] = Field(default_factory=list)
 
 
 class POSCategories(BaseModel):
@@ -93,8 +122,11 @@ class LanguageConfig(BaseModel):
     max_word_length: int | None = Field(default=None, ge=5, le=100)
 
     normalization: Normalization
+    morphology: MorphologyConfig | None = None
     inflection_patterns: InflectionPatterns
+    inflection_exceptions: InflectionExceptions | None = None
     lemmatization_exceptions: LemmatizationExceptions
+    lemmatization: LemmatizationConfig | None = None
     skip_words: list[str] = Field(default_factory=list)
     blacklist: Blacklist
     filtering: Filtering

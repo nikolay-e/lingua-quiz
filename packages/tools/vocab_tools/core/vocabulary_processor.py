@@ -4,12 +4,14 @@ from dataclasses import dataclass
 from ..config.config_loader import get_config_loader
 from ..config.constants import get_pos_description
 from .base_normalizer import get_universal_normalizer
+from .language_plugins import get_language_plugin
 from .lemmatization_service import get_lemmatization_service
 from .nlp_models import get_nlp_model
 from .processing_pipeline import ProcessingContext, ProcessingPipeline
 from .processing_stages import (
     CategorizationStage,
     FilteringStatsCollector,
+    ForeignLanguageFilterStage,
     InflectionFilteringStage,
     LemmatizationStage,
     NLPAnalysisStage,
@@ -19,67 +21,6 @@ from .processing_stages import (
 )
 from .word_source import WordSource
 from .word_validator import WordValidator
-
-GERMAN_PLURAL_PATTERNS = [
-    ("ern", ""),
-    ("er", ""),
-    ("en", ""),
-    ("en", "e"),
-    ("n", ""),
-    ("e", ""),
-    ("s", ""),
-    ("nen", ""),
-]
-
-GERMAN_UMLAUT_PAIRS = {
-    "ä": "a",
-    "ö": "o",
-    "ü": "u",
-}
-
-
-def _get_german_singular_variants(word: str) -> list[str]:
-    word_lower = word.lower()
-    variants = []
-
-    for plural_suffix, singular_suffix in GERMAN_PLURAL_PATTERNS:
-        if word_lower.endswith(plural_suffix):
-            base = word_lower[: -len(plural_suffix)] if plural_suffix else word_lower
-            candidate = base + singular_suffix
-
-            if len(candidate) >= 2:
-                variants.append(candidate)
-
-            for umlaut, vowel in GERMAN_UMLAUT_PAIRS.items():
-                if umlaut in base:
-                    de_umlauted = base.replace(umlaut, vowel)
-                    variants.append(de_umlauted + singular_suffix)
-
-    return variants
-
-
-def _get_german_plural_variants(word: str) -> list[str]:
-    word_lower = word.lower()
-    variants = []
-
-    for plural_suffix, singular_suffix in GERMAN_PLURAL_PATTERNS:
-        if singular_suffix and word_lower.endswith(singular_suffix):
-            base = word_lower[: -len(singular_suffix)]
-        elif not singular_suffix:
-            base = word_lower
-        else:
-            continue
-
-        candidate = base + plural_suffix
-        if len(candidate) > len(word_lower):
-            variants.append(candidate)
-
-        for vowel, umlaut in [("a", "ä"), ("o", "ö"), ("u", "ü")]:
-            if vowel in base:
-                umlauted = base.replace(vowel, umlaut)
-                variants.append(umlauted + plural_suffix)
-
-    return variants
 
 
 @dataclass
@@ -126,6 +67,9 @@ class VocabularyProcessor:
         self.silent = silent
         self.config_loader = get_config_loader()
         self.lang_config = self.config_loader.get_language_config(language_code)
+        self.language_plugin = get_language_plugin(language_code, self.config_loader)
+
+        analysis_defaults = self.config_loader.get_analysis_defaults()
 
         self.normalizer = get_universal_normalizer(language_code, self.config_loader)
         self.skip_words = self.config_loader.get_skip_words(language_code)
@@ -134,8 +78,13 @@ class VocabularyProcessor:
 
         filtering_config = self.lang_config.get("filtering", {})
         self.inflection_frequency_ratio = filtering_config.get("inflection_frequency_ratio", 0.5)
-        self.ner_frequency_threshold = filtering_config.get("ner_frequency_threshold") or 0.0005
+        default_ner_threshold = analysis_defaults.get("ner_frequency_threshold", 0.0005)
+        self.ner_frequency_threshold = filtering_config.get("ner_frequency_threshold", default_ner_threshold)
         self.ner_whitelist = self.config_loader.get_ner_whitelist(language_code)
+        self.foreign_language_filters = filtering_config.get("foreign_language_filters", [])
+        self.pipeline_override = filtering_config.get("pipeline_override", [])
+        self.pipeline_default = analysis_defaults.get("pipeline", [])
+        self.dedup_frequency_replacement_margin = analysis_defaults.get("dedup_frequency_replacement_margin", 1.2)
 
         default_max_length = self.config_loader.get_analysis_defaults().get("max_word_length", 20)
         validator_config = {
@@ -160,22 +109,47 @@ class VocabularyProcessor:
     def _build_pipeline(
         self, existing_words: set[str], filter_inflections: bool, stats_collector: FilteringStatsCollector | None
     ) -> ProcessingPipeline:
-        stages = [
-            NormalizationStage(self.normalizer),
-            ValidationStage(self.validator),
-            LemmatizationStage(self.lemmatization_service),
-            NLPAnalysisStage(self.nlp_model, self.language_code, self.ner_frequency_threshold, self.ner_whitelist),
-            InflectionFilteringStage(
+        stage_names = self._resolve_pipeline_stages()
+        context = {
+            "existing_words": existing_words,
+            "filter_inflections": filter_inflections,
+            "stats_collector": stats_collector,
+        }
+
+        stage_factories = {
+            "normalize": lambda: NormalizationStage(self.normalizer),
+            "validate": lambda: ValidationStage(self.validator),
+            "lemmatize": lambda: LemmatizationStage(self.lemmatization_service),
+            "foreign_filter": lambda: ForeignLanguageFilterStage(self.language_code, self.foreign_language_filters),
+            "nlp": lambda: NLPAnalysisStage(
+                self.nlp_model, self.language_code, self.ner_frequency_threshold, self.ner_whitelist
+            ),
+            "inflection_filter": lambda: InflectionFilteringStage(
                 self.language_code,
                 self.inflection_frequency_ratio,
                 self.inflection_patterns,
-                existing_words,
-                filter_inflections,
+                context["existing_words"],
+                context["filter_inflections"],
             ),
-            CategorizationStage(self.pos_categories),
-            StatisticsCollectionStage(stats_collector),
-        ]
+            "categorize": lambda: CategorizationStage(self.pos_categories),
+            "stats": lambda: StatisticsCollectionStage(context["stats_collector"]),
+        }
+
+        stages = []
+        for stage_name in stage_names:
+            factory = stage_factories.get(stage_name)
+            if not factory:
+                raise ValueError(f"Unknown pipeline stage: {stage_name}")
+            stages.append(factory())
+
         return ProcessingPipeline(stages)
+
+    def _resolve_pipeline_stages(self) -> list[str]:
+        if self.pipeline_override:
+            return self.pipeline_override
+        if self.pipeline_default:
+            return self.pipeline_default
+        return ["normalize", "validate", "lemmatize", "nlp", "inflection_filter", "categorize", "stats"]
 
     def process_words(
         self,
@@ -224,30 +198,25 @@ class VocabularyProcessor:
                 )
                 continue
 
-            if self.language_code == "de":
-                variant_match = self._find_german_singular_match(processed.lemma, seen_lemmas)
-                if variant_match:
-                    existing = seen_lemmas[variant_match]
-                    current_len = len(processed.lemma)
-                    existing_len = len(existing.lemma)
+            variant_match = self.language_plugin.canonical_lemma(processed.lemma, seen_lemmas)
+            if variant_match:
+                existing = seen_lemmas[variant_match]
+                current_len = len(processed.lemma)
+                existing_len = len(existing.lemma)
 
-                    if current_len < existing_len:
-                        processed_words[:] = [w for w in processed_words if w.lemma != variant_match]
-                        categories[existing.category] = [
-                            w for w in categories[existing.category] if w.lemma != variant_match
-                        ]
-                        del seen_lemmas[variant_match]
-                        if stats_collector:
-                            stats_collector.add_filtered(
-                                existing.word, f"german_plural:replaced_by_singular:{processed.lemma}"
-                            )
-                    else:
-                        filtered_count += 1
-                        if stats_collector:
-                            stats_collector.add_filtered(
-                                processed.word, f"german_plural:singular_exists:{variant_match}"
-                            )
-                        continue
+                if current_len < existing_len:
+                    processed_words[:] = [w for w in processed_words if w.lemma != variant_match]
+                    categories[existing.category] = [w for w in categories[existing.category] if w.lemma != variant_match]
+                    del seen_lemmas[variant_match]
+                    if stats_collector:
+                        stats_collector.add_filtered(
+                            existing.word, f"german_plural:replaced_by_singular:{processed.lemma}"
+                        )
+                else:
+                    filtered_count += 1
+                    if stats_collector:
+                        stats_collector.add_filtered(processed.word, f"german_plural:singular_exists:{variant_match}")
+                    continue
 
             processed_words.append(processed)
             categories[processed.category].append(processed)
@@ -306,7 +275,7 @@ class VocabularyProcessor:
             if stats_collector:
                 stats_collector.add_filtered(processed.word, f"duplicate:lemma_exists:{processed.lemma}")
             return filtered_count
-        elif processed.frequency > existing_processed.frequency * 1.2:
+        elif processed.frequency > existing_processed.frequency * self.dedup_frequency_replacement_margin:
             should_replace = True
             replacement_reason = f"replaced_by_higher_freq:{processed.lemma}:freq={processed.frequency:.6f}"
         else:
@@ -339,21 +308,6 @@ class VocabularyProcessor:
             by_category=stats_collector.by_category,
             examples=stats_collector.examples,
         )
-
-    def _find_german_singular_match(self, lemma: str, seen_lemmas: dict) -> str | None:
-        seen_lower = {k.lower(): k for k in seen_lemmas}
-
-        singular_variants = _get_german_singular_variants(lemma)
-        for variant in singular_variants:
-            if variant in seen_lower:
-                return seen_lower[variant]
-
-        plural_variants = _get_german_plural_variants(lemma)
-        for variant in plural_variants:
-            if variant in seen_lower:
-                return seen_lower[variant]
-
-        return None
 
     def _generate_reason(self, word: str, lemma: str, pos_tag: str, morphology: dict, rank: int | None) -> str:
         parts = []

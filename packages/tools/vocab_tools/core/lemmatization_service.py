@@ -18,94 +18,6 @@ from ..config.constants import LEMMATIZATION_BATCH_SIZE
 LanguageCodeType = Literal["en", "es", "de", "ru"]
 
 
-SPANISH_LEMMA_FALLBACK: dict[str, str] = {
-    "estabas": "estar",
-    "estaba": "estar",
-    "estaban": "estar",
-    "estuve": "estar",
-    "estuvo": "estar",
-    "estuviste": "estar",
-    "estarás": "estar",
-    "estará": "estar",
-    "estarían": "estar",
-    "está": "estar",
-    "quieras": "querer",
-    "quiera": "querer",
-    "quieran": "querer",
-    "quiso": "querer",
-    "quisiste": "querer",
-    "quisiera": "querer",
-    "queréis": "querer",
-    "hablado": "hablar",
-    "llegado": "llegar",
-    "tomado": "tomar",
-    "ganado": "ganar",
-    "olvidado": "olvidar",
-    "preparado": "preparar",
-    "pedido": "pedir",
-    "unido": "unir",
-    "viste": "ver",
-    "vio": "ver",
-    "vieron": "ver",
-    "visto": "ver",
-    "comiendo": "comer",
-    "comido": "comer",
-    "tengo": "tener",
-    "tienes": "tener",
-    "tiene": "tener",
-    "tienen": "tener",
-    "tenía": "tener",
-    "tenías": "tener",
-    "tengas": "tener",
-    "tendrás": "tener",
-    "eres": "ser",
-    "era": "ser",
-    "eras": "ser",
-    "fue": "ser",
-    "fuiste": "ir",
-    "fueron": "ir",
-    "vayas": "ir",
-    "vaya": "ir",
-    "vamos": "ir",
-    "vámonos": "ir",
-    "irás": "ir",
-    "irá": "ir",
-    "vais": "ir",
-    "conocí": "conocer",
-    "conoció": "conocer",
-    "conociste": "conocer",
-    "vete": "ir",
-    "cállate": "callar",
-    "quédate": "quedar",
-    "espera": "esperar",
-    "mira": "mirar",
-    "ven": "venir",
-    "di": "decir",
-    "dijo": "decir",
-    "dijiste": "decir",
-    "dijeron": "decir",
-    "irme": "ir",
-    "irte": "ir",
-    "darme": "dar",
-    "darte": "dar",
-    "darle": "dar",
-    "verme": "ver",
-    "verte": "ver",
-    "escucharme": "escuchar",
-    "bonita": "bonito",
-    "bonitas": "bonito",
-    "bonitos": "bonito",
-    "grandes": "grande",
-    "rojas": "rojo",
-    "rojos": "rojo",
-    "roja": "rojo",
-    "gatos": "gato",
-    "perros": "perro",
-    "casas": "casa",
-    "libros": "libro",
-}
-
-
 class LemmatizationService:
     """
     Thread-safe centralized lemmatization service.
@@ -129,6 +41,20 @@ class LemmatizationService:
         self._nlp_model = None
         self._model_loaded = False
         self._load_lock = threading.Lock()
+        self._exceptions_map: dict[str, str] = {}
+        self._word_zipf_delta_threshold: float | None = 1.0
+
+        try:
+            from ..config.config_loader import get_config_loader
+
+            config_loader = get_config_loader()
+            lang_config = config_loader.get_language_config(language_code)
+            lemmatization_config = lang_config.get("lemmatization", {}) or {}
+            self._exceptions_map = lemmatization_config.get("exceptions_map", {}) or {}
+            self._word_zipf_delta_threshold = lemmatization_config.get("word_zipf_delta_threshold", 1.0)
+        except Exception:
+            self._exceptions_map = {}
+            self._word_zipf_delta_threshold = 1.0
 
     @classmethod
     def get_instance(cls, language_code: LanguageCodeType) -> "LemmatizationService":
@@ -340,8 +266,8 @@ class LemmatizationService:
             except Exception:
                 lemma = word
 
-        if self.language_code == "es" and lemma == word:
-            lemma = SPANISH_LEMMA_FALLBACK.get(word, lemma)
+        if word in self._exceptions_map:
+            lemma = self._exceptions_map[word]
 
         return lemma
 
@@ -365,8 +291,8 @@ class LemmatizationService:
                         lemma = doc[0].lemma_.lower()
                     else:
                         lemma = word
-                    if self.language_code == "es" and lemma == word:
-                        lemma = SPANISH_LEMMA_FALLBACK.get(word, lemma)
+                    if word in self._exceptions_map:
+                        lemma = self._exceptions_map[word]
                     results.append(lemma)
                 return results
             except Exception:
@@ -386,6 +312,9 @@ class LemmatizationService:
         Returns:
             Validated lemma (or original word if lemma invalid)
         """
+        if word in self._exceptions_map:
+            return self._exceptions_map[word]
+
         lemma_zipf = zipf_frequency(lemma, self.language_code)
         word_zipf = zipf_frequency(word, self.language_code)
 
@@ -393,8 +322,8 @@ class LemmatizationService:
         if lemma_zipf == 0.0 and word_zipf > 0.0:
             return word
 
-        # If word is significantly more frequent than lemma (> 10x), use word
-        if word_zipf > lemma_zipf + 1.0:
+        threshold = self._word_zipf_delta_threshold
+        if threshold is not None and word_zipf > lemma_zipf + threshold:
             return word
 
         return lemma
