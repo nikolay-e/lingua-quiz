@@ -137,6 +137,7 @@ class VocabularyItemResponse(APIBaseModel):
     target_text: Annotated[str, Field(alias="targetText", title="Targettext")]
     target_language: Annotated[str, Field(alias="targetLanguage", title="Targetlanguage")]
     list_name: Annotated[str, Field(alias="listName", title="Listname")]
+    difficulty_level: Annotated[str | None, Field(alias="difficultyLevel", title="Difficultylevel")]
     source_usage_example: Annotated[str | None, Field(alias="sourceUsageExample", title="Sourceusageexample")]
     target_usage_example: Annotated[str | None, Field(alias="targetUsageExample", title="Targetusageexample")]
 

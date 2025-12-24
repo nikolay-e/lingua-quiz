@@ -1491,6 +1491,17 @@
             "type": "string",
             "title": "Listname"
           },
+          "difficultyLevel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Difficultylevel"
+          },
           "sourceUsageExample": {
             "anyOf": [
               {
@@ -1522,6 +1533,7 @@
           "targetText",
           "targetLanguage",
           "listName",
+          "difficultyLevel",
           "sourceUsageExample",
           "targetUsageExample"
         ],

@@ -189,6 +189,7 @@ export interface VocabularyItemResponse {
   targetText: string;
   targetLanguage: string;
   listName: string;
+  difficultyLevel: string | null;
   sourceUsageExample: string | null;
   targetUsageExample: string | null;
 }

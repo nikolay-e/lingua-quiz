@@ -44,7 +44,7 @@ def get_translations(
 ) -> list[VocabularyItemResponse]:
     translations = query_words_db(
         """SELECT id, source_text, source_language, target_text, target_language,
-                  list_name, source_usage_example, target_usage_example
+                  list_name, difficulty_level, source_usage_example, target_usage_example
            FROM vocabulary_items
            WHERE list_name = %s AND version_id = %s AND is_active = TRUE
            ORDER BY source_text""",
