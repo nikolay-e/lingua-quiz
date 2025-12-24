@@ -1,17 +1,63 @@
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Annotated
 
 import typer
 from rich.console import Console
 from rich.panel import Panel
+from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn, TimeElapsedColumn
 from rich.table import Table
 from rich.tree import Tree
 
+from vocab_tools.config.config_loader import get_config_loader
 from vocab_tools.core.api_client import MissingCredentialsError, VocabularyAPIAdapter
 from vocab_tools.validation.migration_validator import MigrationValidator
 
 from ._utils import normalize_list_name
 
 console = Console()
+
+
+def _validate_list_worker(
+    list_name: str,
+    check_duplicates: bool,
+    check_quality: bool,
+    check_syntax: bool,
+    verbose: bool,
+) -> tuple[str, dict]:
+    try:
+        validator = MigrationValidator()
+        entries = validator.db_parser.get_vocabulary_by_list(list_name)
+        word_count = len(entries)
+
+        issues = []
+        warnings = []
+
+        if check_duplicates:
+            dup_issues = _check_duplicates(entries, verbose)
+            issues.extend(dup_issues)
+
+        if check_quality:
+            quality_issues, quality_warnings = _check_quality(entries, verbose)
+            issues.extend(quality_issues)
+            warnings.extend(quality_warnings)
+
+        if check_syntax:
+            syntax_issues = _check_syntax(entries, verbose)
+            issues.extend(syntax_issues)
+
+        return list_name, {
+            "status": "success",
+            "word_count": word_count,
+            "issues": issues,
+            "warnings": warnings,
+        }
+    except Exception as e:
+        return list_name, {
+            "status": "error",
+            "word_count": 0,
+            "issues": [{"type": "error", "message": str(e)}],
+            "warnings": [],
+        }
 
 
 def validate(
@@ -39,6 +85,10 @@ def validate(
         bool,
         typer.Option("--verbose", "-v", help="Show detailed validation output"),
     ] = False,
+    workers: Annotated[
+        int | None,
+        typer.Option("--workers", "-j", help="Number of parallel workers (default: 14 from config)"),
+    ] = None,
 ):
     """
     Validate vocabulary data quality.
@@ -54,6 +104,8 @@ def validate(
         vocab-tools validate --no-cross-file
         vocab-tools validate -v
     """
+    config_loader = get_config_loader()
+
     console.print(
         Panel(
             "[bold blue]VOCABULARY VALIDATION[/bold blue]\n[dim]Checking data quality...[/dim]",
@@ -83,56 +135,64 @@ def validate(
         console.print("[yellow]No vocabulary lists found to validate.[/yellow]")
         raise typer.Exit(0)
 
-    console.print(f"[green]Validating {len(list_names)} vocabulary list(s)[/green]\n")
+    if workers is None:
+        max_workers = config_loader.get_default_workers()
+    else:
+        if workers < 1:
+            console.print("[red]Workers must be >= 1[/red]")
+            raise typer.Exit(1)
+        max_workers = workers
+
+    console.print(f"[green]Validating {len(list_names)} vocabulary list(s)[/green]")
+    if max_workers > 1:
+        console.print(f"[dim]Using {max_workers} parallel workers[/dim]")
+    console.print()
 
     all_issues: dict[str, list[dict]] = {}
     all_warnings: dict[str, list[dict]] = {}
     total_words = 0
 
-    for ln in list_names:
-        console.print(f"[bold]Checking: {ln}[/bold]")
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        BarColumn(),
+        TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+        TimeElapsedColumn(),
+        console=console,
+    ) as progress:
+        main_task = progress.add_task(f"Validating {len(list_names)} lists...", total=len(list_names))
 
-        try:
-            entries = validator.db_parser.get_vocabulary_by_list(ln)
-            total_words += len(entries)
-
-            issues = []
-            warnings = []
-
-            if check_duplicates:
-                dup_issues = _check_duplicates(entries, verbose)
-                issues.extend(dup_issues)
-
-            if check_quality:
-                quality_issues, quality_warnings = _check_quality(entries, verbose)
-                issues.extend(quality_issues)
-                warnings.extend(quality_warnings)
-
-            if check_syntax:
-                syntax_issues = _check_syntax(entries, verbose)
-                issues.extend(syntax_issues)
-
-            if issues:
-                all_issues[ln] = issues
-            if warnings:
-                all_warnings[ln] = warnings
-
-            issue_count = len(issues)
-            warning_count = len(warnings)
-
-            if issue_count == 0 and warning_count == 0:
-                console.print(f"  [green]No issues found ({len(entries)} words)[/green]")
-            else:
-                status = []
-                if issue_count > 0:
-                    status.append(f"[red]{issue_count} errors[/red]")
-                if warning_count > 0:
-                    status.append(f"[yellow]{warning_count} warnings[/yellow]")
-                console.print(f"  {', '.join(status)} ({len(entries)} words)")
-
-        except Exception as e:
-            console.print(f"  [red]Error validating: {e}[/red]")
-            all_issues[ln] = [{"type": "error", "message": str(e)}]
+        if max_workers > 1 and len(list_names) > 1:
+            with ProcessPoolExecutor(max_workers=max_workers) as executor:
+                futures = {
+                    executor.submit(
+                        _validate_list_worker, ln, check_duplicates, check_quality, check_syntax, verbose
+                    ): ln
+                    for ln in list_names
+                }
+                for future in as_completed(futures):
+                    ln = futures[future]
+                    try:
+                        _, result = future.result()
+                        total_words += result["word_count"]
+                        if result["issues"]:
+                            all_issues[ln] = result["issues"]
+                        if result["warnings"]:
+                            all_warnings[ln] = result["warnings"]
+                    except Exception as e:
+                        all_issues[ln] = [{"type": "error", "message": str(e)}]
+                    progress.advance(main_task)
+                    progress.update(main_task, description=f" Validated {ln}")
+        else:
+            for ln in list_names:
+                progress.update(main_task, description=f" Validating {ln}...")
+                _, result = _validate_list_worker(ln, check_duplicates, check_quality, check_syntax, verbose)
+                total_words += result["word_count"]
+                if result["issues"]:
+                    all_issues[ln] = result["issues"]
+                if result["warnings"]:
+                    all_warnings[ln] = result["warnings"]
+                progress.advance(main_task)
 
     if cross_file and len(list_names) > 1:
         console.print("\n[bold]Cross-file duplicate check...[/bold]")

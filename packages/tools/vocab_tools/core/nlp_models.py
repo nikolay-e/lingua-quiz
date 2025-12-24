@@ -62,7 +62,7 @@ class NLPModelManager:
             try:
                 if not silent:
                     print(f"  Attempting to load {model_name}...")
-                model = spacy.load(model_name)
+                model = spacy.load(model_name, disable=["parser", "ner"])
                 self._validate_model_components(model, language_code)
                 self._model_cache[language_code] = model
                 if not silent:
@@ -78,7 +78,7 @@ class NLPModelManager:
                     try:
                         if not silent:
                             print(f"  Attempting to load {model_name} after download...")
-                        model = spacy.load(model_name)
+                        model = spacy.load(model_name, disable=["parser", "ner"])
                         self._validate_model_components(model, language_code)
                         self._model_cache[language_code] = model
                         if not silent:

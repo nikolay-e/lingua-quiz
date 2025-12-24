@@ -9,7 +9,13 @@ from rich.panel import Panel
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
-from vocab_tools.core.api_client import MissingCredentialsError, VocabularyAPIAdapter, VocabularyEntry
+from vocab_tools.core.api_client import (
+    DirectDatabaseClient,
+    MissingCredentialsError,
+    VocabularyAPIAdapter,
+    VocabularyEntry,
+    is_direct_db_available,
+)
 
 from ._utils import entry_to_dict, list_name_to_filename, normalize_list_name
 
@@ -60,18 +66,32 @@ def export(
         vocab-tools export --output ./backup
         vocab-tools export spanish-a1 -o ./data
     """
-    console.print(
-        Panel(
-            "[bold blue]VOCABULARY EXPORT[/bold blue]\n[dim]Downloading vocabulary from staging API...[/dim]",
-            expand=False,
-        )
-    )
+    use_direct_db = is_direct_db_available()
 
-    try:
-        adapter = VocabularyAPIAdapter()
-    except MissingCredentialsError as e:
-        console.print(f"[red]Error:[/red] {e}")
-        raise typer.Exit(1) from None
+    if use_direct_db:
+        console.print(
+            Panel(
+                "[bold blue]VOCABULARY EXPORT[/bold blue]\n[dim]Connecting directly to database...[/dim]",
+                expand=False,
+            )
+        )
+        try:
+            db_client = DirectDatabaseClient()
+        except MissingCredentialsError as e:
+            console.print(f"[red]Error:[/red] {e}")
+            raise typer.Exit(1) from None
+    else:
+        console.print(
+            Panel(
+                "[bold blue]VOCABULARY EXPORT[/bold blue]\n[dim]Downloading vocabulary from staging API...[/dim]",
+                expand=False,
+            )
+        )
+        try:
+            adapter = VocabularyAPIAdapter()
+        except MissingCredentialsError as e:
+            console.print(f"[red]Error:[/red] {e}")
+            raise typer.Exit(1) from None
 
     output.mkdir(parents=True, exist_ok=True)
 
@@ -79,12 +99,15 @@ def export(
         list_names = [normalize_list_name(list_name)]
     else:
         console.print("[dim]Discovering available vocabulary lists...[/dim]")
-        discovered = adapter.discover_migration_files()
-        list_names = []
-        for lang_lists in discovered.values():
-            for filename in lang_lists:
-                ln = adapter._filename_to_list_name(filename)
-                list_names.append(ln)
+        if use_direct_db:
+            list_names = db_client.get_all_list_names()
+        else:
+            discovered = adapter.discover_migration_files()
+            list_names = []
+            for lang_lists in discovered.values():
+                for filename in lang_lists:
+                    ln = adapter._filename_to_list_name(filename)
+                    list_names.append(ln)
 
         if not list_names:
             console.print("[yellow]No vocabulary lists found in the database.[/yellow]")
@@ -108,7 +131,10 @@ def export(
             progress.update(task, description=f"Exporting {ln}...")
 
             try:
-                entries = adapter.get_vocabulary_by_list(ln)
+                if use_direct_db:
+                    entries = db_client.fetch_vocabulary(ln)
+                else:
+                    entries = adapter.get_vocabulary_by_list(ln)
 
                 if not include_inactive:
                     entries = [e for e in entries if e.is_active]
@@ -128,6 +154,7 @@ def export(
     table = Table(title="Export Summary", show_header=True)
     table.add_column("Metric", style="cyan")
     table.add_column("Value", style="green")
+    table.add_row("Connection", "Direct DB" if use_direct_db else "REST API")
     table.add_row("Lists Exported", str(exported_count))
     table.add_row("Total Words", str(total_words))
     table.add_row("Output Directory", str(output.absolute()))

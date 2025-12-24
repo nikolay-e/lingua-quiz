@@ -7,6 +7,9 @@ class WordValidator:
         self.max_length = config.get("max_word_length") or 20
         self.skip_words = set(config.get("skip_words", []))
         self.blacklist = config.get("blacklist", {})
+        self.blacklist_by_category: dict[str, set[str]] = {
+            category: set(words_list) for category, words_list in self.blacklist.items()
+        }
 
         filtering = config.get("filtering", {})
         self.short_word_whitelist = set(filtering.get("short_word_whitelist", []))
@@ -15,6 +18,8 @@ class WordValidator:
     def is_valid(self, word: str, normalized: str = None) -> bool:
         if normalized is None:
             normalized = word.lower()
+        normalized = normalized.lower()
+        word_lower = word.lower()
 
         if not word or not word.strip():
             return False
@@ -25,21 +30,25 @@ class WordValidator:
         if len(word) > self.max_length:
             return False
 
-        if len(word) < self.min_length and word.lower() not in self.short_word_whitelist:
+        if len(word) < self.min_length and word_lower not in self.short_word_whitelist:
             return False
 
-        if normalized in self.skip_words:
+        if normalized in self.skip_words or word_lower in self.skip_words:
             return False
 
-        for _category, words_list in self.blacklist.items():
-            if word.lower() in words_list or normalized in words_list:
+        for _category, words_list in self.blacklist_by_category.items():
+            if word_lower in words_list or normalized in words_list:
                 return False
 
-        return all(not re.match(pattern, word) for pattern in self.exclude_patterns)
+        return all(
+            not re.match(pattern, word) and not re.match(pattern, normalized) for pattern in self.exclude_patterns
+        )
 
     def get_rejection_reason(self, word: str, normalized: str = None) -> tuple[str, str]:
         if normalized is None:
             normalized = word.lower()
+        normalized = normalized.lower()
+        word_lower = word.lower()
 
         if not word or not word.strip():
             return ("empty", "Empty word")
@@ -50,18 +59,18 @@ class WordValidator:
         if len(word) > self.max_length:
             return ("length", f"Exceeds maximum length ({self.max_length} chars)")
 
-        if len(word) < self.min_length and word.lower() not in self.short_word_whitelist:
+        if len(word) < self.min_length and word_lower not in self.short_word_whitelist:
             return ("length", f"Too short (min: {self.min_length} chars)")
 
-        if normalized in self.skip_words:
+        if normalized in self.skip_words or word_lower in self.skip_words:
             return ("skip_list", "In skip words list")
 
-        for category, words_list in self.blacklist.items():
-            if word.lower() in words_list or normalized in words_list:
+        for category, words_list in self.blacklist_by_category.items():
+            if word_lower in words_list or normalized in words_list:
                 return ("blacklist", f"In blacklist category: {category}")
 
         for pattern in self.exclude_patterns:
-            if re.match(pattern, word):
+            if re.match(pattern, word) or re.match(pattern, normalized):
                 return ("pattern", f"Matches exclusion pattern: {pattern}")
 
         return ("unknown", "Rejected by filters")

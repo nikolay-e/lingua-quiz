@@ -3,7 +3,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from ..config.config_loader import get_config_loader
-from ..core.vocabulary_processor import ProcessedVocabulary
+from ..core.vocabulary_processor import FilteredWord, ProcessedVocabulary
 
 
 class VocabularyExporter:
@@ -299,6 +299,49 @@ class VocabularyExporter:
                 }
                 for w in vocab.words
             ],
+        }
+
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+
+    def export_filtered(
+        self,
+        filtered_words: list[FilteredWord],
+        language_code: str,
+        output_path: Path | str,
+    ):
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        language_name = self.config_loader.get_language_name(language_code)
+
+        by_stage_reason: dict[str, list[dict]] = {}
+        for fw in filtered_words:
+            key = f"{fw.filter_stage}:{fw.filter_reason}"
+            if key not in by_stage_reason:
+                by_stage_reason[key] = []
+            by_stage_reason[key].append(
+                {
+                    "word": fw.word,
+                    "lemma": fw.lemma,
+                    "pos": fw.pos_tag,
+                    "frequency": fw.frequency,
+                    "rank": fw.rank,
+                }
+            )
+
+        data = {
+            "language": language_code,
+            "language_name": language_name,
+            "total_filtered": len(filtered_words),
+            "generated_at": datetime.now(UTC).isoformat(),
+            "by_category": {
+                key: {
+                    "count": len(words),
+                    "examples": words[:50],
+                }
+                for key, words in sorted(by_stage_reason.items(), key=lambda x: -len(x[1]))
+            },
         }
 
         with open(output_path, "w", encoding="utf-8") as f:

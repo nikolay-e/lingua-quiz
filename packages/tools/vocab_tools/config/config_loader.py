@@ -111,6 +111,15 @@ class ConfigLoader:
             return set()
         return set(lang_config.filtering.ner_whitelist)
 
+    def get_parallelization_config(self) -> dict:
+        return self._config.parallelization.model_dump()
+
+    def get_default_workers(self) -> int:
+        return self._config.parallelization.default_workers
+
+    def get_batch_size(self) -> int:
+        return self._config.parallelization.batch_size
+
 
 def get_config_loader() -> ConfigLoader:
     return ConfigLoader()

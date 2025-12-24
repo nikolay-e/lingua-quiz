@@ -1,4 +1,30 @@
+import os
+
 from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+PIPELINE_STAGE_CHOICES = {
+    "normalize",
+    "validate",
+    "lemmatize",
+    "foreign_filter",
+    "nlp",
+    "inflection_filter",
+    "categorize",
+    "stats",
+}
+
+
+class ParallelizationConfig(BaseModel):
+    default_workers: int = Field(default=14, ge=1, le=64)
+    batch_size: int = Field(default=1000, ge=100, le=10000)
+    backend: str = Field(default="loky", pattern="^(loky|multiprocessing|threading)$")
+
+    @field_validator("default_workers", mode="before")
+    @classmethod
+    def resolve_default_workers(cls, v):
+        if v == -1 or v is None:
+            return os.cpu_count() or 4
+        return v
 
 
 class AnalysisDefaults(BaseModel):
@@ -9,7 +35,18 @@ class AnalysisDefaults(BaseModel):
     id_gap_threshold: int = Field(ge=10)
     ner_frequency_threshold: float | None = Field(default=0.0005, ge=0, le=1)
     dedup_frequency_replacement_margin: float = Field(default=1.2, ge=1.0, le=10.0)
+    max_rank: int = Field(default=20000, ge=1000)
+    fetch_buffer_multiplier: float = Field(default=1.5, ge=1.0, le=10.0)
+    source_lemmatize: bool = Field(default=False)
     pipeline: list[str] = Field(default_factory=list)
+
+    @field_validator("pipeline")
+    @classmethod
+    def validate_pipeline(cls, v: list[str]) -> list[str]:
+        invalid = [stage for stage in v if stage not in PIPELINE_STAGE_CHOICES]
+        if invalid:
+            raise ValueError(f"Invalid pipeline stage(s): {', '.join(invalid)}")
+        return v
 
 
 class CEFRLevel(BaseModel):
@@ -102,6 +139,14 @@ class Filtering(BaseModel):
     foreign_language_filters: list[ForeignLanguageFilter] = Field(default_factory=list)
     pipeline_override: list[str] = Field(default_factory=list)
 
+    @field_validator("pipeline_override")
+    @classmethod
+    def validate_pipeline_override(cls, v: list[str]) -> list[str]:
+        invalid = [stage for stage in v if stage not in PIPELINE_STAGE_CHOICES]
+        if invalid:
+            raise ValueError(f"Invalid pipeline stage(s): {', '.join(invalid)}")
+        return v
+
 
 class POSCategories(BaseModel):
     essential_nouns: list[str]
@@ -120,6 +165,7 @@ class LanguageConfig(BaseModel):
     spacy_models: list[str] = Field(min_length=1)
     stanza_code: str | None = None
     max_word_length: int | None = Field(default=None, ge=5, le=100)
+    plugin: str | None = None
 
     normalization: Normalization
     morphology: MorphologyConfig | None = None
@@ -143,6 +189,7 @@ class LanguageConfig(BaseModel):
 class Config(BaseModel):
     model_config = ConfigDict(extra="allow")
 
+    parallelization: ParallelizationConfig = Field(default_factory=ParallelizationConfig)
     analysis_defaults: AnalysisDefaults
     cefr_levels: dict[str, CEFRLevel]
     cefr_cumulative_totals: dict[str, int]

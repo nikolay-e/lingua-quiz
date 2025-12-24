@@ -14,6 +14,7 @@ class ProcessingContext:
     frequency: float | None = None
     category: str | None = None
     should_filter: bool = False
+    filter_stage: str | None = None
     filter_reason: str | None = None
 
 

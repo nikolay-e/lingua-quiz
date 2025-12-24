@@ -33,145 +33,21 @@ class StanzaLemmatizer:
         "se",
     ]
 
-    SPANISH_IRREGULAR_FORMS: ClassVar[dict[str, str]] = {
-        "ve": "ir",
-        "ven": "venir",
-        "di": "decir",
-        "ten": "tener",
-        "pon": "poner",
-        "sal": "salir",
-        "haz": "hacer",
-        "vete": "ir",
-        "vamos": "ir",
-        "vámonos": "ir",
-        "vayas": "ir",
-        "vayamos": "ir",
-        "conocí": "conocer",
-        "dije": "decir",
-        "dijiste": "decir",
-        "dijo": "decir",
-        "dijimos": "decir",
-        "dijeron": "decir",
-        "cállate": "callar",
-        "quédate": "quedar",
-        "levántate": "levantar",
-        "siéntate": "sentar",
-        "acuéstate": "acostar",
-        "espérate": "esperar",
-        "cálmate": "calmar",
-        "mírame": "mirar",
-        "cuídate": "cuidar",
-        "despiértate": "despertar",
-        "muévete": "mover",
-        "vístete": "vestir",
-        "darme": "dar",
-        "darte": "dar",
-        "darle": "dar",
-        "darlo": "dar",
-        "darla": "dar",
-        "darnos": "dar",
-        "daros": "dar",
-        "darles": "dar",
-        "darlos": "dar",
-        "darlas": "dar",
-        "darse": "dar",
-        "bueno": "bueno",
-        "buena": "bueno",
-        "buenos": "bueno",
-        "buenas": "bueno",
-        "buen": "bueno",
-        "gran": "grande",
-        "linda": "lindo",
-        "estupendo": "estupendo",
-        "contenta": "contento",
-        "enamorada": "enamorado",
-        "enamorado": "enamorado",
-        "dios": "dios",
-        "diferencia": "diferencia",
-        "caballeros": "caballero",
-        "afuera": "afuera",
-        "james": "james",
-        "londres": "londres",
-        "san": "san",
-        "haggis": "hacer",
-        "tengas": "tener",
-        "tendrás": "tener",
-        "estarás": "estar",
-        "estuviste": "estar",
-        "come": "comer",
-        "refieres": "referir",
-        "oiga": "oír",
-        "diste": "dar",
-        "púse": "poner",
-        "puse": "poner",
-        "encontraste": "encontrar",
-        "viniste": "venir",
-        "perdiste": "perder",
-        "pudiste": "poder",
-        "mataste": "matar",
-        "irás": "ir",
-        "vais": "ir",
-        "queréis": "querer",
-        "miras": "mirar",
-        "mirad": "mirar",
-        "viniendo": "venir",
-        "vendría": "venir",
-        "muevas": "mover",
-        "huele": "oler",
-        "mintiendo": "mentir",
-        "pones": "poner",
-        "convierte": "convertir",
-        "siéntese": "sentar",
-        "des": "dar",
-        "amas": "amar",
-        "visto": "ver",
-        "vuelto": "volver",
-        "llegado": "llegar",
-        "hablado": "hablar",
-        "tomado": "tomar",
-        "ganado": "ganar",
-        "olvidado": "olvidar",
-        "preparado": "preparar",
-        "pedido": "pedir",
-        "unido": "unir",
-        "casado": "casar",
-        "cansado": "cansar",
-        "herido": "herir",
-        "escrito": "escribir",
-        "decidido": "decidir",
-        "vivido": "vivir",
-        "salido": "salir",
-        "déjame": "dejar",
-        "déjeme": "dejar",
-        "dame": "dar",
-        "dime": "decir",
-        "dímelo": "decir",
-        "verte": "ver",
-        "dale": "dar",
-        "hazlo": "hacer",
-        "escúchame": "escuchar",
-        "verme": "ver",
-        "irme": "ir",
-        "irte": "ir",
-        "déjalo": "dejar",
-        "olvídalo": "olvidar",
-        "ayúdame": "ayudar",
-        "créeme": "creer",
-        "perdóname": "perdonar",
-        "ponte": "poner",
-        "suéltame": "soltar",
-        "llámame": "llamar",
-        "dígame": "decir",
-        "dígle": "decir",
-        "decírtelo": "decir",
-        "manténte": "mantener",
-        "salga": "salir",
-        "salgamos": "salir",
-    }
-
     def __init__(self, language: LanguageCodeType):
         self.language = language
         self._pipeline = None
+        self._exceptions_map: dict[str, str] = {}
+
+        if self.language == "es":
+            try:
+                from ..config.config_loader import get_config_loader
+
+                config_loader = get_config_loader()
+                lang_config = config_loader.get_language_config(self.language)
+                lemmatization = lang_config.get("lemmatization", {}) or {}
+                self._exceptions_map = lemmatization.get("exceptions_map", {}) or {}
+            except Exception:
+                self._exceptions_map = {}
 
         if not STANZA_AVAILABLE:
             print("⚠️  Stanza not available. Install with: pip install stanza")
@@ -240,8 +116,8 @@ class StanzaLemmatizer:
 
         word_lower = word.lower()
 
-        if word_lower in self.SPANISH_IRREGULAR_FORMS:
-            return self.SPANISH_IRREGULAR_FORMS[word_lower]
+        if word_lower in self._exceptions_map:
+            return self._exceptions_map[word_lower]
 
         features = {}
         if feats:
@@ -262,8 +138,8 @@ class StanzaLemmatizer:
 
             base, pronoun = self._strip_spanish_enclitic_pronouns(word_lower)
             if pronoun:
-                if base in self.SPANISH_IRREGULAR_FORMS:
-                    return self.SPANISH_IRREGULAR_FORMS[base]
+                if base in self._exceptions_map:
+                    return self._exceptions_map[base]
 
                 if base.endswith(("ar", "er", "ir")):
                     return base
@@ -290,9 +166,8 @@ class StanzaLemmatizer:
 
         word_lower = word.lower()
 
-        # Only use whitelist
-        if word_lower in self.SPANISH_IRREGULAR_FORMS:
-            return self.SPANISH_IRREGULAR_FORMS[word_lower]
+        if word_lower in self._exceptions_map:
+            return self._exceptions_map[word_lower]
 
         # Default: trust Stanza
         return lemma

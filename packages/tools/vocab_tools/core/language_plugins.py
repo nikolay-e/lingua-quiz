@@ -1,22 +1,28 @@
 from dataclasses import dataclass
-from typing import Protocol, TYPE_CHECKING
+from typing import TYPE_CHECKING, Protocol
 
 if TYPE_CHECKING:
     from .vocabulary_processor import ProcessedWord
 
 
+@dataclass(frozen=True)
+class CanonicalMatch:
+    matched_lemma: str
+    replace_reason: str
+    filter_reason: str
+
+
 class LanguagePlugin(Protocol):
     language_code: str
 
-    def canonical_lemma(self, lemma: str, seen_lemmas: dict[str, "ProcessedWord"]) -> str | None:
-        ...
+    def canonical_lemma(self, lemma: str, seen_lemmas: dict[str, "ProcessedWord"]) -> CanonicalMatch | None: ...
 
 
 @dataclass(frozen=True)
 class DefaultLanguagePlugin:
     language_code: str
 
-    def canonical_lemma(self, lemma: str, seen_lemmas: dict[str, "ProcessedWord"]) -> str | None:
+    def canonical_lemma(self, lemma: str, seen_lemmas: dict[str, "ProcessedWord"]) -> CanonicalMatch | None:
         return None
 
 
@@ -27,16 +33,24 @@ class GermanLanguagePlugin:
     umlaut_pairs: dict[str, str]
     reverse_umlauts: dict[str, str]
 
-    def canonical_lemma(self, lemma: str, seen_lemmas: dict[str, "ProcessedWord"]) -> str | None:
+    def canonical_lemma(self, lemma: str, seen_lemmas: dict[str, "ProcessedWord"]) -> CanonicalMatch | None:
         seen_lower = {k.lower(): k for k in seen_lemmas}
 
         for variant in _generate_singular_variants(lemma, self.suffix_pairs, self.umlaut_pairs):
             if variant in seen_lower:
-                return seen_lower[variant]
+                return CanonicalMatch(
+                    matched_lemma=seen_lower[variant],
+                    replace_reason="replaced_by_shorter",
+                    filter_reason="existing_preferred",
+                )
 
         for variant in _generate_plural_variants(lemma, self.suffix_pairs, self.reverse_umlauts):
             if variant in seen_lower:
-                return seen_lower[variant]
+                return CanonicalMatch(
+                    matched_lemma=seen_lower[variant],
+                    replace_reason="replaced_by_shorter",
+                    filter_reason="existing_preferred",
+                )
 
         return None
 
@@ -89,14 +103,31 @@ def _generate_plural_variants(
     return variants
 
 
-def get_language_plugin(language_code: str, config_loader) -> LanguagePlugin:
-    lang_config = config_loader.get_language_config(language_code)
-    morphology = lang_config.get("morphology")
+PLUGIN_FACTORIES = {
+    "german_morphology": lambda code, cfg: _build_german_plugin(code, cfg),
+}
 
-    if language_code == "de" and morphology:
-        suffix_pairs = [tuple(pair) for pair in morphology.get("plural_singular_suffix_pairs", [])]
-        umlaut_pairs = morphology.get("umlaut_pairs", {})
-        reverse_umlauts = morphology.get("reverse_umlauts", {}) or {v: k for k, v in umlaut_pairs.items()}
-        return GermanLanguagePlugin(language_code, suffix_pairs, umlaut_pairs, reverse_umlauts)
+
+def _build_german_plugin(language_code: str, lang_config) -> LanguagePlugin:
+    morphology = lang_config.morphology
+    if not morphology:
+        return DefaultLanguagePlugin(language_code)
+
+    suffix_pairs = list(morphology.plural_singular_suffix_pairs or [])
+    umlaut_pairs = dict(morphology.umlaut_pairs or {})
+    reverse_umlauts = dict(morphology.reverse_umlauts or {}) or {v: k for k, v in umlaut_pairs.items()}
+    return GermanLanguagePlugin(language_code, suffix_pairs, umlaut_pairs, reverse_umlauts)
+
+
+def get_language_plugin(language_code: str, config_loader) -> LanguagePlugin:
+    lang_config = config_loader.config.get_language(language_code)
+    if not lang_config:
+        return DefaultLanguagePlugin(language_code)
+
+    plugin_name = getattr(lang_config, "plugin", None)
+    if plugin_name:
+        factory = PLUGIN_FACTORIES.get(plugin_name)
+        if factory:
+            return factory(language_code, lang_config)
 
     return DefaultLanguagePlugin(language_code)

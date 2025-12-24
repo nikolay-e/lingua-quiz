@@ -1,5 +1,11 @@
 # Configuration for LinguaQuiz Vocabulary Analysis
 
+# Parallelization settings for CPU-bound NLP tasks
+parallelization:
+  default_workers: 14  # Default number of parallel worker processes
+  batch_size: 1000     # Words per batch for batch processing
+  backend: 'loky'      # joblib backend: 'loky' (default), 'multiprocessing', 'threading'
+
 analysis_defaults:
   min_word_length: 2
   max_word_length: 20
@@ -8,6 +14,9 @@ analysis_defaults:
   id_gap_threshold: 100 # Maximum gap in ID sequences before warning
   ner_frequency_threshold: 0.0005
   dedup_frequency_replacement_margin: 1.2
+  max_rank: 20000
+  fetch_buffer_multiplier: 1.5
+  source_lemmatize: false
   pipeline: ['normalize', 'validate', 'lemmatize', 'foreign_filter', 'nlp', 'inflection_filter', 'categorize', 'stats']
 
 # CEFR Cumulative Totals (for vocabulary analysis)
@@ -367,6 +376,10 @@ languages:
         - "^\\d+$" # Pure numbers
         - '^[A-Z]{2,}$' # All caps abbreviations
         - '^https?://' # URLs
+        - '^([A-Za-z])-\1$' # Stutter tokens like i-i, o-o
+        - '^([A-Za-z]+)-\1$' # Repeated syllables like ba-ba
+        - '.*[:;,.!?]+$' # Trailing punctuation artifacts
+        - "^(?:wasn|isn|aren|weren|hasn|haven|hadn|doesn|don|didn|shouldn|wouldn|couldn|mustn|mightn|needn|shan|won|ain)$" # codespell-ignore Contraction stumps
 
     pos_categories:
       essential_nouns: ['NOUN', 'PROPN']
@@ -377,6 +390,7 @@ languages:
 
   de:
     name: 'German'
+    plugin: 'german_morphology'
     wordfreq_code: 'de'
     spacy_models: ['de_core_news_sm', 'de_core_news_md', 'de_core_news_lg']
     max_word_length: 45 # German compound words with articles and plural forms
@@ -441,7 +455,21 @@ languages:
     inflection_exceptions:
       # Keep inflected forms that are commonly taught separately or have distinct meanings
       irregular_verbs:
-        ['bin', 'bist', 'ist', 'sind', 'war', 'warst', 'gewesen', 'habe', 'hast', 'hat', 'hatte', 'gehabt']
+        [
+          # sein forms
+          'bin', 'bist', 'ist', 'sind', 'war', 'warst', 'gewesen',
+          # haben forms
+          'habe', 'hast', 'hat', 'hatte', 'gehabt',
+          # Modal verbs (essential for A1)
+          'weiß', 'kann', 'muss', 'darf', 'soll', 'will', 'mag',
+          'weißt', 'kannst', 'musst', 'darfst', 'sollst', 'willst', 'magst',
+          # Common 3rd person forms
+          'gibt', 'nimmt', 'sieht', 'hält', 'fährt', 'läuft', 'spricht', 'hilft',
+          # Common imperatives
+          'komm', 'geh', 'mach', 'sag', 'hör', 'schau', 'gib', 'nimm',
+          # Subjunctive II (common)
+          'wäre', 'hätte', 'könnte', 'würde', 'möchte', 'sollte', 'müsste',
+        ]
       reason: 'Common irregular verb forms that learners should recognize separately'
 
     skip_words: []
@@ -494,7 +522,7 @@ languages:
           'of',
           'and',
           'the',
-          'in',
+          # 'in' removed - German preposition
           'on',
           'at',
           'it',
@@ -532,7 +560,7 @@ languages:
           'miss',
           'mom',
           'dad',
-          'man',
+          # 'man' removed - German indefinite pronoun
           'boy',
           'girl',
           'love',
@@ -554,124 +582,7 @@ languages:
           'find',
         ]
       ocr_errors: ['lhre', 'lhr', 'lch', 'lst', 'lm', 'ln']
-      verb_inflections: [
-          # 1st/3rd person singular irregular
-          'weiß',
-          'mag',
-          'kann',
-          'muss',
-          'darf',
-          'soll',
-          'will',
-          # 2nd person singular (du-forms)
-          'nimmst',
-          'gibst',
-          'siehst',
-          'gehst',
-          'kommst',
-          'machst',
-          'sagst',
-          'weißt',
-          'willst',
-          'kannst',
-          'musst',
-          'darfst',
-          'sollst',
-          'magst',
-          'hältst',
-          'fährst',
-          'läufst',
-          'schläfst',
-          'trägst',
-          'fällst',
-          'fängst',
-          'lässt',
-          'isst',
-          'vergisst',
-          'triffst',
-          'sprichst',
-          'brichst',
-          'stichst',
-          'stirbst',
-          'hilfst',
-          'wirfst',
-          'wirst',
-          'fühlst',
-          'denkst',
-          'bringst',
-          'findest',
-          'bleibst',
-          'schreibst',
-          'rufst',
-          'ziehst',
-          # 3rd person singular (er/sie/es-forms)
-          'zieht',
-          'gibt',
-          'nimmt',
-          'sieht',
-          'hält',
-          'fährt',
-          'läuft',
-          'schläft',
-          'trägt',
-          'fällt',
-          'fängt',
-          'lässt',
-          'isst',
-          'vergisst',
-          'trifft',
-          'spricht',
-          'bricht',
-          'sticht',
-          'stirbt',
-          'hilft',
-          'wirft',
-          # Imperatives (du-form)
-          'gib',
-          'nimm',
-          'sieh',
-          'lies',
-          'iss',
-          'vergiss',
-          'triff',
-          'sprich',
-          'brich',
-          'stich',
-          'stirb',
-          'hilf',
-          'wirf',
-          'guck',
-          'schau',
-          'hör',
-          'sag',
-          'mach',
-          'komm',
-          'geh',
-          'bleib',
-          'warte',
-          'halt',
-          'lass',
-          'fahr',
-          'lauf',
-          'schlaf',
-          'freu',
-          'zeig',
-          'frag',
-          'ruf',
-          'zieh',
-          'denk',
-          'bring',
-          'find',
-          # Konjunktiv II
-          'solltest',
-          'könntest',
-          'würdest',
-          'müsstest',
-          'dürftest',
-          'wolltest',
-          'hättest',
-          'wärst',
-        ]
+      verb_inflections: []  # Cleared - these are essential A1 vocabulary, not blacklist material
       proper_nouns:
         [
           'deutschland',
@@ -857,36 +768,87 @@ languages:
     lemmatization:
       word_zipf_delta_threshold: 2.0
       exceptions_map:
+        acuéstate: acostar
+        afuera: afuera
+        amas: amar
+        ayúdame: ayudar
         bonita: bonito
         bonitas: bonito
         bonitos: bonito
+        buen: bueno
+        buena: bueno
+        buenas: bueno
+        bueno: bueno
+        buenos: bueno
+        caballeros: caballero
+        cansado: cansar
+        casado: casar
         casas: casa
+        come: comer
         comido: comer
         comiendo: comer
         conociste: conocer
         conoció: conocer
         conocí: conocer
+        contenta: contento
+        convierte: convertir
+        créeme: creer
+        cuídate: cuidar
         cállate: callar
+        cálmate: calmar
+        dale: dar
+        dame: dar
+        darla: dar
+        darlas: dar
         darle: dar
+        darles: dar
+        darlo: dar
+        darlos: dar
         darme: dar
+        darnos: dar
+        daros: dar
+        darse: dar
         darte: dar
-        di: decir
+        decidido: decidir
         decirme: decir
+        decírtelo: decir
+        des: dar
+        despiértate: despertar
+        di: decir
+        diferencia: diferencia
+        dije: decir
         dijeron: decir
+        dijimos: decir
         dijiste: decir
         dijo: decir
+        dime: decir
+        dios: dios
+        diste: dar
+        déjalo: dejar
+        déjame: dejar
+        déjeme: dejar
+        dígame: decir
+        dígle: decir
+        dímelo: decir
+        enamorada: enamorado
+        enamorado: enamorado
+        encanta: encantar
+        encontraste: encontrar
         era: ser
         eras: ser
         eres: ser
+        escrito: escribir
         escucharme: escuchar
-        encanta: encantar
+        escúchame: escuchar
         espera: esperar
+        espérate: esperar
         estaba: estar
         estaban: estar
         estabas: estar
         estará: estar
         estarás: estar
         estarían: estar
+        estupendo: estupendo
         estuve: estar
         estuviste: estar
         estuvo: estar
@@ -896,20 +858,49 @@ languages:
         fuiste: ir
         ganado: ganar
         gatos: gato
+        gran: grande
         grandes: grande
         hablado: hablar
+        haggis: hacer
+        haz: hacer
+        hazlo: hacer
+        herido: herir
+        huele: oler
         irme: ir
         irte: ir
         irá: ir
         irás: ir
+        james: james
+        levántate: levantar
         libros: libro
+        linda: lindo
         llegado: llegar
+        llámame: llamar
+        londres: londres
+        manténte: mantener
+        mataste: matar
+        mintiendo: mentir
         mira: mirar
+        mirad: mirar
+        miras: mirar
+        muevas: mover
+        muévete: mover
+        mírame: mirar
         necesito: necesitar
+        oiga: oír
         olvidado: olvidar
+        olvídalo: olvidar
         pedido: pedir
+        perdiste: perder
+        perdóname: perdonar
         perros: perro
+        pon: poner
+        pones: poner
+        ponte: poner
         preparado: preparar
+        pudiste: poder
+        puse: poner
+        púse: poner
         queréis: querer
         quiera: querer
         quieran: querer
@@ -919,9 +910,19 @@ languages:
         quisiste: querer
         quiso: querer
         quédate: quedar
+        refieres: referir
         roja: rojo
         rojas: rojo
         rojos: rojo
+        sal: salir
+        salga: salir
+        salgamos: salir
+        salido: salir
+        san: san
+        siéntate: sentar
+        siéntese: sentar
+        suéltame: soltar
+        ten: tener
         tendrás: tener
         tengas: tener
         tengo: tener
@@ -935,17 +936,25 @@ languages:
         vais: ir
         vamos: ir
         vaya: ir
+        vayamos: ir
         vayas: ir
+        ve: ir
         ven: venir
+        vendría: venir
         verme: ver
         verte: ver
         vete: ir
         vieron: ver
+        viniendo: venir
+        viniste: venir
         vino: venir
         vio: ver
         viste: ver
         visto: ver
+        vivido: vivir
+        vuelto: volver
         vámonos: ir
+        vístete: vestir
 
     inflection_exceptions:
       # Keep inflected forms that are commonly taught separately or have distinct meanings
@@ -1127,6 +1136,10 @@ languages:
           min_foreign_zipf: 4.0
           max_native_zipf: 4.0
           min_zipf_delta: 1.5
+        - language: 'de'
+          min_foreign_zipf: 4.0
+          max_native_zipf: 4.0
+          min_zipf_delta: 1.5
       ner_frequency_threshold: 0.0005
       test_whitelist: ['libro', 'mesa', 'silla', 'gato', 'perro', 'casa', 'estar', 'comer', 'tener'] # For integration tests only
       exclude_patterns:
@@ -1254,34 +1267,7 @@ languages:
       aspectual_pairs_keep_both: true # Both делать (imperfective) and сделать (perfective) should be kept
       reason: 'Russian aspectual pairs and high-frequency irregular verb forms that learners must recognize separately'
 
-    skip_words:
-      [
-        'и',
-        'в',
-        'не',
-        'на',
-        'с',
-        'что',
-        'он',
-        'это',
-        'как',
-        'по',
-        'за',
-        'к',
-        'о',
-        'у',
-        'от',
-        'из',
-        'для',
-        'до',
-        'при',
-        'без',
-        'я',
-        'ты',
-        'мы',
-        'вы',
-        'они',
-      ]
+    skip_words: []  # Cleared - these are essential A1 vocabulary (prepositions, pronouns)
 
     blacklist:
       contractions: []

@@ -1,4 +1,3 @@
-import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
@@ -17,8 +16,12 @@ from ..output.formatters import print_error, print_header, print_success
 console = Console()
 
 
-CEFR_LEVELS = ["a1", "a2", "b1", "b2", "c1", "c2"]
-SUPPORTED_LANGUAGES = ["en", "es", "de", "ru"]
+def _get_supported_languages(config_loader) -> list[str]:
+    return list(config_loader.config.languages.keys())
+
+
+def _get_supported_levels(config_loader) -> list[str]:
+    return [level for level in config_loader.config.cefr_levels.keys() if level != "a0"]
 
 
 def _generate_level_vocabulary(
@@ -27,20 +30,16 @@ def _generate_level_vocabulary(
     all_words: list[ProcessedWord],
     output_dir: Path,
     config_loader,
+    start_index: int = 0,
 ) -> dict:
     level_config = config_loader.config.get_cefr_level(level)
     if not level_config:
         return {"status": "error", "error": f"Unknown CEFR level: {level}"}
 
-    min_rank, max_rank = level_config.rank_range
     target_count = level_config.words
+    end_index = start_index + target_count
 
-    level_words = []
-    for w in all_words:
-        if w.rank and min_rank <= w.rank <= max_rank:
-            level_words.append(w)
-
-    level_words = level_words[:target_count]
+    level_words = all_words[start_index:end_index]
 
     level_vocab = ProcessedVocabulary(
         language_code=language,
@@ -60,7 +59,8 @@ def _generate_level_vocabulary(
         "file": output_path,
         "word_count": len(level_words),
         "target_count": target_count,
-        "rank_range": (min_rank, max_rank),
+        "start_index": start_index,
+        "end_index": end_index,
     }
 
 
@@ -74,15 +74,24 @@ def _process_language(
 ) -> dict[str, dict]:
     results = {}
 
+    total_words_needed = 0
+    for level in levels:
+        level_config = config_loader.config.get_cefr_level(level)
+        if level_config:
+            total_words_needed += level_config.words
+
     multiplier = config_loader.get_raw_frequency_multiplier(language)
-    max_rank = 20000
-    fetch_count = int(max_rank * multiplier * 1.5)
+    analysis_defaults = config_loader.get_analysis_defaults()
+    source_lemmatize = analysis_defaults.get("source_lemmatize", True)
+
+    survival_rate = 0.35
+    fetch_count = int(total_words_needed / survival_rate * multiplier * 1.5)
 
     if progress is not None and main_task is not None:
         progress.update(main_task, description=f" {language.upper()}: Loading NLP models...")
 
     processor = VocabularyProcessor(language, silent=True)
-    source = SubtitleFrequencySource(language, top_n=fetch_count, lemmatize=True)
+    source = SubtitleFrequencySource(language, top_n=fetch_count, lemmatize=source_lemmatize)
 
     if progress is not None and main_task is not None:
         progress.update(main_task, description=f" {language.upper()}: Processing vocabulary...")
@@ -90,12 +99,18 @@ def _process_language(
     vocab = processor.process_words(
         source,
         filter_inflections=True,
-        target_count=None,
+        target_count=total_words_needed,
         collect_stats=True,
     )
 
+    if vocab.filtered_words:
+        filtered_path = output_dir / f"{language}_filtered.json"
+        exporter = VocabularyExporter(output_format="json")
+        exporter.export_filtered(vocab.filtered_words, language, filtered_path)
+
     all_words = vocab.words
 
+    start_index = 0
     for level in levels:
         if progress is not None and main_task is not None:
             progress.update(main_task, description=f" {language.upper()} {level.upper()}...")
@@ -106,8 +121,14 @@ def _process_language(
             all_words=all_words,
             output_dir=output_dir,
             config_loader=config_loader,
+            start_index=start_index,
         )
         results[level] = result
+
+        level_config = config_loader.config.get_cefr_level(level)
+        if level_config:
+            start_index += level_config.words
+
         if progress is not None and main_task is not None:
             progress.advance(main_task)
 
@@ -139,8 +160,11 @@ def _generate_impl(
 ) -> None:
     config_loader = get_config_loader()
 
-    languages = [language] if language else SUPPORTED_LANGUAGES
-    levels = [level.lower()] if level else CEFR_LEVELS
+    supported_languages = _get_supported_languages(config_loader)
+    supported_levels = _get_supported_levels(config_loader)
+
+    languages = [language] if language else supported_languages
+    levels = [level.lower()] if level else supported_levels
 
     if output_dir is None:
         output_dir = get_smart_output_dir("generate")
@@ -150,13 +174,12 @@ def _generate_impl(
     total_tasks = len(languages) * len(levels)
 
     if workers is None:
-        cpu_count = os.cpu_count() or 1
-        max_workers = min(cpu_count, len(languages))
+        max_workers = config_loader.get_default_workers()
     else:
         if workers < 1:
             print_error("Workers must be >= 1")
             raise typer.Exit(1)
-        max_workers = min(workers, len(languages))
+        max_workers = workers
 
     print_header(
         "GENERATING CEFR VOCABULARY LISTS",
@@ -187,8 +210,7 @@ def _generate_impl(
         if max_workers > 1 and len(languages) > 1:
             with ProcessPoolExecutor(max_workers=max_workers) as executor:
                 futures = {
-                    executor.submit(_process_language_worker, lang, levels, str(output_dir)): lang
-                    for lang in languages
+                    executor.submit(_process_language_worker, lang, levels, str(output_dir)): lang for lang in languages
                 }
                 for future in as_completed(futures):
                     lang = futures[future]
@@ -287,18 +309,22 @@ def generate_all(
         help="Number of parallel worker processes (default: min(cpu, languages)). Use 1 to disable parallelism.",
     ),
 ) -> None:
+    config_loader = get_config_loader()
+
     if language:
         language = language.lower()
-        if language not in SUPPORTED_LANGUAGES:
+        supported_languages = _get_supported_languages(config_loader)
+        if language not in supported_languages:
             print_error(f"Unknown language: {language}")
-            console.print(f"\n[yellow]Available:[/yellow] {', '.join(SUPPORTED_LANGUAGES)}\n")
+            console.print(f"\n[yellow]Available:[/yellow] {', '.join(supported_languages)}\n")
             raise typer.Exit(1)
 
     if level:
         level = level.lower()
-        if level not in CEFR_LEVELS:
+        supported_levels = _get_supported_levels(config_loader)
+        if level not in supported_levels:
             print_error(f"Unknown level: {level}")
-            console.print(f"\n[yellow]Available:[/yellow] {', '.join(CEFR_LEVELS)}\n")
+            console.print(f"\n[yellow]Available:[/yellow] {', '.join(supported_levels)}\n")
             raise typer.Exit(1)
 
     _generate_impl(language=language, level=level, output_dir=output_dir, workers=workers)
