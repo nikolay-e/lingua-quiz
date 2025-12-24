@@ -64,8 +64,8 @@ def login_and_start_quiz(page: Page, test_user: "AuthenticatedUser") -> None:
 
 
 def logout_user(page: Page) -> None:
-    page.get_by_role("link", name="Settings").click()
-    expect(page.locator("h2")).to_have_text("Settings", timeout=5000)
+    page.locator("button:has-text('Settings')").click()
+    expect(page.locator("h1")).to_have_text("Settings", timeout=5000)
     page.get_by_role("button", name="Log Out").click()
     expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 

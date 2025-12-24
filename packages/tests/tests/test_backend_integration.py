@@ -86,7 +86,7 @@ class TestAuthentication:
 
         assert response.status_code == 400
         data = response.json()
-        assert "already exists" in data["detail"].lower()
+        assert "registration failed" in data["detail"].lower()
 
     def test_user_login(self, api_client, test_user: AuthenticatedUser):
         login = UserLogin(
@@ -405,7 +405,6 @@ class TestAdminVocabulary:
         assert response.status_code == 201
         data = response.json()
         assert "id" in data
-        return data["id"]
 
     def test_admin_get_vocabulary_item(self, admin_api_client):
         source_word = random_word("get")

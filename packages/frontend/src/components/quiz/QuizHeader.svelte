@@ -20,7 +20,7 @@
   }
 </script>
 
-<div>
+<div class="quiz-header">
   {#if !selectedQuiz}
     <LanguageLevelSelector
       {wordLists}

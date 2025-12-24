@@ -67,7 +67,7 @@
     >
       <span
         id="word"
-        class="text-xl font-bold text-primary text-center break-words hyphens-auto"
+        class="question-text text-xl font-bold text-primary text-center break-words hyphens-auto"
         lang={questionLanguage}
       >
         {currentQuestion.questionText}

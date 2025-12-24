@@ -93,7 +93,7 @@ class TestAuthenticationSecurity:
 
         local_storage_before = page.evaluate("() => localStorage.getItem('token')")
 
-        page.get_by_role("link", name="Settings").click()
+        page.locator("button:has-text('Settings')").click()
         page.wait_for_timeout(500)
 
         logout_button = page.get_by_role("button", name="Log Out")

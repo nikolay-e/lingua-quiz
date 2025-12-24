@@ -130,7 +130,7 @@ class TestRegistration:
         page.fill("#register-password", test_user["password"])
         page.click("button:has-text('Create Account')")
 
-        expect(page.locator("text=already exists")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Registration failed")).to_be_visible(timeout=10000)
         page.screenshot(path=str(SCREENSHOTS_DIR / "10_duplicate_user_error.png"))
 
     def test_navigate_back_to_login(self, page: Page):
@@ -175,7 +175,7 @@ class TestQuizInterface:
         logged_in_page.screenshot(path=str(SCREENSHOTS_DIR / "11_quiz_page.png"))
 
     def test_logout_button_present(self, logged_in_page: Page):
-        logged_in_page.get_by_role("link", name="Settings").click()
+        logged_in_page.locator("button:has-text('Settings')").click()
         expect(logged_in_page.get_by_role("button", name="Log Out")).to_be_visible(timeout=10000)
 
     def test_logout_functionality(self, logged_in_page: Page):

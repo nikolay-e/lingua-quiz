@@ -37,7 +37,7 @@
 </script>
 
 {#if feedback}
-  <div class="flex flex-col gap-3" role="alert" aria-live="polite">
+  <div class="feedback-container flex flex-col gap-3" role="alert" aria-live="polite">
     <div
       class={cn(
         'flex items-center justify-center gap-3 px-4 py-3 min-h-10 font-semibold rounded-lg border text-center transition-all',
@@ -55,7 +55,7 @@
           <X size={18} />
         {/if}
       </span>
-      <span>{feedbackMessage}</span>
+      <span class={cn('feedback-text', isRevealResult && 'revealed', isSuccess && 'success', !isRevealResult && !isSuccess && 'error')}>{feedbackMessage}</span>
     </div>
     {#if showRetry}
       <Button

@@ -30,7 +30,8 @@ class TestQuizFlowE2E:
             page.get_by_placeholder("Type your answer...").fill("test")
             page.get_by_role("button", name="Check Answer").click()
             expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-            page.get_by_role("button", name="Next Question").click()
+            # UI auto-advances when user starts typing next answer
+            page.get_by_placeholder("Type your answer...").fill("")
             expect(page.locator(".question-text")).to_be_visible(timeout=3000)
 
     def test_skip_answer(self, page: Page, test_user: AuthenticatedUser) -> None:
@@ -54,7 +55,8 @@ class TestQuizFlowE2E:
         page.get_by_role("button", name="Show Answer").click()
         _correct_answer = page.locator(".correct-answer, .feedback-container").text_content()
 
-        page.get_by_role("button", name="Next Question").click()
+        # UI auto-advances when user starts typing next answer
+        page.get_by_placeholder("Type your answer...").fill("")
         expect(page.locator(".question-text")).to_be_visible(timeout=3000)
 
     def test_multiple_quiz_sessions(self, page: Page, test_user: AuthenticatedUser) -> None:
@@ -74,8 +76,7 @@ class TestQuizFlowE2E:
         page.get_by_role("button", name="Check Answer").click()
 
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-        page.get_by_role("button", name="Next Question").click()
-
+        # Input should already be cleared after submission
         expect(answer_input).to_have_value("")
 
     def test_keyboard_submit(self, page: Page, test_user: AuthenticatedUser) -> None:
@@ -96,14 +97,15 @@ class TestProgressPersistence:
             page.get_by_placeholder("Type your answer...").fill("test")
             page.get_by_role("button", name="Check Answer").click()
             expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-            page.get_by_role("button", name="Next Question").click()
+            # UI auto-advances when user starts typing next answer
+            page.get_by_placeholder("Type your answer...").fill("")
             page.wait_for_timeout(500)
 
         page.wait_for_timeout(1500)
 
         page.get_by_role("button", name="Back to Menu").click()
-        page.wait_for_timeout(500)
-        page.get_by_role("link", name="Settings").click()
+        expect(page.locator("text=Welcome")).to_be_visible(timeout=3000)
+        page.locator("button:has-text('Settings')").click()
         page.get_by_role("button", name="Log Out").click()
         expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
@@ -173,7 +175,8 @@ class TestRevealAnswerNoProgression:
         for i in range(100):
             page.get_by_role("button", name="Show Answer").click()
             expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-            page.get_by_role("button", name="Next Question").click()
+            # UI auto-advances when user starts typing next answer
+            page.get_by_placeholder("Type your answer...").fill("")
             expect(page.locator(".question-text")).to_be_visible(timeout=3000)
             if (i + 1) % 10 == 0:
                 page.wait_for_timeout(100)
@@ -209,10 +212,10 @@ class TestRevealAnswerNoProgression:
         revealed_feedback = page.locator(".feedback-text.revealed")
         expect(revealed_feedback).to_be_visible()
 
-        page.get_by_role("button", name="Next Question").click()
+        # UI auto-advances when user starts typing next answer
+        page.get_by_placeholder("Type your answer...").fill("wrong answer")
         expect(page.locator(".question-text")).to_be_visible(timeout=3000)
 
-        page.get_by_placeholder("Type your answer...").fill("wrong answer")
         page.get_by_role("button", name="Check Answer").click()
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
         checked_feedback = page.locator(".feedback-text.error")
@@ -231,7 +234,8 @@ class TestRevealAnswerNoProgression:
 
             page.get_by_role("button", name="Show Answer").click()
             expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-            page.get_by_role("button", name="Next Question").click()
+            # UI auto-advances when user starts typing next answer
+            page.get_by_placeholder("Type your answer...").fill("")
             expect(page.locator(".question-text")).to_be_visible(timeout=3000)
 
         min_expected_unique_words = 10

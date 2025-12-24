@@ -61,7 +61,7 @@
         ontoggle={() => onToggleFold?.(levelData.id)}
       >
         <summary
-          class="cursor-pointer select-none px-4 py-3 transition-colors
+          class="foldable-header cursor-pointer select-none px-4 py-3 transition-colors
                  hover:bg-primary/5 focus-visible:outline-2 focus-visible:outline-primary
                  focus-visible:outline-offset-[-2px] list-none [&::-webkit-details-marker]:hidden"
         >

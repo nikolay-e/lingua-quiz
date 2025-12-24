@@ -77,6 +77,12 @@ function createQuizStore(): QuizStore {
             quizManager: result.manager,
             currentQuestion: result.currentQuestion,
           }));
+        } else {
+          update((state) => ({
+            ...state,
+            loading: false,
+            error: 'Failed to start quiz. Please try again.',
+          }));
         }
       } catch (error: unknown) {
         logger.error('Failed to start quiz', { error, quizName });

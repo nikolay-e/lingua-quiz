@@ -2,9 +2,9 @@
 
 # Parallelization settings for CPU-bound NLP tasks
 parallelization:
-  default_workers: 14  # Default number of parallel worker processes
-  batch_size: 1000     # Words per batch for batch processing
-  backend: 'loky'      # joblib backend: 'loky' (default), 'multiprocessing', 'threading'
+  default_workers: 14 # Default number of parallel worker processes
+  batch_size: 1000 # Words per batch for batch processing
+  backend: 'loky' # joblib backend: 'loky' (default), 'multiprocessing', 'threading'
 
 analysis_defaults:
   min_word_length: 2
@@ -379,7 +379,7 @@ languages:
         - '^([A-Za-z])-\1$' # Stutter tokens like i-i, o-o
         - '^([A-Za-z]+)-\1$' # Repeated syllables like ba-ba
         - '.*[:;,.!?]+$' # Trailing punctuation artifacts
-        - "^(?:wasn|isn|aren|weren|hasn|haven|hadn|doesn|don|didn|shouldn|wouldn|couldn|mustn|mightn|needn|shan|won|ain)$" # codespell-ignore Contraction stumps
+        - '^(?:wasn|isn|aren|weren|hasn|haven|hadn|doesn|don|didn|shouldn|wouldn|couldn|mustn|mightn|needn|shan|won|ain)$' # codespell-ignore Contraction stumps
 
     pos_categories:
       essential_nouns: ['NOUN', 'PROPN']
@@ -454,21 +454,62 @@ languages:
 
     inflection_exceptions:
       # Keep inflected forms that are commonly taught separately or have distinct meanings
-      irregular_verbs:
-        [
+      irregular_verbs: [
           # sein forms
-          'bin', 'bist', 'ist', 'sind', 'war', 'warst', 'gewesen',
+          'bin',
+          'bist',
+          'ist',
+          'sind',
+          'war',
+          'warst',
+          'gewesen',
           # haben forms
-          'habe', 'hast', 'hat', 'hatte', 'gehabt',
+          'habe',
+          'hast',
+          'hat',
+          'hatte',
+          'gehabt',
           # Modal verbs (essential for A1)
-          'weiß', 'kann', 'muss', 'darf', 'soll', 'will', 'mag',
-          'weißt', 'kannst', 'musst', 'darfst', 'sollst', 'willst', 'magst',
+          'weiß',
+          'kann',
+          'muss',
+          'darf',
+          'soll',
+          'will',
+          'mag',
+          'weißt',
+          'kannst',
+          'musst',
+          'darfst',
+          'sollst',
+          'willst',
+          'magst',
           # Common 3rd person forms
-          'gibt', 'nimmt', 'sieht', 'hält', 'fährt', 'läuft', 'spricht', 'hilft',
+          'gibt',
+          'nimmt',
+          'sieht',
+          'hält',
+          'fährt',
+          'läuft',
+          'spricht',
+          'hilft',
           # Common imperatives
-          'komm', 'geh', 'mach', 'sag', 'hör', 'schau', 'gib', 'nimm',
+          'komm',
+          'geh',
+          'mach',
+          'sag',
+          'hör',
+          'schau',
+          'gib',
+          'nimm',
           # Subjunctive II (common)
-          'wäre', 'hätte', 'könnte', 'würde', 'möchte', 'sollte', 'müsste',
+          'wäre',
+          'hätte',
+          'könnte',
+          'würde',
+          'möchte',
+          'sollte',
+          'müsste',
         ]
       reason: 'Common irregular verb forms that learners should recognize separately'
 
@@ -517,8 +558,7 @@ languages:
         ]
       interjections: ['oh', 'ok', 'ah', 'ach', 'hm', 'eh', 'na', 'hä', 'ey', 'xd', 'ähm', 'mmm']
       slang: ['nen', 'nem', 'ka', 'ned']
-      anglicisms:
-        [
+      anglicisms: [
           'of',
           'and',
           'the',
@@ -582,7 +622,7 @@ languages:
           'find',
         ]
       ocr_errors: ['lhre', 'lhr', 'lch', 'lst', 'lm', 'ln']
-      verb_inflections: []  # Cleared - these are essential A1 vocabulary, not blacklist material
+      verb_inflections: [] # Cleared - these are essential A1 vocabulary, not blacklist material
       proper_nouns:
         [
           'deutschland',
@@ -1267,7 +1307,7 @@ languages:
       aspectual_pairs_keep_both: true # Both делать (imperfective) and сделать (perfective) should be kept
       reason: 'Russian aspectual pairs and high-frequency irregular verb forms that learners must recognize separately'
 
-    skip_words: []  # Cleared - these are essential A1 vocabulary (prepositions, pronouns)
+    skip_words: [] # Cleared - these are essential A1 vocabulary (prepositions, pronouns)
 
     blacklist:
       contractions: []

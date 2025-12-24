@@ -33,12 +33,12 @@ class TestKeyboardNavigation:
         answer_input.focus()
 
         page.keyboard.press("Tab")
-        check_button = page.get_by_role("button", name="Check Answer")
-        expect(check_button).to_be_focused()
-
-        page.keyboard.press("Tab")
         show_answer_button = page.get_by_role("button", name="Show Answer")
         expect(show_answer_button).to_be_focused()
+
+        page.keyboard.press("Tab")
+        check_button = page.get_by_role("button", name="Check Answer")
+        expect(check_button).to_be_focused()
 
     def test_enter_key_submits_answer(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)

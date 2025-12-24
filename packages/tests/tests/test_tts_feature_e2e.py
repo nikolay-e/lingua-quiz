@@ -71,7 +71,8 @@ class TestTTSLanguageSupport:
 
             page.get_by_role("button", name="Show Answer").click()
             expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-            page.get_by_role("button", name="Next Question").click()
+            # UI auto-advances when user starts typing next answer
+            page.get_by_placeholder("Type your answer...").fill("")
             expect(page.locator(".question-text")).to_be_visible(timeout=3000)
 
 
@@ -141,7 +142,8 @@ class TestTTSIntegration:
             page.wait_for_timeout(500)
 
             page.get_by_role("button", name="Show Answer").click()
-            page.get_by_role("button", name="Next Question").click()
+            # UI auto-advances when user starts typing next answer
+            page.get_by_placeholder("Type your answer...").fill("")
 
             page.wait_for_timeout(1000)
 

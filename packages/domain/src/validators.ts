@@ -44,6 +44,7 @@ const schemas: Record<string, JSONSchema7> = {
       targetText: { type: 'string' },
       targetLanguage: { type: 'string' },
       listName: { type: 'string' },
+      difficultyLevel: { anyOf: [{ type: 'string' }, { type: 'null' }] },
       sourceUsageExample: { anyOf: [{ type: 'string' }, { type: 'null' }] },
       targetUsageExample: { anyOf: [{ type: 'string' }, { type: 'null' }] },
     },
