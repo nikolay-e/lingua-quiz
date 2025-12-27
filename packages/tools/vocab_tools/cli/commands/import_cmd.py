@@ -8,7 +8,7 @@ from rich.panel import Panel
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
-from vocab_tools.core.api_client import MissingCredentialsError, VocabularyEntry, get_api_client
+from vocab_tools.core.db_client import DirectDatabaseClient, VocabularyEntry
 
 console = Console()
 
@@ -24,6 +24,7 @@ def _load_vocabulary_from_file(file_path: Path) -> tuple[str, list[dict]]:
         list_name = data.get("word_list_name", "")
         words = [
             {
+                "id": t.get("id"),
                 "sourceText": t.get("source_word", ""),
                 "targetText": t.get("target_word", ""),
                 "sourceUsageExample": t.get("source_example", ""),
@@ -35,9 +36,9 @@ def _load_vocabulary_from_file(file_path: Path) -> tuple[str, list[dict]]:
     return list_name, words
 
 
-def _get_existing_words(client, list_name: str) -> dict[str, VocabularyEntry]:
-    entries = client.list_vocabulary(list_name=list_name, limit=10000)
-    return {e.source_text.lower(): e for e in entries}
+def _get_existing_words(client: DirectDatabaseClient, list_name: str) -> dict[str, VocabularyEntry]:
+    entries = client.fetch_vocabulary(list_name)
+    return {e.id: e for e in entries}
 
 
 def import_vocabulary(
@@ -53,19 +54,11 @@ def import_vocabulary(
         bool,
         typer.Option("--update", "-u", help="Update existing words if they differ"),
     ] = False,
-    skip_existing: Annotated[
-        bool,
-        typer.Option("--skip-existing", "-s", help="Skip words that already exist (default)"),
-    ] = True,
-    batch_size: Annotated[
-        int,
-        typer.Option("--batch-size", "-b", help="Number of words to process in each batch"),
-    ] = 50,
 ):
     """
     Import vocabulary from JSON files to database.
 
-    Uploads vocabulary data from local JSON files to the staging API.
+    Uploads vocabulary data from local JSON files directly to the database.
     Supports both single files and directories.
 
     Examples:
@@ -76,7 +69,7 @@ def import_vocabulary(
     console.print(
         Panel(
             "[bold blue]VOCABULARY IMPORT[/bold blue]\n"
-            f"[dim]{'DRY RUN - no changes will be made' if dry_run else 'Uploading vocabulary to staging API...'}[/dim]",
+            f"[dim]{'DRY RUN - no changes will be made' if dry_run else 'Connecting to database...'}[/dim]",
             expand=False,
         )
     )
@@ -85,9 +78,9 @@ def import_vocabulary(
         console.print("[yellow]DRY RUN MODE - No changes will be made[/yellow]\n")
 
     try:
-        client = get_api_client()
-    except MissingCredentialsError as e:
-        console.print(f"[red]Error:[/red] {e}")
+        client = DirectDatabaseClient()
+    except Exception as e:
+        console.print(f"[red]Error connecting to database:[/red] {e}")
         raise typer.Exit(1) from None
 
     if input_path.is_file():
@@ -104,7 +97,7 @@ def import_vocabulary(
 
     console.print(f"[green]Found {len(files)} file(s) to import[/green]\n")
 
-    stats = {"created": 0, "updated": 0, "skipped": 0, "errors": 0}
+    stats = {"created": 0, "updated": 0, "skipped": 0, "deleted": 0, "errors": 0}
 
     for file_path in files:
         console.print(f"[bold]Processing: {file_path.name}[/bold]")
@@ -126,13 +119,27 @@ def import_vocabulary(
 
         console.print(f"  List: {list_name}, Words: {len(words)}")
 
-        existing_words = {}
-        if update_existing or skip_existing:
-            try:
-                existing_words = _get_existing_words(client, list_name)
-                console.print(f"  [dim]Found {len(existing_words)} existing words[/dim]")
-            except Exception:
-                pass
+        existing_words = _get_existing_words(client, list_name)
+        console.print(f"  [dim]Found {len(existing_words)} existing words in DB[/dim]")
+
+        file_word_ids = {w.get("id") for w in words if w.get("id")}
+        words_to_delete = set(existing_words.keys()) - file_word_ids
+
+        if words_to_delete:
+            console.print(f"  [yellow]Words to delete: {len(words_to_delete)}[/yellow]")
+            for word_id in words_to_delete:
+                existing = existing_words.get(word_id)
+                if existing:
+                    console.print(f"    [dim]Deleting: {existing.source_text}[/dim]")
+                    if not dry_run:
+                        try:
+                            client.delete_vocabulary_item(word_id)
+                            stats["deleted"] += 1
+                        except Exception as e:
+                            console.print(f"    [red]Error deleting: {e}[/red]")
+                            stats["errors"] += 1
+                    else:
+                        stats["deleted"] += 1
 
         with Progress(
             SpinnerColumn(),
@@ -144,6 +151,7 @@ def import_vocabulary(
             task = progress.add_task("Importing...", total=len(words))
 
             for word in words:
+                word_id = word.get("id")
                 source_text = word.get("sourceText", "")
                 target_text = word.get("targetText", "")
 
@@ -152,21 +160,23 @@ def import_vocabulary(
                     progress.advance(task)
                     continue
 
-                existing = existing_words.get(source_text.lower())
+                existing = existing_words.get(word_id) if word_id else None
 
                 if existing:
                     if update_existing and _word_differs(existing, word):
                         if not dry_run:
                             try:
                                 client.update_vocabulary_item(
-                                    item_id=existing.id,
+                                    item_id=word_id,
+                                    source_text=source_text,
                                     target_text=target_text,
                                     source_usage_example=word.get("sourceUsageExample"),
                                     target_usage_example=word.get("targetUsageExample"),
                                     difficulty_level=word.get("difficultyLevel"),
                                 )
                                 stats["updated"] += 1
-                            except Exception:
+                            except Exception as e:
+                                console.print(f"  [red]Error updating '{source_text}': {e}[/red]")
                                 stats["errors"] += 1
                         else:
                             stats["updated"] += 1
@@ -197,11 +207,14 @@ def import_vocabulary(
 
                 progress.advance(task)
 
+    client.close()
+
     table = Table(title="Import Summary", show_header=True)
     table.add_column("Action", style="cyan")
     table.add_column("Count", style="green")
     table.add_row("Created", str(stats["created"]))
     table.add_row("Updated", str(stats["updated"]))
+    table.add_row("Deleted", str(stats["deleted"]))
     table.add_row("Skipped", str(stats["skipped"]))
     table.add_row("Errors", str(stats["errors"]) if stats["errors"] == 0 else f"[red]{stats['errors']}[/red]")
 
@@ -215,6 +228,8 @@ def import_vocabulary(
 
 
 def _word_differs(existing: VocabularyEntry, new_word: dict) -> bool:
+    if existing.source_text != new_word.get("sourceText", ""):
+        return True
     if existing.target_text != new_word.get("targetText", ""):
         return True
     if existing.source_usage_example != (new_word.get("sourceUsageExample") or ""):

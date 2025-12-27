@@ -113,7 +113,32 @@ vocab-tools generate es        # Generate frequency list
 vocab-tools analyze es-a1      # Analyze vocabulary
 vocab-tools fill es-a1         # Fill placeholders
 vocab-tools validate           # Validate all migrations
+vocab-tools export es-a1       # Export vocabulary from staging DB
+vocab-tools import ./data/     # Import vocabulary to staging DB
 ```
+
+### Local Database Access
+
+Import/export commands connect directly to staging PostgreSQL via kubectl port-forward.
+
+**Setup (one-time):**
+
+```bash
+# Start port-forward (run in separate terminal, keep running)
+kubectl port-forward -n shared-database svc/shared-database-shared-postgres 5433:5432
+```
+
+**Credentials:** Stored in macOS Keychain (see `gitops/CLAUDE.md` for details).
+
+| Keychain Key                    | Description                  |
+| ------------------------------- | ---------------------------- |
+| `lingua-quiz-words-db-host`     | localhost (via port-forward) |
+| `lingua-quiz-words-db-port`     | 5433                         |
+| `lingua-quiz-words-db-name`     | linguaquiz_words             |
+| `lingua-quiz-words-db-user`     | linguaquiz_words             |
+| `lingua-quiz-words-db-password` | DB password                  |
+
+**Fallback:** Environment variables `WORDS_DB_*` override Keychain if set.
 
 **Pipeline:** Normalization → Lemmatization (Stanza) → NLP Analysis → Validation → Inflection Filtering → Deduplication
 
