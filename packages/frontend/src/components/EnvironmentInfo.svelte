@@ -7,8 +7,7 @@
   <span
     class="env-label"
     class:production={environment === 'production'}
-    class:staging={environment === 'staging'}
-    class:preview={environment.startsWith('preview')}>
+    class:staging={environment === 'staging'}>
     {environment}
   </span>
   <span class="version">v{version}</span>
@@ -45,11 +44,6 @@
   .env-label.staging {
     background: var(--color-secondary);
     color: var(--color-secondary-foreground);
-  }
-
-  .env-label.preview {
-    background: var(--color-primary);
-    color: var(--color-primary-foreground);
   }
 
   .version {
