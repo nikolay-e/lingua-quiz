@@ -2,7 +2,7 @@ FROM python:3.14-alpine AS python-base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 RUN apk add --no-cache curl netcat-openbsd
-RUN adduser -D -h /home/appuser appuser
+RUN adduser -D -u 1000 -g 1000 -h /home/appuser appuser
 WORKDIR /home/appuser
 
 FROM python-base AS backend
@@ -23,7 +23,7 @@ COPY --chown=appuser:appuser packages/backend/alembic-words/ ./alembic-words/
 COPY --chown=appuser:appuser packages/backend/alembic-words.ini ./
 COPY --chown=appuser:appuser packages/backend/start.sh packages/backend/seed_test_data.py ./
 RUN chmod +x ./start.sh
-USER appuser
+USER 1000
 EXPOSE 9000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:9000/api/health || exit 1
@@ -45,9 +45,13 @@ RUN VITE_APP_VERSION=${APP_VERSION} \
     VITE_APP_ENVIRONMENT=${APP_ENVIRONMENT} \
     npm run build --workspace @lingua-quiz/frontend
 
-FROM nginx:1.29.4-alpine AS frontend
+FROM nginx:1.29-alpine AS frontend
+RUN chown -R nginx:nginx /var/cache/nginx /var/run && \
+    chmod -R 755 /var/cache/nginx /var/run
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=frontend-builder /app/packages/frontend/dist /usr/share/nginx/html
+RUN chown -R nginx:nginx /usr/share/nginx/html
+USER nginx
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
