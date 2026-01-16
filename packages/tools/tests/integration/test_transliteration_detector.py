@@ -1,6 +1,6 @@
 """Integration tests for TransliterationDetector."""
 
-from vocab_tools.analysis.transliteration_detector import TransliterationDetector
+from vocab_tools.core.transliteration_detector import TransliterationDetector
 
 
 class TestTransliterationDetector:

@@ -9,7 +9,7 @@
     "packages/frontend": {
       "entry": ["src/routes/**/*.svelte", "src/app.html", "svelte.config.js", "vite.config.ts", "src/lib/pwa/index.ts"],
       "project": ["src/**/*.{ts,svelte}"],
-      "ignore": [".svelte-kit/**"],
+      "ignore": [".svelte-kit/**", "src/lib/components/ui/dialog/index.ts"],
       "paths": {
         "$lib": ["./src/lib"],
         "$lib/*": ["./src/lib/*"],

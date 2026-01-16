@@ -5,20 +5,15 @@ from rich.console import Console
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
+from ...config.constants import CEFR_LEVELS, SUPPORTED_LANGUAGES
 from ...core.api_client import StagingAPIClient, VocabularyEntry
+from ...core.naming import build_list_name
 from ...core.transliteration_detector import get_transliteration_detector
 from ..output.formatters import print_error, print_header, print_success
 
 console = Console()
 
-SUPPORTED_LANGUAGES = ["en", "es", "de", "ru"]
-CEFR_LEVELS = ["a1", "a2", "b1", "b2", "c1", "c2"]
-
-
-def _get_list_name(lang_code: str, level: str) -> str:
-    lang_map = {"en": "English", "es": "Spanish", "de": "German", "ru": "Russian"}
-    lang_name = lang_map.get(lang_code, lang_code.title())
-    return f"{lang_name} Russian {level.upper()}"
+CEFR_LEVELS_MAIN = [lvl for lvl in CEFR_LEVELS if lvl not in ("a0", "d")]
 
 
 def _detect_transliterations_in_entries(
@@ -42,7 +37,7 @@ def _detect_impl(
     output_file: Path | None = None,
     dry_run: bool = True,
 ) -> None:
-    languages = [language] if language else [lang for lang in SUPPORTED_LANGUAGES if lang != "ru"]
+    languages = [language] if language else [lang for lang in SUPPORTED_LANGUAGES if lang != "ru" and lang != "en"]
 
     print_header(
         "DETECTING A0 TRANSLITERATIONS",
@@ -67,14 +62,14 @@ def _detect_impl(
         BarColumn(),
         console=console,
     ) as progress:
-        total_lists = len(languages) * len(CEFR_LEVELS)
+        total_lists = len(languages) * len(CEFR_LEVELS_MAIN)
         main_task = progress.add_task("Scanning vocabularies...", total=total_lists)
 
         for lang in languages:
             all_transliterations[lang] = []
 
-            for level in CEFR_LEVELS:
-                list_name = _get_list_name(lang, level)
+            for level in CEFR_LEVELS_MAIN:
+                list_name = build_list_name(lang, level)
                 progress.update(main_task, description=f" {lang.upper()} {level.upper()}...")
 
                 try:

@@ -1,46 +1,25 @@
-"""
-Configuration constants for vocabulary analysis.
-
-Loads configuration from config.yaml file for flexibility and maintainability.
-"""
-
-from pathlib import Path
-
-import yaml
-
 from .config_loader import get_config_loader
 
-
-def _load_config() -> dict:
-    config_path = Path(__file__).parent.parent.parent / "config.yaml"
-
-    if not config_path.exists():
-        raise FileNotFoundError(f"Configuration file not found at {config_path}")
-
-    with open(config_path, encoding="utf-8") as f:
-        return yaml.safe_load(f)
-
-
-_CONFIG = _load_config()
 _config_loader = get_config_loader()
+_config = _config_loader.config
 
-ESSENTIAL_VOCABULARY_CATEGORIES = _CONFIG["essential_vocabulary_categories"]
+ESSENTIAL_VOCABULARY_CATEGORIES = _config.essential_vocabulary_categories
 
-DEFAULT_ANALYSIS_CONFIG = _CONFIG["analysis_defaults"]
+DEFAULT_ANALYSIS_CONFIG = _config.analysis_defaults.model_dump()
 
-SUPPORTED_LANGUAGES = list(_CONFIG["languages"].keys())
+SUPPORTED_LANGUAGES = list(_config.languages.keys())
 
-_all_skip_words = set()
-_all_pos_categories = {}
-_all_nlp_models = {}
+_all_skip_words: set[str] = set()
+_all_pos_categories: dict = {}
+_all_nlp_models: dict[str, list[str]] = {}
 
 for lang_code in SUPPORTED_LANGUAGES:
-    lang_config = _CONFIG["languages"][lang_code]
-    _all_skip_words.update(lang_config["skip_words"])
-    _all_nlp_models[lang_code] = lang_config["spacy_models"]
+    lang_config = _config.languages[lang_code]
+    _all_skip_words.update(lang_config.skip_words)
+    _all_nlp_models[lang_code] = lang_config.spacy_models
 
     if not _all_pos_categories:
-        _all_pos_categories = lang_config["pos_categories"]
+        _all_pos_categories = lang_config.pos_categories.model_dump()
 
 ANALYSIS_SKIP_WORDS: set[str] = _all_skip_words
 
@@ -201,6 +180,31 @@ LEVEL_ALIASES = {
     "c1": "C1",
     "c2": "C2",
 }
+
+LANGUAGE_NAME_TO_CODE = {v.lower(): k for k, v in LANGUAGE_CODE_TO_NAME.items()}
+
+
+# ============================================================================
+# LANGUAGE HELPER FUNCTIONS
+# ============================================================================
+
+
+def get_language_name(code: str) -> str:
+    return LANGUAGE_CODE_TO_NAME.get(code.lower(), code.title())
+
+
+def get_language_code(name_or_alias: str) -> str | None:
+    key = name_or_alias.lower().strip()
+    if key in LANGUAGE_ALIASES:
+        return LANGUAGE_ALIASES[key]
+    return None
+
+
+def normalize_language_code(value: str) -> str | None:
+    value_lower = value.lower().strip()
+    if value_lower in LANGUAGE_CODE_TO_NAME:
+        return value_lower
+    return LANGUAGE_ALIASES.get(value_lower)
 
 
 # ============================================================================

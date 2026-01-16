@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 from typing import Annotated
 
@@ -8,32 +7,11 @@ from rich.panel import Panel
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
-from vocab_tools.core.db_client import DirectDatabaseClient, VocabularyEntry
+from vocab_tools.core.db_client import DirectDatabaseClient
+from vocab_tools.core.io import extract_source_language_from_list, load_vocabulary_json
+from vocab_tools.core.models import VocabularyEntry
 
 console = Console()
-
-
-def _load_vocabulary_from_file(file_path: Path) -> tuple[str, list[dict]]:
-    with open(file_path, encoding="utf-8") as f:
-        data = json.load(f)
-
-    list_name = data.get("listName", "")
-    words = data.get("words", [])
-
-    if not list_name and "translations" in data:
-        list_name = data.get("word_list_name", "")
-        words = [
-            {
-                "id": t.get("id"),
-                "sourceText": t.get("source_word", ""),
-                "targetText": t.get("target_word", ""),
-                "sourceUsageExample": t.get("source_example", ""),
-                "targetUsageExample": t.get("target_example", ""),
-            }
-            for t in data.get("translations", [])
-        ]
-
-    return list_name, words
 
 
 def _get_existing_words(client: DirectDatabaseClient, list_name: str) -> dict[str, VocabularyEntry]:
@@ -97,13 +75,13 @@ def import_vocabulary(
 
     console.print(f"[green]Found {len(files)} file(s) to import[/green]\n")
 
-    stats = {"created": 0, "updated": 0, "skipped": 0, "deleted": 0, "errors": 0}
+    stats = {"created": 0, "updated": 0, "moved": 0, "skipped": 0, "deleted": 0, "errors": 0}
 
     for file_path in files:
         console.print(f"[bold]Processing: {file_path.name}[/bold]")
 
         try:
-            list_name, words = _load_vocabulary_from_file(file_path)
+            list_name, words = load_vocabulary_json(file_path)
         except Exception as e:
             console.print(f"  [red]Error loading file: {e}[/red]")
             stats["errors"] += 1
@@ -185,10 +163,10 @@ def import_vocabulary(
                 else:
                     if not dry_run:
                         try:
-                            source_lang = word.get("sourceLanguage", _extract_source_lang(list_name))
+                            source_lang = word.get("sourceLanguage", extract_source_language_from_list(list_name))
                             target_lang = word.get("targetLanguage", "ru")
 
-                            client.create_vocabulary_item(
+                            _, was_inserted = client.upsert_vocabulary_item(
                                 source_text=source_text,
                                 target_text=target_text,
                                 list_name=list_name,
@@ -198,7 +176,10 @@ def import_vocabulary(
                                 source_usage_example=word.get("sourceUsageExample", ""),
                                 target_usage_example=word.get("targetUsageExample", ""),
                             )
-                            stats["created"] += 1
+                            if was_inserted:
+                                stats["created"] += 1
+                            else:
+                                stats["moved"] += 1
                         except Exception as e:
                             console.print(f"  [red]Error creating '{source_text}': {e}[/red]")
                             stats["errors"] += 1
@@ -213,6 +194,7 @@ def import_vocabulary(
     table.add_column("Action", style="cyan")
     table.add_column("Count", style="green")
     table.add_row("Created", str(stats["created"]))
+    table.add_row("Moved", str(stats["moved"]))
     table.add_row("Updated", str(stats["updated"]))
     table.add_row("Deleted", str(stats["deleted"]))
     table.add_row("Skipped", str(stats["skipped"]))
@@ -237,16 +219,3 @@ def _word_differs(existing: VocabularyEntry, new_word: dict) -> bool:
     if existing.target_usage_example != (new_word.get("targetUsageExample") or ""):
         return True
     return False
-
-
-def _extract_source_lang(list_name: str) -> str:
-    lang_mapping = {
-        "spanish": "es",
-        "english": "en",
-        "german": "de",
-        "russian": "ru",
-    }
-    parts = list_name.lower().split()
-    if parts:
-        return lang_mapping.get(parts[0], "en")
-    return "en"

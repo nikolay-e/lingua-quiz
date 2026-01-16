@@ -3,7 +3,7 @@
 import csv
 from pathlib import Path
 
-from ..core.stanza_lemmatizer import get_stanza_lemmatizer
+from ..core.lemmatization_service import get_lemmatization_service
 
 
 def generate_lemmatized_csv(language_code: str, data_dir: Path):
@@ -18,12 +18,7 @@ def generate_lemmatized_csv(language_code: str, data_dir: Path):
     print(f"   Input:  {input_file}")
     print(f"   Output: {output_file}")
 
-    lemmatizer = get_stanza_lemmatizer(language_code)
-
-    if not lemmatizer.is_available():
-        print(f"Stanza not available for {language_code}")
-        print(f"   Install with: python -c \"import stanza; stanza.download('{language_code}')\"")
-        return
+    service = get_lemmatization_service(language_code)
 
     words_data = []
 
@@ -49,7 +44,7 @@ def generate_lemmatized_csv(language_code: str, data_dir: Path):
         batch_end = min(batch_start + batch_size, len(words))
         batch = words[batch_start:batch_end]
 
-        lemmas = lemmatizer.lemmatize_batch(batch)
+        lemmas = service.lemmatize_batch(batch)
         all_lemmas.extend(lemmas)
 
         if (batch_end % 5000) == 0:

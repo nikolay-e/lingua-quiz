@@ -7,6 +7,7 @@ from ..config.config_loader import get_config_loader
 from ..core.api_client import VocabularyAPIAdapter, VocabularyEntry
 from ..core.base_normalizer import get_universal_normalizer
 from ..core.lemmatization_service import get_lemmatization_service
+from ..core.naming import extract_language_code_from_filename
 from .base_validation import BaseValidationIssue, BaseValidationResult
 
 
@@ -46,15 +47,10 @@ class MigrationValidator:
 
     def validate_single_file(self, file_path: Path, silent: bool = False) -> ValidationResult:
         filename = file_path.name
+        lang_code = extract_language_code_from_filename(filename)
 
-        parts = filename.replace(".json", "").split("-")
-        if len(parts) >= 2:
-            language = parts[0]
-        else:
+        if lang_code == "unknown":
             raise ValueError(f"Cannot extract language from filename: {filename}")
-
-        language_map = {"spanish": "es", "german": "de", "english": "en", "russian": "ru"}
-        lang_code = language_map.get(language.lower(), language.lower())
 
         if not silent:
             print(f"Validating {filename}...")

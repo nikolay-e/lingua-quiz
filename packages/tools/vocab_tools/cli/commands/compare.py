@@ -1,4 +1,3 @@
-import json
 import unicodedata
 from pathlib import Path
 from typing import Annotated
@@ -8,16 +7,10 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
+from ...config.constants import get_language_name, normalize_language_code
+from ...core.io import load_vocabulary_words
+
 console = Console()
-
-LANG_CODE_MAP = {
-    "spanish": "es",
-    "english": "en",
-    "german": "de",
-    "russian": "ru",
-}
-
-LANG_NAME_MAP = {v: k for k, v in LANG_CODE_MAP.items()}
 
 
 def _strip_accents(text: str) -> str:
@@ -29,12 +22,10 @@ def _normalize_word(word: str) -> str:
 
 
 def _load_db_export(file_path: Path) -> set[str]:
-    with open(file_path, encoding="utf-8") as f:
-        data = json.load(f)
-
+    words_data = load_vocabulary_words(file_path)
     words = set()
-    for entry in data.get("words", []):
-        source_text = entry.get("sourceText", "")
+    for entry in words_data:
+        source_text = entry.get("sourceText", entry.get("source_text", ""))
         for variant in source_text.split(","):
             variant = variant.strip()
             if variant:
@@ -43,11 +34,9 @@ def _load_db_export(file_path: Path) -> set[str]:
 
 
 def _load_generated(file_path: Path) -> dict[str, dict]:
-    with open(file_path, encoding="utf-8") as f:
-        data = json.load(f)
-
+    words_data = load_vocabulary_words(file_path)
     words = {}
-    for entry in data.get("words", []):
+    for entry in words_data:
         word = entry.get("word", "")
         if word:
             words[_normalize_word(word)] = {
@@ -97,8 +86,8 @@ def compare(
         vocab-tools compare spanish a1 --show-missing 100
         vocab-tools compare de a1 -d ./db_export -g ./generated
     """
-    lang_code = LANG_CODE_MAP.get(language.lower(), language.lower())
-    lang_name = LANG_NAME_MAP.get(lang_code, language.title())
+    lang_code = normalize_language_code(language) or language.lower()
+    lang_name = get_language_name(lang_code)
     level = level.lower()
 
     db_file = db_export_dir / f"{lang_name}-{level}.json"

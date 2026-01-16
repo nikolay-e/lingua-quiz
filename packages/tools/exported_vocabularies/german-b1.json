@@ -1,0 +1,19 @@
+{
+  "listName": "German Russian B1",
+  "exportedAt": "2026-01-16T23:31:08.930369+00:00",
+  "totalWords": 1,
+  "words": [
+    {
+      "id": "b5f0e272-0812-4de5-a49a-0ae6473f1350",
+      "sourceText": "aufgeben",
+      "targetText": "сдаваться",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Ich will nicht aufgeben.",
+      "targetUsageExample": "Я не хочу сдаваться.",
+      "isActive": true
+    }
+  ]
+}

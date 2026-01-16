@@ -1,14 +1,14 @@
-import json
 from pathlib import Path
 from typing import Any
+
+from ..core.io import load_translation_file, save_translation_file
 
 
 def format_vocabulary_json(input_path: Path, output_path: Path | None = None, dry_run: bool = False) -> dict[str, Any]:
     if output_path is None:
         output_path = input_path
 
-    with open(input_path, encoding="utf-8") as f:
-        data = json.load(f)
+    data = load_translation_file(input_path)
 
     translations = data.get("translations", [])
 
@@ -18,8 +18,7 @@ def format_vocabulary_json(input_path: Path, output_path: Path | None = None, dr
     }
 
     if not dry_run:
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
+        save_translation_file(output_path, data)
 
     return stats
 

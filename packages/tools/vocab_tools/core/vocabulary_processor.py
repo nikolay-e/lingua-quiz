@@ -11,7 +11,6 @@ from .lemmatization_service import get_lemmatization_service
 from .nlp_models import get_nlp_model
 from .processing_pipeline import ProcessingContext, ProcessingStage
 from .processing_stages import (
-    NOUN_SUFFIXES,
     CategorizationStage,
     FilteringStatsCollector,
     ForeignLanguageFilterStage,
@@ -392,11 +391,9 @@ class VocabularyProcessor:
         if word.isupper():
             return word, lemma
 
-        should_capitalize = pos_tag in {"NOUN", "PROPN"}
-        if not should_capitalize:
-            de_noun_suffixes = NOUN_SUFFIXES.get("de", ())
-            word_lower = word.lower()
-            should_capitalize = any(word_lower.endswith(s) for s in de_noun_suffixes)
+        from ..languages.german_utils import is_likely_german_noun
+
+        should_capitalize = pos_tag in {"NOUN", "PROPN"} or is_likely_german_noun(word)
 
         if should_capitalize:
             return word.capitalize(), lemma.capitalize() if lemma else lemma

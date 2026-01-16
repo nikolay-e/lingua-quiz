@@ -1,5 +1,4 @@
 import json
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated
 
@@ -8,7 +7,9 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from vocab_tools.core.api_client import MissingCredentialsError, VocabularyEntry, get_api_client
+from vocab_tools.core.api_client import MissingCredentialsError, get_api_client
+from vocab_tools.core.io import extract_source_language_from_list, load_vocabulary_words, save_vocabulary_json
+from vocab_tools.core.models import VocabularyEntry
 
 from ._utils import entry_to_dict, list_name_to_filename, normalize_list_name
 
@@ -144,16 +145,7 @@ def _discover_lists(client, directory: Path) -> list[str]:
 def _load_local_vocabulary(directory: Path, list_name: str) -> list[dict]:
     filename = list_name_to_filename(list_name)
     file_path = directory / filename
-
-    if not file_path.exists():
-        return []
-
-    try:
-        with open(file_path, encoding="utf-8") as f:
-            data = json.load(f)
-        return data.get("words", [])
-    except Exception:
-        return []
+    return load_vocabulary_words(file_path)
 
 
 def _fetch_remote_vocabulary(client, list_name: str) -> list[VocabularyEntry]:
@@ -172,7 +164,7 @@ def _push_changes(client, list_name: str, local_map: dict, remote_map: dict, dry
         if remote_entry is None:
             if not dry_run:
                 try:
-                    source_lang = local_word.get("sourceLanguage", _extract_source_lang(list_name))
+                    source_lang = local_word.get("sourceLanguage", extract_source_language_from_list(list_name))
                     client.create_vocabulary_item(
                         source_text=local_word["sourceText"],
                         target_text=local_word["targetText"],
@@ -251,29 +243,7 @@ def _word_differs_from_entry(local_word: dict, remote_entry: VocabularyEntry) ->
 
 
 def _save_vocabulary_to_file(words: list[dict], file_path: Path, list_name: str):
-    data = {
-        "listName": list_name,
-        "syncedAt": datetime.now(UTC).isoformat(),
-        "totalWords": len(words),
-        "words": words,
-    }
-
-    file_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-
-def _extract_source_lang(list_name: str) -> str:
-    lang_mapping = {
-        "spanish": "es",
-        "english": "en",
-        "german": "de",
-        "russian": "ru",
-    }
-    parts = list_name.lower().split()
-    if parts:
-        return lang_mapping.get(parts[0], "en")
-    return "en"
+    save_vocabulary_json(file_path, words, list_name, timestamp_key="syncedAt")
 
 
 def _print_summary(stats: dict, dry_run: bool):

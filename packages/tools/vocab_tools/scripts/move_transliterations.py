@@ -1,54 +1,47 @@
 """Move transliterations from A1/A2 to A0."""
 
-import json
 from pathlib import Path
 
-from ..analysis.transliteration_detector import TransliterationDetector
+from ..config.config_loader import get_config_loader
+from ..config.constants import get_language_code
+from ..core.base_normalizer import get_universal_normalizer
+from ..core.io import load_translation_file, save_translation_file
+from ..core.transliteration_detector import TransliterationDetector
+
+_detector = TransliterationDetector(similarity_threshold=0.65)
+_config_loader = get_config_loader()
+_normalizer = get_universal_normalizer("en", _config_loader)
 
 
-def is_transliteration(source, target, lang_code="en"):
-    """Check if target is transliteration of source."""
-    detector = TransliterationDetector(similarity_threshold=0.65)
+def is_transliteration(source: str, target: str, lang_code: str = "en") -> bool:
+    target_variants = _normalizer.extract_word_variants(target)
 
-    # Handle multiple translations (split by | or ,)
-    target_variants = []
-    if "|" in target:
-        target_variants = [v.strip() for v in target.split("|")]
-    elif "," in target:
-        target_variants = [v.strip() for v in target.split(",")]
-    else:
-        target_variants = [target.strip()]
-
-    # Check each variant
     for variant in target_variants:
-        is_trans, similarity = detector.is_transliteration(source, variant, source_lang=lang_code, target_lang="ru")
+        is_trans, _ = _detector.is_transliteration(source, variant, source_lang=lang_code, target_lang="ru")
         if is_trans:
             return True
 
     return False
 
 
-def move_transliterations(lang_name, from_level="a1"):
-    """Move transliterations from A1/A2 to A0."""
-    # Map language name to code
-    lang_map = {"english": "en", "spanish": "es", "german": "de"}
-    lang_code = lang_map.get(lang_name, "en")
+def move_transliterations(lang_name: str, from_level: str = "a1") -> None:
+    lang_code = get_language_code(lang_name) or "en"
 
     backend_path = Path(__file__).parent.parent.parent.parent / "backend"
     vocab_dir = backend_path / "migrations" / "data" / "vocabulary"
 
-    # Load source file
     source_file = vocab_dir / f"{lang_name}-russian-{from_level}.json"
     if not source_file.exists():
         print(f"⚠️  {source_file.name} not found")
         return
 
-    with open(source_file, encoding="utf-8") as f:
-        source_data = json.load(f)
+    source_data = load_translation_file(source_file)
+    if not source_data:
+        print(f"⚠️  {source_file.name} is empty or invalid")
+        return
 
-    source_entries = source_data["translations"]
+    source_entries = source_data.get("translations", [])
 
-    # Find transliterations
     transliterations = []
     remaining_entries = []
 
@@ -68,13 +61,11 @@ def move_transliterations(lang_name, from_level="a1"):
     if len(transliterations) > 10:
         print(f"  ... and {len(transliterations) - 10} more")
 
-    # Load or create A0 file
     a0_file = vocab_dir / f"{lang_name}-russian-a0.json"
+    a0_data = load_translation_file(a0_file)
 
-    if a0_file.exists():
-        with open(a0_file, encoding="utf-8") as f:
-            a0_data = json.load(f)
-        a0_entries = a0_data["translations"]
+    if a0_data:
+        a0_entries = a0_data.get("translations", [])
     else:
         a0_data = {
             "source_language": source_data.get("source_language", lang_name.capitalize()),
@@ -84,19 +75,12 @@ def move_transliterations(lang_name, from_level="a1"):
         }
         a0_entries = []
 
-    # Add transliterations to A0
     a0_entries.extend(transliterations)
     a0_data["translations"] = a0_entries
-
-    # Update source file
     source_data["translations"] = remaining_entries
 
-    # Save files
-    with open(a0_file, "w", encoding="utf-8") as f:
-        json.dump(a0_data, f, ensure_ascii=False, indent=2)
-
-    with open(source_file, "w", encoding="utf-8") as f:
-        json.dump(source_data, f, ensure_ascii=False, indent=2)
+    save_translation_file(a0_file, a0_data)
+    save_translation_file(source_file, source_data)
 
     print(f"✅ Moved {len(transliterations)} words to {lang_name.upper()}-A0")
     print(f"   {source_file.name}: {len(source_entries)} → {len(remaining_entries)} words")

@@ -3,6 +3,7 @@ from typing import Any
 
 from wordfreq import word_frequency
 
+from ..languages.german_utils import GERMAN_NOUN_SUFFIXES
 from .base_normalizer import UniversalNormalizer
 from .frequency_service import get_frequency_service
 from .lemmatization_service import LemmatizationService
@@ -118,7 +119,7 @@ POS_TEMPLATES = {
 
 NOUN_SUFFIXES = {
     "en": ("tion", "meant", "ness", "ship", "ity", "ance", "ence", "er", "or", "ist", "ism"),
-    "de": ("ung", "heit", "keit", "tion", "tät", "schaft", "chen", "lein", "nis", "ling", "in"),
+    "de": GERMAN_NOUN_SUFFIXES,
     "es": ("ción", "sión", "dad", "tad", "aje", "ista", "miento", "ura", "ez"),
     "ru": ("ость", "ние", "тель", "ция", "ство", "ка"),
 }

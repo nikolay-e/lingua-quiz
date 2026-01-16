@@ -110,7 +110,7 @@ class WordQualityValidator:
         )
 
         for entry in entries:
-            word_variants = self._extract_word_variants(entry.source_text)
+            word_variants = processor.normalizer.extract_word_variants(entry.source_text)
 
             for word in word_variants:
                 if not word or not word.strip():
@@ -152,11 +152,6 @@ class WordQualityValidator:
             )
 
         return None
-
-    def _extract_word_variants(self, source_word: str) -> list[str]:
-        if "," in source_word:
-            return [w.strip() for w in source_word.split(",") if w.strip()]
-        return [source_word.strip()]
 
     def _print_language_summary(self, result: WordQualityResult):
         """Print summary for a single language."""

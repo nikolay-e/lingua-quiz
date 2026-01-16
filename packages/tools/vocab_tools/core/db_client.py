@@ -1,24 +1,10 @@
 import os
-from dataclasses import dataclass
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
 from vocab_tools.core.keychain import KeychainError, get_words_db_credentials
-
-
-@dataclass
-class VocabularyEntry:
-    id: str
-    source_text: str
-    target_text: str
-    source_language: str
-    target_language: str
-    list_name: str
-    source_usage_example: str = ""
-    target_usage_example: str = ""
-    difficulty_level: str | None = None
-    is_active: bool = True
+from vocab_tools.core.models import VocabularyEntry
 
 
 class MissingCredentialsError(Exception):
@@ -90,21 +76,7 @@ class DirectDatabaseClient:
                 """,
                 (self._version_id, list_name),
             )
-            return [
-                VocabularyEntry(
-                    id=str(row["id"]),
-                    source_text=row["source_text"],
-                    target_text=row["target_text"],
-                    source_language=row["source_language"],
-                    target_language=row["target_language"],
-                    list_name=row["list_name"],
-                    source_usage_example=row["source_usage_example"] or "",
-                    target_usage_example=row["target_usage_example"] or "",
-                    difficulty_level=row["difficulty_level"],
-                    is_active=row["is_active"],
-                )
-                for row in cur.fetchall()
-            ]
+            return [VocabularyEntry.from_db_row(row) for row in cur.fetchall()]
 
     def update_vocabulary_item(
         self,
@@ -189,6 +161,50 @@ class DirectDatabaseClient:
             )
             self.conn.commit()
             return str(cur.fetchone()[0])
+
+    def upsert_vocabulary_item(
+        self,
+        source_text: str,
+        target_text: str,
+        list_name: str,
+        source_language: str = "en",
+        target_language: str = "ru",
+        difficulty_level: str | None = None,
+        source_usage_example: str = "",
+        target_usage_example: str = "",
+    ) -> tuple[str, bool]:
+        with self.conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO vocabulary_items
+                    (version_id, source_text, target_text, source_language, target_language,
+                     list_name, difficulty_level, source_usage_example, target_usage_example, is_active)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, TRUE)
+                ON CONFLICT (version_id, source_text, source_language, target_language)
+                DO UPDATE SET
+                    target_text = EXCLUDED.target_text,
+                    list_name = EXCLUDED.list_name,
+                    difficulty_level = EXCLUDED.difficulty_level,
+                    source_usage_example = EXCLUDED.source_usage_example,
+                    target_usage_example = EXCLUDED.target_usage_example,
+                    is_active = TRUE
+                RETURNING id, (xmax = 0) AS inserted
+                """,
+                (
+                    self._version_id,
+                    source_text,
+                    target_text,
+                    source_language,
+                    target_language,
+                    list_name,
+                    difficulty_level,
+                    source_usage_example,
+                    target_usage_example,
+                ),
+            )
+            self.conn.commit()
+            row = cur.fetchone()
+            return str(row[0]), row[1]
 
     def close(self):
         if self.conn:

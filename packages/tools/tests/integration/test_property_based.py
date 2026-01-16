@@ -70,14 +70,15 @@ class TestFrequencyServiceProperties:
         assert freq >= 0.0
 
 
-class TestProcessorProperties:
+class TestNormalizerProperties:
     @given(text=st.text(min_size=1, max_size=50))
     @settings(max_examples=30, deadline=None)
     def test_normalize_returns_lowercase(self, text):
-        from vocab_tools.processors import get_processor
+        from vocab_tools.config.config_loader import get_config_loader
+        from vocab_tools.core.base_normalizer import get_universal_normalizer
 
         assume(text.strip())
-        processor = get_processor("es")
-        result = processor.normalize(text)
+        normalizer = get_universal_normalizer("es", get_config_loader())
+        result = normalizer.normalize(text)
 
         assert result == result.lower()

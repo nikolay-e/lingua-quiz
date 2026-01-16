@@ -77,28 +77,50 @@ class TransliterationDetector:
     def __init__(self, similarity_threshold: float = 0.7):
         self.similarity_threshold = similarity_threshold
 
-    def is_transliteration(self, source_word: str, target_word: str, source_lang: str) -> bool:
+    def calculate_similarity(self, str1: str, str2: str) -> float:
+        return similarity_ratio(str1.lower(), str2.lower())
+
+    def transliterate_to_cyrillic(self, text: str, lang: str = "es") -> str:
+        return transliterate_to_cyrillic(text)
+
+    def transliterate_to_latin(self, text: str) -> str:
+        return transliterate_to_latin(text)
+
+    def is_transliteration(
+        self,
+        source_word: str,
+        target_word: str,
+        source_lang: str = "es",
+        target_lang: str = "ru",
+    ) -> tuple[bool, float]:
         source_norm = normalize_for_comparison(source_word)
         target_norm = normalize_for_comparison(target_word)
 
+        if not source_norm or not target_norm:
+            return False, 0.0
+
         if len(source_norm) < 3 or len(target_norm) < 3:
-            return False
+            return False, 0.0
+
+        best_similarity = 0.0
 
         if source_lang in ("en", "es", "de"):
             transliterated = transliterate_to_cyrillic(source_word)
             transliterated_norm = normalize_for_comparison(transliterated)
 
             similarity = similarity_ratio(transliterated_norm, target_norm)
+            best_similarity = max(best_similarity, similarity)
             if similarity >= self.similarity_threshold:
-                return True
+                return True, similarity
 
             source_latin = normalize_for_comparison(source_word)
             target_latin = transliterate_to_latin(target_word)
             target_latin_norm = normalize_for_comparison(target_latin)
 
             similarity = similarity_ratio(source_latin, target_latin_norm)
+            best_similarity = max(best_similarity, similarity)
             if similarity >= self.similarity_threshold:
-                return True
+                return True, similarity
 
         elif source_lang == "ru":
             transliterated = transliterate_to_latin(source_word)
@@ -106,10 +128,31 @@ class TransliterationDetector:
             target_norm = normalize_for_comparison(target_word)
 
             similarity = similarity_ratio(transliterated_norm, target_norm)
+            best_similarity = max(best_similarity, similarity)
             if similarity >= self.similarity_threshold:
-                return True
+                return True, similarity
 
-        return False
+        return False, best_similarity
+
+    def find_transliterations(
+        self,
+        translations: list[tuple[str, str]],
+        source_lang: str = "es",
+        target_lang: str = "ru",
+    ) -> list[dict]:
+        matches = []
+        for source_word, target_word in translations:
+            is_trans, similarity = self.is_transliteration(source_word, target_word, source_lang, target_lang)
+            if is_trans:
+                matches.append(
+                    {
+                        "source_word": source_word,
+                        "target_word": target_word,
+                        "similarity": similarity,
+                        "recommendation": "MOVE_TO_A0",
+                    }
+                )
+        return matches
 
     def detect_transliterations(
         self, words: list[str], source_lang: str, russian_translations: dict[str, str] | None = None
@@ -119,7 +162,8 @@ class TransliterationDetector:
         for word in words:
             if russian_translations and word in russian_translations:
                 translation = russian_translations[word]
-                if self.is_transliteration(word, translation, source_lang):
+                is_trans, _ = self.is_transliteration(word, translation, source_lang)
+                if is_trans:
                     transliterations.append(word)
             elif self._looks_like_international_word(word, source_lang):
                 transliterations.append(word)

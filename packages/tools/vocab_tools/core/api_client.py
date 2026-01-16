@@ -1,21 +1,8 @@
 import os
-from dataclasses import dataclass
 
 import requests
 
-
-@dataclass
-class VocabularyEntry:
-    id: str
-    source_text: str
-    target_text: str
-    source_language: str
-    target_language: str
-    list_name: str
-    source_usage_example: str = ""
-    target_usage_example: str = ""
-    difficulty_level: str | None = None
-    is_active: bool = True
+from .models import VocabularyEntry
 
 
 class MissingCredentialsError(Exception):
@@ -104,24 +91,7 @@ class StagingAPIClient:
         response.raise_for_status()
 
         data = response.json()
-        entries = []
-
-        for item in data:
-            entry = VocabularyEntry(
-                id=item.get("id", ""),
-                source_text=item.get("sourceText", ""),
-                target_text=item.get("targetText", ""),
-                source_language=item.get("sourceLanguage", ""),
-                target_language=item.get("targetLanguage", ""),
-                list_name=item.get("listName", ""),
-                source_usage_example=item.get("sourceUsageExample", "") or "",
-                target_usage_example=item.get("targetUsageExample", "") or "",
-                difficulty_level=item.get("difficultyLevel"),
-                is_active=item.get("isActive", True),
-            )
-            entries.append(entry)
-
-        return entries
+        return [VocabularyEntry.from_api_dict(item) for item in data]
 
     def search_vocabulary(self, query: str, limit: int = 100) -> list[VocabularyEntry]:
         url = f"{self.base_url}/api/admin/vocabulary/search"
@@ -131,24 +101,7 @@ class StagingAPIClient:
         response.raise_for_status()
 
         data = response.json()
-        entries = []
-
-        for item in data:
-            entry = VocabularyEntry(
-                id=item.get("id", ""),
-                source_text=item.get("sourceText", ""),
-                target_text=item.get("targetText", ""),
-                source_language=item.get("sourceLanguage", ""),
-                target_language=item.get("targetLanguage", ""),
-                list_name=item.get("listName", ""),
-                source_usage_example=item.get("sourceUsageExample", "") or "",
-                target_usage_example=item.get("targetUsageExample", "") or "",
-                difficulty_level=item.get("difficultyLevel"),
-                is_active=item.get("isActive", True),
-            )
-            entries.append(entry)
-
-        return entries
+        return [VocabularyEntry.from_api_dict(item) for item in data]
 
     def list_vocabulary(
         self, list_name: str | None = None, limit: int = 1000, offset: int = 0
@@ -162,24 +115,7 @@ class StagingAPIClient:
         response.raise_for_status()
 
         data = response.json()
-        entries = []
-
-        for item in data:
-            entry = VocabularyEntry(
-                id=item.get("id", ""),
-                source_text=item.get("sourceText", ""),
-                target_text=item.get("targetText", ""),
-                source_language=item.get("sourceLanguage", ""),
-                target_language=item.get("targetLanguage", ""),
-                list_name=item.get("listName", ""),
-                source_usage_example=item.get("sourceUsageExample", "") or "",
-                target_usage_example=item.get("targetUsageExample", "") or "",
-                difficulty_level=item.get("difficultyLevel"),
-                is_active=item.get("isActive", True),
-            )
-            entries.append(entry)
-
-        return entries
+        return [VocabularyEntry.from_api_dict(item) for item in data]
 
     def update_vocabulary_item(
         self,
@@ -246,33 +182,19 @@ class VocabularyAPIAdapter:
         return self._list_names_cache
 
     def _extract_language_code(self, list_name: str) -> str:
-        lang_mapping = {
-            "english": "en",
-            "german": "de",
-            "spanish": "es",
-            "russian": "ru",
-        }
-        parts = list_name.lower().split()
-        if len(parts) >= 2:
-            source_lang = parts[0]
-            return lang_mapping.get(source_lang, source_lang[:2])
-        return "unknown"
+        from .naming import extract_language_code
+
+        return extract_language_code(list_name)
 
     def _list_name_to_filename(self, list_name: str) -> str:
-        parts = list_name.split()
-        if len(parts) >= 3:
-            lang = parts[0].lower()
-            level = parts[-1].lower()
-            return f"{lang}-{level}.json"
-        return f"{list_name.lower().replace(' ', '-')}.json"
+        from .naming import list_name_to_filename
+
+        return list_name_to_filename(list_name)
 
     def _filename_to_list_name(self, filename: str) -> str:
-        name = filename.replace(".json", "")
-        parts = name.split("-")
-        if len(parts) == 2:
-            lang, level = parts
-            return f"{lang.title()} Russian {level.upper()}"
-        return name
+        from .naming import filename_to_list_name
+
+        return filename_to_list_name(filename)
 
     def discover_migration_files(self) -> dict[str, list[str]]:
         list_names = self._get_all_list_names()

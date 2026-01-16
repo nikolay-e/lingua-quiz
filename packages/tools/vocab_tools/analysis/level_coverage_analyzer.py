@@ -7,6 +7,7 @@ from typing import Any
 from ..config.constants import SUPPORTED_LANGUAGES
 from ..core.api_client import VocabularyAPIAdapter
 from ..core.base_normalizer import get_universal_normalizer
+from ..core.naming import extract_language_code_from_filename
 
 CEFR_FREQUENCY_RANGES = {
     "a1": (1, 1000),
@@ -83,15 +84,8 @@ class LevelCoverageAnalyzer:
         return match.group(1) if match else None
 
     def extract_language_from_filename(self, filename: str) -> str | None:
-        lang_mapping = {
-            "english": "en",
-            "german": "de",
-            "spanish": "es",
-        }
-        for lang_name, lang_code in lang_mapping.items():
-            if filename.lower().startswith(lang_name):
-                return lang_code
-        return None
+        lang_code = extract_language_code_from_filename(filename)
+        return None if lang_code == "unknown" else lang_code
 
     def get_word_frequency_rank(self, word: str, language_code: str, show_progress: bool = False) -> int | None:
         from wordfreq import top_n_list

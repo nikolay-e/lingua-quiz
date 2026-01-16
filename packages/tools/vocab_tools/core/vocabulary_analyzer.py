@@ -215,18 +215,35 @@ class VocabularyAnalyzer(ABC):
 
         return "other"
 
-    @abstractmethod
+    _use_normalization: bool = False
+
     def analyze_word_linguistics(self, word: str, existing_words: set[str], rank: int = None) -> tuple[str, str, str]:
+        result = self._analyze_word_linguistics_base(word, existing_words, use_normalization=self._use_normalization)
+
+        if isinstance(result, tuple):
+            return result
+
+        pos_tag = result["pos_tag"]
+        morphology = result["morphology"]
+
+        category = self._categorize_by_pos(pos_tag, word)
+        reason = self._generate_reason(word, pos_tag, morphology, rank)
+
+        return category, pos_tag, reason
+
+    @abstractmethod
+    def _generate_reason(self, word: str, pos_tag: str, morphology: str, rank: int | None = None) -> str:
         """
-        Perform language-specific linguistic analysis of a word.
+        Generate language-specific analysis reason.
 
         Args:
-            word: Word to analyze
-            existing_words: Set of existing vocabulary words
-            rank: Frequency rank of the word (1-based)
+            word: Original word
+            pos_tag: Part-of-speech tag
+            morphology: Morphological features
+            rank: Frequency rank of the word (optional)
 
         Returns:
-            Tuple of (category, pos_tag, analysis_reason)
+            Analysis reason string
         """
 
     def extract_existing_vocabulary(self) -> set[str]:

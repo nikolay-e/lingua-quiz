@@ -105,16 +105,10 @@ def build_migration_path(lang: str, level: str, migrations_dir: Path | None = No
 
     level_lower = level.lower()
 
-    lang_full_names = {
-        "es": "spanish",
-        "de": "german",
-        "en": "english",
-        "ru": "russian",
-    }
-
     lang_variants = [lang]
-    if lang in lang_full_names:
-        lang_variants.append(lang_full_names[lang])
+    lang_name = LANGUAGE_CODE_TO_NAME.get(lang)
+    if lang_name:
+        lang_variants.append(lang_name.lower())
 
     for lang_variant in lang_variants:
         for pattern in MIGRATION_FILE_PATTERNS:
