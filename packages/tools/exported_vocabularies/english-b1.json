@@ -1,7 +1,7 @@
 {
   "listName": "English Russian B1",
   "exportedAt": "2026-01-16T23:31:07.904604+00:00",
-  "totalWords": 1930,
+  "totalWords": 1929,
   "words": [
     {
       "id": "0d55fd74-8707-42ee-8cb9-8de534b95722",
@@ -10213,7 +10213,7 @@
       "difficultyLevel": "b1",
       "sourceUsageExample": "He has a strong hold.",
       "targetUsageExample": "У него сильный захват.",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": "c5806c7f-9ff4-47a2-b8b4-d4a2ad9625f3",

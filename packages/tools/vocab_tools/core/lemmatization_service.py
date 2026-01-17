@@ -19,28 +19,16 @@ LanguageCodeType = Literal["en", "es", "de", "ru"]
 
 
 class LemmatizationService:
-    """
-    Thread-safe centralized lemmatization service.
-
-    Manages NLP models (Stanza/spaCy) and lemma caching across all modules.
-    Uses singleton pattern to ensure only one instance per language.
-    """
-
     _instances: ClassVar[dict[str, "LemmatizationService"]] = {}
-    _lock: ClassVar[threading.Lock] = threading.Lock()
+    _instance_lock: ClassVar[threading.Lock] = threading.Lock()
 
     def __init__(self, language_code: LanguageCodeType):
-        """
-        Initialize lemmatization service for language.
-
-        Args:
-            language_code: ISO language code (en, es, de, ru)
-        """
         self.language_code = language_code
         self._lemma_cache: dict[str, str] = {}
         self._nlp_model = None
         self._model_loaded = False
         self._load_lock = threading.Lock()
+        self._cache_lock = threading.RLock()
         self._exceptions_map: dict[str, str] = {}
         self._word_zipf_delta_threshold: float | None = 1.0
 
@@ -58,18 +46,8 @@ class LemmatizationService:
 
     @classmethod
     def get_instance(cls, language_code: LanguageCodeType) -> "LemmatizationService":
-        """
-        Get or create lemmatization service for language (thread-safe singleton).
-
-        Args:
-            language_code: ISO language code
-
-        Returns:
-            Shared lemmatization service instance
-        """
         if language_code not in cls._instances:
-            with cls._lock:
-                # Double-check locking pattern
+            with cls._instance_lock:
                 if language_code not in cls._instances:
                     cls._instances[language_code] = cls(language_code)
 
@@ -117,67 +95,41 @@ class LemmatizationService:
                 self._model_loaded = True  # Mark as loaded to avoid retries
 
     def lemmatize(self, word: str) -> str:
-        """
-        Lemmatize single word with validation.
-
-        Args:
-            word: Word to lemmatize
-
-        Returns:
-            Lemma (base form) or lowercase word if lemmatization unavailable
-        """
         if not word:
             return ""
 
         word_lower = word.lower()
 
-        # Check cache first (thread-safe read)
-        if word_lower in self._lemma_cache:
-            return self._lemma_cache[word_lower]
+        with self._cache_lock:
+            if word_lower in self._lemma_cache:
+                return self._lemma_cache[word_lower]
 
-        # Load model if not loaded
         self._load_model()
 
         if self._nlp_model is None:
-            # No model available - return lowercase
-            self._lemma_cache[word_lower] = word_lower
+            with self._cache_lock:
+                self._lemma_cache[word_lower] = word_lower
             return word_lower
 
-        # Lemmatize with model
         lemma = self._lemmatize_with_model(word_lower)
-
-        # Validate lemma with wordfreq fallback
         validated_lemma = self._validate_lemma_with_wordfreq(word_lower, lemma)
 
-        # Cache result (thread-safe write)
-        with self._lock:
+        with self._cache_lock:
             self._lemma_cache[word_lower] = validated_lemma
 
         return validated_lemma
 
     def lemmatize_with_pos(self, word: str) -> list[tuple[str, str]]:
-        """
-        Lemmatize word and return lemma with POS tag.
-
-        Args:
-            word: Word to lemmatize
-
-        Returns:
-            List of (lemma, POS) tuples (usually single item, but can be multiple for compound words)
-        """
         if not word:
             return []
 
         word_lower = word.lower()
 
-        # Load model if not loaded
         self._load_model()
 
         if self._nlp_model is None:
-            # No model available
             return [(word_lower, "UNKNOWN")]
 
-        # Check if this is Stanza (has lemmatize_with_pos method)
         is_stanza = hasattr(self._nlp_model, "lemmatize_with_pos")
 
         if is_stanza:
@@ -186,7 +138,6 @@ class LemmatizationService:
             except Exception:
                 return [(word_lower, "UNKNOWN")]
         else:
-            # spaCy fallback
             try:
                 doc = self._nlp_model(word_lower)
                 results = []
@@ -200,50 +151,36 @@ class LemmatizationService:
                 return [(word_lower, "UNKNOWN")]
 
     def lemmatize_batch(self, words: list[str]) -> list[str]:
-        """
-        Batch lemmatization for efficiency.
-
-        Args:
-            words: List of words to lemmatize
-
-        Returns:
-            List of lemmas
-        """
         if not words:
             return []
 
-        # Load model if not loaded
         self._load_model()
 
         if self._nlp_model is None:
-            # No model - return lowercase
             return [w.lower() for w in words]
 
-        # Check which words are already cached
         results = []
         uncached_indices = []
         uncached_words = []
 
-        for i, word in enumerate(words):
-            word_lower = word.lower()
-            if word_lower in self._lemma_cache:
-                results.append(self._lemma_cache[word_lower])
-            else:
-                results.append(None)  # Placeholder
-                uncached_indices.append(i)
-                uncached_words.append(word_lower)
+        with self._cache_lock:
+            for i, word in enumerate(words):
+                word_lower = word.lower()
+                if word_lower in self._lemma_cache:
+                    results.append(self._lemma_cache[word_lower])
+                else:
+                    results.append(None)
+                    uncached_indices.append(i)
+                    uncached_words.append(word_lower)
 
-        # Process uncached words in batch
         if uncached_words:
             lemmas = self._lemmatize_batch_with_model(uncached_words)
 
-            # Validate and cache results - use enumerate for O(1) indexing
-            for i, (idx, lemma) in enumerate(zip(uncached_indices, lemmas, strict=False)):
-                word_lower = uncached_words[i]
-                validated = self._validate_lemma_with_wordfreq(word_lower, lemma)
-                results[idx] = validated
-
-                with self._lock:
+            with self._cache_lock:
+                for i, (idx, lemma) in enumerate(zip(uncached_indices, lemmas, strict=False)):
+                    word_lower = uncached_words[i]
+                    validated = self._validate_lemma_with_wordfreq(word_lower, lemma)
+                    results[idx] = validated
                     self._lemma_cache[word_lower] = validated
 
         return results
@@ -356,8 +293,7 @@ class LemmatizationService:
         return lemma_ranks
 
     def clear_cache(self):
-        """Clear lemma cache (useful for testing)."""
-        with self._lock:
+        with self._cache_lock:
             self._lemma_cache.clear()
 
 

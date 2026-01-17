@@ -55,7 +55,8 @@ class MigrationValidator:
         if not silent:
             print(f"Validating {filename}...")
 
-        return self._validate_language_file(lang_code, filename)
+        result, _ = self._validate_language_file(lang_code, filename)
+        return result
 
     def validate_all_migrations(self, silent: bool = False) -> ValidationResult:
         if not silent:
@@ -65,12 +66,16 @@ class MigrationValidator:
 
         discovered_files = self.db_parser.discover_migration_files()
 
+        parsed_entries_cache: dict[str, list[VocabularyEntry]] = {}
+
         for language, filenames in discovered_files.items():
             for filename in filenames:
                 try:
                     if not silent:
                         print(f"  Validating {language.upper()} ({filename})...")
-                    language_result = self._validate_language_file(language, filename)
+                    language_result, entries = self._validate_language_file(language, filename)
+
+                    parsed_entries_cache[filename] = entries
 
                     result.files_validated.append(filename)
                     result.issues.extend(language_result.issues)
@@ -87,12 +92,12 @@ class MigrationValidator:
 
         if not silent:
             print("  Validating cross-file duplicates...")
-        cross_file_issues = self._validate_cross_file_duplicates(discovered_files)
+        cross_file_issues = self._validate_cross_file_duplicates(discovered_files, parsed_entries_cache)
         result.issues.extend(cross_file_issues)
 
         return result
 
-    def _validate_language_file(self, language: str, filename: str) -> ValidationResult:
+    def _validate_language_file(self, language: str, filename: str) -> tuple[ValidationResult, list[VocabularyEntry]]:
         try:
             entries = self.db_parser.parse_migration_file(filename)
         except Exception as e:
@@ -105,37 +110,30 @@ class MigrationValidator:
                     file_name=filename,
                 )
             )
-            return result
+            return result, []
 
         result = ValidationResult(total_checked=len(entries))
         normalizer = self.normalizers[language]
         lemmatizer = self.lemmatizers[language]
 
-        # Track duplicates by lemma+POS, but exclude pronouns and functional words
         seen_words: dict[str, list[tuple[str, str]]] = defaultdict(list)
 
         for entry in entries:
             entry_issues = self._validate_entry(entry, filename, normalizer)
             result.issues.extend(entry_issues)
 
-            # Use lemmatization + POS for duplicate detection
             normalized_word = normalizer.normalize(entry.source_text)
             lemma_with_pos = lemmatizer.lemmatize_with_pos(normalized_word)
 
-            # Store lemma+POS as key
             for lemma, pos in lemma_with_pos:
                 key = f"{lemma}:{pos}"
                 seen_words[key].append((entry.source_text, pos))
 
-        # Check for duplicates (same lemma AND same POS)
-        # Exclude pronouns (PRON) - they often have same lemma but different functions
-        # (él, ella, lo, se should NOT be considered duplicates)
         duplicates = {key: words for key, words in seen_words.items() if len(words) > 1}
         if duplicates:
             for key, word_pos_pairs in duplicates.items():
                 lemma, pos = key.split(":", 1)
 
-                # Skip pronouns and determiners - they're intentionally different despite same lemma
                 if pos in ["PRON", "DET"]:
                     continue
 
@@ -150,7 +148,7 @@ class MigrationValidator:
                     )
                 )
 
-        return result
+        return result, entries
 
     def _validate_entry(self, entry: VocabularyEntry, filename: str, normalizer) -> list[ValidationIssue]:
         issues = []
@@ -243,31 +241,52 @@ class MigrationValidator:
     def _validate_answer_syntax(self, target_word: str, filename: str) -> list[ValidationIssue]:
         issues = []
 
-        bracket_count = target_word.count("[") - target_word.count("]")
-        if bracket_count != 0:
+        bracket_error = self._validate_balanced_brackets(target_word, "[", "]")
+        if bracket_error:
             issues.append(
                 ValidationIssue(
                     severity="warning",
                     category="answer_syntax",
-                    message=f"Unbalanced brackets in target_word: '{target_word}'",
+                    message=f"{bracket_error} in target_word: '{target_word}'",
                     file_name=filename,
                 )
             )
 
-        paren_count = target_word.count("(") - target_word.count(")")
-        if paren_count != 0:
+        paren_error = self._validate_balanced_brackets(target_word, "(", ")")
+        if paren_error:
             issues.append(
                 ValidationIssue(
                     severity="warning",
                     category="answer_syntax",
-                    message=f"Unbalanced parentheses in target_word: '{target_word}'",
+                    message=f"{paren_error} in target_word: '{target_word}'",
                     file_name=filename,
                 )
             )
 
         return issues
 
-    def _validate_cross_file_duplicates(self, discovered_files: dict[str, list[str]]) -> list[ValidationIssue]:
+    def _validate_balanced_brackets(self, text: str, open_char: str, close_char: str) -> str | None:
+        stack = []
+        bracket_name = "brackets" if open_char == "[" else "parentheses"
+
+        for i, char in enumerate(text):
+            if char == open_char:
+                stack.append(i)
+            elif char == close_char:
+                if not stack:
+                    return f"Unmatched closing {bracket_name} at position {i}"
+                stack.pop()
+
+        if stack:
+            return f"Unmatched opening {bracket_name} at position {stack[0]}"
+
+        return None
+
+    def _validate_cross_file_duplicates(
+        self,
+        discovered_files: dict[str, list[str]],
+        entries_cache: dict[str, list[VocabularyEntry]] | None = None,
+    ) -> list[ValidationIssue]:
         issues = []
 
         for language, filenames in discovered_files.items():
@@ -280,9 +299,12 @@ class MigrationValidator:
 
             for filename in filenames:
                 try:
-                    entries = self.db_parser.parse_migration_file(filename)
+                    if entries_cache and filename in entries_cache:
+                        entries = entries_cache[filename]
+                    else:
+                        entries = self.db_parser.parse_migration_file(filename)
+
                     for entry in entries:
-                        # Use lemmatization for cross-file duplicate detection
                         normalized = normalizer.normalize(entry.source_text)
                         lemmatized = lemmatizer.lemmatize(normalized)
                         global_seen_words[lemmatized].append((filename, entry.source_text))

@@ -79,7 +79,7 @@ class LevelCoverageAnalyzer:
         return self._lemmatization_services[language_code]
 
     def extract_level_from_filename(self, filename: str) -> str | None:
-        pattern = r"-(a1|a2|b1|b2|c1|c2|d)\.json$"
+        pattern = r"-(a1|a2|b1|b2|c1|c2|d)(?:[-.]|$)"
         match = re.search(pattern, filename.lower())
         return match.group(1) if match else None
 

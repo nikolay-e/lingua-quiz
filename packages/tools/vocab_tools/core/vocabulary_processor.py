@@ -142,7 +142,7 @@ class VocabularyProcessor:
             "min_word_length": filtering_config.get("min_word_length", 2),
             "max_word_length": self.lang_config.get("max_word_length", default_max_length),
             "skip_words": self.skip_words,
-            "blacklist": self.lang_config.get("blacklist", {}),
+            "blacklist": self.config_loader.get_blacklist_dict(language_code),
             "filtering": filtering_config,
         }
         self.validator = WordValidator(validator_config)

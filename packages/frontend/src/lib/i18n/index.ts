@@ -20,7 +20,7 @@ function getInitialLocale(): string {
     }
 
     const browserLocale = getLocaleFromNavigator();
-    if (browserLocale !== null && browserLocale !== undefined) {
+    if (browserLocale !== null) {
       const langCode = browserLocale.split('-')[0];
       if (langCode !== undefined && langCode !== '' && SUPPORTED_LOCALES.includes(langCode as SupportedLocale)) {
         return langCode;

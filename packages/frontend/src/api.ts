@@ -151,10 +151,12 @@ const api = {
           body: JSON.stringify({ currentPassword, newPassword }),
         });
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ detail: response.statusText }));
-          throw new Error(errorData.detail || `HTTP ${response.status}`);
+          const errorData = await (response.json() as Promise<{ detail?: string }>).catch((): { detail: string } => ({
+            detail: response.statusText,
+          }));
+          throw new Error(errorData.detail ?? `HTTP ${response.status}`);
         }
-        return response.json();
+        return response.json() as Promise<Record<string, string>>;
       },
       { token },
     ),

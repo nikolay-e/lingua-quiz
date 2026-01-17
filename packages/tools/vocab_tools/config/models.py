@@ -120,6 +120,11 @@ class Blacklist(BaseModel):
     too_short: list[str] = Field(default_factory=list)
 
 
+class SharedBlacklist(BaseModel):
+    proper_nouns: list[str] = Field(default_factory=list)
+    interjections: list[str] = Field(default_factory=list)
+
+
 class ForeignLanguageFilter(BaseModel):
     language: str
     min_foreign_zipf: float = Field(default=4.0, ge=0, le=10)
@@ -194,6 +199,7 @@ class Config(BaseModel):
     cefr_levels: dict[str, CEFRLevel]
     cefr_cumulative_totals: dict[str, int]
     languages: dict[str, LanguageConfig]
+    shared_blacklists: SharedBlacklist = Field(default_factory=SharedBlacklist)
     essential_vocabulary_categories: list[str] = Field(default_factory=list)
 
     @field_validator("cefr_levels")
@@ -243,26 +249,53 @@ class Config(BaseModel):
     def get_cefr_level(self, level: str) -> CEFRLevel | None:
         return self.cefr_levels.get(level.lower())
 
-    def get_all_blacklist_words(self, language_code: str) -> list[str]:
+    def get_all_blacklists_dict(self, language_code: str) -> dict[str, list[str]]:
         lang_config = self.get_language(language_code)
         if not lang_config:
-            return []
+            return {}
 
         blacklist = lang_config.blacklist
+        result: dict[str, list[str]] = {}
+
+        # Merge shared proper_nouns with language-specific
+        shared_proper_nouns = self.shared_blacklists.proper_nouns or []
+        lang_proper_nouns = blacklist.proper_nouns or []
+        if shared_proper_nouns or lang_proper_nouns:
+            result["proper_nouns"] = shared_proper_nouns + lang_proper_nouns
+
+        # Merge shared interjections with language-specific
+        shared_interjections = self.shared_blacklists.interjections or []
+        lang_interjections = blacklist.interjections or []
+        if shared_interjections or lang_interjections:
+            result["interjections"] = shared_interjections + lang_interjections
+
+        # Add other language-specific categories
+        if blacklist.contractions:
+            result["contractions"] = blacklist.contractions
+        if blacklist.profanity:
+            result["profanity"] = blacklist.profanity
+        if blacklist.abbreviations:
+            result["abbreviations"] = blacklist.abbreviations
+        if blacklist.anglicisms:
+            result["anglicisms"] = blacklist.anglicisms
+        if blacklist.slang:
+            result["slang"] = blacklist.slang
+        if blacklist.technical:
+            result["technical"] = blacklist.technical
+        if blacklist.lemma_errors:
+            result["lemma_errors"] = blacklist.lemma_errors
+        if blacklist.ocr_errors:
+            result["ocr_errors"] = blacklist.ocr_errors
+        if blacklist.verb_inflections:
+            result["verb_inflections"] = blacklist.verb_inflections
+        if blacklist.too_short:
+            result["too_short"] = blacklist.too_short
+
+        return result
+
+    def get_all_blacklist_words(self, language_code: str) -> list[str]:
+        blacklists_dict = self.get_all_blacklists_dict(language_code)
         all_words = []
-
-        # Flatten all blacklist categories
-        all_words.extend(blacklist.contractions)
-        all_words.extend(blacklist.profanity)
-        all_words.extend(blacklist.abbreviations)
-        all_words.extend(blacklist.interjections)
-        all_words.extend(blacklist.anglicisms)
-        all_words.extend(blacklist.slang)
-        all_words.extend(blacklist.proper_nouns)
-        all_words.extend(blacklist.technical)
-        all_words.extend(blacklist.lemma_errors)
-        all_words.extend(blacklist.ocr_errors)
-        all_words.extend(blacklist.verb_inflections)
-        all_words.extend(blacklist.too_short)
-
+        for words in blacklists_dict.values():
+            all_words.extend(words)
         return all_words

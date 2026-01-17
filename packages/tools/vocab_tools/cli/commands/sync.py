@@ -7,11 +7,13 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from vocab_tools.core.api_client import MissingCredentialsError, get_api_client
+from vocab_tools.core.api_client import get_api_client
+from vocab_tools.core.exceptions import MissingCredentialsError
 from vocab_tools.core.io import extract_source_language_from_list, load_vocabulary_words, save_vocabulary_json
 from vocab_tools.core.models import VocabularyEntry
+from vocab_tools.core.repository import entry_to_dict, word_differs
 
-from ._utils import entry_to_dict, list_name_to_filename, normalize_list_name
+from ._utils import list_name_to_filename, normalize_list_name
 
 console = Console()
 
@@ -178,7 +180,7 @@ def _push_changes(client, list_name: str, local_map: dict, remote_map: dict, dry
                 except Exception:
                     pass
             stats["pushed"] += 1
-        elif _word_differs_from_entry(local_word, remote_entry):
+        elif word_differs(remote_entry, local_word, check_source=False):
             if force:
                 if not dry_run:
                     try:
@@ -213,7 +215,7 @@ def _pull_changes(
             updated_words.append(new_word)
             stats["pulled"] += 1
             changes_made = True
-        elif _word_differs_from_entry(local_word, remote_entry):
+        elif word_differs(remote_entry, local_word, check_source=False):
             if force:
                 for i, w in enumerate(updated_words):
                     if w.get("sourceText", "").lower() == key:
@@ -230,16 +232,6 @@ def _pull_changes(
         _save_vocabulary_to_file(updated_words, file_path, list_name)
 
     return stats
-
-
-def _word_differs_from_entry(local_word: dict, remote_entry: VocabularyEntry) -> bool:
-    if local_word.get("targetText", "") != remote_entry.target_text:
-        return True
-    if (local_word.get("sourceUsageExample") or "") != (remote_entry.source_usage_example or ""):
-        return True
-    if (local_word.get("targetUsageExample") or "") != (remote_entry.target_usage_example or ""):
-        return True
-    return False
 
 
 def _save_vocabulary_to_file(words: list[dict], file_path: Path, list_name: str):

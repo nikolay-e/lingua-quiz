@@ -3,12 +3,15 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
+from vocab_tools.core.exceptions import (
+    MissingCredentialsError,
+    VocabularyCreateError,
+    VocabularyDeleteError,
+    VocabularyFetchError,
+    VocabularyUpdateError,
+)
 from vocab_tools.core.keychain import KeychainError, get_words_db_credentials
 from vocab_tools.core.models import VocabularyEntry
-
-
-class MissingCredentialsError(Exception):
-    pass
 
 
 def get_db_connection():
@@ -64,19 +67,22 @@ class DirectDatabaseClient:
             return [row[0] for row in cur.fetchall()]
 
     def fetch_vocabulary(self, list_name: str) -> list[VocabularyEntry]:
-        with self.conn.cursor(cursor_factory=RealDictCursor) as cur:
-            cur.execute(
-                """
-                SELECT id, source_text, target_text, source_language, target_language,
-                       list_name, source_usage_example, target_usage_example,
-                       difficulty_level, is_active
-                FROM vocabulary_items
-                WHERE version_id = %s AND list_name = %s
-                ORDER BY source_text
-                """,
-                (self._version_id, list_name),
-            )
-            return [VocabularyEntry.from_db_row(row) for row in cur.fetchall()]
+        try:
+            with self.conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute(
+                    """
+                    SELECT id, source_text, target_text, source_language, target_language,
+                           list_name, source_usage_example, target_usage_example,
+                           difficulty_level, is_active
+                    FROM vocabulary_items
+                    WHERE version_id = %s AND list_name = %s
+                    ORDER BY source_text
+                    """,
+                    (self._version_id, list_name),
+                )
+                return [VocabularyEntry.from_db_row(row) for row in cur.fetchall()]
+        except psycopg2.Error as e:
+            raise VocabularyFetchError(list_name, e) from e
 
     def update_vocabulary_item(
         self,
@@ -116,16 +122,22 @@ class DirectDatabaseClient:
         params.append(item_id)
         query = f"UPDATE vocabulary_items SET {', '.join(updates)} WHERE id = %s"  # nosec B608
 
-        with self.conn.cursor() as cur:
-            cur.execute(query, params)
-            self.conn.commit()
-            return cur.rowcount > 0
+        try:
+            with self.conn.cursor() as cur:
+                cur.execute(query, params)
+                self.conn.commit()
+                return cur.rowcount > 0
+        except psycopg2.Error as e:
+            raise VocabularyUpdateError(item_id, e) from e
 
     def delete_vocabulary_item(self, item_id: str) -> bool:
-        with self.conn.cursor() as cur:
-            cur.execute("UPDATE vocabulary_items SET is_active = FALSE WHERE id = %s", (item_id,))
-            self.conn.commit()
-            return cur.rowcount > 0
+        try:
+            with self.conn.cursor() as cur:
+                cur.execute("UPDATE vocabulary_items SET is_active = FALSE WHERE id = %s", (item_id,))
+                self.conn.commit()
+                return cur.rowcount > 0
+        except psycopg2.Error as e:
+            raise VocabularyDeleteError(item_id, e) from e
 
     def create_vocabulary_item(
         self,
@@ -138,29 +150,32 @@ class DirectDatabaseClient:
         source_usage_example: str = "",
         target_usage_example: str = "",
     ) -> str:
-        with self.conn.cursor() as cur:
-            cur.execute(
-                """
-                INSERT INTO vocabulary_items
-                    (version_id, source_text, target_text, source_language, target_language,
-                     list_name, difficulty_level, source_usage_example, target_usage_example)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                RETURNING id
-                """,
-                (
-                    self._version_id,
-                    source_text,
-                    target_text,
-                    source_language,
-                    target_language,
-                    list_name,
-                    difficulty_level,
-                    source_usage_example,
-                    target_usage_example,
-                ),
-            )
-            self.conn.commit()
-            return str(cur.fetchone()[0])
+        try:
+            with self.conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO vocabulary_items
+                        (version_id, source_text, target_text, source_language, target_language,
+                         list_name, difficulty_level, source_usage_example, target_usage_example)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    RETURNING id
+                    """,
+                    (
+                        self._version_id,
+                        source_text,
+                        target_text,
+                        source_language,
+                        target_language,
+                        list_name,
+                        difficulty_level,
+                        source_usage_example,
+                        target_usage_example,
+                    ),
+                )
+                self.conn.commit()
+                return str(cur.fetchone()[0])
+        except psycopg2.Error as e:
+            raise VocabularyCreateError(source_text, e) from e
 
     def upsert_vocabulary_item(
         self,

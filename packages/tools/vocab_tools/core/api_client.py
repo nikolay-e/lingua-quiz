@@ -2,11 +2,8 @@ import os
 
 import requests
 
+from .exceptions import MissingCredentialsError, VocabularyCreateError, VocabularyFetchError, VocabularyUpdateError
 from .models import VocabularyEntry
-
-
-class MissingCredentialsError(Exception):
-    pass
 
 
 class StagingAPIClient:
@@ -79,19 +76,24 @@ class StagingAPIClient:
             "targetUsageExample": target_usage_example,
         }
 
-        response = requests.post(url, headers=self._get_headers(), json=data, timeout=30)
-        response.raise_for_status()
-        return response.json()
+        try:
+            response = requests.post(url, headers=self._get_headers(), json=data, timeout=30)
+            response.raise_for_status()
+            return response.json()
+        except requests.RequestException as e:
+            raise VocabularyCreateError(source_text, e) from e
 
     def fetch_vocabulary(self, list_name: str) -> list[VocabularyEntry]:
         url = f"{self.base_url}/api/translations"
         params = {"list_name": list_name}
 
-        response = requests.get(url, headers=self._get_headers(), params=params, timeout=30)
-        response.raise_for_status()
-
-        data = response.json()
-        return [VocabularyEntry.from_api_dict(item) for item in data]
+        try:
+            response = requests.get(url, headers=self._get_headers(), params=params, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+            return [VocabularyEntry.from_api_dict(item) for item in data]
+        except requests.RequestException as e:
+            raise VocabularyFetchError(list_name, e) from e
 
     def search_vocabulary(self, query: str, limit: int = 100) -> list[VocabularyEntry]:
         url = f"{self.base_url}/api/admin/vocabulary/search"
@@ -146,9 +148,12 @@ class StagingAPIClient:
         if is_active is not None:
             data["isActive"] = is_active
 
-        response = requests.put(url, headers=self._get_headers(), json=data, timeout=30)
-        response.raise_for_status()
-        return response.json()
+        try:
+            response = requests.put(url, headers=self._get_headers(), json=data, timeout=30)
+            response.raise_for_status()
+            return response.json()
+        except requests.RequestException as e:
+            raise VocabularyUpdateError(item_id, e) from e
 
 
 def get_api_client() -> StagingAPIClient:

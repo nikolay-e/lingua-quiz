@@ -51,11 +51,9 @@ class FrequencyBasedSource(WordSource):
 
         config_loader = get_config_loader()
         lang_config = config_loader.get_language_config(self.language_code)
-        blacklist = lang_config.get("blacklist", {})
 
-        blacklisted_words = set()
-        for _, word_list in blacklist.items():
-            blacklisted_words.update(w.lower() for w in word_list)
+        # Use get_blacklist_words() to include shared_blacklists
+        blacklisted_words = {w.lower() for w in config_loader.get_blacklist_words(self.language_code)}
 
         model_preferences = config_loader.get_spacy_models(self.language_code)
         nlp = get_nlp_model(self.language_code, model_preferences, silent=True)

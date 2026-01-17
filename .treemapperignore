@@ -21,6 +21,9 @@ packages/core/dist/
 **/tests
 **/data
 
+
+exported_vocabularies
+
 # Cache directories
 __pycache__
 **/__pycache__
@@ -112,9 +115,6 @@ e2e
 *.csv
 packages/tools/frequency_lists/
 packages/tools/data/
-
-# Vocabulary tools (data pipeline)
-vocab_tools
 
 # Misc
 package.json

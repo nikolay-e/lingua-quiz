@@ -10,6 +10,7 @@ from rich.table import Table
 from vocab_tools.core.db_client import DirectDatabaseClient
 from vocab_tools.core.io import extract_source_language_from_list, load_vocabulary_json
 from vocab_tools.core.models import VocabularyEntry
+from vocab_tools.core.repository import word_differs
 
 console = Console()
 
@@ -141,7 +142,7 @@ def import_vocabulary(
                 existing = existing_words.get(word_id) if word_id else None
 
                 if existing:
-                    if update_existing and _word_differs(existing, word):
+                    if update_existing and word_differs(existing, word):
                         if not dry_run:
                             try:
                                 client.update_vocabulary_item(
@@ -207,15 +208,3 @@ def import_vocabulary(
         console.print("\n[yellow]DRY RUN - No changes were made[/yellow]")
     else:
         console.print("\n[bold green]Import complete![/bold green]")
-
-
-def _word_differs(existing: VocabularyEntry, new_word: dict) -> bool:
-    if existing.source_text != new_word.get("sourceText", ""):
-        return True
-    if existing.target_text != new_word.get("targetText", ""):
-        return True
-    if existing.source_usage_example != (new_word.get("sourceUsageExample") or ""):
-        return True
-    if existing.target_usage_example != (new_word.get("targetUsageExample") or ""):
-        return True
-    return False

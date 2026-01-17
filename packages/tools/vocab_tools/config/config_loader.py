@@ -17,7 +17,7 @@ class ConfigLoader:
         return cls._instance
 
     def _load_config(self):
-        config_path = Path(__file__).parent.parent.parent / "config.yaml"
+        config_path = Path(__file__).parent / "config.yaml"
 
         if not config_path.exists():
             raise FileNotFoundError(f"Configuration file not found at {config_path}")
@@ -88,6 +88,9 @@ class ConfigLoader:
 
     def get_blacklist_words(self, language_code: str) -> list[str]:
         return self._config.get_all_blacklist_words(language_code)
+
+    def get_blacklist_dict(self, language_code: str) -> dict[str, list[str]]:
+        return self._config.get_all_blacklists_dict(language_code)
 
     def get_filtering_config(self, language_code: str) -> dict:
         lang_config = self._config.get_language(language_code)
