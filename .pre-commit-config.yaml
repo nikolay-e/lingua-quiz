@@ -203,10 +203,10 @@ repos:
         pass_filenames: false
 
       - id: eslint
-        name: Lint JS/TS/Svelte with ESLint
-        entry: bash -c 'npx --workspace=@lingua-quiz/frontend svelte-kit sync && export NODE_OPTIONS="--max-old-space-size=8192" && npm run lint:fix'
+        name: Lint JS/TS with ESLint
+        entry: bash -c 'export NODE_OPTIONS="--max-old-space-size=8192" && npm run lint:fix'
         language: system
-        files: \.(js|jsx|ts|tsx|svelte)$
+        files: \.(js|jsx|ts|tsx)$
         pass_filenames: false
 
       - id: jscpd
@@ -225,17 +225,9 @@ repos:
 
       - id: typescript-check
         name: TypeScript type checking
-        entry: npm run typecheck
+        entry: bash -c 'npm run build --workspace=@lingua-quiz/domain --workspace=@lingua-quiz/core && npm run typecheck'
         language: system
-        files: \.(ts|tsx|svelte)$
-        pass_filenames: false
-
-      # Svelte-specific type checking
-      - id: svelte-check
-        name: Svelte type checking
-        entry: npm run check
-        language: system
-        files: \.(svelte)$
+        files: \.(ts|tsx)$
         pass_filenames: false
 
       # TypeScript type coverage enforcement
