@@ -46,14 +46,15 @@ RUN VITE_APP_VERSION=${APP_VERSION} \
     npm run build --workspace @lingua-quiz/frontend
 
 FROM nginx:1.29-alpine AS frontend
-RUN chown -R nginx:nginx /var/cache/nginx /var/run && \
-    chmod -R 755 /var/cache/nginx /var/run
+RUN chown -R nginx:nginx /var/cache/nginx && \
+    chmod -R 755 /var/cache/nginx && \
+    touch /tmp/nginx.pid && chown nginx:nginx /tmp/nginx.pid
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=frontend-builder /app/packages/frontend/dist /usr/share/nginx/html
 RUN chown -R nginx:nginx /usr/share/nginx/html
 USER nginx
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off; pid /tmp/nginx.pid;"]
 
 FROM mcr.microsoft.com/playwright/python:v1.57.0-noble AS integration-e2e-tests
 ENV PYTHONUNBUFFERED=1 \

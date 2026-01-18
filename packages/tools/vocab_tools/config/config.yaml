@@ -190,8 +190,27 @@ shared_blacklists:
       'will',
       'william',
       'willy',
+      'barry',
+      'harvey',
+      'mason',
+      'theo',
+      'einstein',
+      'lincoln',
+      'newton',
+      'darwin',
+      'edison',
+      'tesla',
+      'macgyver',
+      'fitz',
+      'tong',
+      'patterson',
+      'indiana',
+      'malcolm',
+      'lindsay',
       # Female names (English)
       'alice',
+      'charlotte',
+      'caroline',
       'amanda',
       'amy',
       'anna',
@@ -559,6 +578,10 @@ languages:
           'um',
           'hmm',
           'hm',
+          'ok',
+          'okay',
+          'mm',
+          'mmm',
           'haha',
           'ha',
           'huh',
@@ -609,6 +632,20 @@ languages:
           'lemme',
           'gimme',
           "'cause",
+          'fuckin',
+          'freakin',
+          'friggin',
+          'uh-huh',
+          'uh-oh',
+          'uh-uh',
+          'mm-hmm',
+          'outta',
+          'lotta',
+          'shoulda',
+          'coulda',
+          'woulda',
+          'tryna',
+          'finna',
         ]
       proper_nouns:
         [
@@ -719,6 +756,41 @@ languages:
       inflection_frequency_ratio: 0.7 # English has low inflection (strict filtering)
       raw_frequency_multiplier: 3.0 # Multiplier for raw subtitle data (increased to ensure 14k target)
       test_whitelist: ['book', 'table', 'chair', 'cat', 'dog', 'house', 'eat', 'run', 'have'] # For integration tests only
+      ner_whitelist: [
+          # Common words spaCy incorrectly tags as PROPN
+          'english',
+          'spanish',
+          'french',
+          'german',
+          'russian',
+          'chinese',
+          'japanese',
+          'heaven',
+          'hell',
+          'god',
+          'jesus',
+          'christmas',
+          'easter',
+          'sunday',
+          'monday',
+          'tuesday',
+          'wednesday',
+          'thursday',
+          'friday',
+          'saturday',
+          'january',
+          'february',
+          'march',
+          'april',
+          'may',
+          'june',
+          'july',
+          'august',
+          'september',
+          'october',
+          'november',
+          'december',
+        ]
       exclude_patterns:
         - "^\\w'\\w+" # Contractions like don't, can't
         - "^'\\w+$" # Fragments like 'i, 'cause
@@ -733,7 +805,7 @@ languages:
         - '^(?:wasn|isn|aren|weren|hasn|haven|hadn|doesn|don|didn|shouldn|wouldn|couldn|mustn|mightn|needn|shan|won|ain)$' # codespell-ignore Contraction stumps
 
     pos_categories:
-      essential_nouns: ['NOUN', 'PROPN']
+      essential_nouns: ['NOUN']
       essential_verbs: ['VERB', 'AUX']
       essential_adjectives: ['ADJ']
       function_words: ['DET', 'PRON', 'ADP', 'CONJ', 'SCONJ']
@@ -1069,7 +1141,7 @@ languages:
         - '^https?://'
 
     pos_categories:
-      essential_nouns: ['NOUN', 'PROPN']
+      essential_nouns: ['NOUN']
       essential_verbs: ['VERB', 'AUX']
       essential_adjectives: ['ADJ']
       function_words: ['DET', 'PRON', 'ADP', 'CONJ', 'SCONJ']
@@ -1546,7 +1618,7 @@ languages:
         - '^https?://'
 
     pos_categories:
-      essential_nouns: ['NOUN', 'PROPN']
+      essential_nouns: ['NOUN']
       essential_verbs: ['VERB', 'AUX']
       essential_adjectives: ['ADJ']
       function_words: ['DET', 'PRON', 'ADP', 'CONJ', 'SCONJ']
@@ -1717,7 +1789,7 @@ languages:
         - '^xx$'
 
     pos_categories:
-      essential_nouns: ['NOUN', 'PROPN']
+      essential_nouns: ['NOUN']
       essential_verbs: ['VERB']
       essential_adjectives: ['ADJ']
       function_words: ['DET', 'PRON', 'ADP', 'CONJ', 'SCONJ', 'PART']

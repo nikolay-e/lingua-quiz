@@ -1,7 +1,7 @@
 {
   "listName": "Spanish Russian A2",
-  "exportedAt": "2026-01-16T23:31:09.147337+00:00",
-  "totalWords": 354,
+  "exportedAt": "2026-01-18T20:40:48.334253+00:00",
+  "totalWords": 605,
   "words": [
     {
       "id": "65549fb7-2ac6-4c85-baf2-528fbf30208c",
@@ -25,6 +25,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Necesito hablar con mi abogado.",
       "targetUsageExample": "Мне нужно поговорить с моим адвокатом.",
+      "isActive": true
+    },
+    {
+      "id": "22b247e2-3daf-4f12-bf06-bf112d024d07",
+      "sourceText": "abrigo",
+      "targetText": "пальто",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -100,6 +112,30 @@
       "isActive": true
     },
     {
+      "id": "9b4c15e2-e673-4097-9bb9-b67a060ff330",
+      "sourceText": "agradecido",
+      "targetText": "благодарен",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "d74c4816-bdb9-4112-a4b9-5b8824fa7808",
+      "sourceText": "alarma",
+      "targetText": "тревога|сигнализация",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "ecf0f609-937b-49a1-bf0f-56a975826916",
       "sourceText": "alcanzar",
       "targetText": "достигать|доставать",
@@ -109,6 +145,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Esto es alcanzar.",
       "targetUsageExample": "Это достигать.",
+      "isActive": true
+    },
+    {
+      "id": "93206e38-3f74-4fd5-9b43-cae522356d5d",
+      "sourceText": "aléjate",
+      "targetText": "отойди",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -160,6 +208,18 @@
       "isActive": true
     },
     {
+      "id": "d687aade-4163-4b56-a23f-190779163aa4",
+      "sourceText": "americanos",
+      "targetText": "американцы",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "075b95ad-507f-48ff-aa25-88a6171d271c",
       "sourceText": "andar",
       "targetText": "ходить",
@@ -169,6 +229,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Me gusta andar.",
       "targetUsageExample": "Я люблю ходить.",
+      "isActive": true
+    },
+    {
+      "id": "0f1b8431-0808-43c7-a7ef-2cd076925318",
+      "sourceText": "anne",
+      "targetText": "Энн",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -220,6 +292,30 @@
       "isActive": true
     },
     {
+      "id": "ffed0bb7-d1bd-40b0-9d3d-f398110a7ddb",
+      "sourceText": "apúrate",
+      "targetText": "поторопись",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "72a247b2-9e71-4086-99f8-e67a4c9bf12e",
+      "sourceText": "armario",
+      "targetText": "шкаф",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "fc9e0943-cd9b-4fe1-9584-35898d2c3833",
       "sourceText": "artista",
       "targetText": "артист|художник",
@@ -229,6 +325,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "¿Tienes artista?",
       "targetUsageExample": "У тебя есть артист?",
+      "isActive": true
+    },
+    {
+      "id": "08f2c1d7-1c93-4126-8433-606bae47a8b3",
+      "sourceText": "asalto",
+      "targetText": "нападение|штурм",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -292,6 +400,18 @@
       "isActive": true
     },
     {
+      "id": "e3ed8160-94a4-4208-afda-3c0d9ae5abfe",
+      "sourceText": "atrapar",
+      "targetText": "поймать",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "95cb3c97-45df-4a69-8728-5debcb3ab4a6",
       "sourceText": "autoridad",
       "targetText": "власть|авторитет",
@@ -316,6 +436,18 @@
       "isActive": true
     },
     {
+      "id": "41aba544-e306-4c58-bd7f-8d5f002f6692",
+      "sourceText": "azúcar",
+      "targetText": "сахар",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "5acd90ad-8e2a-42d1-82bc-9a52c32ab5ff",
       "sourceText": "azul",
       "targetText": "синий",
@@ -337,6 +469,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Mi bandera es importante.",
       "targetUsageExample": "Мой флаг важен.",
+      "isActive": true
+    },
+    {
+      "id": "86eae5b6-d154-4162-aeac-4a2507f4928c",
+      "sourceText": "barato",
+      "targetText": "дешёвый",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -376,6 +520,30 @@
       "isActive": true
     },
     {
+      "id": "4546c0f2-70df-458f-a06c-884d546c25bc",
+      "sourceText": "bebidas",
+      "targetText": "напитки",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "878f0f80-1a2b-4538-a2a3-622bd1609670",
+      "sourceText": "béisbol",
+      "targetText": "бейсбол",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "77b10024-0b89-4e9e-a282-df9dde72429a",
       "sourceText": "belleza",
       "targetText": "красота",
@@ -385,6 +553,66 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "La belleza de la naturaleza.",
       "targetUsageExample": "Красота природы.",
+      "isActive": true
+    },
+    {
+      "id": "6bb681ce-37b4-41d7-8066-69c0e816352f",
+      "sourceText": "bendiga",
+      "targetText": "благослови",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "cad78d34-b8b6-446a-80b9-e5b10f032c5a",
+      "sourceText": "beth",
+      "targetText": "Бет",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "392e0720-af80-4415-87b9-dfddd2b35988",
+      "sourceText": "big",
+      "targetText": "большой",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "e94a9737-7a39-4a88-956b-e3553b2f2d5a",
+      "sourceText": "bola",
+      "targetText": "шар|мяч",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "0b84621d-ec2b-4583-8d3f-a829cb2a4cac",
+      "sourceText": "bolso",
+      "targetText": "сумка",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -400,6 +628,66 @@
       "isActive": true
     },
     {
+      "id": "d392dacf-1e98-4dec-805c-e4b228d41a32",
+      "sourceText": "bote",
+      "targetText": "лодка|банка",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "96a8eb31-078e-469e-9af5-371603861791",
+      "sourceText": "brad",
+      "targetText": "Брэд",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "11652627-de0a-482f-8c4e-853300d8bc10",
+      "sourceText": "breve",
+      "targetText": "краткий|короткий",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "04ee09ac-0a83-41ab-8489-680c1cbe28d1",
+      "sourceText": "bruja",
+      "targetText": "ведьма",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "47ca9e89-3fa9-416d-bc34-eddbaa011f5b",
+      "sourceText": "buscas",
+      "targetText": "ищешь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "91512dae-ae69-4c6f-98f2-4d12592aaf7c",
       "sourceText": "búsqueda",
       "targetText": "поиск",
@@ -412,6 +700,18 @@
       "isActive": true
     },
     {
+      "id": "8a1c02c2-6f26-4a3c-ad98-1cfd3e0f8c81",
+      "sourceText": "cadáver",
+      "targetText": "труп",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "cb945223-baa7-4300-b75c-8f06b9db2756",
       "sourceText": "cadena",
       "targetText": "цепь|сеть",
@@ -421,6 +721,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Esto es cadena.",
       "targetUsageExample": "Это цепь.",
+      "isActive": true
+    },
+    {
+      "id": "3d4c428d-33b5-4f5d-9629-9602e55f8ac7",
+      "sourceText": "caída",
+      "targetText": "падение",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -460,6 +772,18 @@
       "isActive": true
     },
     {
+      "id": "4a731f73-b3e0-49c2-b705-df2fd41c1bc3",
+      "sourceText": "caos",
+      "targetText": "хаос",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "9ed3400c-9b44-4561-ac21-051352c6f8f8",
       "sourceText": "capítulo",
       "targetText": "глава",
@@ -469,6 +793,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Me gusta capítulo.",
       "targetUsageExample": "Мне нравится глава.",
+      "isActive": true
+    },
+    {
+      "id": "6d1f75a7-503c-4f28-9fb9-a6fbe7b80b46",
+      "sourceText": "caray",
+      "targetText": "чёрт|ого",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -508,6 +844,90 @@
       "isActive": true
     },
     {
+      "id": "3a23a098-7092-468a-95e7-85ba88ca3878",
+      "sourceText": "caro",
+      "targetText": "дорогой",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "e2021838-c46f-4f19-97b2-dc6a72410ebf",
+      "sourceText": "cartera",
+      "targetText": "кошелёк|портфель",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "93dc1617-5d75-4bf6-be37-377943b15c25",
+      "sourceText": "casada",
+      "targetText": "замужем",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "35136244-693e-4dcc-be38-680bebfb671b",
+      "sourceText": "casarte",
+      "targetText": "жениться",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "07f0d086-60b9-4f19-b144-9a48905dde1d",
+      "sourceText": "casey",
+      "targetText": "Кейси",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "4769cdd4-240a-4b2a-8d0a-af1e5cf01e0f",
+      "sourceText": "castillo",
+      "targetText": "замок",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "58de637f-afa0-4f77-b520-cb50dcad8ab0",
+      "sourceText": "catherine",
+      "targetText": "Кэтрин",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "0fad2cce-c8fd-4eb9-8852-6809db2de70b",
       "sourceText": "celular",
       "targetText": "мобильный телефон",
@@ -517,6 +937,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Mi celular es importante.",
       "targetUsageExample": "Мой мобильный телефон важен.",
+      "isActive": true
+    },
+    {
+      "id": "0a603f59-7242-4167-b788-cb72690ea4a3",
+      "sourceText": "cerebral",
+      "targetText": "мозговой",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -532,6 +964,30 @@
       "isActive": true
     },
     {
+      "id": "58c37bac-77ff-475c-a579-1fbd0c63f325",
+      "sourceText": "cheque",
+      "targetText": "чек",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "61485a85-2ffb-4996-a31c-49affb1fcbec",
+      "sourceText": "chloe",
+      "targetText": "Хлоя",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "ca236a71-8605-4a22-a054-e72b0fd635fc",
       "sourceText": "ciencia",
       "targetText": "наука",
@@ -541,6 +997,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "La ciencia es interesante.",
       "targetUsageExample": "Наука интересна.",
+      "isActive": true
+    },
+    {
+      "id": "05cf4d7a-ca08-403f-82db-0c59e7f654a8",
+      "sourceText": "científico",
+      "targetText": "учёный|научный",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -556,6 +1024,30 @@
       "isActive": true
     },
     {
+      "id": "8d253842-e5a7-4b6f-923e-170511dfda71",
+      "sourceText": "cigarrillo",
+      "targetText": "сигарета",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "69a3bc7f-2b47-4e0a-a293-fc8c0f3eeae0",
+      "sourceText": "circo",
+      "targetText": "цирк",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "39716242-35c5-4402-8f37-9b6aa81f7d76",
       "sourceText": "cita",
       "targetText": "свидание",
@@ -565,6 +1057,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Tengo una cita.",
       "targetUsageExample": "У меня свидание.",
+      "isActive": true
+    },
+    {
+      "id": "1ed653ed-c15e-4a49-912f-5b625ba6fb83",
+      "sourceText": "city",
+      "targetText": "город",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -604,6 +1108,18 @@
       "isActive": true
     },
     {
+      "id": "24bf5c18-59e4-48e9-8e0e-22fb5fea4c26",
+      "sourceText": "coartada",
+      "targetText": "алиби",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "99139328-a66f-4e72-a55d-a8e257eeb3ca",
       "sourceText": "coche",
       "targetText": "машина [автомобиль]",
@@ -640,6 +1156,18 @@
       "isActive": true
     },
     {
+      "id": "2d373b2f-fbd8-4e8c-9d89-96bcbc15d3be",
+      "sourceText": "coma",
+      "targetText": "кома|запятая",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "f8b3d5ad-3e37-4063-ab64-7656bb670f5e",
       "sourceText": "comenzar",
       "targetText": "начинать",
@@ -673,6 +1201,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El comienzo de la película es emocionante.",
       "targetUsageExample": "Начало фильма захватывающее.",
+      "isActive": true
+    },
+    {
+      "id": "ab5ad946-a3ec-485f-b4fe-4da564c4f76e",
+      "sourceText": "comité",
+      "targetText": "комитет",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -736,6 +1276,18 @@
       "isActive": true
     },
     {
+      "id": "9194984d-ee84-45de-bc43-105bd68baf3f",
+      "sourceText": "comportamiento",
+      "targetText": "поведение",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "c37e334a-7fb2-4c7f-8e69-c15797ecfcc8",
       "sourceText": "compra",
       "targetText": "покупка",
@@ -772,6 +1324,18 @@
       "isActive": true
     },
     {
+      "id": "d871ee5a-d86e-4a4f-8c0d-8cf0b56971d9",
+      "sourceText": "conexión",
+      "targetText": "связь|соединение",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "5a0ba09a-d6cd-41c5-903e-2324835417ab",
       "sourceText": "conferencia",
       "targetText": "конференция",
@@ -781,6 +1345,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Quiero comprar conferencia.",
       "targetUsageExample": "Я хочу купить конференция.",
+      "isActive": true
+    },
+    {
+      "id": "5edc858f-f952-4e87-8aef-447d7d0d789e",
+      "sourceText": "confesión",
+      "targetText": "признание|исповедь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -856,6 +1432,30 @@
       "isActive": true
     },
     {
+      "id": "55b92deb-d666-4235-a55f-12503bc37878",
+      "sourceText": "cooper",
+      "targetText": "Купер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "5127e1d1-8b44-4884-bc56-19e831ff1d5f",
+      "sourceText": "corona",
+      "targetText": "корона",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "bbc08d89-045e-456d-a980-a66af835cbaf",
       "sourceText": "correcto",
       "targetText": "правильный",
@@ -916,6 +1516,30 @@
       "isActive": true
     },
     {
+      "id": "8b0b8d76-2655-48d7-b39d-f4e320057f1f",
+      "sourceText": "crédito",
+      "targetText": "кредит",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "ae3642ca-1ab5-451f-93d0-be8361ad5705",
+      "sourceText": "criaturas",
+      "targetText": "существа",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "c2b292af-24bf-488d-84a1-af5a8093059e",
       "sourceText": "crimen",
       "targetText": "преступление",
@@ -925,6 +1549,54 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Cometió un crimen.",
       "targetUsageExample": "Он совершил преступление.",
+      "isActive": true
+    },
+    {
+      "id": "d1967c55-8656-4378-9335-f7b404174e25",
+      "sourceText": "cristo",
+      "targetText": "Христос",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "cd3c723e-5b60-4519-980c-97d174b9830d",
+      "sourceText": "cruel",
+      "targetText": "жестокий",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "864796ac-f619-477c-9b60-8d401e2a9635",
+      "sourceText": "cruz",
+      "targetText": "крест",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "e4f754aa-199d-4f30-a7d6-795156d17082",
+      "sourceText": "crystal",
+      "targetText": "Кристал|кристалл",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -988,6 +1660,30 @@
       "isActive": true
     },
     {
+      "id": "3b649fa3-1a06-4efe-a60b-615e8acc48f7",
+      "sourceText": "custodia",
+      "targetText": "опека",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "a5c30803-0048-45ff-89f8-064be64cd2bd",
+      "sourceText": "davis",
+      "targetText": "Дэвис",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "678a8944-f049-4119-b917-673df5a34c99",
       "sourceText": "debajo",
       "targetText": "под",
@@ -997,6 +1693,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El libro está debajo de la mesa.",
       "targetUsageExample": "Книга под столом.",
+      "isActive": true
+    },
+    {
+      "id": "9467a5fd-10c5-464b-8e55-c7bdf14a141f",
+      "sourceText": "debiste",
+      "targetText": "ты должен был",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1012,6 +1720,30 @@
       "isActive": true
     },
     {
+      "id": "da5f0f5b-7750-4e4e-a6b0-de72bef76884",
+      "sourceText": "déjala",
+      "targetText": "оставь её",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "7489fb0f-bc6f-436e-b517-c4e8f2e7157a",
+      "sourceText": "déjenme",
+      "targetText": "оставьте меня",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "b85036bd-bed6-4b78-b5ae-a1aa720a2f25",
       "sourceText": "delante",
       "targetText": "перед",
@@ -1024,6 +1756,18 @@
       "isActive": true
     },
     {
+      "id": "de14a7df-8911-4b75-9743-94b35242cee6",
+      "sourceText": "delito",
+      "targetText": "преступление",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "b747556c-54a7-4bac-a539-a0b627cc8b5a",
       "sourceText": "demanda",
       "targetText": "иск|требование",
@@ -1033,6 +1777,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Necesito demanda.",
       "targetUsageExample": "Мне нужно иск.",
+      "isActive": true
+    },
+    {
+      "id": "2fdee23e-e48a-464e-9257-86883563858b",
+      "sourceText": "deme",
+      "targetText": "дайте мне",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1060,6 +1816,42 @@
       "isActive": true
     },
     {
+      "id": "d3d43ba5-b569-4b19-a1a0-8b80e83ec1aa",
+      "sourceText": "depósito",
+      "targetText": "депозит|склад",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "df61cb39-779f-4eb0-9a0b-b4e2bb3d8931",
+      "sourceText": "derek",
+      "targetText": "Дерек",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "e8c85e4f-73b4-44ef-8dde-6b66325bacf0",
+      "sourceText": "deseas",
+      "targetText": "желаешь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "b97088fc-4234-4da1-b5f5-29206b9d6448",
       "sourceText": "deseo",
       "targetText": "желание",
@@ -1069,6 +1861,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Es mi deseo más grande.",
       "targetUsageExample": "Это моё самое большое желание.",
+      "isActive": true
+    },
+    {
+      "id": "feb5b80a-f014-45af-9108-6af115f9d451",
+      "sourceText": "desierto",
+      "targetText": "пустыня",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1108,6 +1912,42 @@
       "isActive": true
     },
     {
+      "id": "bd8a4fbe-1f57-49fc-9694-67b5465a9b11",
+      "sourceText": "devolver",
+      "targetText": "вернуть",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "a039c8c1-9431-4402-b433-3c85205de434",
+      "sourceText": "diles",
+      "targetText": "скажи им",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "c4e64f6c-adb2-4546-9b4f-5bf700382b6e",
+      "sourceText": "dilo",
+      "targetText": "скажи это",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "3d6a3961-1096-4832-9b8e-6e769c0e775d",
       "sourceText": "directamente",
       "targetText": "прямо, напрямую",
@@ -1144,6 +1984,30 @@
       "isActive": true
     },
     {
+      "id": "0be67011-fe88-4ace-971a-68f769a6d9f8",
+      "sourceText": "discúlpeme",
+      "targetText": "извините меня",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "d5dbc216-0cd8-4b3b-887a-82d56d3d813f",
+      "sourceText": "discurso",
+      "targetText": "речь|выступление",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "9feb4f85-2949-4468-b0fd-e5e99936623a",
       "sourceText": "discusión",
       "targetText": "дискуссия|спор",
@@ -1153,6 +2017,42 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Este discusión es bueno.",
       "targetUsageExample": "Этот дискуссия хороший.",
+      "isActive": true
+    },
+    {
+      "id": "8f8dac01-9b5d-4099-a394-b993108b974e",
+      "sourceText": "díselo",
+      "targetText": "скажи ему",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "ab2722d3-5036-4edd-837e-ec8f40efa1a4",
+      "sourceText": "disfrutar",
+      "targetText": "наслаждаться",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "7afa656e-b890-435c-b5c9-a3230ca4354b",
+      "sourceText": "disparo",
+      "targetText": "выстрел",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1240,6 +2140,18 @@
       "isActive": true
     },
     {
+      "id": "1024fbf6-4e2d-4711-8f22-af6e249c5d83",
+      "sourceText": "doc",
+      "targetText": "доктор",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "666ec860-ec7d-4771-ac75-a2d5772dd75a",
       "sourceText": "doctor",
       "targetText": "врач",
@@ -1264,6 +2176,30 @@
       "isActive": true
     },
     {
+      "id": "3f3914e7-74c4-4342-bb39-dd32c9a08972",
+      "sourceText": "ducha",
+      "targetText": "душ",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "495667f9-15db-4c5b-b454-455db024a252",
+      "sourceText": "duerme",
+      "targetText": "спит|спи",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "69ba75be-2c11-41c4-9c46-20ebeb895175",
       "sourceText": "duro",
       "targetText": "твёрдый",
@@ -1273,6 +2209,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Es muy duro.",
       "targetUsageExample": "Это очень твёрдое.",
+      "isActive": true
+    },
+    {
+      "id": "a63d22e5-08b1-467f-877c-eb1f48436d65",
+      "sourceText": "dylan",
+      "targetText": "Дилан",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1372,6 +2320,30 @@
       "isActive": true
     },
     {
+      "id": "6b7b04f0-e78d-4e33-8f68-7cdf4735d2d8",
+      "sourceText": "enhorabuena",
+      "targetText": "поздравляю",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "02dde1cd-38ac-4f8a-abce-8d5ffe89e3a4",
+      "sourceText": "enojada",
+      "targetText": "сердитая|злая",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "7438b81a-8ac8-4fc2-88fe-b7cdf5dbf8aa",
       "sourceText": "enorme",
       "targetText": "огромный",
@@ -1408,6 +2380,18 @@
       "isActive": true
     },
     {
+      "id": "ec206a0f-e068-4ef9-8ab5-15d8e274552e",
+      "sourceText": "escándalo",
+      "targetText": "скандал",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "223b8d2f-db9a-4ba8-9e95-04a0e06f5feb",
       "sourceText": "escritor",
       "targetText": "писатель",
@@ -1429,6 +2413,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Escucha con atención.",
       "targetUsageExample": "Слушай внимательно.",
+      "isActive": true
+    },
+    {
+      "id": "7ca73c9c-c500-4842-a906-5a72d0be9841",
+      "sourceText": "escuchas",
+      "targetText": "слушаешь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1480,6 +2476,30 @@
       "isActive": true
     },
     {
+      "id": "71249794-4095-49cb-ab81-008a184e1899",
+      "sourceText": "esperas",
+      "targetText": "ждёшь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "e64bd740-eb02-4272-bb3c-6d4191300e8b",
+      "sourceText": "espía",
+      "targetText": "шпион",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "80306513-cf90-4c81-9292-cd799c6ae593",
       "sourceText": "espíritu",
       "targetText": "дух",
@@ -1516,6 +2536,18 @@
       "isActive": true
     },
     {
+      "id": "73ab9102-db24-432d-a39c-b948f574c281",
+      "sourceText": "estómago",
+      "targetText": "желудок|живот",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "07bd857b-ae9a-4ba2-a898-01f5fb17aadb",
       "sourceText": "estrategia",
       "targetText": "стратегия",
@@ -1549,6 +2581,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Necesito estudiar.",
       "targetUsageExample": "Мне нужно учиться.",
+      "isActive": true
+    },
+    {
+      "id": "5b1caf22-00ff-4bd2-b6ec-682b8b971d68",
+      "sourceText": "evento",
+      "targetText": "событие",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1633,6 +2677,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Voy a usar exterior.",
       "targetUsageExample": "Я буду использовать внешний.",
+      "isActive": true
+    },
+    {
+      "id": "04cd3c7b-4862-4ad2-99e9-ebef20648b4e",
+      "sourceText": "extrañas",
+      "targetText": "странные|скучаешь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1732,6 +2788,30 @@
       "isActive": true
     },
     {
+      "id": "7e5ee912-2535-43d3-87c8-e02329de81e9",
+      "sourceText": "frankie",
+      "targetText": "Фрэнки",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "fc5c505f-2d71-4390-9913-92ecf8e8318c",
+      "sourceText": "frecuencia",
+      "targetText": "частота",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "cc4628a8-9b6d-44dc-ac97-467f2eacf970",
       "sourceText": "frontera",
       "targetText": "граница",
@@ -1741,6 +2821,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Esto es frontera.",
       "targetUsageExample": "Это граница.",
+      "isActive": true
+    },
+    {
+      "id": "c0504fbb-5585-4338-8933-72d1636ee7f7",
+      "sourceText": "gasolina",
+      "targetText": "бензин",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1792,6 +2884,30 @@
       "isActive": true
     },
     {
+      "id": "79ce8efe-5c52-4b05-b962-f71c5a7eb291",
+      "sourceText": "golpear",
+      "targetText": "бить|ударить",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "14bddcc5-b966-4fd5-872c-0200078523ca",
+      "sourceText": "gordon",
+      "targetText": "Гордон",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "28d81ecd-e6ab-4319-b996-2c5020895fb5",
       "sourceText": "gracia",
       "targetText": "изящество",
@@ -1813,6 +2929,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "¿Tienes grado?",
       "targetUsageExample": "У тебя есть степень?",
+      "isActive": true
+    },
+    {
+      "id": "1be8dcae-2628-4c7c-8344-12568f24c936",
+      "sourceText": "granja",
+      "targetText": "ферма",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1852,6 +2980,42 @@
       "isActive": true
     },
     {
+      "id": "9285af28-2f37-44e0-87a5-f17b7e109f99",
+      "sourceText": "guau",
+      "targetText": "вау|гав",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "487f2462-f300-4f89-9145-2fe61bbdac2f",
+      "sourceText": "habilidad",
+      "targetText": "умение|навык",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "44113492-db39-434d-b737-74a0305fafbd",
+      "sourceText": "hagámoslo",
+      "targetText": "давай сделаем",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "83f6127a-d37c-4078-86f8-cf78b2d5b282",
       "sourceText": "hambre",
       "targetText": "голод",
@@ -1861,6 +3025,54 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Tengo mucha hambre.",
       "targetUsageExample": "Я очень голоден.",
+      "isActive": true
+    },
+    {
+      "id": "6c718b49-6d37-46f0-8643-cb3836b8d6dc",
+      "sourceText": "hank",
+      "targetText": "Хэнк",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "00cbdf91-9753-4978-abf0-578d7b1c9bbc",
+      "sourceText": "hannah",
+      "targetText": "Ханна",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "2f04c0f2-2138-405a-ac1d-d20527e93192",
+      "sourceText": "harto",
+      "targetText": "сытый по горло",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "1516c195-0f03-4a3d-a8c3-0e464af50c16",
+      "sourceText": "heridas",
+      "targetText": "раны",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1900,6 +3112,18 @@
       "isActive": true
     },
     {
+      "id": "08662cd4-3784-4656-87b8-8ebd4168391d",
+      "sourceText": "hitler",
+      "targetText": "Гитлер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "de4cec49-e5b2-4d2d-80b1-bc3e00140cb4",
       "sourceText": "hogar",
       "targetText": "дом, очаг",
@@ -1909,6 +3133,30 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Es mi hogar.",
       "targetUsageExample": "Это мой дом.",
+      "isActive": true
+    },
+    {
+      "id": "5bfe8cba-c241-42dc-b511-372eb37be1ce",
+      "sourceText": "holmes",
+      "targetText": "Холмс",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "9bdd52dc-8b39-4925-b93e-a954aa5d1cd2",
+      "sourceText": "homicidio",
+      "targetText": "убийство",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1933,6 +3181,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Mi hermana trabaja en el hospital.",
       "targetUsageExample": "Моя сестра работает в больнице.",
+      "isActive": true
+    },
+    {
+      "id": "03e0c548-ee5c-4870-a0e2-08bf634d55b6",
+      "sourceText": "howard",
+      "targetText": "Говард",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1972,6 +3232,18 @@
       "isActive": true
     },
     {
+      "id": "bfec7d54-4b09-4e88-a013-eb0dcf14930d",
+      "sourceText": "imaginación",
+      "targetText": "воображение",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "1ae033eb-a9e7-41f5-95f5-22baa9ed75cd",
       "sourceText": "impacto",
       "targetText": "удар|воздействие",
@@ -1981,6 +3253,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Me gusta impacto.",
       "targetUsageExample": "Мне нравится удар.",
+      "isActive": true
+    },
+    {
+      "id": "aa10eaec-f552-466c-91a5-8cb1406501a4",
+      "sourceText": "imperio",
+      "targetText": "империя",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2068,6 +3352,30 @@
       "isActive": true
     },
     {
+      "id": "41aeca4b-c0c9-4aab-be18-0f88436c3aef",
+      "sourceText": "instituto",
+      "targetText": "институт|школа",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "31cc39ec-467e-4db0-a2e1-42e5b2b7c56c",
+      "sourceText": "inteligencia",
+      "targetText": "разведка|интеллект",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "f0b1ce54-032f-44a3-8a59-d97f3df4f9ec",
       "sourceText": "inteligente",
       "targetText": "умный",
@@ -2101,6 +3409,126 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Voy a intentarlo.",
       "targetUsageExample": "Я попытаюсь.",
+      "isActive": true
+    },
+    {
+      "id": "46736f26-6614-460e-a3c9-f78f07330f4d",
+      "sourceText": "invierno",
+      "targetText": "зима",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "c70ec335-1143-4cd2-99b1-627b115d9823",
+      "sourceText": "invitación",
+      "targetText": "приглашение",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "425d76e1-236d-4c5a-881e-5ed369837d14",
+      "sourceText": "jamie",
+      "targetText": "Джейми",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "d1efa935-6a02-4868-ad92-2403a386046e",
+      "sourceText": "jefa",
+      "targetText": "начальница|босс",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "f1e7e661-44d8-48d5-8bde-cec773c7f660",
+      "sourceText": "jeremy",
+      "targetText": "Джереми",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "540ec33c-ee76-48bc-887f-546d7e92fa12",
+      "sourceText": "jersey",
+      "targetText": "свитер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "f6d401e7-670c-4d1f-86f5-c0a2be850857",
+      "sourceText": "jones",
+      "targetText": "Джонс",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "2c402156-e894-4bc7-bf96-35816baf79c5",
+      "sourceText": "jordan",
+      "targetText": "Джордан",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "e24aaf09-c9dd-44d0-b1a3-d9feba46e085",
+      "sourceText": "joyas",
+      "targetText": "драгоценности",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "3beb4a6d-513c-46d6-837d-565567cbe638",
+      "sourceText": "judío",
+      "targetText": "еврей|еврейский",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2161,6 +3589,66 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Me gusta juventud.",
       "targetUsageExample": "Мне нравится молодёжь.",
+      "isActive": true
+    },
+    {
+      "id": "5e8360c0-dce2-443c-9d5f-4d7b174a7364",
+      "sourceText": "kenny",
+      "targetText": "Кенни",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "7a07cf69-fdd4-4b8b-8a82-08bf01a8ef2a",
+      "sourceText": "king",
+      "targetText": "король",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "3a500393-6885-43ac-b3a0-a6a91e3bb64e",
+      "sourceText": "ladrón",
+      "targetText": "вор",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "09bedf10-a5eb-412c-8a11-74ddda624a86",
+      "sourceText": "lárgate",
+      "targetText": "убирайся",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "1461adb5-6b74-4cd8-948e-5ff5eab5a3da",
+      "sourceText": "lección",
+      "targetText": "урок",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2236,6 +3724,30 @@
       "isActive": true
     },
     {
+      "id": "664e2ca8-4b70-46b4-a306-ccf2658905df",
+      "sourceText": "lewis",
+      "targetText": "Льюис",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "3e502901-71d8-4f99-a07a-91f07afe0db7",
+      "sourceText": "licencia",
+      "targetText": "лицензия|разрешение",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "abf636ad-94d8-4ce3-8adf-a565087b5589",
       "sourceText": "lindo",
       "targetText": "милый|симпатичный|красивый",
@@ -2257,6 +3769,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Ya estoy listo para salir.",
       "targetUsageExample": "Я уже готов выходить.",
+      "isActive": true
+    },
+    {
+      "id": "ab815ce3-15a5-49e4-a57d-889154bcb3e4",
+      "sourceText": "llegada",
+      "targetText": "прибытие",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2284,6 +3808,18 @@
       "isActive": true
     },
     {
+      "id": "93b19bea-5ebc-4c12-bfa6-ca49449a5f3f",
+      "sourceText": "llevé",
+      "targetText": "я отнёс",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "94ea0609-8fe4-4402-ba68-6d41503be5b0",
       "sourceText": "lograr",
       "targetText": "достигать|добиваться",
@@ -2293,6 +3829,30 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "¿Dónde está lograr?",
       "targetUsageExample": "Где достигать?",
+      "isActive": true
+    },
+    {
+      "id": "8726155a-7310-45d5-be8a-9d9df52ba858",
+      "sourceText": "lord",
+      "targetText": "лорд",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "a69493d5-0565-4bb4-b1a6-2d6f32af39b1",
+      "sourceText": "lucas",
+      "targetText": "Лукас",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2332,6 +3892,54 @@
       "isActive": true
     },
     {
+      "id": "222e67ed-2de4-44c9-a027-f9e5339eb08a",
+      "sourceText": "madres",
+      "targetText": "матери",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "94a52dc3-6bf9-4f3b-84ec-a9be58315df1",
+      "sourceText": "maggie",
+      "targetText": "Мэгги",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "3c8d41ef-c8fd-4adc-ba81-1007f3d4d1e5",
+      "sourceText": "mama",
+      "targetText": "мама",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "d8078dee-421a-4f7b-b21b-2c9e9824603d",
+      "sourceText": "man",
+      "targetText": "мужик",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "1d2ad9c0-7215-4c68-b43d-f6f0d1058906",
       "sourceText": "mando",
       "targetText": "приказываю",
@@ -2356,6 +3964,42 @@
       "isActive": true
     },
     {
+      "id": "1a7f1604-caca-4605-8683-278b4832f564",
+      "sourceText": "mantén",
+      "targetText": "держи|сохраняй",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "52bc621c-3864-4914-98a8-671de1a695cf",
+      "sourceText": "maravilla",
+      "targetText": "чудо",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "4e570cf8-cb60-4964-91c3-1c0913cb0cc6",
+      "sourceText": "marcus",
+      "targetText": "Маркус",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "52c1206b-c2a9-4439-913d-227acd2d6fd9",
       "sourceText": "martes",
       "targetText": "вторник",
@@ -2377,6 +4021,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "No mates el tiempo.",
       "targetUsageExample": "Не убивай время.",
+      "isActive": true
+    },
+    {
+      "id": "e58d1e94-9b0a-4a92-b3a0-54291b1df5b3",
+      "sourceText": "mato",
+      "targetText": "убиваю",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2452,6 +4108,66 @@
       "isActive": true
     },
     {
+      "id": "0025510f-5c62-4e6f-9602-9f4bf435578a",
+      "sourceText": "meter",
+      "targetText": "положить|засунуть",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "c396b081-952b-4f0e-a6da-e389e164b1d8",
+      "sourceText": "mia",
+      "targetText": "Миа|моя",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "49275b3d-b1a0-484b-a02a-072af03650ec",
+      "sourceText": "miel",
+      "targetText": "мёд|милая",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "2569cba5-bb17-43db-8156-eef0e252791d",
+      "sourceText": "millas",
+      "targetText": "мили",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "c289135a-4039-49ec-9970-ddade476e515",
+      "sourceText": "miller",
+      "targetText": "Миллер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "33498f34-39d2-40d0-b487-ea943f4e3ae4",
       "sourceText": "mínimo",
       "targetText": "минимальный",
@@ -2488,6 +4204,66 @@
       "isActive": true
     },
     {
+      "id": "ba2e8449-a4e6-4ee8-b46a-1c3271b031da",
+      "sourceText": "miss",
+      "targetText": "мисс",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "d3578404-413a-4854-8752-2315dcac294f",
+      "sourceText": "molly",
+      "targetText": "Молли",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "1f565569-de90-4b7a-b8d5-81fff2ff23d2",
+      "sourceText": "mono",
+      "targetText": "обезьяна|милый",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "b26f5144-34c6-4edf-9f3c-bbd49e13a420",
+      "sourceText": "monsieur",
+      "targetText": "месье",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "8ee248e1-e435-4ca7-9680-f11acde3c040",
+      "sourceText": "montaña",
+      "targetText": "гора",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "be42540b-e51a-4981-9089-541fc38f285b",
       "sourceText": "montón",
       "targetText": "куча, много",
@@ -2512,6 +4288,18 @@
       "isActive": true
     },
     {
+      "id": "09e6b974-6a92-4bd1-8b04-19786a3b57fa",
+      "sourceText": "morgan",
+      "targetText": "Морган",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "6512f60c-2f9b-46d5-9eab-2cf4a618b299",
       "sourceText": "morir",
       "targetText": "умирать",
@@ -2524,6 +4312,30 @@
       "isActive": true
     },
     {
+      "id": "f51f1fec-780a-4584-aac3-aeffb6d5b593",
+      "sourceText": "mortal",
+      "targetText": "смертельный|смертный",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "a8e5f296-347e-42c1-8eb3-cfcef9340b86",
+      "sourceText": "mover",
+      "targetText": "двигать",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "c37d4ac3-267e-4bfc-9abd-c0119d16ed99",
       "sourceText": "móvil",
       "targetText": "мобильный телефон",
@@ -2533,6 +4345,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Perdí mi móvil.",
       "targetUsageExample": "Я потерял мобильный телефон.",
+      "isActive": true
+    },
+    {
+      "id": "c2a121ff-0b1b-403c-a9fe-219cd891b538",
+      "sourceText": "muero",
+      "targetText": "умираю",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2560,6 +4384,18 @@
       "isActive": true
     },
     {
+      "id": "b765eed6-6598-4e79-9b6a-a59ec1ed6ab6",
+      "sourceText": "muévanse",
+      "targetText": "двигайтесь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "834eb0e4-bc16-4910-96bf-c57ae08b152f",
       "sourceText": "museo",
       "targetText": "музей",
@@ -2569,6 +4405,30 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Me gusta museo.",
       "targetUsageExample": "Мне нравится музей.",
+      "isActive": true
+    },
+    {
+      "id": "7ad864d2-7f6a-4488-bd58-2e7b2ba7e84e",
+      "sourceText": "nate",
+      "targetText": "Нейт",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "9e5e3cdb-1033-4d82-8220-a90267f29bdc",
+      "sourceText": "nathan",
+      "targetText": "Натан",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2605,6 +4465,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Su negocio es muy exitoso.",
       "targetUsageExample": "Его бизнес очень успешный.",
+      "isActive": true
+    },
+    {
+      "id": "f5193f6d-fb35-42fb-a062-bf6b7185ee7a",
+      "sourceText": "nina",
+      "targetText": "Нина|девочка",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2656,6 +4528,18 @@
       "isActive": true
     },
     {
+      "id": "0052cdae-36a6-48f6-81c7-442b528a4704",
+      "sourceText": "nubes",
+      "targetText": "облака",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "9d420fd6-0ad5-4ecf-97dd-382f21fa6c71",
       "sourceText": "nueve",
       "targetText": "девять",
@@ -2677,6 +4561,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Quiero obtener resultados.",
       "targetUsageExample": "Я хочу получить результаты.",
+      "isActive": true
+    },
+    {
+      "id": "f9170a4f-637b-41b1-81eb-dd3780c8da1c",
+      "sourceText": "ocasión",
+      "targetText": "случай|повод",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2716,6 +4612,18 @@
       "isActive": true
     },
     {
+      "id": "5bd9c453-6a31-4fe5-9afa-f178c91dfbc4",
+      "sourceText": "oficiales",
+      "targetText": "офицеры|официальные",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "242cf881-8656-4236-b31e-489c359c58e8",
       "sourceText": "ofrecer",
       "targetText": "предлагать|предоставлять",
@@ -2740,6 +4648,42 @@
       "isActive": true
     },
     {
+      "id": "022430e7-1440-44e1-8bd9-9cb54bbbba16",
+      "sourceText": "oliver",
+      "targetText": "Оливер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "e63992d1-2f41-4a19-acb2-b025596a2e2f",
+      "sourceText": "olvidar",
+      "targetText": "забывать",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "96a6d884-ec67-4580-97f0-5ff965448da5",
+      "sourceText": "olvides",
+      "targetText": "забудь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "74def206-7f8b-496b-b80f-3229763fb71e",
       "sourceText": "opción",
       "targetText": "вариант",
@@ -2749,6 +4693,42 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "No tengo otra opción.",
       "targetUsageExample": "У меня нет другого выбора.",
+      "isActive": true
+    },
+    {
+      "id": "81b37ccb-305b-45b3-9bc6-183f67acc369",
+      "sourceText": "opinas",
+      "targetText": "думаешь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "b053c666-7901-4a94-8f07-92a24b01dddc",
+      "sourceText": "paciencia",
+      "targetText": "терпение",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "cc185bd4-792a-4620-83c0-f96c87e87c7d",
+      "sourceText": "pagaré",
+      "targetText": "заплачу",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2776,6 +4756,18 @@
       "isActive": true
     },
     {
+      "id": "f82e0699-4bbb-4962-81b5-a988ed4e03aa",
+      "sourceText": "palo",
+      "targetText": "палка",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "fbbac340-60c6-4585-a38d-3cf775e85663",
       "sourceText": "pan",
       "targetText": "хлеб",
@@ -2785,6 +4777,30 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Pan fresco.",
       "targetUsageExample": "Свежий хлеб.",
+      "isActive": true
+    },
+    {
+      "id": "c757e382-b66c-406a-be2f-3d981f5df6d9",
+      "sourceText": "pánico",
+      "targetText": "паника",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "06d8f497-51d0-4561-af11-6ab7c1191bf3",
+      "sourceText": "pantalla",
+      "targetText": "экран",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2809,6 +4825,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Es una linda pareja.",
       "targetUsageExample": "Красивая пара.",
+      "isActive": true
+    },
+    {
+      "id": "56094609-3248-4d16-a9dd-e941bcbb5a58",
+      "sourceText": "parker",
+      "targetText": "Паркер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2848,6 +4876,54 @@
       "isActive": true
     },
     {
+      "id": "6cbc183b-dacf-4f82-93c1-fb9a75cf5146",
+      "sourceText": "partida",
+      "targetText": "отъезд|партия",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "d25da610-82b2-49ad-8811-b2305cf3e194",
+      "sourceText": "pastillas",
+      "targetText": "таблетки",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "626c9d7c-dde9-4b1f-a0f7-fb2665c1dd9c",
+      "sourceText": "patrón",
+      "targetText": "босс|шаблон",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "77f0b65d-b4ac-43ce-97e3-2f860a38a652",
+      "sourceText": "peces",
+      "targetText": "рыбы",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "e3446edb-68b8-4eb6-8946-0a42cf0d0942",
       "sourceText": "pedir",
       "targetText": "просить",
@@ -2881,6 +4957,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Tiene el pelo largo y negro.",
       "targetUsageExample": "У неё длинные чёрные волосы.",
+      "isActive": true
+    },
+    {
+      "id": "d7a5d65a-4b20-48e6-b552-111961b701fa",
+      "sourceText": "pelota",
+      "targetText": "мяч",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3004,6 +5092,18 @@
       "isActive": true
     },
     {
+      "id": "701b195d-e1d8-427d-9962-e36c128c5c5f",
+      "sourceText": "piedras",
+      "targetText": "камни",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "c076c8c1-86bd-4402-95c8-541088599f6b",
       "sourceText": "piel",
       "targetText": "кожа",
@@ -3013,6 +5113,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Tiene la piel suave.",
       "targetUsageExample": "У неё мягкая кожа.",
+      "isActive": true
+    },
+    {
+      "id": "676768d9-5b32-4a01-8806-79fc7cb9f744",
+      "sourceText": "piscina",
+      "targetText": "бассейн",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3040,6 +5152,18 @@
       "isActive": true
     },
     {
+      "id": "1ad527bc-83e7-493c-b8a7-3615590c61c9",
+      "sourceText": "plato",
+      "targetText": "тарелка|блюдо",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "4de125c1-1be0-4f03-ba2d-6423b955374a",
       "sourceText": "plazo",
       "targetText": "срок|период",
@@ -3049,6 +5173,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Mi plazo es importante.",
       "targetUsageExample": "Мой срок важен.",
+      "isActive": true
+    },
+    {
+      "id": "e7874b39-2256-4972-a404-cfb3db2474a1",
+      "sourceText": "poquito",
+      "targetText": "немножко",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3085,6 +5221,30 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Mi precisamente es importante.",
       "targetUsageExample": "Мой именно важен.",
+      "isActive": true
+    },
+    {
+      "id": "26065bf2-2c5f-41b2-90ad-3e85c856ed7d",
+      "sourceText": "preparados",
+      "targetText": "готовы",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "9f4ec1b3-9121-4613-8132-47e79d62c5a0",
+      "sourceText": "presentación",
+      "targetText": "презентация",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3172,6 +5332,18 @@
       "isActive": true
     },
     {
+      "id": "696eabef-9fb0-458f-a53f-3cea71da00fb",
+      "sourceText": "protección",
+      "targetText": "защита",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "771eb84a-c6b7-42ea-8632-58d057618c6b",
       "sourceText": "próximo",
       "targetText": "следующий",
@@ -3208,6 +5380,54 @@
       "isActive": true
     },
     {
+      "id": "6ad01101-0ea7-4188-8379-7287b141d78f",
+      "sourceText": "pulso",
+      "targetText": "пульс",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "7a1c14b4-29df-4730-84e5-eb001e90e297",
+      "sourceText": "putas",
+      "targetText": "шлюхи",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "5d7665e8-baf5-4822-ad92-2a919b171dd5",
+      "sourceText": "quedes",
+      "targetText": "останься",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "c08598bc-23df-4c4b-8acc-2298e7060c73",
+      "sourceText": "quédese",
+      "targetText": "останьтесь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "0401c443-7921-40bb-88be-027d9b1c0e37",
       "sourceText": "querido",
       "targetText": "дорогой",
@@ -3241,6 +5461,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El rápidamente está aquí.",
       "targetUsageExample": "Объект быстро здесь.",
+      "isActive": true
+    },
+    {
+      "id": "ab52d488-1011-461b-b827-98269aba3b2f",
+      "sourceText": "rastro",
+      "targetText": "след",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3292,6 +5524,18 @@
       "isActive": true
     },
     {
+      "id": "0c95d160-2e46-4572-a467-8e71c3c8a1b5",
+      "sourceText": "recibo",
+      "targetText": "получаю|квитанция",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "313af996-5190-4036-866b-67aa82a77bb3",
       "sourceText": "recién",
       "targetText": "недавно|только что",
@@ -3313,6 +5557,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Este reconocimiento es bueno.",
       "targetUsageExample": "Этот признание хороший.",
+      "isActive": true
+    },
+    {
+      "id": "96ed3b85-f12c-4d0d-bbff-06534ac90593",
+      "sourceText": "refiere",
+      "targetText": "имеет в виду",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3340,6 +5596,18 @@
       "isActive": true
     },
     {
+      "id": "4f7f14b4-726c-416a-a5fe-b39373b68e3e",
+      "sourceText": "regrese",
+      "targetText": "вернитесь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "f20af938-a217-466c-8d4b-dbba2cbe7dd1",
       "sourceText": "regreso",
       "targetText": "возвращение",
@@ -3364,6 +5632,30 @@
       "isActive": true
     },
     {
+      "id": "33d8c48c-0877-4351-9190-171813b0dca4",
+      "sourceText": "reino",
+      "targetText": "королевство",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "8362199b-599b-4b11-b6a4-b7054869dc16",
+      "sourceText": "relájate",
+      "targetText": "расслабься",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "ea8b5d01-6538-4f63-b7d8-c6fef543fd9f",
       "sourceText": "representar",
       "targetText": "представлять",
@@ -3373,6 +5665,30 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Mi representar es importante.",
       "targetUsageExample": "Мой представлять важен.",
+      "isActive": true
+    },
+    {
+      "id": "77310177-595b-4f0f-adeb-1e050bb3d542",
+      "sourceText": "reputación",
+      "targetText": "репутация",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "6fcec850-cffa-4dd0-966a-c13921941cea",
+      "sourceText": "reserva",
+      "targetText": "резерв|бронь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3448,6 +5764,18 @@
       "isActive": true
     },
     {
+      "id": "12a140d2-c96c-4e1a-9910-95674092c631",
+      "sourceText": "reto",
+      "targetText": "вызов|спор",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "61b8d5c5-c273-4c3a-80d1-a9f6e483218e",
       "sourceText": "revista",
       "targetText": "журнал",
@@ -3457,6 +5785,90 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Este revista es bueno.",
       "targetUsageExample": "Этот журнал хороший.",
+      "isActive": true
+    },
+    {
+      "id": "f845b8fa-60b7-44a9-9046-a4535c444dde",
+      "sourceText": "ricky",
+      "targetText": "Рики",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "3b9d07a4-0cfe-4c30-a3f3-2ef60e89edd8",
+      "sourceText": "ritmo",
+      "targetText": "ритм",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "5700bbba-11c0-4b86-a532-27fdb883e391",
+      "sourceText": "roca",
+      "targetText": "скала|камень",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "f666816d-29f6-4277-9234-466a148179e7",
+      "sourceText": "ronda",
+      "targetText": "обход|раунд",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "0b74a27a-ac40-4ab1-b77d-41e7883daff9",
+      "sourceText": "roy",
+      "targetText": "Рой",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "3d9f3945-10f5-4b8f-989e-809983c5f9d2",
+      "sourceText": "ruta",
+      "targetText": "маршрут|путь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "9628ba35-a317-43a9-9a1b-e9d4266c3069",
+      "sourceText": "s.",
+      "targetText": "св.",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3496,6 +5908,18 @@
       "isActive": true
     },
     {
+      "id": "fd1617af-00e7-4997-8908-6a18b2278a48",
+      "sourceText": "salto",
+      "targetText": "прыжок",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "5003ca6b-3499-40a9-b20b-12b2e3121e1a",
       "sourceText": "saludo",
       "targetText": "приветствие",
@@ -3529,6 +5953,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El sección está aquí.",
       "targetUsageExample": "Объект секция здесь.",
+      "isActive": true
+    },
+    {
+      "id": "9b4a8594-f599-42bc-843b-72ac2c2c6bf7",
+      "sourceText": "secretaria",
+      "targetText": "секретарь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3652,6 +6088,18 @@
       "isActive": true
     },
     {
+      "id": "ecbd537a-ae96-49d3-8b19-450e5cbdbe7f",
+      "sourceText": "shawn",
+      "targetText": "Шон",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "a36ff9c4-a5e1-4b50-999d-56a287bc269e",
       "sourceText": "silencio",
       "targetText": "тишина",
@@ -3661,6 +6109,42 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Hay silencio.",
       "targetUsageExample": "Тишина.",
+      "isActive": true
+    },
+    {
+      "id": "0523f49c-f078-4bf3-b4d6-6e28983be598",
+      "sourceText": "smith",
+      "targetText": "Смит",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "b2240658-9e93-4993-8097-96d270cb5939",
+      "sourceText": "socio",
+      "targetText": "партнёр|компаньон",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "9d3cc81b-e7c6-418b-bb58-a8f8690d0a9a",
+      "sourceText": "sofá",
+      "targetText": "диван",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3700,6 +6184,30 @@
       "isActive": true
     },
     {
+      "id": "a97cda6b-8fb0-4f06-aa08-b16fd472c9e6",
+      "sourceText": "sonrisa",
+      "targetText": "улыбка",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "1b5bd4ec-6262-489e-8381-3128e8ef9a2b",
+      "sourceText": "sopa",
+      "targetText": "суп",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "65876103-fb2f-497c-8ff5-ffca5fa2d082",
       "sourceText": "sorpresa",
       "targetText": "сюрприз",
@@ -3709,6 +6217,42 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Tengo una sorpresa.",
       "targetUsageExample": "У меня есть сюрприз.",
+      "isActive": true
+    },
+    {
+      "id": "d842a2c3-c8b7-4572-a2b7-5ecc1b7e9092",
+      "sourceText": "sótano",
+      "targetText": "подвал",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "ee058cbb-5ead-459f-a8fc-54054698b0e3",
+      "sourceText": "stephen",
+      "targetText": "Стивен",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "5258ddba-fe8c-448a-9dd0-d0d9493884f1",
+      "sourceText": "street",
+      "targetText": "улица",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3733,6 +6277,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Esto sucede.",
       "targetUsageExample": "Это случается.",
+      "isActive": true
+    },
+    {
+      "id": "28255588-fbd2-46a1-a751-aaaddd62c011",
+      "sourceText": "sudo",
+      "targetText": "потею",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3772,6 +6328,66 @@
       "isActive": true
     },
     {
+      "id": "5cc335b8-38d4-470b-bb89-3bcc4c9d7f3b",
+      "sourceText": "sufrimiento",
+      "targetText": "страдание",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "87afe6c2-5e21-45bb-8736-70353e766a45",
+      "sourceText": "suicidio",
+      "targetText": "самоубийство",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "fa8d1180-b3e0-4c67-b4a4-2bb70366650b",
+      "sourceText": "sujeto",
+      "targetText": "субъект|тип",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "d45519e9-6862-478a-aa48-b25e2eb25f48",
+      "sourceText": "super",
+      "targetText": "супер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "dc04ba5f-373d-4991-9434-b198a99ed67a",
+      "sourceText": "súper",
+      "targetText": "супер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "efacf098-c9f3-4e86-b052-a09f007bd14c",
       "sourceText": "superficie",
       "targetText": "поверхность",
@@ -3808,6 +6424,18 @@
       "isActive": true
     },
     {
+      "id": "69e6d941-de00-478f-a267-78f39733ece5",
+      "sourceText": "tanque",
+      "targetText": "танк|бак",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "943658ac-51e0-42e8-b530-b0bfed0ba6ba",
       "sourceText": "tarea",
       "targetText": "задание|домашняя работа",
@@ -3832,6 +6460,18 @@
       "isActive": true
     },
     {
+      "id": "80858e60-87f1-4f0b-8623-a92099083986",
+      "sourceText": "taylor",
+      "targetText": "Тейлор",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "48dbcd20-c0cf-404a-b526-ae37ef621674",
       "sourceText": "tecnología",
       "targetText": "технология",
@@ -3841,6 +6481,30 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Quiero comprar tecnología.",
       "targetUsageExample": "Я хочу купить технология.",
+      "isActive": true
+    },
+    {
+      "id": "90545d45-a3be-4293-9f56-d15bfdedf9be",
+      "sourceText": "tele",
+      "targetText": "телевизор",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "b40a9f34-1d93-486a-9776-8ca6f227dd34",
+      "sourceText": "templo",
+      "targetText": "храм",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3892,6 +6556,18 @@
       "isActive": true
     },
     {
+      "id": "57214062-2caf-4cdd-b053-b600454ac896",
+      "sourceText": "terminé",
+      "targetText": "я закончил",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "05461434-04e8-4ce6-bc8c-36adc5d2d73f",
       "sourceText": "término",
       "targetText": "термин|конец",
@@ -3928,6 +6604,30 @@
       "isActive": true
     },
     {
+      "id": "a54f12fa-926c-409c-8483-c301d23ab671",
+      "sourceText": "tesoro",
+      "targetText": "сокровище",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "5c9c8c4b-45c3-489e-b2b8-c14fe52c9eda",
+      "sourceText": "that",
+      "targetText": "тот|это",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "c77890eb-4555-4b6d-88e1-ac3046a2355d",
       "sourceText": "tienda",
       "targetText": "магазин",
@@ -3937,6 +6637,42 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "La tienda está cerrada.",
       "targetUsageExample": "Магазин закрыт.",
+      "isActive": true
+    },
+    {
+      "id": "b4131b2b-90ef-458c-87f9-3b562e68a5b2",
+      "sourceText": "tina",
+      "targetText": "Тина|ванна",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "ce86d0a3-02f5-4fd2-ab3d-b141a6929ee0",
+      "sourceText": "tíos",
+      "targetText": "дяди|ребята",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "37c89b6d-555d-4f1c-90b5-8e6de3be1ed3",
+      "sourceText": "toby",
+      "targetText": "Тоби",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3952,6 +6688,42 @@
       "isActive": true
     },
     {
+      "id": "1d9e4a73-ea6d-42b9-b558-dc8a261ce02e",
+      "sourceText": "todd",
+      "targetText": "Тодд",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "54375e66-0e75-4d29-911c-109a29eecfae",
+      "sourceText": "tomas",
+      "targetText": "пьёшь|берёшь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "c4114baf-ad18-4f42-8f11-28c81914e435",
+      "sourceText": "tontería",
+      "targetText": "глупость",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "c29d2c12-aafc-4111-b7c2-a3b8432e053b",
       "sourceText": "tradición",
       "targetText": "традиция",
@@ -3961,6 +6733,54 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Este tradición es bueno.",
       "targetUsageExample": "Этот традиция хороший.",
+      "isActive": true
+    },
+    {
+      "id": "e8032512-5412-4195-a9c7-85cc0e69878b",
+      "sourceText": "tráfico",
+      "targetText": "трафик|движение",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "5b23d0ac-daf9-405f-b20c-739aa48e1150",
+      "sourceText": "traidor",
+      "targetText": "предатель",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "97b5a0ea-d386-4a6c-b341-6928f2d89787",
+      "sourceText": "traigo",
+      "targetText": "несу|приношу",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "ee1a6be9-06fd-43d6-8310-678d8ac8f726",
+      "sourceText": "trajiste",
+      "targetText": "ты принёс",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4012,6 +6832,18 @@
       "isActive": true
     },
     {
+      "id": "470263c7-1b3f-404a-97f6-8c8bb19ab86f",
+      "sourceText": "tripulación",
+      "targetText": "экипаж",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "fe47d218-e684-4007-a964-1e19fd3c9c90",
       "sourceText": "triste",
       "targetText": "грустный",
@@ -4024,6 +6856,30 @@
       "isActive": true
     },
     {
+      "id": "7efe479d-d6be-4904-9e52-1d0307aced23",
+      "sourceText": "tropas",
+      "targetText": "войска",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "62cbaa09-c5fd-4d68-a89d-38781f498836",
+      "sourceText": "trozo",
+      "targetText": "кусок",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "26f3f214-c62a-4a14-9fd7-ac1557b5b871",
       "sourceText": "truco",
       "targetText": "трюк",
@@ -4033,6 +6889,42 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Es un truco de magia.",
       "targetUsageExample": "Это фокус.",
+      "isActive": true
+    },
+    {
+      "id": "3ec496f6-62fe-4833-bcf2-81fccbbe1b31",
+      "sourceText": "túnel",
+      "targetText": "туннель",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "03f1c4f5-756c-4519-9491-e361d875b8f7",
+      "sourceText": "tyler",
+      "targetText": "Тайлер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "64399166-5f1e-4cc2-9c91-0c56247e44c6",
+      "sourceText": "uñas",
+      "targetText": "ногти",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4096,6 +6988,42 @@
       "isActive": true
     },
     {
+      "id": "6265509d-d682-4ca0-a566-c3f367270bc0",
+      "sourceText": "váyanse",
+      "targetText": "уходите",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "1759e07d-8352-4c68-9c4c-31f9b891d40b",
+      "sourceText": "vd.",
+      "targetText": "вы (уваж.)",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "38bd521a-a393-427d-a505-455681f69e62",
+      "sourceText": "vecindario",
+      "targetText": "район|соседство",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "7ade6ec1-9b08-44e2-8e5c-d0f2b0221f3e",
       "sourceText": "vecino",
       "targetText": "сосед",
@@ -4120,6 +7048,18 @@
       "isActive": true
     },
     {
+      "id": "4ef4558f-1df0-4d6a-818d-ac3c4d7b52d8",
+      "sourceText": "vende",
+      "targetText": "продаёт",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "0c91b492-43c2-4a07-8914-0b5ce25a41e3",
       "sourceText": "venta",
       "targetText": "продажа",
@@ -4129,6 +7069,30 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Necesito venta.",
       "targetUsageExample": "Мне нужно продажа.",
+      "isActive": true
+    },
+    {
+      "id": "fb392f26-90b1-4d15-845c-a1645b5eb173",
+      "sourceText": "ventaja",
+      "targetText": "преимущество",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "7e74bc4e-e919-4075-a668-62a7983995f1",
+      "sourceText": "ventanas",
+      "targetText": "окна",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4168,6 +7132,18 @@
       "isActive": true
     },
     {
+      "id": "f18e5dcc-94a5-42d2-b937-7504d54438dd",
+      "sourceText": "vía",
+      "targetText": "путь|через",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "4f3b25c8-6360-4066-a203-18701c0982f0",
       "sourceText": "víctima",
       "targetText": "жертва",
@@ -4204,6 +7180,18 @@
       "isActive": true
     },
     {
+      "id": "02679738-ace5-4704-878d-ea89645ad9dd",
+      "sourceText": "vinimos",
+      "targetText": "мы пришли",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "2612297b-34bb-4cd1-931c-5eb519ba8cfc",
       "sourceText": "visión",
       "targetText": "зрение|видение",
@@ -4228,6 +7216,18 @@
       "isActive": true
     },
     {
+      "id": "5476899c-67cd-427d-9817-7c25f5119af4",
+      "sourceText": "volverás",
+      "targetText": "вернёшься",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "2b030ec8-3a84-41af-92da-a0177ae69226",
       "sourceText": "votar",
       "targetText": "голосовать",
@@ -4249,6 +7249,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Quiero comprar voto.",
       "targetUsageExample": "Я хочу купить голос.",
+      "isActive": true
+    },
+    {
+      "id": "873ac75a-24c2-4e88-a06c-c9b95296caaa",
+      "sourceText": "zorra",
+      "targetText": "лиса|сука",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     }
   ]

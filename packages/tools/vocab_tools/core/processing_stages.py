@@ -253,13 +253,11 @@ class NLPAnalysisStage(ProcessingStage):
             return context
 
         if context.pos_tag == "PROPN":
-            # Only filter low-frequency proper nouns; keep common words like "a", "y", "mi"
-            if self.ner_frequency_threshold is not None and context.frequency < self.ner_frequency_threshold:
-                context.should_filter = True
-                context.filter_stage = self.name
-                context.filter_reason = "proper_noun"
-                return context
-            # High-frequency PROPN - likely misclassified, keep it
+            # Filter ALL proper nouns - they are names, not vocabulary
+            # Only exception: words explicitly in ner_whitelist (checked above)
+            context.should_filter = True
+            context.filter_stage = self.name
+            context.filter_reason = "proper_noun"
             return context
 
         if (
@@ -297,12 +295,11 @@ class NLPAnalysisStage(ProcessingStage):
                 continue
 
             if context.pos_tag == "PROPN":
-                # Only filter low-frequency proper nouns; keep common words like "a", "y", "mi"
-                if self.ner_frequency_threshold is not None and context.frequency < self.ner_frequency_threshold:
-                    context.should_filter = True
-                    context.filter_stage = self.name
-                    context.filter_reason = "proper_noun"
-                # High-frequency PROPN - likely misclassified, keep it
+                # Filter ALL proper nouns - they are names, not vocabulary
+                # Only exception: words explicitly in ner_whitelist (checked above)
+                context.should_filter = True
+                context.filter_stage = self.name
+                context.filter_reason = "proper_noun"
                 continue
 
             if (

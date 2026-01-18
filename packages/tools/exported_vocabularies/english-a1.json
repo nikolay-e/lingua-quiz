@@ -1,7 +1,7 @@
 {
   "listName": "English Russian A1",
-  "exportedAt": "2026-01-16T23:31:07.387305+00:00",
-  "totalWords": 858,
+  "exportedAt": "2026-01-18T20:40:47.188476+00:00",
+  "totalWords": 928,
   "words": [
     {
       "id": "68cbde9f-5cdd-4daf-bc0a-07079052eff9",
@@ -40,15 +40,15 @@
       "isActive": true
     },
     {
-      "id": "69d09895-cf81-4f02-af4d-e49d24e05d7b",
-      "sourceText": "absolutely",
-      "targetText": "абсолютно|совершенно",
+      "id": "e41a752c-062d-4ab5-b03a-5d33a74af671",
+      "sourceText": "accept",
+      "targetText": "принимать",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Absolutely right!",
-      "targetUsageExample": "Абсолютно верно!",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -100,15 +100,15 @@
       "isActive": true
     },
     {
-      "id": "b12b73d9-c106-477a-932f-7591ad9c5ca7",
-      "sourceText": "action",
-      "targetText": "действие",
+      "id": "fb459704-c2f1-4c15-b235-60cacd19ff1d",
+      "sourceText": "acting",
+      "targetText": "игра|актёрское мастерство",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "The action starts now.",
-      "targetUsageExample": "Действие начинается сейчас.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -136,6 +136,18 @@
       "isActive": true
     },
     {
+      "id": "099891b0-e84c-482e-bda6-f84aa9662604",
+      "sourceText": "admit",
+      "targetText": "признавать|допускать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "fc5e6cdd-911f-43d2-aaba-49bcd8d6476e",
       "sourceText": "afraid",
       "targetText": "боящийся|испуганный",
@@ -157,6 +169,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "We will go after lunch.",
       "targetUsageExample": "Мы пойдем после обеда.",
+      "isActive": true
+    },
+    {
+      "id": "1453a4a7-90d7-4795-b180-e65f75732a3d",
+      "sourceText": "afternoon",
+      "targetText": "день|после полудня",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -191,20 +215,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "How old are you?",
-      "targetUsageExample": "Сколько тебе лет?",
-      "isActive": true
-    },
-    {
-      "id": "6fb59219-727b-4a94-a64e-3941f358d612",
-      "sourceText": "agent",
-      "targetText": "агент|представитель",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "He is an agent.",
-      "targetUsageExample": "Он агент.",
+      "sourceUsageExample": "What is your age?",
+      "targetUsageExample": "Какой у тебя возраст?",
       "isActive": true
     },
     {
@@ -240,7 +252,7 @@
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Go ahead.",
-      "targetUsageExample": "Давай.|Продолжай.",
+      "targetUsageExample": "Проходите.",
       "isActive": true
     },
     {
@@ -532,15 +544,39 @@
       "isActive": true
     },
     {
-      "id": "a04d38dd-a55c-4936-a4c4-487708220270",
-      "sourceText": "apartment",
-      "targetText": "квартира",
+      "id": "0fc49f2c-465c-4228-8637-edf4c9297c2b",
+      "sourceText": "apart",
+      "targetText": "отдельно|врозь",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "I live in an apartment.",
-      "targetUsageExample": "Я живу в квартире.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "83533996-ccba-4458-bc69-a4809045ed7c",
+      "sourceText": "apparently",
+      "targetText": "видимо|очевидно",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "ad6dcf34-8eed-43d5-805c-cac48e9d9d71",
+      "sourceText": "appreciate",
+      "targetText": "ценить|быть благодарным",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -558,7 +594,7 @@
     {
       "id": "ca3aa297-fb98-4448-84be-54d286f095d7",
       "sourceText": "arm",
-      "targetText": "рука (от плеча до запястья)",
+      "targetText": "рука [от плеча до кисти]",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -796,18 +832,6 @@
       "isActive": true
     },
     {
-      "id": "aa2ef689-0317-4244-9a5e-17922902e8f4",
-      "sourceText": "based",
-      "targetText": "основанный|основываясь",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "The movie is based on a true story.",
-      "targetUsageExample": "Фильм основан на реальных событиях.",
-      "isActive": true
-    },
-    {
       "id": "72425b9e-e06d-4e8c-af56-64715d7d18b4",
       "sourceText": "bathroom",
       "targetText": "ванная [комната]|туалет",
@@ -820,6 +844,18 @@
       "isActive": true
     },
     {
+      "id": "5b91a7cb-0c3c-4ccd-ab85-913d1f67fa82",
+      "sourceText": "battle",
+      "targetText": "битва|сражение",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "9b046c43-f444-43a7-b639-989b6511ef63",
       "sourceText": "be",
       "targetText": "быть|являться",
@@ -829,6 +865,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I want to be a doctor.",
       "targetUsageExample": "Я хочу быть врачом.",
+      "isActive": true
+    },
+    {
+      "id": "a358f080-4322-4d16-a20d-343015a6d855",
+      "sourceText": "beach",
+      "targetText": "пляж",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -964,6 +1012,18 @@
       "isActive": true
     },
     {
+      "id": "c4abf649-88e1-4011-be85-6db12cc950a5",
+      "sourceText": "besides",
+      "targetText": "кроме того|помимо",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "47c9f9ae-547c-4242-ba1c-e865d46b2d8e",
       "sourceText": "best",
       "targetText": "лучший|наилучший",
@@ -1002,7 +1062,7 @@
     {
       "id": "5d692cb0-ab90-4789-a2e8-ba2cc2d30ff9",
       "sourceText": "bill",
-      "targetText": "счёт|купюра",
+      "targetText": "счёт",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -1057,6 +1117,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I have a black cat.",
       "targetUsageExample": "У меня черная кошка.",
+      "isActive": true
+    },
+    {
+      "id": "ca7189fa-ece6-4477-8676-4487592bc2c9",
+      "sourceText": "blame",
+      "targetText": "винить|вина",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1156,18 +1228,6 @@
       "isActive": true
     },
     {
-      "id": "ef8a2bfe-87aa-4e42-ab5a-ed279cbb5f12",
-      "sourceText": "boss",
-      "targetText": "босс|начальник|шеф",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "My boss is kind.",
-      "targetUsageExample": "Мой босс добрый.",
-      "isActive": true
-    },
-    {
       "id": "c1945d8b-7feb-4410-8b58-2cb9bf02ad08",
       "sourceText": "both",
       "targetText": "оба|обе",
@@ -1177,6 +1237,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I like both of them.",
       "targetUsageExample": "Мне нравятся оба.",
+      "isActive": true
+    },
+    {
+      "id": "23b450ba-8d91-4d90-8427-8576226f1f40",
+      "sourceText": "bother",
+      "targetText": "беспокоить|надоедать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1211,14 +1283,14 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "The boy is running.",
-      "targetUsageExample": "Мальчик бежит.",
+      "sourceUsageExample": "He is a young boy.",
+      "targetUsageExample": "Он молодой мальчик.",
       "isActive": true
     },
     {
       "id": "971208f6-2359-4900-8d5b-22b168c80cd1",
       "sourceText": "boyfriend",
-      "targetText": "парень (в отношениях)|бойфренд",
+      "targetText": "парень",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -1290,7 +1362,7 @@
     {
       "id": "43eb5643-a508-4abd-bf35-41bc860d3577",
       "sourceText": "brown",
-      "targetText": "коричневый; карий (для глаз); каштановый (для волос)",
+      "targetText": "коричневый",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -1321,6 +1393,30 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "This is a tall building.",
       "targetUsageExample": "Это высокое здание.",
+      "isActive": true
+    },
+    {
+      "id": "e4e0fd03-e244-42c4-a6d9-cb60855f636a",
+      "sourceText": "bunch",
+      "targetText": "куча|связка",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "9bcdd559-995f-4c57-ab72-c6708bea15e3",
+      "sourceText": "burn",
+      "targetText": "гореть|жечь",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1408,18 +1504,6 @@
       "isActive": true
     },
     {
-      "id": "3f5e10e6-9db6-446b-9189-fd67b8358f70",
-      "sourceText": "calling",
-      "targetText": "призвание|звонок|зовущий",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Someone is calling.",
-      "targetUsageExample": "Кто-то звонит.",
-      "isActive": false
-    },
-    {
       "id": "8fd75f46-a63f-4b66-8077-4c07ad547454",
       "sourceText": "calm",
       "targetText": "спокойный|спокойствие|успокаивать",
@@ -1441,30 +1525,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I can swim.",
       "targetUsageExample": "Я умею плавать.",
-      "isActive": true
-    },
-    {
-      "id": "7e5d473e-8f65-40f8-96bd-12f5ea129673",
-      "sourceText": "cannot",
-      "targetText": "не мочь",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I cannot come to the party.",
-      "targetUsageExample": "Я не могу прийти на вечеринку.",
-      "isActive": true
-    },
-    {
-      "id": "4d7f34cf-faed-40f5-9855-4b28faf1d669",
-      "sourceText": "captain",
-      "targetText": "капитан",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Yes, captain.",
-      "targetUsageExample": "Да, капитан.",
       "isActive": true
     },
     {
@@ -1525,6 +1585,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "In that case, we should leave.",
       "targetUsageExample": "В таком случае, нам следует уйти.",
+      "isActive": true
+    },
+    {
+      "id": "9be50ac0-ff5f-40b5-9c0a-bca91ee29442",
+      "sourceText": "cash",
+      "targetText": "наличные|деньги",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1602,7 +1674,7 @@
     {
       "id": "93ccf38e-fe34-4263-982d-5cab767965a1",
       "sourceText": "change",
-      "targetText": "менять|изменять|изменение|сдача",
+      "targetText": "(менять|изменять), (изменение|смена)",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -1614,7 +1686,7 @@
     {
       "id": "a76da421-f408-449d-8199-9dee3bbb8756",
       "sourceText": "charge",
-      "targetText": "заряд|обвинение|цена|заряжать|обвинять|быть главным",
+      "targetText": "заряд|обвинение|цена|заряжать|обвинять",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -1696,18 +1768,6 @@
       "isActive": true
     },
     {
-      "id": "b0516acd-a049-4ee1-a9ed-9c46bc2bd65f",
-      "sourceText": "chuckle",
-      "targetText": "хихикать|смеяться|усмешка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "He gave a chuckle.",
-      "targetUsageExample": "Он хихикнул.",
-      "isActive": true
-    },
-    {
       "id": "f1c0a09a-55c5-48d8-afc8-81e47c3d68bf",
       "sourceText": "church",
       "targetText": "церковь",
@@ -1732,18 +1792,6 @@
       "isActive": true
     },
     {
-      "id": "97384868-6946-48eb-9332-a69539bda73d",
-      "sourceText": "class",
-      "targetText": "класс, занятие|урок",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I have a class at 9.",
-      "targetUsageExample": "У меня занятие в 9.",
-      "isActive": true
-    },
-    {
       "id": "5f7e4270-28f6-4247-9e85-333137c9ab4b",
       "sourceText": "clean",
       "targetText": "чистый, убирать|чистить",
@@ -1758,7 +1806,7 @@
     {
       "id": "6c752449-6906-47ce-af57-728d39086da6",
       "sourceText": "clear",
-      "targetText": "ясный|понятный|прозрачный|очищать",
+      "targetText": "(ясный|понятный), очищать",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -1770,7 +1818,7 @@
     {
       "id": "813cc487-7be2-4172-bdc3-e95bfd08f49b",
       "sourceText": "close",
-      "targetText": "закрывать|близкий",
+      "targetText": "закрывать",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -1864,15 +1912,15 @@
       "isActive": true
     },
     {
-      "id": "8586aca9-e5c5-4c56-964d-317c30fedb62",
-      "sourceText": "consider",
-      "targetText": "рассматривать|считать|обдумывать",
+      "id": "7b24c25a-fe45-481e-bbcf-0dbb18f745c2",
+      "sourceText": "congratulations",
+      "targetText": "поздравления",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "I will consider your offer.",
-      "targetUsageExample": "Я рассмотрю твоё предложение.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1909,6 +1957,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "It is cool today.",
       "targetUsageExample": "Сегодня прохладно.",
+      "isActive": true
+    },
+    {
+      "id": "c687fb68-a910-411e-9060-dfd2bf042c7e",
+      "sourceText": "cop",
+      "targetText": "полицейский|коп",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -1974,7 +2034,7 @@
     {
       "id": "fb90dd0d-2d27-43b1-9921-dce02952f986",
       "sourceText": "country",
-      "targetText": "страна; сельская местность",
+      "targetText": "страна, деревня [местность]",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -2068,6 +2128,42 @@
       "isActive": true
     },
     {
+      "id": "ecc72b85-875e-4d56-80d1-cdcf9159aeb6",
+      "sourceText": "cross",
+      "targetText": "пересекать|крест",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "74ea1116-40af-4f2c-8c20-0bed8f395bf5",
+      "sourceText": "crowd",
+      "targetText": "толпа",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "84778826-2bfc-4d26-81da-8efad8a3a926",
+      "sourceText": "cry",
+      "targetText": "плакать|кричать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "ef684346-9742-4186-9ba8-a3e1c741cbc2",
       "sourceText": "cup",
       "targetText": "чашка",
@@ -2116,6 +2212,18 @@
       "isActive": true
     },
     {
+      "id": "5cbccf5e-af0e-453c-850e-71c9d2b21ed0",
+      "sourceText": "cute",
+      "targetText": "милый|симпатичный",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "7ce13274-80ed-44ec-b3bd-bfedea536e31",
       "sourceText": "dad",
       "targetText": "папа",
@@ -2128,18 +2236,6 @@
       "isActive": true
     },
     {
-      "id": "b12ff48f-e001-4aa6-bc22-8f4000adc55e",
-      "sourceText": "daddy",
-      "targetText": "папа|папочка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Where is daddy?",
-      "targetUsageExample": "Где папа?",
-      "isActive": false
-    },
-    {
       "id": "fea4ac7f-422b-4171-8587-7696c3a4a63a",
       "sourceText": "dance",
       "targetText": "танец, танцевать",
@@ -2149,6 +2245,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I like to dance.",
       "targetUsageExample": "Я люблю танцевать.",
+      "isActive": true
+    },
+    {
+      "id": "ba4c5cf3-3ebb-4225-9701-da18a3b21598",
+      "sourceText": "danger",
+      "targetText": "опасность",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2197,18 +2305,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Hello, darling.",
       "targetUsageExample": "Привет, дорогая.",
-      "isActive": true
-    },
-    {
-      "id": "cc3a6baf-3cd2-4bd5-ba19-7940b3753854",
-      "sourceText": "data",
-      "targetText": "данные",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "We need more data.",
-      "targetUsageExample": "Нам нужно больше данных.",
       "isActive": true
     },
     {
@@ -2332,30 +2428,6 @@
       "isActive": true
     },
     {
-      "id": "ab357153-0ffe-4c8f-a934-9bc9b0b8f53a",
-      "sourceText": "design",
-      "targetText": "дизайн, проектировать",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I like the design of this car.",
-      "targetUsageExample": "Мне нравится дизайн этой машины.",
-      "isActive": true
-    },
-    {
-      "id": "4cb9d9a3-8272-4352-93ca-c51badc3c5bb",
-      "sourceText": "detective",
-      "targetText": "детектив|сыщик",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "He is a detective.",
-      "targetUsageExample": "Он детектив.",
-      "isActive": true
-    },
-    {
       "id": "f1372406-ad38-4009-809d-23d885370eb8",
       "sourceText": "development",
       "targetText": "развитие|разработка",
@@ -2464,18 +2536,6 @@
       "isActive": true
     },
     {
-      "id": "6a7a7077-faab-4ed5-90d8-8126debd594d",
-      "sourceText": "doctor",
-      "targetText": "врач|доктор",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I need to see a doctor.",
-      "targetUsageExample": "Мне нужно к врачу.",
-      "isActive": true
-    },
-    {
       "id": "cf104d14-5e2c-441b-ab42-934f757a7677",
       "sourceText": "dog",
       "targetText": "собака|пёс",
@@ -2497,6 +2557,30 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Please close the door.",
       "targetUsageExample": "Пожалуйста, закрой дверь.",
+      "isActive": true
+    },
+    {
+      "id": "24e99763-5a4f-454c-85c2-9fb49dab6710",
+      "sourceText": "double",
+      "targetText": "двойной|вдвое",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "f768d69e-5fa6-4497-932f-393d2d064363",
+      "sourceText": "doubt",
+      "targetText": "сомнение|сомневаться",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2605,6 +2689,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I will be busy during the day.",
       "targetUsageExample": "Я буду занят в течение дня.",
+      "isActive": true
+    },
+    {
+      "id": "f886b3b7-9b02-42ad-a685-ffd92c930d88",
+      "sourceText": "duty",
+      "targetText": "долг|обязанность",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2740,6 +2836,18 @@
       "isActive": true
     },
     {
+      "id": "e1c8e0c4-ca43-4699-8645-75f5611dd1d9",
+      "sourceText": "empty",
+      "targetText": "пустой",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "4e66f512-0fea-48c1-b67f-5fe21600f520",
       "sourceText": "end",
       "targetText": "конец, заканчивать|заканчиваться",
@@ -2749,6 +2857,30 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "This is the end of the movie.",
       "targetUsageExample": "Это конец фильма.",
+      "isActive": true
+    },
+    {
+      "id": "e02e7d2f-9791-4120-8578-33f95f0a8786",
+      "sourceText": "engine",
+      "targetText": "двигатель|мотор",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "c51cee86-8119-4077-9f73-78b7598888b4",
+      "sourceText": "English",
+      "targetText": "английский",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2809,6 +2941,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Even a child can do it.",
       "targetUsageExample": "Даже ребенок может это сделать.",
+      "isActive": true
+    },
+    {
+      "id": "96e5065d-fb76-40c0-bc3f-2a16fc18a971",
+      "sourceText": "evening",
+      "targetText": "вечер",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -2881,6 +3025,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Everything is ready.",
       "targetUsageExample": "Все готово.",
+      "isActive": true
+    },
+    {
+      "id": "63f8d7f7-c748-4987-82ec-957c5dbe8ba9",
+      "sourceText": "everywhere",
+      "targetText": "везде|повсюду",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3124,6 +3280,18 @@
       "isActive": true
     },
     {
+      "id": "278bf777-0c95-4612-bd24-fd0ab663e4b9",
+      "sourceText": "favor",
+      "targetText": "услуга|одолжение",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "b8d5206f-d5b5-4352-90b9-39ed77a063b8",
       "sourceText": "favorite",
       "targetText": "любимый",
@@ -3208,18 +3376,6 @@
       "isActive": true
     },
     {
-      "id": "894d0f66-4ae2-496f-b5b2-88a777e787e7",
-      "sourceText": "fighting",
-      "targetText": "борьба|бой|сражение",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Stop fighting!",
-      "targetUsageExample": "Прекратите драться!",
-      "isActive": false
-    },
-    {
       "id": "fdb327f2-e67a-47cc-9fb8-f086bea14640",
       "sourceText": "figure",
       "targetText": "(цифра|фигура), понимать",
@@ -3241,18 +3397,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Finally, we are here.",
       "targetUsageExample": "Наконец, мы здесь.",
-      "isActive": true
-    },
-    {
-      "id": "5a73d994-9030-40af-83ee-28e138df8557",
-      "sourceText": "financial",
-      "targetText": "финансовый",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I have some financial problems.",
-      "targetUsageExample": "У меня некоторые финансовые проблемы.",
       "isActive": true
     },
     {
@@ -3299,8 +3443,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "The house is on fire.",
-      "targetUsageExample": "Дом горит.",
+      "sourceUsageExample": "The fire is warm.",
+      "targetUsageExample": "Огонь теплый.",
       "isActive": true
     },
     {
@@ -3325,6 +3469,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I like to eat fish.",
       "targetUsageExample": "Я люблю есть рыбу.",
+      "isActive": true
+    },
+    {
+      "id": "60b85558-7c72-4585-8c15-102b0e016a7d",
+      "sourceText": "fit",
+      "targetText": "подходить|в форме",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3438,13 +3594,13 @@
     {
       "id": "1d7edb4e-32f1-4ba9-a022-280d02cda256",
       "sourceText": "foot",
-      "targetText": "ступня",
+      "targetText": "стопа|нога",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "My foot hurts.",
-      "targetUsageExample": "У меня болит ступня.",
+      "targetUsageExample": "У меня болит нога.",
       "isActive": true
     },
     {
@@ -3556,6 +3712,30 @@
       "isActive": true
     },
     {
+      "id": "400c64b0-13f1-4850-a712-77643942cdc3",
+      "sourceText": "french",
+      "targetText": "французский",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "3cee1888-f11b-4b7b-8b23-7f63a79c5b85",
+      "sourceText": "fresh",
+      "targetText": "свежий",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "66dc99a1-efc5-4605-858d-eb0823a745d9",
       "sourceText": "friend",
       "targetText": "друг|подруга",
@@ -3652,27 +3832,27 @@
       "isActive": true
     },
     {
-      "id": "efed5fb8-07f0-4d4a-8944-b9ada64310eb",
-      "sourceText": "gentleman",
-      "targetText": "джентльмен|господин",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "He is a gentleman.",
-      "targetUsageExample": "Он джентльмен.",
-      "isActive": true
-    },
-    {
       "id": "8bb07521-af30-48db-ab06-5a410fa981a6",
       "sourceText": "get",
-      "targetText": "получать|добираться|становиться|покупать",
+      "targetText": "получать|добираться|становиться",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "I need to get some milk.",
       "targetUsageExample": "Мне нужно купить молока.",
+      "isActive": true
+    },
+    {
+      "id": "700b098b-606a-42b1-a450-595d77b40b6f",
+      "sourceText": "gift",
+      "targetText": "подарок",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3781,7 +3961,19 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "He is gone.",
       "targetUsageExample": "Он ушел.",
-      "isActive": false
+      "isActive": true
+    },
+    {
+      "id": "8c731494-c1ef-4f44-93f1-1f2fe550e7f5",
+      "sourceText": "good",
+      "targetText": "хороший|хорошо",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
     },
     {
       "id": "e7437ff8-f68c-4071-90a6-eae36ffa68b4",
@@ -3805,6 +3997,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "The government made a new law.",
       "targetUsageExample": "Правительство издало новый закон.",
+      "isActive": true
+    },
+    {
+      "id": "5b823b28-3e03-4d1a-be2a-0436f6ad3f04",
+      "sourceText": "grab",
+      "targetText": "хватать|схватить",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3856,6 +4060,18 @@
       "isActive": true
     },
     {
+      "id": "ad90d998-4c0a-45a0-bcbc-2217c793c77b",
+      "sourceText": "guard",
+      "targetText": "охранник|охранять",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "8e2abd4d-99dd-41f5-9fd9-b8fb643462a8",
       "sourceText": "guess",
       "targetText": "(угадывать|догадываться), догадка",
@@ -3868,15 +4084,27 @@
       "isActive": true
     },
     {
-      "id": "3462e56f-559f-4589-8960-58eae5833790",
-      "sourceText": "guys",
-      "targetText": "ребята|парни",
+      "id": "ef211e3d-ecd3-48ea-b431-ea1fda423966",
+      "sourceText": "guilty",
+      "targetText": "виновный|виноватый",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Hey guys, what's up?",
-      "targetUsageExample": "Привет, ребята, как дела?",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "8f01af4e-313f-496a-b844-9009b343de7b",
+      "sourceText": "guy",
+      "targetText": "парень",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -3935,8 +4163,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Hang your coat here.",
-      "targetUsageExample": "Повесь пальто здесь.",
+      "sourceUsageExample": "Hang on a second.",
+      "targetUsageExample": "Подожди секунду.",
       "isActive": true
     },
     {
@@ -4021,6 +4249,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I have to go now.",
       "targetUsageExample": "Мне нужно идти.",
+      "isActive": true
+    },
+    {
+      "id": "658498d6-a5bd-4994-8653-d69076904cec",
+      "sourceText": "he",
+      "targetText": "он",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4144,6 +4384,18 @@
       "isActive": true
     },
     {
+      "id": "a16fb1a0-4332-4fef-a725-e0278c3758c5",
+      "sourceText": "herself",
+      "targetText": "сама|себя",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "d9ae1ee5-7666-4af5-9555-711e5ee032ab",
       "sourceText": "hey",
       "targetText": "эй|привет",
@@ -4240,6 +4492,18 @@
       "isActive": true
     },
     {
+      "id": "36aa1c37-c36f-4fbe-9880-79050f8a595f",
+      "sourceText": "hole",
+      "targetText": "дыра|отверстие",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "25f2a504-399e-4002-9ae8-4c552b9cb451",
       "sourceText": "home",
       "targetText": "дом [жилище], домой",
@@ -4266,7 +4530,7 @@
     {
       "id": "830502e2-96ff-4330-ac0b-37528e5134e7",
       "sourceText": "honey",
-      "targetText": "мёд|дорогой|дорогая",
+      "targetText": "дорогой|дорогая|мёд",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -4446,7 +4710,7 @@
     {
       "id": "cd096ea6-33b6-486e-afe0-e332202bb35d",
       "sourceText": "hurt",
-      "targetText": "болеть|ранить|причинять боль",
+      "targetText": "боль|ранить|причинять боль",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -4470,25 +4734,13 @@
     {
       "id": "bd1e1b71-64d9-416d-9b73-b3e0ec8f579e",
       "sourceText": "ice",
-      "targetText": "лёд|ледяной",
+      "targetText": "лёд|мороженое|ледяной",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "The ice is cold.",
       "targetUsageExample": "Лёд холодный.",
-      "isActive": true
-    },
-    {
-      "id": "11f63c02-a725-45d5-b724-79ba4633909a",
-      "sourceText": "idiot",
-      "targetText": "идиот|дурак",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Don't be an idiot.",
-      "targetUsageExample": "Не будь идиотом.",
       "isActive": true
     },
     {
@@ -4516,6 +4768,18 @@
       "isActive": true
     },
     {
+      "id": "572bc777-864c-4b9f-9039-4128b348dcc2",
+      "sourceText": "immediately",
+      "targetText": "немедленно|сразу",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "4f05c91d-2be4-42a5-b962-b0253788190e",
       "sourceText": "important",
       "targetText": "важный",
@@ -4525,6 +4789,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "This is an important meeting.",
       "targetUsageExample": "Это важная встреча.",
+      "isActive": true
+    },
+    {
+      "id": "f7318823-03c6-4ed1-9fc1-7bf9cc94df54",
+      "sourceText": "impossible",
+      "targetText": "невозможно|невозможный",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4561,6 +4837,30 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "The price has increased.",
       "targetUsageExample": "Цена выросла.",
+      "isActive": true
+    },
+    {
+      "id": "c74a090c-7d28-41b5-8871-3a206570d5a2",
+      "sourceText": "indeed",
+      "targetText": "действительно|в самом деле",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "42761981-ff6e-4d84-8d96-80a5303b6684",
+      "sourceText": "innocent",
+      "targetText": "невиновный|невинный",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4680,19 +4980,31 @@
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "The dog is wagging its tail.",
-      "targetUsageExample": "Собака виляет своим хвостом.",
+      "targetUsageExample": "Собака виляет хвостом.",
       "isActive": true
     },
     {
-      "id": "1dfeb282-7e6b-4ead-8f40-45bc5139e6ea",
-      "sourceText": "January",
-      "targetText": "январь",
+      "id": "c34124ae-1b57-49fa-a598-9bf4ae54c548",
+      "sourceText": "itself",
+      "targetText": "само|себя",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "My birthday is in January.",
-      "targetUsageExample": "Мой день рождения в январе.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "4e517a28-24bf-4997-9759-21eae5a47bb6",
+      "sourceText": "jail",
+      "targetText": "тюрьма",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4720,6 +5032,18 @@
       "isActive": true
     },
     {
+      "id": "de7457c6-42f0-476e-aac6-9defe73ae844",
+      "sourceText": "joke",
+      "targetText": "шутка|шутить",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "68dd4dd6-423a-4a0b-936f-ddf0360caf3f",
       "sourceText": "judge",
       "targetText": "судья|судить|оценивать",
@@ -4732,27 +5056,15 @@
       "isActive": true
     },
     {
-      "id": "3ae6b3d4-d4ba-40a0-964f-47ccbd5e576f",
-      "sourceText": "July",
-      "targetText": "июль",
+      "id": "084b588c-558d-46aa-bd43-9617794a27ed",
+      "sourceText": "jump",
+      "targetText": "прыгать|прыжок",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "We are going on vacation in July.",
-      "targetUsageExample": "Мы едем в отпуск в июле.",
-      "isActive": true
-    },
-    {
-      "id": "dd2e6ae2-6848-43b1-ac7f-3563c5c645c5",
-      "sourceText": "June",
-      "targetText": "июнь",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "My birthday is in June.",
-      "targetUsageExample": "Мой день рождения в июне.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4775,8 +5087,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Keep this book.",
-      "targetUsageExample": "Оставь эту книгу себе.",
+      "sourceUsageExample": "Please keep the change.",
+      "targetUsageExample": "Сдачи не надо.",
       "isActive": true
     },
     {
@@ -4792,33 +5104,33 @@
       "isActive": true
     },
     {
-      "id": "ee8ac3c6-7121-46db-940b-34441c200f4b",
-      "sourceText": "killed",
-      "targetText": "убил",
+      "id": "d06de30c-422f-4751-a083-3f723be8e8b1",
+      "sourceText": "kick",
+      "targetText": "пинать|удар",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "He was killed in the war.",
-      "targetUsageExample": "Он был убит на войне.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
-      "id": "2ea3e5e4-bf29-42ff-ad21-ab2542481674",
-      "sourceText": "killer",
-      "targetText": "убийца|киллер",
+      "id": "2b62838a-c995-44a3-91a3-fa40ae55cbc5",
+      "sourceText": "kill",
+      "targetText": "убивать",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "He is a killer.",
-      "targetUsageExample": "Он убийца.",
+      "sourceUsageExample": "Do not kill.",
+      "targetUsageExample": "Не убивай.",
       "isActive": true
     },
     {
       "id": "8e79c348-3f03-474f-b993-8984474b76fc",
       "sourceText": "kind",
-      "targetText": "добрый|вид|тип|род",
+      "targetText": "вид|род",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -4826,18 +5138,6 @@
       "sourceUsageExample": "You are very kind.",
       "targetUsageExample": "Ты очень добрый.",
       "isActive": true
-    },
-    {
-      "id": "9e86afcf-8ce1-43c0-a0e2-27d9d916650c",
-      "sourceText": "kind (type)",
-      "targetText": "вид|тип|сорт",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "What kind of music do you like?",
-      "targetUsageExample": "Какую музыку ты любишь?",
-      "isActive": false
     },
     {
       "id": "fa9a6ca8-3224-43f8-85ed-86b816be0dad",
@@ -4873,6 +5173,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "The kitchen is big.",
       "targetUsageExample": "Кухня большая.",
+      "isActive": true
+    },
+    {
+      "id": "02951164-4731-4bd1-a7ea-6b6bed136078",
+      "sourceText": "knock",
+      "targetText": "стучать|стук",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -4926,7 +5238,7 @@
     {
       "id": "c0155eb0-7292-4aa0-8e01-549dfe086a49",
       "sourceText": "last",
-      "targetText": "последний|прошлый",
+      "targetText": "последний",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -4934,18 +5246,6 @@
       "sourceUsageExample": "This is the last one.",
       "targetUsageExample": "Это последний.",
       "isActive": true
-    },
-    {
-      "id": "5bf35e89-83e1-493d-a574-f0a711e65c28",
-      "sourceText": "last (final)",
-      "targetText": "последний",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "This is the last page.",
-      "targetUsageExample": "Это последняя страница.",
-      "isActive": false
     },
     {
       "id": "fdbcea87-4221-4f28-ae1e-998fc4a323b8",
@@ -4984,6 +5284,18 @@
       "isActive": true
     },
     {
+      "id": "1c92b176-819d-4bbf-a13d-dd0ecf84a951",
+      "sourceText": "lawyer",
+      "targetText": "адвокат|юрист",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "cef4459e-b00b-4f3e-b921-02ac7f610ccf",
       "sourceText": "lead",
       "targetText": "(вести|возглавлять), свинец",
@@ -4993,18 +5305,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "He will lead the team.",
       "targetUsageExample": "Он возглавит команду.",
-      "isActive": true
-    },
-    {
-      "id": "4788b7ef-eb4d-44e6-8390-60aaf88ec9f1",
-      "sourceText": "league",
-      "targetText": "лига",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "He plays in the top league.",
-      "targetUsageExample": "Он играет в высшей лиге.",
       "isActive": true
     },
     {
@@ -5053,6 +5353,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Turn left.",
       "targetUsageExample": "Поверните налево.",
+      "isActive": true
+    },
+    {
+      "id": "a5181110-3545-421d-9a5d-329d4a892b1a",
+      "sourceText": "leg",
+      "targetText": "нога",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -5113,18 +5425,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I want to lie down.",
       "targetUsageExample": "Я хочу лечь.",
-      "isActive": true
-    },
-    {
-      "id": "d8ef97f6-c031-4ae3-98fb-183cd6aa7238",
-      "sourceText": "lieutenant",
-      "targetText": "лейтенант",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Yes, lieutenant.",
-      "targetUsageExample": "Да, лейтенант.",
       "isActive": true
     },
     {
@@ -5236,6 +5536,18 @@
       "isActive": true
     },
     {
+      "id": "85a09a89-0a76-4b4a-bb32-76a3144aa750",
+      "sourceText": "lock",
+      "targetText": "замок|запирать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "eefdf1bc-b98b-463a-94d7-9e80223615fc",
       "sourceText": "long",
       "targetText": "длинный|долгий",
@@ -5257,6 +5569,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Look at me!",
       "targetUsageExample": "Посмотри на меня!",
+      "isActive": true
+    },
+    {
+      "id": "300c79c3-890d-4eb4-bb71-4a0dad6da866",
+      "sourceText": "lose",
+      "targetText": "терять|проигрывать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Do not lose your keys.",
+      "targetUsageExample": "Не теряй свои ключи.",
       "isActive": true
     },
     {
@@ -5332,18 +5656,6 @@
       "isActive": true
     },
     {
-      "id": "3e2ae882-fd8e-4419-bd93-a4e4aeb03588",
-      "sourceText": "lt",
-      "targetText": "лейтенант",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Lt. Smith is here.",
-      "targetUsageExample": "Лейтенант Смит здесь.",
-      "isActive": false
-    },
-    {
       "id": "7199e347-e740-4268-87ae-2a8aabd7a8e5",
       "sourceText": "luck",
       "targetText": "удача|везение",
@@ -5365,18 +5677,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "You are lucky.",
       "targetUsageExample": "Тебе повезло.",
-      "isActive": true
-    },
-    {
-      "id": "03847e14-2e83-40e5-839d-359be11bf3a9",
-      "sourceText": "lunch",
-      "targetText": "обед|ланч",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I am having lunch.",
-      "targetUsageExample": "Я обедаю.",
       "isActive": true
     },
     {
@@ -5425,6 +5725,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I will make a cake.",
       "targetUsageExample": "Я испеку торт.",
+      "isActive": true
+    },
+    {
+      "id": "ca9edbd2-a0f2-4d59-a062-a4f8d7c08b39",
+      "sourceText": "mama",
+      "targetText": "мама",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -5488,15 +5800,27 @@
       "isActive": true
     },
     {
-      "id": "de019958-baf4-4206-88b6-4c249a047a60",
-      "sourceText": "master",
-      "targetText": "мастер|хозяин|осваивать",
+      "id": "fea8a22f-91c8-42fa-8684-97e6dcd4956c",
+      "sourceText": "marry",
+      "targetText": "жениться|выходить замуж",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "He is the master.",
-      "targetUsageExample": "Он мастер.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "f91a3a61-902b-4eb3-9e29-ccf1fcd33e6a",
+      "sourceText": "mate",
+      "targetText": "приятель|друг",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -5524,6 +5848,18 @@
       "isActive": true
     },
     {
+      "id": "334b0374-6e81-4729-b16c-a65b2b0f1326",
+      "sourceText": "me",
+      "targetText": "меня|мне",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "f701881c-9520-4558-b0a2-6089af56d2e0",
       "sourceText": "mean",
       "targetText": "(значить|означать), иметь в виду",
@@ -5545,18 +5881,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "This means yes.",
       "targetUsageExample": "Это означает да.",
-      "isActive": false
-    },
-    {
-      "id": "c1468b6b-e0a7-4176-b5f8-e38b74f8daaa",
-      "sourceText": "medical",
-      "targetText": "медицинский",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I need medical help.",
-      "targetUsageExample": "Мне нужна медицинская помощь.",
       "isActive": true
     },
     {
@@ -5596,6 +5920,30 @@
       "isActive": true
     },
     {
+      "id": "aec56b36-9598-4999-bcfb-ef836c389186",
+      "sourceText": "memory",
+      "targetText": "память|воспоминание",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "3564b1c3-3f67-449a-b54d-80a4cda63cdc",
+      "sourceText": "mention",
+      "targetText": "упоминать|упоминание",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "3182e4af-d6ab-4508-a6ac-2a51cdfd0327",
       "sourceText": "mess",
       "targetText": "беспорядок|путаница|столовая|портить",
@@ -5627,8 +5975,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "The ball is in the middle.",
-      "targetUsageExample": "Мяч посередине.",
+      "sourceUsageExample": "I am in the middle of something.",
+      "targetUsageExample": "Я занят чем-то.",
       "isActive": true
     },
     {
@@ -5689,7 +6037,7 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "My dog is missing.",
       "targetUsageExample": "Моя собака пропала.",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "3bbd6523-1c85-4301-9aa2-def430a77b6d",
@@ -5749,6 +6097,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "There are twelve months in a year.",
       "targetUsageExample": "В году двенадцать месяцев.",
+      "isActive": true
+    },
+    {
+      "id": "dc381401-1951-4581-8f51-7b40d0885aaa",
+      "sourceText": "moon",
+      "targetText": "луна",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -5848,42 +6208,6 @@
       "isActive": true
     },
     {
-      "id": "cb15f784-2ddc-4445-b9fb-8040f95ea618",
-      "sourceText": "mum",
-      "targetText": "мама|мамочка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "My mum is kind.",
-      "targetUsageExample": "Моя мама добрая.",
-      "isActive": true
-    },
-    {
-      "id": "61393e1d-37b5-4b03-af0b-c6832678d722",
-      "sourceText": "murder",
-      "targetText": "убийство|убивать",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "This is a murder case.",
-      "targetUsageExample": "Это дело об убийстве.",
-      "isActive": true
-    },
-    {
-      "id": "dbfa624d-e973-4e76-b2fe-219ccb12dec6",
-      "sourceText": "music",
-      "targetText": "музыка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I like to listen to music.",
-      "targetUsageExample": "Я люблю слушать музыку.",
-      "isActive": true
-    },
-    {
       "id": "42c4ce3b-a511-46ea-914b-c347a232144a",
       "sourceText": "must",
       "targetText": "должен|обязан",
@@ -5944,6 +6268,18 @@
       "isActive": true
     },
     {
+      "id": "4f864b97-006c-45be-826a-a196e8051f7f",
+      "sourceText": "nature",
+      "targetText": "природа",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "b0179ebd-e0ec-4f95-93d5-091c3a6284a9",
       "sourceText": "near",
       "targetText": "рядом|около|близко",
@@ -5956,6 +6292,18 @@
       "isActive": true
     },
     {
+      "id": "38fe4c6e-f6eb-4ea4-bb35-ba4455d6f871",
+      "sourceText": "neck",
+      "targetText": "шея",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "bcc7d986-d723-4d21-9bb1-0af388a0037c",
       "sourceText": "need",
       "targetText": "нуждаться, (потребность|нужда)",
@@ -5965,6 +6313,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I need your help.",
       "targetUsageExample": "Мне нужна твоя помощь.",
+      "isActive": true
+    },
+    {
+      "id": "15520216-ffe8-4ba8-a147-607eab1514b7",
+      "sourceText": "neither",
+      "targetText": "ни один|ни тот ни другой",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -6088,18 +6448,6 @@
       "isActive": true
     },
     {
-      "id": "518c00c1-13f2-4aa7-8193-07c025e0de97",
-      "sourceText": "non",
-      "targetText": "не-",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "This is non-alcoholic beer.",
-      "targetUsageExample": "Это безалкогольное пиво.",
-      "isActive": true
-    },
-    {
       "id": "0f37892d-0c43-4015-8b4b-5b2a082fee34",
       "sourceText": "none",
       "targetText": "никто|ни один|никакой|ничто",
@@ -6109,18 +6457,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "None of them.",
       "targetUsageExample": "Никто из них.",
-      "isActive": true
-    },
-    {
-      "id": "a9708ab0-4bbc-4d6c-ac0d-b2311320f89d",
-      "sourceText": "normal",
-      "targetText": "нормальный|обычный",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "This is normal.",
-      "targetUsageExample": "Это нормально.",
       "isActive": true
     },
     {
@@ -6172,15 +6508,15 @@
       "isActive": true
     },
     {
-      "id": "16179123-44de-4ba7-bb29-347fd23e2311",
-      "sourceText": "November",
-      "targetText": "ноябрь",
+      "id": "67eb1911-c9e2-4a89-a9dc-ec88a6bd24d9",
+      "sourceText": "notice",
+      "targetText": "замечать|уведомление",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "My birthday is in November.",
-      "targetUsageExample": "Мой день рождения в ноябре.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -6205,6 +6541,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "What is your phone number?",
       "targetUsageExample": "Какой у тебя номер телефона?",
+      "isActive": true
+    },
+    {
+      "id": "a40a94c6-4eb2-4939-8a51-130ffb11568d",
+      "sourceText": "obviously",
+      "targetText": "очевидно",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -6244,30 +6592,6 @@
       "isActive": true
     },
     {
-      "id": "c00e4072-8142-4f29-abea-900e1f456901",
-      "sourceText": "office",
-      "targetText": "офис|кабинет",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I work in an office.",
-      "targetUsageExample": "Я работаю в офисе.",
-      "isActive": true
-    },
-    {
-      "id": "aa55c751-13a0-4561-adf7-655e7a521d07",
-      "sourceText": "official",
-      "targetText": "официальный, чиновник",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "This is an official document.",
-      "targetUsageExample": "Это официальный документ.",
-      "isActive": true
-    },
-    {
       "id": "8171abd9-df84-43e7-94ad-6bafa3c36172",
       "sourceText": "often",
       "targetText": "часто",
@@ -6290,18 +6614,6 @@
       "sourceUsageExample": "I need some oil for my car.",
       "targetUsageExample": "Мне нужно масло для машины.",
       "isActive": true
-    },
-    {
-      "id": "2ab268d0-7865-4c9d-af3b-11afac74ba43",
-      "sourceText": "ok",
-      "targetText": "ладно|хорошо",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Ok, let's go.",
-      "targetUsageExample": "Ладно, пойдём.",
-      "isActive": false
     },
     {
       "id": "c01eb40f-aff4-4759-8bc2-e5a9d839367d",
@@ -6354,7 +6666,7 @@
     {
       "id": "7c4888a6-0dbd-439e-8bf9-2126ea67db03",
       "sourceText": "one",
-      "targetText": "один",
+      "targetText": "один [pron: никто]",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -6436,6 +6748,18 @@
       "isActive": true
     },
     {
+      "id": "6bc56e42-f869-43aa-a59d-e11cc095a517",
+      "sourceText": "otherwise",
+      "targetText": "иначе|в противном случае",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "7082b4e9-d054-44d6-bdd6-2593be715b22",
       "sourceText": "our",
       "targetText": "наш|наша|наше|наши",
@@ -6445,6 +6769,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "This is our house.",
       "targetUsageExample": "Это наш дом.",
+      "isActive": true
+    },
+    {
+      "id": "4f847ea9-ed0d-450c-8c33-1c65fe2e2a50",
+      "sourceText": "ourselves",
+      "targetText": "мы сами|себя",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -6676,15 +7012,15 @@
       "isActive": true
     },
     {
-      "id": "fee38ab6-6817-451a-bb92-ef052a001287",
-      "sourceText": "phone",
-      "targetText": "телефон",
+      "id": "416bc695-358b-44a3-a326-aa3d36fe74d5",
+      "sourceText": "person",
+      "targetText": "человек",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "I need to charge my phone.",
-      "targetUsageExample": "Мне нужно зарядить телефон.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -6750,7 +7086,7 @@
     {
       "id": "8f4e0a83-d22b-4709-beed-7339b39165a9",
       "sourceText": "play",
-      "targetText": "играть|пьеса",
+      "targetText": "играть",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -6805,18 +7141,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "What is the main point?",
       "targetUsageExample": "В чем главная мысль?",
-      "isActive": true
-    },
-    {
-      "id": "bd9805e5-5063-4ccf-bf05-d255d49cd8cc",
-      "sourceText": "police",
-      "targetText": "полиция",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "The police are coming.",
-      "targetUsageExample": "Полиция едет.",
       "isActive": true
     },
     {
@@ -6880,6 +7204,18 @@
       "isActive": true
     },
     {
+      "id": "4ba47f44-353e-43b0-81c7-b9deef6a1ae2",
+      "sourceText": "pregnant",
+      "targetText": "беременная",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "8872ecc3-ab3c-422c-86a7-2efe7a3d95c8",
       "sourceText": "present",
       "targetText": "подарок, настоящий [время], представлять",
@@ -6892,15 +7228,15 @@
       "isActive": true
     },
     {
-      "id": "d17eb4c0-4d17-4ef3-88a8-7f5703cb53f0",
-      "sourceText": "president",
-      "targetText": "президент",
+      "id": "dd9b059d-d019-403a-abb8-0a4d113945a2",
+      "sourceText": "pressure",
+      "targetText": "давление",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "The president speaks.",
-      "targetUsageExample": "Президент говорит.",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -7048,6 +7384,18 @@
       "isActive": true
     },
     {
+      "id": "4ede1bad-bbb6-4c76-9809-236598819e46",
+      "sourceText": "push",
+      "targetText": "толкать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "44e10975-ab9b-4a9a-8d29-17674de3805e",
       "sourceText": "put",
       "targetText": "класть|ставить|положить",
@@ -7120,6 +7468,18 @@
       "isActive": true
     },
     {
+      "id": "136ee847-5cb3-40b4-9044-457aeccbd358",
+      "sourceText": "quit",
+      "targetText": "бросать|уходить",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "d27ec208-79f9-4a14-9681-d07f0469ff9c",
       "sourceText": "quite",
       "targetText": "вполне|довольно",
@@ -7153,6 +7513,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "It started to rain.",
       "targetUsageExample": "Начался дождь.",
+      "isActive": true
+    },
+    {
+      "id": "1c358693-e0d3-418a-8a46-a75bf692519c",
+      "sourceText": "raise",
+      "targetText": "поднимать|повышать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -7192,6 +7564,18 @@
       "isActive": true
     },
     {
+      "id": "b92ff4c8-8f06-427c-9992-5bc25c36a452",
+      "sourceText": "reach",
+      "targetText": "достигать|дотянуться",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "4b0701ce-215d-49e1-b918-98328d4db307",
       "sourceText": "read",
       "targetText": "читать",
@@ -7213,7 +7597,7 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Reading is my hobby.",
       "targetUsageExample": "Чтение - мое хобби.",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "136e13c6-d97c-49c8-9691-99b054fc7dff",
@@ -7278,7 +7662,7 @@
     {
       "id": "8c679ebc-fd25-48bd-a4a2-8af15c4447a8",
       "sourceText": "record",
-      "targetText": "запись|рекорд|записывать",
+      "targetText": "запись, записывать",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -7456,6 +7840,18 @@
       "isActive": true
     },
     {
+      "id": "f71f2c86-70f7-437c-a1f4-acb3a522fd79",
+      "sourceText": "rid",
+      "targetText": "избавиться",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "341e992b-e488-4561-b65f-c19c3b3536f5",
       "sourceText": "ride",
       "targetText": "ездить [верхом, на велосипеде], поездка",
@@ -7528,6 +7924,18 @@
       "isActive": true
     },
     {
+      "id": "2fc219d3-31bb-4df7-969f-2e1e9af3a9e5",
+      "sourceText": "roll",
+      "targetText": "катить|рулон",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "2ed1b245-51ac-493e-aeff-27c300832aa4",
       "sourceText": "room",
       "targetText": "комната",
@@ -7573,7 +7981,7 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I am running.",
       "targetUsageExample": "Я бегу.",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "0a582dc1-d0a2-48b4-80de-955dc2933f29",
@@ -7597,6 +8005,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "This is a safe place.",
       "targetUsageExample": "Это безопасное место.",
+      "isActive": true
+    },
+    {
+      "id": "0581e190-8bec-4792-8f46-6ae6a45cf7ca",
+      "sourceText": "sake",
+      "targetText": "ради",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -7708,6 +8128,18 @@
       "isActive": true
     },
     {
+      "id": "5560a7af-9107-4876-8896-582d092384aa",
+      "sourceText": "search",
+      "targetText": "искать|поиск",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "7478a957-07ef-4bcf-b8ae-a614d4298726",
       "sourceText": "seat",
       "targetText": "место|сиденье|усаживать",
@@ -7729,18 +8161,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Wait a second.",
       "targetUsageExample": "Подожди секунду.",
-      "isActive": true
-    },
-    {
-      "id": "05120a2c-7f62-4ada-ad5f-a2feb3ada883",
-      "sourceText": "secret",
-      "targetText": "секрет|тайна|секретный",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I have a secret.",
-      "targetUsageExample": "У меня есть секрет.",
       "isActive": true
     },
     {
@@ -7837,18 +8257,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "This makes no sense.",
       "targetUsageExample": "Это не имеет смысла.",
-      "isActive": true
-    },
-    {
-      "id": "61385ee9-4990-4c64-accf-233d1993b4f7",
-      "sourceText": "September",
-      "targetText": "сентябрь",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "My birthday is in September.",
-      "targetUsageExample": "Мой день рождения в сентябре.",
       "isActive": true
     },
     {
@@ -7998,7 +8406,7 @@
     {
       "id": "03a51c4b-b459-4720-8420-425be2c8acb9",
       "sourceText": "shot",
-      "targetText": "выстрел|кадр|укол|рюмка",
+      "targetText": "выстрел, кадр",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -8089,6 +8497,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "This is a good sign.",
       "targetUsageExample": "Это хороший знак.",
+      "isActive": true
+    },
+    {
+      "id": "c5821136-5ac2-4c4b-82b9-64a9b00c5df8",
+      "sourceText": "silly",
+      "targetText": "глупый|дурацкий",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -8200,6 +8620,18 @@
       "isActive": true
     },
     {
+      "id": "51b2ca11-d59b-46d2-9459-16f56a00a559",
+      "sourceText": "sky",
+      "targetText": "небо",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "11c651ad-8a84-4898-985b-15ab8c6371be",
       "sourceText": "sleep",
       "targetText": "спать, сон",
@@ -8209,6 +8641,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I need to sleep.",
       "targetUsageExample": "Мне нужно спать.",
+      "isActive": true
+    },
+    {
+      "id": "9ea5d59f-fbb6-4283-a276-3a99677f491f",
+      "sourceText": "sleeping",
+      "targetText": "спящий|сон",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -8257,6 +8701,30 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "A good smell.",
       "targetUsageExample": "Хороший запах.",
+      "isActive": true
+    },
+    {
+      "id": "caed891a-5a3c-431e-957d-6f2fc7a21bcc",
+      "sourceText": "smile",
+      "targetText": "улыбка|улыбаться",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "1eb349a4-a39a-42b9-86e7-0afab183b692",
+      "sourceText": "smoke",
+      "targetText": "дым|курить",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -8545,7 +9013,7 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I am standing.",
       "targetUsageExample": "Я стою.",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "9a7de4a3-c9cd-47e1-846b-9756e4a7f262",
@@ -8596,6 +9064,18 @@
       "isActive": true
     },
     {
+      "id": "af2d3003-f2bb-47b1-b260-abc163f092ca",
+      "sourceText": "steal",
+      "targetText": "красть|воровать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "50c91c96-f21a-4ee5-ae72-848a9e39c270",
       "sourceText": "step",
       "targetText": "шаг",
@@ -8634,7 +9114,7 @@
     {
       "id": "cddb2cd4-1c8e-4678-94af-c53ac1dbf963",
       "sourceText": "store",
-      "targetText": "магазин|хранить",
+      "targetText": "магазин",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -8689,6 +9169,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "He is very strong.",
       "targetUsageExample": "Он очень сильный.",
+      "isActive": true
+    },
+    {
+      "id": "db645fc8-16bb-438e-95fb-3780d10611b0",
+      "sourceText": "stuck",
+      "targetText": "застрявший|застрять",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -8752,6 +9244,30 @@
       "isActive": true
     },
     {
+      "id": "7b30aa1b-b899-459e-8b2f-0b1b702255f7",
+      "sourceText": "suddenly",
+      "targetText": "внезапно|вдруг",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "58a8cf71-0a5e-48d8-9c49-2b36dce547ce",
+      "sourceText": "suit",
+      "targetText": "костюм|подходить",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "267ab3bf-84a2-4da6-8adb-496b41a7fc66",
       "sourceText": "summer",
       "targetText": "лето",
@@ -8761,6 +9277,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I love summer.",
       "targetUsageExample": "Я люблю лето.",
+      "isActive": true
+    },
+    {
+      "id": "77b9fca8-cfeb-46b7-a893-8f9c8f7157fa",
+      "sourceText": "sun",
+      "targetText": "солнце",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -8869,6 +9397,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I need to talk to you.",
       "targetUsageExample": "Мне нужно с тобой поговорить.",
+      "isActive": true
+    },
+    {
+      "id": "47e3c325-b6d7-4841-ab4c-580170567bd8",
+      "sourceText": "taste",
+      "targetText": "вкус|пробовать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -9004,18 +9544,6 @@
       "isActive": true
     },
     {
-      "id": "58964739-7539-4e95-a0b7-0cf504f61cf4",
-      "sourceText": "the",
-      "targetText": "определённый артикль",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "The sky is blue.",
-      "targetUsageExample": "Небо голубое.",
-      "isActive": true
-    },
-    {
       "id": "67cc4690-9d3b-4c8a-9c45-aa026398282c",
       "sourceText": "their",
       "targetText": "их",
@@ -9040,6 +9568,30 @@
       "isActive": true
     },
     {
+      "id": "192af7c8-cc18-41df-a0e9-87d0394cc4cc",
+      "sourceText": "themselves",
+      "targetText": "сами|себя",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "8f2eade4-12bc-4203-86b6-583d82670658",
+      "sourceText": "then",
+      "targetText": "тогда|потом",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "561a00a3-7765-43db-a6fe-be12a5eb1779",
       "sourceText": "there",
       "targetText": "там",
@@ -9049,6 +9601,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "The book is over there.",
       "targetUsageExample": "Книга вон там.",
+      "isActive": true
+    },
+    {
+      "id": "889167e0-8376-41a8-9b3a-b63f4019883d",
+      "sourceText": "they",
+      "targetText": "они",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -9121,6 +9685,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "A thousand people were there.",
       "targetUsageExample": "Там была тысяча человек.",
+      "isActive": true
+    },
+    {
+      "id": "108c1f4e-9b12-4db0-855b-ed95503c2f10",
+      "sourceText": "throat",
+      "targetText": "горло",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -9340,6 +9916,18 @@
       "isActive": true
     },
     {
+      "id": "8a563d30-e3ce-4f3d-8149-ae88c2d0c931",
+      "sourceText": "track",
+      "targetText": "след|трек",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "8c559475-9736-47d1-a1de-bdec49ff4e08",
       "sourceText": "trade",
       "targetText": "торговля, торговать",
@@ -9385,6 +9973,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I like to travel.",
       "targetUsageExample": "Я люблю путешествовать.",
+      "isActive": true
+    },
+    {
+      "id": "525d375c-c4a1-4063-8bb4-a11f74905ca5",
+      "sourceText": "treat",
+      "targetText": "угощение|лечить",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -9604,6 +10204,30 @@
       "isActive": true
     },
     {
+      "id": "848211a6-5905-4084-a4a1-6ba63866dd6f",
+      "sourceText": "upon",
+      "targetText": "на|после",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
+      "id": "89050537-1678-4833-bd6a-600ed6a038a9",
+      "sourceText": "upset",
+      "targetText": "расстроенный|расстраивать",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "c379de20-4028-4676-a3cd-e1dd4b1eda22",
       "sourceText": "upstairs",
       "targetText": "наверху|на верхнем этаже",
@@ -9676,6 +10300,18 @@
       "isActive": true
     },
     {
+      "id": "1620e16a-a55f-43e9-bffe-02db2fa7cac6",
+      "sourceText": "village",
+      "targetText": "деревня|село",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
+      "isActive": true
+    },
+    {
       "id": "94c66fb8-8a4d-402e-864e-be2853f06416",
       "sourceText": "voice",
       "targetText": "голос",
@@ -9721,7 +10357,7 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I am waiting.",
       "targetUsageExample": "Я жду.",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "5f9e18ff-cbfb-43e1-952a-c7382f3023bf",
@@ -9757,7 +10393,7 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I am walking.",
       "targetUsageExample": "Я иду.",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "61f9f5d1-4b4a-4a86-89c3-5a74c787d403",
@@ -9805,6 +10441,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "It is warm today.",
       "targetUsageExample": "Сегодня тепло.",
+      "isActive": true
+    },
+    {
+      "id": "3d0ac147-3daf-43f0-84d2-74bb6172d065",
+      "sourceText": "waste",
+      "targetText": "тратить впустую|отходы",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -10060,18 +10708,6 @@
       "isActive": true
     },
     {
-      "id": "a15e73fe-af8c-4df4-9895-41ecad74fcb4",
-      "sourceText": "whoa",
-      "targetText": "стоп|эй|ого",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Whoa, slow down!",
-      "targetUsageExample": "Ого, помедленнее!",
-      "isActive": true
-    },
-    {
       "id": "a11cf2d2-8e03-4852-ace8-45d15c346bea",
       "sourceText": "whole",
       "targetText": "целый|весь",
@@ -10081,6 +10717,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "The whole world.",
       "targetUsageExample": "Весь мир.",
+      "isActive": true
+    },
+    {
+      "id": "fb261fff-9362-41fc-8e4a-d0f5211bf277",
+      "sourceText": "whose",
+      "targetText": "чей|чья|чьё",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -10129,6 +10777,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I want to win the game.",
       "targetUsageExample": "Я хочу выиграть игру.",
+      "isActive": true
+    },
+    {
+      "id": "91c4390f-547e-436c-8085-6d88076f33e4",
+      "sourceText": "wind",
+      "targetText": "ветер",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -10228,6 +10888,18 @@
       "isActive": true
     },
     {
+      "id": "dd3e47e2-0996-4d8f-87cf-68f1688e8f57",
+      "sourceText": "word",
+      "targetText": "слово",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "What is this word?",
+      "targetUsageExample": "Что это за слово?",
+      "isActive": true
+    },
+    {
       "id": "1aa8abf8-3ede-40d2-8e37-f197ca9bf924",
       "sourceText": "words",
       "targetText": "слова",
@@ -10237,7 +10909,7 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I have no words.",
       "targetUsageExample": "У меня нет слов.",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "229aacc3-6b37-43a2-a460-556a3c1ef664",
@@ -10345,7 +11017,7 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Your writing is very good.",
       "targetUsageExample": "Твое письмо очень хорошее.",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "97ffb44d-11ed-47cd-9e17-6b047a93248d",
@@ -10393,6 +11065,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Yes, I can help you.",
       "targetUsageExample": "Да, я могу тебе помочь.",
+      "isActive": true
+    },
+    {
+      "id": "d1d8407a-3020-484d-889b-5edd4166dfbc",
+      "sourceText": "yesterday",
+      "targetText": "вчера",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "",
+      "targetUsageExample": "",
       "isActive": true
     },
     {
@@ -10453,54 +11137,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "You can do it yourself.",
       "targetUsageExample": "Ты можешь сделать это сам.",
-      "isActive": true
-    },
-    {
-      "id": "c8ec4f1d-060b-4804-9f2c-c4d565af66d3",
-      "sourceText": "hold",
-      "targetText": "держать|удерживать|захват",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Hold my hand.",
-      "targetUsageExample": "Держи меня за руку.",
-      "isActive": true
-    },
-    {
-      "id": "new-kill-001",
-      "sourceText": "kill",
-      "targetText": "убивать",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Do not kill.",
-      "targetUsageExample": "Не убивай.",
-      "isActive": true
-    },
-    {
-      "id": "new-lose-001",
-      "sourceText": "lose",
-      "targetText": "терять|проигрывать",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Do not lose your keys.",
-      "targetUsageExample": "Не теряй свои ключи.",
-      "isActive": true
-    },
-    {
-      "id": "new-word-001",
-      "sourceText": "word",
-      "targetText": "слово",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "What is this word?",
-      "targetUsageExample": "Что это за слово?",
       "isActive": true
     }
   ]

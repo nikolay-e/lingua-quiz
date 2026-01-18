@@ -54,6 +54,7 @@ class FrequencyBasedSource(WordSource):
 
         # Use get_blacklist_words() to include shared_blacklists
         blacklisted_words = {w.lower() for w in config_loader.get_blacklist_words(self.language_code)}
+        ner_whitelist = {w.lower() for w in config_loader.get_ner_whitelist(self.language_code)}
 
         model_preferences = config_loader.get_spacy_models(self.language_code)
         nlp = get_nlp_model(self.language_code, model_preferences, silent=True)
@@ -78,7 +79,8 @@ class FrequencyBasedSource(WordSource):
                 doc = nlp(word)
                 if doc and len(doc) > 0:
                     token = doc[0]
-                    if token.pos_ == "PROPN":
+                    # Filter PROPN unless in whitelist
+                    if token.pos_ == "PROPN" and word_lower not in ner_whitelist:
                         continue
                     lemma = token.lemma_.lower()
                     lemma_exceptions = lang_config.get("lemmatization_exceptions", {}).get("short_lemmas", [])
