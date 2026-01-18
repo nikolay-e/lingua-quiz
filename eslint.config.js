@@ -2,8 +2,6 @@ import globals from 'globals';
 import js from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
-import svelte from 'eslint-plugin-svelte';
-import svelteParser from 'svelte-eslint-parser';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 
@@ -154,7 +152,6 @@ export default [
       '**/node_modules/',
       '**/dist/',
       '**/build/',
-      '**/.svelte-kit/',
       '**/coverage/',
       '**/.turbo/',
       '**/package-lock.json',
@@ -162,12 +159,10 @@ export default [
       '**/venv/',
       '**/.venv/',
       '**/packages/word-processing/venv/',
-      '**/packages/frontend/src/lib/components/ui/**', // Auto-generated shadcn-svelte components
       '**/generated/**', // Auto-generated code (all packages)
       '**/__pycache__/**', // Python cache
       '**/.mypy_cache/**', // Mypy cache
       '**/*.pyc', // Python compiled files
-      '**/*.svelte.ts', // Svelte 5 runes files - checked by svelte-check
     ],
   },
 
@@ -331,87 +326,9 @@ export default [
     },
   },
 
-  // Svelte files
-  ...svelte.configs['flat/recommended'],
-  {
-    files: ['**/*.svelte'],
-    languageOptions: {
-      parser: svelteParser,
-      ecmaVersion: 2024,
-      sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        $$props: 'readonly',
-        $$restProps: 'readonly',
-        $$slots: 'readonly',
-      },
-      parserOptions: {
-        parser: tsparser,
-        extraFileExtensions: ['.svelte'],
-      },
-    },
-    plugins: {
-      '@typescript-eslint': tseslint,
-      svelte,
-    },
-    rules: {
-      ...baseRules,
-      ...svelte.configs['flat/recommended'][1].rules,
-      // Svelte-specific rules
-      'svelte/valid-compile': 'error',
-      'svelte/no-at-html-tags': 'error',
-      'svelte/no-unused-svelte-ignore': 'warn',
-      'svelte/no-inner-declarations': 'error',
-      'svelte/no-trailing-spaces': 'error',
-      'svelte/mustache-spacing': ['error', { textExpressions: 'never', attributesAndProps: 'never' }],
-      'svelte/html-closing-bracket-spacing': [
-        'error',
-        { startTag: 'never', endTag: 'never', selfClosingTag: 'always' },
-      ],
-      'svelte/first-attribute-linebreak': ['error', { multiline: 'below', singleline: 'beside' }],
-      'svelte/indent': 'off', // Disabled due to known bug causing stack overflow
-      'svelte/max-attributes-per-line': [
-        'error',
-        {
-          multiline: 1,
-          singleline: 3,
-        },
-      ],
-      // Each block keys - CRITICAL: prevents Svelte 5 runtime error
-      // "Cannot read properties of undefined (reading 'prev')"
-      // Note: ESLint can only check syntax, not runtime duplicate values
-      'svelte/require-each-key': 'error',
-      'svelte/valid-each-key': 'error',
-      // SvelteKit navigation
-      'svelte/no-navigation-without-resolve': 'off', // We use goto() correctly with await/void
-      // TypeScript in Svelte
-      'no-unused-vars': 'off',
-      'no-undef': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_|\\$\\$',
-        },
-      ],
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      // Disable type-checking rules for Svelte (requires additional setup)
-      '@typescript-eslint/no-unsafe-assignment': 'off',
-      '@typescript-eslint/no-unsafe-member-access': 'off',
-      '@typescript-eslint/no-unsafe-call': 'off',
-      '@typescript-eslint/no-unsafe-return': 'off',
-      '@typescript-eslint/no-unsafe-argument': 'off',
-      '@typescript-eslint/no-floating-promises': 'off',
-      '@typescript-eslint/await-thenable': 'off',
-      '@typescript-eslint/no-misused-promises': 'off',
-      '@typescript-eslint/naming-convention': 'off',
-    },
-  },
-
   // Markdown code blocks
   {
-    files: ['**/*.md/*.js', '**/*.md/*.ts', '**/*.md/*.svelte'],
+    files: ['**/*.md/*.js', '**/*.md/*.ts'],
     rules: {
       'no-console': 'off',
       'no-unused-vars': 'off',
