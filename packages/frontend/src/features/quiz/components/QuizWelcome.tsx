@@ -42,42 +42,6 @@ export function QuizWelcome(): React.JSX.Element {
           </div>
         </div>
       </div>
-
-      <style>{`
-        .feature {
-          display: flex;
-          align-items: center;
-          padding: var(--spacing-sm) var(--spacing-md);
-          background: var(--color-muted);
-          border-radius: var(--radius-md);
-          transition: all var(--transition-speed) ease;
-        }
-
-        .feature-icon {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          margin-right: var(--spacing-sm);
-          transition: transform var(--transition-speed) ease;
-        }
-
-        .feature:hover .feature-icon {
-          transform: scale(1.15);
-        }
-
-        .feature-link {
-          text-decoration: none;
-          color: inherit;
-          cursor: pointer;
-        }
-
-        .feature-link:hover {
-          background-color: var(--color-primary);
-          color: var(--color-primary-foreground);
-          transform: translateY(-1px);
-          box-shadow: var(--shadow-button-hover);
-        }
-      `}</style>
     </>
   );
 }

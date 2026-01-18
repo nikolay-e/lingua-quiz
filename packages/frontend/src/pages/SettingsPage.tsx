@@ -131,7 +131,7 @@ export function SettingsPage(): React.JSX.Element {
   };
 
   const handleLogout = (): void => {
-    logout();
+    void logout();
   };
 
   const languageOptions = getSupportedLocales().map((loc) => ({
@@ -154,7 +154,7 @@ export function SettingsPage(): React.JSX.Element {
             variant="ghost"
             size="sm"
             onClick={() => {
-              navigate('/');
+              void navigate('/');
             }}
             className="self-start mb-2"
           >
@@ -451,147 +451,6 @@ export function SettingsPage(): React.JSX.Element {
           }}
         />
       )}
-
-      <style>{`
-        .settings-page {
-          min-height: 100vh;
-          background-color: var(--color-background);
-          padding: var(--spacing-md);
-        }
-
-        .settings-container {
-          max-width: 640px;
-          margin: 0 auto;
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-lg);
-        }
-
-        .settings-header {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-xs);
-        }
-
-        .settings-header h1 {
-          font-size: var(--font-size-2xl);
-          font-weight: var(--font-weight-bold);
-          color: var(--color-text);
-          margin: 0;
-        }
-
-        .settings-section {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .section-title {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-sm);
-        }
-
-        .password-form,
-        .azure-form {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-md);
-        }
-
-        .form-field {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-xs);
-        }
-
-        .password-input-wrapper {
-          position: relative;
-          display: flex;
-          align-items: center;
-        }
-
-        .password-input-wrapper input {
-          padding-right: 44px;
-        }
-
-        .toggle-password {
-          position: absolute;
-          right: 8px;
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 4px;
-          color: var(--color-muted-foreground);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .toggle-password:hover {
-          color: var(--color-text);
-        }
-
-        .password-requirements {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-          font-size: var(--font-size-sm);
-        }
-
-        .password-requirements li {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-xs);
-          color: var(--color-muted-foreground);
-          transition: color var(--transition-speed);
-        }
-
-        .password-requirements li.valid {
-          color: var(--color-success);
-        }
-
-        .requirement-icon {
-          font-size: 12px;
-        }
-
-        .error-message {
-          font-size: var(--font-size-sm);
-          color: var(--color-error);
-          margin: 0;
-        }
-
-        .danger-zone {
-          margin-top: var(--spacing-lg);
-        }
-
-        .danger-action {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: var(--spacing-md);
-        }
-
-        @media (width <= 480px) {
-          .danger-action {
-            flex-direction: column;
-            align-items: stretch;
-          }
-        }
-
-        .danger-info h4 {
-          font-weight: var(--font-weight-semibold);
-          margin: 0 0 var(--spacing-xs) 0;
-        }
-
-        .danger-info p {
-          font-size: var(--font-size-sm);
-          color: var(--color-muted-foreground);
-          margin: 0;
-        }
-      `}</style>
     </main>
   );
 }

@@ -6,8 +6,8 @@
       "project": []
     },
     "packages/frontend": {
-      "entry": ["src/main.tsx", "vite.config.ts"],
-      "project": ["src/**/*.{ts,tsx}"],
+      "entry": ["src/main.tsx", "vite.config.ts", ".storybook/main.ts", ".storybook/preview.ts"],
+      "project": ["src/**/*.{ts,tsx}", "src/**/*.stories.tsx"],
       "ignore": ["src/generated/**"],
       "paths": {
         "@/*": ["./src/*"],
@@ -30,8 +30,18 @@
     }
   },
   "ignore": ["**/generated/**", "**/node_modules/**"],
-  "ignoreDependencies": ["sort-package-json"],
-  "ignoreBinaries": ["check_image"],
+  "ignoreDependencies": [
+    "sort-package-json",
+    "@axe-core/playwright",
+    "lighthouse",
+    "postcss-html",
+    "stylelint-config-html",
+    "@stylelint/postcss-css-in-js",
+    "@vitest/coverage-v8",
+    "eslint-plugin-storybook",
+    "playwright"
+  ],
+  "ignoreBinaries": ["check_image", "sleep"],
   "ignoreExportsUsedInFile": true,
   "rules": {
     "exports": "off"

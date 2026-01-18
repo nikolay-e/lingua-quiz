@@ -390,22 +390,6 @@ export function QuizPage(): React.JSX.Element {
           setShowLevelAnimation(false);
         }}
       />
-
-      <style>{`
-        .feed {
-          max-width: 600px;
-          margin: 0 auto;
-          padding: var(--spacing-md);
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-md);
-        }
-        .stack {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-md);
-        }
-      `}</style>
     </>
   );
 }

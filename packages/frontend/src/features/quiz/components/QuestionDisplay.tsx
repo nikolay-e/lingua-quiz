@@ -78,28 +78,6 @@ export function QuestionDisplay({
           {currentQuestion.questionText}
         </span>
       </div>
-      <style>{`
-        .progress-bar {
-          width: 100%;
-          height: 6px;
-          border-radius: 9999px;
-          appearance: none;
-          background: var(--color-muted);
-        }
-        .progress-bar::-webkit-progress-bar {
-          background: var(--color-muted);
-          border-radius: 9999px;
-        }
-        .progress-bar::-webkit-progress-value {
-          background: var(--color-primary);
-          border-radius: 9999px;
-          transition: all 0.3s ease;
-        }
-        .progress-bar::-moz-progress-bar {
-          background: var(--color-primary);
-          border-radius: 9999px;
-        }
-      `}</style>
     </div>
   );
 }

@@ -32,13 +32,13 @@ export function TTSButton({ token, text, language }: TTSButtonProps): React.JSX.
   }, []);
 
   const handlePlay = () => {
-    ttsService.playTTS(token, text, language);
+    void ttsService.playTTS(token, text, language);
   };
 
   if (!canUseTTS) {
     return (
-      <span className="tts-muted text-sm text-muted-foreground" aria-live="polite">
-        {t('quiz.ttsUnavailable', { language: language || 'this language' })}
+      <span className="text-sm text-muted-foreground" aria-live="polite">
+        {t('quiz.ttsUnavailable', { language: language !== '' ? language : 'this language' })}
       </span>
     );
   }

@@ -99,39 +99,6 @@ export function LearningProgress({
           );
         })}
       </section>
-
-      <style>{`
-        summary::-webkit-details-marker {
-          display: none;
-        }
-        .progress-bar {
-          width: 100%;
-          height: 4px;
-          border-radius: 9999px;
-          appearance: none;
-          background: var(--color-muted);
-        }
-        .progress-bar::-webkit-progress-bar {
-          background: var(--color-muted);
-          border-radius: 9999px;
-        }
-        .progress-bar::-webkit-progress-value {
-          background: var(--color-primary);
-          border-radius: 9999px;
-          transition: all 0.3s ease;
-        }
-        .progress-bar::-moz-progress-bar {
-          background: var(--color-primary);
-          border-radius: 9999px;
-        }
-        @keyframes content-reveal {
-          from { opacity: 0; max-height: 0; }
-          to { opacity: 1; max-height: 500px; }
-        }
-        .animate-content-reveal {
-          animation: content-reveal 0.2s ease-out;
-        }
-      `}</style>
     </div>
   );
 }

@@ -149,28 +149,29 @@ export async function assessPronunciation(
   const result = (await response.json()) as AzurePronunciationResult;
 
   const nBestArray = result.NBest;
-  const nBest = nBestArray?.[0];
-  if (nBest === null || nBest === undefined) {
+  const nBest = nBestArray[0];
+  if (nBest === undefined) {
     throw new Error(`No pronunciation assessment results: ${JSON.stringify(result)}`);
   }
 
-  const words = nBest.Words ?? [];
+  const words = nBest.Words;
 
-  const scores: PronunciationScores = nBest.PronunciationAssessment
-    ? {
-        accuracy: nBest.PronunciationAssessment.AccuracyScore,
-        fluency: nBest.PronunciationAssessment.FluencyScore,
-        completeness: nBest.PronunciationAssessment.CompletenessScore,
-        prosody: nBest.PronunciationAssessment.ProsodyScore ?? 100,
-        pronunciation: nBest.PronunciationAssessment.PronScore,
-      }
-    : {
-        accuracy: nBest.AccuracyScore,
-        fluency: nBest.FluencyScore ?? nBest.AccuracyScore,
-        completeness: nBest.CompletenessScore ?? 100,
-        prosody: nBest.ProsodyScore ?? 100,
-        pronunciation: nBest.PronScore ?? nBest.AccuracyScore,
-      };
+  const scores: PronunciationScores =
+    nBest.PronunciationAssessment !== undefined
+      ? {
+          accuracy: nBest.PronunciationAssessment.AccuracyScore,
+          fluency: nBest.PronunciationAssessment.FluencyScore,
+          completeness: nBest.PronunciationAssessment.CompletenessScore,
+          prosody: nBest.PronunciationAssessment.ProsodyScore ?? 100,
+          pronunciation: nBest.PronunciationAssessment.PronScore,
+        }
+      : {
+          accuracy: nBest.AccuracyScore,
+          fluency: nBest.FluencyScore ?? nBest.AccuracyScore,
+          completeness: nBest.CompletenessScore ?? 100,
+          prosody: nBest.ProsodyScore ?? 100,
+          pronunciation: nBest.PronScore ?? nBest.AccuracyScore,
+        };
 
   const phonemeErrors: PhonemeError[] = [];
   const wordAssessments: WordAssessment[] = [];
@@ -178,9 +179,9 @@ export async function assessPronunciation(
   for (const word of words) {
     const wordPhonemes: WordAssessment['phonemes'] = [];
 
-    if (word.Phonemes !== null && word.Phonemes !== undefined) {
+    if (word.Phonemes !== undefined) {
       for (const phoneme of word.Phonemes) {
-        if (phoneme.Phoneme === '' || phoneme.Phoneme === undefined) continue;
+        if (phoneme.Phoneme === '') continue;
 
         const score = phoneme.PronunciationAssessment?.AccuracyScore ?? phoneme.AccuracyScore ?? 0;
         const nBestPhonemes = phoneme.PronunciationAssessment?.NBestPhonemes ?? phoneme.NBestPhonemes;

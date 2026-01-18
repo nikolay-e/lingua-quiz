@@ -59,7 +59,7 @@ export const useSpeakStore = create<SpeakStore>()(
           const { lastPracticeDate: lastDate, streakDays: currentStreak } = get();
           let streakDays = currentStreak;
 
-          if (lastDate !== null && lastDate !== undefined && lastDate !== '') {
+          if (lastDate !== null && lastDate !== '') {
             const lastDateObj = new Date(lastDate);
             const todayObj = new Date(today);
             const diffDays = Math.floor((todayObj.getTime() - lastDateObj.getTime()) / (1000 * 60 * 60 * 24));

@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 import globals from 'globals';
 import js from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
@@ -164,9 +167,7 @@ export default [
       '**/.mypy_cache/**', // Mypy cache
       '**/*.pyc', // Python compiled files
     ],
-  },
-
-  // JavaScript files
+  }, // JavaScript files
   {
     files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
     languageOptions: {
@@ -178,9 +179,7 @@ export default [
       sourceType: 'module',
     },
     rules: baseRules,
-  },
-
-  // TypeScript files - packages/core
+  }, // TypeScript files - packages/core
   {
     files: ['packages/core/src/**/*.ts'],
     languageOptions: {
@@ -204,9 +203,7 @@ export default [
       ...tseslint.configs.recommended.rules,
       ...typescriptRules,
     },
-  },
-
-  // TypeScript files - packages/frontend
+  }, // TypeScript files - packages/frontend
   {
     files: ['packages/frontend/src/**/*.ts'],
     languageOptions: {
@@ -230,9 +227,7 @@ export default [
       ...tseslint.configs.recommended.rules,
       ...typescriptRules,
     },
-  },
-
-  // TypeScript test files (relaxed rules)
+  }, // TypeScript test files (relaxed rules)
   {
     files: ['**/*.test.ts', '**/*.spec.ts', '**/tests/**/*.ts', '**/test/**/*.ts', '**/__tests__/**/*.ts'],
     languageOptions: {
@@ -290,9 +285,7 @@ export default [
       '@typescript-eslint/consistent-type-imports': 'off',
       '@typescript-eslint/no-inferrable-types': 'off',
     },
-  },
-
-  // Configuration files
+  }, // Configuration files
   {
     files: ['**/vite.config.ts', '**/vitest.config.ts', '*.config.ts', '*.config.js'],
     languageOptions: {
@@ -324,9 +317,7 @@ export default [
       '@typescript-eslint/await-thenable': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
     },
-  },
-
-  // Markdown code blocks
+  }, // Markdown code blocks
   {
     files: ['**/*.md/*.js', '**/*.md/*.ts'],
     rules: {
@@ -337,5 +328,68 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'off',
       'max-len': 'off',
     },
+  }, // TypeScript React files - packages/frontend (TSX)
+  {
+    files: ['packages/frontend/src/**/*.tsx'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 2024,
+        sourceType: 'module',
+        project: './packages/frontend/tsconfig.json',
+        tsconfigRootDir: __dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        ...globals.browser,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+    },
+    rules: {
+      ...baseRules,
+      ...tseslint.configs.recommended.rules,
+      ...typescriptRules,
+    },
+  }, // Storybook stories (relaxed rules)
+  {
+    files: ['**/*.stories.tsx', '**/*.stories.ts'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 2024,
+        sourceType: 'module',
+        project: './packages/frontend/tsconfig.json',
+        tsconfigRootDir: __dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        ...globals.browser,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+    },
+    rules: {
+      ...baseRules,
+      ...tseslint.configs.recommended.rules,
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/strict-boolean-expressions': 'off',
+      '@typescript-eslint/no-unnecessary-condition': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/await-thenable': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
+    },
   },
+  ...storybook.configs['flat/recommended'],
 ];

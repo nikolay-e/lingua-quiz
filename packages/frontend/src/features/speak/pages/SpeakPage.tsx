@@ -97,7 +97,7 @@ export function SpeakPage(): React.JSX.Element {
             variant="ghost"
             size="sm"
             onClick={() => {
-              navigate('/');
+              void navigate('/');
             }}
             className="self-start"
           >
@@ -110,7 +110,7 @@ export function SpeakPage(): React.JSX.Element {
               variant="ghost"
               size="icon"
               onClick={() => {
-                navigate('/settings');
+                void navigate('/settings');
               }}
               title={t('settings.title')}
             >
@@ -127,7 +127,7 @@ export function SpeakPage(): React.JSX.Element {
                 Azure API key not configured. Using simulated scores.{' '}
                 <button
                   onClick={() => {
-                    navigate('/settings');
+                    void navigate('/settings');
                   }}
                   className="speak-warning-link"
                 >
@@ -198,198 +198,6 @@ export function SpeakPage(): React.JSX.Element {
           </div>
         </div>
       </div>
-
-      <style>{`
-        .speak-page {
-          min-height: 100vh;
-          background-color: var(--color-background);
-          padding: var(--spacing-md);
-        }
-
-        .speak-container {
-          max-width: 1000px;
-          margin: 0 auto;
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-lg);
-        }
-
-        .speak-header {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-xs);
-        }
-
-        .speak-header-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .speak-header h1 {
-          font-size: var(--font-size-2xl);
-          font-weight: var(--font-weight-bold);
-          color: var(--color-text);
-          margin: 0;
-        }
-
-        .speak-content {
-          display: grid;
-          grid-template-columns: 1fr 280px;
-          gap: var(--spacing-lg);
-        }
-
-        @media (width <= 768px) {
-          .speak-content {
-            grid-template-columns: 1fr;
-          }
-        }
-
-        .speak-main {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-md);
-        }
-
-        .speak-warning {
-          background: color-mix(in srgb, var(--color-warning) 20%, transparent);
-          color: var(--color-warning);
-          border-radius: var(--radius-md);
-          padding: var(--spacing-sm);
-          text-align: center;
-          font-size: var(--font-size-sm);
-        }
-
-        .speak-warning-link {
-          background: none;
-          border: none;
-          text-decoration: underline;
-          color: inherit;
-          cursor: pointer;
-        }
-
-        .speak-input-section {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-xs);
-        }
-
-        .speak-text-display {
-          background: var(--color-card);
-          border-radius: var(--radius-lg);
-          padding: var(--spacing-lg);
-          text-align: center;
-        }
-
-        .speak-text {
-          font-size: var(--font-size-xl);
-          font-weight: var(--font-weight-medium);
-          margin: 0;
-          color: var(--color-text);
-        }
-
-        .speak-word-scores {
-          margin-top: var(--spacing-md);
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: var(--spacing-xs);
-        }
-
-        .speak-word {
-          padding: 4px 12px;
-          border-radius: var(--radius-full);
-          font-size: var(--font-size-sm);
-          font-weight: var(--font-weight-medium);
-        }
-
-        .speak-word.good {
-          background: color-mix(in srgb, var(--color-success) 20%, transparent);
-          color: var(--color-success);
-        }
-
-        .speak-word.needs-work {
-          background: color-mix(in srgb, var(--color-error) 20%, transparent);
-          color: var(--color-error);
-        }
-
-        .speak-processing {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: var(--spacing-sm);
-          color: var(--color-muted-foreground);
-        }
-
-        .speak-spinner {
-          width: 24px;
-          height: 24px;
-          border: 2px solid var(--color-primary);
-          border-top-color: transparent;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-
-        .speak-error {
-          background: color-mix(in srgb, var(--color-error) 20%, transparent);
-          color: var(--color-error);
-          border-radius: var(--radius-md);
-          padding: var(--spacing-sm);
-          text-align: center;
-          font-size: var(--font-size-sm);
-        }
-
-        .speak-hint {
-          text-align: center;
-          font-size: var(--font-size-xs);
-          color: var(--color-muted-foreground);
-          opacity: 0.5;
-          margin: 0;
-        }
-
-        .speak-sidebar {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-md);
-        }
-
-        .speak-feedback {
-          border-radius: var(--radius-lg);
-          padding: var(--spacing-md);
-          text-align: center;
-        }
-
-        .speak-feedback.passed {
-          background: color-mix(in srgb, var(--color-success) 20%, transparent);
-        }
-
-        .speak-feedback.needs-work {
-          background: color-mix(in srgb, var(--color-warning) 20%, transparent);
-        }
-
-        .speak-feedback-message {
-          font-weight: var(--font-weight-semibold);
-          margin: 0;
-        }
-
-        .speak-feedback.passed .speak-feedback-message {
-          color: var(--color-success);
-        }
-
-        .speak-feedback.needs-work .speak-feedback-message {
-          color: var(--color-warning);
-        }
-
-        .speak-feedback-suggestion {
-          font-size: var(--font-size-sm);
-          color: var(--color-muted-foreground);
-          margin: var(--spacing-xs) 0 0 0;
-        }
-      `}</style>
     </main>
   );
 }

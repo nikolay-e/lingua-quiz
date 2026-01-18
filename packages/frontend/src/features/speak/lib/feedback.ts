@@ -6,12 +6,12 @@ export function getAssessmentFeedback(
   threshold: number,
   wordAssessments?: WordAssessment[],
 ): AssessmentFeedback {
-  const hasWordAssessments = wordAssessments !== null && wordAssessments !== undefined && wordAssessments.length > 0;
+  const hasWordAssessments = wordAssessments !== undefined && wordAssessments.length > 0;
   const minWordScore = hasWordAssessments ? Math.min(...wordAssessments.map((w) => w.accuracyScore)) : 100;
 
   const worstWord = wordAssessments?.find((w) => w.accuracyScore === minWordScore);
 
-  if (scores.pronunciation >= threshold && minWordScore < threshold && worstWord !== null && worstWord !== undefined) {
+  if (scores.pronunciation >= threshold && minWordScore < threshold && worstWord !== undefined) {
     return {
       passed: false,
       message: `Word "${worstWord.word}" needs work (${Math.round(minWordScore)}%)`,

@@ -136,21 +136,6 @@ function Toast({ toast, onRemove }: ToastProps): React.JSX.Element {
       >
         <X size={16} />
       </button>
-      <style>{`
-        @keyframes slide-in {
-          from {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        .animate-slide-in {
-          animation: slide-in 0.2s ease-out;
-        }
-      `}</style>
     </div>
   );
 }

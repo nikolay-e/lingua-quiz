@@ -22,7 +22,7 @@ function parseListName(list: WordList): ParsedList | null {
   const spaceMatch = list.listName.match(/^(\w+)\s+(\w+)\s+([A-Ca-c]\d)$/);
   const hyphenMatch = list.listName.match(/^(\w+)-(\w+)-([A-Ca-c]\d)$/);
   const match = spaceMatch ?? hyphenMatch;
-  if (match === null || match[1] === undefined || match[2] === undefined || match[3] === undefined) return null;
+  if (match?.[1] === undefined || match[2] === undefined || match[3] === undefined) return null;
   return {
     source: match[1].toLowerCase(),
     target: match[2].toLowerCase(),
@@ -109,7 +109,6 @@ export function LanguageLevelSelector({
             </div>
           ))}
         </div>
-        <style>{selectorStyles}</style>
       </div>
     );
   }
@@ -170,111 +169,6 @@ export function LanguageLevelSelector({
           </Button>
         </div>
       )}
-
-      <style>{selectorStyles}</style>
     </div>
   );
 }
-
-const selectorStyles = `
-  .selector-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-  }
-
-  .selector-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-  }
-
-  .selector-row {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    align-items: center;
-    gap: var(--spacing-md);
-    transition: opacity var(--transition-speed) ease;
-  }
-
-  @media (width <= 480px) {
-    .selector-row {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-xs);
-    }
-  }
-
-  .selector-row.disabled {
-    opacity: 0.5;
-  }
-
-  .selector-label {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text);
-    white-space: nowrap;
-  }
-
-  .selector-label .label-icon {
-    color: var(--color-primary);
-    flex-shrink: 0;
-  }
-
-  .selector-trigger {
-    width: 100%;
-    min-height: var(--touch-target-min);
-  }
-
-  .start-section {
-    display: flex;
-    justify-content: center;
-    padding-top: var(--spacing-sm);
-  }
-
-  .start-button {
-    min-width: 180px;
-  }
-
-  .loading-state {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-  }
-
-  .skeleton-row {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: var(--spacing-md);
-    align-items: center;
-  }
-
-  @media (width <= 480px) {
-    .skeleton-row {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-xs);
-    }
-  }
-
-  .skeleton-label {
-    height: 20px;
-    border-radius: var(--radius-sm);
-  }
-
-  .skeleton-select {
-    height: var(--touch-target-min);
-    border-radius: var(--radius-md);
-  }
-
-  .skeleton-shimmer {
-    background: linear-gradient(90deg, var(--color-muted) 25%, var(--color-muted-foreground) 50%, var(--color-muted) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-`;

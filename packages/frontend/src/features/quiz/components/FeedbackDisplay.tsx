@@ -79,38 +79,6 @@ export function FeedbackDisplay({
           <span>{t('quiz.tryAgain')}</span>
         </Button>
       )}
-      <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.2s ease-out;
-        }
-        @keyframes success-pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.02); }
-        }
-        .animate-success-pulse {
-          animation: success-pulse 0.3s ease-out;
-        }
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-4px); }
-          75% { transform: translateX(4px); }
-        }
-        .animate-shake {
-          animation: shake 0.3s ease-out;
-        }
-        @keyframes icon-pop {
-          0% { transform: scale(0); }
-          50% { transform: scale(1.3); }
-          100% { transform: scale(1); }
-        }
-        .animate-icon-pop {
-          animation: icon-pop 0.3s ease-out;
-        }
-      `}</style>
     </div>
   );
 }

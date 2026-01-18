@@ -12,7 +12,7 @@ export function UserActions({ username }: UserActionsProps): React.JSX.Element {
   const navigate = useNavigate();
 
   const navigateToSettings = () => {
-    navigate('/settings');
+    void navigate('/settings');
   };
 
   return (

@@ -21,11 +21,9 @@ function getInitialLocale(): string {
     }
 
     const browserLocale = navigator.language;
-    if (browserLocale !== null) {
-      const langCode = browserLocale.split('-')[0];
-      if (langCode !== undefined && langCode !== '' && SUPPORTED_LOCALES.includes(langCode as SupportedLocale)) {
-        return langCode;
-      }
+    const langCode = browserLocale.split('-')[0];
+    if (langCode !== undefined && langCode !== '' && SUPPORTED_LOCALES.includes(langCode as SupportedLocale)) {
+      return langCode;
     }
   }
   return DEFAULT_LOCALE;

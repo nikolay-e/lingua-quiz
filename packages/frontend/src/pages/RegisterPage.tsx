@@ -47,7 +47,7 @@ export function RegisterPage(): React.JSX.Element {
     try {
       await register(username, password);
       setMessage(t('auth.registerSuccess'));
-      navigate('/');
+      void navigate('/');
     } catch (error: unknown) {
       setMessage(extractErrorMessage(error, t('auth.registerFailed')));
       setHasError(true);
@@ -135,98 +135,6 @@ export function RegisterPage(): React.JSX.Element {
           </button>
         </p>
       </div>
-
-      <style>{`
-        .auth-layout {
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: var(--spacing-md);
-          background-color: var(--color-background);
-        }
-
-        .auth-card {
-          width: 100%;
-          max-width: 400px;
-          padding: var(--spacing-xl);
-          background: var(--color-surface);
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-lg);
-          box-shadow: var(--shadow-md);
-        }
-
-        .auth-card h2 {
-          text-align: center;
-          margin-bottom: var(--spacing-lg);
-          color: var(--color-text);
-        }
-
-        .password-requirements {
-          font-size: var(--font-size-sm);
-        }
-
-        .requirements-title {
-          margin: 0 0 var(--spacing-xs) 0;
-          font-weight: var(--font-weight-medium);
-        }
-
-        .password-requirements ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-
-        .password-requirements li {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-xs);
-          color: var(--color-muted-foreground);
-          transition: color var(--transition-speed);
-        }
-
-        .password-requirements li.valid {
-          color: var(--color-success);
-        }
-
-        .requirement-icon {
-          font-size: 12px;
-        }
-
-        .auth-message {
-          margin-top: var(--spacing-md);
-          padding: var(--spacing-sm);
-          border-radius: var(--radius-md);
-          text-align: center;
-          font-size: var(--font-size-sm);
-        }
-
-        .auth-message.success {
-          background-color: color-mix(in oklch, var(--color-success) 10%, transparent);
-          color: var(--color-success);
-        }
-
-        .auth-message.error {
-          background-color: var(--color-error-bg);
-          color: var(--color-error-text);
-        }
-
-        .auth-link-text {
-          margin-top: var(--spacing-lg);
-          text-align: center;
-          font-size: var(--font-size-sm);
-          color: var(--color-text-muted);
-        }
-
-        .auth-link {
-          background: none;
-          border: none;
-          color: var(--color-primary);
-          cursor: pointer;
-          text-decoration: underline;
-          font-size: inherit;
-        }
-      `}</style>
     </div>
   );
 }

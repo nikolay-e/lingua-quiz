@@ -33,41 +33,6 @@ export function ErrorDisplay({
           </Button>
         )}
       </div>
-      <style>{`
-        .error-display {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-md);
-          padding: var(--spacing-md);
-          background-color: var(--color-error-bg);
-          border: 1px solid var(--color-error-border);
-          border-radius: var(--radius-md);
-        }
-
-        .error-content {
-          display: flex;
-          align-items: flex-start;
-          gap: var(--spacing-sm);
-        }
-
-        .error-content .error-icon {
-          color: var(--color-error);
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-
-        .error-message {
-          margin: 0;
-          color: var(--color-error-text);
-          line-height: 1.5;
-        }
-
-        .error-actions {
-          display: flex;
-          gap: var(--spacing-sm);
-          justify-content: flex-end;
-        }
-      `}</style>
     </div>
   );
 }

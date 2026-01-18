@@ -15,17 +15,23 @@ export function WaveformDisplay({ audioData, isRecording }: WaveformDisplayProps
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const computedStyle = getComputedStyle(canvas);
+    const surfaceColor = computedStyle.getPropertyValue('--color-surface').trim() || '#1e293b';
+    const borderColor = computedStyle.getPropertyValue('--color-border').trim() || '#334155';
+    const primaryColor = computedStyle.getPropertyValue('--color-primary').trim() || '#6366f1';
+    const errorColor = computedStyle.getPropertyValue('--color-error').trim() || '#ef4444';
+
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
     ctx.scale(dpr, dpr);
 
-    ctx.fillStyle = 'var(--color-surface, #1e293b)';
+    ctx.fillStyle = surfaceColor;
     ctx.fillRect(0, 0, rect.width, rect.height);
 
     if (!audioData || audioData.length === 0) {
-      ctx.strokeStyle = 'var(--color-border, #334155)';
+      ctx.strokeStyle = borderColor;
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(0, rect.height / 2);
@@ -37,7 +43,7 @@ export function WaveformDisplay({ audioData, isRecording }: WaveformDisplayProps
     const step = Math.ceil(audioData.length / rect.width);
     const amp = rect.height / 2;
 
-    ctx.strokeStyle = isRecording ? 'var(--color-error, #ef4444)' : 'var(--color-primary, #6366f1)';
+    ctx.strokeStyle = isRecording ? errorColor : primaryColor;
     ctx.lineWidth = 2;
     ctx.beginPath();
 
@@ -64,5 +70,5 @@ export function WaveformDisplay({ audioData, isRecording }: WaveformDisplayProps
     ctx.stroke();
   }, [audioData, isRecording]);
 
-  return <canvas ref={canvasRef} className="waveform-canvas" style={{ width: '100%', height: '96px' }} />;
+  return <canvas ref={canvasRef} className="waveform-canvas" />;
 }

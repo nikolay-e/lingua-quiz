@@ -96,7 +96,7 @@ export function AudioRecorder({
     audioUrlRef.current = URL.createObjectURL(audioBlob);
     audioRef.current = new Audio(audioUrlRef.current);
     audioRef.current.onended = () => setIsPlaying(false);
-    audioRef.current.play();
+    void audioRef.current.play();
     setIsPlaying(true);
   };
 
@@ -140,48 +140,6 @@ export function AudioRecorder({
             ? `Recorded (${formatDuration(duration)}) — click to play`
             : 'Click to start recording'}
       </p>
-
-      <style>{`
-        .audio-recorder {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-md);
-        }
-
-        .waveform-canvas {
-          border-radius: var(--radius-md);
-          background: var(--color-surface);
-        }
-
-        .audio-recorder-controls {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: var(--spacing-sm);
-        }
-
-        .record-button {
-          width: 64px;
-          height: 64px;
-          border-radius: 50%;
-        }
-
-        .record-button.recording {
-          animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.7; }
-        }
-
-        .audio-recorder-hint {
-          text-align: center;
-          font-size: var(--font-size-sm);
-          color: var(--color-muted-foreground);
-          margin: 0;
-        }
-      `}</style>
     </div>
   );
 }

@@ -35,32 +35,6 @@ export function QuizSkeleton(): React.JSX.Element {
           ))}
         </div>
       </FeedCard>
-
-      <style>{`
-        .header-skeleton {
-          padding: var(--spacing-md);
-        }
-
-        .select-skeleton {
-          padding: var(--spacing-sm) var(--spacing-md);
-        }
-
-        .question-skeleton {
-          padding: var(--spacing-lg);
-          display: flex;
-          justify-content: center;
-        }
-
-        .input-skeleton {
-          display: flex;
-          gap: var(--spacing-sm);
-          padding: var(--spacing-sm);
-        }
-
-        .progress-skeleton {
-          padding: var(--spacing-md);
-        }
-      `}</style>
     </div>
   );
 }

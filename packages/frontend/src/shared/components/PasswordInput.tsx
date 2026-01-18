@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import { Input } from '@shared/ui';
-import { Label } from '@shared/ui';
+import { Input, Label } from '@shared/ui';
 
 interface PasswordInputProps {
   value: string;

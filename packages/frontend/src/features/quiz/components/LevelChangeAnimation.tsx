@@ -71,28 +71,6 @@ export function LevelChangeAnimation({
           )}
         </div>
       </div>
-      <style>{`
-        @keyframes level-up {
-          0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-          20% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-          40% { transform: translate(-50%, -50%) scale(1); }
-          80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-          100% { transform: translate(-50%, -100%) scale(0.8); opacity: 0; }
-        }
-        @keyframes level-down {
-          0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-          20% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-          40% { transform: translate(-50%, -50%) scale(1); }
-          80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-          100% { transform: translate(-50%, 0%) scale(0.8); opacity: 0; }
-        }
-        .animate-level-up {
-          animation: level-up 1.2s ease-out forwards;
-        }
-        .animate-level-down {
-          animation: level-down 1.2s ease-out forwards;
-        }
-      `}</style>
     </div>
   );
 }

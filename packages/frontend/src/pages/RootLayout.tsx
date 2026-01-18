@@ -40,11 +40,11 @@ export function RootLayout(): React.JSX.Element {
     const publicRoutes = ['/login', '/register'];
 
     if (!isAuthenticated && protectedRoutes.includes(currentPath)) {
-      navigate('/login', { replace: true });
+      void navigate('/login', { replace: true });
     } else if (isAuthenticated && publicRoutes.includes(currentPath)) {
-      navigate('/', { replace: true });
+      void navigate('/', { replace: true });
     } else if (currentPath === '/admin' && !isAdmin) {
-      navigate('/', { replace: true });
+      void navigate('/', { replace: true });
     }
   }, [isAuthenticated, isAdmin, currentPath, navigate]);
 
@@ -52,7 +52,7 @@ export function RootLayout(): React.JSX.Element {
     <>
       {isAuthenticated && isAdminPage && isAdmin && (
         <div className="admin-nav">
-          <Button variant="outline" onClick={() => navigate('/')}>
+          <Button variant="outline" onClick={() => void navigate('/')}>
             <svg className="mr-2 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -70,15 +70,6 @@ export function RootLayout(): React.JSX.Element {
       )}
 
       <Outlet />
-
-      <style>{`
-        .admin-nav {
-          position: fixed;
-          top: max(var(--spacing-sm), env(safe-area-inset-top, 0px));
-          right: max(var(--spacing-sm), env(safe-area-inset-right, 0px));
-          z-index: 1000;
-        }
-      `}</style>
     </>
   );
 }
