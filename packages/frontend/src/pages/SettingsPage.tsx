@@ -14,9 +14,12 @@ import {
   Sun,
   Moon,
   Monitor,
+  Mic,
 } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useThemeStore } from '@features/settings/stores/theme.store';
+import { useSpeakStore } from '@features/speak';
+import { AZURE_REGIONS } from '@features/speak/lib/constants';
 import { Button, Input, Label, Card, CardHeader, CardTitle, CardDescription, CardContent, Select } from '@shared/ui';
 import { ConfirmDialog, useToast } from '@shared/components';
 import { extractErrorMessage, THEME_MODES, type ThemeMode } from '@shared/utils';
@@ -44,6 +47,10 @@ export function SettingsPage(): React.JSX.Element {
   const mode = useThemeStore((state) => state.mode);
   const setMode = useThemeStore((state) => state.setMode);
 
+  const azureApiKey = useSpeakStore((state) => state.azureApiKey);
+  const azureRegion = useSpeakStore((state) => state.azureRegion);
+  const setAzureCredentials = useSpeakStore((state) => state.setAzureCredentials);
+
   const currentLocale = i18n.language as SupportedLocale;
 
   const [currentPassword, setCurrentPassword] = useState('');
@@ -55,6 +62,9 @@ export function SettingsPage(): React.JSX.Element {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+  const [localAzureKey, setLocalAzureKey] = useState(azureApiKey);
+  const [localAzureRegion, setLocalAzureRegion] = useState(azureRegion);
+  const [showAzureKey, setShowAzureKey] = useState(false);
 
   const passwordRequirements = useMemo(
     () => [
@@ -80,6 +90,16 @@ export function SettingsPage(): React.JSX.Element {
       setMode(value);
     }
   };
+
+  const handleSaveAzureCredentials = () => {
+    setAzureCredentials(localAzureKey, localAzureRegion);
+    toast.success(t('settings.azureSaved', 'Azure credentials saved'));
+  };
+
+  const azureRegionOptions = AZURE_REGIONS.map((region) => ({
+    value: region.value,
+    label: region.label,
+  }));
 
   const handleChangePassword = async (): Promise<void> => {
     if (!canSubmitPassword || token === null) return;
@@ -194,6 +214,60 @@ export function SettingsPage(): React.JSX.Element {
             </CardHeader>
             <CardContent>
               <Select value={mode} onValueChange={handleThemeChange} options={themeOptions} className="w-full" />
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="settings-section">
+          <Card>
+            <CardHeader>
+              <div className="section-title">
+                <Mic size={20} className="text-primary" />
+                <CardTitle>{t('settings.azureSpeech', 'Pronunciation (Azure Speech)')}</CardTitle>
+              </div>
+              <CardDescription>
+                {t('settings.azureSpeechDesc', 'Configure Azure Speech Services for pronunciation assessment')}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="azure-form">
+                <div className="form-field">
+                  <Label htmlFor="azure-key">{t('settings.azureKey', 'Azure Speech Key')}</Label>
+                  <div className="password-input-wrapper">
+                    <Input
+                      id="azure-key"
+                      type={showAzureKey ? 'text' : 'password'}
+                      value={localAzureKey}
+                      onChange={(e) => {
+                        setLocalAzureKey(e.target.value);
+                      }}
+                      placeholder={t('settings.azureKeyPlaceholder', 'Enter your Azure Speech API key')}
+                    />
+                    <button
+                      type="button"
+                      className="toggle-password"
+                      onClick={() => {
+                        setShowAzureKey(!showAzureKey);
+                      }}
+                      aria-label={showAzureKey ? t('settings.hidePassword') : t('settings.showPassword')}
+                    >
+                      {showAzureKey ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+                <div className="form-field">
+                  <Label htmlFor="azure-region">{t('settings.azureRegion', 'Azure Region')}</Label>
+                  <Select
+                    value={localAzureRegion}
+                    onValueChange={setLocalAzureRegion}
+                    options={azureRegionOptions}
+                    className="w-full"
+                  />
+                </div>
+                <Button type="button" onClick={handleSaveAzureCredentials} className="self-start mt-2">
+                  {t('settings.saveAzure', 'Save Azure Settings')}
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </section>
@@ -417,7 +491,8 @@ export function SettingsPage(): React.JSX.Element {
           gap: var(--spacing-sm);
         }
 
-        .password-form {
+        .password-form,
+        .azure-form {
           display: flex;
           flex-direction: column;
           gap: var(--spacing-md);

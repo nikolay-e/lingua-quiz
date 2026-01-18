@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { RootLayout, QuizPage, LoginPage, RegisterPage, SettingsPage, AdminPage } from '@pages';
+import { RootLayout, HomePage, QuizPage, LoginPage, RegisterPage, SettingsPage, AdminPage } from '@pages';
+import { SpeakPage } from '@features/speak';
 import { ProtectedRoute } from '@app/routing/ProtectedRoute';
 import { AdminRoute } from '@app/routing/AdminRoute';
 import { ToastProvider } from '@shared/components';
@@ -13,6 +14,14 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'learn',
+        element: (
+          <ProtectedRoute>
             <QuizPage />
           </ProtectedRoute>
         ),
@@ -22,6 +31,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <QuizPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'speak',
+        element: (
+          <ProtectedRoute>
+            <SpeakPage />
           </ProtectedRoute>
         ),
       },
