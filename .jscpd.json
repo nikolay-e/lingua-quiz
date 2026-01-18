@@ -11,7 +11,6 @@
     "**/__pycache__/**",
     "**/generated/**",
     "**/.git/**",
-    "**/.svelte-kit/**",
     "**/tests/**",
     "**/*.test.ts",
     "**/*.test.js",

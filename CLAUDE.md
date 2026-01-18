@@ -6,13 +6,13 @@
 
 Language learning web application using spaced repetition for vocabulary mastery.
 
-Full-stack application with Svelte frontend and Python backend.
+Full-stack application with React frontend and Python backend.
 
 **Live Demo:** [staging.lingua-quiz.org](https://staging.lingua-quiz.org/)
 
 ## Tech Stack
 
-- **Frontend**: Svelte 5, Vite 7, TypeScript
+- **Frontend**: React 19, Vite 7, TypeScript
 - **Backend**: Python 3.13, FastAPI, PostgreSQL
 - **Testing**: Playwright (E2E), Python integration tests
 - **Monorepo**: npm workspaces
@@ -24,7 +24,7 @@ lingua-quiz/
 ├── packages/
 │   ├── core/                  # Quiz business logic (TypeScript)
 │   ├── domain/                # Shared domain models (TypeScript)
-│   ├── frontend/              # Svelte 5 application
+│   ├── frontend/              # React 19 application
 │   ├── backend/               # Python FastAPI application
 │   ├── tests/                 # Playwright E2E tests
 │   └── tools/                 # Vocabulary generation pipeline (Python)
