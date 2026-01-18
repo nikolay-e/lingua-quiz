@@ -1,26 +1,23 @@
 {
   "$schema": "https://unpkg.com/knip@latest/schema.json",
-  "svelte": true,
   "workspaces": {
     ".": {
       "entry": [],
       "project": []
     },
     "packages/frontend": {
-      "entry": ["src/routes/**/*.svelte", "src/app.html", "svelte.config.js", "vite.config.ts", "src/lib/pwa/index.ts"],
-      "project": ["src/**/*.{ts,svelte}"],
-      "ignore": [".svelte-kit/**", "src/lib/components/ui/dialog/index.ts"],
+      "entry": ["src/main.tsx", "vite.config.ts"],
+      "project": ["src/**/*.{ts,tsx}"],
+      "ignore": ["src/generated/**"],
       "paths": {
-        "$lib": ["./src/lib"],
-        "$lib/*": ["./src/lib/*"],
-        "$stores": ["./src/stores"],
-        "$stores/*": ["./src/stores/*"],
-        "$components": ["./src/components"],
-        "$components/*": ["./src/components/*"],
-        "$api": ["./src/lib/api"],
-        "$api/*": ["./src/lib/api/*"],
-        "$src": ["./src"],
-        "$src/*": ["./src/*"]
+        "@/*": ["./src/*"],
+        "@app/*": ["./src/app/*"],
+        "@pages": ["./src/pages"],
+        "@pages/*": ["./src/pages/*"],
+        "@features/*": ["./src/features/*"],
+        "@shared/*": ["./src/shared/*"],
+        "@api": ["./src/api"],
+        "@api/*": ["./src/api/*"]
       }
     },
     "packages/core": {
@@ -35,5 +32,8 @@
   "ignore": ["**/generated/**", "**/node_modules/**"],
   "ignoreDependencies": ["sort-package-json"],
   "ignoreBinaries": ["check_image"],
-  "ignoreExportsUsedInFile": true
+  "ignoreExportsUsedInFile": true,
+  "rules": {
+    "exports": "off"
+  }
 }

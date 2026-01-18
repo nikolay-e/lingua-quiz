@@ -1,0 +1,34 @@
+import { useMemo } from 'react';
+import type { QuizManager } from '@lingua-quiz/core';
+import type { LevelWordLists, TranslationDisplay } from '@api/types';
+import { LEVEL_CONFIG } from '../config/levelConfig';
+
+export function useLevelWordLists(quizManager: QuizManager | null): LevelWordLists {
+  return useMemo(() => {
+    if (quizManager === null) {
+      return LEVEL_CONFIG.reduce<LevelWordLists>((acc, level) => {
+        acc[level.id] = { ...level, words: [], count: 0 };
+        return acc;
+      }, {});
+    }
+
+    const state = quizManager.getState();
+
+    return LEVEL_CONFIG.reduce<LevelWordLists>((acc, level) => {
+      const queue = state.queues[level.key as keyof typeof state.queues];
+      const words = queue
+        .map((id) => quizManager.getTranslationForDisplay(id))
+        .filter((translation): translation is TranslationDisplay => translation !== undefined)
+        .map((w) => `${w.source} -> ${w.target}`);
+
+      const queueLength = queue.length;
+
+      acc[level.id] = {
+        ...level,
+        words,
+        count: queueLength,
+      };
+      return acc;
+    }, {});
+  }, [quizManager]);
+}

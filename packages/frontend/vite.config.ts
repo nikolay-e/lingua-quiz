@@ -1,25 +1,25 @@
-import { sveltekit } from '@sveltejs/kit/vite';
+import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import { defineConfig } from 'vite';
-import { SvelteKitPWA } from '@vite-pwa/sveltekit';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    sveltekit(),
-    SvelteKitPWA({
+    react(),
+    VitePWA({
       strategies: 'generateSW',
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: false, // Disable PWA in development to avoid caching issues
+        enabled: false,
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,gif,ico,svg,woff,woff2}'],
         maximumFileSizeToCacheInBytes: 3000000,
-        skipWaiting: true, // Automatically update service worker
-        clientsClaim: true, // Take control of all clients immediately
-        cleanupOutdatedCaches: true, // Clean up old caches automatically
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -28,7 +28,7 @@ export default defineConfig({
               cacheName: 'google-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365, // 365 days
+                maxAgeSeconds: 60 * 60 * 24 * 365,
               },
             },
           },
@@ -39,7 +39,7 @@ export default defineConfig({
               cacheName: 'gstatic-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365, // 365 days
+                maxAgeSeconds: 60 * 60 * 24 * 365,
               },
             },
           },
@@ -50,7 +50,7 @@ export default defineConfig({
               cacheName: 'api-cache',
               expiration: {
                 maxEntries: 100,
-                maxAgeSeconds: 60 * 60, // 1 hour
+                maxAgeSeconds: 60 * 60,
               },
               networkTimeoutSeconds: 10,
             },
@@ -101,7 +101,6 @@ export default defineConfig({
       },
     },
     headers: {
-      // Disable caching in development
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       Pragma: 'no-cache',
       Expires: '0',
@@ -111,38 +110,41 @@ export default defineConfig({
   publicDir: 'public',
   build: {
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
-    sourcemap: false, // Disable sourcemaps in production to avoid information disclosure
+    sourcemap: false,
     minify: 'esbuild',
     cssMinify: true,
     rollupOptions: {
       output: {
-        // Generate hashed filenames with timestamp for better cache busting
         assetFileNames: `assets/[name]-[hash]-${Date.now()}[extname]`,
         chunkFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
         entryFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
-        // Remove comments from build
         banner: '',
         footer: '',
         intro: '',
         outro: '',
         manualChunks: {
-          vendor: ['svelte'],
-          'ui-components': ['bits-ui', 'lucide-svelte'],
+          vendor: ['react', 'react-dom'],
+          'vendor-router': ['react-router-dom'],
+          'vendor-state': ['zustand', '@tanstack/react-query'],
+          'vendor-i18n': ['i18next', 'react-i18next'],
+          'vendor-icons': ['lucide-react'],
         },
       },
     },
   },
   esbuild: {
     target: 'es2020',
-    // Remove console.log and debugger statements in production
     drop: ['console', 'debugger'],
-    // Remove comments
     legalComments: 'none',
   },
   resolve: {
     alias: {
-      $lib: path.resolve('./src/lib'),
-      // Resolve OpenAPI schema for domain package validators
+      '@': path.resolve('./src'),
+      '@app': path.resolve('./src/app'),
+      '@pages': path.resolve('./src/pages'),
+      '@features': path.resolve('./src/features'),
+      '@shared': path.resolve('./src/shared'),
+      '@api': path.resolve('./src/api'),
       '../../../lingua-quiz-schema.json': path.resolve('../../lingua-quiz-schema.json'),
     },
   },
