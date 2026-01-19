@@ -1,10 +1,11 @@
 /* ============================================
-   CASCADE LAYER ORDER
-   Declare before Tailwind import to lock in order
+   TAILWIND v4 IMPORT - prettier-ignore required to prevent url() wrapping
    ============================================ */
-@layer reset, base, tokens, components, utilities, overrides;
 
-@import url('tailwindcss');
+/* prettier-ignore */
+@import url("tailwindcss");
+
+@layer reset, base, tokens, components, utilities, overrides;
 
 /* ============================================
    TAILWIND THEME CONFIGURATION
@@ -22,7 +23,7 @@
   --color-background: #f4f7f9;
   --color-surface: var(--color-white);
   --color-border: #e2e8f0;
-  --color-input-border: #ddd;
+  --color-input-border: #9ca3af;
   --color-text: #333;
   --color-text-muted: rgb(51 51 51 / 0.75);
   --color-disabled-bg: #f0f0f0;
@@ -35,7 +36,7 @@
   --color-muted-foreground: #64748b;
   --color-accent: var(--color-border);
   --color-accent-foreground: #0f172a;
-  --color-input: var(--color-border);
+  --color-input: var(--color-input-border);
   --color-ring: var(--color-primary);
   --color-card: var(--color-surface);
   --color-card-foreground: var(--color-text);
@@ -426,12 +427,17 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: 6px;
 
     /* Style inputs when group contains toggle button */
     &:has(.toggle-password-btn) input {
       padding-inline-end: 2.75rem;
     }
+  }
+
+  /* Add spacing before submit button in forms */
+  .form-compact button[type='submit'] {
+    margin-top: var(--spacing-sm);
   }
 
   .toggle-password-btn {
@@ -481,7 +487,7 @@
   .form-compact {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
   }
 
   /* Admin table to cards on mobile */
@@ -718,17 +724,20 @@
 
   .auth-card {
     width: 100%;
-    max-width: 400px;
-    padding: var(--spacing-xl);
+    max-width: 420px;
+    padding: var(--spacing-2xl) var(--spacing-xl);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
 
     h2 {
       text-align: center;
-      margin-bottom: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
       color: var(--color-text);
+      font-size: var(--font-size-xl);
     }
   }
 

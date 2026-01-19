@@ -28,28 +28,30 @@ export function PasswordInput({
   return (
     <div className="input-group">
       {label !== '' && <Label htmlFor={id}>{label}</Label>}
-      <Input
-        type={showPassword ? 'text' : 'password'}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        required
-        aria-required="true"
-        invalid={invalid}
-        disabled={disabled}
-        id={id}
-        autoComplete={autocomplete}
-      />
-      <button
-        type="button"
-        className="toggle-password-btn disabled:opacity-50 disabled:cursor-not-allowed"
-        onClick={() => setShowPassword(!showPassword)}
-        aria-label={showPassword ? 'Hide password' : 'Show password'}
-        tabIndex={-1}
-        disabled={disabled}
-      >
-        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-      </button>
+      <div className="password-input-wrapper">
+        <Input
+          type={showPassword ? 'text' : 'password'}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          required
+          aria-required="true"
+          invalid={invalid}
+          disabled={disabled}
+          id={id}
+          autoComplete={autocomplete}
+        />
+        <button
+          type="button"
+          className="toggle-password"
+          onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? 'Hide password' : 'Show password'}
+          tabIndex={-1}
+          disabled={disabled}
+        >
+          {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+        </button>
+      </div>
     </div>
   );
 }
