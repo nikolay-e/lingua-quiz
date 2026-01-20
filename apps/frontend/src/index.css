@@ -53,7 +53,7 @@
   /* Font */
   --font-sans: 'Roboto', arial, sans-serif;
 
-  /* Spacing scale (used by Tailwind utilities) */
+  /* Spacing scale (used by gap-*, p-*, m-* utilities) */
   --spacing-xs: 8px;
   --spacing-sm: 12px;
   --spacing-md: 16px;

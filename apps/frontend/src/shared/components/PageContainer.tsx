@@ -11,11 +11,11 @@ interface PageContainerProps {
 }
 
 const maxWidthClasses: Record<MaxWidth, string> = {
-  sm: 'max-w-sm',
-  md: 'max-w-md',
-  lg: 'max-w-lg',
-  xl: 'max-w-xl',
-  '2xl': 'max-w-2xl',
+  sm: 'max-w-[24rem]',
+  md: 'max-w-[28rem]',
+  lg: 'max-w-[32rem]',
+  xl: 'max-w-[36rem]',
+  '2xl': 'max-w-[42rem]',
   '3xl': 'max-w-3xl',
   '4xl': 'max-w-4xl',
 };
