@@ -3,33 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { Languages, GraduationCap, BookOpen, Play } from 'lucide-react';
 import type { WordList } from '@api/types';
 import { Button, Select } from '@shared/ui';
-
-interface ParsedList {
-  source: string;
-  target: string;
-  level: string;
-  listName: string;
-  wordCount: number;
-}
+import { parseListName, type ParsedList } from '../utils';
 
 interface LanguageLevelSelectorProps {
   wordLists: WordList[];
   loading?: boolean;
   onSelect: (listName: string) => void;
-}
-
-function parseListName(list: WordList): ParsedList | null {
-  const spaceMatch = list.listName.match(/^(\w+)\s+(\w+)\s+([A-Ca-c]\d)$/);
-  const hyphenMatch = list.listName.match(/^(\w+)-(\w+)-([A-Ca-c]\d)$/);
-  const match = spaceMatch ?? hyphenMatch;
-  if (match?.[1] === undefined || match[2] === undefined || match[3] === undefined) return null;
-  return {
-    source: match[1].toLowerCase(),
-    target: match[2].toLowerCase(),
-    level: match[3].toLowerCase(),
-    listName: list.listName,
-    wordCount: list.wordCount,
-  };
 }
 
 export function LanguageLevelSelector({

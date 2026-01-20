@@ -2,35 +2,13 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Languages, GraduationCap, BookOpen, Play, Mic, Settings } from 'lucide-react';
-import type { WordList } from '@api/types';
 import { Button, Select } from '@shared/ui';
 import { FeedCard } from '@shared/components';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { useSpeakStore } from '@features/speak';
+import { parseListName, type ParsedList } from '@features/quiz/utils';
 import { logger, extractErrorMessage } from '@shared/utils';
-
-interface ParsedList {
-  source: string;
-  target: string;
-  level: string;
-  listName: string;
-  wordCount: number;
-}
-
-function parseListName(list: WordList): ParsedList | null {
-  const spaceMatch = list.listName.match(/^(\w+)\s+(\w+)\s+([A-Ca-c]\d)$/);
-  const hyphenMatch = list.listName.match(/^(\w+)-(\w+)-([A-Ca-c]\d)$/);
-  const match = spaceMatch ?? hyphenMatch;
-  if (match?.[1] === undefined || match?.[2] === undefined || match?.[3] === undefined) return null;
-  return {
-    source: match[1].toLowerCase(),
-    target: match[2].toLowerCase(),
-    level: match[3].toLowerCase(),
-    listName: list.listName,
-    wordCount: list.wordCount,
-  };
-}
 
 export function HomePage(): React.JSX.Element {
   const { t } = useTranslation();

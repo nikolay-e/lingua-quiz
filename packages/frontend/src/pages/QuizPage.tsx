@@ -260,16 +260,16 @@ export function QuizPage(): React.JSX.Element {
       }
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    document.addEventListener('visibilitychange', () => {
+    const visibilityHandler = (): void => {
       void handleVisibilityChange();
-    });
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener('visibilitychange', visibilityHandler);
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
-      document.removeEventListener('visibilitychange', () => {
-        void handleVisibilityChange();
-      });
+      document.removeEventListener('visibilitychange', visibilityHandler);
     };
   }, [token, quizManager, selectedQuiz, hasPendingChanges, flushImmediately]);
 
