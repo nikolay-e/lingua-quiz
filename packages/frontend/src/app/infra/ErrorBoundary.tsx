@@ -1,4 +1,5 @@
 import { Component, type ReactNode, type ErrorInfo } from 'react';
+import { Button } from '@shared/ui/Button';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -36,22 +37,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
       return (
         <div className="feed">
-          <div className="stack" style={{ textAlign: 'center', padding: 'var(--spacing-xl)' }}>
+          <div className="stack text-center p-8">
             <h1>Something went wrong</h1>
             <p className="muted">{this.state.error?.message ?? 'An unexpected error occurred'}</p>
-            <button
-              onClick={this.handleRetry}
-              className="touch-target"
-              style={{
-                backgroundColor: 'var(--color-primary)',
-                color: 'white',
-                border: 'none',
-                borderRadius: 'var(--radius-md)',
-                cursor: 'pointer',
-              }}
-            >
-              Try Again
-            </button>
+            <Button onClick={this.handleRetry}>Try Again</Button>
           </div>
         </div>
       );
