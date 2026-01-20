@@ -48,12 +48,13 @@ RUN VITE_APP_VERSION=${APP_VERSION} \
 FROM nginx:1.29-alpine AS frontend
 RUN chown -R nginx:nginx /var/cache/nginx && \
     chmod -R 755 /var/cache/nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf.template
 COPY --from=frontend-builder /app/packages/frontend/dist /usr/share/nginx/html
 RUN chown -R nginx:nginx /usr/share/nginx/html
 USER nginx
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ENV BACKEND_HOST=backend:9000
+CMD ["/bin/sh", "-c", "envsubst '${BACKEND_HOST}' < /etc/nginx/nginx.conf.template > /tmp/nginx.conf && nginx -c /tmp/nginx.conf -g 'daemon off;'"]
 
 FROM mcr.microsoft.com/playwright/python:v1.57.0-noble AS integration-e2e-tests
 ENV PYTHONUNBUFFERED=1 \
