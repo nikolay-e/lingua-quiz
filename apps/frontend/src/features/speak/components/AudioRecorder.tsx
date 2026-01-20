@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { Mic, Square, Play, Pause } from 'lucide-react';
+import { Mic, Square, Play, Pause, X } from 'lucide-react';
 import { useAudioRecorder } from '../hooks/useAudioRecorder';
 import { WaveformDisplay } from './WaveformDisplay';
 import { Button } from '@shared/ui';
+import { cn } from '@shared/utils';
 
 interface AudioRecorderProps {
   onRecordingComplete: (blob: Blob) => void;
@@ -66,7 +67,7 @@ export function AudioRecorder({
     if (toggleRef) {
       toggleRef.current = handleToggleRecording;
     }
-  });
+  }, [toggleRef, handleToggleRecording]);
 
   useEffect(() => {
     return () => {
@@ -106,34 +107,38 @@ export function AudioRecorder({
   };
 
   return (
-    <div className="audio-recorder">
+    <div className="flex flex-col gap-4">
       <WaveformDisplay audioData={audioData} isRecording={isRecording} />
 
-      <div className="audio-recorder-controls">
+      <div className="flex items-center justify-center gap-3">
         {audioBlob && !isRecording && (
-          <Button variant="secondary" size="icon" onClick={handlePlayback} title="Play recording">
+          <Button
+            variant="secondary"
+            size="icon"
+            onClick={handlePlayback}
+            aria-label={isPlaying ? 'Pause playback' : 'Play recording'}
+          >
             {isPlaying ? <Pause size={24} /> : <Play size={24} />}
           </Button>
         )}
 
         <Button
           variant={isRecording ? 'destructive' : 'default'}
-          size="lg"
           onClick={handleToggleRecording}
           disabled={disabled}
-          className={`record-button ${isRecording ? 'recording' : ''}`}
+          className={cn('w-16 h-16 rounded-full', isRecording && 'animate-pulse')}
         >
           {isRecording ? <Square size={24} /> : <Mic size={28} />}
         </Button>
 
         {audioBlob && !isRecording && (
-          <Button variant="ghost" size="icon" onClick={handleClear} title="Clear recording">
-            ✕
+          <Button variant="ghost" size="icon" onClick={handleClear} aria-label="Clear recording">
+            <X size={20} />
           </Button>
         )}
       </div>
 
-      <p className="audio-recorder-hint">
+      <p className="text-center text-sm text-muted-foreground m-0">
         {isRecording
           ? `Recording ${formatDuration(duration)}... Click to stop`
           : audioBlob

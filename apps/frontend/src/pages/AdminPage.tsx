@@ -4,9 +4,9 @@ import { useAuthStore } from '@features/auth/stores/auth.store';
 import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '@api/admin';
 import { LANGUAGE_OPTIONS, DIFFICULTY_OPTIONS, LIST_NAME_OPTIONS } from '@features/admin/config/adminConfig';
 import type { AdminVocabularyItem } from '@api/types';
-import { Button, Input, Label, Select } from '@shared/ui';
-import { ConfirmDialog, useToast } from '@shared/components';
-import { extractErrorMessage } from '@shared/utils';
+import { Button, Input, Label, Select, Card, CardContent } from '@shared/ui';
+import { ConfirmDialog, PageContainer, useToast } from '@shared/components';
+import { cn, extractErrorMessage } from '@shared/utils';
 
 interface EditForm {
   sourceText: string;
@@ -255,8 +255,8 @@ export function AdminPage(): React.JSX.Element {
   ];
 
   return (
-    <main id="main-content" className="min-h-screen bg-background p-4">
-      <div className="mx-auto max-w-7xl flex flex-col gap-6">
+    <>
+      <PageContainer maxWidth="4xl">
         <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold text-primary">Vocabulary Management</h1>
@@ -269,22 +269,30 @@ export function AdminPage(): React.JSX.Element {
         </header>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-card p-4 rounded-lg border border-border">
-            <div className="text-2xl font-bold text-primary">{stats.total}</div>
-            <div className="text-sm text-muted-foreground">Total Items</div>
-          </div>
-          <div className="bg-card p-4 rounded-lg border border-border">
-            <div className="text-2xl font-bold text-success">{stats.active}</div>
-            <div className="text-sm text-muted-foreground">Active</div>
-          </div>
-          <div className="bg-card p-4 rounded-lg border border-border">
-            <div className="text-2xl font-bold text-destructive">{stats.inactive}</div>
-            <div className="text-sm text-muted-foreground">Inactive</div>
-          </div>
-          <div className="bg-card p-4 rounded-lg border border-border">
-            <div className="text-2xl font-bold text-primary">{stats.languageCount}</div>
-            <div className="text-sm text-muted-foreground">Languages</div>
-          </div>
+          <Card>
+            <CardContent className="pt-4">
+              <div className="text-2xl font-bold text-primary">{stats.total}</div>
+              <div className="text-sm text-muted-foreground">Total Items</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4">
+              <div className="text-2xl font-bold text-success">{stats.active}</div>
+              <div className="text-sm text-muted-foreground">Active</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4">
+              <div className="text-2xl font-bold text-destructive">{stats.inactive}</div>
+              <div className="text-sm text-muted-foreground">Inactive</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4">
+              <div className="text-2xl font-bold text-primary">{stats.languageCount}</div>
+              <div className="text-sm text-muted-foreground">Languages</div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
@@ -326,7 +334,7 @@ export function AdminPage(): React.JSX.Element {
         </div>
 
         {filteredResults.length > 0 && (
-          <div className="bg-card rounded-lg border border-border overflow-hidden">
+          <Card className="overflow-hidden">
             <table className="w-full">
               <thead className="bg-muted">
                 <tr>
@@ -369,13 +377,16 @@ export function AdminPage(): React.JSX.Element {
               </thead>
               <tbody>
                 {filteredResults.map((item) => (
-                  <tr key={item.id} className="border-t border-border hover:bg-muted/50">
+                  <tr key={item.id} className="border-t border-border hover:bg-muted/50 transition-colors">
                     <td className="p-3">{item.sourceText}</td>
                     <td className="p-3">{item.targetText}</td>
                     <td className="p-3">{item.listName}</td>
                     <td className="p-3">
                       <span
-                        className={`px-2 py-1 rounded text-xs ${item.isActive ? 'bg-success/20 text-success' : 'bg-destructive/20 text-destructive'}`}
+                        className={cn(
+                          'px-2 py-1 rounded text-xs',
+                          item.isActive ? 'bg-success/20 text-success' : 'bg-destructive/20 text-destructive',
+                        )}
                       >
                         {item.isActive ? 'Active' : 'Inactive'}
                       </span>
@@ -388,8 +399,9 @@ export function AdminPage(): React.JSX.Element {
                           onClick={() => {
                             openEditDialog(item);
                           }}
+                          aria-label={`Edit ${item.sourceText}`}
                         >
-                          <Edit2 size={16} />
+                          <Edit2 size={16} aria-hidden="true" />
                         </Button>
                         <Button
                           variant="ghost"
@@ -397,8 +409,9 @@ export function AdminPage(): React.JSX.Element {
                           onClick={() => {
                             openDeleteDialog(item);
                           }}
+                          aria-label={`Delete ${item.sourceText}`}
                         >
-                          <Trash2 size={16} />
+                          <Trash2 size={16} aria-hidden="true" />
                         </Button>
                       </div>
                     </td>
@@ -406,12 +419,14 @@ export function AdminPage(): React.JSX.Element {
                 ))}
               </tbody>
             </table>
-          </div>
+          </Card>
         )}
+      </PageContainer>
 
-        {isEditDialogOpen && selectedItem !== null && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-card p-6 rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+      {isEditDialogOpen && selectedItem !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <Card className="w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <CardContent className="pt-6">
               <h2 className="text-xl font-semibold mb-4">Edit Vocabulary Item</h2>
               <div className="flex flex-col gap-4">
                 <div>
@@ -492,13 +507,15 @@ export function AdminPage(): React.JSX.Element {
                   </Button>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
-        {isCreateDialogOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-card p-6 rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+      {isCreateDialogOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <Card className="w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <CardContent className="pt-6">
               <h2 className="text-xl font-semibold mb-4">Create Vocabulary Item</h2>
               <div className="flex flex-col gap-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -601,25 +618,25 @@ export function AdminPage(): React.JSX.Element {
                   </Button>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
-        {isDeleteDialogOpen && itemToDelete !== null && (
-          <ConfirmDialog
-            open={isDeleteDialogOpen}
-            title="Delete Vocabulary Item"
-            description={`Are you sure you want to delete "${itemToDelete.sourceText}"? This action cannot be undone.`}
-            confirmLabel="Delete"
-            onConfirm={() => {
-              void handleDeleteItem();
-            }}
-            onCancel={() => {
-              setIsDeleteDialogOpen(false);
-            }}
-          />
-        )}
-      </div>
-    </main>
+      {isDeleteDialogOpen && itemToDelete !== null && (
+        <ConfirmDialog
+          open={isDeleteDialogOpen}
+          title="Delete Vocabulary Item"
+          description={`Are you sure you want to delete "${itemToDelete.sourceText}"? This action cannot be undone.`}
+          confirmLabel="Delete"
+          onConfirm={() => {
+            void handleDeleteItem();
+          }}
+          onCancel={() => {
+            setIsDeleteDialogOpen(false);
+          }}
+        />
+      )}
+    </>
   );
 }

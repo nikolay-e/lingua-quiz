@@ -60,7 +60,7 @@ export function LearningProgress({
                 onToggleFold?.(levelData.id);
               }}
             >
-              <summary className="foldable-header cursor-pointer select-none px-4 py-3 transition-colors hover:bg-primary/5 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-[-2px] list-none">
+              <summary className="cursor-pointer select-none px-4 py-3 transition-colors hover:bg-primary/5 focus-visible:outline-2 focus-visible:outline-primary focus-visible:-outline-offset-2 list-none">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-3">
                     <ChevronRight size={14} className="transition-transform group-open:rotate-90" aria-hidden="true" />
@@ -70,7 +70,7 @@ export function LearningProgress({
                     </span>
                   </div>
                   <progress
-                    className="progress-bar"
+                    className="w-full h-1.5 rounded-full appearance-none [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-muted [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-primary [&::-webkit-progress-value]:transition-all [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-primary"
                     value={levelData.count}
                     max={totalWords}
                     aria-label={`${levelData.label}: ${getProgressText(levelData.count, totalWords)}`}
@@ -82,9 +82,9 @@ export function LearningProgress({
               <div className="px-4 pb-4 pt-2 animate-content-reveal">
                 {levelData.words.length > 0 ? (
                   <ol id={`${levelData.id}-list`} className="pl-8 flex flex-col gap-2">
-                    {levelData.words.map((word, wordIndex) => (
+                    {levelData.words.map((word) => (
                       <li
-                        key={`${levelData.id}-${wordIndex}`}
+                        key={`${levelData.id}-${word}`}
                         className="py-2 border-b border-border last:border-b-0 text-sm"
                       >
                         {word}

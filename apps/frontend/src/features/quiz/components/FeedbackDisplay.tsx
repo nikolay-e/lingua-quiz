@@ -42,7 +42,7 @@ export function FeedbackDisplay({
   if (feedback === null) return null;
 
   return (
-    <div className="feedback-container flex flex-col gap-3" role="alert" aria-live="polite">
+    <div className="flex flex-col gap-3" role="alert" aria-live="polite">
       <div
         className={cn(
           'flex items-center justify-center gap-3 px-4 py-3 min-h-10 font-semibold rounded-lg border text-center transition-all',
@@ -62,16 +62,7 @@ export function FeedbackDisplay({
             <X size={18} />
           )}
         </span>
-        <span
-          className={cn(
-            'feedback-text',
-            isRevealResult && 'revealed',
-            isSuccess && 'success',
-            !isRevealResult && !isSuccess && 'error',
-          )}
-        >
-          {feedbackMessage}
-        </span>
+        <span>{feedbackMessage}</span>
       </div>
       {showRetry && (
         <Button variant="outline" onClick={onRetry} className="w-full">

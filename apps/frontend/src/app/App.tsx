@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RootLayout, HomePage, QuizPage, LoginPage, RegisterPage, SettingsPage, AdminPage, SpeakPage } from '@pages';
 import { ProtectedRoute } from '@app/routing/ProtectedRoute';
 import { AdminRoute } from '@app/routing/AdminRoute';
-import { ToastProvider } from '@shared/components';
+import { Toasts } from '@shared/components';
 
 const router = createBrowserRouter([
   {
@@ -71,8 +71,9 @@ const router = createBrowserRouter([
 
 export function App(): React.JSX.Element {
   return (
-    <ToastProvider>
+    <>
       <RouterProvider router={router} />
-    </ToastProvider>
+      <Toasts />
+    </>
   );
 }

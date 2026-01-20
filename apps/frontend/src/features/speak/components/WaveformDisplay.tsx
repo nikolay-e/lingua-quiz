@@ -16,9 +16,9 @@ export function WaveformDisplay({ audioData, isRecording }: WaveformDisplayProps
     if (!ctx) return;
 
     const computedStyle = getComputedStyle(canvas);
-    const surfaceColor = computedStyle.getPropertyValue('--color-surface').trim() || '#1e293b';
-    const borderColor = computedStyle.getPropertyValue('--color-border').trim() || '#334155';
-    const primaryColor = computedStyle.getPropertyValue('--color-primary').trim() || '#6366f1';
+    const surfaceColor = computedStyle.getPropertyValue('--color-surface').trim() || '#fff';
+    const borderColor = computedStyle.getPropertyValue('--color-border').trim() || '#e2e8f0';
+    const primaryColor = computedStyle.getPropertyValue('--color-primary').trim() || '#2563eb';
     const errorColor = computedStyle.getPropertyValue('--color-error').trim() || '#ef4444';
 
     const dpr = window.devicePixelRatio || 1;
@@ -70,5 +70,18 @@ export function WaveformDisplay({ audioData, isRecording }: WaveformDisplayProps
     ctx.stroke();
   }, [audioData, isRecording]);
 
-  return <canvas ref={canvasRef} className="waveform-canvas" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="w-full h-24 rounded-lg bg-surface"
+      role="img"
+      aria-label={
+        isRecording
+          ? 'Audio waveform visualization - recording in progress'
+          : audioData
+            ? 'Audio waveform visualization'
+            : 'Empty audio waveform'
+      }
+    />
+  );
 }

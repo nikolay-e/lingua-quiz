@@ -21,8 +21,8 @@ import { useThemeStore } from '@features/settings/stores/theme.store';
 import { useSpeakStore } from '@features/speak';
 import { AZURE_REGIONS } from '@features/speak/lib/constants';
 import { Button, Input, Label, Card, CardHeader, CardTitle, CardDescription, CardContent, Select } from '@shared/ui';
-import { ConfirmDialog, useToast } from '@shared/components';
-import { extractErrorMessage, THEME_MODES, type ThemeMode } from '@shared/utils';
+import { ConfirmDialog, PageContainer, useToast } from '@shared/components';
+import { cn, extractErrorMessage, THEME_MODES, type ThemeMode } from '@shared/utils';
 import { setLocale, getSupportedLocales, LOCALE_NAMES, type SupportedLocale } from '@shared/i18n';
 import api from '@api';
 
@@ -147,9 +147,9 @@ export function SettingsPage(): React.JSX.Element {
   const ThemeIcon = mode === THEME_MODES.DARK ? Moon : mode === THEME_MODES.LIGHT ? Sun : Monitor;
 
   return (
-    <main className="settings-page">
-      <div className="settings-container">
-        <header className="settings-header">
+    <>
+      <PageContainer maxWidth="xl">
+        <header className="flex flex-col gap-2">
           <Button
             variant="ghost"
             size="sm"
@@ -158,17 +158,17 @@ export function SettingsPage(): React.JSX.Element {
             }}
             className="self-start mb-2"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={18} aria-hidden="true" />
             <span>{t('nav.back')}</span>
           </Button>
-          <h1>{t('settings.title')}</h1>
+          <h1 className="text-2xl font-bold">{t('settings.title')}</h1>
           <p className="text-muted-foreground">{t('settings.subtitle')}</p>
         </header>
 
-        <section className="settings-section">
+        <section>
           <Card>
             <CardHeader>
-              <div className="section-title">
+              <div className="flex items-center gap-2">
                 <User size={20} className="text-primary" />
                 <CardTitle>{t('settings.account')}</CardTitle>
               </div>
@@ -183,10 +183,10 @@ export function SettingsPage(): React.JSX.Element {
           </Card>
         </section>
 
-        <section className="settings-section">
+        <section>
           <Card>
             <CardHeader>
-              <div className="section-title">
+              <div className="flex items-center gap-2">
                 <Globe size={20} className="text-primary" />
                 <CardTitle>{t('settings.language')}</CardTitle>
               </div>
@@ -203,10 +203,10 @@ export function SettingsPage(): React.JSX.Element {
           </Card>
         </section>
 
-        <section className="settings-section">
+        <section>
           <Card>
             <CardHeader>
-              <div className="section-title">
+              <div className="flex items-center gap-2">
                 <ThemeIcon size={20} className="text-primary" />
                 <CardTitle>{t('settings.theme')}</CardTitle>
               </div>
@@ -218,10 +218,10 @@ export function SettingsPage(): React.JSX.Element {
           </Card>
         </section>
 
-        <section className="settings-section">
+        <section>
           <Card>
             <CardHeader>
-              <div className="section-title">
+              <div className="flex items-center gap-2">
                 <Mic size={20} className="text-primary" />
                 <CardTitle>{t('settings.azureSpeech', 'Pronunciation (Azure Speech)')}</CardTitle>
               </div>
@@ -230,10 +230,10 @@ export function SettingsPage(): React.JSX.Element {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="azure-form">
-                <div className="form-field">
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-1.5">
                   <Label htmlFor="azure-key">{t('settings.azureKey', 'Azure Speech Key')}</Label>
-                  <div className="password-input-wrapper">
+                  <div className="relative flex items-center">
                     <Input
                       id="azure-key"
                       type={showAzureKey ? 'text' : 'password'}
@@ -242,10 +242,11 @@ export function SettingsPage(): React.JSX.Element {
                         setLocalAzureKey(e.target.value);
                       }}
                       placeholder={t('settings.azureKeyPlaceholder', 'Enter your Azure Speech API key')}
+                      className="pr-11"
                     />
                     <button
                       type="button"
-                      className="toggle-password"
+                      className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors"
                       onClick={() => {
                         setShowAzureKey(!showAzureKey);
                       }}
@@ -255,7 +256,7 @@ export function SettingsPage(): React.JSX.Element {
                     </button>
                   </div>
                 </div>
-                <div className="form-field">
+                <div className="flex flex-col gap-1.5">
                   <Label htmlFor="azure-region">{t('settings.azureRegion', 'Azure Region')}</Label>
                   <Select
                     value={localAzureRegion}
@@ -272,10 +273,10 @@ export function SettingsPage(): React.JSX.Element {
           </Card>
         </section>
 
-        <section className="settings-section">
+        <section>
           <Card>
             <CardHeader>
-              <div className="section-title">
+              <div className="flex items-center gap-2">
                 <KeyRound size={20} className="text-primary" />
                 <CardTitle>{t('settings.changePassword')}</CardTitle>
               </div>
@@ -283,15 +284,15 @@ export function SettingsPage(): React.JSX.Element {
             </CardHeader>
             <CardContent>
               <form
-                className="password-form"
+                className="flex flex-col gap-4"
                 onSubmit={(e) => {
                   e.preventDefault();
                   void handleChangePassword();
                 }}
               >
-                <div className="form-field">
+                <div className="flex flex-col gap-1.5">
                   <Label htmlFor="current-password">{t('settings.currentPassword')}</Label>
-                  <div className="password-input-wrapper">
+                  <div className="relative flex items-center">
                     <Input
                       id="current-password"
                       type={showCurrentPassword ? 'text' : 'password'}
@@ -301,10 +302,11 @@ export function SettingsPage(): React.JSX.Element {
                       }}
                       autoComplete="current-password"
                       disabled={isChangingPassword}
+                      className="pr-11"
                     />
                     <button
                       type="button"
-                      className="toggle-password"
+                      className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors"
                       onClick={() => {
                         setShowCurrentPassword(!showCurrentPassword);
                       }}
@@ -315,9 +317,9 @@ export function SettingsPage(): React.JSX.Element {
                   </div>
                 </div>
 
-                <div className="form-field">
+                <div className="flex flex-col gap-1.5">
                   <Label htmlFor="new-password">{t('settings.newPassword')}</Label>
-                  <div className="password-input-wrapper">
+                  <div className="relative flex items-center">
                     <Input
                       id="new-password"
                       type={showNewPassword ? 'text' : 'password'}
@@ -328,10 +330,11 @@ export function SettingsPage(): React.JSX.Element {
                       autoComplete="new-password"
                       disabled={isChangingPassword}
                       aria-invalid={newPassword.length > 0 && !isPasswordValid}
+                      className="pr-11"
                     />
                     <button
                       type="button"
-                      className="toggle-password"
+                      className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors"
                       onClick={() => {
                         setShowNewPassword(!showNewPassword);
                       }}
@@ -341,10 +344,16 @@ export function SettingsPage(): React.JSX.Element {
                     </button>
                   </div>
                   {newPassword.length > 0 && (
-                    <ul className="password-requirements">
+                    <ul className="text-sm space-y-1 mt-2">
                       {passwordRequirements.map((req) => (
-                        <li key={req.labelKey} className={req.valid ? 'valid' : ''}>
-                          <span className="requirement-icon">{req.valid ? '✓' : '○'}</span>
+                        <li
+                          key={req.labelKey}
+                          className={cn(
+                            'flex items-center gap-2',
+                            req.valid ? 'text-success' : 'text-muted-foreground',
+                          )}
+                        >
+                          <span className="w-4">{req.valid ? '✓' : '○'}</span>
                           <span>{t(req.labelKey)}</span>
                         </li>
                       ))}
@@ -352,9 +361,9 @@ export function SettingsPage(): React.JSX.Element {
                   )}
                 </div>
 
-                <div className="form-field">
+                <div className="flex flex-col gap-1.5">
                   <Label htmlFor="confirm-password">{t('settings.confirmPassword')}</Label>
-                  <div className="password-input-wrapper">
+                  <div className="relative flex items-center">
                     <Input
                       id="confirm-password"
                       type={showConfirmPassword ? 'text' : 'password'}
@@ -365,10 +374,11 @@ export function SettingsPage(): React.JSX.Element {
                       autoComplete="new-password"
                       disabled={isChangingPassword}
                       aria-invalid={confirmPassword.length > 0 && !doPasswordsMatch}
+                      className="pr-11"
                     />
                     <button
                       type="button"
-                      className="toggle-password"
+                      className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors"
                       onClick={() => {
                         setShowConfirmPassword(!showConfirmPassword);
                       }}
@@ -378,7 +388,7 @@ export function SettingsPage(): React.JSX.Element {
                     </button>
                   </div>
                   {confirmPassword.length > 0 && !doPasswordsMatch && (
-                    <p className="error-message">{t('settings.passwordMismatch')}</p>
+                    <p className="text-sm text-error">{t('settings.passwordMismatch')}</p>
                   )}
                 </div>
 
@@ -397,20 +407,20 @@ export function SettingsPage(): React.JSX.Element {
           </Card>
         </section>
 
-        <section className="settings-section danger-zone">
+        <section>
           <Card className="border-destructive">
             <CardHeader>
-              <div className="section-title">
+              <div className="flex items-center gap-2">
                 <Trash2 size={20} className="text-destructive" />
                 <CardTitle>{t('settings.dangerZone')}</CardTitle>
               </div>
               <CardDescription>{t('settings.dangerZoneDesc')}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="danger-action">
-                <div className="danger-info">
-                  <h4>{t('settings.deleteAccount')}</h4>
-                  <p>{t('settings.deleteAccountDesc')}</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <h4 className="font-medium">{t('settings.deleteAccount')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('settings.deleteAccountDesc')}</p>
                 </div>
                 <Button
                   variant="destructive"
@@ -418,6 +428,7 @@ export function SettingsPage(): React.JSX.Element {
                     setShowDeleteConfirm(true);
                   }}
                   disabled={isDeletingAccount}
+                  className="shrink-0"
                 >
                   {isDeletingAccount ? (
                     <>
@@ -435,7 +446,7 @@ export function SettingsPage(): React.JSX.Element {
             </CardContent>
           </Card>
         </section>
-      </div>
+      </PageContainer>
 
       {showDeleteConfirm && (
         <ConfirmDialog
@@ -451,6 +462,6 @@ export function SettingsPage(): React.JSX.Element {
           }}
         />
       )}
-    </main>
+    </>
   );
 }

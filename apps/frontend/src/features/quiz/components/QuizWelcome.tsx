@@ -20,22 +20,22 @@ export function QuizWelcome(): React.JSX.Element {
             href="https://github.com/nikolay-e/lingua-quiz/blob/main/CLAUDE.md#learning-algorithm"
             target="_blank"
             rel="noopener noreferrer"
-            className="feature feature-link"
+            className="flex items-center gap-3 px-4 py-3 bg-card border border-border rounded-lg text-foreground no-underline transition-all hover:bg-primary/5 hover:border-primary/30"
             aria-label={`${t('quiz.featureAdaptive')} (opens in new window)`}
           >
-            <span className="feature-icon">
+            <span className="inline-flex items-center justify-center text-primary transition-transform hover:scale-110">
               <BrainCircuit size={20} />
             </span>
             {t('quiz.featureAdaptive')}
           </a>
-          <div className="feature">
-            <span className="feature-icon">
+          <div className="flex items-center gap-3 px-4 py-3 bg-card border border-border rounded-lg">
+            <span className="inline-flex items-center justify-center text-primary">
               <TrendingUp size={20} />
             </span>
             {t('quiz.featureProgress')}
           </div>
-          <div className="feature">
-            <span className="feature-icon">
+          <div className="flex items-center gap-3 px-4 py-3 bg-card border border-border rounded-lg">
+            <span className="inline-flex items-center justify-center text-primary">
               <Volume2 size={20} />
             </span>
             {t('quiz.featureTTS')}

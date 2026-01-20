@@ -61,7 +61,7 @@ export function QuestionDisplay({
       )}
       {levelInfo !== null && (
         <progress
-          className="progress-bar"
+          className="w-full h-1.5 rounded-full appearance-none [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-muted [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-primary [&::-webkit-progress-value]:transition-all [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-primary"
           value={completionPercent}
           max="100"
           aria-label={`Level completion: ${completionPercent}%`}
@@ -72,7 +72,7 @@ export function QuestionDisplay({
       <div className="flex flex-col items-center justify-center min-h-20 px-6 py-4 bg-primary/5 rounded-lg">
         <span
           id="word"
-          className="question-text text-xl font-bold text-primary text-center break-words hyphens-auto"
+          className="text-xl font-bold text-primary text-center wrap-break-word hyphens-auto"
           lang={questionLanguage}
         >
           {currentQuestion.questionText}

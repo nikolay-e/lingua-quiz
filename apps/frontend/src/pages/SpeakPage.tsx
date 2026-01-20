@@ -13,7 +13,9 @@ import {
 import { assessPronunciation, generateSimulatedAssessment } from '@features/speak/services/azure-speech';
 import { getAssessmentFeedback } from '@features/speak/lib/feedback';
 import type { PronunciationScores, WordAssessment, AssessmentFeedback } from '@features/speak/types';
+import { cn } from '@shared/utils';
 import { Button, Input, Label } from '@shared/ui';
+import { PageContainer } from '@shared/components';
 
 export function SpeakPage(): React.JSX.Element {
   const { t } = useTranslation();
@@ -95,114 +97,126 @@ export function SpeakPage(): React.JSX.Element {
   };
 
   return (
-    <main className="speak-page">
-      <div className="speak-container">
-        <header className="speak-header">
+    <PageContainer maxWidth="4xl">
+      <header className="flex flex-col gap-2">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => {
+            void navigate('/');
+          }}
+          className="self-start"
+        >
+          <ArrowLeft size={18} aria-hidden="true" />
+          <span>{t('nav.back')}</span>
+        </Button>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold">{t('speak.title', 'I Speak')}</h1>
           <Button
             variant="ghost"
-            size="sm"
+            size="icon"
             onClick={() => {
-              void navigate('/');
+              void navigate('/settings');
             }}
-            className="self-start"
+            aria-label={t('settings.title')}
           >
-            <ArrowLeft size={18} />
-            <span>{t('nav.back')}</span>
+            <Settings size={20} aria-hidden="true" />
           </Button>
-          <div className="speak-header-row">
-            <h1>{t('speak.title', 'I Speak')}</h1>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                void navigate('/settings');
-              }}
-              title={t('settings.title')}
-            >
-              <Settings size={20} />
-            </Button>
-          </div>
-          <p className="text-muted-foreground">{t('speak.subtitle', 'Practice your pronunciation')}</p>
-        </header>
+        </div>
+        <p className="text-muted-foreground">{t('speak.subtitle', 'Practice your pronunciation')}</p>
+      </header>
 
-        <div className="speak-content">
-          <div className="speak-main">
-            {!hasAzureCredentials && (
-              <div className="speak-warning">
-                Azure API key not configured. Using simulated scores.{' '}
-                <button
-                  onClick={() => {
-                    void navigate('/settings');
-                  }}
-                  className="speak-warning-link"
-                >
-                  Configure
-                </button>
-              </div>
-            )}
-
-            <div className="speak-input-section">
-              <Label htmlFor="practice-text">{t('speak.textLabel', 'Text to practice')}</Label>
-              <Input
-                id="practice-text"
-                value={practiceText}
-                onChange={(e) => {
-                  setPracticeText(e.target.value);
-                  resetState();
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-6">
+        <div className="flex flex-col gap-4">
+          {!hasAzureCredentials && (
+            <div className="bg-secondary/20 border border-secondary/30 rounded-lg p-3 text-sm text-secondary-foreground">
+              Azure API key not configured. Using simulated scores.{' '}
+              <button
+                onClick={() => {
+                  void navigate('/settings');
                 }}
-                placeholder={t('speak.textPlaceholder', 'Enter text to practice...')}
-                disabled={isRecording || isProcessing}
-              />
+                className="text-primary hover:underline font-medium bg-transparent border-none cursor-pointer transition-colors"
+              >
+                Configure
+              </button>
             </div>
+          )}
 
-            <div className="speak-text-display">
-              <p className="speak-text">{practiceText || t('speak.textPlaceholder', 'Enter text to practice...')}</p>
-              {wordAssessments.length > 0 && (
-                <div className="speak-word-scores">
-                  {wordAssessments.map((wa, idx) => (
-                    <span
-                      key={idx}
-                      className={`speak-word ${wa.accuracyScore >= passThreshold ? 'good' : 'needs-work'}`}
-                      title={`${Math.round(wa.accuracyScore)}%`}
-                    >
-                      {wa.word}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <AudioRecorder
-              onRecordingComplete={handleRecordingComplete}
-              disabled={isProcessing || !practiceText.trim()}
-              onRecordingStateChange={handleRecordingStateChange}
-              toggleRef={toggleRecordingRef}
+          <div className="flex flex-col gap-1.5">
+            <Label htmlFor="practice-text">{t('speak.textLabel', 'Text to practice')}</Label>
+            <Input
+              id="practice-text"
+              value={practiceText}
+              onChange={(e) => {
+                setPracticeText(e.target.value);
+                resetState();
+              }}
+              placeholder={t('speak.textPlaceholder', 'Enter text to practice...')}
+              disabled={isRecording || isProcessing}
             />
-
-            {isProcessing && (
-              <div className="speak-processing">
-                <div className="speak-spinner" />
-                <p>{t('speak.analyzing', 'Analyzing pronunciation...')}</p>
-              </div>
-            )}
-
-            {error && <div className="speak-error">{error}</div>}
-
-            <p className="speak-hint">{t('speak.hint', 'Space: record/stop')}</p>
           </div>
 
-          <div className="speak-sidebar">
-            <ScoreCard scores={scores} threshold={passThreshold} passed={feedback?.passed} />
-
-            {feedback && (
-              <div className={`speak-feedback ${feedback.passed ? 'passed' : 'needs-work'}`}>
-                <p className="speak-feedback-message">{feedback.message}</p>
-                {feedback.suggestion && <p className="speak-feedback-suggestion">{feedback.suggestion}</p>}
+          <div className="bg-card border border-border rounded-lg p-4 min-h-20">
+            <p className="text-lg font-medium text-center">
+              {practiceText || t('speak.textPlaceholder', 'Enter text to practice...')}
+            </p>
+            {wordAssessments.length > 0 && (
+              <div className="flex flex-wrap gap-2 justify-center mt-3">
+                {wordAssessments.map((wa) => (
+                  <span
+                    key={wa.word}
+                    className={cn(
+                      'px-2 py-1 rounded text-sm font-medium',
+                      wa.accuracyScore >= passThreshold ? 'bg-success/20 text-success' : 'bg-error/20 text-error',
+                    )}
+                    title={`${Math.round(wa.accuracyScore)}%`}
+                  >
+                    {wa.word}
+                  </span>
+                ))}
               </div>
             )}
           </div>
+
+          <AudioRecorder
+            onRecordingComplete={handleRecordingComplete}
+            disabled={isProcessing || !practiceText.trim()}
+            onRecordingStateChange={handleRecordingStateChange}
+            toggleRef={toggleRecordingRef}
+          />
+
+          {isProcessing && (
+            <div className="flex items-center justify-center gap-3 p-4">
+              <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              <p className="text-muted-foreground">{t('speak.analyzing', 'Analyzing pronunciation...')}</p>
+            </div>
+          )}
+
+          {error && <div className="bg-error/10 border border-error/20 rounded-lg p-3 text-sm text-error">{error}</div>}
+
+          <p className="text-center text-xs text-muted-foreground">{t('speak.hint', 'Space: record/stop')}</p>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <ScoreCard scores={scores} threshold={passThreshold} passed={feedback?.passed} />
+
+          {feedback && (
+            <div
+              className={cn(
+                'rounded-lg p-4',
+                feedback.passed
+                  ? 'bg-success/10 border border-success/20'
+                  : 'bg-secondary/10 border border-secondary/20',
+              )}
+            >
+              <p className={cn('font-medium', feedback.passed ? 'text-success' : 'text-secondary-foreground')}>
+                {feedback.message}
+              </p>
+              {feedback.suggestion && <p className="text-sm text-muted-foreground mt-2">{feedback.suggestion}</p>}
+            </div>
+          )}
         </div>
       </div>
-    </main>
+    </PageContainer>
   );
 }

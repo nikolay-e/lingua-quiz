@@ -15,12 +15,12 @@ export function ErrorDisplay({
   retryLabel = 'Try again',
 }: ErrorDisplayProps): React.JSX.Element {
   return (
-    <div className="error-display" role="alert">
-      <div className="error-content">
-        <AlertCircle size={24} className="error-icon" />
-        <p className="error-message text-sm">{message}</p>
+    <div className="flex flex-col gap-4 p-4 bg-error/10 border border-error/20 rounded-lg" role="alert">
+      <div className="flex items-start gap-3">
+        <AlertCircle size={24} className="text-error shrink-0 mt-0.5" aria-hidden="true" />
+        <p className="text-sm text-error leading-relaxed m-0">{message}</p>
       </div>
-      <div className="error-actions">
+      <div className="flex gap-3 justify-end">
         {onRetry !== undefined && (
           <Button variant="default" size="sm" onClick={onRetry}>
             <RefreshCw size={16} />

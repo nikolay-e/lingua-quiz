@@ -2,13 +2,13 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Languages, GraduationCap, BookOpen, Play, Mic, Settings } from 'lucide-react';
-import { Button, Select } from '@shared/ui';
-import { FeedCard } from '@shared/components';
+import { Button, Select, Skeleton } from '@shared/ui';
+import { FeedCard, PageContainer } from '@shared/components';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { useSpeakStore } from '@features/speak';
 import { parseListName, type ParsedList } from '@features/quiz/utils';
-import { logger, extractErrorMessage } from '@shared/utils';
+import { logger, extractErrorMessage, cn } from '@shared/utils';
 
 export function HomePage(): React.JSX.Element {
   const { t } = useTranslation();
@@ -128,103 +128,108 @@ export function HomePage(): React.JSX.Element {
   const canSpeak = selectedLearning !== undefined;
 
   return (
-    <main className="home-page">
-      <div className="home-container">
-        <FeedCard
-          title={null}
-          headerAction={
-            <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} title={t('settings.title')}>
-              <Settings size={20} />
-            </Button>
-          }
-        >
-          <div className="selector-container">
-            {loading ? (
-              <div className="loading-state">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="skeleton-row">
-                    <div className="skeleton-shimmer skeleton-label" />
-                    <div className="skeleton-shimmer skeleton-select" />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="selector-grid">
-                <div className="selector-row">
-                  <div className="selector-label">
-                    <Languages size={18} className="label-icon" />
-                    <span>{t('quiz.iSpeak')}</span>
-                  </div>
-                  <Select
-                    value={selectedKnown}
-                    onValueChange={handleKnownChange}
-                    options={knownOptions}
-                    placeholder={t('quiz.selectLanguage')}
-                    className="selector-trigger"
-                  />
+    <PageContainer maxWidth="3xl">
+      <FeedCard
+        title={null}
+        headerAction={
+          <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} aria-label={t('settings.title')}>
+            <Settings size={20} aria-hidden="true" />
+          </Button>
+        }
+      >
+        <div className="flex flex-col gap-6">
+          {loading ? (
+            <div className="flex flex-col gap-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="grid grid-cols-[120px_1fr] gap-4 items-center">
+                  <Skeleton className="h-5" />
+                  <Skeleton className="h-10" />
                 </div>
-
-                <div className={`selector-row ${selectedKnown === undefined ? 'disabled' : ''}`}>
-                  <div className="selector-label">
-                    <BookOpen size={18} className="label-icon" />
-                    <span>{t('quiz.iLearn')}</span>
-                  </div>
-                  <Select
-                    value={selectedLearning}
-                    onValueChange={handleLearningChange}
-                    options={learningOptions}
-                    placeholder={t('quiz.selectLanguage')}
-                    disabled={selectedKnown === undefined}
-                    className="selector-trigger"
-                  />
-                </div>
-
-                <div className={`selector-row ${selectedLearning === undefined ? 'disabled' : ''}`}>
-                  <div className="selector-label">
-                    <GraduationCap size={18} className="label-icon" />
-                    <span>{t('quiz.level')}</span>
-                  </div>
-                  <Select
-                    value={selectedLevel}
-                    onValueChange={setSelectedLevel}
-                    options={levelOptions}
-                    placeholder={t('quiz.selectLevel')}
-                    disabled={selectedLearning === undefined}
-                    className="selector-trigger"
-                  />
-                </div>
-              </div>
-            )}
-
-            {loadError !== null && <div className="error-message">{loadError}</div>}
-
-            <div className="action-buttons">
-              <Button
-                size="lg"
-                className="action-button"
-                onClick={() => {
-                  void handleLearnWords();
-                }}
-                disabled={!canStart}
-              >
-                <Play size={20} />
-                <span>{t('home.learnWords', 'Learn Words')}</span>
-              </Button>
-
-              <Button
-                size="lg"
-                variant="secondary"
-                className="action-button"
-                onClick={handlePracticePronunciation}
-                disabled={!canSpeak}
-              >
-                <Mic size={20} />
-                <span>{t('home.practicePronunciation', 'Practice Pronunciation')}</span>
-              </Button>
+              ))}
             </div>
+          ) : (
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-[120px_1fr] gap-4 items-center">
+                <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
+                  <Languages size={18} className="text-muted-foreground" />
+                  <span>{t('quiz.iSpeak')}</span>
+                </div>
+                <Select
+                  value={selectedKnown}
+                  onValueChange={handleKnownChange}
+                  options={knownOptions}
+                  placeholder={t('quiz.selectLanguage')}
+                />
+              </div>
+
+              <div
+                className={cn(
+                  'grid grid-cols-[120px_1fr] gap-4 items-center transition-opacity',
+                  selectedKnown === undefined && 'opacity-50 pointer-events-none',
+                )}
+              >
+                <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
+                  <BookOpen size={18} className="text-muted-foreground" />
+                  <span>{t('quiz.iLearn')}</span>
+                </div>
+                <Select
+                  value={selectedLearning}
+                  onValueChange={handleLearningChange}
+                  options={learningOptions}
+                  placeholder={t('quiz.selectLanguage')}
+                  disabled={selectedKnown === undefined}
+                />
+              </div>
+
+              <div
+                className={cn(
+                  'grid grid-cols-[120px_1fr] gap-4 items-center transition-opacity',
+                  selectedLearning === undefined && 'opacity-50 pointer-events-none',
+                )}
+              >
+                <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
+                  <GraduationCap size={18} className="text-muted-foreground" />
+                  <span>{t('quiz.level')}</span>
+                </div>
+                <Select
+                  value={selectedLevel}
+                  onValueChange={setSelectedLevel}
+                  options={levelOptions}
+                  placeholder={t('quiz.selectLevel')}
+                  disabled={selectedLearning === undefined}
+                />
+              </div>
+            </div>
+          )}
+
+          {loadError !== null && <div className="text-destructive text-center p-3">{loadError}</div>}
+
+          <div className="flex flex-col gap-4 pt-4">
+            <Button
+              size="lg"
+              className="w-full justify-center gap-3"
+              onClick={() => {
+                void handleLearnWords();
+              }}
+              disabled={!canStart}
+            >
+              <Play size={20} />
+              <span>{t('home.learnWords', 'Learn Words')}</span>
+            </Button>
+
+            <Button
+              size="lg"
+              variant="secondary"
+              className="w-full justify-center gap-3"
+              onClick={handlePracticePronunciation}
+              disabled={!canSpeak}
+            >
+              <Mic size={20} />
+              <span>{t('home.practicePronunciation', 'Practice Pronunciation')}</span>
+            </Button>
           </div>
-        </FeedCard>
-      </div>
-    </main>
+        </div>
+      </FeedCard>
+    </PageContainer>
   );
 }

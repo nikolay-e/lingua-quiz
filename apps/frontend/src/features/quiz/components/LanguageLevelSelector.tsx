@@ -2,7 +2,8 @@ import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Languages, GraduationCap, BookOpen, Play } from 'lucide-react';
 import type { WordList } from '@api/types';
-import { Button, Select } from '@shared/ui';
+import { Button, Select, Skeleton } from '@shared/ui';
+import { cn } from '@shared/utils';
 import { parseListName, type ParsedList } from '../utils';
 
 interface LanguageLevelSelectorProps {
@@ -79,12 +80,12 @@ export function LanguageLevelSelector({
 
   if (loading) {
     return (
-      <div className="selector-container">
-        <div className="loading-state">
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="skeleton-row">
-              <div className="skeleton-shimmer skeleton-label" />
-              <div className="skeleton-shimmer skeleton-select" />
+            <div key={i} className="grid grid-cols-[120px_1fr] gap-4 items-center">
+              <Skeleton className="h-5" />
+              <Skeleton className="h-11" />
             </div>
           ))}
         </div>
@@ -93,11 +94,11 @@ export function LanguageLevelSelector({
   }
 
   return (
-    <div className="selector-container">
-      <div className="selector-grid">
-        <div className="selector-row">
-          <div className="selector-label">
-            <Languages size={18} className="label-icon" />
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-[120px_1fr] gap-4 items-center">
+          <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
+            <Languages size={18} className="text-muted-foreground" />
             <span>{t('quiz.iSpeak')}</span>
           </div>
           <Select
@@ -105,13 +106,17 @@ export function LanguageLevelSelector({
             onValueChange={handleKnownChange}
             options={knownOptions}
             placeholder={t('quiz.selectLanguage')}
-            className="selector-trigger"
           />
         </div>
 
-        <div className={`selector-row ${selectedKnown === undefined ? 'disabled' : ''}`}>
-          <div className="selector-label">
-            <BookOpen size={18} className="label-icon" />
+        <div
+          className={cn(
+            'grid grid-cols-[120px_1fr] gap-4 items-center transition-opacity',
+            selectedKnown === undefined && 'opacity-50 pointer-events-none',
+          )}
+        >
+          <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
+            <BookOpen size={18} className="text-muted-foreground" />
             <span>{t('quiz.iLearn')}</span>
           </div>
           <Select
@@ -120,13 +125,17 @@ export function LanguageLevelSelector({
             options={learningOptions}
             placeholder={t('quiz.selectLanguage')}
             disabled={selectedKnown === undefined}
-            className="selector-trigger"
           />
         </div>
 
-        <div className={`selector-row ${selectedLearning === undefined ? 'disabled' : ''}`}>
-          <div className="selector-label">
-            <GraduationCap size={18} className="label-icon" />
+        <div
+          className={cn(
+            'grid grid-cols-[120px_1fr] gap-4 items-center transition-opacity',
+            selectedLearning === undefined && 'opacity-50 pointer-events-none',
+          )}
+        >
+          <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
+            <GraduationCap size={18} className="text-muted-foreground" />
             <span>{t('quiz.level')}</span>
           </div>
           <Select
@@ -135,14 +144,13 @@ export function LanguageLevelSelector({
             options={levelOptions}
             placeholder={t('quiz.selectLevel')}
             disabled={selectedLearning === undefined}
-            className="selector-trigger"
           />
         </div>
       </div>
 
       {selectedList !== null && selectedList !== undefined && (
-        <div className="start-section">
-          <Button size="default" className="start-button" onClick={handleStart}>
+        <div className="pt-4">
+          <Button size="default" className="w-full" onClick={handleStart}>
             <Play size={18} />
             <span>{t('quiz.startLearning')}</span>
           </Button>

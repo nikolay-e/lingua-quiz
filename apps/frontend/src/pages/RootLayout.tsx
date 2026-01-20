@@ -51,7 +51,7 @@ export function RootLayout(): React.JSX.Element {
   return (
     <>
       {isAuthenticated && isAdminPage && isAdmin && (
-        <div className="admin-nav">
+        <div className="fixed top-[max(0.5rem,env(safe-area-inset-top,0px))] right-[max(0.5rem,env(safe-area-inset-right,0px))] z-50">
           <Button variant="outline" onClick={() => void navigate('/')}>
             <svg className="mr-2 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -61,7 +61,7 @@ export function RootLayout(): React.JSX.Element {
         </div>
       )}
       {isAuthenticated && isAdmin && isQuizPage && (
-        <div className="admin-nav">
+        <div className="fixed top-[max(0.5rem,env(safe-area-inset-top,0px))] right-[max(0.5rem,env(safe-area-inset-right,0px))] z-50">
           <Button variant="secondary" onClick={() => navigate('/admin')}>
             <Settings size={16} className="mr-2" />
             {t('nav.adminPanel')}

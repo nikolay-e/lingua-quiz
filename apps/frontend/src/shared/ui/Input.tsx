@@ -9,6 +9,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ className, inva
   return (
     <input
       ref={ref}
+      data-slot="input"
       aria-invalid={invalid}
       className={cn(
         'flex h-10 w-full rounded-lg border border-input bg-surface px-3 py-2 text-sm text-foreground',

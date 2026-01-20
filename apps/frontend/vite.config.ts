@@ -125,7 +125,7 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           'vendor-router': ['react-router-dom'],
-          'vendor-state': ['zustand', '@tanstack/react-query'],
+          'vendor-state': ['zustand'],
           'vendor-i18n': ['i18next', 'react-i18next'],
           'vendor-icons': ['lucide-react'],
         },

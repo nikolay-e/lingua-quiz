@@ -281,7 +281,10 @@ export function QuizPage(): React.JSX.Element {
 
   return (
     <>
-      <main id="main-content" className="feed">
+      <main
+        id="main-content"
+        className="w-full max-w-210 mx-auto flex flex-col gap-4 pt-[calc(1rem+env(safe-area-inset-top,0px))] pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pl-[calc(1rem+env(safe-area-inset-left,0px))] pr-[calc(1rem+env(safe-area-inset-right,0px))] md:pt-16 md:pb-12 md:px-6 md:gap-6"
+      >
         {selectedQuiz === null && (
           <FeedCard title={null}>
             <QuizWelcome />
@@ -289,7 +292,7 @@ export function QuizPage(): React.JSX.Element {
         )}
 
         <FeedCard title={null}>
-          <div className="stack">
+          <div className="flex flex-col gap-4">
             <QuizHeader
               wordLists={wordLists}
               selectedQuiz={selectedQuiz}

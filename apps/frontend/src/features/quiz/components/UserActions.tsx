@@ -16,7 +16,7 @@ export function UserActions({ username }: UserActionsProps): React.JSX.Element {
   };
 
   return (
-    <div className="actions">
+    <div className="flex flex-wrap gap-4 items-center justify-center">
       <Button variant="outline" onClick={navigateToSettings} className="w-full">
         <Settings size={16} />
         <span>

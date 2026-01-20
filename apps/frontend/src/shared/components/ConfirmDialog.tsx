@@ -56,25 +56,31 @@ export function ConfirmDialog({
   return (
     <dialog
       ref={dialogRef}
-      className="confirm-dialog"
+      className="border-none rounded-lg p-0 max-w-[min(90vw,400px)] bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur-sm"
       aria-labelledby="confirm-dialog-title"
       aria-describedby="confirm-dialog-desc"
       onCancel={handleCancel}
       onClick={handleClick}
     >
-      <div className="confirm-dialog-content">
-        <IconComponent size={20} className="warning-icon" />
-        <span id="confirm-dialog-title" className="confirm-title text-base">
+      <div className="flex flex-col items-center gap-2 p-6 bg-surface border border-border rounded-lg text-center shadow-xl">
+        <IconComponent size={20} className="text-secondary" aria-hidden="true" />
+        <span id="confirm-dialog-title" className="text-base font-semibold">
           {title}
         </span>
-        <span id="confirm-dialog-desc" className="confirm-desc text-sm">
+        <span id="confirm-dialog-desc" className="text-sm text-muted-foreground">
           {description}
         </span>
-        <div className="confirm-actions">
-          <Button ref={confirmButtonRef} size="sm" variant={confirmVariant} onClick={onConfirm}>
+        <div className="flex gap-3 mt-3">
+          <Button
+            ref={confirmButtonRef}
+            size="sm"
+            variant={confirmVariant}
+            onClick={onConfirm}
+            aria-label={confirmLabel}
+          >
             {confirmLabel}
           </Button>
-          <Button size="sm" variant="ghost" onClick={onCancel}>
+          <Button size="sm" variant="ghost" onClick={onCancel} aria-label={cancelLabel}>
             {cancelLabel}
           </Button>
         </div>
