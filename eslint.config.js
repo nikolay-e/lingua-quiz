@@ -205,13 +205,13 @@ export default [
     },
   }, // TypeScript files - packages/frontend
   {
-    files: ['packages/frontend/src/**/*.ts'],
+    files: ['apps/frontend/src/**/*.ts'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
         ecmaVersion: 2024,
         sourceType: 'module',
-        project: './packages/frontend/tsconfig.json',
+        project: './apps/frontend/tsconfig.json',
         tsconfigRootDir: __dirname,
       },
       globals: {
@@ -330,13 +330,13 @@ export default [
     },
   }, // TypeScript React files - packages/frontend (TSX)
   {
-    files: ['packages/frontend/src/**/*.tsx'],
+    files: ['apps/frontend/src/**/*.tsx'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
         ecmaVersion: 2024,
         sourceType: 'module',
-        project: './packages/frontend/tsconfig.json',
+        project: './apps/frontend/tsconfig.json',
         tsconfigRootDir: __dirname,
         ecmaFeatures: {
           jsx: true,
@@ -354,6 +354,59 @@ export default [
       ...tseslint.configs.recommended.rules,
       ...typescriptRules,
     },
+  },
+  // Frontend architecture boundaries: shared cannot import from features/pages/app
+  {
+    files: ['apps/frontend/src/shared/**/*.ts', 'apps/frontend/src/shared/**/*.tsx'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@features/*', '../features/*', '../../features/*'],
+              message: 'shared/ cannot import from features/',
+            },
+            { group: ['@pages/*', '../pages/*', '../../pages/*'], message: 'shared/ cannot import from pages/' },
+            { group: ['@app/*', '../app/*', '../../app/*'], message: 'shared/ cannot import from app/' },
+            { group: ['@api/*', '../api/*', '../../api/*'], message: 'shared/ cannot import from api/' },
+          ],
+        },
+      ],
+    },
+  },
+  // Frontend architecture boundaries: features cannot import from pages/app
+  {
+    files: ['apps/frontend/src/features/**/*.ts', 'apps/frontend/src/features/**/*.tsx'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@pages/*', '../pages/*', '../../pages/*', '../../../pages/*'],
+              message: 'features/ cannot import from pages/',
+            },
+            {
+              group: ['@app/*', '../app/*', '../../app/*', '../../../app/*'],
+              message: 'features/ cannot import from app/',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  // Frontend architecture boundaries: pages cannot import from app
+  {
+    files: ['apps/frontend/src/pages/**/*.ts', 'apps/frontend/src/pages/**/*.tsx'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [{ group: ['@app/*', '../app/*', '../../app/*'], message: 'pages/ cannot import from app/' }],
+        },
+      ],
+    },
   }, // Storybook stories (relaxed rules)
   {
     files: ['**/*.stories.tsx', '**/*.stories.ts'],
@@ -362,7 +415,7 @@ export default [
       parserOptions: {
         ecmaVersion: 2024,
         sourceType: 'module',
-        project: './packages/frontend/tsconfig.json',
+        project: './apps/frontend/tsconfig.json',
         tsconfigRootDir: __dirname,
         ecmaFeatures: {
           jsx: true,

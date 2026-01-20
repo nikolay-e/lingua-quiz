@@ -21,16 +21,25 @@ Full-stack application with React frontend and Python backend.
 
 ```text
 lingua-quiz/
+├── apps/
+│   ├── frontend/              # React 19 application
+│   └── backend/               # Python FastAPI application
 ├── packages/
 │   ├── core/                  # Quiz business logic (TypeScript)
 │   ├── domain/                # Shared domain models (TypeScript)
-│   ├── frontend/              # React 19 application
-│   ├── backend/               # Python FastAPI application
-│   ├── tests/                 # Playwright E2E tests
-│   └── tools/                 # Vocabulary generation pipeline (Python)
+│   └── api-client/            # Generated API client (TypeScript)
+├── tools/
+│   └── vocab-tools/           # Vocabulary generation pipeline (Python)
+├── tests/
+│   └── e2e/                   # Playwright E2E tests
+├── schema/                    # OpenAPI schema
+├── infra/
+│   └── nginx/                 # nginx configurations
+├── docs/
+│   └── proposals/             # Design documents
 ├── Dockerfile                 # Multi-stage build
 ├── docker-compose.yml         # Local development
-└── Makefile                   # Development commands
+└── package.json               # Workspace configuration
 ```
 
 ## Commands
@@ -106,7 +115,7 @@ converted (ä→a, ß→ss), Cyrillic normalized (ё→е).
 
 ## Vocabulary Tools
 
-The `packages/tools/` generates CEFR-level vocabulary from subtitle frequency data.
+The `tools/vocab-tools/` generates CEFR-level vocabulary from subtitle frequency data.
 
 ```bash
 vocab-tools generate es        # Generate frequency list
@@ -142,7 +151,7 @@ kubectl port-forward -n shared-database svc/shared-database-shared-postgres 5433
 
 **Pipeline:** Normalization → Lemmatization (Stanza) → NLP Analysis → Validation → Inflection Filtering → Deduplication
 
-See `packages/tools/CLAUDE.md` for details.
+See `tools/vocab-tools/CLAUDE.md` for details.
 
 ### CEFR Vocabulary Sizes
 

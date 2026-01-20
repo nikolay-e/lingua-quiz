@@ -79,7 +79,7 @@ tmp/
 # Development configuration
 docker-compose.yml
 docker-compose.*.yml
-nginx.local.conf
+infra/nginx.local.conf
 Makefile
 
 # Claude AI tools

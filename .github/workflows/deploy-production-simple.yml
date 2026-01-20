@@ -96,7 +96,7 @@ jobs:
           npm version ${{ steps.version.outputs.new }} --no-git-tag-version
 
           # Update version in all workspace packages
-          for package_json in packages/*/package.json; do
+          for package_json in packages/*/package.json apps/*/package.json; do
             if [ -f "$package_json" ]; then
               echo "Updating version in $package_json"
               cd "$(dirname "$package_json")"
@@ -110,7 +110,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add package.json packages/*/package.json
+          git add package.json packages/*/package.json apps/*/package.json
           git commit -m "chore: bump version to ${{ steps.version.outputs.new }}"
 
           # Push to main

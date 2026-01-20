@@ -12,7 +12,8 @@
   "type": "module",
   "main": "index.js",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
     "check": "npm run check --workspaces --if-present",

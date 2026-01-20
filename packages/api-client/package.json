@@ -1,0 +1,26 @@
+{
+  "name": "@lingua-quiz/api-client",
+  "version": "1.0.5",
+  "description": "Generated API client for Lingua Quiz backend",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "generate": "openapi-typescript-codegen --input ../../schema/lingua-quiz-schema.json --output src/generated --client fetch"
+  },
+  "devDependencies": {
+    "openapi-typescript-codegen": "^0.29.0",
+    "typescript": "^5.9.3"
+  }
+}

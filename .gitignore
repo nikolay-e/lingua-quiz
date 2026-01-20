@@ -94,13 +94,13 @@ vitest.config.js
 vite.config.js
 
 # Generated JavaScript files from TypeScript
-packages/frontend/src/*.js
-packages/frontend/src/**/*.js
-!packages/frontend/public/**/*.js
+apps/frontend/src/*.js
+apps/frontend/src/**/*.js
+!apps/frontend/public/**/*.js
 packages/core/tests/*.js
 
 # Frontend app types
-packages/frontend/src/app.d.ts
+apps/frontend/src/app.d.ts
 
 # TODO files (local task tracking)
 TODO.md

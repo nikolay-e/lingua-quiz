@@ -179,7 +179,7 @@ skips = [
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-testpaths = ["tests", "packages/backend/tests", "packages/tests/tests"]
+testpaths = ["tests/e2e", "tools/vocab-tools/tests"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"

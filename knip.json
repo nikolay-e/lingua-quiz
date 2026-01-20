@@ -5,10 +5,9 @@
       "entry": [],
       "project": []
     },
-    "packages/frontend": {
+    "apps/frontend": {
       "entry": ["src/main.tsx", "vite.config.ts", ".storybook/main.ts", ".storybook/preview.ts"],
       "project": ["src/**/*.{ts,tsx}", "src/**/*.stories.tsx"],
-      "ignore": ["src/generated/**"],
       "paths": {
         "@/*": ["./src/*"],
         "@app/*": ["./src/app/*"],
@@ -27,6 +26,10 @@
     "packages/domain": {
       "entry": ["src/index.ts"],
       "project": ["src/**/*.ts"]
+    },
+    "packages/api-client": {
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.ts"]
     }
   },
   "ignore": ["**/generated/**", "**/node_modules/**"],
@@ -39,7 +42,8 @@
     "@stylelint/postcss-css-in-js",
     "@vitest/coverage-v8",
     "eslint-plugin-storybook",
-    "playwright"
+    "playwright",
+    "openapi-typescript-codegen"
   ],
   "ignoreBinaries": ["check_image", "sleep"],
   "ignoreExportsUsedInFile": true,

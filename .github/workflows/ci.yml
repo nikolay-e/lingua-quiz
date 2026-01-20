@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci --prefer-offline
-          pip install --no-cache-dir pre-commit -r packages/backend/requirements.txt
+          pip install --no-cache-dir pre-commit -r apps/backend/requirements.txt
 
       - name: Run pre-commit
         run: pre-commit run --all-files --show-diff-on-failure --color=always

@@ -11,17 +11,17 @@ ARG APP_ENVIRONMENT=development
 ENV APP_VERSION=${APP_VERSION} \
     APP_ENVIRONMENT=${APP_ENVIRONMENT}
 RUN apk add --no-cache postgresql-libs
-COPY --chown=appuser:appuser packages/backend/requirements.txt ./
+COPY --chown=appuser:appuser apps/backend/requirements.txt ./
 RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev postgresql-dev linux-headers \
     && pip install --no-cache-dir -r requirements.txt \
     && apk --purge del .build-deps
 
-COPY --chown=appuser:appuser packages/backend/src/ ./
-COPY --chown=appuser:appuser packages/backend/alembic/ ./alembic/
-COPY --chown=appuser:appuser packages/backend/alembic.ini ./
-COPY --chown=appuser:appuser packages/backend/alembic-words/ ./alembic-words/
-COPY --chown=appuser:appuser packages/backend/alembic-words.ini ./
-COPY --chown=appuser:appuser packages/backend/start.sh packages/backend/seed_test_data.py ./
+COPY --chown=appuser:appuser apps/backend/src/ ./
+COPY --chown=appuser:appuser apps/backend/alembic/ ./alembic/
+COPY --chown=appuser:appuser apps/backend/alembic.ini ./
+COPY --chown=appuser:appuser apps/backend/alembic-words/ ./alembic-words/
+COPY --chown=appuser:appuser apps/backend/alembic-words.ini ./
+COPY --chown=appuser:appuser apps/backend/start.sh apps/backend/seed_test_data.py ./
 RUN chmod +x ./start.sh
 USER 1000
 EXPOSE 9000
@@ -36,11 +36,14 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY packages/domain/ ./packages/domain/
 COPY packages/core/package.json ./packages/core/
-COPY packages/frontend/package.json ./packages/frontend/
+COPY packages/api-client/package.json ./packages/api-client/
+COPY apps/frontend/package.json ./apps/frontend/
 RUN npm ci
 COPY packages/core/ ./packages/core/
+COPY packages/api-client/ ./packages/api-client/
 RUN npm run build --workspace @lingua-quiz/core
-COPY packages/frontend/ ./packages/frontend/
+RUN npm run build --workspace @lingua-quiz/api-client
+COPY apps/frontend/ ./apps/frontend/
 RUN VITE_APP_VERSION=${APP_VERSION} \
     VITE_APP_ENVIRONMENT=${APP_ENVIRONMENT} \
     npm run build --workspace @lingua-quiz/frontend
@@ -48,8 +51,8 @@ RUN VITE_APP_VERSION=${APP_VERSION} \
 FROM nginx:1.29-alpine AS frontend
 RUN chown -R nginx:nginx /var/cache/nginx && \
     chmod -R 755 /var/cache/nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=frontend-builder /app/packages/frontend/dist /usr/share/nginx/html
+COPY infra/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=frontend-builder /app/apps/frontend/dist /usr/share/nginx/html
 RUN chown -R nginx:nginx /usr/share/nginx/html
 USER nginx
 EXPOSE 80
@@ -58,17 +61,18 @@ CMD ["nginx", "-g", "daemon off;"]
 FROM mcr.microsoft.com/playwright/python:v1.57.0-noble AS integration-e2e-tests
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
-WORKDIR /home/pwuser/tests
-COPY packages/tests/requirements.txt ./
+WORKDIR /home/pwuser
+COPY tests/e2e/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY --chown=pwuser:pwuser packages/backend/src/ ./backend/src/
-COPY --chown=pwuser:pwuser packages/backend/alembic/ ./backend/alembic/
-COPY --chown=pwuser:pwuser packages/backend/alembic.ini ./backend/alembic.ini
-COPY --chown=pwuser:pwuser packages/backend/alembic-words/ ./backend/alembic-words/
-COPY --chown=pwuser:pwuser packages/backend/alembic-words.ini ./backend/alembic-words.ini
+COPY --chown=pwuser:pwuser apps/backend/src/ ./backend/src/
+COPY --chown=pwuser:pwuser apps/backend/alembic/ ./backend/alembic/
+COPY --chown=pwuser:pwuser apps/backend/alembic.ini ./backend/alembic.ini
+COPY --chown=pwuser:pwuser apps/backend/alembic-words/ ./backend/alembic-words/
+COPY --chown=pwuser:pwuser apps/backend/alembic-words.ini ./backend/alembic-words.ini
 
-COPY --chown=pwuser:pwuser packages/tests/ ./
-RUN mkdir -p reports && chown -R pwuser:pwuser /home/pwuser/tests
+COPY --chown=pwuser:pwuser tests/e2e/ ./tests/
+RUN mkdir -p tests/reports && chown -R pwuser:pwuser /home/pwuser
 USER pwuser
+WORKDIR /home/pwuser/tests
 CMD ["python3", "test_runner.py"]

@@ -24,7 +24,7 @@ repos:
       - id: check-docstring-first
       - id: name-tests-test
         args: ['--pytest-test-first']
-        exclude: ^packages/tests/(fixtures|pages|utils)/
+        exclude: ^tests/e2e/(fixtures|pages|utils)/
 
       # File format checks
       - id: check-yaml
@@ -62,7 +62,7 @@ repos:
     hooks:
       - id: openapi-spec-validator
         name: Validate unified OpenAPI schema
-        files: ^lingua-quiz-schema\.json$
+        files: ^schema/lingua-quiz-schema\.json$
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.29.0
@@ -86,11 +86,11 @@ repos:
         name: Lint Python with ruff
         args: ['--fix', '--exit-non-zero-on-fix']
         types_or: [python, pyi]
-        files: ^packages/(backend|tools|tests)/
+        files: ^(apps/backend|tools/vocab-tools|tests/e2e)/
       - id: ruff-format
         name: Format Python with ruff
         types_or: [python, pyi]
-        files: ^packages/(backend|tools|tests)/
+        files: ^(apps/backend|tools/vocab-tools|tests/e2e)/
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.21.1
@@ -98,8 +98,8 @@ repos:
       - id: pyupgrade
         name: Upgrade Python syntax
         args: ['--py313-plus']
-        files: ^packages/(backend|tools|tests)/.*\.py$
-        exclude: ^packages/backend/domain-py/
+        files: ^(apps/backend|tools/vocab-tools|tests/e2e)/.*\.py$
+        exclude: ^apps/backend/domain-py/
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.18.2
@@ -108,8 +108,8 @@ repos:
         name: Type check Python with mypy
         args: ['--python-version=3.13', '--check-untyped-defs', '--ignore-missing-imports', '--no-warn-unused-ignores']
         additional_dependencies: ['types-requests', 'types-PyYAML']
-        files: ^packages/backend/src/
-        exclude: ^packages/backend/(alembic|alembic-words)/
+        files: ^apps/backend/src/
+        exclude: ^apps/backend/(alembic|alembic-words)/
 
   - repo: https://github.com/PyCQA/bandit
     rev: 1.9.0
@@ -117,7 +117,7 @@ repos:
       - id: bandit
         name: Security scan Python (bandit)
         args: ['-q', '-r', '-x', 'tests,*/test_*.py,*/conftest.py', '--skip', 'B101,B108,B110,B404,B603']
-        files: ^packages/(backend|tools)/
+        files: ^(apps/backend|tools/vocab-tools)/
 
   - repo: https://github.com/returntocorp/semgrep
     rev: v1.89.0
@@ -126,7 +126,7 @@ repos:
         name: Semgrep (AST-based security)
         args:
           ['--config=p/security-audit', '--config=p/python', '--error', '--skip-unknown-extensions', '--metrics=off']
-        files: ^packages/(backend|tools)/
+        files: ^(apps/backend|tools/vocab-tools)/
         exclude: (/generated/|/tests/)
 
   - repo: https://github.com/jendrikseipp/vulture
@@ -136,15 +136,15 @@ repos:
         name: Dead code detection (vulture)
         args:
           [
-            'packages/backend/src',
-            'packages/tools/vocab_tools',
+            'apps/backend/src',
+            'tools/vocab-tools/vocab_tools',
             '--min-confidence',
             '100',
             '--exclude',
             'venv,generated,__pycache__',
           ]
         pass_filenames: false
-        files: ^packages/(backend|tools)/.*\.py$
+        files: ^(apps/backend|tools/vocab-tools)/.*\.py$
 
   - repo: https://github.com/PyCQA/pylint
     rev: v3.3.4
@@ -160,7 +160,7 @@ repos:
             '--ignore-docstrings=yes',
             '--ignore-imports=yes',
           ]
-        files: ^packages/(backend|tools)/
+        files: ^(apps/backend|tools/vocab-tools)/
         exclude: (/generated/|/tests/|alembic.*/env\.py$)
         additional_dependencies: ['types-PyYAML', 'types-aiofiles', 'types-requests']
 
@@ -169,7 +169,7 @@ repos:
     hooks:
       - id: pip-audit
         name: Python dependency vulnerability audit
-        args: ['-r', 'packages/backend/requirements.txt', '-r', 'packages/tools/requirements.txt']
+        args: ['-r', 'apps/backend/requirements.txt', '-r', 'tools/vocab-tools/requirements.txt']
 
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: 4.0.0a2
@@ -197,9 +197,9 @@ repos:
       # Sort package.json files to maintain consistent order
       - id: sort-package-json
         name: Sort package.json files
-        entry: npx sort-package-json "package.json" "packages/*/package.json"
+        entry: npx sort-package-json "package.json" "packages/*/package.json" "apps/*/package.json"
         language: system
-        files: ^(package\.json|packages/.*/package\.json)$
+        files: ^(package\.json|packages/.*/package\.json|apps/.*/package\.json)$
         pass_filenames: false
 
       - id: eslint
@@ -211,7 +211,7 @@ repos:
 
       - id: jscpd
         name: Copy-paste detection (jscpd)
-        entry: npx jscpd --min-lines 6 --min-tokens 50 --threshold 3 packages/
+        entry: npx jscpd --min-lines 6 --min-tokens 50 --threshold 3 packages/ apps/
         language: system
         files: \.(js|jsx|ts|tsx|py)$
         pass_filenames: false
@@ -295,7 +295,7 @@ repos:
         name: Build Docker images (backend, frontend, tests)
         entry: bash -c 'echo "Building backend..." && docker build --target backend -t lingua-quiz-backend:test . && echo "Building frontend..." && docker build --target frontend -t lingua-quiz-frontend:test . && echo "Building test container..." && docker build --target integration-e2e-tests -t lingua-quiz-tests:test . && echo "All images built successfully"'
         language: system
-        files: ^(Dockerfile|docker-compose.*\.(yml|yaml)|packages/(backend|frontend|core|domain|tests)/.*|lingua-quiz-schema\.json|nginx\.conf|package(-lock)?\.json)$
+        files: ^(Dockerfile|docker-compose.*\.(yml|yaml)|apps/(backend|frontend)/.*|packages/(core|domain|api-client)/.*|tests/e2e/.*|schema/lingua-quiz-schema\.json|infra/nginx/.*|package(-lock)?\.json)$
         pass_filenames: false
 
   - repo: https://github.com/adrienverge/yamllint
@@ -325,7 +325,7 @@ repos:
             '--write-changes',
             '--ignore-words-list=crate,nd,ser,llm,async,cli,theses,ba,te,tha,ue,refreshin,ist,lief,calle,cliente,flor,inicial,soler,afterall,ture,ure,sie,bein,alle,oder,deine,als,aktion,deines,vor,aktive,caracteres,wasn,couldn',
           ]
-        exclude: ^(\.git/|\.venv/|venv/|node_modules/|/generated/|^lingua-quiz-schema\.json$|^package-lock\.json$|packages/tools/vocab_tools/data/subtitle_frequencies/|packages/tools/vocab_tools/data/reference/cefr/|packages/tools/exported_vocabularies/)
+        exclude: ^(\.git/|\.venv/|venv/|node_modules/|/generated/|^schema/lingua-quiz-schema\.json$|^package-lock\.json$|tools/vocab-tools/vocab_tools/data/subtitle_frequencies/|tools/vocab-tools/vocab_tools/data/reference/cefr/|tools/vocab-tools/exported_vocabularies/)
 
   - repo: local
     hooks:
