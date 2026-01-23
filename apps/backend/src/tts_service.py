@@ -1,12 +1,10 @@
-import base64
 import hashlib
-import os
 import time
 from typing import ClassVar
 
+from core.config import AZURE_TTS_API_KEY, AZURE_TTS_REGION
 from core.logging import get_logger
-from google.cloud import texttospeech
-from google.oauth2 import service_account
+import httpx
 from psycopg2.extras import RealDictCursor
 
 logger = get_logger(__name__)
@@ -36,35 +34,24 @@ class TTSService:
         "spanish": "es",
     }
 
+    VOICE_CONFIGS: ClassVar[dict[str, dict[str, str]]] = {
+        "en": {"locale": "en-US", "voice": "en-US-AvaMultilingualNeural"},
+        "de": {"locale": "de-DE", "voice": "de-DE-FlorianMultilingualNeural"},
+        "ru": {"locale": "ru-RU", "voice": "ru-RU-DmitryNeural"},
+        "es": {"locale": "es-ES", "voice": "es-ES-AlvaroNeural"},
+    }
+
     def __init__(self, db_pool):
-        self.client = None
         self.db_pool = db_pool
-        self.voice_configs = {
-            "en": {"language_code": "en-US", "name": "en-US-Standard-A"},
-            "de": {"language_code": "de-DE", "name": "de-DE-Standard-A"},
-            "ru": {"language_code": "ru-RU", "name": "ru-RU-Standard-A"},
-            "es": {"language_code": "es-ES", "name": "es-ES-Standard-A"},
-        }
-        self._initialize_client()
+        self.api_key = AZURE_TTS_API_KEY
+        self.region = AZURE_TTS_REGION
+        self.endpoint = f"https://{self.region}.tts.speech.microsoft.com/cognitiveservices/v1"
         self._ensure_table_exists()
 
-    def _initialize_client(self):
-        try:
-            credentials_b64 = os.getenv("GOOGLE_CLOUD_CREDENTIALS_B64")
-            if credentials_b64:
-                import json
-
-                credentials_json = base64.b64decode(credentials_b64).decode("utf-8")
-                credentials_info = json.loads(credentials_json)
-                credentials = service_account.Credentials.from_service_account_info(credentials_info)
-                self.client = texttospeech.TextToSpeechClient(credentials=credentials)
-                logger.info("TTS client initialized with service account credentials")
-            else:
-                self.client = texttospeech.TextToSpeechClient()
-                logger.info("TTS client initialized with default credentials")
-        except Exception as e:
-            logger.error(f"Failed to initialize TTS client: {e}")
-            self.client = None
+        if self.api_key:
+            logger.info("Azure TTS service initialized", extra={"region": self.region})
+        else:
+            logger.warning("Azure TTS API key not configured")
 
     def _ensure_table_exists(self):
         if self.db_pool is None:
@@ -98,7 +85,7 @@ class TTSService:
                 self.db_pool.putconn(conn)
 
     def is_available(self) -> bool:
-        return self.client is not None
+        return bool(self.api_key)
 
     def _normalize_language(self, language: str) -> str:
         lang_lower = language.lower()
@@ -107,7 +94,7 @@ class TTSService:
         return lang_lower
 
     def _get_content_key(self, text: str, language: str) -> str:
-        return hashlib.md5(f"{text}_{language}".encode(), usedforsecurity=False).hexdigest()
+        return hashlib.md5(f"{text}_{language}_azure".encode(), usedforsecurity=False).hexdigest()
 
     def _get_from_storage(self, text: str, language: str) -> bytes | None:
         conn = None
@@ -168,13 +155,19 @@ class TTSService:
         finally:
             if conn:
                 self.db_pool.putconn(conn)
-        return False
+
+    def _build_ssml(self, text: str, voice_config: dict[str, str]) -> str:
+        escaped_text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+        return f"""<speak version='1.0' xml:lang='{voice_config["locale"]}'>
+            <voice name='{voice_config["voice"]}'>
+                <prosody rate='-10%'>{escaped_text}</prosody>
+            </voice>
+        </speak>"""
 
     def synthesize_speech(self, text: str, language: str) -> bytes | None:
         if not self.is_available() or not text.strip():
             logger.warning("TTS synthesis skipped: service unavailable or empty text")
             return None
-        assert self.client is not None
 
         text = text.strip()
         language = self._normalize_language(language)
@@ -186,31 +179,30 @@ class TTSService:
         if audio_content:
             return audio_content
 
-        voice_config = self.voice_configs.get(language)
+        voice_config = self.VOICE_CONFIGS.get(language)
         if not voice_config:
             logger.warning(
                 "TTS language not supported",
-                extra={"language": language, "supported": list(self.voice_configs.keys())},
+                extra={"language": language, "supported": list(self.VOICE_CONFIGS.keys())},
             )
             return None
 
         start_time = time.perf_counter()
         try:
-            response = self.client.synthesize_speech(
-                input=texttospeech.SynthesisInput(text=text),
-                voice=texttospeech.VoiceSelectionParams(
-                    language_code=voice_config["language_code"],
-                    name=voice_config["name"],
-                ),
-                audio_config=texttospeech.AudioConfig(
-                    audio_encoding=texttospeech.AudioEncoding.MP3,
-                    speaking_rate=0.9,
-                    effects_profile_id=["telephony-class-application"],
-                ),
-            )
+            ssml = self._build_ssml(text, voice_config)
+            headers = {
+                "Ocp-Apim-Subscription-Key": self.api_key,
+                "Content-Type": "application/ssml+xml",
+                "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
+            }
+
+            with httpx.Client(timeout=10.0) as client:
+                response = client.post(self.endpoint, content=ssml, headers=headers)
+                response.raise_for_status()
+                new_audio: bytes = bytes(response.content)
+
             duration_ms = (time.perf_counter() - start_time) * 1000
 
-            new_audio: bytes = response.audio_content
             self._save_to_storage(text, language, new_audio)
 
             logger.info(
@@ -224,6 +216,20 @@ class TTSService:
             )
             return new_audio
 
+        except httpx.HTTPStatusError as e:
+            duration_ms = (time.perf_counter() - start_time) * 1000
+            logger.error(
+                "TTS synthesis failed",
+                extra={
+                    "language": language,
+                    "text_length": len(text),
+                    "error_type": "HTTPStatusError",
+                    "status_code": e.response.status_code,
+                    "error": str(e),
+                    "duration_ms": round(duration_ms, 2),
+                },
+            )
+            return None
         except Exception as e:
             duration_ms = (time.perf_counter() - start_time) * 1000
             error_type = type(e).__name__
@@ -240,6 +246,6 @@ class TTSService:
             return None
 
     def get_supported_languages(self) -> list:
-        codes = list(self.voice_configs.keys())
+        codes = list(self.VOICE_CONFIGS.keys())
         names = [name.capitalize() for name in self.LANGUAGE_NAME_TO_CODE]
         return codes + names

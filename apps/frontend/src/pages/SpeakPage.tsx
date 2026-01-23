@@ -64,7 +64,7 @@ export function SpeakPage(): React.JSX.Element {
   }, []);
 
   const handleRecordingComplete = async (blob: Blob) => {
-    if (!practiceText.trim()) return;
+    if (practiceText.trim() === '') return;
 
     setIsProcessing(true);
     setError(null);
@@ -158,7 +158,7 @@ export function SpeakPage(): React.JSX.Element {
 
           <div className="bg-card border border-border rounded-lg p-4 min-h-20">
             <p className="text-lg font-medium text-center">
-              {practiceText || t('speak.textPlaceholder', 'Enter text to practice...')}
+              {practiceText !== '' ? practiceText : t('speak.textPlaceholder', 'Enter text to practice...')}
             </p>
             {wordAssessments.length > 0 && (
               <div className="flex flex-wrap gap-2 justify-center mt-3">
@@ -180,7 +180,7 @@ export function SpeakPage(): React.JSX.Element {
 
           <AudioRecorder
             onRecordingComplete={handleRecordingComplete}
-            disabled={isProcessing || !practiceText.trim()}
+            disabled={isProcessing || practiceText.trim() === ''}
             onRecordingStateChange={handleRecordingStateChange}
             toggleRef={toggleRecordingRef}
           />
@@ -192,7 +192,9 @@ export function SpeakPage(): React.JSX.Element {
             </div>
           )}
 
-          {error && <div className="bg-error/10 border border-error/20 rounded-lg p-3 text-sm text-error">{error}</div>}
+          {error !== null && (
+            <div className="bg-error/10 border border-error/20 rounded-lg p-3 text-sm text-error">{error}</div>
+          )}
 
           <p className="text-center text-xs text-muted-foreground">{t('speak.hint', 'Space: record/stop')}</p>
         </div>
@@ -200,7 +202,7 @@ export function SpeakPage(): React.JSX.Element {
         <div className="flex flex-col gap-4">
           <ScoreCard scores={scores} threshold={passThreshold} passed={feedback?.passed} />
 
-          {feedback && (
+          {feedback !== null && (
             <div
               className={cn(
                 'rounded-lg p-4',
@@ -212,7 +214,9 @@ export function SpeakPage(): React.JSX.Element {
               <p className={cn('font-medium', feedback.passed ? 'text-success' : 'text-secondary-foreground')}>
                 {feedback.message}
               </p>
-              {feedback.suggestion && <p className="text-sm text-muted-foreground mt-2">{feedback.suggestion}</p>}
+              {feedback.suggestion !== undefined && feedback.suggestion !== '' && (
+                <p className="text-sm text-muted-foreground mt-2">{feedback.suggestion}</p>
+              )}
             </div>
           )}
         </div>

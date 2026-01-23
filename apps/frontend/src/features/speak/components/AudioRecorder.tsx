@@ -32,11 +32,11 @@ export function AudioRecorder({
   const audioUrlRef = useRef<string | null>(null);
 
   const handleStopPlayback = () => {
-    if (audioRef.current) {
+    if (audioRef.current !== null) {
       audioRef.current.pause();
       audioRef.current = null;
     }
-    if (audioUrlRef.current) {
+    if (audioUrlRef.current !== null) {
       URL.revokeObjectURL(audioUrlRef.current);
       audioUrlRef.current = null;
     }
@@ -64,18 +64,18 @@ export function AudioRecorder({
   }, [isRecording, onRecordingStateChange]);
 
   useEffect(() => {
-    if (toggleRef) {
+    if (toggleRef !== undefined) {
       toggleRef.current = handleToggleRecording;
     }
   }, [toggleRef, handleToggleRecording]);
 
   useEffect(() => {
     return () => {
-      if (audioRef.current) {
+      if (audioRef.current !== null) {
         audioRef.current.pause();
         audioRef.current = null;
       }
-      if (audioUrlRef.current) {
+      if (audioUrlRef.current !== null) {
         URL.revokeObjectURL(audioUrlRef.current);
         audioUrlRef.current = null;
       }
@@ -83,15 +83,15 @@ export function AudioRecorder({
   }, []);
 
   const handlePlayback = () => {
-    if (!audioBlob) return;
+    if (audioBlob === null) return;
 
-    if (isPlaying && audioRef.current) {
+    if (isPlaying && audioRef.current !== null) {
       audioRef.current.pause();
       setIsPlaying(false);
       return;
     }
 
-    if (audioUrlRef.current) {
+    if (audioUrlRef.current !== null) {
       URL.revokeObjectURL(audioUrlRef.current);
     }
     audioUrlRef.current = URL.createObjectURL(audioBlob);
@@ -111,7 +111,7 @@ export function AudioRecorder({
       <WaveformDisplay audioData={audioData} isRecording={isRecording} />
 
       <div className="flex items-center justify-center gap-3">
-        {audioBlob && !isRecording && (
+        {audioBlob !== null && !isRecording && (
           <Button
             variant="secondary"
             size="icon"
@@ -131,7 +131,7 @@ export function AudioRecorder({
           {isRecording ? <Square size={24} /> : <Mic size={28} />}
         </Button>
 
-        {audioBlob && !isRecording && (
+        {audioBlob !== null && !isRecording && (
           <Button variant="ghost" size="icon" onClick={handleClear} aria-label="Clear recording">
             <X size={20} />
           </Button>
@@ -139,11 +139,9 @@ export function AudioRecorder({
       </div>
 
       <p className="text-center text-sm text-muted-foreground m-0">
-        {isRecording
-          ? `Recording ${formatDuration(duration)}... Click to stop`
-          : audioBlob
-            ? `Recorded (${formatDuration(duration)}) — click to play`
-            : 'Click to start recording'}
+        {isRecording && `Recording ${formatDuration(duration)}... Click to stop`}
+        {!isRecording && audioBlob !== null && `Recorded (${formatDuration(duration)}) — click to play`}
+        {!isRecording && audioBlob === null && 'Click to start recording'}
       </p>
     </div>
   );

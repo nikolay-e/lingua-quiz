@@ -27,7 +27,12 @@ export function PageContainer({
   className,
 }: PageContainerProps): React.JSX.Element {
   return (
-    <main className={cn('min-h-screen bg-background', centered ? 'flex items-center justify-center p-4' : 'px-4 py-8')}>
+    <main
+      className={cn(
+        'min-h-screen w-full bg-background',
+        centered ? 'flex items-center justify-center p-4' : 'px-4 py-8',
+      )}
+    >
       <div className={cn('w-full mx-auto', maxWidthClasses[maxWidth], !centered && 'flex flex-col gap-6', className)}>
         {children}
       </div>

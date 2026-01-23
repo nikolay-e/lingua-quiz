@@ -54,7 +54,7 @@ function ScoreRow({ value, label }: { value: number; label: string }): React.JSX
 }
 
 export function ScoreCard({ scores, threshold, passed: passedProp }: ScoreCardProps): React.JSX.Element {
-  if (!scores) {
+  if (scores === null) {
     return (
       <div className="bg-card rounded-lg p-4 text-center text-sm text-muted-foreground">
         <p>Record speech to get assessment</p>

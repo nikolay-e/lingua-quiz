@@ -41,7 +41,12 @@ function Toast({ toast, onRemove }: ToastProps): React.JSX.Element {
     };
   }, [toast.id, onRemove]);
 
-  const Icon = toast.type === 'success' ? CheckCircle : toast.type === 'error' ? AlertCircle : Info;
+  const getIcon = () => {
+    if (toast.type === 'success') return CheckCircle;
+    if (toast.type === 'error') return AlertCircle;
+    return Info;
+  };
+  const Icon = getIcon();
 
   return (
     <div

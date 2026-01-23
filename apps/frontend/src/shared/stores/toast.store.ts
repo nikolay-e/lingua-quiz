@@ -52,12 +52,14 @@ export interface ToastActions {
   info: (message: string) => void;
 }
 
+const stableToastActions: ToastActions = {
+  success: (message: string) => useToastStore.getState().success(message),
+  error: (message: string) => useToastStore.getState().error(message),
+  info: (message: string) => useToastStore.getState().info(message),
+};
+
 export function useToast(): ToastActions {
-  return useToastStore((state) => ({
-    success: state.success,
-    error: state.error,
-    info: state.info,
-  }));
+  return stableToastActions;
 }
 
 export const useToasts = (): ToastItem[] => useToastStore((state) => state.toasts);

@@ -71,3 +71,36 @@ export async function executeApiCall<T>(
     return handleApiError(error);
   }
 }
+
+export async function fetchWithAuth<T>(
+  endpoint: string,
+  options: { method: string; body?: unknown; token: string },
+): Promise<T> {
+  const url = `${OpenAPI.BASE}${endpoint}`;
+
+  const response = await fetch(url, {
+    method: options.method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${options.token}`,
+    },
+    body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+  });
+
+  if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('Unauthorized');
+    }
+    if (response.status === 403) {
+      throw new Error('Forbidden - Admin access required');
+    }
+    const errorData = (await response.json().catch(() => ({ detail: response.statusText }))) as { detail?: string };
+    throw new Error(errorData.detail ?? `HTTP ${response.status}`);
+  }
+
+  const contentType = response.headers.get('content-type');
+  if (contentType?.includes('application/json') === true) {
+    return response.json() as Promise<T>;
+  }
+  return undefined as T;
+}

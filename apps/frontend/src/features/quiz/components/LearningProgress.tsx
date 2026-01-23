@@ -48,7 +48,7 @@ export function LearningProgress({
       <section className="flex flex-col gap-2 flex-1 overflow-y-auto min-h-0">
         {Object.values(levelWordLists).map((levelData) => {
           const LevelIcon = LEVEL_CONFIG.find((c) => c.id === levelData.id)?.icon ?? ChevronRight;
-          const isOpen = !foldedLists[levelData.id];
+          const isOpen = foldedLists[levelData.id] === false;
 
           return (
             <details
@@ -56,8 +56,11 @@ export function LearningProgress({
               id={levelData.id}
               className="group border border-border rounded-lg overflow-hidden"
               open={isOpen}
-              onToggle={() => {
-                onToggleFold?.(levelData.id);
+              onToggle={(e) => {
+                const details = e.currentTarget;
+                if (details.open !== isOpen) {
+                  onToggleFold?.(levelData.id);
+                }
               }}
             >
               <summary className="cursor-pointer select-none px-4 py-3 transition-colors hover:bg-primary/5 focus-visible:outline-2 focus-visible:outline-primary focus-visible:-outline-offset-2 list-none">
@@ -70,7 +73,7 @@ export function LearningProgress({
                     </span>
                   </div>
                   <progress
-                    className="w-full h-1.5 rounded-full appearance-none [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-muted [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-primary [&::-webkit-progress-value]:transition-all [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-primary"
+                    className="w-full h-1.5 rounded-full appearance-none [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-muted [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-primary [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-primary"
                     value={levelData.count}
                     max={totalWords}
                     aria-label={`${levelData.label}: ${getProgressText(levelData.count, totalWords)}`}

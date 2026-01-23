@@ -84,9 +84,17 @@ export function AdminPage(): React.JSX.Element {
 
     results.sort((a, b) => {
       let comparison = 0;
-      if (sortBy === 'source') comparison = a.sourceText.localeCompare(b.sourceText);
-      else if (sortBy === 'target') comparison = a.targetText.localeCompare(b.targetText);
-      else if (sortBy === 'list') comparison = a.listName.localeCompare(b.listName);
+      switch (sortBy) {
+        case 'source':
+          comparison = a.sourceText.localeCompare(b.sourceText);
+          break;
+        case 'target':
+          comparison = a.targetText.localeCompare(b.targetText);
+          break;
+        case 'list':
+          comparison = a.listName.localeCompare(b.listName);
+          break;
+      }
       return sortOrder === 'asc' ? comparison : -comparison;
     });
 

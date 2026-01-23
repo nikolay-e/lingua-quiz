@@ -54,13 +54,9 @@ export function FeedbackDisplay({
         )}
       >
         <span className="text-lg" aria-hidden="true">
-          {isRevealResult ? (
-            <Circle size={18} />
-          ) : isSuccess ? (
-            <Check size={18} className="animate-icon-pop" />
-          ) : (
-            <X size={18} />
-          )}
+          {isRevealResult && <Circle size={18} />}
+          {!isRevealResult && isSuccess && <Check size={18} className="animate-icon-pop" />}
+          {!isRevealResult && !isSuccess && <X size={18} />}
         </span>
         <span>{feedbackMessage}</span>
       </div>

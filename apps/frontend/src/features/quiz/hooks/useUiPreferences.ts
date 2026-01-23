@@ -32,7 +32,7 @@ export function useUiPreferences(): UiPreferences {
   const toggleFold = useCallback((levelId: string) => {
     setFoldedLists((prev) => ({
       ...prev,
-      [levelId]: prev[levelId] !== true,
+      [levelId]: prev[levelId] === false,
     }));
   }, []);
 

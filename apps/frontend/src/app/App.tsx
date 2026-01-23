@@ -1,8 +1,27 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { RootLayout, HomePage, QuizPage, LoginPage, RegisterPage, SettingsPage, AdminPage, SpeakPage } from '@pages';
+import { RootLayout } from '@pages';
 import { ProtectedRoute } from '@app/routing/ProtectedRoute';
 import { AdminRoute } from '@app/routing/AdminRoute';
+import { ErrorBoundary } from '@app/infra/ErrorBoundary';
 import { Toasts } from '@shared/components';
+import { Skeleton } from '@shared/ui';
+
+const HomePage = lazy(() => import('@pages/HomePage').then((m) => ({ default: m.HomePage })));
+const QuizPage = lazy(() => import('@pages/QuizPage').then((m) => ({ default: m.QuizPage })));
+const LoginPage = lazy(() => import('@pages/LoginPage').then((m) => ({ default: m.LoginPage })));
+const RegisterPage = lazy(() => import('@pages/RegisterPage').then((m) => ({ default: m.RegisterPage })));
+const SettingsPage = lazy(() => import('@pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
+const AdminPage = lazy(() => import('@pages/AdminPage').then((m) => ({ default: m.AdminPage })));
+const SpeakPage = lazy(() => import('@pages/SpeakPage').then((m) => ({ default: m.SpeakPage })));
+
+function PageLoader(): React.JSX.Element {
+  return (
+    <div className="min-h-screen w-full flex items-center justify-center">
+      <Skeleton className="h-64 w-full max-w-md" />
+    </div>
+  );
+}
 
 const router = createBrowserRouter([
   {
@@ -13,7 +32,9 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <ProtectedRoute>
-            <HomePage />
+            <Suspense fallback={<PageLoader />}>
+              <HomePage />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -21,7 +42,9 @@ const router = createBrowserRouter([
         path: 'learn',
         element: (
           <ProtectedRoute>
-            <QuizPage />
+            <Suspense fallback={<PageLoader />}>
+              <QuizPage />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -29,7 +52,9 @@ const router = createBrowserRouter([
         path: 'quiz',
         element: (
           <ProtectedRoute>
-            <QuizPage />
+            <Suspense fallback={<PageLoader />}>
+              <QuizPage />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -37,23 +62,35 @@ const router = createBrowserRouter([
         path: 'speak',
         element: (
           <ProtectedRoute>
-            <SpeakPage />
+            <Suspense fallback={<PageLoader />}>
+              <SpeakPage />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
       {
         path: 'login',
-        element: <LoginPage />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <LoginPage />
+          </Suspense>
+        ),
       },
       {
         path: 'register',
-        element: <RegisterPage />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <RegisterPage />
+          </Suspense>
+        ),
       },
       {
         path: 'settings',
         element: (
           <ProtectedRoute>
-            <SettingsPage />
+            <Suspense fallback={<PageLoader />}>
+              <SettingsPage />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -61,7 +98,9 @@ const router = createBrowserRouter([
         path: 'admin',
         element: (
           <AdminRoute>
-            <AdminPage />
+            <Suspense fallback={<PageLoader />}>
+              <AdminPage />
+            </Suspense>
           </AdminRoute>
         ),
       },
@@ -71,9 +110,9 @@ const router = createBrowserRouter([
 
 export function App(): React.JSX.Element {
   return (
-    <>
+    <ErrorBoundary>
       <RouterProvider router={router} />
       <Toasts />
-    </>
+    </ErrorBoundary>
   );
 }

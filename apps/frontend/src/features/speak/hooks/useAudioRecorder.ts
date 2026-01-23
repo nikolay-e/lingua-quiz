@@ -24,19 +24,18 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
   const animationIdRef = useRef<number | null>(null);
   const timerIdRef = useRef<number | null>(null);
 
-  const updateWaveformRef = useRef<() => void>(() => {});
+  const updateWaveform = useCallback(() => {
+    if (analyserRef.current === null) return;
 
-  useEffect(() => {
-    updateWaveformRef.current = () => {
-      if (analyserRef.current === null) return;
+    const dataArray = new Float32Array(analyserRef.current.fftSize);
+    analyserRef.current.getFloatTimeDomainData(dataArray);
+    setAudioData(new Float32Array(dataArray));
 
-      const dataArray = new Float32Array(analyserRef.current.fftSize);
-      analyserRef.current.getFloatTimeDomainData(dataArray);
-      setAudioData(new Float32Array(dataArray));
+    animationIdRef.current = requestAnimationFrame(updateWaveform);
+  }, []);
 
-      animationIdRef.current = requestAnimationFrame(updateWaveformRef.current);
-    };
-  });
+  const updateWaveformRef = useRef(updateWaveform);
+  updateWaveformRef.current = updateWaveform;
 
   useEffect(() => {
     return () => {

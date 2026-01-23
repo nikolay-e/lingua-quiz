@@ -49,17 +49,27 @@ if (typeof window !== 'undefined') {
   applyTheme(initialResolved);
 }
 
+function handleSystemThemeChange(set: (state: Partial<ThemeState>) => void): void {
+  const currentMode = safeStorage.getItem(STORAGE_KEYS.THEME) ?? THEME_MODES.SYSTEM;
+  if (currentMode === THEME_MODES.SYSTEM) {
+    const resolved = resolveTheme(THEME_MODES.SYSTEM);
+    applyTheme(resolved);
+    set({ mode: THEME_MODES.SYSTEM, resolvedTheme: resolved });
+  }
+}
+
+let mediaQueryListener: (() => void) | null = null;
+
 export const useThemeStore = create<ThemeStore>()((set) => {
   if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', () => {
-      const currentMode = safeStorage.getItem(STORAGE_KEYS.THEME) ?? THEME_MODES.SYSTEM;
-      if (currentMode === THEME_MODES.SYSTEM) {
-        const resolved = resolveTheme(THEME_MODES.SYSTEM);
-        applyTheme(resolved);
-        set({ mode: THEME_MODES.SYSTEM, resolvedTheme: resolved });
-      }
-    });
+
+    if (mediaQueryListener !== null) {
+      mediaQuery.removeEventListener('change', mediaQueryListener);
+    }
+
+    mediaQueryListener = () => handleSystemThemeChange(set);
+    mediaQuery.addEventListener('change', mediaQueryListener);
   }
 
   return {

@@ -10,28 +10,28 @@ export function WaveformDisplay({ audioData, isRecording }: WaveformDisplayProps
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (canvas === null) return;
 
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (ctx === null) return;
 
     const computedStyle = getComputedStyle(canvas);
-    const surfaceColor = computedStyle.getPropertyValue('--color-surface').trim() || '#fff';
-    const borderColor = computedStyle.getPropertyValue('--color-border').trim() || '#e2e8f0';
-    const primaryColor = computedStyle.getPropertyValue('--color-primary').trim() || '#2563eb';
-    const errorColor = computedStyle.getPropertyValue('--color-error').trim() || '#ef4444';
+    const surfaceColor = computedStyle.getPropertyValue('--color-surface').trim();
+    const borderColor = computedStyle.getPropertyValue('--color-border').trim();
+    const primaryColor = computedStyle.getPropertyValue('--color-primary').trim();
+    const errorColor = computedStyle.getPropertyValue('--color-error').trim();
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = window.devicePixelRatio;
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
     ctx.scale(dpr, dpr);
 
-    ctx.fillStyle = surfaceColor;
+    ctx.fillStyle = surfaceColor !== '' ? surfaceColor : '#fff';
     ctx.fillRect(0, 0, rect.width, rect.height);
 
-    if (!audioData || audioData.length === 0) {
-      ctx.strokeStyle = borderColor;
+    if (audioData === null || audioData.length === 0) {
+      ctx.strokeStyle = borderColor !== '' ? borderColor : '#e2e8f0';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(0, rect.height / 2);
@@ -43,7 +43,9 @@ export function WaveformDisplay({ audioData, isRecording }: WaveformDisplayProps
     const step = Math.ceil(audioData.length / rect.width);
     const amp = rect.height / 2;
 
-    ctx.strokeStyle = isRecording ? errorColor : primaryColor;
+    const recordingColor = errorColor !== '' ? errorColor : '#ef4444';
+    const normalColor = primaryColor !== '' ? primaryColor : '#2563eb';
+    ctx.strokeStyle = isRecording ? recordingColor : normalColor;
     ctx.lineWidth = 2;
     ctx.beginPath();
 
@@ -75,13 +77,11 @@ export function WaveformDisplay({ audioData, isRecording }: WaveformDisplayProps
       ref={canvasRef}
       className="w-full h-24 rounded-lg bg-surface"
       role="img"
-      aria-label={
-        isRecording
-          ? 'Audio waveform visualization - recording in progress'
-          : audioData
-            ? 'Audio waveform visualization'
-            : 'Empty audio waveform'
-      }
+      aria-label={(() => {
+        if (isRecording) return 'Audio waveform visualization - recording in progress';
+        if (audioData !== null) return 'Audio waveform visualization';
+        return 'Empty audio waveform';
+      })()}
     />
   );
 }

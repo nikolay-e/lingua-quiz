@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Languages, GraduationCap, BookOpen, Play, Mic, Settings } from 'lucide-react';
 import { Button, Select, Skeleton } from '@shared/ui';
-import { FeedCard, PageContainer } from '@shared/components';
+import { FeedCard } from '@shared/components';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { useSpeakStore } from '@features/speak';
@@ -128,15 +128,22 @@ export function HomePage(): React.JSX.Element {
   const canSpeak = selectedLearning !== undefined;
 
   return (
-    <PageContainer maxWidth="3xl">
-      <FeedCard
-        title={null}
-        headerAction={
+    <main
+      id="main-content"
+      className="w-full max-w-210 mx-auto flex flex-col gap-4 pt-[calc(1rem+env(safe-area-inset-top,0px))] pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pl-[calc(1rem+env(safe-area-inset-left,0px))] pr-[calc(1rem+env(safe-area-inset-right,0px))] md:pt-16 md:pb-12 md:px-6 md:gap-6"
+    >
+      <FeedCard dense title={null}>
+        <header className="flex items-center justify-between">
+          <h1 className="m-0 text-primary text-xl flex items-center gap-2">
+            <Languages size={28} /> LinguaQuiz
+          </h1>
           <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} aria-label={t('settings.title')}>
             <Settings size={20} aria-hidden="true" />
           </Button>
-        }
-      >
+        </header>
+      </FeedCard>
+
+      <FeedCard title={null}>
         <div className="flex flex-col gap-6">
           {loading ? (
             <div className="flex flex-col gap-4">
@@ -230,6 +237,6 @@ export function HomePage(): React.JSX.Element {
           </div>
         </div>
       </FeedCard>
-    </PageContainer>
+    </main>
   );
 }

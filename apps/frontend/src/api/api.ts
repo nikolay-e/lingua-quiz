@@ -23,7 +23,7 @@ import {
   validateVocabularyItem,
   validateWordList,
 } from '@lingua-quiz/domain';
-import { executeApiCall, setAuthToken } from './config';
+import { executeApiCall, fetchWithAuth, setAuthToken } from './config';
 
 const mapAuthResponse = (response: TokenResponse): AuthResponse => ({
   token: response.token,
@@ -100,23 +100,7 @@ const api = {
       correctCount: number;
       incorrectCount: number;
     }>,
-  ): Promise<void> =>
-    executeApiCall(
-      async () => {
-        const response = await fetch('/api/user/progress/bulk', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ items }),
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${await response.text()}`);
-        }
-      },
-      { token },
-    ),
+  ): Promise<void> => fetchWithAuth('/api/user/progress/bulk', { method: 'POST', body: { items }, token }),
 
   synthesizeSpeech: (token: string, data: { text: string; language: string }): Promise<TTSResponse> =>
     executeApiCall(
@@ -140,26 +124,7 @@ const api = {
     executeApiCall(() => AuthenticationService.deleteAccountApiAuthDeleteAccountDelete(), { token }),
 
   changePassword: (token: string, currentPassword: string, newPassword: string): Promise<Record<string, string>> =>
-    executeApiCall(
-      async () => {
-        const response = await fetch('/api/auth/change-password', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ currentPassword, newPassword }),
-        });
-        if (!response.ok) {
-          const errorData = await (response.json() as Promise<{ detail?: string }>).catch((): { detail: string } => ({
-            detail: response.statusText,
-          }));
-          throw new Error(errorData.detail ?? `HTTP ${response.status}`);
-        }
-        return response.json() as Promise<Record<string, string>>;
-      },
-      { token },
-    ),
+    fetchWithAuth('/api/auth/change-password', { method: 'POST', body: { currentPassword, newPassword }, token }),
 
   fetchTranslations: (token: string, listName: string): Promise<Translation[]> =>
     executeApiCall(

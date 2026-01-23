@@ -64,7 +64,6 @@ export function QuizPage(): React.JSX.Element {
   const [awaitingNextInput, setAwaitingNextInput] = useState(false);
 
   const answerInputRef = useRef<AnswerInputRef>(null);
-  const showProgress = true;
 
   const direction = currentQuestion?.direction ?? 'normal';
   const sourceLanguage =
@@ -172,14 +171,13 @@ export function QuizPage(): React.JSX.Element {
       if (result !== null) {
         setFeedback(result);
         setAwaitingNextInput(true);
-        if ('translation' in result && result.translation !== undefined) {
-          const hasExamples =
-            result.translation.sourceUsageExample !== undefined || result.translation.targetUsageExample !== undefined;
+        if ('translation' in result) {
+          const { sourceUsageExample, targetUsageExample } = result.translation;
+          const source = sourceUsageExample ?? '';
+          const target = targetUsageExample ?? '';
+          const hasExamples = source !== '' || target !== '';
           if (hasExamples) {
-            setUsageExamples({
-              source: result.translation.sourceUsageExample ?? '',
-              target: result.translation.targetUsageExample ?? '',
-            });
+            setUsageExamples({ source, target });
           }
         }
 
@@ -361,7 +359,7 @@ export function QuizPage(): React.JSX.Element {
               </FeedCard>
             )}
 
-            {selectedQuiz !== null && showProgress && (
+            {selectedQuiz !== null && (
               <FeedCard>
                 <LearningProgress
                   selectedQuiz={selectedQuiz}

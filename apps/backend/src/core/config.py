@@ -96,3 +96,7 @@ if APP_ENVIRONMENT in ("production", "staging"):
 
 # Slow query threshold (milliseconds)
 SLOW_QUERY_THRESHOLD_MS = int(os.getenv("SLOW_QUERY_THRESHOLD_MS", "100"))
+
+# Azure TTS configuration
+AZURE_TTS_API_KEY = os.getenv("AZURE_TTS_API_KEY", "")
+AZURE_TTS_REGION = os.getenv("AZURE_TTS_REGION", "eastus")
