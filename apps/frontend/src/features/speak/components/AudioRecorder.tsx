@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Mic, Square, Play, Pause, X } from 'lucide-react';
 import { useAudioRecorder } from '../hooks/useAudioRecorder';
 import { WaveformDisplay } from './WaveformDisplay';
@@ -31,7 +31,7 @@ export function AudioRecorder({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
 
-  const handleStopPlayback = () => {
+  const handleStopPlayback = useCallback(() => {
     if (audioRef.current !== null) {
       audioRef.current.pause();
       audioRef.current = null;
@@ -41,9 +41,9 @@ export function AudioRecorder({
       audioUrlRef.current = null;
     }
     setIsPlaying(false);
-  };
+  }, []);
 
-  const handleToggleRecording = async () => {
+  const handleToggleRecording = useCallback(async () => {
     if (disabled) return;
     try {
       if (isRecording) {
@@ -57,7 +57,7 @@ export function AudioRecorder({
     } catch {
       // Microphone permission denied or not available
     }
-  };
+  }, [disabled, isRecording, stopRecording, onRecordingComplete, handleStopPlayback, clearRecording, startRecording]);
 
   useEffect(() => {
     onRecordingStateChange?.(isRecording);
