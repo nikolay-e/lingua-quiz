@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Settings } from 'lucide-react';
+import { ArrowLeft, Settings, Shuffle } from 'lucide-react';
 import { AudioRecorder } from '@features/speak/components/AudioRecorder';
 import { ScoreCard } from '@features/speak/components/ScoreCard';
 import {
@@ -12,6 +12,7 @@ import {
 } from '@features/speak/stores/speak.store';
 import { assessPronunciation, generateSimulatedAssessment } from '@features/speak/services/azure-speech';
 import { getAssessmentFeedback } from '@features/speak/lib/feedback';
+import { getDefaultPhrase, getRandomPhrase } from '@features/speak/lib/phrases';
 import type { PronunciationScores, WordAssessment, AssessmentFeedback } from '@features/speak/types';
 import { cn } from '@shared/utils';
 import { Button, Input, Label } from '@shared/ui';
@@ -27,7 +28,7 @@ export function SpeakPage(): React.JSX.Element {
   const passThreshold = usePassThreshold();
   const language = useSpeakLanguage();
 
-  const [practiceText, setPracticeText] = useState('Hello, how are you today?');
+  const [practiceText, setPracticeText] = useState(() => getDefaultPhrase(language));
   const [scores, setScores] = useState<PronunciationScores | null>(null);
   const [wordAssessments, setWordAssessments] = useState<WordAssessment[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -70,6 +71,16 @@ export function SpeakPage(): React.JSX.Element {
       void releaseWakeLock();
     };
   }, []);
+
+  useEffect(() => {
+    setPracticeText(getDefaultPhrase(language));
+    resetState();
+  }, [language, resetState]);
+
+  const handleRandomPhrase = useCallback(() => {
+    setPracticeText(getRandomPhrase(language));
+    resetState();
+  }, [language, resetState]);
 
   const handleRecordingComplete = async (blob: Blob) => {
     if (practiceText.trim() === '') return;
@@ -152,16 +163,29 @@ export function SpeakPage(): React.JSX.Element {
 
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="practice-text">{t('speak.textLabel', 'Text to practice')}</Label>
-            <Input
-              id="practice-text"
-              value={practiceText}
-              onChange={(e) => {
-                setPracticeText(e.target.value);
-                resetState();
-              }}
-              placeholder={t('speak.textPlaceholder', 'Enter text to practice...')}
-              disabled={isRecording || isProcessing}
-            />
+            <div className="flex gap-2">
+              <Input
+                id="practice-text"
+                value={practiceText}
+                onChange={(e) => {
+                  setPracticeText(e.target.value);
+                  resetState();
+                }}
+                placeholder={t('speak.textPlaceholder', 'Enter text to practice...')}
+                disabled={isRecording || isProcessing}
+                className="flex-1"
+              />
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleRandomPhrase}
+                disabled={isRecording || isProcessing}
+                aria-label={t('speak.randomPhrase', 'Random phrase')}
+                title={t('speak.randomPhrase', 'Random phrase')}
+              >
+                <Shuffle size={18} aria-hidden="true" />
+              </Button>
+            </div>
           </div>
 
           <div className="bg-card border border-border rounded-lg p-4 min-h-20">
