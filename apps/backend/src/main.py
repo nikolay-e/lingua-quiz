@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import datetime
 
-from api.v2 import admin, auth, progress, tts, version, vocabulary
+from api.v2 import admin, auth, config, progress, tts, version, vocabulary
 from core.config import APP_VERSION, CORS_ALLOWED_ORIGINS, LOG_JSON_FORMAT, LOG_LEVEL, PORT, RATE_LIMIT_ENABLED
 from core.csrf import validate_origin
 from core.database import query_db
@@ -96,6 +96,7 @@ app.include_router(progress.router)
 app.include_router(tts.router)
 app.include_router(admin.router)
 app.include_router(version.router)
+app.include_router(config.router)
 
 
 @app.get("/api/health", response_model=HealthResponse, tags=["Health"])

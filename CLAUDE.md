@@ -8,7 +8,7 @@ Language learning web application using spaced repetition for vocabulary mastery
 
 Full-stack application with React frontend and Python backend.
 
-**Live Demo:** [staging.lingua-quiz.org](https://staging.lingua-quiz.org/)
+**Live:** [lingua-quiz.org](https://lingua-quiz.org/)
 
 ## Tech Stack
 
@@ -122,13 +122,13 @@ vocab-tools generate es        # Generate frequency list
 vocab-tools analyze es-a1      # Analyze vocabulary
 vocab-tools fill es-a1         # Fill placeholders
 vocab-tools validate           # Validate all migrations
-vocab-tools export es-a1       # Export vocabulary from staging DB
-vocab-tools import ./data/     # Import vocabulary to staging DB
+vocab-tools export es-a1       # Export vocabulary from production DB
+vocab-tools import ./data/     # Import vocabulary to production DB
 ```
 
 ### Local Database Access
 
-Import/export commands connect directly to staging PostgreSQL via kubectl port-forward.
+Import/export commands connect directly to production PostgreSQL via kubectl port-forward.
 
 **Setup (one-time):**
 

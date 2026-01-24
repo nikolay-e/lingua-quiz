@@ -100,3 +100,7 @@ SLOW_QUERY_THRESHOLD_MS = int(os.getenv("SLOW_QUERY_THRESHOLD_MS", "100"))
 # Azure TTS configuration
 AZURE_TTS_API_KEY = os.getenv("AZURE_TTS_API_KEY", "")
 AZURE_TTS_REGION = os.getenv("AZURE_TTS_REGION", "eastus")
+
+# Azure Speech configuration (for pronunciation assessment)
+AZURE_SPEECH_API_KEY = os.getenv("AZURE_SPEECH_API_KEY", "")
+AZURE_SPEECH_REGION = os.getenv("AZURE_SPEECH_REGION", "westeurope")

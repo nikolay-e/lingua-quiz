@@ -9,6 +9,9 @@ import {
   useHasAzureCredentials,
   usePassThreshold,
   useSpeakLanguage,
+  useAzureApiKey,
+  useAzureRegion,
+  useServerConfigLoaded,
 } from '@features/speak/stores/speak.store';
 import { assessPronunciation, generateSimulatedAssessment } from '@features/speak/services/azure-speech';
 import { getAssessmentFeedback } from '@features/speak/lib/feedback';
@@ -23,10 +26,17 @@ export function SpeakPage(): React.JSX.Element {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { azureApiKey, azureRegion, recordAttempt } = useSpeakStore();
+  const { recordAttempt, loadServerConfig } = useSpeakStore();
+  const azureApiKey = useAzureApiKey();
+  const azureRegion = useAzureRegion();
   const hasAzureCredentials = useHasAzureCredentials();
+  const serverConfigLoaded = useServerConfigLoaded();
   const passThreshold = usePassThreshold();
   const language = useSpeakLanguage();
+
+  useEffect(() => {
+    void loadServerConfig();
+  }, [loadServerConfig]);
 
   const [practiceText, setPracticeText] = useState(() => getDefaultPhrase(language));
   const [scores, setScores] = useState<PronunciationScores | null>(null);
@@ -147,7 +157,7 @@ export function SpeakPage(): React.JSX.Element {
 
       <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-6">
         <div className="flex flex-col gap-4">
-          {!hasAzureCredentials && (
+          {serverConfigLoaded && !hasAzureCredentials && (
             <div className="bg-secondary/20 border border-secondary/30 rounded-lg p-3 text-sm text-secondary-foreground">
               Azure API key not configured. Using simulated scores.{' '}
               <button
