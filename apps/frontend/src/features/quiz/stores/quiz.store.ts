@@ -9,7 +9,6 @@ interface QuizState {
   selectedQuiz: string | null;
   quizManager: QuizManager | null;
   currentQuestion: QuizQuestion | null;
-  sessionId: string | null;
   loading: boolean;
   error: string | null;
 }
@@ -39,7 +38,6 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
   selectedQuiz: null,
   quizManager: null,
   currentQuestion: null,
-  sessionId: null,
   loading: false,
   error: null,
 
@@ -135,7 +133,6 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
       selectedQuiz: null,
       quizManager: null,
       currentQuestion: null,
-      sessionId: null,
       loading: false,
       error: null,
     });

@@ -16,6 +16,7 @@ import type { PronunciationScores, WordAssessment, AssessmentFeedback } from '@f
 import { cn } from '@shared/utils';
 import { Button, Input, Label } from '@shared/ui';
 import { PageContainer } from '@shared/components';
+import { requestWakeLock, releaseWakeLock } from '@shared/pwa';
 
 export function SpeakPage(): React.JSX.Element {
   const { t } = useTranslation();
@@ -61,6 +62,13 @@ export function SpeakPage(): React.JSX.Element {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  useEffect(() => {
+    void requestWakeLock();
+    return () => {
+      void releaseWakeLock();
+    };
   }, []);
 
   const handleRecordingComplete = async (blob: Blob) => {
