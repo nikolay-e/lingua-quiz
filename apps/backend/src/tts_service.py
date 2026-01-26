@@ -2,7 +2,7 @@ import hashlib
 import time
 from typing import ClassVar
 
-from core.config import AZURE_TTS_API_KEY, AZURE_TTS_REGION
+from core.config import AZURE_SPEECH_API_KEY, AZURE_SPEECH_REGION
 from core.logging import get_logger
 import httpx
 from psycopg2.extras import RealDictCursor
@@ -43,8 +43,8 @@ class TTSService:
 
     def __init__(self, db_pool):
         self.db_pool = db_pool
-        self.api_key = AZURE_TTS_API_KEY
-        self.region = AZURE_TTS_REGION
+        self.api_key = AZURE_SPEECH_API_KEY
+        self.region = AZURE_SPEECH_REGION
         self.endpoint = f"https://{self.region}.tts.speech.microsoft.com/cognitiveservices/v1"
         self._ensure_table_exists()
 

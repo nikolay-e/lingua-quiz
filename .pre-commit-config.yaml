@@ -169,7 +169,8 @@ repos:
     hooks:
       - id: pip-audit
         name: Python dependency vulnerability audit
-        args: ['-r', 'apps/backend/requirements.txt', '-r', 'tools/vocab-tools/requirements.txt']
+        # GHSA-7gcm-g887-7qv7: protobuf JSON recursion DoS, no fix available yet
+        args: ['-r', 'apps/backend/requirements.txt', '-r', 'tools/vocab-tools/requirements.txt', '--ignore-vuln', 'GHSA-7gcm-g887-7qv7']
 
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: 4.0.0a2

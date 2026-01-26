@@ -100,7 +100,7 @@
     "listenPronunciation": "Escuchar pronunciación",
     "listen": "Escuchar",
     "playing": "Reproduciendo...",
-    "ttsUnavailable": "TTS no disponible para {language}",
+    "ttsUnavailable": "TTS no disponible para {{language}}",
     "levelUp": "¡Subiste de nivel!",
     "levelDown": "Bajaste de nivel"
   },
