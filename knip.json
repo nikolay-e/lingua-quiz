@@ -43,7 +43,8 @@
     "@vitest/coverage-v8",
     "eslint-plugin-storybook",
     "playwright",
-    "openapi-typescript-codegen"
+    "openapi-typescript-codegen",
+    "@lingua-quiz/api-client"
   ],
   "ignoreBinaries": ["check_image", "sleep"],
   "ignoreExportsUsedInFile": true,
