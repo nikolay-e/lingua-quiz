@@ -58,7 +58,7 @@ USER nginx
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
-FROM mcr.microsoft.com/playwright/python:v1.57.0-noble AS integration-e2e-tests
+FROM mcr.microsoft.com/playwright/python:v1.58.0-noble AS integration-e2e-tests
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 WORKDIR /home/pwuser
