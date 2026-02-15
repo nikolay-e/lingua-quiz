@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { SubmissionResult, QuizQuestion, RevealResult } from '@lingua-quiz/core';
 import type { QuizFeedback } from '@api/types';
 import { useAuthStore } from '@features/auth/stores/auth.store';
@@ -24,6 +25,7 @@ import { logger, extractErrorMessage, isTouchDevice } from '@shared/utils';
 import { requestWakeLock, releaseWakeLock, reacquireWakeLockOnVisibilityChange } from '@shared/pwa';
 
 export function QuizPage(): React.JSX.Element {
+  const navigate = useNavigate();
   const toast = useToast();
 
   const token = useAuthStore((state) => state.token);
@@ -157,7 +159,8 @@ export function QuizPage(): React.JSX.Element {
     reset();
     resetQuizSession();
     await releaseWakeLock();
-  }, [token, quizManager, reset, resetQuizSession, saveAndCleanup, toast]);
+    void navigate('/');
+  }, [token, quizManager, reset, resetQuizSession, saveAndCleanup, toast, navigate]);
 
   const handleSubmitAnswer = useCallback(async (): Promise<void> => {
     if (currentQuestion === null || isSubmitting || token === null) return;

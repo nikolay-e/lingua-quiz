@@ -1,9 +1,9 @@
 import os
 
+from conftest import AuthenticatedUser, login_and_start_quiz
 from pages.auth_page import AuthPage
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import AuthenticatedUser, login_and_start_quiz
 
 pytestmark = pytest.mark.e2e
 
@@ -22,6 +22,7 @@ class TestKeyboardNavigation:
         password_field = page.get_by_role("textbox", name="Password")
         expect(password_field).to_be_focused()
 
+        page.keyboard.press("Tab")
         page.keyboard.press("Tab")
         sign_in_button = page.get_by_role("button", name="Sign In")
         expect(sign_in_button).to_be_focused()

@@ -41,7 +41,8 @@ services:
       MIGRATE_WORDS: 'true'
       DOCKER_ENVIRONMENT: 'true'
       RATE_LIMIT_ENABLED: 'false'
-      SEED_TEST_DATA: 'true'
+      SYNC_VOCABULARY: 'true'
+      SEED_TEST_DATA: 'false'
       UVICORN_WORKERS: '4'
     ports:
       - '9000:9000'

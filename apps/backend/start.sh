@@ -39,6 +39,17 @@ if [ "$MIGRATE_WORDS" = "true" ]; then
   }
 fi
 
+SYNC_VOCABULARY="${SYNC_VOCABULARY:-false}"
+echo "SYNC_VOCABULARY variable is set to: $SYNC_VOCABULARY"
+
+if [ "$SYNC_VOCABULARY" = "true" ]; then
+  echo "Syncing vocabulary from files to database..."
+  python sync_vocabulary.py || {
+    echo "ERROR: Vocabulary sync failed"
+    exit 1
+  }
+fi
+
 SEED_TEST_DATA="${SEED_TEST_DATA:-false}"
 if [ "$SEED_TEST_DATA" = "true" ]; then
   echo "Seeding test data..."

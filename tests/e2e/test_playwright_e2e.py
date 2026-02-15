@@ -2,9 +2,9 @@ import os
 from pathlib import Path
 from typing import TypedDict
 
+from conftest import logout_user
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import logout_user
 from utils import random_password, random_username
 
 pytestmark = pytest.mark.e2e
@@ -76,8 +76,8 @@ class TestRegistration:
         page.click("text=Register here")
 
         expect(page.locator("h2")).to_have_text("Create Account")
-        expect(page.locator("#register-username")).to_be_visible()
-        expect(page.locator("#register-password")).to_be_visible()
+        expect(page.locator("#username")).to_be_visible()
+        expect(page.locator("#password")).to_be_visible()
         expect(page.locator("button:has-text('Create Account')")).to_be_visible()
         expect(page.locator("text=Already have an account?")).to_be_visible()
 
@@ -86,8 +86,9 @@ class TestRegistration:
     def test_password_requirements_display(self, page: Page):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
+        expect(page.get_by_test_id("register-title")).to_be_visible()
 
-        page.fill("#register-password", "weak")
+        page.fill("#password", "weak")
 
         expect(page.locator("text=At least 8 characters long")).to_be_visible()
         expect(page.locator("text=Contains at least one uppercase letter")).to_be_visible()
@@ -97,37 +98,41 @@ class TestRegistration:
     def test_password_requirements_satisfied(self, page: Page):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
+        expect(page.get_by_test_id("register-title")).to_be_visible()
 
-        page.fill("#register-password", "StrongPass123!")
+        page.fill("#password", "StrongPass123!")
         page.screenshot(path=str(SCREENSHOTS_DIR / "07_password_valid.png"))
 
     def test_successful_registration(self, page: Page, test_user):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
+        expect(page.get_by_test_id("register-title")).to_be_visible()
 
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
 
         page.screenshot(path=str(SCREENSHOTS_DIR / "08_register_filled.png"))
 
         page.click("button:has-text('Create Account')")
 
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
         page.screenshot(path=str(SCREENSHOTS_DIR / "09_after_registration.png"))
 
     def test_duplicate_username_error(self, page: Page, test_user):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        expect(page.get_by_test_id("register-title")).to_be_visible()
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
         page.click("button:has-text('Create Account')")
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
         logout_user(page)
 
         page.click("text=Register here")
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        expect(page.get_by_test_id("register-title")).to_be_visible()
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
         page.click("button:has-text('Create Account')")
 
         expect(page.locator("text=Registration failed")).to_be_visible(timeout=10000)
@@ -145,10 +150,11 @@ class TestAuthentication:
     def test_full_auth_flow(self, page: Page, test_user):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        expect(page.get_by_test_id("register-title")).to_be_visible()
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
         page.click("button:has-text('Create Account')")
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
         logout_user(page)
 
@@ -156,7 +162,7 @@ class TestAuthentication:
         page.fill("#password", test_user["password"])
         page.click("button:has-text('Sign In')")
 
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
 
 class TestQuizInterface:
@@ -164,18 +170,19 @@ class TestQuizInterface:
     def logged_in_page(self, page: Page, test_user):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        expect(page.get_by_test_id("register-title")).to_be_visible()
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
         page.click("button:has-text('Create Account')")
-        page.wait_for_selector("text=Welcome", timeout=10000)
+        page.wait_for_selector("text=Learn Words", timeout=10000)
         return page
 
     def test_quiz_page_after_login(self, logged_in_page: Page):
-        expect(logged_in_page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(logged_in_page.locator("text=Learn Words")).to_be_visible(timeout=10000)
         logged_in_page.screenshot(path=str(SCREENSHOTS_DIR / "11_quiz_page.png"))
 
     def test_logout_button_present(self, logged_in_page: Page):
-        logged_in_page.locator("button:has-text('Settings')").click()
+        logged_in_page.get_by_role("button", name="Settings").click()
         expect(logged_in_page.get_by_role("button", name="Log Out")).to_be_visible(timeout=10000)
 
     def test_logout_functionality(self, logged_in_page: Page):
@@ -202,8 +209,8 @@ class TestAccessibility:
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
 
-        username_input = page.locator("#register-username")
-        password_input = page.locator("#register-password")
+        username_input = page.locator("#username")
+        password_input = page.locator("#password")
 
         expect(username_input).to_be_visible()
         expect(password_input).to_be_visible()
@@ -259,18 +266,20 @@ class TestErrorHandling:
         expect(error_locator).to_be_visible(timeout=10000)
 
         page.click("text=Register here")
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        expect(page.get_by_test_id("register-title")).to_be_visible()
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
         page.click("button:has-text('Create Account')")
 
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
     def test_register_short_username_error(self, page: Page):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
+        expect(page.get_by_test_id("register-title")).to_be_visible()
 
-        page.fill("#register-username", "ab")
-        page.fill("#register-password", "ValidPass123!")
+        page.fill("#username", "ab")
+        page.fill("#password", "ValidPass123!")
         page.click("button:has-text('Create Account')")
 
         error_locator = page.locator(".error-message").or_(page.locator("[role='alert']")).or_(page.locator("text=must be at least"))
@@ -280,8 +289,9 @@ class TestErrorHandling:
     def test_register_weak_password_shows_requirements(self, page: Page):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
+        expect(page.get_by_test_id("register-title")).to_be_visible()
 
-        page.fill("#register-password", "weak")
+        page.fill("#password", "weak")
 
         expect(page.locator("text=At least 8 characters long")).to_be_visible()
         expect(page.locator("text=Contains at least one uppercase letter")).to_be_visible()
@@ -292,16 +302,18 @@ class TestErrorHandling:
     def test_register_password_no_number_error(self, page: Page):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
+        expect(page.get_by_test_id("register-title")).to_be_visible()
 
-        page.fill("#register-password", "WeakPassword!")
+        page.fill("#password", "WeakPassword!")
 
         expect(page.locator("text=Contains at least one number")).to_be_visible()
 
     def test_register_password_no_special_char_error(self, page: Page):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
+        expect(page.get_by_test_id("register-title")).to_be_visible()
 
-        page.fill("#register-password", "WeakPassword1")
+        page.fill("#password", "WeakPassword1")
 
         expect(page.locator("text=Contains at least one special character")).to_be_visible()
 
@@ -318,34 +330,37 @@ class TestErrorHandling:
         page.fill("#password", "")
 
         page.click("text=Register here")
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        expect(page.get_by_test_id("register-title")).to_be_visible()
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
         page.click("button:has-text('Create Account')")
 
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
 
 class TestSessionManagement:
     def test_session_persists_on_page_refresh(self, page: Page, test_user):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        expect(page.get_by_test_id("register-title")).to_be_visible()
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
         page.click("button:has-text('Create Account')")
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
         page.reload()
         page.wait_for_load_state("networkidle")
 
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
     def test_logout_clears_session(self, page: Page, test_user):
         page.goto(FRONTEND_URL)
         page.click("text=Register here")
-        page.fill("#register-username", test_user["username"])
-        page.fill("#register-password", test_user["password"])
+        expect(page.get_by_test_id("register-title")).to_be_visible()
+        page.fill("#username", test_user["username"])
+        page.fill("#password", test_user["password"])
         page.click("button:has-text('Create Account')")
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=10000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
         logout_user(page)
 

@@ -1,11 +1,11 @@
 import os
 import re
 
+from conftest import AuthenticatedUser
 from pages.admin_page import AdminPage
 from pages.auth_page import AuthPage
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import AuthenticatedUser
 
 pytestmark = pytest.mark.e2e
 
@@ -141,5 +141,4 @@ class TestAdminStats:
         admin_page = AdminPage(page, FRONTEND_URL)
         admin_page.navigate_to_admin().wait_for_admin_panel()
 
-        # Check that "Total Items" stat card exists
-        expect(page.locator(".stats-card").filter(has_text="Total Items")).to_be_visible()
+        expect(page.locator("text=Total Items")).to_be_visible()

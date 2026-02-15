@@ -1,9 +1,9 @@
 import os
 import re
 
+from conftest import AuthenticatedUser, login_and_start_quiz, login_user, start_quiz_with_cascading_selectors
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import AuthenticatedUser, login_and_start_quiz, login_user, start_quiz_with_cascading_selectors
 
 pytestmark = pytest.mark.e2e
 
@@ -44,7 +44,7 @@ class TestQuizFlowE2E:
         login_and_start_quiz(page, test_user)
 
         page.get_by_role("button", name="Back to Menu").click()
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=3000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=3000)
 
     def test_correct_answer_shows_success(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
@@ -64,7 +64,7 @@ class TestQuizFlowE2E:
         _first_question = page.locator(".question-text").text_content()
 
         page.get_by_role("button", name="Back to Menu").click()
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=3000)
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=3000)
 
         start_quiz_with_cascading_selectors(page)
 
@@ -104,8 +104,8 @@ class TestProgressPersistence:
         page.wait_for_timeout(1500)
 
         page.get_by_role("button", name="Back to Menu").click()
-        expect(page.locator("text=Welcome")).to_be_visible(timeout=3000)
-        page.locator("button:has-text('Settings')").click()
+        expect(page.locator("text=Learn Words")).to_be_visible(timeout=3000)
+        page.get_by_role("button", name="Settings").click()
         page.get_by_role("button", name="Log Out").click()
         expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)
 
@@ -116,11 +116,11 @@ class TestQuizListSelection:
     def test_cascading_selectors_populated(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_user(page, test_user["username"], test_user["password"])
 
-        selector_triggers = page.locator('[data-slot="select-trigger"]')
+        selector_triggers = page.locator('[data-slot="select"]')
         expect(selector_triggers.first).to_be_visible(timeout=5000)
 
         selector_triggers.nth(0).click()
-        options = page.locator('[data-slot="select-item"]')
+        options = page.locator('[role="option"]')
         expect(options.first).to_be_visible(timeout=3000)
         option_count = options.count()
         assert option_count >= 1
@@ -128,22 +128,22 @@ class TestQuizListSelection:
     def test_cascading_selectors_flow(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_user(page, test_user["username"], test_user["password"])
 
-        selector_triggers = page.locator('[data-slot="select-trigger"]')
+        selector_triggers = page.locator('[data-slot="select"]')
         expect(selector_triggers.first).to_be_visible(timeout=5000)
 
         selector_triggers.nth(0).click()
-        page.locator('[data-slot="select-item"]').first.click()
+        page.locator('[role="option"]').first.click()
         page.wait_for_timeout(200)
 
         selector_triggers.nth(1).click()
-        options = page.locator('[data-slot="select-item"]')
+        options = page.locator('[role="option"]')
         expect(options.first).to_be_visible(timeout=3000)
         assert options.count() >= 1
         options.first.click()
         page.wait_for_timeout(200)
 
         selector_triggers.nth(2).click()
-        level_options = page.locator('[data-slot="select-item"]')
+        level_options = page.locator('[role="option"]')
         expect(level_options.first).to_be_visible(timeout=3000)
         assert level_options.count() >= 1
 

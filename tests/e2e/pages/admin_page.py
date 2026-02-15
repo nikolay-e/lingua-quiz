@@ -8,9 +8,8 @@ class AdminPage(BasePage):
         super().__init__(page, base_url)
 
     def navigate_to_admin(self):
-        self.goto("/admin")
+        self.page.get_by_role("button", name="Admin Panel").click()
         self.page.wait_for_url("**/admin", timeout=10000)
-        self.page.wait_for_timeout(2000)
         return self
 
     def wait_for_admin_panel(self, timeout: int = 15000):
@@ -40,8 +39,8 @@ class AdminPage(BasePage):
         return self
 
     def select_language_filter(self, language: str):
-        language_container = self.page.get_by_text("Language:").locator("..")
-        language_container.locator('[data-slot="select-trigger"]').click()
+        selects = self.page.locator('[data-slot="select"]')
+        selects.nth(0).click()
         self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
         language_map = {
             "en": "English",
@@ -53,10 +52,10 @@ class AdminPage(BasePage):
         return self
 
     def select_status_filter(self, status: str):
-        status_container = self.page.get_by_text("Status:").locator("..")
-        status_container.locator('[data-slot="select-trigger"]').click()
+        selects = self.page.locator('[data-slot="select"]')
+        selects.nth(1).click()
         self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
-        status_map = {"active": "Active", "inactive": "Inactive", "all": "All"}
+        status_map = {"active": "Active", "inactive": "Inactive", "all": "All Status"}
         self.page.get_by_role("option", name=status_map.get(status, status), exact=True).click()
         return self
 
@@ -73,23 +72,24 @@ class AdminPage(BasePage):
         difficulty: str = "A1",
         list_name: str = "test-list",
     ):
-        dialog = self.page.locator('[role="dialog"]')
+        dialog = self.page.locator(".fixed.inset-0").last
         expect(dialog).to_be_visible(timeout=3000)
+        inputs = dialog.locator("input")
 
-        dialog.locator("#create-source").fill(source_text)
-        dialog.locator("#create-target").fill(target_text)
+        inputs.nth(0).fill(source_text)
+        inputs.nth(1).fill(target_text)
 
-        self.page.locator("#create-source-lang").click()
-        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
         lang_map = {"en": "English", "de": "German", "es": "Spanish", "ru": "Russian"}
+        selects = dialog.locator('[data-slot="select"]')
+
+        selects.nth(0).click()
+        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
         self.page.get_by_role("option", name=lang_map.get(source_lang, source_lang), exact=True).click(timeout=5000)
 
-        self.page.locator("#create-target-lang").click()
+        selects.nth(1).click()
         self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
         self.page.get_by_role("option", name=lang_map.get(target_lang, target_lang), exact=True).click(timeout=5000)
 
-        self.page.locator("#create-difficulty").click()
-        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
         diff_map = {
             "A1": "A1 - Beginner",
             "A2": "A2 - Elementary",
@@ -98,10 +98,9 @@ class AdminPage(BasePage):
             "C1": "C1 - Advanced",
             "C2": "C2 - Proficiency",
         }
-        self.page.get_by_role("option", name=diff_map.get(difficulty, difficulty), exact=True).click(timeout=5000)
-
-        self.page.locator("#create-list-name").click()
+        selects.nth(4).click()
         self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
+        self.page.get_by_role("option", name=diff_map.get(difficulty, difficulty), exact=True).click(timeout=5000)
 
         list_name_map = {
             "english-russian-a0": "English-Russian A0",
@@ -120,17 +119,18 @@ class AdminPage(BasePage):
             "spanish-russian-b1": "Spanish-Russian B1",
             "spanish-russian-b2": "Spanish-Russian B2",
         }
-
+        selects.nth(3).click()
+        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
         mapped_name = list_name_map.get(list_name, list_name)
         self.page.get_by_role("option", name=mapped_name, exact=False).first.click(timeout=5000)
         return self
 
     def click_save_in_dialog(self):
-        self.page.locator('[role="dialog"] button:has-text("Save")').click()
+        self.page.locator('.fixed.inset-0 button:has-text("Save")').click()
         return self
 
     def click_cancel_in_dialog(self):
-        self.page.locator('[role="dialog"] button:has-text("Cancel")').click()
+        self.page.locator('.fixed.inset-0 button:has-text("Cancel")').click()
         return self
 
     def create_vocabulary_item(self, source_text: str, target_text: str, **kwargs):
@@ -145,13 +145,14 @@ class AdminPage(BasePage):
         return self
 
     def fill_edit_dialog(self, source_text: str = None, target_text: str = None):
-        dialog = self.page.locator('[role="dialog"]')
+        dialog = self.page.locator(".fixed.inset-0").last
         expect(dialog).to_be_visible(timeout=3000)
+        inputs = dialog.locator("input")
 
         if source_text:
-            dialog.locator("#edit-source").fill(source_text)
+            inputs.nth(0).fill(source_text)
         if target_text:
-            dialog.locator("#edit-target").fill(target_text)
+            inputs.nth(1).fill(target_text)
         return self
 
     def edit_vocabulary_item(self, row_index: int = 0, **kwargs):
@@ -166,11 +167,11 @@ class AdminPage(BasePage):
         return self
 
     def confirm_delete(self):
-        self.page.locator('[role="dialog"] button:has-text("Delete")').click()
+        self.page.locator("dialog").get_by_role("button", name="Delete").click()
         return self
 
     def cancel_delete(self):
-        self.page.locator('[role="dialog"] button:has-text("Cancel")').click()
+        self.page.locator("dialog").get_by_role("button", name="Cancel").click()
         return self
 
     def delete_vocabulary_item(self, row_index: int = 0, confirm: bool = True):
@@ -188,8 +189,7 @@ class AdminPage(BasePage):
         return self.page.locator("table tbody tr").count()
 
     def expect_stats_visible(self):
-        stats = self.page.locator(".stats-card, [class*='stat']")
-        expect(stats.first).to_be_visible(timeout=3000)
+        expect(self.page.locator("text=Total Items")).to_be_visible(timeout=3000)
         return self
 
     def expect_no_access_error(self):

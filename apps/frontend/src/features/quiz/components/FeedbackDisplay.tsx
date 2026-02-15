@@ -42,15 +42,15 @@ export function FeedbackDisplay({
   if (feedback === null) return null;
 
   return (
-    <div className="flex flex-col gap-3" role="alert" aria-live="polite">
+    <div className="feedback-container flex flex-col gap-3" role="alert" aria-live="polite">
       <div
         className={cn(
-          'flex items-center justify-center gap-3 px-4 py-3 min-h-10 font-semibold rounded-lg border text-center transition-all',
-          isRevealResult && 'text-muted-foreground bg-muted/50 border-border animate-fade-in',
-          isSuccess && 'text-success bg-success/10 border-success ring-1 ring-success animate-success-pulse',
+          'feedback-text flex items-center justify-center gap-3 px-4 py-3 min-h-10 font-semibold rounded-lg border text-center transition-all',
+          isRevealResult && 'revealed text-muted-foreground bg-muted/50 border-border animate-fade-in',
+          isSuccess && 'success text-success bg-success/10 border-success ring-1 ring-success animate-success-pulse',
           !isRevealResult &&
             !isSuccess &&
-            'text-destructive bg-destructive/10 border-destructive ring-1 ring-destructive animate-shake',
+            'error text-destructive bg-destructive/10 border-destructive ring-1 ring-destructive animate-shake',
         )}
       >
         <span className="text-lg" aria-hidden="true">

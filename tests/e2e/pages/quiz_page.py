@@ -43,7 +43,7 @@ class QuizPage(BasePage):
         return self
 
     def expect_welcome_visible(self, timeout: int = 5000):
-        expect(self.page.locator("text=Welcome")).to_be_visible(timeout=timeout)
+        expect(self.page.locator("text=Learn Words")).to_be_visible(timeout=timeout)
         return self
 
     def expect_logout_button_visible(self, timeout: int = 10000):

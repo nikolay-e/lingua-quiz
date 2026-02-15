@@ -27,8 +27,8 @@ class AuthPage(BasePage):
         return self
 
     def fill_register(self, username: str, password: str):
-        self.page.fill("#register-username", username)
-        self.page.fill("#register-password", password)
+        self.page.fill("#username", username)
+        self.page.fill("#password", password)
         return self
 
     def click_create_account(self):
@@ -61,7 +61,7 @@ class AuthPage(BasePage):
         return self
 
     def wait_for_welcome(self, timeout: int = 10000):
-        expect(self.page.locator("text=Welcome")).to_be_visible(timeout=timeout)
+        expect(self.page.locator("text=Learn Words")).to_be_visible(timeout=timeout)
         return self
 
     def expect_unauthorized_error(self, timeout: int = 10000):

@@ -1,11 +1,11 @@
-import json
-
-from core.database import execute_words_write_transaction, get_active_version, query_words_db, serialize_rows
+from core.database import get_active_version, query_words_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.logging import get_logger
 from core.security import require_admin
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from generated.schemas import VocabularyItemCreate, VocabularyItemDetailResponse, VocabularyItemUpdate
+from generated.schemas import VocabularyItemDetailResponse
+
+VOCABULARY_READONLY_MESSAGE = "Vocabulary is managed via repository files. Edit data/vocabularies/*.json and redeploy."
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
@@ -76,196 +76,19 @@ def get_vocabulary_item(
     return serialize_rows(item, VocabularyItemDetailResponse, one=True)
 
 
-@router.post("/vocabulary", status_code=status.HTTP_201_CREATED)
-@handle_api_errors("Create vocabulary item")
-def create_vocabulary_item(
-    item_data: VocabularyItemCreate,
-    current_admin: dict = Depends(require_admin),
-    version_id: int = Depends(get_active_version),
-) -> dict[str, str]:
-    logger.info(
-        "Admin creating vocabulary item",
-        extra={
-            "admin": current_admin["username"],
-            "source_text": item_data.source_text,
-            "list_name": item_data.list_name,
-        },
-    )
-    result = execute_words_write_transaction(
-        """INSERT INTO vocabulary_items
-           (version_id, source_text, source_language, target_text, target_language,
-            list_name, difficulty_level, source_usage_example, target_usage_example)
-           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-           RETURNING id""",
-        (
-            version_id,
-            item_data.source_text,
-            item_data.source_language,
-            item_data.target_text,
-            item_data.target_language,
-            item_data.list_name,
-            item_data.difficulty_level,
-            item_data.source_usage_example,
-            item_data.target_usage_example,
-        ),
-        fetch_results=True,
-        one=True,
-    )
-
-    execute_words_write_transaction(
-        """INSERT INTO content_changelog
-           (version_id, change_type, vocabulary_item_id, new_values, changed_by)
-           VALUES (%s, 'ADD', %s, %s::jsonb, %s)""",
-        (
-            version_id,
-            result["id"],
-            json.dumps(
-                {
-                    "source_text": item_data.source_text,
-                    "target_text": item_data.target_text,
-                }
-            ),
-            current_admin["username"],
-        ),
-    )
-
-    return {"message": "Vocabulary item created", "id": result["id"]}
+@router.post("/vocabulary", status_code=status.HTTP_405_METHOD_NOT_ALLOWED)
+def create_vocabulary_item() -> dict[str, str]:
+    raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED, detail=VOCABULARY_READONLY_MESSAGE)
 
 
-def _collect_field_updates(
-    item_data: VocabularyItemUpdate,
-    existing_item: dict,
-) -> tuple[
-    list[str],
-    list[str | bool],
-    dict[str, str | bool | None],
-    dict[str, str | bool | None],
-]:
-    update_fields: list[str] = []
-    update_values: list[str | bool] = []
-    old_values: dict[str, str | bool | None] = {}
-    new_values: dict[str, str | bool | None] = {}
-
-    field_mappings = [
-        ("source_text", item_data.source_text, False),
-        ("target_text", item_data.target_text, False),
-        ("source_usage_example", item_data.source_usage_example, False),
-        ("target_usage_example", item_data.target_usage_example, False),
-        ("is_active", item_data.is_active, True),
-        ("list_name", item_data.list_name, False),
-        ("difficulty_level", item_data.difficulty_level, False),
-    ]
-
-    for field_name, new_value, stringify in field_mappings:
-        if new_value is not None:
-            update_fields.append(f"{field_name} = %s")
-            update_values.append(new_value)
-            old_val = existing_item[field_name]
-            old_values[field_name] = str(old_val) if stringify else old_val
-            new_values[field_name] = str(new_value) if stringify else new_value
-
-    return update_fields, update_values, old_values, new_values
+@router.put("/vocabulary/{item_id}", status_code=status.HTTP_405_METHOD_NOT_ALLOWED)
+def update_vocabulary_item(item_id: str) -> dict[str, str]:
+    raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED, detail=VOCABULARY_READONLY_MESSAGE)
 
 
-@router.put("/vocabulary/{item_id}")
-@handle_api_errors("Update vocabulary item")
-def update_vocabulary_item(
-    item_id: str,
-    item_data: VocabularyItemUpdate,
-    current_admin: dict = Depends(require_admin),
-) -> dict[str, str]:
-    logger.info(
-        "Admin updating vocabulary item",
-        extra={"admin": current_admin["username"], "item_id": item_id},
-    )
-    existing_item = query_words_db(
-        "SELECT id, source_text, target_text, source_usage_example, target_usage_example, is_active, list_name, difficulty_level, version_id FROM vocabulary_items WHERE id = %s",
-        (item_id,),
-        one=True,
-    )
-
-    if not existing_item:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Vocabulary item not found",
-        )
-
-    update_fields, update_values, old_values, new_values = _collect_field_updates(item_data, existing_item)
-
-    if not update_fields:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="No fields to update",
-        )
-
-    update_values.append(item_id)
-    # Safe: update_fields contains only predefined strings, values are parameterized
-    execute_words_write_transaction(
-        f"UPDATE vocabulary_items SET {', '.join(update_fields)} WHERE id = %s",  # nosec B608
-        tuple(update_values),
-    )
-
-    execute_words_write_transaction(
-        """INSERT INTO content_changelog
-           (version_id, change_type, vocabulary_item_id, old_values, new_values, changed_by)
-           VALUES (%s, 'UPDATE', %s, %s::jsonb, %s::jsonb, %s)""",
-        (
-            existing_item["version_id"],
-            item_id,
-            json.dumps(old_values),
-            json.dumps(new_values),
-            current_admin["username"],
-        ),
-    )
-
-    return {"message": "Vocabulary item updated"}
-
-
-@router.delete("/vocabulary/{item_id}")
-@handle_api_errors("Delete vocabulary item")
-def delete_vocabulary_item(
-    item_id: str,
-    current_admin: dict = Depends(require_admin),
-) -> dict[str, str]:
-    logger.info(
-        "Admin deleting vocabulary item",
-        extra={"admin": current_admin["username"], "item_id": item_id},
-    )
-    existing_item = query_words_db(
-        "SELECT id, source_text, target_text, version_id FROM vocabulary_items WHERE id = %s",
-        (item_id,),
-        one=True,
-    )
-
-    if not existing_item:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Vocabulary item not found",
-        )
-
-    execute_words_write_transaction(
-        "UPDATE vocabulary_items SET is_active = FALSE WHERE id = %s",
-        (item_id,),
-    )
-
-    execute_words_write_transaction(
-        """INSERT INTO content_changelog
-           (version_id, change_type, vocabulary_item_id, old_values, changed_by)
-           VALUES (%s, 'DELETE', %s, %s::jsonb, %s)""",
-        (
-            existing_item["version_id"],
-            item_id,
-            json.dumps(
-                {
-                    "source_text": existing_item["source_text"],
-                    "target_text": existing_item["target_text"],
-                }
-            ),
-            current_admin["username"],
-        ),
-    )
-
-    return {"message": "Vocabulary item deleted"}
+@router.delete("/vocabulary/{item_id}", status_code=status.HTTP_405_METHOD_NOT_ALLOWED)
+def delete_vocabulary_item(item_id: str) -> dict[str, str]:
+    raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED, detail=VOCABULARY_READONLY_MESSAGE)
 
 
 @router.get("/vocabulary", response_model=list[VocabularyItemDetailResponse])

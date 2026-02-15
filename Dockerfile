@@ -21,7 +21,8 @@ COPY --chown=appuser:appuser apps/backend/alembic/ ./alembic/
 COPY --chown=appuser:appuser apps/backend/alembic.ini ./
 COPY --chown=appuser:appuser apps/backend/alembic-words/ ./alembic-words/
 COPY --chown=appuser:appuser apps/backend/alembic-words.ini ./
-COPY --chown=appuser:appuser apps/backend/start.sh apps/backend/seed_test_data.py ./
+COPY --chown=appuser:appuser data/vocabularies/ ./data/vocabularies/
+COPY --chown=appuser:appuser apps/backend/start.sh apps/backend/seed_test_data.py apps/backend/sync_vocabulary.py ./
 RUN chmod +x ./start.sh
 USER 1000
 EXPOSE 9000

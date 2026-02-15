@@ -35,26 +35,26 @@ def login_user(page: Page, username: str, password: str) -> None:
     page.get_by_role("textbox", name="Username").fill(username)
     page.get_by_role("textbox", name="Password").fill(password)
     page.get_by_role("button", name="Sign In").click()
-    expect(page.locator("text=Welcome")).to_be_visible(timeout=5000)
+    expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
 
 def start_quiz_with_cascading_selectors(page: Page) -> None:
-    selector_triggers = page.locator('[data-slot="select-trigger"]')
+    selector_triggers = page.locator('[data-slot="select"]')
     expect(selector_triggers.first).to_be_visible(timeout=5000)
 
     selector_triggers.nth(0).click()
-    page.locator('[data-slot="select-item"]').first.click()
+    page.locator('[role="option"]').first.click()
     page.wait_for_timeout(200)
 
     selector_triggers.nth(1).click()
-    page.locator('[data-slot="select-item"]').first.click()
+    page.locator('[role="option"]').first.click()
     page.wait_for_timeout(200)
 
     selector_triggers.nth(2).click()
-    page.locator('[data-slot="select-item"]').first.click()
+    page.locator('[role="option"]').first.click()
     page.wait_for_timeout(200)
 
-    page.get_by_role("button", name="Start Learning").click()
+    page.get_by_role("button", name="Learn Words").click()
     expect(page.locator(".question-text")).to_be_visible(timeout=5000)
 
 
@@ -64,7 +64,7 @@ def login_and_start_quiz(page: Page, test_user: "AuthenticatedUser") -> None:
 
 
 def logout_user(page: Page) -> None:
-    page.locator("button:has-text('Settings')").click()
+    page.get_by_role("button", name="Settings").click()
     expect(page.locator("h1")).to_have_text("Settings", timeout=5000)
     page.get_by_role("button", name="Log Out").click()
     expect(page.locator("h2")).to_have_text("Sign In", timeout=10000)

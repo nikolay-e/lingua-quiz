@@ -1,10 +1,10 @@
 import os
 
+from conftest import AuthenticatedUser, login_and_start_quiz, login_user
 from pages.admin_page import AdminPage
 from pages.auth_page import AuthPage
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import AuthenticatedUser, login_and_start_quiz, login_user
 
 pytestmark = pytest.mark.e2e
 
@@ -93,7 +93,7 @@ class TestAuthenticationSecurity:
 
         local_storage_before = page.evaluate("() => localStorage.getItem('token')")
 
-        page.locator("button:has-text('Settings')").click()
+        page.get_by_role("button", name="Settings").click()
         page.wait_for_timeout(500)
 
         logout_button = page.get_by_role("button", name="Log Out")

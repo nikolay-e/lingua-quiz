@@ -72,7 +72,7 @@ export function QuestionDisplay({
       <div className="flex flex-col items-center justify-center min-h-20 px-6 py-4 bg-primary/5 rounded-lg">
         <span
           id="word"
-          className="text-xl font-bold text-primary text-center wrap-break-word hyphens-auto"
+          className="question-text text-xl font-bold text-primary text-center wrap-break-word hyphens-auto"
           lang={questionLanguage}
         >
           {currentQuestion.questionText}

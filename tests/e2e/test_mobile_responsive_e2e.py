@@ -1,8 +1,8 @@
 import os
 
+from conftest import AuthenticatedUser, login_and_start_quiz, login_user, start_quiz_with_cascading_selectors
 from playwright.sync_api import Page, expect
 import pytest
-from tests.conftest import AuthenticatedUser, login_and_start_quiz, login_user, start_quiz_with_cascading_selectors
 
 pytestmark = pytest.mark.e2e
 

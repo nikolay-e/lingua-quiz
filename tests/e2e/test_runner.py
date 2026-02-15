@@ -34,7 +34,7 @@ def main():
         sys.executable,
         "-m",
         "pytest",
-        "tests/",
+        ".",
         "-v",  # Verbose output
         "--tb=short",  # Short traceback format
         "--html=reports/test_report.html",  # HTML report

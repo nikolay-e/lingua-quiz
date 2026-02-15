@@ -136,18 +136,6 @@ export const useAuthStore = create<AuthStore>()(
       }
     };
 
-    if (typeof window !== 'undefined') {
-      checkToken();
-
-      authChannel?.addEventListener('message', (event: MessageEvent<AuthChannelMessage>) => {
-        if (event.data.type === 'token-refreshed') {
-          checkToken();
-        } else {
-          logoutUser();
-        }
-      });
-    }
-
     return {
       token: null,
       username: null,
@@ -196,6 +184,18 @@ export const useAuthStore = create<AuthStore>()(
     };
   }),
 );
+
+if (typeof window !== 'undefined') {
+  useAuthStore.getState().checkToken();
+
+  authChannel?.addEventListener('message', (event: MessageEvent<AuthChannelMessage>) => {
+    if (event.data.type === 'token-refreshed') {
+      useAuthStore.getState().checkToken();
+    } else {
+      useAuthStore.getState().logoutUser();
+    }
+  });
+}
 
 export const useIsAuthenticated = (): boolean => useAuthStore((state) => state.isAuthenticated);
 export const useIsAdmin = (): boolean => useAuthStore((state) => state.isAdmin);

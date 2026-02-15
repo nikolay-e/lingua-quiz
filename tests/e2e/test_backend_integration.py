@@ -12,6 +12,7 @@ BACKEND_SRC = BACKEND_DIR / "src"
 if str(BACKEND_SRC) not in sys.path:
     sys.path.append(str(BACKEND_SRC))
 
+from conftest import API_URL, SKIP_TTS_TESTS, AuthenticatedUser
 from generated.schemas import (
     BulkProgressUpdateRequest,
     ContentVersionResponse,
@@ -25,15 +26,12 @@ from generated.schemas import (
     UserProgressResponse,
     UserRegistration,
     VersionResponse,
-    VocabularyItemCreate,
     VocabularyItemDetailResponse,
     VocabularyItemResponse,
-    VocabularyItemUpdate,
     WordListResponse,
 )
 import pytest
-from tests.conftest import API_URL, SKIP_TTS_TESTS, AuthenticatedUser
-from utils import random_password, random_username, random_word
+from utils import random_password, random_username
 
 
 @pytest.mark.integration
@@ -385,98 +383,35 @@ class TestAdminVocabulary:
         data = response.json()
         assert isinstance(data, list)
 
-    def test_admin_create_vocabulary_item(self, admin_api_client):
-        vocab_item = VocabularyItemCreate(
-            source_text=random_word("integration"),
-            source_language="en",
-            target_text="интеграционное_тестовое_слово",
-            target_language="ru",
-            list_name="test-integration-list",
-            difficulty_level="A1",
-            source_usage_example="This is an integration test word.",
-            target_usage_example="Это интеграционное тестовое слово.",
-        )
-
+    def test_admin_create_vocabulary_returns_405(self, admin_api_client):
         response = admin_api_client.post(
             f"{API_URL}/admin/vocabulary",
-            json=vocab_item.model_dump(by_alias=True),
+            json={"sourceText": "test", "sourceLanguage": "en", "targetText": "тест", "targetLanguage": "ru", "listName": "test"},
         )
+        assert response.status_code == 405
 
-        assert response.status_code == 201
-        data = response.json()
-        assert "id" in data
+    def test_admin_update_vocabulary_returns_405(self, admin_api_client):
+        response = admin_api_client.put(
+            f"{API_URL}/admin/vocabulary/00000000-0000-0000-0000-000000000001",
+            json={"targetText": "updated"},
+        )
+        assert response.status_code == 405
+
+    def test_admin_delete_vocabulary_returns_405(self, admin_api_client):
+        response = admin_api_client.delete(f"{API_URL}/admin/vocabulary/00000000-0000-0000-0000-000000000001")
+        assert response.status_code == 405
 
     def test_admin_get_vocabulary_item(self, admin_api_client):
-        source_word = random_word("get")
-        create_response = admin_api_client.post(
-            f"{API_URL}/admin/vocabulary",
-            json=VocabularyItemCreate(
-                source_text=source_word,
-                source_language="en",
-                target_text="тестовое_слово_для_получения",
-                target_language="ru",
-                list_name="test-integration-list",
-            ).model_dump(by_alias=True),
-        )
-        item_id = create_response.json()["id"]
+        list_response = admin_api_client.get(f"{API_URL}/admin/vocabulary", params={"limit": 1})
+        if list_response.status_code != 200 or not list_response.json():
+            pytest.skip("No vocabulary items available")
 
+        item_id = list_response.json()[0]["id"]
         response = admin_api_client.get(f"{API_URL}/admin/vocabulary/{item_id}")
 
         assert response.status_code == 200
         item = VocabularyItemDetailResponse.model_validate(response.json())
         assert item.id == item_id
-        assert item.source_text == source_word
-
-    def test_admin_update_vocabulary_item(self, admin_api_client):
-        create_response = admin_api_client.post(
-            f"{API_URL}/admin/vocabulary",
-            json=VocabularyItemCreate(
-                source_text=random_word("update"),
-                source_language="en",
-                target_text="слово_для_обновления",
-                target_language="ru",
-                list_name="test-integration-list",
-            ).model_dump(by_alias=True),
-        )
-        item_id = create_response.json()["id"]
-
-        update_data = VocabularyItemUpdate(
-            target_text="обновлённое_слово",
-            source_usage_example="Updated example sentence.",
-        )
-
-        response = admin_api_client.put(
-            f"{API_URL}/admin/vocabulary/{item_id}",
-            json=update_data.model_dump(by_alias=True, exclude_none=True),
-        )
-
-        assert response.status_code == 200
-
-        get_response = admin_api_client.get(f"{API_URL}/admin/vocabulary/{item_id}")
-        updated_item = VocabularyItemDetailResponse.model_validate(get_response.json())
-        assert updated_item.target_text == "обновлённое_слово"
-        assert updated_item.source_usage_example == "Updated example sentence."
-
-    def test_admin_delete_vocabulary_item(self, admin_api_client):
-        create_response = admin_api_client.post(
-            f"{API_URL}/admin/vocabulary",
-            json=VocabularyItemCreate(
-                source_text=random_word("delete"),
-                source_language="en",
-                target_text="слово_для_удаления",
-                target_language="ru",
-                list_name="test-integration-list",
-            ).model_dump(by_alias=True),
-        )
-        item_id = create_response.json()["id"]
-
-        response = admin_api_client.delete(f"{API_URL}/admin/vocabulary/{item_id}")
-        assert response.status_code == 200
-
-        get_response = admin_api_client.get(f"{API_URL}/admin/vocabulary/{item_id}")
-        if get_response.status_code == 200:
-            item = get_response.json()
-            assert item.get("isActive") is False
 
 
 @pytest.mark.integration
@@ -615,11 +550,11 @@ class TestEdgeCases:
             f"{API_URL}/admin/vocabulary/00000000-0000-0000-0000-000000000000",
             json={"targetText": "updated"},
         )
-        assert response.status_code == 404
+        assert response.status_code == 405
 
     def test_admin_delete_nonexistent_vocabulary_item(self, admin_api_client):
         response = admin_api_client.delete(f"{API_URL}/admin/vocabulary/00000000-0000-0000-0000-000000000000")
-        assert response.status_code == 404
+        assert response.status_code == 405
 
     def test_empty_bulk_progress_rejected(self, authenticated_api_client):
         response = authenticated_api_client.post(
