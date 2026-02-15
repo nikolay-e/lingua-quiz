@@ -10,7 +10,7 @@ import {
   validateWordList,
 } from '../src/validators';
 
-import openapi from '../../../lingua-quiz-schema.json';
+import openapi from '../../../schema/lingua-quiz-schema.json';
 
 const schemas = (openapi as { components?: { schemas?: Record<string, JSONSchema7> } }).components?.schemas || {};
 const vocabularyItemSchema = schemas.VocabularyItemResponse as JSONSchema7;

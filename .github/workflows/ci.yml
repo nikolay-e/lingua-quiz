@@ -177,6 +177,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     timeout-minutes: 5
     permissions:
+      contents: read
       deployments: write
     steps:
       - uses: actions/checkout@v6

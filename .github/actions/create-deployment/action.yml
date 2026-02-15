@@ -1,0 +1,60 @@
+name: Create GitHub Deployment
+description: Creates a GitHub deployment and sets initial status
+inputs:
+  environment:
+    required: true
+  ref:
+    required: true
+  is-production:
+    default: 'false'
+  is-transient:
+    default: 'false'
+  description:
+    default: ''
+  payload:
+    default: '{}'
+  environment-url:
+    default: ''
+  initial-status:
+    default: 'in_progress'
+  status-description:
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Create deployment
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        DEPLOY_REF: ${{ inputs.ref }}
+        DEPLOY_ENV: ${{ inputs.environment }}
+        DEPLOY_DESC: ${{ inputs.description }}
+        DEPLOY_PROD: ${{ inputs.is-production }}
+        DEPLOY_TRANSIENT: ${{ inputs.is-transient }}
+        DEPLOY_PAYLOAD: ${{ inputs.payload }}
+      run: |
+        BODY=$(jq -n \
+          --arg ref "$DEPLOY_REF" \
+          --arg env "$DEPLOY_ENV" \
+          --arg desc "$DEPLOY_DESC" \
+          --argjson prod "$DEPLOY_PROD" \
+          --argjson transient "$DEPLOY_TRANSIENT" \
+          --argjson payload "$DEPLOY_PAYLOAD" \
+          '{
+            ref: $ref,
+            environment: $env,
+            description: $desc,
+            production_environment: $prod,
+            transient_environment: $transient,
+            payload: $payload,
+            auto_merge: false,
+            required_contexts: []
+          }')
+
+        DEPLOY_ID=$(echo "$BODY" | gh api repos/${{ github.repository }}/deployments --input - --jq '.id')
+
+        gh api repos/${{ github.repository }}/deployments/${DEPLOY_ID}/statuses \
+          -f state="${{ inputs.initial-status }}" \
+          -f description="${{ inputs.status-description }}" \
+          -f environment_url="${{ inputs.environment-url }}"
