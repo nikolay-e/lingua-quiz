@@ -172,6 +172,9 @@ export function QuizPage(): React.JSX.Element {
       const result = await submitAnswer(token, userAnswer);
 
       if (result !== null) {
+        if ('isCorrect' in result && 'vibrate' in navigator) {
+          navigator.vibrate(result.isCorrect ? [50] : [50, 30, 50]);
+        }
         setFeedback(result);
         setAwaitingNextInput(true);
         if ('translation' in result) {
@@ -358,7 +361,13 @@ export function QuizPage(): React.JSX.Element {
                     onRetry={retryLastOperation}
                   />
                 )}
-                {usageExamples !== null && <UsageExamples examples={usageExamples} />}
+                {usageExamples !== null && (
+                  <UsageExamples
+                    examples={usageExamples}
+                    sourceLanguage={sourceLanguage}
+                    targetLanguage={targetLanguage}
+                  />
+                )}
               </FeedCard>
             )}
 
@@ -384,6 +393,10 @@ export function QuizPage(): React.JSX.Element {
           </FeedCard>
         )}
       </main>
+
+      <div aria-live="polite" className="sr-only">
+        {currentQuestion !== null ? currentQuestion.questionText : ''}
+      </div>
 
       <LevelChangeAnimation
         isVisible={showLevelAnimation}

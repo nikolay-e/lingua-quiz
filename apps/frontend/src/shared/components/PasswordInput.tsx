@@ -47,7 +47,6 @@ export function PasswordInput({
           className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={() => setShowPassword(!showPassword)}
           aria-label={showPassword ? 'Hide password' : 'Show password'}
-          tabIndex={0}
           disabled={disabled}
         >
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Languages, GraduationCap, BookOpen, Play, Mic, Settings } from 'lucide-react';
 import { Button, Select, Skeleton } from '@shared/ui';
-import { FeedCard } from '@shared/components';
+import { FeedCard, ErrorDisplay } from '@shared/components';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { useSpeakStore } from '@features/speak';
@@ -209,7 +209,15 @@ export function HomePage(): React.JSX.Element {
             </div>
           )}
 
-          {loadError !== null && <div className="text-destructive text-center p-3">{loadError}</div>}
+          {loadError !== null && (
+            <ErrorDisplay
+              message={loadError}
+              onRetry={() => {
+                void handleLoadWordLists();
+              }}
+              retryLabel={t('common.retry', 'Retry')}
+            />
+          )}
 
           <div className="flex flex-col gap-4 pt-4">
             <Button

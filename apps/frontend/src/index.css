@@ -107,23 +107,6 @@
     /* Level change animation colors */
     --color-level-up: #059669;
     --color-level-down: #dc2626;
-
-    /* ========================================
-       DEPRECATED ALIASES - Remove in next major version
-       These are kept for backward compatibility with existing components.
-       New code should use the --color-* equivalents directly.
-       ======================================== */
-    --primary-color: var(--color-primary);
-    --container-bg: var(--color-surface);
-    --text-color: var(--color-text);
-    --input-border-color: var(--color-input-border);
-    --success-color: var(--color-success);
-    --error-color: var(--color-error);
-    --shadow-xl: 0 4px 12px rgb(0 0 0 / 0.15);
-    --shadow-button-hover: 0 2px 8px rgb(0 0 0 / 0.12);
-    --color-error-bg: rgb(239 68 68 / 0.1);
-    --color-error-border: rgb(239 68 68 / 0.3);
-    --color-error-text: #b91c1c;
   }
 }
 
@@ -159,11 +142,6 @@
   /* Level change animation colors */
   --color-level-up: #34d399;
   --color-level-down: #f87171;
-
-  /* Deprecated dark theme aliases */
-  --color-error-bg: rgb(239 68 68 / 0.15);
-  --color-error-border: rgb(239 68 68 / 0.4);
-  --color-error-text: #fca5a5;
 }
 
 /* Dark theme select arrow (SVG with light stroke) */
@@ -328,6 +306,11 @@
       cursor: not-allowed;
       opacity: 0.5;
     }
+  }
+
+  /* Progress bar smooth value transition */
+  progress::-webkit-progress-value {
+    transition: width 0.3s ease-out;
   }
 
   /* Global invalid state styling for form controls */

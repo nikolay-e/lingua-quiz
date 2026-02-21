@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { X, CheckCircle, AlertCircle, Info } from 'lucide-react';
 import { useToasts, useRemoveToast } from '@shared/stores/toast.store';
 import { cn } from '@shared/utils';
@@ -12,7 +12,7 @@ export function Toasts(): React.JSX.Element | null {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+    <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-[calc(1rem+env(safe-area-inset-right,0px))] z-50 flex flex-col gap-2">
       {toasts.map((toast) => (
         <Toast key={toast.id} toast={toast} onRemove={remove} />
       ))}
@@ -31,15 +31,38 @@ interface ToastProps {
   onRemove: (id: number) => void;
 }
 
+const TOAST_DURATION = 4000;
+
 function Toast({ toast, onRemove }: ToastProps): React.JSX.Element {
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const [paused, setPaused] = useState(false);
+  const remainingRef = useRef(TOAST_DURATION);
+  const startTimeRef = useRef(Date.now());
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const scheduleRemoval = useCallback(() => {
+    startTimeRef.current = Date.now();
+    timerRef.current = setTimeout(() => {
       onRemove(toast.id);
-    }, 4000);
-    return () => {
-      clearTimeout(timer);
-    };
+    }, remainingRef.current);
   }, [toast.id, onRemove]);
+
+  useEffect(() => {
+    scheduleRemoval();
+    return () => {
+      clearTimeout(timerRef.current);
+    };
+  }, [scheduleRemoval]);
+
+  const handleMouseEnter = () => {
+    clearTimeout(timerRef.current);
+    remainingRef.current -= Date.now() - startTimeRef.current;
+    setPaused(true);
+  };
+
+  const handleMouseLeave = () => {
+    setPaused(false);
+    scheduleRemoval();
+  };
 
   const getIcon = () => {
     if (toast.type === 'success') return CheckCircle;
@@ -56,8 +79,11 @@ function Toast({ toast, onRemove }: ToastProps): React.JSX.Element {
         toast.type === 'success' && 'border-success/50',
         toast.type === 'error' && 'border-destructive/50',
         toast.type === 'info' && 'border-primary/50',
+        paused && 'shadow-xl',
       )}
       role="alert"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <Icon
         size={18}

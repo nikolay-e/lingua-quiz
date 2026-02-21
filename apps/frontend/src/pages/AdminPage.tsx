@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { Plus, Search, Edit2, Trash2, Loader2, ArrowUp, ArrowDown } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '@api/admin';
@@ -431,205 +431,203 @@ export function AdminPage(): React.JSX.Element {
         )}
       </PageContainer>
 
-      {isEditDialogOpen && selectedItem !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <Card className="w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <CardContent className="pt-6">
-              <h2 className="text-xl font-semibold mb-4">Edit Vocabulary Item</h2>
-              <div className="flex flex-col gap-4">
-                <div>
-                  <Label>Source Text</Label>
-                  <Input
-                    value={editForm.sourceText}
-                    onChange={(e) => {
-                      setEditForm({ ...editForm, sourceText: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <Label>Target Text</Label>
-                  <Input
-                    value={editForm.targetText}
-                    onChange={(e) => {
-                      setEditForm({ ...editForm, targetText: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <Label>Source Example</Label>
-                  <Input
-                    value={editForm.sourceUsageExample ?? ''}
-                    onChange={(e) => {
-                      setEditForm({ ...editForm, sourceUsageExample: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <Label>Target Example</Label>
-                  <Input
-                    value={editForm.targetUsageExample ?? ''}
-                    onChange={(e) => {
-                      setEditForm({ ...editForm, targetUsageExample: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <Label>List Name</Label>
-                  <Select
-                    value={editForm.listName}
-                    onValueChange={(val) => {
-                      setEditForm({ ...editForm, listName: val });
-                    }}
-                    options={LIST_NAME_OPTIONS}
-                  />
-                </div>
-                <div>
-                  <Label>Difficulty</Label>
-                  <Select
-                    value={editForm.difficultyLevel}
-                    onValueChange={(val) => {
-                      setEditForm({ ...editForm, difficultyLevel: val });
-                    }}
-                    options={DIFFICULTY_OPTIONS}
-                  />
-                </div>
-                <div className="flex gap-2 mt-4">
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setIsEditDialogOpen(false);
-                    }}
-                    className="flex-1"
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      void handleUpdateItem();
-                    }}
-                    disabled={loading}
-                    className="flex-1"
-                  >
-                    {loading ? <Loader2 size={16} className="animate-spin mr-2" /> : null}
-                    Save Changes
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      <AdminFormDialog
+        open={isEditDialogOpen}
+        title="Edit Vocabulary Item"
+        onClose={() => {
+          setIsEditDialogOpen(false);
+        }}
+      >
+        <div className="flex flex-col gap-4">
+          <div>
+            <Label>Source Text</Label>
+            <Input
+              value={editForm.sourceText}
+              onChange={(e) => {
+                setEditForm({ ...editForm, sourceText: e.target.value });
+              }}
+            />
+          </div>
+          <div>
+            <Label>Target Text</Label>
+            <Input
+              value={editForm.targetText}
+              onChange={(e) => {
+                setEditForm({ ...editForm, targetText: e.target.value });
+              }}
+            />
+          </div>
+          <div>
+            <Label>Source Example</Label>
+            <Input
+              value={editForm.sourceUsageExample ?? ''}
+              onChange={(e) => {
+                setEditForm({ ...editForm, sourceUsageExample: e.target.value });
+              }}
+            />
+          </div>
+          <div>
+            <Label>Target Example</Label>
+            <Input
+              value={editForm.targetUsageExample ?? ''}
+              onChange={(e) => {
+                setEditForm({ ...editForm, targetUsageExample: e.target.value });
+              }}
+            />
+          </div>
+          <div>
+            <Label>List Name</Label>
+            <Select
+              value={editForm.listName}
+              onValueChange={(val) => {
+                setEditForm({ ...editForm, listName: val });
+              }}
+              options={LIST_NAME_OPTIONS}
+            />
+          </div>
+          <div>
+            <Label>Difficulty</Label>
+            <Select
+              value={editForm.difficultyLevel}
+              onValueChange={(val) => {
+                setEditForm({ ...editForm, difficultyLevel: val });
+              }}
+              options={DIFFICULTY_OPTIONS}
+            />
+          </div>
+          <div className="flex gap-2 mt-4">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setIsEditDialogOpen(false);
+              }}
+              className="flex-1"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                void handleUpdateItem();
+              }}
+              disabled={loading}
+              className="flex-1"
+            >
+              {loading ? <Loader2 size={16} className="animate-spin mr-2" /> : null}
+              Save Changes
+            </Button>
+          </div>
         </div>
-      )}
+      </AdminFormDialog>
 
-      {isCreateDialogOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <Card className="w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <CardContent className="pt-6">
-              <h2 className="text-xl font-semibold mb-4">Create Vocabulary Item</h2>
-              <div className="flex flex-col gap-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label>Source Language</Label>
-                    <Select
-                      value={createForm.sourceLanguage}
-                      onValueChange={(val) => {
-                        setCreateForm({ ...createForm, sourceLanguage: val });
-                      }}
-                      options={LANGUAGE_OPTIONS}
-                    />
-                  </div>
-                  <div>
-                    <Label>Target Language</Label>
-                    <Select
-                      value={createForm.targetLanguage}
-                      onValueChange={(val) => {
-                        setCreateForm({ ...createForm, targetLanguage: val });
-                      }}
-                      options={LANGUAGE_OPTIONS}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Label>Source Text</Label>
-                  <Input
-                    value={createForm.sourceText}
-                    onChange={(e) => {
-                      setCreateForm({ ...createForm, sourceText: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <Label>Target Text</Label>
-                  <Input
-                    value={createForm.targetText}
-                    onChange={(e) => {
-                      setCreateForm({ ...createForm, targetText: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <Label>Source Example</Label>
-                  <Input
-                    value={createForm.sourceUsageExample ?? ''}
-                    onChange={(e) => {
-                      setCreateForm({ ...createForm, sourceUsageExample: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <Label>Target Example</Label>
-                  <Input
-                    value={createForm.targetUsageExample ?? ''}
-                    onChange={(e) => {
-                      setCreateForm({ ...createForm, targetUsageExample: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <Label>List Name</Label>
-                  <Select
-                    value={createForm.listName}
-                    onValueChange={(val) => {
-                      setCreateForm({ ...createForm, listName: val });
-                    }}
-                    options={LIST_NAME_OPTIONS}
-                  />
-                </div>
-                <div>
-                  <Label>Difficulty</Label>
-                  <Select
-                    value={createForm.difficultyLevel}
-                    onValueChange={(val) => {
-                      setCreateForm({ ...createForm, difficultyLevel: val });
-                    }}
-                    options={DIFFICULTY_OPTIONS}
-                  />
-                </div>
-                <div className="flex gap-2 mt-4">
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setIsCreateDialogOpen(false);
-                    }}
-                    className="flex-1"
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      void handleCreateItem();
-                    }}
-                    disabled={loading}
-                    className="flex-1"
-                  >
-                    {loading ? <Loader2 size={16} className="animate-spin mr-2" /> : null}
-                    Create Item
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      <AdminFormDialog
+        open={isCreateDialogOpen}
+        title="Create Vocabulary Item"
+        onClose={() => {
+          setIsCreateDialogOpen(false);
+        }}
+      >
+        <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label>Source Language</Label>
+              <Select
+                value={createForm.sourceLanguage}
+                onValueChange={(val) => {
+                  setCreateForm({ ...createForm, sourceLanguage: val });
+                }}
+                options={LANGUAGE_OPTIONS}
+              />
+            </div>
+            <div>
+              <Label>Target Language</Label>
+              <Select
+                value={createForm.targetLanguage}
+                onValueChange={(val) => {
+                  setCreateForm({ ...createForm, targetLanguage: val });
+                }}
+                options={LANGUAGE_OPTIONS}
+              />
+            </div>
+          </div>
+          <div>
+            <Label>Source Text</Label>
+            <Input
+              value={createForm.sourceText}
+              onChange={(e) => {
+                setCreateForm({ ...createForm, sourceText: e.target.value });
+              }}
+            />
+          </div>
+          <div>
+            <Label>Target Text</Label>
+            <Input
+              value={createForm.targetText}
+              onChange={(e) => {
+                setCreateForm({ ...createForm, targetText: e.target.value });
+              }}
+            />
+          </div>
+          <div>
+            <Label>Source Example</Label>
+            <Input
+              value={createForm.sourceUsageExample ?? ''}
+              onChange={(e) => {
+                setCreateForm({ ...createForm, sourceUsageExample: e.target.value });
+              }}
+            />
+          </div>
+          <div>
+            <Label>Target Example</Label>
+            <Input
+              value={createForm.targetUsageExample ?? ''}
+              onChange={(e) => {
+                setCreateForm({ ...createForm, targetUsageExample: e.target.value });
+              }}
+            />
+          </div>
+          <div>
+            <Label>List Name</Label>
+            <Select
+              value={createForm.listName}
+              onValueChange={(val) => {
+                setCreateForm({ ...createForm, listName: val });
+              }}
+              options={LIST_NAME_OPTIONS}
+            />
+          </div>
+          <div>
+            <Label>Difficulty</Label>
+            <Select
+              value={createForm.difficultyLevel}
+              onValueChange={(val) => {
+                setCreateForm({ ...createForm, difficultyLevel: val });
+              }}
+              options={DIFFICULTY_OPTIONS}
+            />
+          </div>
+          <div className="flex gap-2 mt-4">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setIsCreateDialogOpen(false);
+              }}
+              className="flex-1"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                void handleCreateItem();
+              }}
+              disabled={loading}
+              className="flex-1"
+            >
+              {loading ? <Loader2 size={16} className="animate-spin mr-2" /> : null}
+              Create Item
+            </Button>
+          </div>
         </div>
-      )}
+      </AdminFormDialog>
 
       {isDeleteDialogOpen && itemToDelete !== null && (
         <ConfirmDialog
@@ -646,5 +644,61 @@ export function AdminPage(): React.JSX.Element {
         />
       )}
     </>
+  );
+}
+
+interface AdminFormDialogProps {
+  open: boolean;
+  title: string;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+function AdminFormDialog({ open, title, onClose, children }: AdminFormDialogProps): React.JSX.Element {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const handleClose = useCallback(() => {
+    onClose();
+  }, [onClose]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (dialog === null) return;
+
+    if (open) {
+      dialog.showModal();
+    } else {
+      dialog.close();
+    }
+  }, [open]);
+
+  const handleCancel = (e: React.SyntheticEvent): void => {
+    e.preventDefault();
+    handleClose();
+  };
+
+  const handleClick = (e: React.MouseEvent): void => {
+    if (e.target === dialogRef.current) {
+      handleClose();
+    }
+  };
+
+  return (
+    <dialog
+      ref={dialogRef}
+      className="border-none rounded-lg p-0 max-w-[min(90vw,28rem)] w-full bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+      aria-labelledby={`dialog-title-${title.replace(/\s/g, '-').toLowerCase()}`}
+      onCancel={handleCancel}
+      onClick={handleClick}
+    >
+      <Card className="max-h-[90vh] overflow-y-auto">
+        <CardContent className="pt-6">
+          <h2 id={`dialog-title-${title.replace(/\s/g, '-').toLowerCase()}`} className="text-xl font-semibold mb-4">
+            {title}
+          </h2>
+          {children}
+        </CardContent>
+      </Card>
+    </dialog>
   );
 }

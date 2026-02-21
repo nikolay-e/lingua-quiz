@@ -1,24 +1,11 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  ArrowLeft,
-  KeyRound,
-  Trash2,
-  Eye,
-  EyeOff,
-  Loader2,
-  LogOut,
-  User,
-  Globe,
-  Sun,
-  Moon,
-  Monitor,
-} from 'lucide-react';
+import { ArrowLeft, KeyRound, Trash2, Loader2, LogOut, User, Globe, Sun, Moon, Monitor } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useThemeStore } from '@features/settings/stores/theme.store';
-import { Button, Input, Label, Card, CardHeader, CardTitle, CardDescription, CardContent, Select } from '@shared/ui';
-import { ConfirmDialog, PageContainer, useToast } from '@shared/components';
+import { Button, Card, CardHeader, CardTitle, CardDescription, CardContent, Select } from '@shared/ui';
+import { ConfirmDialog, PageContainer, PasswordInput, useToast } from '@shared/components';
 import { cn, extractErrorMessage, THEME_MODES, type ThemeMode } from '@shared/utils';
 import { setLocale, getSupportedLocales, LOCALE_NAMES, type SupportedLocale } from '@shared/i18n';
 import api from '@api';
@@ -49,9 +36,6 @@ export function SettingsPage(): React.JSX.Element {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
@@ -220,59 +204,25 @@ export function SettingsPage(): React.JSX.Element {
                   void handleChangePassword();
                 }}
               >
-                <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="current-password">{t('settings.currentPassword')}</Label>
-                  <div className="relative flex items-center">
-                    <Input
-                      id="current-password"
-                      type={showCurrentPassword ? 'text' : 'password'}
-                      value={currentPassword}
-                      onChange={(e) => {
-                        setCurrentPassword(e.target.value);
-                      }}
-                      autoComplete="current-password"
-                      disabled={isChangingPassword}
-                      className="pr-11"
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors"
-                      onClick={() => {
-                        setShowCurrentPassword(!showCurrentPassword);
-                      }}
-                      aria-label={showCurrentPassword ? t('settings.hidePassword') : t('settings.showPassword')}
-                    >
-                      {showCurrentPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
-                </div>
+                <PasswordInput
+                  value={currentPassword}
+                  onChange={setCurrentPassword}
+                  id="current-password"
+                  label={t('settings.currentPassword')}
+                  autocomplete="current-password"
+                  disabled={isChangingPassword}
+                />
 
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="new-password">{t('settings.newPassword')}</Label>
-                  <div className="relative flex items-center">
-                    <Input
-                      id="new-password"
-                      type={showNewPassword ? 'text' : 'password'}
-                      value={newPassword}
-                      onChange={(e) => {
-                        setNewPassword(e.target.value);
-                      }}
-                      autoComplete="new-password"
-                      disabled={isChangingPassword}
-                      aria-invalid={newPassword.length > 0 && !isPasswordValid}
-                      className="pr-11"
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors"
-                      onClick={() => {
-                        setShowNewPassword(!showNewPassword);
-                      }}
-                      aria-label={showNewPassword ? t('settings.hidePassword') : t('settings.showPassword')}
-                    >
-                      {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
+                  <PasswordInput
+                    value={newPassword}
+                    onChange={setNewPassword}
+                    id="new-password"
+                    label={t('settings.newPassword')}
+                    autocomplete="new-password"
+                    disabled={isChangingPassword}
+                    invalid={newPassword.length > 0 && !isPasswordValid}
+                  />
                   {newPassword.length > 0 && (
                     <ul className="text-sm space-y-1 mt-2">
                       {passwordRequirements.map((req) => (
@@ -292,31 +242,15 @@ export function SettingsPage(): React.JSX.Element {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="confirm-password">{t('settings.confirmPassword')}</Label>
-                  <div className="relative flex items-center">
-                    <Input
-                      id="confirm-password"
-                      type={showConfirmPassword ? 'text' : 'password'}
-                      value={confirmPassword}
-                      onChange={(e) => {
-                        setConfirmPassword(e.target.value);
-                      }}
-                      autoComplete="new-password"
-                      disabled={isChangingPassword}
-                      aria-invalid={confirmPassword.length > 0 && !doPasswordsMatch}
-                      className="pr-11"
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors"
-                      onClick={() => {
-                        setShowConfirmPassword(!showConfirmPassword);
-                      }}
-                      aria-label={showConfirmPassword ? t('settings.hidePassword') : t('settings.showPassword')}
-                    >
-                      {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
+                  <PasswordInput
+                    value={confirmPassword}
+                    onChange={setConfirmPassword}
+                    id="confirm-password"
+                    label={t('settings.confirmPassword')}
+                    autocomplete="new-password"
+                    disabled={isChangingPassword}
+                    invalid={confirmPassword.length > 0 && !doPasswordsMatch}
+                  />
                   {confirmPassword.length > 0 && !doPasswordsMatch && (
                     <p className="text-sm text-error">{t('settings.passwordMismatch')}</p>
                   )}
