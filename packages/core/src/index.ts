@@ -6,6 +6,9 @@ import {
   MISTAKE_WINDOW,
   MAX_FOCUS_POOL_SIZE,
   MIN_HISTORY_FOR_DEGRADATION,
+  SLOW_RESPONSE_MS,
+  BETWEEN_SESSION_DECAY_BASE,
+  LEVEL_STABILITY_DAYS,
 } from './constants';
 import { checkAnswer, formatForDisplay } from './answer-comparison';
 import type { Translation, ProgressEntry } from './types';
@@ -99,6 +102,17 @@ export class QuizManager {
       );
     });
 
+    const now = Date.now();
+    for (const entry of fullProgress) {
+      const stability = LEVEL_STABILITY_DAYS[entry.level];
+      if (stability === undefined || entry.lastAskedAt === undefined) continue;
+      const daysSince = (now - new Date(entry.lastAskedAt).getTime()) / (1000 * 60 * 60 * 24);
+      if (daysSince > 1) {
+        const decayFactor = Math.pow(BETWEEN_SESSION_DECAY_BASE, daysSince / stability);
+        entry.queuePosition = Math.max(0, Math.floor((entry.queuePosition ?? 0) * decayFactor));
+      }
+    }
+
     this.queueManager = new QueueManager(translations, fullProgress);
     this.stateManager = new StateManager(translations, fullProgress);
     this.levelEngine = new LevelEngine(this.queueManager);
@@ -151,6 +165,11 @@ export class QuizManager {
 
     this.submissionStartTime = Date.now();
 
+    const isFirstEncounter = p.recentHistory.length === 0 && p.level === 'LEVEL_1';
+    const exampleForDirection = direction === 'normal' ? t.sourceUsageExample : t.targetUsageExample;
+    const rawExample = isFirstEncounter ? exampleForDirection : null;
+    const firstEncounterExample = rawExample != null && rawExample !== '' ? rawExample : undefined;
+
     return {
       translationId: t.id,
       questionText: direction === 'normal' ? t.sourceText : t.targetText,
@@ -159,7 +178,7 @@ export class QuizManager {
       sourceLanguage: t.sourceLanguage,
       targetLanguage: t.targetLanguage,
       questionType,
-      usageExample: this.getUsageExample(questionType, direction, t),
+      usageExample: firstEncounterExample ?? this.getUsageExample(questionType, direction, t),
     };
   };
 
@@ -215,11 +234,14 @@ export class QuizManager {
     const correctAnswerText = direction === 'normal' ? t.targetText : t.sourceText;
     const isCorrect = checkAnswer(userAnswer, correctAnswerText);
 
-    const recentHistory = [...p.recentHistory.slice(-this.opts.historySizeForDegradation + 1), isCorrect];
-    const consecutiveCorrect = isCorrect ? p.consecutiveCorrect + 1 : 0;
-
     const responseTimeMs = this.submissionStartTime !== null ? Date.now() - this.submissionStartTime : undefined;
     this.submissionStartTime = null;
+
+    const isSlowCorrect = isCorrect && responseTimeMs !== undefined && responseTimeMs > SLOW_RESPONSE_MS;
+
+    const recentHistory = [...p.recentHistory.slice(-this.opts.historySizeForDegradation + 1), isCorrect];
+    const correctIncrement = isSlowCorrect ? 0 : 1;
+    const consecutiveCorrect = isCorrect ? p.consecutiveCorrect + correctIncrement : 0;
 
     const oldLevel = p.level;
 
@@ -227,7 +249,7 @@ export class QuizManager {
       translationId,
       p.level,
       isCorrect,
-      consecutiveCorrect,
+      isSlowCorrect ? 1 : consecutiveCorrect,
       F,
       this.opts.queuePositionIncrement,
     );

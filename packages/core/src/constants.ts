@@ -8,6 +8,15 @@ export const MISTAKE_WINDOW = 10;
 export const MAX_FOCUS_POOL_SIZE = K * F * T_PROMO;
 export const MIN_HISTORY_FOR_DEGRADATION = 3;
 
+export const SLOW_RESPONSE_MS = 5000;
+export const BETWEEN_SESSION_DECAY_BASE = 0.9;
+export const LEVEL_STABILITY_DAYS: Record<string, number> = {
+  LEVEL_1: 3,
+  LEVEL_2: 6,
+  LEVEL_3: 9,
+  LEVEL_4: 12,
+};
+
 export const LEVEL_ORDER: LevelStatus[] = ['LEVEL_0', 'LEVEL_1', 'LEVEL_2', 'LEVEL_3', 'LEVEL_4', 'LEVEL_5'];
 
 export function getNextLevel(level: LevelStatus): LevelStatus | null {

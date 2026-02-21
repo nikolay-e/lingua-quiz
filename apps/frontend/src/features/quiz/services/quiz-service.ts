@@ -101,6 +101,8 @@ export class QuizService {
         queuePosition: number;
         correctCount: number;
         incorrectCount: number;
+        consecutiveCorrect: number;
+        lastPracticed: string | null;
       }
 
       const progressLookup = new Map<string, ProgressEntry>(
@@ -111,6 +113,8 @@ export class QuizService {
             queuePosition: p.queuePosition,
             correctCount: p.correctCount,
             incorrectCount: p.incorrectCount,
+            consecutiveCorrect: p.consecutiveCorrect,
+            lastPracticed: p.lastPracticed,
           },
         ]),
       );
@@ -143,8 +147,9 @@ export class QuizService {
           translationId: word.id,
           level: `LEVEL_${level}` as 'LEVEL_0' | 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5',
           queuePosition,
-          consecutiveCorrect: 0,
+          consecutiveCorrect: userProg?.consecutiveCorrect ?? 0,
           recentHistory: [] as boolean[],
+          lastAskedAt: userProg?.lastPracticed ?? undefined,
         };
       });
 
