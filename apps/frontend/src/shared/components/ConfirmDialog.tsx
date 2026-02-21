@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useId, useRef, useCallback } from 'react';
 import { AlertTriangle, type LucideIcon } from 'lucide-react';
 import { Button } from '@shared/ui';
+import { BaseDialog } from './BaseDialog';
 
 type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
 
@@ -27,47 +28,29 @@ export function ConfirmDialog({
   onCancel,
   icon: IconComponent = AlertTriangle,
 }: ConfirmDialogProps): React.JSX.Element {
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+  const descId = useId();
   const confirmButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (dialog === null) return;
-
-    if (open) {
-      dialog.showModal();
-      confirmButtonRef.current?.focus();
-    } else {
-      dialog.close();
-    }
-  }, [open]);
-
-  const handleCancel = (e: React.SyntheticEvent): void => {
-    e.preventDefault();
-    onCancel();
-  };
-
-  const handleClick = (e: React.MouseEvent): void => {
-    if (e.target === dialogRef.current) {
-      onCancel();
-    }
-  };
+  const handleOpen = useCallback(() => {
+    confirmButtonRef.current?.focus();
+  }, []);
 
   return (
-    <dialog
-      ref={dialogRef}
+    <BaseDialog
+      open={open}
+      onClose={onCancel}
+      onOpen={handleOpen}
+      titleId={titleId}
+      descriptionId={descId}
       className="border-none rounded-lg p-0 max-w-[min(90vw,400px)] bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur-sm"
-      aria-labelledby="confirm-dialog-title"
-      aria-describedby="confirm-dialog-desc"
-      onCancel={handleCancel}
-      onClick={handleClick}
     >
       <div className="flex flex-col items-center gap-2 p-6 bg-surface border border-border rounded-lg text-center shadow-xl">
         <IconComponent size={20} className="text-secondary" aria-hidden="true" />
-        <span id="confirm-dialog-title" className="text-base font-semibold">
+        <span id={titleId} className="text-base font-semibold">
           {title}
         </span>
-        <span id="confirm-dialog-desc" className="text-sm text-muted-foreground">
+        <span id={descId} className="text-sm text-muted-foreground">
           {description}
         </span>
         <div className="flex gap-3 mt-3">
@@ -85,6 +68,6 @@ export function ConfirmDialog({
           </Button>
         </div>
       </div>
-    </dialog>
+    </BaseDialog>
   );
 }

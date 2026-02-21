@@ -79,6 +79,7 @@ export function QuizPage(): React.JSX.Element {
     setFeedback(null);
     if (clearAnswer) setUserAnswer('');
     setQuestionForFeedback(null);
+    setUsageExamples(null);
     setAwaitingNextInput(false);
   }, []);
 
@@ -172,7 +173,11 @@ export function QuizPage(): React.JSX.Element {
       const result = await submitAnswer(token, userAnswer);
 
       if (result !== null) {
-        if ('isCorrect' in result && 'vibrate' in navigator) {
+        if (
+          'isCorrect' in result &&
+          'vibrate' in navigator &&
+          !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
           navigator.vibrate(result.isCorrect ? [50] : [50, 30, 50]);
         }
         setFeedback(result);

@@ -1,3 +1,4 @@
+export { BaseDialog } from './BaseDialog';
 export { FeedCard } from './FeedCard';
 export { PageContainer } from './PageContainer';
 export { PasswordInput } from './PasswordInput';

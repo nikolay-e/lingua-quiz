@@ -151,6 +151,7 @@ interface SelectProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
+  id?: string;
 }
 
 function Select({
@@ -160,10 +161,11 @@ function Select({
   placeholder = 'Select...',
   disabled = false,
   className,
+  id,
 }: SelectProps): React.JSX.Element {
   return (
     <SelectRoot value={value} onValueChange={onValueChange} disabled={disabled}>
-      <SelectTrigger className={className}>
+      <SelectTrigger className={className} id={id}>
         <SelectPrimitive.Value placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

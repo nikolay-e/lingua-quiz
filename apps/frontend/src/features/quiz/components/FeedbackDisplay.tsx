@@ -42,7 +42,7 @@ export function FeedbackDisplay({
   if (feedback === null) return null;
 
   return (
-    <div className="feedback-container flex flex-col gap-3" role="alert">
+    <div className="feedback-container flex flex-col gap-3" role="status">
       <div
         className={cn(
           'feedback-text flex items-center justify-center gap-3 px-4 py-3 min-h-10 font-semibold rounded-lg border text-center transition-all',

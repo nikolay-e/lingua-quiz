@@ -313,6 +313,10 @@
     transition: width 0.3s ease-out;
   }
 
+  progress::-moz-progress-bar {
+    transition: width 0.3s ease-out;
+  }
+
   /* Global invalid state styling for form controls */
   input[aria-invalid='true'],
   textarea[aria-invalid='true'],

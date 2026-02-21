@@ -1,11 +1,11 @@
-import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
+import { useState, useMemo, useId } from 'react';
 import { Plus, Search, Edit2, Trash2, Loader2, ArrowUp, ArrowDown } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '@api/admin';
 import { LANGUAGE_OPTIONS, DIFFICULTY_OPTIONS, LIST_NAME_OPTIONS } from '@features/admin/config/adminConfig';
 import type { AdminVocabularyItem } from '@api/types';
 import { Button, Input, Label, Select, Card, CardContent } from '@shared/ui';
-import { ConfirmDialog, PageContainer, useToast } from '@shared/components';
+import { BaseDialog, ConfirmDialog, PageContainer, useToast } from '@shared/components';
 import { cn, extractErrorMessage } from '@shared/utils';
 
 interface EditForm {
@@ -440,8 +440,9 @@ export function AdminPage(): React.JSX.Element {
       >
         <div className="flex flex-col gap-4">
           <div>
-            <Label>Source Text</Label>
+            <Label htmlFor="edit-source-text">Source Text</Label>
             <Input
+              id="edit-source-text"
               value={editForm.sourceText}
               onChange={(e) => {
                 setEditForm({ ...editForm, sourceText: e.target.value });
@@ -449,8 +450,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>Target Text</Label>
+            <Label htmlFor="edit-target-text">Target Text</Label>
             <Input
+              id="edit-target-text"
               value={editForm.targetText}
               onChange={(e) => {
                 setEditForm({ ...editForm, targetText: e.target.value });
@@ -458,8 +460,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>Source Example</Label>
+            <Label htmlFor="edit-source-example">Source Example</Label>
             <Input
+              id="edit-source-example"
               value={editForm.sourceUsageExample ?? ''}
               onChange={(e) => {
                 setEditForm({ ...editForm, sourceUsageExample: e.target.value });
@@ -467,8 +470,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>Target Example</Label>
+            <Label htmlFor="edit-target-example">Target Example</Label>
             <Input
+              id="edit-target-example"
               value={editForm.targetUsageExample ?? ''}
               onChange={(e) => {
                 setEditForm({ ...editForm, targetUsageExample: e.target.value });
@@ -476,8 +480,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>List Name</Label>
+            <Label htmlFor="edit-list-name">List Name</Label>
             <Select
+              id="edit-list-name"
               value={editForm.listName}
               onValueChange={(val) => {
                 setEditForm({ ...editForm, listName: val });
@@ -486,8 +491,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>Difficulty</Label>
+            <Label htmlFor="edit-difficulty">Difficulty</Label>
             <Select
+              id="edit-difficulty"
               value={editForm.difficultyLevel}
               onValueChange={(val) => {
                 setEditForm({ ...editForm, difficultyLevel: val });
@@ -529,8 +535,9 @@ export function AdminPage(): React.JSX.Element {
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label>Source Language</Label>
+              <Label htmlFor="create-source-lang">Source Language</Label>
               <Select
+                id="create-source-lang"
                 value={createForm.sourceLanguage}
                 onValueChange={(val) => {
                   setCreateForm({ ...createForm, sourceLanguage: val });
@@ -539,8 +546,9 @@ export function AdminPage(): React.JSX.Element {
               />
             </div>
             <div>
-              <Label>Target Language</Label>
+              <Label htmlFor="create-target-lang">Target Language</Label>
               <Select
+                id="create-target-lang"
                 value={createForm.targetLanguage}
                 onValueChange={(val) => {
                   setCreateForm({ ...createForm, targetLanguage: val });
@@ -550,8 +558,9 @@ export function AdminPage(): React.JSX.Element {
             </div>
           </div>
           <div>
-            <Label>Source Text</Label>
+            <Label htmlFor="create-source-text">Source Text</Label>
             <Input
+              id="create-source-text"
               value={createForm.sourceText}
               onChange={(e) => {
                 setCreateForm({ ...createForm, sourceText: e.target.value });
@@ -559,8 +568,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>Target Text</Label>
+            <Label htmlFor="create-target-text">Target Text</Label>
             <Input
+              id="create-target-text"
               value={createForm.targetText}
               onChange={(e) => {
                 setCreateForm({ ...createForm, targetText: e.target.value });
@@ -568,8 +578,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>Source Example</Label>
+            <Label htmlFor="create-source-example">Source Example</Label>
             <Input
+              id="create-source-example"
               value={createForm.sourceUsageExample ?? ''}
               onChange={(e) => {
                 setCreateForm({ ...createForm, sourceUsageExample: e.target.value });
@@ -577,8 +588,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>Target Example</Label>
+            <Label htmlFor="create-target-example">Target Example</Label>
             <Input
+              id="create-target-example"
               value={createForm.targetUsageExample ?? ''}
               onChange={(e) => {
                 setCreateForm({ ...createForm, targetUsageExample: e.target.value });
@@ -586,8 +598,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>List Name</Label>
+            <Label htmlFor="create-list-name">List Name</Label>
             <Select
+              id="create-list-name"
               value={createForm.listName}
               onValueChange={(val) => {
                 setCreateForm({ ...createForm, listName: val });
@@ -596,8 +609,9 @@ export function AdminPage(): React.JSX.Element {
             />
           </div>
           <div>
-            <Label>Difficulty</Label>
+            <Label htmlFor="create-difficulty">Difficulty</Label>
             <Select
+              id="create-difficulty"
               value={createForm.difficultyLevel}
               onValueChange={(val) => {
                 setCreateForm({ ...createForm, difficultyLevel: val });
@@ -655,50 +669,18 @@ interface AdminFormDialogProps {
 }
 
 function AdminFormDialog({ open, title, onClose, children }: AdminFormDialogProps): React.JSX.Element {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  const handleClose = useCallback(() => {
-    onClose();
-  }, [onClose]);
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (dialog === null) return;
-
-    if (open) {
-      dialog.showModal();
-    } else {
-      dialog.close();
-    }
-  }, [open]);
-
-  const handleCancel = (e: React.SyntheticEvent): void => {
-    e.preventDefault();
-    handleClose();
-  };
-
-  const handleClick = (e: React.MouseEvent): void => {
-    if (e.target === dialogRef.current) {
-      handleClose();
-    }
-  };
+  const titleId = useId();
 
   return (
-    <dialog
-      ref={dialogRef}
-      className="border-none rounded-lg p-0 max-w-[min(90vw,28rem)] w-full bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur-sm"
-      aria-labelledby={`dialog-title-${title.replace(/\s/g, '-').toLowerCase()}`}
-      onCancel={handleCancel}
-      onClick={handleClick}
-    >
+    <BaseDialog open={open} onClose={onClose} titleId={titleId}>
       <Card className="max-h-[90vh] overflow-y-auto">
         <CardContent className="pt-6">
-          <h2 id={`dialog-title-${title.replace(/\s/g, '-').toLowerCase()}`} className="text-xl font-semibold mb-4">
+          <h2 id={titleId} className="text-xl font-semibold mb-4">
             {title}
           </h2>
           {children}
         </CardContent>
       </Card>
-    </dialog>
+    </BaseDialog>
   );
 }

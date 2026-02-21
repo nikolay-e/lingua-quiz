@@ -55,7 +55,7 @@ function Toast({ toast, onRemove }: ToastProps): React.JSX.Element {
 
   const handleMouseEnter = () => {
     clearTimeout(timerRef.current);
-    remainingRef.current -= Date.now() - startTimeRef.current;
+    remainingRef.current = Math.max(0, remainingRef.current - (Date.now() - startTimeRef.current));
     setPaused(true);
   };
 

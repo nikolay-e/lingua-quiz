@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Eye, EyeOff } from 'lucide-react';
 import { Input, Label } from '@shared/ui';
 
@@ -23,6 +24,7 @@ export function PasswordInput({
   autocomplete = 'current-password',
   invalid = false,
 }: PasswordInputProps): React.JSX.Element {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -46,7 +48,7 @@ export function PasswordInput({
           type="button"
           className="absolute right-2 p-1 bg-transparent border-none cursor-pointer text-muted-foreground flex items-center justify-center hover:text-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={() => setShowPassword(!showPassword)}
-          aria-label={showPassword ? 'Hide password' : 'Show password'}
+          aria-label={showPassword ? t('settings.hidePassword') : t('settings.showPassword')}
           disabled={disabled}
         >
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
