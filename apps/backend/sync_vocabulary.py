@@ -117,8 +117,6 @@ def sync(conn, vocabulary_dir):
 
 
 def main():
-    database_url = f"postgresql://{WORDS_DB_USER}:{WORDS_DB_PASSWORD}@{WORDS_DB_HOST}:{WORDS_DB_PORT}/{WORDS_DB_NAME}"
-
     if not WORDS_DB_USER:
         print("WORDS_DB credentials not set, skipping sync")
         sys.exit(0)
@@ -128,7 +126,13 @@ def main():
         print(f"Vocabulary directory not found: {vocabulary_dir}")
         sys.exit(1)
 
-    conn = psycopg2.connect(database_url)
+    conn = psycopg2.connect(
+        host=WORDS_DB_HOST,
+        port=WORDS_DB_PORT,
+        dbname=WORDS_DB_NAME,
+        user=WORDS_DB_USER,
+        password=WORDS_DB_PASSWORD,
+    )
     try:
         sync(conn, vocabulary_dir)
     finally:
