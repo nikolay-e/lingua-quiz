@@ -2,6 +2,17 @@
 
 > Extends [../CLAUDE.md](../CLAUDE.md)
 
+## Ultimate Goal
+
+**THIS IS THE MOST IMPORTANT SECTION IN THIS FILE.**
+
+The ultimate goal is a guiding star — not necessarily achievable, but the direction we always move toward:
+
+**Maximize the efficiency of foreign language vocabulary acquisition based on modern cognitive science.
+The shortest possible path from zero to fluent word knowledge.**
+
+Every decision, every feature, every change must be evaluated against this goal. Code is a means, not the goal.
+
 ## Project Overview
 
 Language learning web application using spaced repetition for vocabulary mastery.
