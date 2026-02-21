@@ -170,7 +170,15 @@ repos:
       - id: pip-audit
         name: Python dependency vulnerability audit
         # GHSA-7gcm-g887-7qv7: protobuf JSON recursion DoS, no fix available yet
-        args: ['-r', 'apps/backend/requirements.txt', '-r', 'tools/vocab-tools/requirements.txt', '--ignore-vuln', 'GHSA-7gcm-g887-7qv7']
+        args:
+          [
+            '-r',
+            'apps/backend/requirements.txt',
+            '-r',
+            'tools/vocab-tools/requirements.txt',
+            '--ignore-vuln',
+            'GHSA-7gcm-g887-7qv7',
+          ]
 
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: 4.0.0a2
@@ -326,7 +334,7 @@ repos:
             '--write-changes',
             '--ignore-words-list=crate,nd,ser,llm,async,cli,theses,ba,te,tha,ue,refreshin,ist,lief,calle,cliente,flor,inicial,soler,afterall,ture,ure,sie,bein,alle,oder,deine,als,aktion,deines,vor,aktive,caracteres,wasn,couldn',
           ]
-        exclude: ^(\.git/|\.venv/|venv/|node_modules/|/generated/|^schema/lingua-quiz-schema\.json$|^package-lock\.json$|tools/vocab-tools/vocab_tools/data/subtitle_frequencies/|tools/vocab-tools/vocab_tools/data/reference/cefr/|tools/vocab-tools/exported_vocabularies/)
+        exclude: ^(\.git/|\.venv/|venv/|node_modules/|/generated/|^schema/lingua-quiz-schema\.json$|^package-lock\.json$|tools/vocab-tools/vocab_tools/data/subtitle_frequencies/|tools/vocab-tools/vocab_tools/data/reference/cefr/|tools/vocab-tools/exported_vocabularies/|data/vocabularies/)
 
   - repo: local
     hooks:
