@@ -1,7 +1,7 @@
 {
   "listName": "German Russian A1",
   "exportedAt": "2026-01-18T20:40:47.749471+00:00",
-  "totalWords": 983,
+  "totalWords": 976,
   "words": [
     {
       "id": "bd5e8329-cdb4-497a-94b5-a04b2a3d1953",
@@ -126,7 +126,7 @@
     {
       "id": "db038402-9021-400f-8c61-33d041931076",
       "sourceText": "allerdings",
-      "targetText": "правда, впрочем",
+      "targetText": "правда|впрочем",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -738,7 +738,7 @@
     {
       "id": "05f098ec-5459-4d27-b0fe-b3e5f80f01fb",
       "sourceText": "beginnen",
-      "targetText": "начинать, начинаться",
+      "targetText": "начинать|начинаться",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -827,7 +827,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Er ist in bekannter Schauspieler.",
+      "sourceUsageExample": "Er ist ein bekannter Schauspieler.",
       "targetUsageExample": "Он известный актер.",
       "isActive": true
     },
@@ -942,7 +942,7 @@
     {
       "id": "1cb027e8-058c-4326-9dad-4dd0ba92d574",
       "sourceText": "bestehen",
-      "targetText": "существовать, сдать [экзамен]",
+      "targetText": "существовать|сдать [экзамен]",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -977,7 +977,7 @@
     },
     {
       "id": "f8c8249f-bd55-4221-a460-be42bc38ca09",
-      "sourceText": "Betrunken",
+      "sourceText": "betrunken",
       "targetText": "пьяный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1037,7 +1037,7 @@
     },
     {
       "id": "a46c3cc4-150d-425f-93fc-a6bf8e5a6b15",
-      "sourceText": "Bewusst",
+      "sourceText": "bewusst",
       "targetText": "сознательно|осознанно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1074,7 +1074,7 @@
     {
       "id": "5aac7428-f359-42cf-b50f-77f98329899e",
       "sourceText": "bilden",
-      "targetText": "образовывать",
+      "targetText": "образовывать|составлять",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -1085,14 +1085,14 @@
     },
     {
       "id": "7be00768-e4c7-4d80-987a-5b8888bad340",
-      "sourceText": "Bilder",
-      "targetText": "картины|фотографии",
+      "sourceText": "Bild",
+      "targetText": "картина|фотография",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Die Bilder an der Wand sind schön.",
-      "targetUsageExample": "Картины на стене красивые.",
+      "sourceUsageExample": "Das Bild an der Wand ist schön.",
+      "targetUsageExample": "Картина на стене красивая.",
       "isActive": true
     },
     {
@@ -1121,7 +1121,7 @@
     },
     {
       "id": "944712e9-7c45-4385-812b-02d96b00d18a",
-      "sourceText": "Bisschen",
+      "sourceText": "bisschen",
       "targetText": "немного",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1434,7 +1434,7 @@
     {
       "id": "e04ff553-3fd4-4cbd-aabc-7d5a580e2867",
       "sourceText": "daher",
-      "targetText": "отсюда, поэтому",
+      "targetText": "отсюда|поэтому",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -1523,7 +1523,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Danke für define Hilfe.",
+      "sourceUsageExample": "Danke für deine Hilfe.",
       "targetUsageExample": "Спасибо за твою помощь.",
       "isActive": true
     },
@@ -1744,18 +1744,6 @@
       "isActive": true
     },
     {
-      "id": "00d7b9cc-ac0f-4d5c-b305-f99d7526de31",
-      "sourceText": "denken|gedenken",
-      "targetText": "думать|вспоминать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Ich denke an dich.",
-      "targetUsageExample": "Я думаю о тебе.",
-      "isActive": true
-    },
-    {
       "id": "882f51a2-62f4-4770-b783-24b33e0be799",
       "sourceText": "denn",
       "targetText": "так как",
@@ -1811,14 +1799,14 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "In Euro ist gleich hundert Cent.",
+      "sourceUsageExample": "Ein Euro ist gleich hundert Cent.",
       "targetUsageExample": "Единица евро равна ста центам.",
       "isActive": true
     },
     {
       "id": "469cff97-20ab-4a29-9ffc-fb27c6bb0eff",
       "sourceText": "der Mann [Männer]",
-      "targetText": "мужчина, муж",
+      "targetText": "мужчина|муж",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -1866,7 +1854,7 @@
     {
       "id": "844e6add-2eb9-436b-a795-015ff15ca032",
       "sourceText": "deutlich",
-      "targetText": "отчётливо, явно",
+      "targetText": "отчётливо|явно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -2027,7 +2015,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Dort drüben ist der Supermarket.",
+      "sourceUsageExample": "Dort drüben ist der Supermarkt.",
       "targetUsageExample": "Там напротив находится супермаркет.",
       "isActive": true
     },
@@ -2141,7 +2129,7 @@
     },
     {
       "id": "b2fab51c-3f25-41e7-9802-dcd5d3547f6a",
-      "sourceText": "drogen",
+      "sourceText": "Drogen",
       "targetText": "наркотики",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2214,7 +2202,7 @@
     {
       "id": "3a1e024e-d7dc-4a32-97fc-c0df633216fd",
       "sourceText": "eben",
-      "targetText": "именно, как раз",
+      "targetText": "именно|как раз",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -2358,7 +2346,7 @@
     {
       "id": "226266e3-5ca5-40fd-b5e3-1e148c949bdb",
       "sourceText": "eigentlich",
-      "targetText": "собственно, на самом деле",
+      "targetText": "собственно|на самом деле",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -2382,7 +2370,7 @@
     {
       "id": "2de01784-36b3-40ca-8bb7-0a653b8be7f8",
       "sourceText": "einfach",
-      "targetText": "простой, просто",
+      "targetText": "простой|просто",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -2646,7 +2634,7 @@
     {
       "id": "137de6dc-8a59-485c-950a-5c23a09e9888",
       "sourceText": "erhalten",
-      "targetText": "получать, сохранять [в хорошем состоянии]",
+      "targetText": "получать|сохранять [в хорошем состоянии]",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -2766,7 +2754,7 @@
     {
       "id": "eedbfbe6-1e6e-48b4-986c-6882009dd9c5",
       "sourceText": "erst",
-      "targetText": "(только|лишь), сначала, не раньше чем",
+      "targetText": "(только|лишь)|сначала|не раньше чем",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -2956,18 +2944,6 @@
       "isActive": true
     },
     {
-      "id": "d8b3dee6-9210-4aab-bffe-3437494cdb5d",
-      "sourceText": "fällt",
-      "targetText": "падает|приходит на ум",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Der Apfel fällt vom Baum.",
-      "targetUsageExample": "Яблоко падает с дерева.",
-      "isActive": true
-    },
-    {
       "id": "2445b0c8-8913-4429-993e-1eab76b47630",
       "sourceText": "falsch",
       "targetText": "неправильный",
@@ -3114,7 +3090,7 @@
     {
       "id": "1b954b39-bd5c-4492-889e-7f4ff965805c",
       "sourceText": "fertig",
-      "targetText": "готовый, законченный",
+      "targetText": "готовый|законченный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -3408,7 +3384,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Früher war alles besser.",
-      "targetUsageExample": "Ранее всё было лучше.",
+      "targetUsageExample": "Раньше всё было лучше.",
       "isActive": true
     },
     {
@@ -3450,7 +3426,7 @@
     {
       "id": "9ae81c5d-007a-4c5c-bd9e-b33876156871",
       "sourceText": "funktionieren",
-      "targetText": "функционировать, работать",
+      "targetText": "функционировать|работать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -3664,18 +3640,6 @@
       "isActive": true
     },
     {
-      "id": "a3a28934-30f3-42aa-90f8-56f2c0488348",
-      "sourceText": "gefällt",
-      "targetText": "нравится",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Das Kleid gefällt mir.",
-      "targetUsageExample": "Мне нравится это платье.",
-      "isActive": true
-    },
-    {
       "id": "336bfc09-5afe-4121-a2ea-3102ba016a93",
       "sourceText": "Gefängnis",
       "targetText": "тюрьма",
@@ -3731,7 +3695,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Die Apotheke ist gegenüber dem Supermarket.",
+      "sourceUsageExample": "Die Apotheke ist gegenüber dem Supermarkt.",
       "targetUsageExample": "Аптека напротив супермаркета.",
       "isActive": true
     },
@@ -3870,7 +3834,7 @@
     {
       "id": "91059d65-f0d0-4183-b277-54a29f382743",
       "sourceText": "gerade",
-      "targetText": "прямо, только что",
+      "targetText": "прямо|только что",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -4007,7 +3971,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Gestern war in schöner Tag.",
+      "sourceUsageExample": "Gestern war ein schöner Tag.",
       "targetUsageExample": "Вчера был прекрасный день.",
       "isActive": true
     },
@@ -4074,7 +4038,7 @@
     {
       "id": "6822735e-bfb1-4d2f-aff5-470c06de2ad6",
       "sourceText": "glauben",
-      "targetText": "верить, думать [полагать]",
+      "targetText": "верить|думать [полагать]",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -4086,7 +4050,7 @@
     {
       "id": "3a2ea048-12e1-4f0f-addb-37aa30b775d7",
       "sourceText": "gleich",
-      "targetText": "(равный|одинаковый), (сейчас|сразу)",
+      "targetText": "(равный|одинаковый)|(сейчас|сразу)",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -4182,7 +4146,7 @@
     {
       "id": "ec941b86-bbeb-4932-abe7-c3aa0d1c4b3b",
       "sourceText": "groß",
-      "targetText": "большой, высокий [о росте]",
+      "targetText": "большой|высокий [о росте]",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -4362,7 +4326,7 @@
     {
       "id": "d9e4ce24-6957-45ff-aabc-d43bb6b9a950",
       "sourceText": "halten",
-      "targetText": "держать, останавливаться, считать [иметь мнение]",
+      "targetText": "держать|останавливаться|считать [иметь мнение]",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -4398,7 +4362,7 @@
     {
       "id": "5b9540b5-e035-4603-9a37-695ceb702f4c",
       "sourceText": "hängen",
-      "targetText": "вешать, висеть",
+      "targetText": "вешать|висеть",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -4458,7 +4422,7 @@
     {
       "id": "3fd4e085-30ee-4642-b550-2d7a74ce1607",
       "sourceText": "häufig",
-      "targetText": "часто, нередко",
+      "targetText": "часто|нередко",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -4613,7 +4577,7 @@
     },
     {
       "id": "24def505-7957-4fad-92b2-2a12bb9cc486",
-      "sourceText": "Herzen",
+      "sourceText": "Herz",
       "targetText": "сердце",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4631,7 +4595,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Heute ist in schöner Tag.",
+      "sourceUsageExample": "Heute ist ein schöner Tag.",
       "targetUsageExample": "Сегодня прекрасный день.",
       "isActive": true
     },
@@ -5466,7 +5430,7 @@
     {
       "id": "7873aea9-0dcc-4048-b8e7-5c15c1282411",
       "sourceText": "kein",
-      "targetText": "нет, никакой",
+      "targetText": "нет|никакой",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -5490,7 +5454,7 @@
     {
       "id": "86ccae29-0b12-4a6d-b8e6-8c8da311042c",
       "sourceText": "kennen",
-      "targetText": "знать, быть знакомым с",
+      "targetText": "знать|быть знакомым с",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -5526,7 +5490,7 @@
     {
       "id": "bba88c2d-ff64-47ce-b22d-bffcfbc4c056",
       "sourceText": "klar",
-      "targetText": "ясно, понятно",
+      "targetText": "ясно|понятно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -5934,7 +5898,7 @@
     {
       "id": "7c00ecb9-d6cf-4d6b-97a3-a0b91bbc411c",
       "sourceText": "lassen",
-      "targetText": "позволять, оставлять",
+      "targetText": "позволять|оставлять",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -5946,7 +5910,7 @@
     {
       "id": "7bda1340-748a-4e4f-a7ab-add71d8b44c7",
       "sourceText": "laufen",
-      "targetText": "(ходить|идти), бежать",
+      "targetText": "(ходить|идти)|бежать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -6029,7 +5993,7 @@
     },
     {
       "id": "9864dc5a-6923-4362-b075-2405aebbad1a",
-      "sourceText": "Leise",
+      "sourceText": "leise",
       "targetText": "тихо",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6113,7 +6077,7 @@
     },
     {
       "id": "28da8270-ce13-4940-9dd5-6577ac61ff06",
-      "sourceText": "Lieb",
+      "sourceText": "lieb",
       "targetText": "милый|дорогой",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6593,7 +6557,7 @@
     },
     {
       "id": "68fb0b15-d01d-42fb-b8b3-597749a40470",
-      "sourceText": "Mitkommen",
+      "sourceText": "mitkommen",
       "targetText": "идти вместе",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6678,7 +6642,7 @@
     {
       "id": "ccd16f0e-4493-4cdf-a9c6-4cdd3846efd0",
       "sourceText": "morden",
-      "targetText": "убийство",
+      "targetText": "убивать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -6822,25 +6786,13 @@
     {
       "id": "1c6a39c0-963e-4830-9dcf-3c7529f1bdff",
       "sourceText": "nächste",
-      "targetText": "следующий, ближайший",
+      "targetText": "следующий|ближайший",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Das nächste Mal wird besser.",
       "targetUsageExample": "Следующий раз будет лучше.",
-      "isActive": true
-    },
-    {
-      "id": "4f56a4a2-3307-47b5-9488-145e32bfd407",
-      "sourceText": "Nächsten",
-      "targetText": "следующий|ближний",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Bis zum nächsten Mal!",
-      "targetUsageExample": "До следующего раза!",
       "isActive": true
     },
     {
@@ -7062,7 +7014,7 @@
     {
       "id": "d8cecce3-394d-43c9-ba9c-439244cd0f6d",
       "sourceText": "niemals",
-      "targetText": "ниразу",
+      "targetText": "никогда",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -7265,7 +7217,7 @@
     },
     {
       "id": "a8ea7125-737e-44fd-9883-d495fa3e0cf1",
-      "sourceText": "Öffnen",
+      "sourceText": "öffnen",
       "targetText": "открывать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7626,7 +7578,7 @@
     {
       "id": "6cf342d8-1b67-4512-abd6-23deb3e4372f",
       "sourceText": "raten",
-      "targetText": "угадывать, советовать",
+      "targetText": "угадывать|советовать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -7698,7 +7650,7 @@
     {
       "id": "403a4bbc-4c26-40a2-9368-96eba20cecf2",
       "sourceText": "regeln",
-      "targetText": "правила",
+      "targetText": "улаживать|регулировать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -8034,7 +7986,7 @@
     {
       "id": "f51d9d4e-65bf-4044-8ef9-939f00f1d2c0",
       "sourceText": "schaffen",
-      "targetText": "создавать, справляться",
+      "targetText": "создавать|справляться",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -8106,7 +8058,7 @@
     {
       "id": "55715b1d-1ccf-43a0-99d1-57c83425e992",
       "sourceText": "scheinen",
-      "targetText": "казаться, сиять, светить",
+      "targetText": "казаться|сиять|светить",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -8250,7 +8202,7 @@
     {
       "id": "05c0290e-1b66-46a5-af88-83fab1591eaa",
       "sourceText": "schmerzen",
-      "targetText": "боль",
+      "targetText": "болеть|причинять боль",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -8586,7 +8538,7 @@
     {
       "id": "3a3747ba-1924-43b8-bc06-1d69d3a2e578",
       "sourceText": "setzen",
-      "targetText": "сажать, ставить",
+      "targetText": "сажать|ставить",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -8802,12 +8754,12 @@
     {
       "id": "691ee00a-7846-4b74-b618-dc1f65573726",
       "sourceText": "sollen",
-      "targetText": "быть должным, стоить [в значении совета]",
+      "targetText": "быть должным|стоить [в значении совета]",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Du sollst define Hausaufgaben machen.",
+      "sourceUsageExample": "Du sollst deine Hausaufgaben machen.",
       "targetUsageExample": "Тебе стоит делать домашнее задание.",
       "isActive": true
     },
@@ -8826,7 +8778,7 @@
     {
       "id": "c521c39e-6454-42cb-98bc-57ce830b1060",
       "sourceText": "sondern",
-      "targetText": "а, но",
+      "targetText": "а|но",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -8873,7 +8825,7 @@
     },
     {
       "id": "4010fa42-2e0a-45fc-8e49-9fae3562d24b",
-      "sourceText": "Sowas",
+      "sourceText": "sowas",
       "targetText": "такое",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -8970,7 +8922,7 @@
     {
       "id": "de6107d2-35eb-4ad1-b65f-7051009b834b",
       "sourceText": "sprechen",
-      "targetText": "говорить, разговаривать",
+      "targetText": "говорить|разговаривать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -9102,7 +9054,7 @@
     {
       "id": "a2a972f6-019f-4b80-a0ea-74f4687d7137",
       "sourceText": "still",
-      "targetText": "тихий",
+      "targetText": "тихий|тихо",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -9114,7 +9066,7 @@
     {
       "id": "78169526-8a0d-4564-9c31-bece99a1f341",
       "sourceText": "stimmen",
-      "targetText": "(быть верным|быть правильным), голосовать, настраивать",
+      "targetText": "(быть верным|быть правильным)|голосовать|настраивать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -9209,14 +9161,14 @@
     },
     {
       "id": "71f6f657-862e-4a5e-9f27-f8e1e600587b",
-      "sourceText": "Tages",
-      "targetText": "дня",
+      "sourceText": "Tag",
+      "targetText": "день",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Am Ende des Tages bin ich müde.",
-      "targetUsageExample": "В конце дня я устал.",
+      "sourceUsageExample": "Der Tag war lang.",
+      "targetUsageExample": "День был длинным.",
       "isActive": true
     },
     {
@@ -9414,7 +9366,7 @@
     {
       "id": "de3187ac-a6dc-4965-babf-dcd16ead7d36",
       "sourceText": "tragen",
-      "targetText": "носить [одежду], нести",
+      "targetText": "носить [одежду]|нести",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -9450,7 +9402,7 @@
     {
       "id": "58732c30-b9af-4f8f-9658-d586ac125c7a",
       "sourceText": "treffen",
-      "targetText": "встречать, попадать [в цель]",
+      "targetText": "встречать|попадать [в цель]",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -9510,7 +9462,7 @@
     {
       "id": "78672a68-3ce1-45d1-ad67-a6dc812ef345",
       "sourceText": "tun",
-      "targetText": "делать, действовать",
+      "targetText": "делать|действовать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -9546,7 +9498,7 @@
     {
       "id": "6c4b6cea-c1ea-4c85-ae38-f68234e034c2",
       "sourceText": "über",
-      "targetText": "над, о",
+      "targetText": "над|о",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -9666,7 +9618,7 @@
     {
       "id": "b2eee18e-8af8-4fbd-b676-46087ce14862",
       "sourceText": "um",
-      "targetText": "вокруг, в",
+      "targetText": "вокруг|в",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -9726,7 +9678,7 @@
     {
       "id": "036f5ab3-e617-4597-b225-40e0377abc53",
       "sourceText": "ungefähr",
-      "targetText": "примерно, приблизительно",
+      "targetText": "примерно|приблизительно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -10038,7 +9990,7 @@
     {
       "id": "def54524-b388-4d39-91ce-f75fc83ccd38",
       "sourceText": "verheiratet",
-      "targetText": "женат, замужем",
+      "targetText": "женат|замужем",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -10386,7 +10338,7 @@
     {
       "id": "89a035e2-0fa0-448b-9d24-f88b0e573017",
       "sourceText": "von",
-      "targetText": "от, из",
+      "targetText": "от|из",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -10433,7 +10385,7 @@
     },
     {
       "id": "2c48ce61-31f7-4887-ac46-b433ba02abf8",
-      "sourceText": "Vorhin",
+      "sourceText": "vorhin",
       "targetText": "недавно|только что",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -10482,7 +10434,7 @@
     {
       "id": "8089ac27-6e11-470e-8dfc-ba5e0563258b",
       "sourceText": "vorstellen",
-      "targetText": "представлять [кого-то], воображать",
+      "targetText": "представлять [кого-то]|воображать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -10830,7 +10782,7 @@
     {
       "id": "e2b3da5d-d063-4305-96d7-3e7b459ec55d",
       "sourceText": "welche",
-      "targetText": "какой, какая, какие",
+      "targetText": "какой|какая|какие",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -10962,7 +10914,7 @@
     {
       "id": "ce0aa0be-9ba3-4ae9-b743-f2f8cec71872",
       "sourceText": "wetten",
-      "targetText": "пари",
+      "targetText": "спорить|держать пари",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -11045,14 +10997,14 @@
     },
     {
       "id": "e714cf6b-8538-4c4b-acb1-873c715452d4",
-      "sourceText": "willen",
+      "sourceText": "Wille",
       "targetText": "воля",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Um Gottes willen!",
-      "targetUsageExample": "Ради бога!",
+      "sourceUsageExample": "Wo ein Wille ist, ist auch ein Weg.",
+      "targetUsageExample": "Где есть воля, есть и путь.",
       "isActive": true
     },
     {
@@ -11101,18 +11053,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Das ist wirklich gut.",
       "targetUsageExample": "Это действительно хорошо.",
-      "isActive": true
-    },
-    {
-      "id": "e0a60fb4-1d37-4ca1-87a7-cff2218f97af",
-      "sourceText": "wirst",
-      "targetText": "станешь",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Du wirst in guter Arzt.",
-      "targetUsageExample": "Ты станешь хорошим врачом.",
       "isActive": true
     },
     {
@@ -11321,7 +11261,7 @@
     },
     {
       "id": "ba7cb8db-5d8a-49b8-a8a6-f0adf5c28d73",
-      "sourceText": "Worum",
+      "sourceText": "worum",
       "targetText": "о чём",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -11500,39 +11440,15 @@
       "isActive": true
     },
     {
-      "id": "0b2d57b3-a7b1-42ff-a08c-58d7e57f132c",
-      "sourceText": "Zieh",
-      "targetText": "тяни|двигай",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Zieh deine Jacke an!",
-      "targetUsageExample": "Надень куртку!",
-      "isActive": true
-    },
-    {
       "id": "23efcd4c-3900-405a-a89e-1f53bf502269",
       "sourceText": "ziehen",
-      "targetText": "тянуть, переезжать",
+      "targetText": "тянуть|переезжать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Zieh an der Tür!",
       "targetUsageExample": "Потяни дверь!",
-      "isActive": true
-    },
-    {
-      "id": "38a3aa52-7706-41ca-8f76-494bc720bfd7",
-      "sourceText": "zieht",
-      "targetText": "тянет|переезжает",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Er zieht nach Hamburg.",
-      "targetUsageExample": "Он переезжает в Гамбург.",
       "isActive": true
     },
     {
@@ -11586,7 +11502,7 @@
     {
       "id": "9a51d691-3c98-4daf-88f1-b4c132270916",
       "sourceText": "zudem",
-      "targetText": "К тому же",
+      "targetText": "к тому же",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
@@ -11754,7 +11670,7 @@
     {
       "id": "c9c722d1-2403-4f09-b837-7d9ae851008e",
       "sourceText": "zwar",
-      "targetText": "хотя, правда",
+      "targetText": "хотя|правда",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
