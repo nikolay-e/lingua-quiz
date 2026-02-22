@@ -2,16 +2,42 @@
 .git/
 .gitignore
 .gitattributes
+.github/
+.gitleaksignore
+.gitlint
 
-# Secrets and environment
+# Secrets and credentials
 .env
 .env.*
 .env.local
 .env.*.local
 *.key
 *.pem
+*.p12
+*.pfx
+*id_rsa*
+*id_ed25519*
+credentials.json
+secrets.json
 secrets/
+.secrets.baseline
+.netrc
+.npmrc
+.yarnrc
 .age-key.txt
+
+# Cloud credentials
+.aws/
+.gcloud/
+.azure/
+
+# Private directory
+private/
+
+# Shell history
+.bash_history
+.zsh_history
+.sh_history
 
 # Node
 node_modules/
@@ -47,10 +73,9 @@ test-results/
 # Documentation
 *.md
 !README.md
-!CLAUDE.md
 docs/
 
-# IDE and editor
+# IDE and editors
 .vscode/
 .idea/
 *.swp
@@ -61,12 +86,14 @@ docs/
 .DS_Store
 Thumbs.db
 
+# Claude AI tools
+.claude/
+
 # Logs
 *.log
 logs/
 
 # CI/CD
-.github/
 .gitlab-ci.yml
 .circleci/
 
@@ -77,16 +104,17 @@ tmp/
 .cache/
 
 # Development configuration
-docker-compose.yml
-docker-compose.*.yml
+docker-compose*.yml
 infra/nginx.local.conf
 Makefile
 
-# Claude AI tools
-.claude/
-
 # Pre-commit hooks
 .pre-commit-config.yaml
+renovate.json
+
+# Docker (prevent recursive inclusion)
+Dockerfile*
+.dockerignore
 
 # Generated data
 analysis_history.json
@@ -96,18 +124,6 @@ packages/tools/generated_vocabularies/
 # Tree mapper output
 tree.tmp
 directory_tree.yaml
-
-# SSH keys (prevent accidental exposure)
-*id_rsa*
-*id_ed25519*
-*.key
-*.pem
-
-# Secrets baseline
-.secrets.baseline
-
-# Renovate
-renovate.json
 
 # TypeScript build info
 *.tsbuildinfo

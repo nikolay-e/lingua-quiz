@@ -1,11 +1,86 @@
-node_modules
-dist
-.DS_Store
-*.log
-.git
+# Version control
+.git/
 .gitignore
-README.md
+.gitattributes
+.github/
+.gitleaksignore
+.gitlint
+
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*id_rsa*
+*id_ed25519*
+credentials.json
+secrets.json
+.secrets.baseline
+.netrc
+.npmrc
+.yarnrc
+.age-key.txt
+
+# Cloud credentials
+.aws/
+.gcloud/
+.azure/
+
+# Private directory
+private/
+
+# Shell history
+.bash_history
+.zsh_history
+.sh_history
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude AI tools
+.claude/
+
+# Documentation
+*.md
+!README.md
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+tmp/
+temp/
+
+# CI/CD
+.pre-commit-config.yaml
+renovate.json
+
+# Docker (prevent recursive inclusion)
+Dockerfile*
 .dockerignore
-Dockerfile
-.vscode
-.idea
+docker-compose*.yml
+
+# Tree mapper output
+tree.tmp
+directory_tree.yaml
