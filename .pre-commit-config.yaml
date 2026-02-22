@@ -125,15 +125,15 @@ repos:
         args: ['-q', '-r', '-x', 'tests,*/test_*.py,*/conftest.py', '--skip', 'B101,B108,B110,B404,B603']
         files: ^(apps/backend|tools/vocab-tools)/
 
-  - repo: https://github.com/returntocorp/semgrep
-    rev: v1.89.0
+  - repo: local
     hooks:
       - id: semgrep
         name: Semgrep (AST-based security)
-        args:
-          ['--config=p/security-audit', '--config=p/python', '--error', '--skip-unknown-extensions', '--metrics=off']
+        entry: semgrep --config=p/security-audit --config=p/python --error --skip-unknown-extensions --metrics=off
+        language: system
         files: ^(apps/backend|tools/vocab-tools)/
         exclude: (/generated/|/tests/)
+        types: [python]
 
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.14
@@ -257,7 +257,7 @@ repos:
       # NPM security audit for production dependencies
       - id: npm-audit
         name: npm audit (security check)
-        entry: npm audit --audit-level=high --production
+        entry: npm audit --audit-level=high --omit=dev
         language: system
         files: ^package(-lock)?\.json$
         pass_filenames: false

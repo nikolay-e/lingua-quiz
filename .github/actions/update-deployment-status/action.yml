@@ -1,0 +1,30 @@
+name: Update Deployment Status
+description: Updates the status of an existing GitHub deployment
+inputs:
+  environment:
+    required: true
+  deployment-id:
+    required: true
+  status:
+    required: true
+  description:
+    default: ''
+  environment-url:
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Update deployment status
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        DEPLOYMENT_ID: ${{ inputs.deployment-id }}
+        STATUS: ${{ inputs.status }}
+        DESCRIPTION: ${{ inputs.description }}
+        ENV_URL: ${{ inputs.environment-url }}
+      run: |
+        gh api "repos/${{ github.repository }}/deployments/${DEPLOYMENT_ID}/statuses" \
+          -f "state=${STATUS}" \
+          -f "description=${DESCRIPTION}" \
+          -f "environment_url=${ENV_URL}"
