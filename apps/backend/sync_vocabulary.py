@@ -80,6 +80,25 @@ def sync(conn, vocabulary_dir):
 
     all_ids = [w[0] for w in words]
 
+    stale_keys = [(version_id, w[1], w[2], w[4], w[0]) for w in words]
+    execute_values(
+        cur,
+        """DELETE FROM vocabulary_items
+           WHERE id IN (
+             SELECT vi.id FROM vocabulary_items vi
+             JOIN (VALUES %s) AS src(vid, src_text, src_lang, tgt_lang, new_id)
+               ON vi.version_id = src.vid::int
+              AND vi.source_text = src.src_text
+              AND vi.source_language = src.src_lang
+              AND vi.target_language = src.tgt_lang
+              AND vi.id != src.new_id::uuid
+           )""",
+        stale_keys,
+        page_size=500,
+    )
+    if cur.rowcount > 0:
+        print(f"Removed {cur.rowcount} stale records with conflicting text keys")
+
     values = [(w[0], version_id, w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9]) for w in words]
 
     execute_values(
