@@ -88,6 +88,7 @@ export function QuizPage(): React.JSX.Element {
       if (awaitingNextInput) {
         setFeedback(null);
         setQuestionForFeedback(null);
+        setUsageExamples(null);
         setAwaitingNextInput(false);
       }
       setUserAnswer(v);
@@ -225,6 +226,22 @@ export function QuizPage(): React.JSX.Element {
     }
   }, [token, loadWordLists]);
 
+  const handleBackToMenuClick = useCallback(() => {
+    void handleBackToMenu();
+  }, [handleBackToMenu]);
+
+  const handleRetryLoadClick = useCallback(() => {
+    void handleLoadWordLists();
+  }, [handleLoadWordLists]);
+
+  const handleSubmitClick = useCallback(() => {
+    void handleSubmitAnswer();
+  }, [handleSubmitAnswer]);
+
+  const handleLevelAnimationComplete = useCallback(() => {
+    setShowLevelAnimation(false);
+  }, []);
+
   useEffect(() => {
     setSaveErrorCallback((message: string) => {
       toast.error(message);
@@ -307,18 +324,10 @@ export function QuizPage(): React.JSX.Element {
               selectedQuiz={selectedQuiz}
               loading={loading}
               onSelect={handleQuizSelect}
-              onBackToMenu={() => {
-                void handleBackToMenu();
-              }}
+              onBackToMenu={handleBackToMenuClick}
             />
             {loadError !== null && selectedQuiz === null && (
-              <ErrorDisplay
-                message={loadError}
-                onRetry={() => {
-                  void handleLoadWordLists();
-                }}
-                retryLabel="Reload quizzes"
-              />
+              <ErrorDisplay message={loadError} onRetry={handleRetryLoadClick} retryLabel="Reload quizzes" />
             )}
           </div>
         </FeedCard>
@@ -353,9 +362,7 @@ export function QuizPage(): React.JSX.Element {
                   value={userAnswer}
                   disabled={isSubmitting}
                   isLoading={isSubmitting}
-                  onSubmit={() => {
-                    void handleSubmitAnswer();
-                  }}
+                  onSubmit={handleSubmitClick}
                   onValueChange={handleValueChange}
                   onSkip={handleSkip}
                 />
@@ -408,9 +415,7 @@ export function QuizPage(): React.JSX.Element {
         isLevelUp={isLevelUp}
         fromLevel={levelChangeFrom}
         toLevel={levelChangeTo}
-        onComplete={() => {
-          setShowLevelAnimation(false);
-        }}
+        onComplete={handleLevelAnimationComplete}
       />
     </>
   );

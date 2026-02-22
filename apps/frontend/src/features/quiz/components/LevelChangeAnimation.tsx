@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import { ArrowUp, ArrowDown } from 'lucide-react';
 import { cn } from '@shared/utils';
 
@@ -20,28 +20,27 @@ export function LevelChangeAnimation({
   onComplete,
 }: LevelChangeAnimationProps): React.JSX.Element | null {
   const animationRef = useRef<HTMLDivElement>(null);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
-  const triggerAnimation = useCallback(() => {
+  useEffect(() => {
+    if (!isVisible) return;
+
     const element = animationRef.current;
-    if (element === null) return;
-
-    element.style.animation = 'none';
-    void element.offsetHeight;
-    element.style.animation = '';
+    if (element !== null) {
+      element.style.animation = 'none';
+      void element.offsetHeight;
+      element.style.animation = '';
+    }
 
     const timer = setTimeout(() => {
-      onComplete?.();
+      onCompleteRef.current?.();
     }, 1200);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [onComplete]);
-
-  useEffect(() => {
-    if (!isVisible) return;
-    return triggerAnimation();
-  }, [isVisible, triggerAnimation]);
+  }, [isVisible]);
 
   if (!isVisible) return null;
 

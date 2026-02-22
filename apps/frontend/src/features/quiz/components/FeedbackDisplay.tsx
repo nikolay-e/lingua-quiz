@@ -45,7 +45,7 @@ export function FeedbackDisplay({
     <div className="feedback-container flex flex-col gap-3" role="status">
       <div
         className={cn(
-          'feedback-text flex items-center justify-center gap-3 px-4 py-3 min-h-10 font-semibold rounded-lg border text-center transition-all',
+          'feedback-text flex items-center justify-center gap-3 px-4 py-3 min-h-10 font-semibold rounded-lg border text-center transition-colors',
           isRevealResult && 'revealed text-muted-foreground bg-muted/50 border-border animate-fade-in',
           isSuccess && 'success text-success bg-success/10 border-success ring-1 ring-success animate-success-pulse',
           !isRevealResult &&

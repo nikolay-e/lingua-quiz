@@ -28,6 +28,13 @@ interface CreateForm {
   targetUsageExample: string | null;
 }
 
+const LANGUAGE_FILTER_OPTIONS = [{ value: 'all', label: 'All Languages' }, ...LANGUAGE_OPTIONS];
+const STATUS_FILTER_OPTIONS = [
+  { value: 'all', label: 'All Status' },
+  { value: 'active', label: 'Active' },
+  { value: 'inactive', label: 'Inactive' },
+];
+
 const initialCreateForm: CreateForm = {
   sourceText: '',
   sourceLanguage: 'en',
@@ -255,13 +262,6 @@ export function AdminPage(): React.JSX.Element {
     }
   };
 
-  const languageFilterOptions = [{ value: 'all', label: 'All Languages' }, ...LANGUAGE_OPTIONS];
-  const statusFilterOptions = [
-    { value: 'all', label: 'All Status' },
-    { value: 'active', label: 'Active' },
-    { value: 'inactive', label: 'Inactive' },
-  ];
-
   return (
     <>
       <PageContainer maxWidth="4xl">
@@ -329,13 +329,13 @@ export function AdminPage(): React.JSX.Element {
             <Select
               value={filterLanguage}
               onValueChange={setFilterLanguage}
-              options={languageFilterOptions}
+              options={LANGUAGE_FILTER_OPTIONS}
               className="w-40"
             />
             <Select
               value={filterStatus}
               onValueChange={setFilterStatus}
-              options={statusFilterOptions}
+              options={STATUS_FILTER_OPTIONS}
               className="w-32"
             />
           </div>

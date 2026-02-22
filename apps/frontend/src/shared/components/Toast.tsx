@@ -32,19 +32,22 @@ interface ToastProps {
 }
 
 const TOAST_DURATION = 4000;
+const MIN_REMAINING_AFTER_PAUSE = 500;
 
 function Toast({ toast, onRemove }: ToastProps): React.JSX.Element {
   const [paused, setPaused] = useState(false);
   const remainingRef = useRef(TOAST_DURATION);
   const startTimeRef = useRef(Date.now());
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const onRemoveRef = useRef(onRemove);
+  onRemoveRef.current = onRemove;
 
   const scheduleRemoval = useCallback(() => {
     startTimeRef.current = Date.now();
     timerRef.current = setTimeout(() => {
-      onRemove(toast.id);
+      onRemoveRef.current(toast.id);
     }, remainingRef.current);
-  }, [toast.id, onRemove]);
+  }, [toast.id]);
 
   useEffect(() => {
     scheduleRemoval();
@@ -55,7 +58,10 @@ function Toast({ toast, onRemove }: ToastProps): React.JSX.Element {
 
   const handleMouseEnter = () => {
     clearTimeout(timerRef.current);
-    remainingRef.current = Math.max(0, remainingRef.current - (Date.now() - startTimeRef.current));
+    remainingRef.current = Math.max(
+      MIN_REMAINING_AFTER_PAUSE,
+      remainingRef.current - (Date.now() - startTimeRef.current),
+    );
     setPaused(true);
   };
 

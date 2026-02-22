@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, KeyRound, Trash2, Loader2, LogOut, User, Globe, Sun, Moon, Monitor } from 'lucide-react';
@@ -55,15 +55,18 @@ export function SettingsPage(): React.JSX.Element {
   const doPasswordsMatch = newPassword === confirmPassword && confirmPassword.length > 0;
   const canSubmitPassword = currentPassword.length > 0 && isPasswordValid && doPasswordsMatch && !isChangingPassword;
 
-  const handleLanguageChange = (value: string) => {
+  const handleLanguageChange = useCallback((value: string) => {
     setLocale(value as SupportedLocale);
-  };
+  }, []);
 
-  const handleThemeChange = (value: string) => {
-    if (value === THEME_MODES.LIGHT || value === THEME_MODES.DARK || value === THEME_MODES.SYSTEM) {
-      setMode(value);
-    }
-  };
+  const handleThemeChange = useCallback(
+    (value: string) => {
+      if (value === THEME_MODES.LIGHT || value === THEME_MODES.DARK || value === THEME_MODES.SYSTEM) {
+        setMode(value);
+      }
+    },
+    [setMode],
+  );
 
   const handleChangePassword = async (): Promise<void> => {
     if (!canSubmitPassword || token === null) return;
@@ -98,15 +101,15 @@ export function SettingsPage(): React.JSX.Element {
     void logout();
   };
 
-  const languageOptions = getSupportedLocales().map((loc) => ({
-    value: loc,
-    label: LOCALE_NAMES[loc],
-  }));
+  const languageOptions = useMemo(
+    () => getSupportedLocales().map((loc) => ({ value: loc, label: LOCALE_NAMES[loc] })),
+    [],
+  );
 
-  const themeOptions = THEME_MODES_LIST.map((themeMode) => ({
-    value: themeMode,
-    label: t(THEME_MODE_NAMES[themeMode]),
-  }));
+  const themeOptions = useMemo(
+    () => THEME_MODES_LIST.map((themeMode) => ({ value: themeMode, label: t(THEME_MODE_NAMES[themeMode]) })),
+    [t],
+  );
 
   const getThemeIcon = () => {
     if (mode === THEME_MODES.DARK) return Moon;

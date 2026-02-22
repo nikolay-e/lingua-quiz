@@ -23,6 +23,8 @@ export function BaseDialog({
   children,
 }: BaseDialogProps): React.JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const onOpenRef = useRef(onOpen);
+  onOpenRef.current = onOpen;
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -30,11 +32,11 @@ export function BaseDialog({
 
     if (open && !dialog.open) {
       dialog.showModal();
-      onOpen?.();
+      onOpenRef.current?.();
     } else if (!open && dialog.open) {
       dialog.close();
     }
-  }, [open, onOpen]);
+  }, [open]);
 
   const handleCancel = (e: React.SyntheticEvent): void => {
     e.preventDefault();
