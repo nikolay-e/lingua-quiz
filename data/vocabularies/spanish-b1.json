@@ -2164,18 +2164,6 @@
       "isActive": true
     },
     {
-      "id": "aa4d9e1a-4f72-4631-bba4-c5acb9828253",
-      "sourceText": "cansado",
-      "targetText": "усталый",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Estoy muy cansado.",
-      "targetUsageExample": "Я очень устал.",
-      "isActive": true
-    },
-    {
       "id": "542785a9-d27e-402f-922b-12c2ea18b6a9",
       "sourceText": "cantante",
       "targetText": "певец|певица",
@@ -7336,18 +7324,6 @@
       "isActive": true
     },
     {
-      "id": "90508ee4-4178-47bd-9240-9e9d2113e4ff",
-      "sourceText": "imaginar",
-      "targetText": "воображать|представлять",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Este imaginar es bueno.",
-      "targetUsageExample": "Этот воображать хороший.",
-      "isActive": true
-    },
-    {
       "id": "c2114541-b420-46a5-b399-11ddf9e23908",
       "sourceText": "impresión",
       "targetText": "впечатление",
@@ -9817,18 +9793,6 @@
       "difficultyLevel": "b1",
       "sourceUsageExample": "Tiene buen oído.",
       "targetUsageExample": "У него хороший слух.",
-      "isActive": true
-    },
-    {
-      "id": "443a9c5f-fd04-42f3-ac0d-f48bcf805e30",
-      "sourceText": "oír",
-      "targetText": "слышать",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "No puedo oír bien.",
-      "targetUsageExample": "Я не могу хорошо слышать.",
       "isActive": true
     },
     {

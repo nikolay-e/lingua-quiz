@@ -26,26 +26,29 @@ def compute_content_hash(vocabulary_dir):
 
 
 def load_words_from_files(vocabulary_dir):
-    words = []
+    seen = {}
     for filepath in sorted(Path(vocabulary_dir).glob("*.json")):
         with open(filepath) as f:
             data = json.load(f)
         for w in data["words"]:
-            words.append(
-                (
-                    w["id"],
-                    w["sourceText"],
-                    w["sourceLanguage"],
-                    w["targetText"],
-                    w["targetLanguage"],
-                    w["listName"],
-                    w["difficultyLevel"],
-                    w.get("sourceUsageExample", ""),
-                    w.get("targetUsageExample", ""),
-                    w.get("isActive", True),
-                )
+            dedup_key = (w["sourceText"], w["sourceLanguage"], w["targetLanguage"])
+            entry = (
+                w["id"],
+                w["sourceText"],
+                w["sourceLanguage"],
+                w["targetText"],
+                w["targetLanguage"],
+                w["listName"],
+                w["difficultyLevel"],
+                w.get("sourceUsageExample", ""),
+                w.get("targetUsageExample", ""),
+                w.get("isActive", True),
             )
-    return words
+            if dedup_key in seen:
+                print(f"Skipping duplicate: {w['sourceText']} ({w['sourceLanguage']}->{w['targetLanguage']}) in {filepath.name}")
+            else:
+                seen[dedup_key] = entry
+    return list(seen.values())
 
 
 def sync(conn, vocabulary_dir):

@@ -1924,18 +1924,6 @@
       "isActive": true
     },
     {
-      "id": "eb59c760-e5ec-4f73-9b7d-6899fb7d77f6",
-      "sourceText": "dama",
-      "targetText": "дама",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Es una gran dama.",
-      "targetUsageExample": "Она великая дама.",
-      "isActive": true
-    },
-    {
       "id": "2fd8d2bd-55cd-493e-a616-e25accde7f86",
       "sourceText": "daño",
       "targetText": "вред|ущерб",
@@ -2437,18 +2425,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Necesito dos billetes.",
       "targetUsageExample": "Мне нужно два билета.",
-      "isActive": true
-    },
-    {
-      "id": "ced90c43-8bfb-4113-824e-44bb51739806",
-      "sourceText": "doctor",
-      "targetText": "доктор",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "El doctor me ayudó.",
-      "targetUsageExample": "Доктор мне помог.",
       "isActive": true
     },
     {
@@ -4345,18 +4321,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Es el mejor estudiante.",
       "targetUsageExample": "Он лучший ученик.",
-      "isActive": true
-    },
-    {
-      "id": "507ef9a7-1308-4799-aa17-d930b8676531",
-      "sourceText": "momento",
-      "targetText": "момент",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Un momento, por favor.",
-      "targetUsageExample": "Один момент, пожалуйста.",
       "isActive": true
     },
     {
