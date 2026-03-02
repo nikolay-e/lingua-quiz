@@ -100,6 +100,7 @@ jobs:
           target: ${{ matrix.service }}
           platforms: linux/amd64
           push: true
+          provenance: false
           tags: |
             ${{ env.REGISTRY }}/lingua-quiz-${{ matrix.service }}:${{ steps.tag.outputs.value }}
             ${{ env.REGISTRY }}/lingua-quiz-${{ matrix.service }}:${{ steps.tag.outputs.commit_sha }}
