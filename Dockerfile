@@ -30,7 +30,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:9000/api/health || exit 1
 CMD ["./start.sh"]
 
-FROM node:25-slim AS frontend-builder
+FROM node:24-slim AS frontend-builder
 ARG APP_VERSION=dev
 ARG APP_ENVIRONMENT=development
 WORKDIR /app
@@ -49,7 +49,7 @@ RUN VITE_APP_VERSION=${APP_VERSION} \
     VITE_APP_ENVIRONMENT=${APP_ENVIRONMENT} \
     npm run build --workspace @lingua-quiz/frontend
 
-FROM nginx:1.29.5-alpine AS frontend
+FROM nginx:1.28-alpine AS frontend
 RUN chown -R nginx:nginx /var/cache/nginx && \
     chmod -R 755 /var/cache/nginx
 COPY infra/nginx/nginx.conf /etc/nginx/nginx.conf
