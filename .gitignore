@@ -113,3 +113,11 @@ packages/word-processing/frequency_lists/*_top*.csv
 packages/word-processing/data/subtitle_frequencies/*_lemmatized.csv
 packages/tools/generated_vocabularies/
 .playwright-mcp/
+
+.treemapper/
+.mise.toml
+
+# Temporary screenshots
+login-mobile.png
+login-page.png
+register-page.png
