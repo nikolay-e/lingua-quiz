@@ -15,7 +15,10 @@ export function QuestionDisplay({
 }: QuestionDisplayProps): React.JSX.Element {
   const { t } = useTranslation();
 
-  const questionLanguage = currentQuestion?.sourceLanguage ?? 'en';
+  const questionLanguage =
+    currentQuestion?.direction === 'reverse'
+      ? (currentQuestion.targetLanguage ?? 'en')
+      : (currentQuestion?.sourceLanguage ?? 'en');
 
   const levelInfo = useMemo(() => {
     if (currentQuestion === null) return null;
@@ -33,12 +36,14 @@ export function QuestionDisplay({
     [levelWordLists],
   );
 
-  const currentLevelCount = useMemo(() => {
-    if (levelInfo === null) return 0;
-    return levelWordLists[levelInfo.id]?.count ?? 0;
-  }, [levelInfo, levelWordLists]);
+  const masteredCount = useMemo(() => {
+    const masteredLevels = ['level3', 'level4', 'level5'];
+    return Object.entries(levelWordLists)
+      .filter(([id]) => masteredLevels.includes(id))
+      .reduce((sum, [, l]) => sum + l.count, 0);
+  }, [levelWordLists]);
 
-  const completionPercent = totalWords > 0 ? Math.round(((totalWords - currentLevelCount) / totalWords) * 100) : 0;
+  const completionPercent = totalWords > 0 ? Math.round((masteredCount / totalWords) * 100) : 0;
 
   if (currentQuestion === null) {
     return (

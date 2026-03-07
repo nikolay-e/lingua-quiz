@@ -1,15 +1,9 @@
 import { create } from 'zustand';
 import { persist, subscribeWithSelector } from 'zustand/middleware';
 import type { Attempt, PronunciationScores, LanguageCode } from '../types';
-import { SCORING, DEFAULT_AZURE_REGION, STORAGE_KEY } from '../lib/constants';
-import api from '@api/api';
+import { SCORING, STORAGE_KEY } from '../lib/constants';
 
 interface SpeakState {
-  azureApiKey: string;
-  azureRegion: string;
-  serverAzureApiKey: string;
-  serverAzureRegion: string;
-  serverConfigLoaded: boolean;
   passThreshold: number;
   language: LanguageCode;
   attempts: Attempt[];
@@ -18,8 +12,6 @@ interface SpeakState {
 }
 
 interface SpeakActions {
-  setAzureCredentials: (key: string, region: string) => void;
-  loadServerConfig: () => Promise<void>;
   setPassThreshold: (threshold: number) => void;
   setLanguage: (language: LanguageCode) => void;
   recordAttempt: (text: string, scores: PronunciationScores, passed: boolean) => void;
@@ -29,11 +21,6 @@ interface SpeakActions {
 type SpeakStore = SpeakState & SpeakActions;
 
 const initialState: SpeakState = {
-  azureApiKey: '',
-  azureRegion: DEFAULT_AZURE_REGION,
-  serverAzureApiKey: '',
-  serverAzureRegion: '',
-  serverConfigLoaded: false,
   passThreshold: SCORING.DEFAULT_THRESHOLD,
   language: 'en-US',
   attempts: [],
@@ -46,22 +33,6 @@ export const useSpeakStore = create<SpeakStore>()(
     persist(
       (set, get) => ({
         ...initialState,
-
-        setAzureCredentials: (key, region) => set({ azureApiKey: key, azureRegion: region }),
-
-        loadServerConfig: async () => {
-          if (get().serverConfigLoaded) return;
-          try {
-            const config = await api.fetchPublicConfig();
-            set({
-              serverAzureApiKey: config.azure_speech_api_key,
-              serverAzureRegion: config.azure_speech_region,
-              serverConfigLoaded: true,
-            });
-          } catch {
-            set({ serverConfigLoaded: true });
-          }
-        },
 
         setPassThreshold: (threshold) => set({ passThreshold: threshold }),
 
@@ -112,8 +83,6 @@ export const useSpeakStore = create<SpeakStore>()(
       {
         name: STORAGE_KEY,
         partialize: (state) => ({
-          azureApiKey: state.azureApiKey,
-          azureRegion: state.azureRegion,
           passThreshold: state.passThreshold,
           language: state.language,
           attempts: state.attempts.slice(-100),
@@ -125,15 +94,6 @@ export const useSpeakStore = create<SpeakStore>()(
   ),
 );
 
-export const useAzureApiKey = () => useSpeakStore((s) => (s.azureApiKey !== '' ? s.azureApiKey : s.serverAzureApiKey));
-export const useAzureRegion = () => useSpeakStore((s) => (s.azureRegion !== '' ? s.azureRegion : s.serverAzureRegion));
-export const useHasAzureCredentials = () =>
-  useSpeakStore((s) => {
-    const key = s.azureApiKey !== '' ? s.azureApiKey : s.serverAzureApiKey;
-    const region = s.azureRegion !== '' ? s.azureRegion : s.serverAzureRegion;
-    return key !== '' && region !== '';
-  });
-export const useServerConfigLoaded = () => useSpeakStore((s) => s.serverConfigLoaded);
 export const usePassThreshold = () => useSpeakStore((s) => s.passThreshold);
 export const useSpeakLanguage = () => useSpeakStore((s) => s.language);
 export const useAttempts = () => useSpeakStore((s) => s.attempts);

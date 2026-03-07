@@ -39,16 +39,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'learn',
-        element: (
-          <ProtectedRoute>
-            <Suspense fallback={<PageLoader />}>
-              <QuizPage />
-            </Suspense>
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: 'quiz',
         element: (
           <ProtectedRoute>

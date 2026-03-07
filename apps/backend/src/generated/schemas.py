@@ -171,6 +171,38 @@ class HTTPValidationError(APIBaseModel):
     detail: Annotated[list[ValidationError] | None, Field(None, title="Detail")]
 
 
+class PhonemeAssessmentSchema(APIBaseModel):
+    phoneme: Annotated[str, Field(title="Phoneme")]
+    score: Annotated[float, Field(title="Score")]
+    expected: Annotated[str, Field(title="Expected")]
+    actual: Annotated[str | None, Field(None, title="Actual")]
+
+
+class PhonemeErrorSchema(APIBaseModel):
+    phoneme: Annotated[str, Field(title="Phoneme")]
+    expected: Annotated[str, Field(title="Expected")]
+    actual: Annotated[str, Field(title="Actual")]
+    score: Annotated[float, Field(title="Score")]
+
+
+class WordAssessmentSchema(APIBaseModel):
+    word: Annotated[str, Field(alias="word", title="Word")]
+    accuracy_score: Annotated[float, Field(alias="accuracyScore", title="AccuracyScore")]
+    error_type: Annotated[str, Field(alias="errorType", title="ErrorType")]
+    phonemes: Annotated[list[PhonemeAssessmentSchema], Field(title="Phonemes")]
+
+
+class SpeechAssessResponse(APIBaseModel):
+    accuracy: Annotated[float, Field(title="Accuracy")]
+    fluency: Annotated[float, Field(title="Fluency")]
+    completeness: Annotated[float, Field(title="Completeness")]
+    prosody: Annotated[float, Field(title="Prosody")]
+    pronunciation: Annotated[float, Field(title="Pronunciation")]
+    word_assessments: Annotated[list[WordAssessmentSchema], Field(alias="wordAssessments", title="WordAssessments")]
+    phoneme_errors: Annotated[list[PhonemeErrorSchema], Field(alias="phonemeErrors", title="PhonemeErrors")]
+    recognized_text: Annotated[str, Field(alias="recognizedText", title="RecognizedText")]
+
+
 class TokenResponse(APIBaseModel):
     token: Annotated[str, Field(title="Token")]
     refresh_token: Annotated[str, Field(title="Refresh Token")]

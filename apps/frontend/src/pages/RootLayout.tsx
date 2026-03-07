@@ -1,26 +1,22 @@
 import { useEffect, useRef } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Settings } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useThemeStore } from '@features/settings/stores/theme.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
-import { Button } from '@shared/ui';
+import { AppNav } from '@shared/components';
 
 export function RootLayout(): React.JSX.Element {
-  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
 
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const isAdmin = useAuthStore((state) => state.isAdmin);
+  const username = useAuthStore((state) => state.username);
   const resolvedTheme = useThemeStore((state) => state.resolvedTheme);
   const resetQuiz = useQuizStore((state) => state.reset);
 
   const isInitialized = useRef(false);
   const currentPath = location.pathname;
-  const isAdminPage = currentPath === '/admin';
-  const isQuizPage = currentPath === '/' || currentPath === '/quiz';
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', resolvedTheme);
@@ -36,7 +32,7 @@ export function RootLayout(): React.JSX.Element {
     if (isInitialized.current) return;
     isInitialized.current = true;
 
-    const protectedRoutes = ['/', '/quiz', '/admin', '/settings'];
+    const protectedRoutes = ['/', '/quiz', '/speak', '/admin', '/settings'];
     const publicRoutes = ['/login', '/register'];
 
     if (!isAuthenticated && protectedRoutes.includes(currentPath)) {
@@ -49,27 +45,9 @@ export function RootLayout(): React.JSX.Element {
   }, [isAuthenticated, isAdmin, currentPath, navigate]);
 
   return (
-    <>
-      {isAuthenticated && isAdminPage && isAdmin && (
-        <div className="fixed top-[max(0.5rem,env(safe-area-inset-top,0px))] right-[max(0.5rem,env(safe-area-inset-right,0px))] z-50">
-          <Button variant="outline" onClick={() => void navigate('/')}>
-            <svg className="mr-2 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            {t('nav.backToQuiz')}
-          </Button>
-        </div>
-      )}
-      {isAuthenticated && isAdmin && isQuizPage && (
-        <div className="fixed top-[max(0.5rem,env(safe-area-inset-top,0px))] right-[max(0.5rem,env(safe-area-inset-right,0px))] z-50">
-          <Button variant="secondary" onClick={() => navigate('/admin')}>
-            <Settings size={16} className="mr-2" />
-            {t('nav.adminPanel')}
-          </Button>
-        </div>
-      )}
-
+    <div className={isAuthenticated ? 'has-bottom-nav' : ''}>
+      {isAuthenticated && <AppNav username={username} isAdmin={isAdmin} />}
       <Outlet />
-    </>
+    </div>
   );
 }

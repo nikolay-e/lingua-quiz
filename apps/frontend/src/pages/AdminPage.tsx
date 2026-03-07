@@ -5,7 +5,7 @@ import adminApi, { type VocabularyItemCreate, type VocabularyItemUpdate } from '
 import { LANGUAGE_OPTIONS, DIFFICULTY_OPTIONS, LIST_NAME_OPTIONS } from '@features/admin/config/adminConfig';
 import type { AdminVocabularyItem } from '@api/types';
 import { Button, Input, Label, Select, Card, CardContent } from '@shared/ui';
-import { BaseDialog, ConfirmDialog, PageContainer, useToast } from '@shared/components';
+import { AppShell, BaseDialog, ConfirmDialog, useToast } from '@shared/components';
 import { cn, extractErrorMessage } from '@shared/utils';
 
 interface EditForm {
@@ -264,10 +264,10 @@ export function AdminPage(): React.JSX.Element {
 
   return (
     <>
-      <PageContainer maxWidth="4xl">
+      <AppShell maxWidth="4xl">
         <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-primary">Vocabulary Management</h1>
+            <h1 className="text-primary">Vocabulary Management</h1>
             <p className="text-muted-foreground">Search, create, and manage vocabulary items</p>
           </div>
           <Button onClick={openCreateDialog} className="w-full md:w-auto">
@@ -341,9 +341,17 @@ export function AdminPage(): React.JSX.Element {
           </div>
         </div>
 
+        {searchResults.length > 0 && filteredResults.length === 0 && (
+          <Card>
+            <CardContent className="py-8 text-center text-muted-foreground">
+              No items match the current filters.
+            </CardContent>
+          </Card>
+        )}
+
         {filteredResults.length > 0 && (
           <Card className="overflow-hidden">
-            <table className="w-full">
+            <table data-admin-table className="w-full">
               <thead className="bg-muted">
                 <tr>
                   <th
@@ -386,10 +394,16 @@ export function AdminPage(): React.JSX.Element {
               <tbody>
                 {filteredResults.map((item) => (
                   <tr key={item.id} className="border-t border-border hover:bg-muted/50 transition-colors">
-                    <td className="p-3">{item.sourceText}</td>
-                    <td className="p-3">{item.targetText}</td>
-                    <td className="p-3">{item.listName}</td>
-                    <td className="p-3">
+                    <td data-label="Source" className="p-3">
+                      {item.sourceText}
+                    </td>
+                    <td data-label="Target" className="p-3">
+                      {item.targetText}
+                    </td>
+                    <td data-label="List" className="p-3">
+                      {item.listName}
+                    </td>
+                    <td data-label="Status" className="p-3">
                       <span
                         className={cn(
                           'px-2 py-1 rounded text-xs',
@@ -399,7 +413,7 @@ export function AdminPage(): React.JSX.Element {
                         {item.isActive ? 'Active' : 'Inactive'}
                       </span>
                     </td>
-                    <td className="p-3 text-right">
+                    <td data-label="Actions" className="p-3 text-right">
                       <div className="flex gap-2 justify-end">
                         <Button
                           variant="ghost"
@@ -429,7 +443,7 @@ export function AdminPage(): React.JSX.Element {
             </table>
           </Card>
         )}
-      </PageContainer>
+      </AppShell>
 
       <AdminFormDialog
         open={isEditDialogOpen}

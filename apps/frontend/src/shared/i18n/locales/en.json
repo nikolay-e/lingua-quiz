@@ -3,7 +3,13 @@
     "backToQuiz": "Back to Quiz",
     "adminPanel": "Admin Panel",
     "back": "Back",
-    "backToMenu": "Back to Menu"
+    "backToMenu": "Back to Menu",
+    "home": "Home",
+    "quiz": "Quiz",
+    "speak": "Speak",
+    "settings": "Settings",
+    "admin": "Admin",
+    "navigation": "Navigation"
   },
   "auth": {
     "signIn": "Sign In",
@@ -195,6 +201,26 @@
     "totalItems": "Total Items",
     "activeItems": "Active Items",
     "inactiveItems": "Inactive Items"
+  },
+  "speak": {
+    "title": "I Speak",
+    "subtitle": "Practice your pronunciation",
+    "loginRequired": "Log in to use pronunciation assessment. Using simulated scores.",
+    "textLabel": "Text to practice",
+    "textPlaceholder": "Enter text to practice...",
+    "randomPhrase": "Random phrase",
+    "analyzing": "Analyzing pronunciation...",
+    "hint": "Space: record/stop"
+  },
+  "home": {
+    "learnWords": "Learn Words",
+    "learnWordsDesc": "Master vocabulary with spaced repetition",
+    "practicePronunciation": "Practice Pronunciation",
+    "practicePronunciationDesc": "Improve your speaking skills",
+    "chooseCourse": "Choose Course",
+    "streakDays": "Day streak",
+    "accuracy": "Accuracy",
+    "attempts": "Attempts"
   },
   "common": {
     "cancel": "Cancel",

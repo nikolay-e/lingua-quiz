@@ -42,42 +42,50 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
   error: null,
 
   loadWordLists: async (token: string) => {
+    const { loading, wordLists } = get();
+    if (loading || wordLists.length > 0) return;
+
     set({ loading: true, error: null });
 
     try {
       const result = await quizService.loadWordLists(token);
       if (result !== null) {
         set({ wordLists: result, loading: false });
+      } else {
+        set({ loading: false, error: 'Failed to load word lists. Please try again.' });
+        throw new Error('Failed to load word lists');
       }
     } catch (error: unknown) {
-      logger.error('Failed to load word lists', { error });
-      set({
-        error: extractErrorMessage(error, 'Failed to load word lists'),
-        loading: false,
-      });
+      const msg = extractErrorMessage(error, 'Failed to load word lists');
+      if (get().loading) {
+        set({ error: msg, loading: false });
+      }
+      throw error;
     }
   },
 
   startQuiz: async (token: string, quizName: string) => {
-    set({ loading: true, error: null, selectedQuiz: quizName });
+    set({ loading: true, error: null });
 
     try {
       const result = await quizService.startQuiz(token, quizName);
       if (result !== null) {
         set({
           loading: false,
+          selectedQuiz: quizName,
           quizManager: result.manager,
           currentQuestion: result.currentQuestion,
         });
       } else {
-        set({
-          loading: false,
-          error: 'Failed to start quiz. Please try again.',
-        });
+        set({ loading: false, selectedQuiz: null, error: 'Failed to start quiz. Please try again.' });
+        throw new Error('Failed to start quiz');
       }
     } catch (error: unknown) {
-      logger.error('Failed to start quiz', { error, quizName });
-      set({ error: extractErrorMessage(error, 'Failed to start quiz'), loading: false });
+      const msg = extractErrorMessage(error, 'Failed to start quiz');
+      if (get().loading) {
+        set({ error: msg, loading: false, selectedQuiz: null });
+      }
+      throw error;
     }
   },
 

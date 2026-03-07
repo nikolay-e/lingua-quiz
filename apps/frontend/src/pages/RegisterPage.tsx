@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { UserPlus, Loader2, Languages } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { Button, Input, Label } from '@shared/ui';
-import { FeedCard, PasswordInput } from '@shared/components';
+import { AppShell, FeedCard, PasswordInput } from '@shared/components';
+import { usePasswordValidation } from '@shared/hooks';
 import { cn, extractErrorMessage } from '@shared/utils';
 
 export function RegisterPage(): React.JSX.Element {
@@ -18,18 +19,7 @@ export function RegisterPage(): React.JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const passwordRequirements = useMemo(
-    () => [
-      { labelKey: 'auth.reqLength', valid: password.length >= 8 },
-      { labelKey: 'auth.reqUppercase', valid: /[A-Z]/.test(password) },
-      { labelKey: 'auth.reqLowercase', valid: /[a-z]/.test(password) },
-      { labelKey: 'auth.reqNumber', valid: /\d/.test(password) },
-      { labelKey: 'auth.reqSpecial', valid: /[!@#$%^&*()_\-+=[\]{}`;:'",.\\|<>/?~]/.test(password) },
-    ],
-    [password],
-  );
-
-  const isPasswordValid = passwordRequirements.every((r) => r.valid);
+  const { requirements: passwordRequirements, isValid: isPasswordValid } = usePasswordValidation(password);
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
@@ -57,11 +47,8 @@ export function RegisterPage(): React.JSX.Element {
   };
 
   return (
-    <main
-      id="main-content"
-      className="w-full max-w-[28rem] mx-auto flex flex-col gap-4 pt-[calc(1rem+env(safe-area-inset-top,0px))] pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pl-[calc(1rem+env(safe-area-inset-left,0px))] pr-[calc(1rem+env(safe-area-inset-right,0px))] md:pt-16 md:pb-12 md:px-6 md:gap-6"
-    >
-      <FeedCard dense title={null}>
+    <AppShell maxWidth="md">
+      <FeedCard dense>
         <header className="flex items-center justify-center gap-2">
           <h1 className="m-0 text-primary text-xl flex items-center gap-2">
             <Languages size={28} /> LinguaQuiz
@@ -69,7 +56,7 @@ export function RegisterPage(): React.JSX.Element {
         </header>
       </FeedCard>
 
-      <FeedCard title={null}>
+      <FeedCard>
         <h2 id="register-title" data-testid="register-title" className="text-xl font-semibold text-center mb-2">
           {t('auth.signUp')}
         </h2>
@@ -162,6 +149,6 @@ export function RegisterPage(): React.JSX.Element {
           </button>
         </p>
       </FeedCard>
-    </main>
+    </AppShell>
   );
 }

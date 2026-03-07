@@ -3,7 +3,13 @@
     "backToQuiz": "К викторине",
     "adminPanel": "Админ-панель",
     "back": "Назад",
-    "backToMenu": "В меню"
+    "backToMenu": "В меню",
+    "home": "Главная",
+    "quiz": "Квиз",
+    "speak": "Речь",
+    "settings": "Настройки",
+    "admin": "Админ",
+    "navigation": "Навигация"
   },
   "auth": {
     "signIn": "Войти",
@@ -195,6 +201,26 @@
     "totalItems": "Всего записей",
     "activeItems": "Активных",
     "inactiveItems": "Неактивных"
+  },
+  "speak": {
+    "title": "Произношение",
+    "subtitle": "Практикуйте произношение",
+    "loginRequired": "Войдите, чтобы использовать оценку произношения. Используются симулированные оценки.",
+    "textLabel": "Текст для практики",
+    "textPlaceholder": "Введите текст для практики...",
+    "randomPhrase": "Случайная фраза",
+    "analyzing": "Анализ произношения...",
+    "hint": "Пробел: запись/стоп"
+  },
+  "home": {
+    "learnWords": "Учить слова",
+    "learnWordsDesc": "Осваивайте лексику с интервальным повторением",
+    "practicePronunciation": "Произношение",
+    "practicePronunciationDesc": "Улучшите навыки речи",
+    "chooseCourse": "Выбор курса",
+    "streakDays": "Дней подряд",
+    "accuracy": "Точность",
+    "attempts": "Попыток"
   },
   "common": {
     "cancel": "Отмена",

@@ -69,10 +69,10 @@ export const useAuthStore = create<AuthStore>()(
       }
 
       try {
-        const payload = jwtDecode<{ exp: number; isAdmin?: boolean }>(data.token);
+        const payload = jwtDecode<{ exp: number; isAdmin?: boolean; is_admin?: boolean }>(data.token);
         const expirationMs = payload.exp * 1000;
         safeStorage.setItem(STORAGE_KEYS.TOKEN_EXPIRATION, expirationMs.toString());
-        const isAdmin = payload.isAdmin ?? false;
+        const isAdmin = payload.isAdmin ?? payload.is_admin ?? false;
         set({ token: data.token, username: data.username, isAuthenticated: true, isAdmin });
         scheduleTokenRefresh(refreshAccessToken);
       } catch (error: unknown) {
@@ -119,14 +119,20 @@ export const useAuthStore = create<AuthStore>()(
       }
 
       try {
-        const payload = jwtDecode<{ exp: number; username?: string; sub?: string; isAdmin?: boolean }>(token);
+        const payload = jwtDecode<{
+          exp: number;
+          username?: string;
+          sub?: string;
+          isAdmin?: boolean;
+          is_admin?: boolean;
+        }>(token);
         const isExpired = payload.exp * 1000 < Date.now();
 
         if (isExpired) {
           void refreshAccessToken();
         } else {
           const username = payload.username ?? payload.sub ?? 'Unknown User';
-          const isAdmin = payload.isAdmin ?? false;
+          const isAdmin = payload.isAdmin ?? payload.is_admin ?? false;
           set({ token, username, isAuthenticated: true, isAdmin });
           scheduleTokenRefresh(refreshAccessToken);
         }

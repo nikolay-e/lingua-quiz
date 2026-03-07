@@ -144,11 +144,6 @@
   --color-level-down: #f87171;
 }
 
-/* Dark theme select arrow (SVG with light stroke) */
-[data-theme='dark'] select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-}
-
 /* ============================================
    RESET LAYER - Normalize browser defaults
    ============================================ */
@@ -255,7 +250,6 @@
 
   h1 {
     font-size: var(--font-size-2xl);
-    text-align: center;
   }
 
   h2 {
@@ -264,48 +258,6 @@
 
   h3 {
     font-size: var(--font-size-lg);
-  }
-
-  /* Select element styling (inputs handled by shadcn) */
-  select {
-    width: 100%;
-    min-height: var(--touch-target-min);
-    padding-block: var(--spacing-sm);
-    padding-inline: var(--spacing-md);
-    padding-inline-end: var(--spacing-xl);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-input-border);
-    font-size: var(--font-size-base);
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right var(--spacing-sm) center;
-    background-repeat: no-repeat;
-    background-size: 1.25rem;
-    appearance: none;
-    cursor: pointer;
-    transition:
-      border-color var(--transition-speed) ease,
-      box-shadow var(--transition-speed) ease,
-      background-color var(--transition-speed) ease;
-
-    &:focus-visible {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 2px color-mix(in sRGB, var(--color-primary) 20%, transparent);
-    }
-
-    &:focus:not(:focus-visible) {
-      outline: none;
-    }
-
-    &:disabled {
-      background-color: var(--color-disabled-bg);
-      color: var(--color-disabled-text);
-      border-color: var(--color-disabled-border);
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
   }
 
   /* Progress bar smooth value transition */
@@ -391,6 +343,17 @@
     display: none;
   }
 
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
   /* Toast slide-in animation */
   .animate-slide-in {
     animation: slide-in 0.2s ease-out;
@@ -413,6 +376,19 @@
    ============================================ */
 
 @layer utilities {
+  @media (width < 768px) {
+    .has-bottom-nav {
+      padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  .page-safe-area {
+    padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    padding-left: calc(1rem + env(safe-area-inset-left, 0px));
+    padding-right: calc(1rem + env(safe-area-inset-right, 0px));
+  }
+
   /* Animation utilities for feedback and UI interactions */
   .animate-fade-in {
     animation: fade-in 150ms ease-out;

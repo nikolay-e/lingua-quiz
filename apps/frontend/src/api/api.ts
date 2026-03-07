@@ -1,7 +1,6 @@
 import {
   AuthenticationService,
   ContentVersionService,
-  OpenAPI,
   ProgressService,
   TextToSpeechService,
   VocabularyService,
@@ -25,11 +24,6 @@ import {
   validateWordList,
 } from '@lingua-quiz/domain';
 import { executeApiCall, fetchWithAuth, setAuthToken } from './config';
-
-export interface PublicConfig {
-  azure_speech_api_key: string;
-  azure_speech_region: string;
-}
 
 const mapAuthResponse = (response: TokenResponse): AuthResponse => ({
   token: response.token,
@@ -158,14 +152,6 @@ const api = {
         ),
       { token },
     ),
-
-  fetchPublicConfig: async (): Promise<PublicConfig> => {
-    const response = await fetch(`${OpenAPI.BASE}/api/config`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch config: ${response.status}`);
-    }
-    return response.json() as Promise<PublicConfig>;
-  },
 };
 
 export default api;

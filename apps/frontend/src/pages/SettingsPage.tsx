@@ -1,11 +1,12 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, KeyRound, Trash2, Loader2, LogOut, User, Globe, Sun, Moon, Monitor } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useThemeStore } from '@features/settings/stores/theme.store';
 import { Button, Card, CardHeader, CardTitle, CardDescription, CardContent, Select } from '@shared/ui';
-import { ConfirmDialog, PageContainer, PasswordInput, useToast } from '@shared/components';
+import { AppShell, ConfirmDialog, PasswordInput, useToast } from '@shared/components';
+import { usePasswordValidation } from '@shared/hooks';
 import { cn, extractErrorMessage, THEME_MODES, type ThemeMode } from '@shared/utils';
 import { setLocale, getSupportedLocales, LOCALE_NAMES, type SupportedLocale } from '@shared/i18n';
 import api from '@api';
@@ -40,18 +41,10 @@ export function SettingsPage(): React.JSX.Element {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
-  const passwordRequirements = useMemo(
-    () => [
-      { labelKey: 'settings.reqLength', valid: newPassword.length >= 8 },
-      { labelKey: 'settings.reqUppercase', valid: /[A-Z]/.test(newPassword) },
-      { labelKey: 'settings.reqLowercase', valid: /[a-z]/.test(newPassword) },
-      { labelKey: 'settings.reqNumber', valid: /\d/.test(newPassword) },
-      { labelKey: 'settings.reqSpecial', valid: /[!@#$%^&*()_\-+=[\]{}`;:'",.\\|<>/?~]/.test(newPassword) },
-    ],
-    [newPassword],
+  const { requirements: passwordRequirements, isValid: isPasswordValid } = usePasswordValidation(
+    newPassword,
+    'settings',
   );
-
-  const isPasswordValid = passwordRequirements.every((r) => r.valid);
   const doPasswordsMatch = newPassword === confirmPassword && confirmPassword.length > 0;
   const canSubmitPassword = currentPassword.length > 0 && isPasswordValid && doPasswordsMatch && !isChangingPassword;
 
@@ -120,7 +113,7 @@ export function SettingsPage(): React.JSX.Element {
 
   return (
     <>
-      <PageContainer maxWidth="xl">
+      <AppShell maxWidth="xl">
         <header className="flex flex-col gap-2">
           <Button
             variant="ghost"
@@ -133,7 +126,7 @@ export function SettingsPage(): React.JSX.Element {
             <ArrowLeft size={18} aria-hidden="true" />
             <span>{t('nav.back')}</span>
           </Button>
-          <h1 className="text-2xl font-bold">{t('settings.title')}</h1>
+          <h1>{t('settings.title')}</h1>
           <p className="text-muted-foreground">{t('settings.subtitle')}</p>
         </header>
 
@@ -313,7 +306,7 @@ export function SettingsPage(): React.JSX.Element {
             </CardContent>
           </Card>
         </section>
-      </PageContainer>
+      </AppShell>
 
       {showDeleteConfirm && (
         <ConfirmDialog

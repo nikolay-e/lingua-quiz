@@ -3,7 +3,13 @@
     "backToQuiz": "Zurück zum Quiz",
     "adminPanel": "Admin-Panel",
     "back": "Zurück",
-    "backToMenu": "Zurück zum Menü"
+    "backToMenu": "Zurück zum Menü",
+    "home": "Start",
+    "quiz": "Quiz",
+    "speak": "Sprechen",
+    "settings": "Einstellungen",
+    "admin": "Admin",
+    "navigation": "Navigation"
   },
   "auth": {
     "signIn": "Anmelden",
@@ -195,6 +201,26 @@
     "totalItems": "Einträge gesamt",
     "activeItems": "Aktive Einträge",
     "inactiveItems": "Inaktive Einträge"
+  },
+  "speak": {
+    "title": "Sprechen",
+    "subtitle": "Übe deine Aussprache",
+    "loginRequired": "Melde dich an, um die Aussprachebewertung zu nutzen. Simulierte Bewertungen werden verwendet.",
+    "textLabel": "Text zum Üben",
+    "textPlaceholder": "Text zum Üben eingeben...",
+    "randomPhrase": "Zufälliger Satz",
+    "analyzing": "Aussprache wird analysiert...",
+    "hint": "Leertaste: Aufnahme/Stop"
+  },
+  "home": {
+    "learnWords": "Wörter lernen",
+    "learnWordsDesc": "Vokabeln mit Wiederholungen meistern",
+    "practicePronunciation": "Aussprache üben",
+    "practicePronunciationDesc": "Verbessere deine Sprechfähigkeiten",
+    "chooseCourse": "Kurs wählen",
+    "streakDays": "Tage am Stück",
+    "accuracy": "Genauigkeit",
+    "attempts": "Versuche"
   },
   "common": {
     "cancel": "Abbrechen",

@@ -4,39 +4,27 @@ import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Settings, Shuffle } from 'lucide-react';
 import { AudioRecorder } from '@features/speak/components/AudioRecorder';
 import { ScoreCard } from '@features/speak/components/ScoreCard';
-import {
-  useSpeakStore,
-  useHasAzureCredentials,
-  usePassThreshold,
-  useSpeakLanguage,
-  useAzureApiKey,
-  useAzureRegion,
-  useServerConfigLoaded,
-} from '@features/speak/stores/speak.store';
-import { assessPronunciation, generateSimulatedAssessment } from '@features/speak/services/azure-speech';
+import { useSpeakStore, usePassThreshold, useSpeakLanguage } from '@features/speak/stores/speak.store';
+import { useToken, useIsAuthenticated } from '@features/auth/stores/auth.store';
+import { assessPronunciationViaBackend } from '@api/speech';
+import { generateSimulatedAssessment } from '@features/speak/services/simulation';
 import { getAssessmentFeedback } from '@features/speak/lib/feedback';
 import { getDefaultPhrase, getRandomPhrase } from '@features/speak/lib/phrases';
 import type { PronunciationScores, WordAssessment, AssessmentFeedback } from '@features/speak/types';
 import { cn } from '@shared/utils';
 import { Button, Input, Label } from '@shared/ui';
-import { PageContainer } from '@shared/components';
+import { AppShell } from '@shared/components';
 import { requestWakeLock, releaseWakeLock } from '@shared/pwa';
 
 export function SpeakPage(): React.JSX.Element {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { recordAttempt, loadServerConfig } = useSpeakStore();
-  const azureApiKey = useAzureApiKey();
-  const azureRegion = useAzureRegion();
-  const hasAzureCredentials = useHasAzureCredentials();
-  const serverConfigLoaded = useServerConfigLoaded();
+  const { recordAttempt } = useSpeakStore();
+  const token = useToken();
+  const isAuthenticated = useIsAuthenticated();
   const passThreshold = usePassThreshold();
   const language = useSpeakLanguage();
-
-  useEffect(() => {
-    void loadServerConfig();
-  }, [loadServerConfig]);
 
   const [practiceText, setPracticeText] = useState(() => getDefaultPhrase(language));
   const [scores, setScores] = useState<PronunciationScores | null>(null);
@@ -100,12 +88,13 @@ export function SpeakPage(): React.JSX.Element {
 
     try {
       const cleanText = practiceText.trim();
-      const result = hasAzureCredentials
-        ? await assessPronunciation(blob, cleanText, azureApiKey, azureRegion, language)
-        : await (async () => {
-            await new Promise((resolve) => setTimeout(resolve, 1200));
-            return generateSimulatedAssessment(cleanText);
-          })();
+      const result =
+        isAuthenticated && token !== null
+          ? await assessPronunciationViaBackend(blob, cleanText, language, token)
+          : await (async () => {
+              await new Promise((resolve) => setTimeout(resolve, 1200));
+              return generateSimulatedAssessment(cleanText);
+            })();
 
       setScores(result.scores);
       setWordAssessments(result.wordAssessments);
@@ -126,7 +115,7 @@ export function SpeakPage(): React.JSX.Element {
   };
 
   return (
-    <PageContainer maxWidth="4xl">
+    <AppShell maxWidth="4xl">
       <header className="flex flex-col gap-2">
         <Button
           variant="ghost"
@@ -140,7 +129,7 @@ export function SpeakPage(): React.JSX.Element {
           <span>{t('nav.back')}</span>
         </Button>
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">{t('speak.title', 'I Speak')}</h1>
+          <h1>{t('speak.title', 'I Speak')}</h1>
           <Button
             variant="ghost"
             size="icon"
@@ -157,17 +146,9 @@ export function SpeakPage(): React.JSX.Element {
 
       <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-6">
         <div className="flex flex-col gap-4">
-          {serverConfigLoaded && !hasAzureCredentials && (
+          {!isAuthenticated && (
             <div className="bg-secondary/20 border border-secondary/30 rounded-lg p-3 text-sm text-secondary-foreground">
-              Azure API key not configured. Using simulated scores.{' '}
-              <button
-                onClick={() => {
-                  void navigate('/settings');
-                }}
-                className="text-primary hover:underline font-medium bg-transparent border-none cursor-pointer transition-colors"
-              >
-                Configure
-              </button>
+              {t('speak.loginRequired', 'Log in to use pronunciation assessment. Using simulated scores.')}
             </div>
           )}
 
@@ -263,6 +244,6 @@ export function SpeakPage(): React.JSX.Element {
           )}
         </div>
       </div>
-    </PageContainer>
+    </AppShell>
   );
 }

@@ -7,6 +7,4 @@ export { UsageExamples } from './UsageExamples';
 export { LearningProgress } from './LearningProgress';
 export { LevelChangeAnimation } from './LevelChangeAnimation';
 export { TTSButton } from './TTSButton';
-export { UserActions } from './UserActions';
-export { QuizWelcome } from './QuizWelcome';
 export { QuizSkeleton } from './QuizSkeleton';

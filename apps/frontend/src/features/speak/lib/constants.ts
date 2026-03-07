@@ -26,19 +26,4 @@ export const SIMULATION = {
   PHONEME_ERROR_THRESHOLD: 70,
 } as const;
 
-export const AZURE_REGIONS = [
-  { value: 'eastus', label: 'East US' },
-  { value: 'eastus2', label: 'East US 2' },
-  { value: 'westus', label: 'West US' },
-  { value: 'westus2', label: 'West US 2' },
-  { value: 'westeurope', label: 'West Europe' },
-  { value: 'northeurope', label: 'North Europe' },
-  { value: 'germanywestcentral', label: 'Germany West Central' },
-  { value: 'uksouth', label: 'UK South' },
-  { value: 'southeastasia', label: 'Southeast Asia' },
-  { value: 'australiaeast', label: 'Australia East' },
-] as const;
-
-export const DEFAULT_AZURE_REGION = 'eastus';
-
 export const STORAGE_KEY = 'lingua-quiz-speak';

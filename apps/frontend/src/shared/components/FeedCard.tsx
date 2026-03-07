@@ -2,8 +2,8 @@ import type { ReactNode } from 'react';
 import { cn } from '@shared/utils';
 
 interface FeedCardProps {
-  title?: string | null;
-  subtitle?: string | null;
+  title?: string;
+  subtitle?: string;
   dense?: boolean;
   className?: string;
   headerAction?: ReactNode;
@@ -11,8 +11,8 @@ interface FeedCardProps {
 }
 
 export function FeedCard({
-  title = null,
-  subtitle = null,
+  title,
+  subtitle,
   dense = false,
   className,
   headerAction,
@@ -20,12 +20,12 @@ export function FeedCard({
 }: FeedCardProps): React.JSX.Element {
   return (
     <article className={cn('bg-card border border-border rounded-lg shadow-sm', dense ? 'p-4' : 'p-6', className)}>
-      {(title !== null || subtitle !== null || headerAction !== undefined) && (
+      {(title !== undefined || subtitle !== undefined || headerAction !== undefined) && (
         <header className="mb-3">
           <div className="flex justify-between items-center gap-4">
             <div>
-              {title !== null && <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>}
-              {subtitle !== null && <p className="text-sm text-muted-foreground">{subtitle}</p>}
+              {title !== undefined && <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>}
+              {subtitle !== undefined && <p className="text-sm text-muted-foreground">{subtitle}</p>}
             </div>
             {headerAction !== undefined && <div className="shrink-0">{headerAction}</div>}
           </div>

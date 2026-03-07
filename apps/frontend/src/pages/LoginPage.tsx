@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { LogIn, Loader2, Languages } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { Button, Input, Label } from '@shared/ui';
-import { FeedCard, PasswordInput } from '@shared/components';
+import { AppShell, FeedCard, PasswordInput } from '@shared/components';
 import { cn, extractErrorMessage } from '@shared/utils';
 
 export function LoginPage(): React.JSX.Element {
@@ -37,11 +37,8 @@ export function LoginPage(): React.JSX.Element {
   };
 
   return (
-    <main
-      id="main-content"
-      className="w-full max-w-[28rem] mx-auto flex flex-col gap-4 pt-[calc(1rem+env(safe-area-inset-top,0px))] pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pl-[calc(1rem+env(safe-area-inset-left,0px))] pr-[calc(1rem+env(safe-area-inset-right,0px))] md:pt-16 md:pb-12 md:px-6 md:gap-6"
-    >
-      <FeedCard dense title={null}>
+    <AppShell maxWidth="md">
+      <FeedCard dense>
         <header className="flex items-center justify-center gap-2">
           <h1 className="m-0 text-primary text-xl flex items-center gap-2">
             <Languages size={28} /> LinguaQuiz
@@ -49,7 +46,7 @@ export function LoginPage(): React.JSX.Element {
         </header>
       </FeedCard>
 
-      <FeedCard title={null}>
+      <FeedCard>
         <h2 id="login-title" data-testid="login-title" className="text-xl font-semibold text-center mb-2">
           {t('auth.signIn')}
         </h2>
@@ -125,6 +122,6 @@ export function LoginPage(): React.JSX.Element {
           </button>
         </p>
       </FeedCard>
-    </main>
+    </AppShell>
   );
 }

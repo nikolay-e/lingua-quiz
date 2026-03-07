@@ -1,10 +1,9 @@
-import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Languages, GraduationCap, BookOpen, Play } from 'lucide-react';
 import type { WordList } from '@api/types';
 import { Button, Select, Skeleton } from '@shared/ui';
 import { cn } from '@shared/utils';
-import { parseListName, type ParsedList } from '../utils';
+import { useLanguageLevelSelection } from '../hooks';
 
 interface LanguageLevelSelectorProps {
   wordLists: WordList[];
@@ -19,64 +18,25 @@ export function LanguageLevelSelector({
 }: LanguageLevelSelectorProps): React.JSX.Element {
   const { t } = useTranslation();
 
-  const [selectedKnown, setSelectedKnown] = useState<string | undefined>(undefined);
-  const [selectedLearning, setSelectedLearning] = useState<string | undefined>(undefined);
-  const [selectedLevel, setSelectedLevel] = useState<string | undefined>(undefined);
-
-  const parsedLists = useMemo(
-    () => wordLists.map(parseListName).filter((p): p is ParsedList => p !== null),
-    [wordLists],
-  );
-
-  const knownLanguages = useMemo(() => [...new Set(parsedLists.map((p) => p.target))].sort(), [parsedLists]);
-
-  const learningLanguages = useMemo(() => {
-    if (selectedKnown === undefined) return [];
-    return [...new Set(parsedLists.filter((p) => p.target === selectedKnown).map((p) => p.source))].sort();
-  }, [parsedLists, selectedKnown]);
-
-  const availableLevels = useMemo(() => {
-    if (selectedKnown === undefined || selectedLearning === undefined) return [];
-    return parsedLists
-      .filter((p) => p.target === selectedKnown && p.source === selectedLearning)
-      .map((p) => ({ level: p.level, wordCount: p.wordCount }))
-      .sort((a, b) => a.level.localeCompare(b.level));
-  }, [parsedLists, selectedKnown, selectedLearning]);
-
-  const selectedList = useMemo(() => {
-    if (selectedKnown === undefined || selectedLearning === undefined || selectedLevel === undefined) return null;
-    return parsedLists.find(
-      (p) => p.target === selectedKnown && p.source === selectedLearning && p.level === selectedLevel,
-    );
-  }, [parsedLists, selectedKnown, selectedLearning, selectedLevel]);
-
-  const handleKnownChange = (value: string) => {
-    setSelectedKnown(value);
-    setSelectedLearning(undefined);
-    setSelectedLevel(undefined);
-  };
-
-  const handleLearningChange = (value: string) => {
-    setSelectedLearning(value);
-    setSelectedLevel(undefined);
-  };
+  const {
+    selectedKnown,
+    selectedLearning,
+    selectedLevel,
+    selectedList,
+    knownOptions,
+    learningOptions,
+    levelOptions,
+    handleKnownChange,
+    handleLearningChange,
+    handleLevelChange,
+    canStart,
+  } = useLanguageLevelSelection(wordLists);
 
   const handleStart = () => {
-    if (selectedList !== null && selectedList !== undefined) {
+    if (selectedList !== null) {
       onSelect(selectedList.listName);
     }
   };
-
-  const formatLanguage = (code: string): string => t(`languages.${code}`);
-  const formatLevel = (level: string): string => t(`levels.${level}`);
-
-  const knownOptions = knownLanguages.map((lang) => ({ value: lang, label: formatLanguage(lang) }));
-  const learningOptions = learningLanguages.map((lang) => ({ value: lang, label: formatLanguage(lang) }));
-  const levelOptions = availableLevels.map(({ level, wordCount }) => ({
-    value: level,
-    label: formatLevel(level),
-    sublabel: `${wordCount} ${t('quiz.words')}`,
-  }));
 
   if (loading) {
     return (
@@ -140,7 +100,7 @@ export function LanguageLevelSelector({
           </div>
           <Select
             value={selectedLevel}
-            onValueChange={setSelectedLevel}
+            onValueChange={handleLevelChange}
             options={levelOptions}
             placeholder={t('quiz.selectLevel')}
             disabled={selectedLearning === undefined}
@@ -148,7 +108,7 @@ export function LanguageLevelSelector({
         </div>
       </div>
 
-      {selectedList !== null && selectedList !== undefined && (
+      {canStart && (
         <div className="pt-4">
           <Button size="default" className="w-full" onClick={handleStart}>
             <Play size={18} />

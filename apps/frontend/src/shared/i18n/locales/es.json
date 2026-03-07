@@ -3,7 +3,13 @@
     "backToQuiz": "Volver al quiz",
     "adminPanel": "Panel de admin",
     "back": "Atrás",
-    "backToMenu": "Volver al menú"
+    "backToMenu": "Volver al menú",
+    "home": "Inicio",
+    "quiz": "Quiz",
+    "speak": "Hablar",
+    "settings": "Ajustes",
+    "admin": "Admin",
+    "navigation": "Navegación"
   },
   "auth": {
     "signIn": "Iniciar sesión",
@@ -195,6 +201,26 @@
     "totalItems": "Total de elementos",
     "activeItems": "Elementos activos",
     "inactiveItems": "Elementos inactivos"
+  },
+  "speak": {
+    "title": "Hablar",
+    "subtitle": "Practica tu pronunciación",
+    "loginRequired": "Inicia sesión para usar la evaluación de pronunciación. Se usan puntuaciones simuladas.",
+    "textLabel": "Texto para practicar",
+    "textPlaceholder": "Ingresa texto para practicar...",
+    "randomPhrase": "Frase aleatoria",
+    "analyzing": "Analizando pronunciación...",
+    "hint": "Espacio: grabar/parar"
+  },
+  "home": {
+    "learnWords": "Aprender palabras",
+    "learnWordsDesc": "Domina vocabulario con repetición espaciada",
+    "practicePronunciation": "Practicar pronunciación",
+    "practicePronunciationDesc": "Mejora tus habilidades de habla",
+    "chooseCourse": "Elegir curso",
+    "streakDays": "Días seguidos",
+    "accuracy": "Precisión",
+    "attempts": "Intentos"
   },
   "common": {
     "cancel": "Cancelar",

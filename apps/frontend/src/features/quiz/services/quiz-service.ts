@@ -1,4 +1,5 @@
 import api, { type WordList, type Translation, type UserProgress } from '@api';
+import { OpenAPI } from '@lingua-quiz/api-client';
 import { QuizManager, type QuizQuestion, type SubmissionResult, type RevealResult } from '@lingua-quiz/core';
 import { STORAGE_KEYS, safeStorage, logger, clearTimer, extractErrorMessage } from '@shared/utils';
 
@@ -253,9 +254,8 @@ export class QuizService {
     }, this.DEBOUNCE_DELAY);
   }
 
-  async bulkSaveProgress(token: string, manager: QuizManager | null): Promise<void> {
-    if (this.saveInProgress) return;
-    if (manager === null || this.progressMap.size === 0) return;
+  private async saveProgressItems(token: string): Promise<void> {
+    if (this.saveInProgress || this.progressMap.size === 0) return;
 
     this.saveInProgress = true;
 
@@ -290,6 +290,11 @@ export class QuizService {
     } finally {
       this.saveInProgress = false;
     }
+  }
+
+  async bulkSaveProgress(token: string, manager: QuizManager | null): Promise<void> {
+    if (manager === null || this.progressMap.size === 0) return;
+    await this.saveProgressItems(token);
   }
 
   cleanup(): void {
@@ -342,7 +347,7 @@ export class QuizService {
       }
 
       if (this.progressMap.size > 0) {
-        await this.bulkSaveProgress(token, null).catch((error) => {
+        await this.saveProgressItems(token).catch((error) => {
           logger.warn('Failed to restore pending progress from bulk save', { error });
           this.persistPendingToStorage();
         });
@@ -357,10 +362,10 @@ export class QuizService {
     this.persistPendingToStorage();
     this.debounceTimer = clearTimer(this.debounceTimer);
 
-    if (manager !== null && this.progressMap.size > 0) {
-      if (isUnloading && typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
-        this.sendBeaconSave(token);
-      } else {
+    if (this.progressMap.size > 0) {
+      if (isUnloading) {
+        this.keepaliveSave(token);
+      } else if (manager !== null) {
         this.bulkSaveProgress(token, manager).catch((error) => {
           logger.warn('Failed to flush progress immediately', { error });
           this.persistPendingToStorage();
@@ -369,7 +374,7 @@ export class QuizService {
     }
   }
 
-  private sendBeaconSave(_token: string): void {
+  private keepaliveSave(token: string): void {
     const items = Array.from(this.progressMap.entries()).map(([vocabularyItemId, progress]) => ({
       vocabularyItemId,
       level: progress.level,
@@ -380,19 +385,14 @@ export class QuizService {
 
     if (items.length === 0) return;
 
-    const apiBaseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-    const url = `${apiBaseUrl}/api/user/progress/bulk`;
-    const payload = JSON.stringify({ items });
+    const url = `${OpenAPI.BASE}/api/user/progress/bulk`;
 
-    const blob = new Blob([payload], { type: 'application/json' });
-
-    const success = navigator.sendBeacon(url, blob);
-    if (success) {
-      logger.info(`Sent ${items.length} progress items via sendBeacon`);
-      this.progressMap.clear();
-    } else {
-      logger.warn('sendBeacon failed, progress will be restored from storage on next session');
-    }
+    void fetch(url, {
+      method: 'POST',
+      keepalive: true,
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ items }),
+    });
   }
 }
 
