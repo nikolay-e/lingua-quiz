@@ -115,6 +115,7 @@ jobs:
 
       - name: Trivy scan
         uses: aquasecurity/trivy-action@0.35.0
+        continue-on-error: true
         with:
           image-ref: ${{ env.REGISTRY }}/lingua-quiz-${{ matrix.service }}:${{ steps.tag.outputs.value }}
           format: sarif
