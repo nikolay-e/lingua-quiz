@@ -72,7 +72,7 @@ class AdminPage(BasePage):
         difficulty: str = "A1",
         list_name: str = "test-list",
     ):
-        dialog = self.page.locator(".fixed.inset-0").last
+        dialog = self.page.locator("dialog[open]")
         expect(dialog).to_be_visible(timeout=3000)
         inputs = dialog.locator("input")
 
@@ -126,11 +126,11 @@ class AdminPage(BasePage):
         return self
 
     def click_save_in_dialog(self):
-        self.page.locator('.fixed.inset-0 button:has-text("Save")').click()
+        self.page.locator('dialog[open] button:has-text("Save")').click()
         return self
 
     def click_cancel_in_dialog(self):
-        self.page.locator('.fixed.inset-0 button:has-text("Cancel")').click()
+        self.page.locator('dialog[open] button:has-text("Cancel")').click()
         return self
 
     def create_vocabulary_item(self, source_text: str, target_text: str, **kwargs):
@@ -144,8 +144,8 @@ class AdminPage(BasePage):
         rows.nth(row_index).locator('button[aria-label*="Edit"]').click()
         return self
 
-    def fill_edit_dialog(self, source_text: str = None, target_text: str = None):
-        dialog = self.page.locator(".fixed.inset-0").last
+    def fill_edit_dialog(self, source_text: str | None = None, target_text: str | None = None):
+        dialog = self.page.locator("dialog[open]")
         expect(dialog).to_be_visible(timeout=3000)
         inputs = dialog.locator("input")
 
