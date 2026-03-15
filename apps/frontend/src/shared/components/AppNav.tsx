@@ -51,17 +51,19 @@ export function AppNav({ username, isAdmin }: AppNavProps): React.JSX.Element {
           {isAdmin && (
             <Link
               to="/admin"
+              role="button"
               className={cn(
                 'flex items-center gap-1.5 text-sm no-underline transition-colors',
                 isActive('/admin') ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
               )}
             >
               <Shield size={16} />
-              {t('nav.admin')}
+              {t('nav.adminPanel')}
             </Link>
           )}
           <Link
             to="/settings"
+            role="button"
             className={cn(
               'flex items-center transition-colors',
               isActive('/settings') ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
@@ -92,6 +94,7 @@ export function AppNav({ username, isAdmin }: AppNavProps): React.JSX.Element {
           {isAdmin && (
             <Link
               to="/admin"
+              role="button"
               className={cn(
                 'flex flex-col items-center justify-center gap-0.5 flex-1 h-full no-underline transition-colors',
                 isActive('/admin') ? 'text-primary' : 'text-muted-foreground',
@@ -99,11 +102,12 @@ export function AppNav({ username, isAdmin }: AppNavProps): React.JSX.Element {
               aria-current={isActive('/admin') ? 'page' : undefined}
             >
               <Shield size={20} />
-              <span className="text-[10px] leading-tight">{t('nav.admin')}</span>
+              <span className="text-[10px] leading-tight">{t('nav.adminPanel')}</span>
             </Link>
           )}
           <Link
             to="/settings"
+            role="button"
             className={cn(
               'flex flex-col items-center justify-center gap-0.5 flex-1 h-full no-underline transition-colors',
               isActive('/settings') ? 'text-primary' : 'text-muted-foreground',
