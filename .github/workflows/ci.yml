@@ -109,8 +109,8 @@ jobs:
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
             org.opencontainers.image.revision=${{ steps.tag.outputs.commit_sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=ghcr.io/nikolay-e/lingua-quiz/lingua-quiz-${{ matrix.service }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/nikolay-e/lingua-quiz/lingua-quiz-${{ matrix.service }}:buildcache,mode=max,image-manifest=true
 
       - name: Trivy scan
         uses: aquasecurity/trivy-action@0.35.0
