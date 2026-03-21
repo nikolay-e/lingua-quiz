@@ -438,12 +438,7 @@ export class QuizService {
   private keepaliveSave(token: string): void {
     const items = Array.from(this.progressMap.entries()).map(([vocabularyItemId, progress]) => ({
       vocabularyItemId,
-      level: progress.level,
-      queuePosition: progress.queuePosition,
-      correctCount: progress.correctCount,
-      incorrectCount: progress.incorrectCount,
-      consecutiveCorrect: progress.consecutiveCorrect,
-      recentHistory: progress.recentHistory,
+      ...this.sanitizeProgressItem(progress),
     }));
 
     if (items.length === 0) return;

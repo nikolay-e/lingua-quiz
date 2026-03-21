@@ -122,6 +122,10 @@ async def get_version() -> VersionResponse:
     return VersionResponse(version=APP_VERSION)
 
 
+def _sanitize_validation_errors(errors: list[dict]) -> list[dict]:
+    return [{"loc": e.get("loc"), "type": e.get("type"), "msg": e.get("msg")} for e in errors]
+
+
 @app.exception_handler(RequestValidationError)
 async def request_validation_error_handler(request: Request, exc: RequestValidationError):
     logger.warning(
@@ -129,7 +133,7 @@ async def request_validation_error_handler(request: Request, exc: RequestValidat
         extra={
             "path": request.url.path,
             "method": request.method,
-            "errors": exc.errors(),
+            "errors": _sanitize_validation_errors(exc.errors()),
         },
     )
     return JSONResponse(
@@ -144,7 +148,8 @@ async def validation_exception_handler(request: Request, exc: ValidationError):
         "Validation error",
         extra={
             "path": request.url.path,
-            "errors": exc.errors(),
+            "method": request.method,
+            "errors": _sanitize_validation_errors(exc.errors()),
         },
     )
     return JSONResponse(
