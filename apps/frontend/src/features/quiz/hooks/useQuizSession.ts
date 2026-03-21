@@ -13,6 +13,7 @@ type FeedbackState = SubmissionResult | QuizFeedback | RevealResult | null;
 
 interface QuizSessionState {
   userAnswer: string;
+  submittedAnswer: string;
   feedback: FeedbackState;
   usageExamples: { source: string; target: string } | null;
   isSubmitting: boolean;
@@ -72,12 +73,14 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
   const [levelChangeTo, setLevelChangeTo] = useState<string | undefined>(undefined);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [lastSelectedQuiz, setLastSelectedQuiz] = useState<string | null>(null);
+  const [submittedAnswer, setSubmittedAnswer] = useState('');
   const [lastFailedAnswer, setLastFailedAnswer] = useState<string | null>(null);
   const [awaitingNextInput, setAwaitingNextInput] = useState(false);
 
   const resetQuizSession = useCallback((clearAnswer = true) => {
     setFeedback(null);
     if (clearAnswer) setUserAnswer('');
+    setSubmittedAnswer('');
     setQuestionForFeedback(null);
     setUsageExamples(null);
     setAwaitingNextInput(false);
@@ -97,9 +100,10 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
   );
 
   const handleSkip = useCallback((): void => {
-    if (currentQuestion === null || isSubmitting) return;
+    if (currentQuestion === null || isSubmitting || token === null) return;
     setQuestionForFeedback(currentQuestion);
-    const result = revealAnswer();
+    setSubmittedAnswer('');
+    const result = revealAnswer(token);
     if (result !== null) {
       setFeedback(result);
       setAwaitingNextInput(true);
@@ -107,11 +111,21 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
         source: result.translation.sourceUsageExample ?? '',
         target: result.translation.targetUsageExample ?? '',
       });
+
+      if (result.levelChange !== undefined) {
+        const fromNum = parseInt(result.levelChange.from.replace('LEVEL_', ''));
+        const toNum = parseInt(result.levelChange.to.replace('LEVEL_', ''));
+        setIsLevelUp(toNum > fromNum);
+        setLevelChangeFrom(result.levelChange.from);
+        setLevelChangeTo(result.levelChange.to);
+        setShowLevelAnimation(true);
+      }
+
       setUserAnswer('');
       getNextQuestion();
       answerInputRef.current?.focus();
     }
-  }, [currentQuestion, isSubmitting, revealAnswer, getNextQuestion, answerInputRef]);
+  }, [currentQuestion, isSubmitting, token, revealAnswer, getNextQuestion, answerInputRef]);
 
   const handleQuizSelect = useCallback(
     async (quiz: string): Promise<void> => {
@@ -160,6 +174,7 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
     setIsSubmitting(true);
     setQuestionForFeedback(currentQuestion);
     setLastFailedAnswer(null);
+    setSubmittedAnswer(userAnswer);
 
     try {
       const result = await submitAnswer(token, userAnswer);
@@ -247,6 +262,7 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
 
   return {
     userAnswer,
+    submittedAnswer,
     feedback,
     usageExamples,
     isSubmitting,

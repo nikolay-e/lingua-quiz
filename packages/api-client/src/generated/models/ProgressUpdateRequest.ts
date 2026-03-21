@@ -8,4 +8,6 @@ export type ProgressUpdateRequest = {
   queuePosition: number;
   correctCount: number;
   incorrectCount: number;
+  consecutiveCorrect: number;
+  recentHistory: boolean[];
 };

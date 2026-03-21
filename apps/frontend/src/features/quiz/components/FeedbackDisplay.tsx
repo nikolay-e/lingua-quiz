@@ -9,12 +9,14 @@ import type { QuizFeedback } from '@api/types';
 interface FeedbackDisplayProps {
   feedback?: SubmissionResult | QuizFeedback | RevealResult | null;
   questionForFeedback?: QuizQuestion | null;
+  submittedAnswer?: string;
   onRetry?: () => void;
 }
 
 export function FeedbackDisplay({
   feedback = null,
   questionForFeedback = null,
+  submittedAnswer,
   onRetry,
 }: FeedbackDisplayProps): React.JSX.Element | null {
   const { t } = useTranslation();
@@ -58,7 +60,14 @@ export function FeedbackDisplay({
           {!isRevealResult && isSuccess && <Check size={18} className="animate-icon-pop" />}
           {!isRevealResult && !isSuccess && <X size={18} />}
         </span>
-        <span>{feedbackMessage}</span>
+        {!isRevealResult && !isSuccess && submittedAnswer !== undefined && submittedAnswer !== '' ? (
+          <div className="flex flex-col items-center gap-1">
+            <span className="line-through opacity-60">{submittedAnswer}</span>
+            <span>{feedbackMessage}</span>
+          </div>
+        ) : (
+          <span>{feedbackMessage}</span>
+        )}
       </div>
       {showRetry && (
         <Button variant="outline" onClick={onRetry} className="w-full">

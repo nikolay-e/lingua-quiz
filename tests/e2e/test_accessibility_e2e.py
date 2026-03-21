@@ -34,8 +34,8 @@ class TestKeyboardNavigation:
         answer_input.focus()
 
         page.keyboard.press("Tab")
-        show_answer_button = page.get_by_role("button", name="Show Answer")
-        expect(show_answer_button).to_be_focused()
+        i_dont_know_button = page.get_by_role("button", name="I Don't Know")
+        expect(i_dont_know_button).to_be_focused()
 
         page.keyboard.press("Tab")
         check_button = page.get_by_role("button", name="Check Answer")
@@ -83,8 +83,8 @@ class TestARIAAttributes:
         check_button = page.get_by_role("button", name="Check Answer")
         expect(check_button).to_be_visible()
 
-        show_button = page.get_by_role("button", name="Show Answer")
-        expect(show_button).to_be_visible()
+        i_dont_know_button = page.get_by_role("button", name="I Don't Know")
+        expect(i_dont_know_button).to_be_visible()
 
     def test_form_fields_have_labels(self, page: Page) -> None:
         page.goto(FRONTEND_URL)

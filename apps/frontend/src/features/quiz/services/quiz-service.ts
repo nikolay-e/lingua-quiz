@@ -10,6 +10,8 @@ export interface ProgressData {
   queuePosition: number;
   correctCount: number;
   incorrectCount: number;
+  consecutiveCorrect: number;
+  recentHistory: boolean[];
   targetLanguage: string;
 }
 
@@ -103,6 +105,7 @@ export class QuizService {
         correctCount: number;
         incorrectCount: number;
         consecutiveCorrect: number;
+        recentHistory: boolean[];
         lastPracticed: string | null;
       }
 
@@ -115,6 +118,7 @@ export class QuizService {
             correctCount: p.correctCount,
             incorrectCount: p.incorrectCount,
             consecutiveCorrect: p.consecutiveCorrect,
+            recentHistory: p.recentHistory ?? [],
             lastPracticed: p.lastPracticed,
           },
         ]),
@@ -149,7 +153,7 @@ export class QuizService {
           level: `LEVEL_${level}` as 'LEVEL_0' | 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4' | 'LEVEL_5',
           queuePosition,
           consecutiveCorrect: userProg?.consecutiveCorrect ?? 0,
-          recentHistory: [] as boolean[],
+          recentHistory: userProg?.recentHistory ?? ([] as boolean[]),
           lastAskedAt: userProg?.lastPracticed ?? undefined,
         };
       });
@@ -164,6 +168,8 @@ export class QuizService {
             queuePosition: prog.queuePosition,
             correctCount: prog.correctCount,
             incorrectCount: prog.incorrectCount,
+            consecutiveCorrect: prog.consecutiveCorrect,
+            recentHistory: prog.recentHistory,
             targetLanguage: translation.targetLanguage,
           });
         }
@@ -181,8 +187,44 @@ export class QuizService {
     });
   }
 
-  revealAnswer(manager: QuizManager, question: QuizQuestion): RevealResult | null {
-    return manager.revealAnswer(question.translationId);
+  revealAnswer(manager: QuizManager, question: QuizQuestion, token: string): RevealResult | null {
+    const result = manager.revealAnswer(question.translationId);
+
+    const translation = manager.getTranslation(question.translationId);
+    if (translation === undefined) {
+      return result;
+    }
+
+    const quizState = manager.getState();
+    const currentProgress = quizState.progress.find((p) => p.translationId === question.translationId);
+    if (currentProgress === undefined) {
+      return result;
+    }
+
+    const level = parseInt(currentProgress.level.replace('LEVEL_', ''));
+    const existing = this.progressMap.get(translation.id) ?? {
+      correctCount: 0,
+      incorrectCount: 0,
+      level: 0,
+      queuePosition: 0,
+      consecutiveCorrect: 0,
+      recentHistory: [] as boolean[],
+      targetLanguage: translation.targetLanguage,
+    };
+
+    this.progressMap.set(translation.id, {
+      level,
+      queuePosition: currentProgress.queuePosition ?? 0,
+      correctCount: existing.correctCount,
+      incorrectCount: existing.incorrectCount + 1,
+      consecutiveCorrect: currentProgress.consecutiveCorrect,
+      recentHistory: currentProgress.recentHistory,
+      targetLanguage: translation.targetLanguage,
+    });
+
+    this.debouncedSave(token, manager);
+
+    return result;
   }
 
   submitAnswer(manager: QuizManager, question: QuizQuestion, answer: string, token: string): SubmissionResult | null {
@@ -208,6 +250,8 @@ export class QuizService {
       incorrectCount: 0,
       level: 0,
       queuePosition: 0,
+      consecutiveCorrect: 0,
+      recentHistory: [] as boolean[],
       targetLanguage: translation.targetLanguage,
     };
 
@@ -216,6 +260,8 @@ export class QuizService {
       queuePosition: currentProgress.queuePosition ?? 0,
       correctCount: existing.correctCount + (feedback.isCorrect ? 1 : 0),
       incorrectCount: existing.incorrectCount + (feedback.isCorrect ? 0 : 1),
+      consecutiveCorrect: currentProgress.consecutiveCorrect,
+      recentHistory: currentProgress.recentHistory,
       targetLanguage: translation.targetLanguage,
     });
 
@@ -271,6 +317,8 @@ export class QuizService {
         queuePosition: progress.queuePosition,
         correctCount: progress.correctCount,
         incorrectCount: progress.incorrectCount,
+        consecutiveCorrect: progress.consecutiveCorrect,
+        recentHistory: progress.recentHistory,
       }));
 
       if (items.length > 0) {
@@ -341,6 +389,8 @@ export class QuizService {
             queuePosition: item.queuePosition,
             correctCount: item.correctCount,
             incorrectCount: item.incorrectCount,
+            consecutiveCorrect: item.consecutiveCorrect ?? 0,
+            recentHistory: item.recentHistory ?? [],
             targetLanguage: item.targetLanguage,
           });
         }
@@ -381,6 +431,8 @@ export class QuizService {
       queuePosition: progress.queuePosition,
       correctCount: progress.correctCount,
       incorrectCount: progress.incorrectCount,
+      consecutiveCorrect: progress.consecutiveCorrect,
+      recentHistory: progress.recentHistory,
     }));
 
     if (items.length === 0) return;

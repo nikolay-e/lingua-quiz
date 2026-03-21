@@ -87,6 +87,8 @@ const api = {
       queuePosition: number;
       correctCount: number;
       incorrectCount: number;
+      consecutiveCorrect: number;
+      recentHistory: boolean[];
     },
   ): Promise<Record<string, string>> =>
     executeApiCall(() => ProgressService.saveUserProgressApiUserProgressPost(payload), { token }),
@@ -99,6 +101,8 @@ const api = {
       queuePosition: number;
       correctCount: number;
       incorrectCount: number;
+      consecutiveCorrect: number;
+      recentHistory: boolean[];
     }>,
   ): Promise<void> => fetchWithAuth('/api/user/progress/bulk', { method: 'POST', body: { items }, token }),
 

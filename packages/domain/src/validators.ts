@@ -70,6 +70,7 @@ const schemas: Record<string, JSONSchema7> = {
       'incorrectCount',
       'consecutiveCorrect',
       'lastPracticed',
+      'recentHistory',
     ],
     properties: {
       vocabularyItemId: { type: 'string' },
@@ -82,17 +83,28 @@ const schemas: Record<string, JSONSchema7> = {
       incorrectCount: { type: 'integer' },
       consecutiveCorrect: { type: 'integer' },
       lastPracticed: { anyOf: [{ type: 'string' }, { type: 'null' }] },
+      recentHistory: { type: 'array', items: { type: 'boolean' } },
     },
   },
   ProgressUpdateRequest: {
     type: 'object',
-    required: ['vocabularyItemId', 'level', 'queuePosition', 'correctCount', 'incorrectCount'],
+    required: [
+      'vocabularyItemId',
+      'level',
+      'queuePosition',
+      'correctCount',
+      'incorrectCount',
+      'consecutiveCorrect',
+      'recentHistory',
+    ],
     properties: {
       vocabularyItemId: { type: 'string' },
       level: { type: 'integer', minimum: 0, maximum: 5 },
       queuePosition: { type: 'integer', minimum: 0 },
       correctCount: { type: 'integer', minimum: 0 },
       incorrectCount: { type: 'integer', minimum: 0 },
+      consecutiveCorrect: { type: 'integer', minimum: 0 },
+      recentHistory: { type: 'array', items: { type: 'boolean' }, maxItems: 20 },
     },
   },
   ContentVersionResponse: {

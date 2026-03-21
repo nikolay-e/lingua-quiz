@@ -13,4 +13,5 @@ export type UserProgressResponse = {
   incorrectCount: number;
   consecutiveCorrect: number;
   lastPracticed: string | null;
+  recentHistory: boolean[];
 };

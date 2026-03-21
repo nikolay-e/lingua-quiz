@@ -1,6 +1,6 @@
 import { useRef, useImperativeHandle, forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Send, Eye, Loader2 } from 'lucide-react';
+import { Send, CircleHelp, Loader2 } from 'lucide-react';
 import { Button, Input } from '@shared/ui';
 
 interface AnswerInputProps {
@@ -61,8 +61,8 @@ export const AnswerInput = forwardRef<AnswerInputRef, AnswerInputProps>(
             disabled={onSkip === undefined || isLoading}
             className="flex-1"
           >
-            <Eye size={16} />
-            <span>{t('quiz.showAnswer')}</span>
+            <CircleHelp size={16} />
+            <span>{t('quiz.iDontKnow')}</span>
           </Button>
           <Button type="submit" variant="default" disabled={disabled || isLoading} className="flex-1">
             {isLoading ? (

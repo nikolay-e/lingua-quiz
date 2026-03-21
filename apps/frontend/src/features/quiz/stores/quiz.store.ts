@@ -18,7 +18,7 @@ interface QuizActions {
   startQuiz: (token: string, quizName: string) => Promise<void>;
   getNextQuestion: () => QuizQuestion | null;
   submitAnswer: (token: string, answer: string) => Promise<SubmissionResult | null>;
-  revealAnswer: () => RevealResult | null;
+  revealAnswer: (token: string) => RevealResult | null;
   setLevel: (
     level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4',
     token?: string,
@@ -113,11 +113,11 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
     }
   },
 
-  revealAnswer: () => {
+  revealAnswer: (token: string) => {
     const state = get();
     if (state.quizManager === null || state.currentQuestion === null) return null;
 
-    return quizService.revealAnswer(state.quizManager, state.currentQuestion);
+    return quizService.revealAnswer(state.quizManager, state.currentQuestion, token);
   },
 
   setLevel: async (level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4', token?: string) => {

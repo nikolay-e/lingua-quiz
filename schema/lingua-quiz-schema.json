@@ -991,6 +991,19 @@
             "type": "integer",
             "minimum": 0.0,
             "title": "Incorrectcount"
+          },
+          "consecutiveCorrect": {
+            "type": "integer",
+            "minimum": 0,
+            "title": "Consecutivecorrect"
+          },
+          "recentHistory": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "maxItems": 20,
+            "title": "Recenthistory"
           }
         },
         "type": "object",
@@ -999,7 +1012,9 @@
           "level",
           "queuePosition",
           "correctCount",
-          "incorrectCount"
+          "incorrectCount",
+          "consecutiveCorrect",
+          "recentHistory"
         ],
         "title": "ProgressUpdateRequest"
       },
@@ -1195,6 +1210,13 @@
               }
             ],
             "title": "Lastpracticed"
+          },
+          "recentHistory": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "title": "Recenthistory"
           }
         },
         "type": "object",
@@ -1208,7 +1230,8 @@
           "correctCount",
           "incorrectCount",
           "consecutiveCorrect",
-          "lastPracticed"
+          "lastPracticed",
+          "recentHistory"
         ],
         "title": "UserProgressResponse"
       },

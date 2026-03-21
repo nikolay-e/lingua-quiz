@@ -42,6 +42,7 @@ export function QuizPage(): React.JSX.Element {
 
   const {
     userAnswer,
+    submittedAnswer,
     feedback,
     usageExamples,
     isSubmitting,
@@ -98,9 +99,14 @@ export function QuizPage(): React.JSX.Element {
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent): void => {
       if (token !== null && hasPendingChanges()) {
-        flushImmediately(token, true);
         e.preventDefault();
         e.returnValue = '';
+      }
+    };
+
+    const handlePageHide = (): void => {
+      if (token !== null && hasPendingChanges()) {
+        flushImmediately(token, true);
       }
     };
 
@@ -119,10 +125,12 @@ export function QuizPage(): React.JSX.Element {
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('pagehide', handlePageHide);
     document.addEventListener('visibilitychange', visibilityHandler);
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('pagehide', handlePageHide);
       document.removeEventListener('visibilitychange', visibilityHandler);
     };
   }, [token, quizManager, selectedQuiz, hasPendingChanges, flushImmediately]);
@@ -189,6 +197,7 @@ export function QuizPage(): React.JSX.Element {
                       <FeedbackDisplay
                         feedback={feedback}
                         questionForFeedback={questionForFeedback}
+                        submittedAnswer={submittedAnswer}
                         onRetry={retryLastOperation}
                       />
                     )}

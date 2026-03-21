@@ -28,6 +28,7 @@ def get_user_progress(
     progress_data = query_db(
         """SELECT vocabulary_item_id, level, queue_position,
                   correct_count, incorrect_count, consecutive_correct,
+                  COALESCE(recent_history, '{}') as recent_history,
                   TO_CHAR(last_practiced_at, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') as last_practiced
            FROM user_progress
            WHERE user_id = %s
@@ -94,14 +95,16 @@ def save_user_progress(
     )
     execute_write_transaction(
         """INSERT INTO user_progress
-               (user_id, vocabulary_item_id, level, queue_position, correct_count, incorrect_count, last_practiced_at)
-               VALUES (%s, %s, %s, %s, %s, %s, NOW())
+               (user_id, vocabulary_item_id, level, queue_position, correct_count, incorrect_count, consecutive_correct, recent_history, last_practiced_at)
+               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, NOW())
                ON CONFLICT (user_id, vocabulary_item_id)
                DO UPDATE SET
                    level = EXCLUDED.level,
                    queue_position = EXCLUDED.queue_position,
                    correct_count = EXCLUDED.correct_count,
                    incorrect_count = EXCLUDED.incorrect_count,
+                   consecutive_correct = EXCLUDED.consecutive_correct,
+                   recent_history = EXCLUDED.recent_history,
                    last_practiced_at = EXCLUDED.last_practiced_at""",
         (
             current_user["user_id"],
@@ -110,6 +113,8 @@ def save_user_progress(
             progress_data.queue_position,
             progress_data.correct_count,
             progress_data.incorrect_count,
+            progress_data.consecutive_correct,
+            progress_data.recent_history,
         ),
     )
 
@@ -136,7 +141,7 @@ def save_bulk_progress(
     params = []
 
     for item in bulk_data.items:
-        values_placeholders.append("(%s, %s, %s, %s, %s, %s, NOW())")
+        values_placeholders.append("(%s, %s, %s, %s, %s, %s, %s, %s, NOW())")
         params.extend(
             [
                 current_user["user_id"],
@@ -145,12 +150,14 @@ def save_bulk_progress(
                 item.queue_position,
                 item.correct_count,
                 item.incorrect_count,
+                item.consecutive_correct,
+                item.recent_history,
             ]
         )
 
     query = f"""
         INSERT INTO user_progress
-        (user_id, vocabulary_item_id, level, queue_position, correct_count, incorrect_count, last_practiced_at)
+        (user_id, vocabulary_item_id, level, queue_position, correct_count, incorrect_count, consecutive_correct, recent_history, last_practiced_at)
         VALUES {", ".join(values_placeholders)}
         ON CONFLICT (user_id, vocabulary_item_id)
         DO UPDATE SET
@@ -158,6 +165,8 @@ def save_bulk_progress(
             queue_position = EXCLUDED.queue_position,
             correct_count = EXCLUDED.correct_count,
             incorrect_count = EXCLUDED.incorrect_count,
+            consecutive_correct = EXCLUDED.consecutive_correct,
+            recent_history = EXCLUDED.recent_history,
             last_practiced_at = EXCLUDED.last_practiced_at
     """  # nosec B608
 

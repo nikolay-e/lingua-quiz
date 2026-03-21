@@ -20,6 +20,8 @@ export interface ProgressUpdateRequest {
   queuePosition: number;
   correctCount: number;
   incorrectCount: number;
+  consecutiveCorrect: number;
+  recentHistory: boolean[];
 }
 /**
  * This interface was referenced by `DomainTypes`'s JSON-Schema
@@ -130,6 +132,7 @@ export interface UserProgressResponse {
   incorrectCount: number;
   consecutiveCorrect: number;
   lastPracticed: string | null;
+  recentHistory: boolean[];
 }
 /**
  * This interface was referenced by `DomainTypes`'s JSON-Schema

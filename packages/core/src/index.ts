@@ -6,7 +6,6 @@ import {
   MISTAKE_WINDOW,
   MAX_FOCUS_POOL_SIZE,
   MIN_HISTORY_FOR_DEGRADATION,
-  SLOW_RESPONSE_MS,
   BETWEEN_SESSION_DECAY_BASE,
   LEVEL_STABILITY_DAYS,
 } from './constants';
@@ -45,6 +44,10 @@ export interface SubmissionResult {
 export interface RevealResult {
   correctAnswerText: string;
   translation: Translation;
+  levelChange?: {
+    from: string;
+    to: string;
+  };
 }
 
 export interface QuizState {
@@ -211,17 +214,76 @@ export class QuizManager {
   };
 
   revealAnswer = (translationId: string): RevealResult => {
+    const p = this.stateManager.getProgress(translationId);
     const t = this.stateManager.getTranslation(translationId);
-    if (t === undefined) throw new Error('Translation not found');
+    if (t === undefined || p === undefined) throw new Error('Translation or progress not found');
 
     const direction = this.levelEngine.getDirection(this.currentLevel);
     const correctAnswerText = direction === 'normal' ? t.targetText : t.sourceText;
 
     this.submissionStartTime = null;
 
+    const recentHistory = [...p.recentHistory.slice(-this.opts.historySizeForDegradation + 1), false];
+    const consecutiveCorrect = 0;
+
+    const oldLevel = p.level;
+
+    const queuePosition = this.queueManager.updatePosition(
+      translationId,
+      p.level,
+      false,
+      0,
+      F,
+      this.opts.queuePositionIncrement,
+    );
+
+    this.stateManager.updateProgress(translationId, {
+      recentHistory,
+      consecutiveCorrect,
+      queuePosition,
+    });
+
+    const updatedProgress = this.stateManager.getProgress(translationId);
+    if (updatedProgress !== undefined) {
+      const newLevel = this.levelEngine.checkLevelProgression(
+        updatedProgress,
+        this.opts.correctAnswersToLevelUp,
+        this.opts.mistakesToLevelDown,
+        MIN_HISTORY_FOR_DEGRADATION,
+      );
+
+      if (newLevel !== null) {
+        const newQueuePosition = this.queueManager.moveWordToLevel(translationId, oldLevel, newLevel);
+        this.stateManager.updateProgress(translationId, {
+          level: newLevel,
+          queuePosition: newQueuePosition,
+          consecutiveCorrect: 0,
+          recentHistory: newLevel < oldLevel ? [] : updatedProgress.recentHistory,
+        });
+      }
+    }
+
+    const finalProgress = this.stateManager.getProgress(translationId);
+    const shouldExclude = finalProgress?.level === 'LEVEL_0';
+    const promotedWords = this.queueManager.replenishFocusPool(
+      this.opts.maxFocusWords,
+      shouldExclude ? translationId : undefined,
+    );
+
+    for (const promotedId of promotedWords) {
+      this.stateManager.updateProgress(promotedId, {
+        level: 'LEVEL_1',
+        queuePosition: this.queueManager.getQueues().LEVEL_1.indexOf(promotedId),
+      });
+    }
+
     return {
       correctAnswerText,
       translation: t,
+      levelChange:
+        finalProgress !== undefined && oldLevel !== finalProgress.level
+          ? { from: oldLevel, to: finalProgress.level }
+          : undefined,
     };
   };
 
@@ -237,11 +299,8 @@ export class QuizManager {
     const responseTimeMs = this.submissionStartTime !== null ? Date.now() - this.submissionStartTime : undefined;
     this.submissionStartTime = null;
 
-    const isSlowCorrect = isCorrect && responseTimeMs !== undefined && responseTimeMs > SLOW_RESPONSE_MS;
-
     const recentHistory = [...p.recentHistory.slice(-this.opts.historySizeForDegradation + 1), isCorrect];
-    const correctIncrement = isSlowCorrect ? 0 : 1;
-    const consecutiveCorrect = isCorrect ? p.consecutiveCorrect + correctIncrement : 0;
+    const consecutiveCorrect = isCorrect ? p.consecutiveCorrect + 1 : 0;
 
     const oldLevel = p.level;
 
@@ -249,7 +308,7 @@ export class QuizManager {
       translationId,
       p.level,
       isCorrect,
-      isSlowCorrect ? 1 : consecutiveCorrect,
+      consecutiveCorrect,
       F,
       this.opts.queuePositionIncrement,
     );

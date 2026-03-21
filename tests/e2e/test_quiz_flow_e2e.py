@@ -37,7 +37,7 @@ class TestQuizFlowE2E:
     def test_skip_answer(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
 
-        page.get_by_role("button", name="Show Answer").click()
+        page.get_by_role("button", name="I Don't Know").click()
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
 
     def test_back_to_menu(self, page: Page, test_user: AuthenticatedUser) -> None:
@@ -52,7 +52,7 @@ class TestQuizFlowE2E:
         question_text = page.locator(".question-text").text_content()
         assert question_text
 
-        page.get_by_role("button", name="Show Answer").click()
+        page.get_by_role("button", name="I Don't Know").click()
         _correct_answer = page.locator(".correct-answer, .feedback-container").text_content()
 
         # UI auto-advances when user starts typing next answer
@@ -148,8 +148,8 @@ class TestQuizListSelection:
         assert level_options.count() >= 1
 
 
-class TestRevealAnswerNoProgression:
-    def test_show_answer_does_not_degrade_word_levels(self, page: Page, test_user: AuthenticatedUser) -> None:
+class TestRevealAnswerBehavior:
+    def test_i_dont_know_counts_as_incorrect(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
 
         def get_level_counts() -> dict[str, int]:
@@ -170,44 +170,35 @@ class TestRevealAnswerNoProgression:
                         counts[level_id] = int(match.group(1)) if match else 0
             return counts
 
-        initial_counts = get_level_counts()
+        initial_level1 = get_level_counts().get("LEVEL_1", 0)
 
-        for i in range(100):
-            page.get_by_role("button", name="Show Answer").click()
+        for i in range(10):
+            page.get_by_role("button", name="I Don't Know").click()
             expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
-            # UI auto-advances when user starts typing next answer
             page.get_by_placeholder("Type your answer...").fill("")
             expect(page.locator(".question-text")).to_be_visible(timeout=3000)
-            if (i + 1) % 10 == 0:
-                page.wait_for_timeout(100)
 
         page.wait_for_timeout(1500)
 
         final_counts = get_level_counts()
+        final_level0 = final_counts.get("LEVEL_0", 0)
+        final_level1 = final_counts.get("LEVEL_1", 0)
 
-        assert final_counts.get("LEVEL_0", 0) == initial_counts.get("LEVEL_0", 0), (
-            f"LEVEL_0 word count changed from {initial_counts.get('LEVEL_0', 0)} to {final_counts.get('LEVEL_0', 0)}. "
-            "Show Answer should not cause word degradation."
-        )
+        assert final_level0 > 0 or final_level1 < initial_level1, "I Don't Know should cause word degradation (words moving back to LEVEL_0)."
 
-        for level_id in ["LEVEL_1", "LEVEL_2", "LEVEL_3", "LEVEL_4", "LEVEL_5"]:
-            initial = initial_counts.get(level_id, 0)
-            final = final_counts.get(level_id, 0)
-            assert final >= initial, f"{level_id} word count decreased from {initial} to {final}. Show Answer should not cause word degradation."
-
-    def test_show_answer_displays_revealed_feedback_style(self, page: Page, test_user: AuthenticatedUser) -> None:
+    def test_i_dont_know_displays_revealed_feedback_style(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
 
-        page.get_by_role("button", name="Show Answer").click()
+        page.get_by_role("button", name="I Don't Know").click()
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
 
         feedback_text = page.locator(".feedback-text.revealed")
         expect(feedback_text).to_be_visible()
 
-    def test_show_answer_then_check_answer_different_behavior(self, page: Page, test_user: AuthenticatedUser) -> None:
+    def test_i_dont_know_then_check_answer_different_behavior(self, page: Page, test_user: AuthenticatedUser) -> None:
         login_and_start_quiz(page, test_user)
 
-        page.get_by_role("button", name="Show Answer").click()
+        page.get_by_role("button", name="I Don't Know").click()
         expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
         revealed_feedback = page.locator(".feedback-text.revealed")
         expect(revealed_feedback).to_be_visible()
@@ -232,7 +223,7 @@ class TestRevealAnswerNoProgression:
             if question_text:
                 unique_questions.add(question_text.strip())
 
-            page.get_by_role("button", name="Show Answer").click()
+            page.get_by_role("button", name="I Don't Know").click()
             expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
             # UI auto-advances when user starts typing next answer
             page.get_by_placeholder("Type your answer...").fill("")

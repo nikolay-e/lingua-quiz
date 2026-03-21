@@ -170,6 +170,7 @@ repos:
       - id: pip-audit
         name: Python dependency vulnerability audit
         # GHSA-7gcm-g887-7qv7: protobuf JSON recursion DoS, no fix available yet
+        # GHSA-rf74-v2fm-23pw, GHSA-gfwx-w7gr-fvh7, GHSA-jm6w-m3j8-898g: nltk 3.9.3 CVEs, no fix available
         args:
           [
             '-r',
@@ -178,6 +179,12 @@ repos:
             'tools/vocab-tools/requirements.txt',
             '--ignore-vuln',
             'GHSA-7gcm-g887-7qv7',
+            '--ignore-vuln',
+            'GHSA-rf74-v2fm-23pw',
+            '--ignore-vuln',
+            'GHSA-gfwx-w7gr-fvh7',
+            '--ignore-vuln',
+            'GHSA-jm6w-m3j8-898g',
           ]
 
   - repo: https://github.com/sqlfluff/sqlfluff

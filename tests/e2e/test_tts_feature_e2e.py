@@ -69,7 +69,7 @@ class TestTTSLanguageSupport:
                 tts_button.first.click()
                 page.wait_for_timeout(1000)
 
-            page.get_by_role("button", name="Show Answer").click()
+            page.get_by_role("button", name="I Don't Know").click()
             expect(page.locator(".feedback-container")).to_be_visible(timeout=3000)
             # UI auto-advances when user starts typing next answer
             page.get_by_placeholder("Type your answer...").fill("")
@@ -141,7 +141,7 @@ class TestTTSIntegration:
 
             page.wait_for_timeout(500)
 
-            page.get_by_role("button", name="Show Answer").click()
+            page.get_by_role("button", name="I Don't Know").click()
             # UI auto-advances when user starts typing next answer
             page.get_by_placeholder("Type your answer...").fill("")
 
