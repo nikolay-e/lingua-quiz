@@ -1,0 +1,39 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: '33 2 * * *' # 02:33 UTC = 05:33 MSK
+  workflow_dispatch:
+
+concurrency:
+  group: nightly-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  e2e-tests:
+    name: Integration & E2E Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: docker/setup-buildx-action@v4
+
+      - name: Build and run tests
+        run: |
+          mkdir -p test-reports && chmod 777 test-reports
+          docker compose --profile test-all up --build --abort-on-container-exit --exit-code-from test-all
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-reports
+          path: test-reports/
+          retention-days: 7
+
+      - name: Cleanup
+        if: always()
+        run: docker compose --profile test-all down -v

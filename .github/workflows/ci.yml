@@ -64,10 +64,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        service: [backend, frontend, integration-e2e-tests]
-    outputs:
-      tag: ${{ steps.tag.outputs.value }}
-      sha: ${{ steps.tag.outputs.commit_sha }}
+        service: [backend, frontend]
     steps:
       - uses: actions/checkout@v6
 
@@ -127,47 +124,3 @@ jobs:
         continue-on-error: true
         with:
           sarif_file: trivy-results.sarif
-
-  test:
-    runs-on: ubuntu-latest
-    needs: [build]
-    timeout-minutes: 15
-    permissions:
-      contents: read
-      packages: read
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: docker/login-action@v4
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Pull and tag images
-        env:
-          TAG: ${{ needs.build.outputs.tag }}
-        run: |
-          for svc in backend frontend integration-e2e-tests; do
-            docker pull "${{ env.REGISTRY }}/lingua-quiz-${svc}:${TAG}"
-          done
-          docker tag "${{ env.REGISTRY }}/lingua-quiz-backend:${TAG}" lingua-quiz-backend:latest
-          docker tag "${{ env.REGISTRY }}/lingua-quiz-frontend:${TAG}" lingua-quiz-frontend:latest
-          docker tag "${{ env.REGISTRY }}/lingua-quiz-integration-e2e-tests:${TAG}" lingua-quiz-tests:latest
-
-      - name: Run tests
-        run: |
-          mkdir -p test-reports && chmod 777 test-reports
-          docker compose --profile test-all up --no-build --abort-on-container-exit --exit-code-from test-all
-
-      - name: Upload reports
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: test-reports
-          path: test-reports/
-          retention-days: 1
-
-      - name: Cleanup
-        if: always()
-        run: docker compose --profile test-all down -v
