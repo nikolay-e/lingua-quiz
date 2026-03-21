@@ -1,12 +1,10 @@
-from core.config import AZURE_SPEECH_API_KEY, RATE_LIMIT_ENABLED
+from core.config import AZURE_SPEECH_API_KEY
 from core.error_handler import handle_api_errors
+from core.rate_limit import limiter
 from fastapi import APIRouter, Request
 from pydantic import BaseModel
-from slowapi import Limiter
-from slowapi.util import get_remote_address
 
 router = APIRouter(prefix="/api", tags=["Config"])
-limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
 
 class PublicConfigResponse(BaseModel):

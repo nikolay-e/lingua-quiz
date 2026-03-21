@@ -1,9 +1,4 @@
 {
   "files": [],
-  "references": [
-    { "path": "./packages/domain" },
-    { "path": "./packages/core" },
-    { "path": "./packages/api-client" },
-    { "path": "./apps/frontend" }
-  ]
+  "references": [{ "path": "./packages/core" }, { "path": "./packages/api-client" }, { "path": "./apps/frontend" }]
 }

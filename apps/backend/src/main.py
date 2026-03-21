@@ -2,18 +2,18 @@
 import datetime
 
 from api.v2 import admin, auth, config, progress, speech, tts, version, vocabulary
-from core.config import APP_VERSION, CORS_ALLOWED_ORIGINS, LOG_JSON_FORMAT, LOG_LEVEL, PORT, RATE_LIMIT_ENABLED
+from core.config import APP_VERSION, CORS_ALLOWED_ORIGINS, LOG_JSON_FORMAT, LOG_LEVEL, PORT
 from core.csrf import validate_origin
 from core.database import query_db
 from core.json_encoder import CustomJSONResponse
 from core.logging import configure_logging, get_logger
+from core.rate_limit import limiter
 from core.request_logging import RequestLoggingMiddleware
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from generated.schemas import HealthResponse, VersionResponse
 from pydantic import ValidationError
-from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
@@ -86,7 +86,6 @@ async def add_security_headers(request: Request, call_next):
     return response
 
 
-limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 

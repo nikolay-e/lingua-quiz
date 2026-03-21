@@ -22,7 +22,7 @@ codegen: ## Regenerate all code from OpenAPI schema
 
 codegen-check: ## Verify generated code is up to date (for CI)
 	@./tools/codegen/generate-all.sh
-	@git diff --exit-code packages/api-client/src/generated/ packages/domain/src/generated/ apps/backend/src/generated/ || \
+	@git diff --exit-code packages/api-client/src/generated/ apps/backend/src/generated/ || \
 		(echo "Error: Generated code is out of date. Run 'make codegen' and commit." && exit 1)
 
 # ===================================================================================

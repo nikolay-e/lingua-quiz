@@ -6,9 +6,9 @@ import type { JSONSchema7 } from 'json-schema';
 const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
 
-type Validator<T> = (data: unknown) => { valid: boolean; errors: string[] };
+type Validator = (data: unknown) => { valid: boolean; errors: string[] };
 
-const compile = <T>(schema: JSONSchema7): Validator<T> => {
+const compile = (schema: JSONSchema7): Validator => {
   const validate = ajv.compile(schema);
   return (data: unknown) => {
     const valid = validate(data) as boolean;
@@ -24,7 +24,7 @@ const compile = <T>(schema: JSONSchema7): Validator<T> => {
   };
 };
 
-const schemas: Record<string, JSONSchema7> = {
+const schemas = {
   VocabularyItemResponse: {
     type: 'object',
     required: ['id', 'sourceText', 'sourceLanguage', 'targetText', 'targetLanguage', 'listName'],
@@ -133,13 +133,13 @@ const schemas: Record<string, JSONSchema7> = {
       supportedLanguages: { type: 'array', items: { type: 'string' } },
     },
   },
-};
+} satisfies Record<string, JSONSchema7>;
 
-export const validateVocabularyItem = compile<unknown>(schemas.VocabularyItemResponse);
-export const validateWordList = compile<unknown>(schemas.WordListResponse);
-export const validateUserProgress = compile<unknown>(schemas.UserProgressResponse);
-export const validateProgressUpdate = compile<unknown>(schemas.ProgressUpdateRequest);
-export const validateContentVersion = compile<unknown>(schemas.ContentVersionResponse);
-export const validateTtsRequest = compile<unknown>(schemas.TTSRequest);
-export const validateTtsResponse = compile<unknown>(schemas.TTSResponse);
-export const validateTtsLanguages = compile<unknown>(schemas.TTSLanguagesResponse);
+export const validateVocabularyItem = compile(schemas.VocabularyItemResponse);
+export const validateWordList = compile(schemas.WordListResponse);
+export const validateUserProgress = compile(schemas.UserProgressResponse);
+export const validateProgressUpdate = compile(schemas.ProgressUpdateRequest);
+export const validateContentVersion = compile(schemas.ContentVersionResponse);
+export const validateTtsRequest = compile(schemas.TTSRequest);
+export const validateTtsResponse = compile(schemas.TTSResponse);
+export const validateTtsLanguages = compile(schemas.TTSLanguagesResponse);

@@ -1,0 +1,85 @@
+import globals from 'globals';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsparser from '@typescript-eslint/parser';
+import { baseRules } from './base.js';
+
+export default [
+  {
+    files: ['**/*.test.ts', '**/*.spec.ts', '**/tests/**/*.ts', '**/test/**/*.ts', '**/__tests__/**/*.ts'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: { ecmaVersion: 2024, sourceType: 'module', project: false },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jest,
+        ...globals.mocha,
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+      },
+    },
+    plugins: { '@typescript-eslint': tseslint },
+    rules: {
+      ...baseRules,
+      ...tseslint.configs.recommended.rules,
+      'no-console': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/await-thenable': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
+      '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      '@typescript-eslint/prefer-optional-chain': 'off',
+      '@typescript-eslint/consistent-type-imports': 'off',
+      '@typescript-eslint/no-inferrable-types': 'off',
+    },
+  },
+  {
+    files: ['**/vite.config.ts', '**/vitest.config.ts', '*.config.ts', '*.config.js'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: { ecmaVersion: 2024, sourceType: 'module' },
+      globals: { ...globals.node },
+    },
+    plugins: { '@typescript-eslint': tseslint },
+    rules: {
+      ...baseRules,
+      ...tseslint.configs.recommended.rules,
+      'no-console': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/naming-convention': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/await-thenable': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
+    },
+  },
+  {
+    files: ['**/*.md/*.js', '**/*.md/*.ts'],
+    rules: {
+      'no-console': 'off',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      'max-len': 'off',
+    },
+  },
+];

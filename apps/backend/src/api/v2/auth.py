@@ -5,6 +5,7 @@ from core.config import RATE_LIMIT_ENABLED
 from core.database import execute_write_transaction, query_db
 from core.error_handler import handle_api_errors
 from core.logging import get_logger, user_id_var
+from core.rate_limit import limiter
 from core.security import get_current_user, hash_password, verify_password, verify_refresh_token
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from generated.schemas import (
@@ -20,7 +21,6 @@ from slowapi.util import get_remote_address
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
-limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
 
 def get_username_for_rate_limit(request: Request) -> str:
@@ -216,8 +216,10 @@ def change_password(
 
 
 @router.delete("/delete-account")
+@limiter.limit("3/hour")
 @handle_api_errors("Account deletion")
 def delete_account(
+    request: Request,
     current_user: dict = Depends(get_current_user),
 ) -> dict[str, str]:
     logger.info(f"Account deletion request for user: {current_user['username']}")

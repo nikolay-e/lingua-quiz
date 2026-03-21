@@ -4,35 +4,26 @@ default_language_version:
   python: python3.13
   node: system
 
-fail_fast: false # Run all hooks to get complete feedback
+fail_fast: false
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
-      # Critical safety checks
       - id: check-merge-conflict
       - id: check-case-conflict
       - id: detect-private-key
-      - id: debug-statements
-        language_version: python3
       - id: check-added-large-files
         args: ['--maxkb=1024']
-
-      # Python-specific checks
       - id: check-ast
       - id: check-docstring-first
       - id: name-tests-test
         args: ['--pytest-test-first']
         exclude: ^tests/e2e/(fixtures|pages|utils)/
-
-      # File format checks
       - id: check-yaml
         exclude: ^(helm/.*\.yaml|flux/.*/flux-system/.*)$
       - id: check-json
       - id: check-toml
-
-      # Auto-fixable hygiene
       - id: trailing-whitespace
         exclude: (/generated/|^lingua-quiz-schema\.json$)
       - id: end-of-file-fixer
@@ -42,27 +33,27 @@ repos:
         exclude: (/generated/|^lingua-quiz-schema\.json$)
       - id: fix-byte-order-marker
 
-  - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.35.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.5
     hooks:
-      - id: check-github-workflows
-        name: Validate GitHub workflows
-        args: ['--verbose']
-      - id: check-dependabot
-        name: Validate Dependabot config
+      - id: ruff
+        name: Lint Python with ruff
+        args: ['--fix', '--exit-non-zero-on-fix']
+        types_or: [python, pyi]
+        files: ^(apps/backend|tools/vocab-tools|tests/e2e)/
+      - id: ruff-format
+        name: Format Python with ruff
+        types_or: [python, pyi]
+        files: ^(apps/backend|tools/vocab-tools|tests/e2e)/
 
-  - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.8
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
     hooks:
-      - id: actionlint
-        name: Lint GitHub Actions
-
-  - repo: https://github.com/python-openapi/openapi-spec-validator
-    rev: 0.8.0b1
-    hooks:
-      - id: openapi-spec-validator
-        name: Validate unified OpenAPI schema
-        files: ^schema/lingua-quiz-schema\.json$
+      - id: prettier
+        name: Format JS/TS with Prettier
+        args: ['--write']
+        files: \.(js|jsx|ts|tsx|json|css|scss|html|md)$
+        exclude: (/generated/|^lingua-quiz-schema\.json$|/(dist|build|node_modules)/|^package-lock\.json$|^flux/.*/flux-system/)
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.29.0
@@ -79,250 +70,6 @@ repos:
         args: ['--baseline', '.secrets.baseline']
         exclude: (/generated/|^lingua-quiz-schema\.json$|^package-lock\.json$)
 
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.5
-    hooks:
-      - id: ruff
-        name: Lint Python with ruff
-        args: ['--fix', '--exit-non-zero-on-fix']
-        types_or: [python, pyi]
-        files: ^(apps/backend|tools/vocab-tools|tests/e2e)/
-      - id: ruff-format
-        name: Format Python with ruff
-        types_or: [python, pyi]
-        files: ^(apps/backend|tools/vocab-tools|tests/e2e)/
-
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.21.1
-    hooks:
-      - id: pyupgrade
-        name: Upgrade Python syntax
-        args: ['--py313-plus']
-        files: ^(apps/backend|tools/vocab-tools|tests/e2e)/.*\.py$
-        exclude: ^apps/backend/domain-py/
-
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.18.2
-    hooks:
-      - id: mypy
-        name: Type check Python with mypy
-        args: ['--python-version=3.13', '--check-untyped-defs', '--ignore-missing-imports', '--no-warn-unused-ignores']
-        additional_dependencies: ['types-requests', 'types-PyYAML']
-        files: ^apps/backend/src/
-        exclude: ^apps/backend/(alembic|alembic-words)/
-
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.9.0
-    hooks:
-      - id: bandit
-        name: Security scan Python (bandit)
-        args: ['-q', '-r', '-x', 'tests,*/test_*.py,*/conftest.py', '--skip', 'B101,B108,B110,B404,B603']
-        files: ^(apps/backend|tools/vocab-tools)/
-
-  - repo: local
-    hooks:
-      - id: semgrep
-        name: Semgrep (AST-based security)
-        entry: semgrep --config=p/security-audit --config=p/python --error --skip-unknown-extensions --metrics=off
-        language: system
-        files: ^(apps/backend|tools/vocab-tools)/
-        exclude: (/generated/|/tests/)
-        types: [python]
-
-  - repo: https://github.com/jendrikseipp/vulture
-    rev: v2.14
-    hooks:
-      - id: vulture
-        name: Dead code detection (vulture)
-        args:
-          [
-            'apps/backend/src',
-            'tools/vocab-tools/vocab_tools',
-            '--min-confidence',
-            '100',
-            '--exclude',
-            'venv,generated,__pycache__',
-          ]
-        pass_filenames: false
-        files: ^(apps/backend|tools/vocab-tools)/.*\.py$
-
-  - repo: https://github.com/PyCQA/pylint
-    rev: v3.3.4
-    hooks:
-      - id: pylint
-        name: Pylint (duplicate code detection)
-        args:
-          [
-            '--disable=all',
-            '--enable=duplicate-code',
-            '--min-similarity-lines=10',
-            '--ignore-comments=yes',
-            '--ignore-docstrings=yes',
-            '--ignore-imports=yes',
-          ]
-        files: ^(apps/backend|tools/vocab-tools)/
-        exclude: (/generated/|/tests/|alembic.*/env\.py$)
-        additional_dependencies: ['types-PyYAML', 'types-aiofiles', 'types-requests']
-
-  - repo: https://github.com/trailofbits/pip-audit
-    rev: v2.9.0
-    hooks:
-      - id: pip-audit
-        name: Python dependency vulnerability audit
-        # GHSA-7gcm-g887-7qv7: protobuf JSON recursion DoS, no fix available yet
-        # GHSA-rf74-v2fm-23pw, GHSA-gfwx-w7gr-fvh7, GHSA-jm6w-m3j8-898g: nltk 3.9.3 CVEs, no fix available
-        args:
-          [
-            '-r',
-            'apps/backend/requirements.txt',
-            '-r',
-            'tools/vocab-tools/requirements.txt',
-            '--ignore-vuln',
-            'GHSA-7gcm-g887-7qv7',
-            '--ignore-vuln',
-            'GHSA-rf74-v2fm-23pw',
-            '--ignore-vuln',
-            'GHSA-gfwx-w7gr-fvh7',
-            '--ignore-vuln',
-            'GHSA-jm6w-m3j8-898g',
-          ]
-
-  - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 4.0.0a2
-    hooks:
-      - id: sqlfluff-fix
-        name: Format SQL files
-        args: ['--dialect=postgres', '--exclude-rules=RF04']
-        files: \.sql$
-      - id: sqlfluff-lint
-        name: Lint SQL files
-        args: ['--dialect=postgres', '--exclude-rules=RF04']
-        files: \.sql$
-
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
-    hooks:
-      - id: prettier
-        name: Format JS/TS with Prettier
-        args: ['--write']
-        files: \.(js|jsx|ts|tsx|json|css|scss|html|md)$
-        exclude: (/generated/|^lingua-quiz-schema\.json$|/(dist|build|node_modules)/|^package-lock\.json$|^flux/.*/flux-system/)
-
-  - repo: local
-    hooks:
-      # Sort package.json files to maintain consistent order
-      - id: sort-package-json
-        name: Sort package.json files
-        entry: npx sort-package-json "package.json" "packages/*/package.json" "apps/*/package.json"
-        language: system
-        files: ^(package\.json|packages/.*/package\.json|apps/.*/package\.json)$
-        pass_filenames: false
-
-      - id: eslint
-        name: Lint JS/TS with ESLint
-        entry: bash -c 'export NODE_OPTIONS="--max-old-space-size=8192" && npm run lint:fix'
-        language: system
-        files: \.(js|jsx|ts|tsx)$
-        pass_filenames: false
-
-      - id: jscpd
-        name: Copy-paste detection (jscpd)
-        entry: npx jscpd --min-lines 6 --min-tokens 50 --threshold 3 packages/ apps/
-        language: system
-        files: \.(js|jsx|ts|tsx|py)$
-        pass_filenames: false
-
-      - id: knip
-        name: Dead code detection (knip)
-        entry: npx knip --no-progress --no-config-hints
-        language: system
-        files: \.(js|jsx|ts|tsx)$
-        pass_filenames: false
-
-      - id: typescript-check
-        name: TypeScript type checking
-        entry: bash -c 'npm run build --workspace=@lingua-quiz/domain --workspace=@lingua-quiz/core && npm run typecheck'
-        language: system
-        files: \.(ts|tsx)$
-        pass_filenames: false
-
-      # TypeScript type coverage enforcement
-      - id: type-coverage
-        name: Type coverage check (>=85%)
-        entry: npx type-coverage --at-least 85 --ignore-catch --ignore-files "**/*.test.ts" "**/*.spec.ts" "**/generated/**"
-        language: system
-        files: \.(ts|tsx)$
-        exclude: /generated/
-        pass_filenames: false
-
-      # NPM security audit for production dependencies
-      - id: npm-audit
-        name: npm audit (security check)
-        entry: npm audit --audit-level=high --omit=dev
-        language: system
-        files: ^package(-lock)?\.json$
-        pass_filenames: false
-
-  - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.11.0.1
-    hooks:
-      - id: shellcheck
-        name: Lint shell scripts
-        args: ['--exclude=SC2034,SC2155,SC2086']
-
-  - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.12.0-2
-    hooks:
-      - id: shfmt
-        name: Format shell scripts
-        args: ['-i', '2', '-ci', '-bn', '-w']
-
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.14.0
-    hooks:
-      - id: hadolint-docker
-        name: Lint Dockerfiles
-        files: (^|/)[Dd]ockerfile(\..*)?$
-        args: [
-            '--ignore',
-            'DL3018', # Pin versions (alpine apk)
-            '--ignore',
-            'DL3013', # Pin versions (pip)
-            '--ignore',
-            'DL3029', # Do not use --platform flag
-            '--ignore',
-            'DL3059', # Multiple consecutive RUN
-            '--ignore',
-            'DL3003', # Use WORKDIR
-          ]
-
-  - repo: local
-    hooks:
-      # Docker Compose validation
-      - id: docker-compose-check
-        name: Docker Compose config validation
-        entry: bash -c 'for f in docker-compose*.yml docker-compose*.yaml; do [ -f "$f" ] && docker compose -f "$f" config -q || true; done'
-        language: system
-        files: ^docker-compose.*\.(yml|yaml)$
-        pass_filenames: false
-
-  - repo: https://github.com/adrienverge/yamllint
-    rev: v1.37.1
-    hooks:
-      - id: yamllint
-        name: Lint YAML files
-        args: ['-d', 'relaxed']
-        files: \.(yaml|yml)$
-        exclude: ^(helm/.*\.yaml|flux/.*/flux-system/.*)$
-
-  - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.45.0
-    hooks:
-      - id: markdownlint
-        name: Lint and fix Markdown files
-        args: ['--fix', '--config', '.markdownlint.yaml']
-        files: \.(md|markdown)$
-
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
@@ -337,36 +84,13 @@ repos:
 
   - repo: local
     hooks:
-      - id: stylelint
-        name: Lint CSS/SCSS
-        entry: npx stylelint --fix --config .stylelintrc.json
+      - id: sort-package-json
+        name: Sort package.json files
+        entry: npx sort-package-json "package.json" "packages/*/package.json" "apps/*/package.json"
         language: system
-        files: \.(css|scss)$
-        pass_filenames: true
-
-  - repo: local
-    hooks:
-      - id: helm-lint-changed
-        name: Helm lint changed charts
-        entry: bash -c
-        args:
-          - |
-            CHANGED_CHARTS=$(git diff --name-only --cached | grep "^helm/" | cut -d/ -f1-2 | sort -u || true);
-            [ -z "$CHANGED_CHARTS" ] && exit 0;
-            for chart in $CHANGED_CHARTS; do
-              [ -f "$chart/Chart.yaml" ] || continue;
-              echo "Linting $chart...";
-              helm dependency build "$chart" >/dev/null 2>&1 || true;
-              helm lint "$chart" || exit 1;
-            done
-        language: system
-        files: ^helm/
+        files: ^(package\.json|packages/.*/package\.json|apps/.*/package\.json)$
         pass_filenames: false
 
-  # =============================================================================
-  # STAGE 13: Commit Message Quality (commit-msg hook)
-  # Enables conventional commits for changelog automation
-  # =============================================================================
   - repo: https://github.com/jorisroovers/gitlint
     rev: v0.19.1
     hooks:

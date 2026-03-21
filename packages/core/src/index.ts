@@ -11,7 +11,7 @@ import {
 } from './constants';
 import { checkAnswer, formatForDisplay } from './answer-comparison';
 import type { Translation, ProgressEntry } from './types';
-import type { LevelKey } from '@lingua-quiz/domain';
+import type { LevelKey } from './levels';
 import { QueueManager, type LevelStatus, type Queues } from './QueueManager';
 import { LevelEngine, type PracticeLevel, type QuestionDirection, type QuestionType } from './LevelEngine';
 import { StateManager } from './StateManager';
@@ -417,6 +417,8 @@ export class QuizManager {
 export * from './constants';
 export * from './answer-comparison';
 export * from './types';
+export * from './levels';
+export * from './levelUtils';
 export { QueueManager } from './QueueManager';
 export { LevelEngine } from './LevelEngine';
 export { StateManager } from './StateManager';

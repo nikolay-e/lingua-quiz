@@ -88,7 +88,7 @@ export function AppNav({ username, isAdmin }: AppNavProps): React.JSX.Element {
               aria-current={isActive(path) ? 'page' : undefined}
             >
               <Icon size={20} />
-              <span className="text-[10px] leading-tight">{t(labelKey)}</span>
+              <span className="text-xs leading-tight">{t(labelKey)}</span>
             </Link>
           ))}
           {isAdmin && (
@@ -102,7 +102,7 @@ export function AppNav({ username, isAdmin }: AppNavProps): React.JSX.Element {
               aria-current={isActive('/admin') ? 'page' : undefined}
             >
               <Shield size={20} />
-              <span className="text-[10px] leading-tight">{t('nav.adminPanel')}</span>
+              <span className="text-xs leading-tight">{t('nav.adminPanel')}</span>
             </Link>
           )}
           <Link
@@ -115,7 +115,7 @@ export function AppNav({ username, isAdmin }: AppNavProps): React.JSX.Element {
             aria-current={isActive('/settings') ? 'page' : undefined}
           >
             <Settings size={20} />
-            <span className="text-[10px] leading-tight">{t('nav.settings')}</span>
+            <span className="text-xs leading-tight">{t('nav.settings')}</span>
           </Link>
         </div>
       </nav>

@@ -1,8 +1,9 @@
 import base64
 
-from core.config import AZURE_SPEECH_API_KEY, AZURE_SPEECH_REGION, RATE_LIMIT_ENABLED
+from core.config import AZURE_SPEECH_API_KEY, AZURE_SPEECH_REGION
 from core.error_handler import handle_api_errors
 from core.logging import get_logger
+from core.rate_limit import limiter
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile, status
 from generated.schemas import (
@@ -11,12 +12,9 @@ from generated.schemas import (
     WordAssessmentSchema,
 )
 import httpx
-from slowapi import Limiter
-from slowapi.util import get_remote_address
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/speech", tags=["Speech"])
-limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
 SUPPORTED_LANGUAGES = {"en-US", "fr-FR", "es-ES", "de-DE"}
 MAX_AUDIO_SIZE = 5 * 1024 * 1024

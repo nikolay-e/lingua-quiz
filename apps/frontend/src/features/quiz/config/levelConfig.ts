@@ -1,4 +1,4 @@
-import type { LevelKey } from '@lingua-quiz/domain';
+import type { LevelKey } from '@lingua-quiz/core';
 import { List, ListTodo, CheckCircle, Star, Trophy, type LucideIcon } from 'lucide-react';
 
 export interface LevelConfigItem {

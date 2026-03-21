@@ -6,8 +6,8 @@
       "project": []
     },
     "apps/frontend": {
-      "entry": ["src/main.tsx", "vite.config.ts", ".storybook/main.ts", ".storybook/preview.ts"],
-      "project": ["src/**/*.{ts,tsx}", "src/**/*.stories.tsx"],
+      "entry": ["src/main.tsx", "vite.config.ts"],
+      "project": ["src/**/*.{ts,tsx}"],
       "paths": {
         "@/*": ["./src/*"],
         "@app/*": ["./src/app/*"],
@@ -20,10 +20,6 @@
       }
     },
     "packages/core": {
-      "entry": ["src/index.ts"],
-      "project": ["src/**/*.ts"]
-    },
-    "packages/domain": {
       "entry": ["src/index.ts"],
       "project": ["src/**/*.ts"]
     },
@@ -40,7 +36,6 @@
     "stylelint-config-html",
     "@stylelint/postcss-css-in-js",
     "@vitest/coverage-v8",
-    "eslint-plugin-storybook",
     "playwright",
     "openapi-typescript-codegen",
     "@lingua-quiz/api-client"

@@ -12,7 +12,7 @@ const QuizPage = lazy(() => import('@pages/QuizPage').then((m) => ({ default: m.
 const LoginPage = lazy(() => import('@pages/LoginPage').then((m) => ({ default: m.LoginPage })));
 const RegisterPage = lazy(() => import('@pages/RegisterPage').then((m) => ({ default: m.RegisterPage })));
 const SettingsPage = lazy(() => import('@pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
-const AdminPage = lazy(() => import('@pages/AdminPage').then((m) => ({ default: m.AdminPage })));
+const AdminPage = lazy(() => import('@pages/admin').then((m) => ({ default: m.AdminPage })));
 const SpeakPage = lazy(() => import('@pages/SpeakPage').then((m) => ({ default: m.SpeakPage })));
 
 function PageLoader(): React.JSX.Element {

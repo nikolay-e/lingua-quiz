@@ -8,11 +8,10 @@ All code is generated from: `schema/lingua-quiz-schema.json` (OpenAPI 3.1 specif
 
 ## Generated Outputs
 
-| Output                  | Location                                  | Generator                  |
-| ----------------------- | ----------------------------------------- | -------------------------- |
-| TypeScript API Client   | `packages/api-client/src/generated/`      | openapi-typescript-codegen |
-| TypeScript Domain Types | `packages/domain/src/generated/domain.ts` | json-schema-to-typescript  |
-| Python Pydantic Schemas | `apps/backend/src/generated/schemas.py`   | datamodel-codegen          |
+| Output                  | Location                                | Generator                  |
+| ----------------------- | --------------------------------------- | -------------------------- |
+| TypeScript API Client   | `packages/api-client/src/generated/`    | openapi-typescript-codegen |
+| Python Pydantic Schemas | `apps/backend/src/generated/schemas.py` | datamodel-codegen          |
 
 ## Usage
 
@@ -48,7 +47,6 @@ pip install datamodel-code-generator
 
 These are internal helpers; prefer `generate-all.sh`:
 
-- `generate-domain-ts.sh` — TypeScript domain types only
 - `generate-backend-schemas.sh` — Python schemas only
 
 API client generation uses npm workspace script: `npm run generate --workspace @lingua-quiz/api-client`

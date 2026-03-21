@@ -1,6 +1,16 @@
-import type { LevelKey, VocabularyItem } from '@lingua-quiz/domain';
+import type { LevelKey } from './levels';
 
-export type Translation = VocabularyItem;
+export interface Translation {
+  id: string;
+  sourceText: string;
+  sourceLanguage: string;
+  targetText: string;
+  targetLanguage: string;
+  listName: string;
+  difficultyLevel: string | null;
+  sourceUsageExample: string | null;
+  targetUsageExample: string | null;
+}
 
 export interface ProgressEntry {
   translationId: string;

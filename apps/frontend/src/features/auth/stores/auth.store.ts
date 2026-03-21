@@ -206,6 +206,4 @@ if (typeof window !== 'undefined') {
 }
 
 export const useIsAuthenticated = (): boolean => useAuthStore((state) => state.isAuthenticated);
-export const useIsAdmin = (): boolean => useAuthStore((state) => state.isAdmin);
 export const useToken = (): string | null => useAuthStore((state) => state.token);
-export const useUsername = (): string | null => useAuthStore((state) => state.username);

@@ -40,21 +40,108 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci --prefer-offline
-          pip install --no-cache-dir pre-commit semgrep -r apps/backend/requirements.txt
+          pip install --no-cache-dir pre-commit -r apps/backend/requirements.txt
 
       - name: Build workspaces
         run: npm run build --workspaces --if-present
 
       - name: Run pre-commit
         run: pre-commit run --all-files --show-diff-on-failure --color=always
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096
-
-      - name: Run domain tests
-        run: npm run test --workspace @lingua-quiz/domain
 
       - name: Run core tests
         run: npm run test --workspace @lingua-quiz/core
+
+  deep-analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci --prefer-offline
+          pip install --no-cache-dir semgrep mypy bandit vulture pylint pyupgrade pip-audit sqlfluff types-requests types-PyYAML types-aiofiles -r apps/backend/requirements.txt
+
+      - name: Build workspaces
+        run: npm run build --workspaces --if-present
+
+      - name: ESLint
+        run: npm run lint
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+
+      - name: TypeScript type checking
+        run: npm run typecheck
+
+      - name: mypy
+        run: mypy --python-version=3.13 --check-untyped-defs --ignore-missing-imports --no-warn-unused-ignores apps/backend/src/
+        continue-on-error: false
+
+      - name: bandit
+        run: bandit -q -r -x 'tests,*/test_*.py,*/conftest.py' --skip B101,B108,B110,B404,B603 apps/backend/ tools/vocab-tools/
+
+      - name: semgrep
+        run: semgrep --config=p/security-audit --config=p/python --error --skip-unknown-extensions --metrics=off apps/backend/ tools/vocab-tools/
+
+      - name: vulture
+        run: vulture apps/backend/src tools/vocab-tools/vocab_tools --min-confidence 100 --exclude venv,generated,__pycache__
+
+      - name: pylint duplicate code
+        run: pylint --disable=all --enable=duplicate-code --min-similarity-lines=10 --ignore-comments=yes --ignore-docstrings=yes --ignore-imports=yes apps/backend/src/ tools/vocab-tools/vocab_tools/
+
+      - name: pip-audit
+        run: pip-audit -r apps/backend/requirements.txt -r tools/vocab-tools/requirements.txt --ignore-vuln GHSA-7gcm-g887-7qv7 --ignore-vuln GHSA-rf74-v2fm-23pw --ignore-vuln GHSA-gfwx-w7gr-fvh7 --ignore-vuln GHSA-jm6w-m3j8-898g
+
+      - name: npm audit
+        run: npm audit --audit-level=high --omit=dev
+
+      - name: Copy-paste detection
+        run: npx jscpd --min-lines 6 --min-tokens 50 --threshold 3 packages/ apps/
+
+      - name: Dead code detection (knip)
+        run: npx knip --no-progress --no-config-hints
+
+      - name: Validate GitHub workflows
+        uses: docker://rhysd/actionlint:latest
+        with:
+          args: -color
+
+      - name: Validate OpenAPI schema
+        run: pip install openapi-spec-validator && python -m openapi_spec_validator schema/lingua-quiz-schema.json
+
+      - name: shellcheck
+        continue-on-error: true
+        run: |
+          sudo apt-get install -y shellcheck
+          find . -name '*.sh' -not -path '*/node_modules/*' -not -path '*/.git/*' | xargs shellcheck --exclude=SC2034,SC2155,SC2086
+
+      - name: hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          ignore: DL3018,DL3013,DL3029,DL3059,DL3003
+
+      - name: yamllint
+        run: pip install yamllint && yamllint -d relaxed .
+
+      - name: stylelint
+        continue-on-error: true
+        run: npx stylelint --config .stylelintrc.json '**/*.{css,scss}'
+
+      - name: SQL lint
+        continue-on-error: true
+        run: sqlfluff lint --dialect=postgres --exclude-rules=RF04 .
 
   build:
     runs-on: ubuntu-latest

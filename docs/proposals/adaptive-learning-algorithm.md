@@ -426,7 +426,7 @@ CREATE TABLE user_learning_profile (
 );
 ```
 
-#### 2. Обновить TypeScript types (`packages/domain/`)
+#### 2. Обновить TypeScript types (`packages/core/`)
 
 #### 3. Обновить OpenAPI schema
 

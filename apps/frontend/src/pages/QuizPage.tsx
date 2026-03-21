@@ -143,7 +143,7 @@ export function QuizPage(): React.JSX.Element {
 
   return (
     <>
-      <AppShell className="max-w-210">
+      <AppShell className="max-w-5xl">
         <FeedCard>
           <div className="flex flex-col gap-4">
             <QuizHeader

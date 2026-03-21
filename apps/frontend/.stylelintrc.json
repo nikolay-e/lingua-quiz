@@ -36,5 +36,5 @@
     "color-function-notation": null,
     "length-zero-no-unit": null
   },
-  "ignoreFiles": ["dist/**/*", "node_modules/**/*", ".storybook/**/*"]
+  "ignoreFiles": ["dist/**/*", "node_modules/**/*"]
 }

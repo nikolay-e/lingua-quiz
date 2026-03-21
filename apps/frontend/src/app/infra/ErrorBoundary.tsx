@@ -36,7 +36,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       return (
-        <div className="w-full max-w-210 mx-auto px-4 py-4 md:px-6 md:py-16 flex flex-col gap-4">
+        <div className="w-full max-w-5xl mx-auto px-4 py-4 md:px-6 md:py-16 flex flex-col gap-4">
           <div className="flex flex-col gap-4 text-center p-8">
             <h1>Something went wrong</h1>
             <p className="opacity-75 text-sm">{this.state.error?.message ?? 'An unexpected error occurred'}</p>

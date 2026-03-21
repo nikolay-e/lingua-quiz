@@ -15,68 +15,45 @@ export function extractErrorMessage(error: unknown, fallback = 'An unexpected er
     const typedError = error as { message?: string; detail?: unknown; body?: unknown };
 
     if (typedError.body !== undefined && typedError.body !== null) {
-      const bodyMessage = extractErrorFromBody(typedError.body);
+      const bodyMessage = extractObjectFields(typedError.body);
       if (bodyMessage !== null) return bodyMessage;
     }
 
-    if (typeof typedError.message === 'string' && typedError.message !== '') {
-      return typedError.message;
+    return extractObjectFields(error) ?? fallback;
+  }
+
+  return fallback;
+}
+
+function extractObjectFields(obj: unknown): string | null {
+  if (obj === null || obj === undefined) return null;
+
+  if (typeof obj === 'string' && obj !== '') return obj;
+
+  if (typeof obj === 'object') {
+    const typed = obj as { message?: string; detail?: unknown };
+
+    if (typeof typed.message === 'string' && typed.message !== '') {
+      return typed.message;
     }
 
-    if (typeof typedError.detail === 'string' && typedError.detail !== '') {
-      return typedError.detail;
+    if (typeof typed.detail === 'string' && typed.detail !== '') {
+      return typed.detail;
     }
 
-    if (Array.isArray(typedError.detail)) {
-      const collected = typedError.detail
+    if (Array.isArray(typed.detail)) {
+      const collected = typed.detail
         .map((item) => {
           if (typeof item === 'string') return item;
           if (item != null && typeof item === 'object') {
-            const obj = item as { msg?: string; message?: string };
-            return obj.msg ?? obj.message ?? '';
+            const entry = item as { msg?: string; message?: string };
+            return entry.msg ?? entry.message ?? '';
           }
           return '';
         })
         .filter((msg) => msg !== '')
         .join(', ');
       if (collected !== '') return collected;
-    }
-  }
-
-  return fallback;
-}
-
-function extractErrorFromBody(body: unknown): string | null {
-  if (body === null || body === undefined) return null;
-
-  if (typeof body === 'string' && body !== '') {
-    return body;
-  }
-
-  if (typeof body === 'object') {
-    const typedBody = body as { message?: string; detail?: unknown };
-
-    if (typeof typedBody.message === 'string' && typedBody.message !== '') {
-      return typedBody.message;
-    }
-
-    if (typeof typedBody.detail === 'string' && typedBody.detail !== '') {
-      return typedBody.detail;
-    }
-
-    if (Array.isArray(typedBody.detail)) {
-      const collected = typedBody.detail
-        .map((item) => {
-          if (typeof item === 'string') return item;
-          if (item != null && typeof item === 'object') {
-            const obj = item as { msg?: string; message?: string };
-            return obj.msg ?? obj.message ?? '';
-          }
-          return '';
-        })
-        .filter((msg) => msg !== '')
-        .join(', ');
-      return collected !== '' ? collected : null;
     }
   }
 

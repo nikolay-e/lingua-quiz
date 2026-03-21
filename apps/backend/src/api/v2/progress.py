@@ -1,16 +1,13 @@
-from core.config import RATE_LIMIT_ENABLED
 from core.database import execute_write_transaction, get_active_version, query_db, query_words_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.logging import get_logger
+from core.rate_limit import limiter
 from core.security import get_current_user
 from fastapi import APIRouter, Depends, Request
 from generated.schemas import BulkProgressUpdateRequest, ProgressUpdateRequest, UserProgressResponse
-from slowapi import Limiter
-from slowapi.util import get_remote_address
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/user", tags=["Progress"])
-limiter = Limiter(key_func=get_remote_address, enabled=RATE_LIMIT_ENABLED)
 
 
 @router.get("/progress", response_model=list[UserProgressResponse])

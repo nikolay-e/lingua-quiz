@@ -1,4 +1,5 @@
-import { type LevelKey, LEVEL_KEYS, createEmptyLevelArrays } from '@lingua-quiz/domain';
+import { type LevelKey, LEVEL_KEYS } from './levels';
+import { createEmptyLevelArrays } from './levelUtils';
 import type { ProgressEntry } from './types';
 
 export type LevelStatus = LevelKey;

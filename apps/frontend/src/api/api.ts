@@ -22,7 +22,7 @@ import {
   validateUserProgress,
   validateVocabularyItem,
   validateWordList,
-} from '@lingua-quiz/domain';
+} from './validators';
 import { executeApiCall, fetchWithAuth, setAuthToken } from './config';
 
 const mapAuthResponse = (response: TokenResponse): AuthResponse => ({

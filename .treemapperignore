@@ -9,7 +9,6 @@ generated
 **/generated
 packages/backend/src/generated/
 packages/frontend/src/generated/
-packages/domain/dist/
 packages/core/dist/
 
 # Build artifacts

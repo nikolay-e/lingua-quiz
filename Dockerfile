@@ -35,7 +35,6 @@ ARG APP_VERSION=dev
 ARG APP_ENVIRONMENT=development
 WORKDIR /app
 COPY package.json package-lock.json ./
-COPY packages/domain/ ./packages/domain/
 COPY packages/core/package.json ./packages/core/
 COPY packages/api-client/package.json ./packages/api-client/
 COPY apps/frontend/package.json ./apps/frontend/

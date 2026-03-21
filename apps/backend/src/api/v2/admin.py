@@ -5,8 +5,6 @@ from core.security import require_admin
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from generated.schemas import VocabularyItemDetailResponse
 
-VOCABULARY_READONLY_MESSAGE = "Vocabulary is managed via repository files. Edit data/vocabularies/*.json and redeploy."
-
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
 
@@ -74,21 +72,6 @@ def get_vocabulary_item(
         )
 
     return serialize_rows(item, VocabularyItemDetailResponse, one=True)
-
-
-@router.post("/vocabulary", status_code=status.HTTP_405_METHOD_NOT_ALLOWED)
-def create_vocabulary_item() -> dict[str, str]:
-    raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED, detail=VOCABULARY_READONLY_MESSAGE)
-
-
-@router.put("/vocabulary/{item_id}", status_code=status.HTTP_405_METHOD_NOT_ALLOWED)
-def update_vocabulary_item(item_id: str) -> dict[str, str]:
-    raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED, detail=VOCABULARY_READONLY_MESSAGE)
-
-
-@router.delete("/vocabulary/{item_id}", status_code=status.HTTP_405_METHOD_NOT_ALLOWED)
-def delete_vocabulary_item(item_id: str) -> dict[str, str]:
-    raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED, detail=VOCABULARY_READONLY_MESSAGE)
 
 
 @router.get("/vocabulary", response_model=list[VocabularyItemDetailResponse])

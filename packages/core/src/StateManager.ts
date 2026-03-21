@@ -1,4 +1,4 @@
-import { createZeroLevelCounts } from '@lingua-quiz/domain';
+import { createZeroLevelCounts } from './levelUtils';
 import type { Translation, ProgressEntry } from './types';
 
 export class StateManager {

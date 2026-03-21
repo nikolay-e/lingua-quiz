@@ -8,6 +8,9 @@ import type { AnswerInputRef } from '@features/quiz/components';
 import { useToast } from '@shared/components';
 import { logger, extractErrorMessage, isTouchDevice } from '@shared/utils';
 import { requestWakeLock, releaseWakeLock } from '@shared/pwa';
+import { useQuizFeedback } from './useQuizFeedback';
+import { useQuizLevelAnimation } from './useQuizLevelAnimation';
+import { useQuizInput } from './useQuizInput';
 
 type FeedbackState = SubmissionResult | QuizFeedback | RevealResult | null;
 
@@ -43,16 +46,15 @@ interface QuizSessionActions {
   handleLevelAnimationComplete: () => void;
 }
 
-export type QuizSession = QuizSessionState & QuizSessionActions;
-
-export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>): QuizSession {
+export function useQuizSession(
+  answerInputRef: RefObject<AnswerInputRef | null>,
+): QuizSessionState & QuizSessionActions {
   const navigate = useNavigate();
   const toast = useToast();
 
   const token = useAuthStore((state) => state.token);
 
   const currentQuestion = useQuizStore((state) => state.currentQuestion);
-
   const loadWordLists = useQuizStore((state) => state.loadWordLists);
   const startQuiz = useQuizStore((state) => state.startQuiz);
   const getNextQuestion = useQuizStore((state) => state.getNextQuestion);
@@ -62,80 +64,68 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
   const saveAndCleanup = useQuizStore((state) => state.saveAndCleanup);
   const quizManager = useQuizStore((state) => state.quizManager);
 
-  const [userAnswer, setUserAnswer] = useState('');
-  const [feedback, setFeedback] = useState<FeedbackState>(null);
-  const [usageExamples, setUsageExamples] = useState<{ source: string; target: string } | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [questionForFeedback, setQuestionForFeedback] = useState<QuizQuestion | null>(null);
-  const [showLevelAnimation, setShowLevelAnimation] = useState(false);
-  const [isLevelUp, setIsLevelUp] = useState(true);
-  const [levelChangeFrom, setLevelChangeFrom] = useState<string | undefined>(undefined);
-  const [levelChangeTo, setLevelChangeTo] = useState<string | undefined>(undefined);
+  const fb = useQuizFeedback();
+  const levelAnim = useQuizLevelAnimation();
+  const input = useQuizInput(fb.resetFeedback);
+
   const [loadError, setLoadError] = useState<string | null>(null);
   const [lastSelectedQuiz, setLastSelectedQuiz] = useState<string | null>(null);
-  const [submittedAnswer, setSubmittedAnswer] = useState('');
-  const [lastFailedAnswer, setLastFailedAnswer] = useState<string | null>(null);
-  const [awaitingNextInput, setAwaitingNextInput] = useState(false);
 
-  const resetQuizSession = useCallback((clearAnswer = true) => {
-    setFeedback(null);
-    if (clearAnswer) setUserAnswer('');
-    setSubmittedAnswer('');
-    setQuestionForFeedback(null);
-    setUsageExamples(null);
-    setAwaitingNextInput(false);
-  }, []);
-
-  const handleValueChange = useCallback(
-    (v: string): void => {
-      if (awaitingNextInput) {
-        setFeedback(null);
-        setQuestionForFeedback(null);
-        setUsageExamples(null);
-        setAwaitingNextInput(false);
-      }
-      setUserAnswer(v);
+  const resetQuizSession = useCallback(
+    (clearAnswer = true) => {
+      fb.resetFeedback();
+      if (clearAnswer) input.setUserAnswer('');
+      input.setAwaitingNextInput(false);
     },
-    [awaitingNextInput],
+    [fb, input],
+  );
+
+  const applyResultExamples = useCallback(
+    (result: { translation: { sourceUsageExample?: string | null; targetUsageExample?: string | null } }) => {
+      const source = result.translation.sourceUsageExample ?? '';
+      const target = result.translation.targetUsageExample ?? '';
+      const hasExamples = source !== '' || target !== '';
+      if (hasExamples) {
+        fb.setUsageExamples({ source, target });
+      }
+    },
+    [fb],
+  );
+
+  const applyLevelChange = useCallback(
+    (result: { levelChange?: { from: string; to: string } }) => {
+      if (result.levelChange !== undefined) {
+        levelAnim.triggerLevelAnimation(result.levelChange);
+      }
+    },
+    [levelAnim],
   );
 
   const handleSkip = useCallback((): void => {
-    if (currentQuestion === null || isSubmitting || token === null) return;
-    setQuestionForFeedback(currentQuestion);
-    setSubmittedAnswer('');
+    if (currentQuestion === null || fb.isSubmitting || token === null) return;
+    fb.setQuestionForFeedback(currentQuestion);
+    fb.setSubmittedAnswer('');
     const result = revealAnswer(token);
     if (result !== null) {
-      setFeedback(result);
-      setAwaitingNextInput(true);
-      setUsageExamples({
+      fb.setFeedback(result);
+      input.setAwaitingNextInput(true);
+      fb.setUsageExamples({
         source: result.translation.sourceUsageExample ?? '',
         target: result.translation.targetUsageExample ?? '',
       });
-
-      if (result.levelChange !== undefined) {
-        const fromNum = parseInt(result.levelChange.from.replace('LEVEL_', ''));
-        const toNum = parseInt(result.levelChange.to.replace('LEVEL_', ''));
-        setIsLevelUp(toNum > fromNum);
-        setLevelChangeFrom(result.levelChange.from);
-        setLevelChangeTo(result.levelChange.to);
-        setShowLevelAnimation(true);
-      }
-
-      setUserAnswer('');
+      applyLevelChange(result);
+      input.setUserAnswer('');
       getNextQuestion();
       answerInputRef.current?.focus();
     }
-  }, [currentQuestion, isSubmitting, token, revealAnswer, getNextQuestion, answerInputRef]);
+  }, [currentQuestion, fb, token, revealAnswer, input, applyLevelChange, getNextQuestion, answerInputRef]);
 
   const handleQuizSelect = useCallback(
     async (quiz: string): Promise<void> => {
       reset();
       resetQuizSession();
-
       if (quiz === '') return;
-
       setLastSelectedQuiz(quiz);
-
       try {
         if (token !== null) {
           await startQuiz(token, quiz);
@@ -144,13 +134,13 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
         }
       } catch (error: unknown) {
         logger.error('Failed to start quiz:', error);
-        setFeedback({
+        fb.setFeedback({
           message: extractErrorMessage(error, 'Failed to start quiz. Please try again.'),
           isSuccess: false,
         });
       }
     },
-    [token, reset, resetQuizSession, startQuiz, answerInputRef],
+    [token, reset, resetQuizSession, startQuiz, answerInputRef, fb],
   );
 
   const handleBackToMenu = useCallback(async (): Promise<void> => {
@@ -169,16 +159,13 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
   }, [token, quizManager, reset, resetQuizSession, saveAndCleanup, toast, navigate]);
 
   const handleSubmitAnswer = useCallback(async (): Promise<void> => {
-    if (currentQuestion === null || isSubmitting || token === null) return;
-
-    setIsSubmitting(true);
-    setQuestionForFeedback(currentQuestion);
-    setLastFailedAnswer(null);
-    setSubmittedAnswer(userAnswer);
-
+    if (currentQuestion === null || fb.isSubmitting || token === null) return;
+    fb.setIsSubmitting(true);
+    fb.setQuestionForFeedback(currentQuestion);
+    fb.setLastFailedAnswer(null);
+    fb.setSubmittedAnswer(input.userAnswer);
     try {
-      const result = await submitAnswer(token, userAnswer);
-
+      const result = await submitAnswer(token, input.userAnswer);
       if (result !== null) {
         if (
           'isCorrect' in result &&
@@ -187,54 +174,50 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
         ) {
           navigator.vibrate(result.isCorrect ? [50] : [50, 30, 50]);
         }
-        setFeedback(result);
-        setAwaitingNextInput(true);
+        fb.setFeedback(result);
+        input.setAwaitingNextInput(true);
         if ('translation' in result) {
-          const { sourceUsageExample, targetUsageExample } = result.translation;
-          const source = sourceUsageExample ?? '';
-          const target = targetUsageExample ?? '';
-          const hasExamples = source !== '' || target !== '';
-          if (hasExamples) {
-            setUsageExamples({ source, target });
-          }
+          applyResultExamples(result);
         }
-
-        if ('levelChange' in result && result.levelChange !== undefined) {
-          const fromNum = parseInt(result.levelChange.from.replace('LEVEL_', ''));
-          const toNum = parseInt(result.levelChange.to.replace('LEVEL_', ''));
-          setIsLevelUp(toNum > fromNum);
-          setLevelChangeFrom(result.levelChange.from);
-          setLevelChangeTo(result.levelChange.to);
-          setShowLevelAnimation(true);
+        if ('levelChange' in result) {
+          applyLevelChange(result);
         }
-
-        setUserAnswer('');
+        input.setUserAnswer('');
         getNextQuestion();
         answerInputRef.current?.focus();
       }
     } catch (error: unknown) {
       logger.error('Error submitting answer:', error);
-      setFeedback({ message: extractErrorMessage(error, 'Error submitting answer.'), isSuccess: false });
-      setLastFailedAnswer(userAnswer);
+      fb.setFeedback({ message: extractErrorMessage(error, 'Error submitting answer.'), isSuccess: false });
+      fb.setLastFailedAnswer(input.userAnswer);
     } finally {
-      setIsSubmitting(false);
+      fb.setIsSubmitting(false);
     }
-  }, [currentQuestion, isSubmitting, token, userAnswer, submitAnswer, getNextQuestion, answerInputRef]);
+  }, [
+    currentQuestion,
+    fb,
+    token,
+    input,
+    submitAnswer,
+    applyResultExamples,
+    applyLevelChange,
+    getNextQuestion,
+    answerInputRef,
+  ]);
 
   const retryLastOperation = useCallback((): void => {
-    if (lastFailedAnswer !== null && currentQuestion !== null) {
-      setUserAnswer(lastFailedAnswer);
-      setLastFailedAnswer(null);
-      setFeedback(null);
+    if (fb.lastFailedAnswer !== null && currentQuestion !== null) {
+      input.setUserAnswer(fb.lastFailedAnswer);
+      fb.setLastFailedAnswer(null);
+      fb.setFeedback(null);
       void handleSubmitAnswer();
     } else if (lastSelectedQuiz !== null) {
       void handleQuizSelect(lastSelectedQuiz);
     }
-  }, [lastFailedAnswer, currentQuestion, lastSelectedQuiz, handleQuizSelect, handleSubmitAnswer]);
+  }, [fb, currentQuestion, input, lastSelectedQuiz, handleQuizSelect, handleSubmitAnswer]);
 
   const handleLoadWordLists = useCallback(async (): Promise<void> => {
     if (token === null) return;
-
     setLoadError(null);
     try {
       await loadWordLists(token);
@@ -256,27 +239,23 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
     void handleSubmitAnswer();
   }, [handleSubmitAnswer]);
 
-  const handleLevelAnimationComplete = useCallback(() => {
-    setShowLevelAnimation(false);
-  }, []);
-
   return {
-    userAnswer,
-    submittedAnswer,
-    feedback,
-    usageExamples,
-    isSubmitting,
-    questionForFeedback,
-    awaitingNextInput,
-    showLevelAnimation,
-    isLevelUp,
-    levelChangeFrom,
-    levelChangeTo,
+    userAnswer: input.userAnswer,
+    submittedAnswer: fb.submittedAnswer,
+    feedback: fb.feedback,
+    usageExamples: fb.usageExamples,
+    isSubmitting: fb.isSubmitting,
+    questionForFeedback: fb.questionForFeedback,
+    awaitingNextInput: input.awaitingNextInput,
+    showLevelAnimation: levelAnim.showLevelAnimation,
+    isLevelUp: levelAnim.isLevelUp,
+    levelChangeFrom: levelAnim.levelChangeFrom,
+    levelChangeTo: levelAnim.levelChangeTo,
     loadError,
     lastSelectedQuiz,
-    setUserAnswer,
+    setUserAnswer: input.setUserAnswer,
     resetQuizSession,
-    handleValueChange,
+    handleValueChange: input.handleValueChange,
     handleSkip,
     handleQuizSelect,
     retryLastOperation,
@@ -286,6 +265,6 @@ export function useQuizSession(answerInputRef: RefObject<AnswerInputRef | null>)
     handleBackToMenuClick,
     handleRetryLoadClick,
     handleSubmitClick,
-    handleLevelAnimationComplete,
+    handleLevelAnimationComplete: levelAnim.handleLevelAnimationComplete,
   };
 }

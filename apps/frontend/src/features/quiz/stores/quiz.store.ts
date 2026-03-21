@@ -168,10 +168,3 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
     quizService.setSaveErrorCallback(callback);
   },
 }));
-
-export const useWordLists = (): WordList[] => useQuizStore((state) => state.wordLists);
-export const useSelectedQuiz = (): string | null => useQuizStore((state) => state.selectedQuiz);
-export const useQuizManager = (): QuizManager | null => useQuizStore((state) => state.quizManager);
-export const useCurrentQuestion = (): QuizQuestion | null => useQuizStore((state) => state.currentQuestion);
-export const useQuizLoading = (): boolean => useQuizStore((state) => state.loading);
-export const useQuizError = (): string | null => useQuizStore((state) => state.error);

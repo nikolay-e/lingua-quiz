@@ -1,16 +1,16 @@
-import type { VocabularyItemDetailResponse } from '@lingua-quiz/api-client';
 import type {
-  ContentVersion as DomainContentVersion,
-  User as DomainUser,
-  UserProgress as DomainUserProgress,
-  VocabularyItem as DomainVocabularyItem,
-  WordList as DomainWordList,
-  TtsLanguages,
-  TtsResponse,
-} from '@lingua-quiz/domain';
+  ContentVersionResponse,
+  TTSLanguagesResponse as ApiTTSLanguagesResponse,
+  TTSResponse as ApiTTSResponse,
+  UserProgressResponse,
+  UserResponse,
+  VocabularyItemDetailResponse,
+  VocabularyItemResponse,
+  WordListResponse,
+} from '@lingua-quiz/api-client';
 import type { LucideIcon } from 'lucide-react';
 
-export type User = DomainUser & { isAdmin?: boolean };
+export type User = UserResponse & { isAdmin?: boolean };
 
 export interface AuthResponse {
   token: string;
@@ -19,11 +19,11 @@ export interface AuthResponse {
   user: User;
 }
 
-export type Translation = DomainVocabularyItem;
-export type TTSResponse = TtsResponse;
-export type TTSLanguagesResponse = TtsLanguages;
-export type WordList = DomainWordList;
-export type UserProgress = DomainUserProgress;
+export type Translation = VocabularyItemResponse;
+export type TTSResponse = ApiTTSResponse;
+export type TTSLanguagesResponse = ApiTTSLanguagesResponse;
+export type WordList = WordListResponse;
+export type UserProgress = UserProgressResponse;
 
 export interface QuizFeedback {
   message: string;
@@ -49,5 +49,5 @@ export interface TranslationDisplay {
   target: string;
 }
 
-export type ContentVersion = DomainContentVersion;
+export type ContentVersion = ContentVersionResponse;
 export type AdminVocabularyItem = VocabularyItemDetailResponse;
