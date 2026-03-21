@@ -171,18 +171,3 @@ jobs:
       - name: Cleanup
         if: always()
         run: docker compose --profile test-all down -v
-
-  ci-success:
-    runs-on: ubuntu-latest
-    if: always()
-    needs: [lint, build, test]
-    timeout-minutes: 1
-    steps:
-      - name: Verify all jobs passed
-        run: |
-          if [[ "${{ needs.lint.result }}" != "success" ]] || \
-             [[ "${{ needs.build.result }}" != "success" ]] || \
-             [[ "${{ needs.test.result }}" != "success" ]]; then
-            echo "::error::CI failed: lint=${{ needs.lint.result }}, build=${{ needs.build.result }}, test=${{ needs.test.result }}"
-            exit 1
-          fi
