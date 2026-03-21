@@ -148,10 +148,11 @@ jobs:
         env:
           TAG: ${{ needs.build.outputs.tag }}
         run: |
-          for svc in backend integration-e2e-tests; do
+          for svc in backend frontend integration-e2e-tests; do
             docker pull "${{ env.REGISTRY }}/lingua-quiz-${svc}:${TAG}"
           done
           docker tag "${{ env.REGISTRY }}/lingua-quiz-backend:${TAG}" lingua-quiz-backend:latest
+          docker tag "${{ env.REGISTRY }}/lingua-quiz-frontend:${TAG}" lingua-quiz-frontend:latest
           docker tag "${{ env.REGISTRY }}/lingua-quiz-integration-e2e-tests:${TAG}" lingua-quiz-tests:latest
 
       - name: Run integration tests
