@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from collections.abc import Sequence
 import datetime
 
 from api.v2 import admin, auth, config, progress, speech, tts, version, vocabulary
@@ -122,7 +123,7 @@ async def get_version() -> VersionResponse:
     return VersionResponse(version=APP_VERSION)
 
 
-def _sanitize_validation_errors(errors: list[dict]) -> list[dict]:
+def _sanitize_validation_errors(errors: Sequence[dict]) -> list[dict]:
     return [{"loc": e.get("loc"), "type": e.get("type"), "msg": e.get("msg")} for e in errors]
 
 
