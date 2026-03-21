@@ -79,6 +79,7 @@ ignore = [
     "B007",   # Allow unused loop variables in tests
     "RUF001", # Allow Cyrillic characters in Russian test data
     "PLC2401", # Allow non-ASCII in function names (Spanish accents in test names)
+    "T201",   # Allow print() for browser logging in E2E tests
 ]
 "**/test_*.py" = [
     "S101",

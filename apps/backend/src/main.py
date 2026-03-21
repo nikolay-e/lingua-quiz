@@ -21,7 +21,7 @@ configure_logging(log_level=LOG_LEVEL, json_format=LOG_JSON_FORMAT)
 logger = get_logger(__name__)
 
 
-def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded):
+def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
     client_ip = get_remote_address(request)
     logger.warning(
         "Rate limit exceeded",

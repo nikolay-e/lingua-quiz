@@ -25,7 +25,7 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
         timer.start()
 
         try:
-            response = await call_next(request)
+            response: Response = await call_next(request)
         except Exception as e:
             duration_ms = timer.elapsed_ms()
             self._log_request(request, 500, duration_ms, request_id, error=str(e))
