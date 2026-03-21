@@ -213,6 +213,8 @@ class TestUserProgress:
             queue_position=5,
             correct_count=3,
             incorrect_count=1,
+            consecutive_correct=0,
+            recent_history=[True, True, False],
         )
         save_response = authenticated_api_client.post(
             f"{API_URL}/user/progress",
@@ -260,6 +262,8 @@ class TestUserProgress:
                     queue_position=10,
                     correct_count=5,
                     incorrect_count=0,
+                    consecutive_correct=3,
+                    recent_history=[True, True, True],
                 ),
                 ProgressUpdateRequest(
                     vocabulary_item_id=vocab_items[1].id,
@@ -267,6 +271,8 @@ class TestUserProgress:
                     queue_position=3,
                     correct_count=2,
                     incorrect_count=1,
+                    consecutive_correct=1,
+                    recent_history=[True, False, True],
                 ),
             ]
         )
