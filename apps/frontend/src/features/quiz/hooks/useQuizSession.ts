@@ -1,18 +1,15 @@
 import { useState, useCallback, type RefObject } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { SubmissionResult, QuizQuestion, RevealResult } from '@lingua-quiz/core';
-import type { QuizFeedback } from '@api/types';
+import type { QuizQuestion } from '@lingua-quiz/core';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import type { AnswerInputRef } from '@features/quiz/components';
 import { useToast } from '@shared/components';
 import { logger, extractErrorMessage, isTouchDevice } from '@shared/utils';
 import { requestWakeLock, releaseWakeLock } from '@shared/pwa';
-import { useQuizFeedback } from './useQuizFeedback';
+import { useQuizFeedback, type FeedbackState } from './useQuizFeedback';
 import { useQuizLevelAnimation } from './useQuizLevelAnimation';
 import { useQuizInput } from './useQuizInput';
-
-type FeedbackState = SubmissionResult | QuizFeedback | RevealResult | null;
 
 interface QuizSessionState {
   userAnswer: string;

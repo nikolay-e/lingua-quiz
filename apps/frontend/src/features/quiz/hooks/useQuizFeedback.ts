@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import type { SubmissionResult, QuizQuestion, RevealResult } from '@lingua-quiz/core';
 import type { QuizFeedback } from '@api/types';
 
-type FeedbackState = SubmissionResult | QuizFeedback | RevealResult | null;
+export type FeedbackState = SubmissionResult | QuizFeedback | RevealResult | null;
 
 export interface QuizFeedbackReturn {
   submittedAnswer: string;
