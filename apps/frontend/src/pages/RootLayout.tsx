@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useThemeStore } from '@features/settings/stores/theme.store';
@@ -15,7 +15,6 @@ export function RootLayout(): React.JSX.Element {
   const resolvedTheme = useThemeStore((state) => state.resolvedTheme);
   const resetQuiz = useQuizStore((state) => state.reset);
 
-  const isInitialized = useRef(false);
   const currentPath = location.pathname;
 
   useEffect(() => {
@@ -29,9 +28,6 @@ export function RootLayout(): React.JSX.Element {
   }, [isAuthenticated, resetQuiz]);
 
   useEffect(() => {
-    if (isInitialized.current) return;
-    isInitialized.current = true;
-
     const protectedRoutes = ['/', '/quiz', '/speak', '/admin', '/settings'];
     const publicRoutes = ['/login', '/register'];
 

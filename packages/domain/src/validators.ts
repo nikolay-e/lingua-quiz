@@ -27,16 +27,7 @@ const compile = <T>(schema: JSONSchema7): Validator<T> => {
 const schemas: Record<string, JSONSchema7> = {
   VocabularyItemResponse: {
     type: 'object',
-    required: [
-      'id',
-      'sourceText',
-      'sourceLanguage',
-      'targetText',
-      'targetLanguage',
-      'listName',
-      'sourceUsageExample',
-      'targetUsageExample',
-    ],
+    required: ['id', 'sourceText', 'sourceLanguage', 'targetText', 'targetLanguage', 'listName'],
     properties: {
       id: { type: 'string' },
       sourceText: { type: 'string' },

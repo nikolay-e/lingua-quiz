@@ -115,9 +115,9 @@ export default defineConfig({
     cssMinify: true,
     rollupOptions: {
       output: {
-        assetFileNames: `assets/[name]-[hash]-${Date.now()}[extname]`,
-        chunkFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
-        entryFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
         banner: '',
         footer: '',
         intro: '',

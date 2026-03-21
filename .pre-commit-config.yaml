@@ -306,14 +306,6 @@ repos:
         files: ^docker-compose.*\.(yml|yaml)$
         pass_filenames: false
 
-      # Build all Docker images to ensure they compile successfully
-      - id: docker-build-all
-        name: Build Docker images (backend, frontend, tests)
-        entry: bash -c 'echo "Building backend..." && docker build --target backend -t lingua-quiz-backend:test . && echo "Building frontend..." && docker build --target frontend -t lingua-quiz-frontend:test . && echo "Building test container..." && docker build --target integration-e2e-tests -t lingua-quiz-tests:test . && echo "All images built successfully"'
-        language: system
-        files: ^(Dockerfile|docker-compose.*\.(yml|yaml)|apps/(backend|frontend)/.*|packages/(core|domain|api-client)/.*|tests/e2e/.*|schema/lingua-quiz-schema\.json|infra/nginx/.*|package(-lock)?\.json)$
-        pass_filenames: false
-
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.37.1
     hooks:

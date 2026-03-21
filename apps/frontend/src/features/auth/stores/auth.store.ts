@@ -44,7 +44,7 @@ function scheduleTokenRefresh(refreshAccessToken: () => Promise<void>): void {
   const expirationMs = parseInt(expirationStr, 10);
   const now = Date.now();
   const timeUntilExpiry = expirationMs - now;
-  const refreshBeforeMs = 2 * 60 * 1000;
+  const refreshBeforeMs = 3 * 60 * 1000;
   const refreshIn = Math.max(0, timeUntilExpiry - refreshBeforeMs);
 
   refreshTimer = setTimeout(() => {
@@ -194,13 +194,15 @@ export const useAuthStore = create<AuthStore>()(
 if (typeof window !== 'undefined') {
   useAuthStore.getState().checkToken();
 
-  authChannel?.addEventListener('message', (event: MessageEvent<AuthChannelMessage>) => {
-    if (event.data.type === 'token-refreshed') {
-      useAuthStore.getState().checkToken();
-    } else {
-      useAuthStore.getState().logoutUser();
-    }
-  });
+  if (authChannel !== null) {
+    authChannel.onmessage = (event: MessageEvent<AuthChannelMessage>): void => {
+      if (event.data.type === 'token-refreshed') {
+        useAuthStore.getState().checkToken();
+      } else {
+        useAuthStore.getState().logoutUser();
+      }
+    };
+  }
 }
 
 export const useIsAuthenticated = (): boolean => useAuthStore((state) => state.isAuthenticated);

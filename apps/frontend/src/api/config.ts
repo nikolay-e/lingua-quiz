@@ -102,5 +102,5 @@ export async function fetchWithAuth<T>(
   if (contentType?.includes('application/json') === true) {
     return response.json() as Promise<T>;
   }
-  return undefined as T;
+  throw new Error(`Unexpected non-JSON response from ${endpoint}`);
 }
