@@ -76,15 +76,25 @@ export function useLanguageLevelSelection(wordLists: WordList[]) {
 
   const handleKnownChange = (value: string) => {
     setSelectedKnown(value);
-    setSelectedLearning(undefined);
-    setSelectedLevel(undefined);
-    persistSelection(value);
+    const learningExists = parsedLists.some((p) => p.target === value && p.source === selectedLearning);
+    const newLearning = learningExists ? selectedLearning : undefined;
+    const levelExists =
+      newLearning !== undefined &&
+      parsedLists.some((p) => p.target === value && p.source === newLearning && p.level === selectedLevel);
+    const newLevel = levelExists ? selectedLevel : undefined;
+    setSelectedLearning(newLearning);
+    setSelectedLevel(newLevel);
+    persistSelection(value, newLearning, newLevel);
   };
 
   const handleLearningChange = (value: string) => {
     setSelectedLearning(value);
-    setSelectedLevel(undefined);
-    persistSelection(selectedKnown, value);
+    const levelExists = parsedLists.some(
+      (p) => p.target === selectedKnown && p.source === value && p.level === selectedLevel,
+    );
+    const newLevel = levelExists ? selectedLevel : undefined;
+    setSelectedLevel(newLevel);
+    persistSelection(selectedKnown, value, newLevel);
   };
 
   const handleLevelChange = (value: string) => {
