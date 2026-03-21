@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import type { SubmissionResult, QuizQuestion, RevealResult } from '@lingua-quiz/core';
 import type { QuizFeedback } from '@api/types';
 
@@ -28,12 +28,12 @@ export function useQuizFeedback(): QuizFeedbackReturn {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastFailedAnswer, setLastFailedAnswer] = useState<string | null>(null);
 
-  const resetFeedback = useCallback(() => {
+  const resetFeedback = () => {
     setFeedback(null);
     setSubmittedAnswer('');
     setQuestionForFeedback(null);
     setUsageExamples(null);
-  }, []);
+  };
 
   return {
     submittedAnswer,

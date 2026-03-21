@@ -32,6 +32,7 @@ select = [
     "C4",     # flake8-comprehensions
     "DTZ",    # flake8-datetimez
     "T10",    # flake8-debugger
+    "T20",    # flake8-print
     "EM",     # flake8-errmsg
     "ICN",    # flake8-import-conventions
     "PIE",    # flake8-pie
@@ -130,6 +131,7 @@ ignore = [
 ]
 "**/interactive_mode.py" = [
     "RUF012",  # Allow mutable class attributes for UI styles
+    "T201",    # Allow print() in interactive UI
 ]
 "**/vocabulary_analyzer.py" = [
     "PLR0915", # Allow many statements in analysis logic
@@ -146,6 +148,15 @@ ignore = [
 "**/transliteration_detector.py" = [
     "RUF001",  # Allow Cyrillic in transliteration mappings
     "RUF012",  # Allow mutable class attributes for transliteration tables
+]
+"apps/backend/sync_vocabulary.py" = [
+    "T201",    # Allow print() in CLI sync script
+]
+"apps/backend/seed_test_data.py" = [
+    "T201",    # Allow print() in test data seeding script
+]
+"tools/vocab-tools/vocab_tools/cli/**/*.py" = [
+    "T201",    # Allow print() in CLI commands
 ]
 
 [tool.ruff.lint.isort]

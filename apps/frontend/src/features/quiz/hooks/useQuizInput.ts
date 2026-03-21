@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 export interface QuizInputReturn {
   userAnswer: string;
@@ -13,21 +13,18 @@ export function useQuizInput(onAwaitingInputClear: () => void): QuizInputReturn 
   const [userAnswer, setUserAnswer] = useState('');
   const [awaitingNextInput, setAwaitingNextInput] = useState(false);
 
-  const handleValueChange = useCallback(
-    (v: string): void => {
-      if (awaitingNextInput) {
-        onAwaitingInputClear();
-        setAwaitingNextInput(false);
-      }
-      setUserAnswer(v);
-    },
-    [awaitingNextInput, onAwaitingInputClear],
-  );
+  const handleValueChange = (v: string): void => {
+    if (awaitingNextInput) {
+      onAwaitingInputClear();
+      setAwaitingNextInput(false);
+    }
+    setUserAnswer(v);
+  };
 
-  const resetInput = useCallback(() => {
+  const resetInput = () => {
     setUserAnswer('');
     setAwaitingNextInput(false);
-  }, []);
+  };
 
   return {
     userAnswer,

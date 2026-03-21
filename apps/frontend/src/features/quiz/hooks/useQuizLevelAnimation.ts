@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 export interface LevelChange {
   from: string;
@@ -20,18 +20,18 @@ export function useQuizLevelAnimation(): QuizLevelAnimationReturn {
   const [levelChangeFrom, setLevelChangeFrom] = useState<string | undefined>(undefined);
   const [levelChangeTo, setLevelChangeTo] = useState<string | undefined>(undefined);
 
-  const triggerLevelAnimation = useCallback((change: LevelChange) => {
+  const triggerLevelAnimation = (change: LevelChange) => {
     const fromNum = parseInt(change.from.replace('LEVEL_', ''));
     const toNum = parseInt(change.to.replace('LEVEL_', ''));
     setIsLevelUp(toNum > fromNum);
     setLevelChangeFrom(change.from);
     setLevelChangeTo(change.to);
     setShowLevelAnimation(true);
-  }, []);
+  };
 
-  const handleLevelAnimationComplete = useCallback(() => {
+  const handleLevelAnimationComplete = () => {
     setShowLevelAnimation(false);
-  }, []);
+  };
 
   return {
     showLevelAnimation,

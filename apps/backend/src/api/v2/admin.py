@@ -1,9 +1,10 @@
-from core.database import get_active_version, query_words_db, serialize_rows
+from core.database import execute_words_write_transaction, get_active_version, query_words_db, serialize_rows
 from core.error_handler import handle_api_errors
 from core.logging import get_logger
+from core.rate_limit import limiter
 from core.security import require_admin
-from fastapi import APIRouter, Depends, HTTPException, Query, status
-from generated.schemas import VocabularyItemDetailResponse
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from generated.schemas import VocabularyItemCreate, VocabularyItemDetailResponse, VocabularyItemUpdate
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
@@ -111,3 +112,139 @@ def list_vocabulary(
         )
 
     return serialize_rows(results, VocabularyItemDetailResponse) or []
+
+
+FIELD_TO_COLUMN = {
+    "source_text": "source_text",
+    "target_text": "target_text",
+    "source_usage_example": "source_usage_example",
+    "target_usage_example": "target_usage_example",
+    "is_active": "is_active",
+    "list_name": "list_name",
+    "difficulty_level": "difficulty_level",
+}
+
+
+@router.post(
+    "/vocabulary",
+    status_code=status.HTTP_201_CREATED,
+)
+@limiter.limit("30/minute")
+@handle_api_errors("Create vocabulary item")
+def create_vocabulary_item(
+    request: Request,
+    item: VocabularyItemCreate,
+    current_admin: dict = Depends(require_admin),
+    version_id: int = Depends(get_active_version),
+) -> dict[str, str]:
+    logger.info(
+        "Admin creating vocabulary item",
+        extra={"admin": current_admin["username"], "source_text": item.source_text},
+    )
+    result = execute_words_write_transaction(
+        """INSERT INTO vocabulary_items
+           (version_id, source_text, source_language, target_text, target_language,
+            list_name, difficulty_level, source_usage_example, target_usage_example)
+           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+           RETURNING id""",
+        (
+            version_id,
+            item.source_text,
+            item.source_language,
+            item.target_text,
+            item.target_language,
+            item.list_name,
+            item.difficulty_level,
+            item.source_usage_example,
+            item.target_usage_example,
+        ),
+        fetch_results=True,
+        one=True,
+    )
+
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to create vocabulary item",
+        )
+
+    return {"id": str(result["id"]), "message": "Vocabulary item created"}
+
+
+@router.put("/vocabulary/{item_id}")
+@limiter.limit("30/minute")
+@handle_api_errors("Update vocabulary item")
+def update_vocabulary_item(
+    request: Request,
+    item_id: str,
+    item: VocabularyItemUpdate,
+    current_admin: dict = Depends(require_admin),
+) -> dict[str, str]:
+    updates = item.model_dump(exclude_unset=True)
+
+    if not updates:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No fields to update",
+        )
+
+    set_clauses = []
+    values = []
+    for field, value in updates.items():
+        column = FIELD_TO_COLUMN.get(field)
+        if column is None:
+            continue
+        set_clauses.append(f"{column} = %s")  # nosec B608
+        values.append(value)
+
+    if not set_clauses:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No valid fields to update",
+        )
+
+    set_clauses.append("updated_at = NOW()")
+    values.append(item_id)
+
+    query = f"UPDATE vocabulary_items SET {', '.join(set_clauses)} WHERE id = %s"  # nosec B608
+    logger.info(
+        "Admin updating vocabulary item",
+        extra={"admin": current_admin["username"], "item_id": item_id, "fields": list(updates.keys())},
+    )
+
+    row_count = execute_words_write_transaction(query, tuple(values))
+
+    if row_count == 0:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Vocabulary item not found",
+        )
+
+    return {"message": "Vocabulary item updated"}
+
+
+@router.delete("/vocabulary/{item_id}")
+@limiter.limit("30/minute")
+@handle_api_errors("Delete vocabulary item")
+def delete_vocabulary_item(
+    request: Request,
+    item_id: str,
+    current_admin: dict = Depends(require_admin),
+) -> dict[str, str]:
+    logger.info(
+        "Admin deleting vocabulary item",
+        extra={"admin": current_admin["username"], "item_id": item_id},
+    )
+
+    row_count = execute_words_write_transaction(
+        "DELETE FROM vocabulary_items WHERE id = %s",
+        (item_id,),
+    )
+
+    if row_count == 0:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Vocabulary item not found",
+        )
+
+    return {"message": "Vocabulary item deleted"}

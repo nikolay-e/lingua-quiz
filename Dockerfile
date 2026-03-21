@@ -52,6 +52,7 @@ FROM nginx:1.29.6-alpine AS frontend
 RUN chown -R nginx:nginx /var/cache/nginx && \
     chmod -R 755 /var/cache/nginx
 COPY infra/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY infra/nginx/snippets/ /etc/nginx/snippets/
 COPY --from=frontend-builder /app/apps/frontend/dist /usr/share/nginx/html
 RUN chown -R nginx:nginx /usr/share/nginx/html
 USER nginx
