@@ -85,7 +85,7 @@ def verify_refresh_token(token: str) -> dict:
     return {"user_id": token_data["user_id"]}
 
 
-async def get_current_user(
+def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
 ) -> dict:
     token_prefix = credentials.credentials[:8] if credentials.credentials else "none"
@@ -112,7 +112,7 @@ async def get_current_user(
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
 
 
-async def require_admin(current_user: dict = Depends(get_current_user)) -> dict:
+def require_admin(current_user: dict = Depends(get_current_user)) -> dict:
     from core.database import query_db
 
     user = query_db(

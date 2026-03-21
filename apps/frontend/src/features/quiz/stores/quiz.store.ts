@@ -13,6 +13,8 @@ interface QuizState {
   error: string | null;
 }
 
+type ActiveLevel = 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4';
+
 interface QuizActions {
   loadWordLists: (token: string) => Promise<void>;
   startQuiz: (token: string, quizName: string) => Promise<void>;
@@ -20,9 +22,9 @@ interface QuizActions {
   submitAnswer: (token: string, answer: string) => Promise<SubmissionResult | null>;
   revealAnswer: (token: string) => RevealResult | null;
   setLevel: (
-    level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4',
+    level: ActiveLevel,
     token?: string,
-  ) => Promise<{ success: boolean; actualLevel: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4'; message?: string }>;
+  ) => Promise<{ success: boolean; actualLevel: ActiveLevel; message?: string }>;
   reset: () => void;
   saveAndCleanup: (token: string) => Promise<void>;
   flushImmediately: (token: string, isUnloading?: boolean) => void;
@@ -49,11 +51,11 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
 
     try {
       const result = await quizService.loadWordLists(token);
-      if (result !== null) {
-        set({ wordLists: result, loading: false });
-      } else {
+      if (result === null) {
         set({ loading: false, error: 'Failed to load word lists. Please try again.' });
         throw new Error('Failed to load word lists');
+      } else {
+        set({ wordLists: result, loading: false });
       }
     } catch (error: unknown) {
       const msg = extractErrorMessage(error, 'Failed to load word lists');
@@ -69,16 +71,16 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
 
     try {
       const result = await quizService.startQuiz(token, quizName);
-      if (result !== null) {
+      if (result === null) {
+        set({ loading: false, selectedQuiz: null, error: 'Failed to start quiz. Please try again.' });
+        throw new Error('Failed to start quiz');
+      } else {
         set({
           loading: false,
           selectedQuiz: quizName,
           quizManager: result.manager,
           currentQuestion: result.currentQuestion,
         });
-      } else {
-        set({ loading: false, selectedQuiz: null, error: 'Failed to start quiz. Please try again.' });
-        throw new Error('Failed to start quiz');
       }
     } catch (error: unknown) {
       const msg = extractErrorMessage(error, 'Failed to start quiz');
@@ -120,7 +122,7 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
     return quizService.revealAnswer(state.quizManager, state.currentQuestion, token);
   },
 
-  setLevel: async (level: 'LEVEL_1' | 'LEVEL_2' | 'LEVEL_3' | 'LEVEL_4', token?: string) => {
+  setLevel: async (level: ActiveLevel, token?: string) => {
     const state = get();
     if (state.quizManager === null) {
       return { success: false, actualLevel: 'LEVEL_1' as const, message: 'Quiz not initialized' };

@@ -21,7 +21,7 @@ configure_logging(log_level=LOG_LEVEL, json_format=LOG_JSON_FORMAT)
 logger = get_logger(__name__)
 
 
-async def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded):
+def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded):
     client_ip = get_remote_address(request)
     logger.warning(
         "Rate limit exceeded",
@@ -99,8 +99,8 @@ app.include_router(config.router)
 app.include_router(speech.router)
 
 
-@app.get("/api/health", response_model=HealthResponse, tags=["Health"])
-async def health_check():
+@app.get("/api/health", tags=["Health"])
+async def health_check() -> HealthResponse:
     try:
         query_db("SELECT 1", one=True)
         return HealthResponse(
@@ -116,8 +116,8 @@ async def health_check():
         )
 
 
-@app.get("/api/version", response_model=VersionResponse, tags=["Health"])
-async def get_version():
+@app.get("/api/version", tags=["Health"])
+async def get_version() -> VersionResponse:
     return VersionResponse(version=APP_VERSION)
 
 

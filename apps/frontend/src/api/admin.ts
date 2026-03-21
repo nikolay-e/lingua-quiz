@@ -42,6 +42,6 @@ const adminApi = {
   },
 };
 
-export type { VocabularyItemCreate, VocabularyItemUpdate };
+export type { VocabularyItemCreate, VocabularyItemUpdate } from '@lingua-quiz/api-client';
 
 export default adminApi;

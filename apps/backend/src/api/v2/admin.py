@@ -1,22 +1,26 @@
-from core.database import execute_words_write_transaction, get_active_version, query_words_db, serialize_rows
+from typing import Annotated
+
+from core.database import execute_words_write_transaction, query_words_db, serialize_rows
+from core.dependencies import ActiveVersion, CurrentAdmin
 from core.error_handler import handle_api_errors
 from core.logging import get_logger
 from core.rate_limit import limiter
-from core.security import require_admin
-from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from fastapi import APIRouter, HTTPException, Query, Request, status
 from generated.schemas import VocabularyItemCreate, VocabularyItemDetailResponse, VocabularyItemUpdate
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
 
+VOCABULARY_ITEM_NOT_FOUND = "Vocabulary item not found"
 
-@router.get("/vocabulary/search", response_model=list[VocabularyItemDetailResponse])
+
+@router.get("/vocabulary/search")
 @handle_api_errors("Search vocabulary")
 def search_vocabulary(
-    query: str = Query(..., min_length=1, max_length=100),
-    limit: int = Query(50, ge=1, le=500),
-    current_admin: dict = Depends(require_admin),
-    version_id: int = Depends(get_active_version),
+    query: Annotated[str, Query(min_length=1, max_length=100)],
+    current_admin: CurrentAdmin,
+    version_id: ActiveVersion,
+    limit: Annotated[int, Query(ge=1, le=500)] = 50,
 ) -> list[VocabularyItemDetailResponse]:
     logger.info(
         "Admin vocabulary search",
@@ -48,11 +52,11 @@ def search_vocabulary(
     return serialize_rows(results, VocabularyItemDetailResponse) or []
 
 
-@router.get("/vocabulary/{item_id}", response_model=VocabularyItemDetailResponse)
+@router.get("/vocabulary/{item_id}")
 @handle_api_errors("Get vocabulary item")
 def get_vocabulary_item(
     item_id: str,
-    current_admin: dict = Depends(require_admin),
+    current_admin: CurrentAdmin,
 ) -> VocabularyItemDetailResponse:
     item = query_words_db(
         """SELECT id, source_text, source_language, target_text, target_language,
@@ -69,20 +73,20 @@ def get_vocabulary_item(
     if not item:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Vocabulary item not found",
+            detail=VOCABULARY_ITEM_NOT_FOUND,
         )
 
     return serialize_rows(item, VocabularyItemDetailResponse, one=True)
 
 
-@router.get("/vocabulary", response_model=list[VocabularyItemDetailResponse])
+@router.get("/vocabulary")
 @handle_api_errors("List vocabulary")
 def list_vocabulary(
+    current_admin: CurrentAdmin,
+    version_id: ActiveVersion,
     list_name: str | None = None,
-    limit: int = Query(100, ge=1, le=1000),
-    offset: int = Query(0, ge=0),
-    current_admin: dict = Depends(require_admin),
-    version_id: int = Depends(get_active_version),
+    limit: Annotated[int, Query(ge=1, le=1000)] = 100,
+    offset: Annotated[int, Query(ge=0)] = 0,
 ) -> list[VocabularyItemDetailResponse]:
     if list_name:
         results = query_words_db(
@@ -134,8 +138,8 @@ FIELD_TO_COLUMN = {
 def create_vocabulary_item(
     request: Request,
     item: VocabularyItemCreate,
-    current_admin: dict = Depends(require_admin),
-    version_id: int = Depends(get_active_version),
+    current_admin: CurrentAdmin,
+    version_id: ActiveVersion,
 ) -> dict[str, str]:
     logger.info(
         "Admin creating vocabulary item",
@@ -178,7 +182,7 @@ def update_vocabulary_item(
     request: Request,
     item_id: str,
     item: VocabularyItemUpdate,
-    current_admin: dict = Depends(require_admin),
+    current_admin: CurrentAdmin,
 ) -> dict[str, str]:
     updates = item.model_dump(exclude_unset=True)
 
@@ -217,7 +221,7 @@ def update_vocabulary_item(
     if row_count == 0:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Vocabulary item not found",
+            detail=VOCABULARY_ITEM_NOT_FOUND,
         )
 
     return {"message": "Vocabulary item updated"}
@@ -229,7 +233,7 @@ def update_vocabulary_item(
 def delete_vocabulary_item(
     request: Request,
     item_id: str,
-    current_admin: dict = Depends(require_admin),
+    current_admin: CurrentAdmin,
 ) -> dict[str, str]:
     logger.info(
         "Admin deleting vocabulary item",
@@ -244,7 +248,7 @@ def delete_vocabulary_item(
     if row_count == 0:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Vocabulary item not found",
+            detail=VOCABULARY_ITEM_NOT_FOUND,
         )
 
     return {"message": "Vocabulary item deleted"}

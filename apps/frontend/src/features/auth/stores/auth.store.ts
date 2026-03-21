@@ -29,7 +29,7 @@ type QuizStoreSaveCallback = (token: string) => Promise<void>;
 let quizStoreSaveCallback: QuizStoreSaveCallback | null = null;
 let refreshTimer: ReturnType<typeof setTimeout> | null = null;
 let isRefreshing = false;
-const authChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('auth-channel') : null;
+const authChannel = typeof globalThis.BroadcastChannel !== 'undefined' ? new BroadcastChannel('auth-channel') : null;
 
 export function setQuizStoreRef(saveCallback: QuizStoreSaveCallback): void {
   quizStoreSaveCallback = saveCallback;
@@ -41,7 +41,7 @@ function scheduleTokenRefresh(refreshAccessToken: () => Promise<void>): void {
   const expirationStr = safeStorage.getItem(STORAGE_KEYS.TOKEN_EXPIRATION);
   if (expirationStr === null) return;
 
-  const expirationMs = parseInt(expirationStr, 10);
+  const expirationMs = Number.parseInt(expirationStr, 10);
   const now = Date.now();
   const timeUntilExpiry = expirationMs - now;
   const refreshBeforeMs = 3 * 60 * 1000;
@@ -191,7 +191,7 @@ export const useAuthStore = create<AuthStore>()(
   }),
 );
 
-if (typeof window !== 'undefined') {
+if (typeof globalThis.window !== 'undefined') {
   useAuthStore.getState().checkToken();
 
   if (authChannel !== null) {

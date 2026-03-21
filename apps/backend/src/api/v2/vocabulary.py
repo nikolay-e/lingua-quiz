@@ -1,22 +1,22 @@
-from core.database import get_active_version, query_words_db, serialize_rows
+from core.database import query_words_db, serialize_rows
+from core.dependencies import ActiveVersion, CurrentUser
 from core.error_handler import handle_api_errors
 from core.logging import get_logger
 from core.rate_limit import limiter
-from core.security import get_current_user
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Request
 from generated.schemas import VocabularyItemResponse, WordListResponse
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api", tags=["Vocabulary"])
 
 
-@router.get("/word-lists", response_model=list[WordListResponse])
+@router.get("/word-lists")
 @limiter.limit("100/minute")
 @handle_api_errors("Get word lists")
 def get_word_lists(
     request: Request,
-    current_user: dict = Depends(get_current_user),
-    version_id: int = Depends(get_active_version),
+    current_user: CurrentUser,
+    version_id: ActiveVersion,
 ) -> list[WordListResponse]:
     logger.debug(f"Fetching word lists for user: {current_user['username']}")
     lists = query_words_db(
@@ -30,14 +30,14 @@ def get_word_lists(
     return serialize_rows(lists, WordListResponse) or []
 
 
-@router.get("/translations", response_model=list[VocabularyItemResponse])
+@router.get("/translations")
 @limiter.limit("100/minute")
 @handle_api_errors("Get translations")
 def get_translations(
     request: Request,
     list_name: str,
-    current_user: dict = Depends(get_current_user),
-    version_id: int = Depends(get_active_version),
+    current_user: CurrentUser,
+    version_id: ActiveVersion,
 ) -> list[VocabularyItemResponse]:
     translations = query_words_db(
         """SELECT id, source_text, source_language, target_text, target_language,

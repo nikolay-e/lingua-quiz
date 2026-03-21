@@ -81,9 +81,23 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
     setDuration(0);
     updateWaveformRef.current();
 
-    timerIdRef.current = window.setInterval(() => {
+    timerIdRef.current = globalThis.window.setInterval(() => {
       setDuration((d) => d + 1);
     }, 1000);
+  }, []);
+
+  const cleanupRecordingResources = useCallback(() => {
+    mediaRecorderRef.current?.stream.getTracks().forEach((track) => track.stop());
+
+    if (animationIdRef.current !== null) {
+      cancelAnimationFrame(animationIdRef.current);
+    }
+    if (audioContextRef.current !== null && audioContextRef.current.state !== 'closed') {
+      audioContextRef.current.close().catch(() => {});
+    }
+    if (timerIdRef.current !== null) {
+      clearInterval(timerIdRef.current);
+    }
   }, []);
 
   const stopRecording = useCallback((): Promise<Blob> => {
@@ -97,24 +111,13 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
         const blob = new Blob(chunksRef.current, { type: 'audio/webm' });
         setAudioBlob(blob);
         resolve(blob);
-
-        mediaRecorderRef.current?.stream.getTracks().forEach((track) => track.stop());
-
-        if (animationIdRef.current !== null) {
-          cancelAnimationFrame(animationIdRef.current);
-        }
-        if (audioContextRef.current !== null && audioContextRef.current.state !== 'closed') {
-          audioContextRef.current.close().catch(() => {});
-        }
-        if (timerIdRef.current !== null) {
-          clearInterval(timerIdRef.current);
-        }
+        cleanupRecordingResources();
       };
 
       mediaRecorderRef.current.stop();
       setIsRecording(false);
     });
-  }, []);
+  }, [cleanupRecordingResources]);
 
   const clearRecording = useCallback(() => {
     setAudioBlob(null);

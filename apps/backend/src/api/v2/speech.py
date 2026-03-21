@@ -1,11 +1,11 @@
 import base64
 
 from core.config import AZURE_SPEECH_API_KEY, AZURE_SPEECH_REGION
+from core.dependencies import CurrentUser
 from core.error_handler import handle_api_errors
 from core.logging import get_logger
 from core.rate_limit import limiter
-from core.security import get_current_user
-from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile, status
+from fastapi import APIRouter, File, HTTPException, Request, UploadFile, status
 from generated.schemas import (
     PhonemeAssessmentSchema,
     SpeechAssessResponse,
@@ -38,6 +38,78 @@ def _build_pronunciation_config(reference_text: str) -> str:
     return base64.b64encode(raw.encode("utf-8")).decode("utf-8")
 
 
+def _extract_phoneme_assessment(phoneme: dict) -> PhonemeAssessmentSchema:
+    ph_pa = phoneme.get("PronunciationAssessment", {})
+    score = ph_pa.get("AccuracyScore", phoneme.get("AccuracyScore", 0))
+    n_best_phonemes = ph_pa.get("NBestPhonemes", phoneme.get("NBestPhonemes"))
+    best_match = n_best_phonemes[0] if n_best_phonemes else None
+    actual = best_match["Phoneme"] if best_match is not None and best_match.get("Phoneme") != phoneme["Phoneme"] else phoneme["Phoneme"]
+
+    return PhonemeAssessmentSchema(
+        phoneme=phoneme["Phoneme"],
+        score=score,
+        expected=phoneme["Phoneme"],
+        actual=actual if actual != phoneme["Phoneme"] else None,
+    )
+
+
+def _extract_word_assessment(word: dict) -> tuple[WordAssessmentSchema, list[dict]]:
+    word_phonemes = []
+    phoneme_errors = []
+    word_pa = word.get("PronunciationAssessment", {})
+
+    for phoneme in word.get("Phonemes", []):
+        if phoneme.get("Phoneme", "") == "":
+            continue
+
+        ph_assessment = _extract_phoneme_assessment(phoneme)
+        word_phonemes.append(ph_assessment)
+
+        if ph_assessment.score < 85:
+            phoneme_errors.append(
+                {
+                    "phoneme": ph_assessment.phoneme,
+                    "expected": ph_assessment.expected,
+                    "actual": ph_assessment.actual or ph_assessment.phoneme,
+                    "score": ph_assessment.score,
+                }
+            )
+
+    word_accuracy = word_pa.get("AccuracyScore", word.get("AccuracyScore", 0))
+    word_error_type = word_pa.get("ErrorType", "None")
+
+    word_assessment = WordAssessmentSchema(
+        word=word.get("Word", ""),
+        accuracyScore=word_accuracy,
+        errorType=word_error_type,
+        phonemes=word_phonemes,
+    )
+
+    return word_assessment, phoneme_errors
+
+
+def _extract_scores(best: dict) -> tuple[float, float, float, float, float]:
+    pa = best.get("PronunciationAssessment")
+
+    if pa is not None:
+        return (
+            pa.get("AccuracyScore", 0),
+            pa.get("FluencyScore", 0),
+            pa.get("CompletenessScore", 0),
+            pa.get("ProsodyScore", 100),
+            pa.get("PronScore", 0),
+        )
+
+    accuracy = best.get("AccuracyScore", 0)
+    return (
+        accuracy,
+        best.get("FluencyScore", accuracy),
+        best.get("CompletenessScore", 100),
+        best.get("ProsodyScore", 100),
+        best.get("PronScore", accuracy),
+    )
+
+
 def _parse_azure_response(data: dict, reference_text: str) -> SpeechAssessResponse:
     n_best = data.get("NBest", [])
     if not n_best:
@@ -47,68 +119,15 @@ def _parse_azure_response(data: dict, reference_text: str) -> SpeechAssessRespon
         )
 
     best = n_best[0]
-    pa = best.get("PronunciationAssessment")
-
-    if pa is not None:
-        accuracy = pa.get("AccuracyScore", 0)
-        fluency = pa.get("FluencyScore", 0)
-        completeness = pa.get("CompletenessScore", 0)
-        prosody = pa.get("ProsodyScore", 100)
-        pronunciation = pa.get("PronScore", 0)
-    else:
-        accuracy = best.get("AccuracyScore", 0)
-        fluency = best.get("FluencyScore", accuracy)
-        completeness = best.get("CompletenessScore", 100)
-        prosody = best.get("ProsodyScore", 100)
-        pronunciation = best.get("PronScore", accuracy)
+    accuracy, fluency, completeness, prosody, pronunciation = _extract_scores(best)
 
     phoneme_errors = []
     word_assessments = []
 
     for word in best.get("Words", []):
-        word_phonemes = []
-        word_pa = word.get("PronunciationAssessment", {})
-
-        for phoneme in word.get("Phonemes", []):
-            if phoneme.get("Phoneme", "") == "":
-                continue
-
-            ph_pa = phoneme.get("PronunciationAssessment", {})
-            score = ph_pa.get("AccuracyScore", phoneme.get("AccuracyScore", 0))
-            n_best_phonemes = ph_pa.get("NBestPhonemes", phoneme.get("NBestPhonemes"))
-            best_match = n_best_phonemes[0] if n_best_phonemes else None
-            actual = best_match["Phoneme"] if best_match is not None and best_match.get("Phoneme") != phoneme["Phoneme"] else phoneme["Phoneme"]
-
-            word_phonemes.append(
-                PhonemeAssessmentSchema(
-                    phoneme=phoneme["Phoneme"],
-                    score=score,
-                    expected=phoneme["Phoneme"],
-                    actual=actual if actual != phoneme["Phoneme"] else None,
-                )
-            )
-
-            if score < 85:
-                phoneme_errors.append(
-                    {
-                        "phoneme": phoneme["Phoneme"],
-                        "expected": phoneme["Phoneme"],
-                        "actual": actual,
-                        "score": score,
-                    }
-                )
-
-        word_accuracy = word_pa.get("AccuracyScore", word.get("AccuracyScore", 0))
-        word_error_type = word_pa.get("ErrorType", "None")
-
-        word_assessments.append(
-            WordAssessmentSchema(
-                word=word.get("Word", ""),
-                accuracyScore=word_accuracy,
-                errorType=word_error_type,
-                phonemes=word_phonemes,
-            )
-        )
+        word_assessment, word_errors = _extract_word_assessment(word)
+        word_assessments.append(word_assessment)
+        phoneme_errors.extend(word_errors)
 
     return SpeechAssessResponse(
         accuracy=accuracy,
@@ -122,15 +141,15 @@ def _parse_azure_response(data: dict, reference_text: str) -> SpeechAssessRespon
     )
 
 
-@router.post("/assess", response_model=SpeechAssessResponse)
+@router.post("/assess")
 @limiter.limit("30/minute")
 @handle_api_errors("Speech assessment")
 async def assess_pronunciation(
     request: Request,
     text: str,
     language: str,
+    current_user: CurrentUser,
     audio: UploadFile = File(...),
-    current_user: dict = Depends(get_current_user),
 ) -> SpeechAssessResponse:
     if not AZURE_SPEECH_API_KEY:
         raise HTTPException(

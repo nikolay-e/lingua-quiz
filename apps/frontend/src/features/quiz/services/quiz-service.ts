@@ -28,7 +28,7 @@ export interface AuthErrorInfo {
 type LogoutCallback = () => void;
 
 export class QuizService {
-  private progressMap = new Map<string, ProgressData>();
+  private readonly progressMap = new Map<string, ProgressData>();
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
   private saveInProgress = false;
   private logoutCallback: LogoutCallback | null = null;
@@ -82,7 +82,7 @@ export class QuizService {
       const savedVersion = safeStorage.getItem(STORAGE_KEYS.CONTENT_VERSION);
       const currentVersionId = versionResult.versionId.toString();
 
-      if (savedVersion !== null && parseInt(savedVersion) !== versionResult.versionId) {
+      if (savedVersion !== null && Number.parseInt(savedVersion) !== versionResult.versionId) {
         logger.info(`Content version changed: ${savedVersion} -> ${currentVersionId}. Clearing cache.`);
         this.progressMap.clear();
       }
@@ -189,19 +189,19 @@ export class QuizService {
 
   revealAnswer(manager: QuizManager, question: QuizQuestion, token: string): RevealResult | null {
     const result = manager.revealAnswer(question.translationId);
+    this.trackRevealProgress(manager, question, token);
+    return result;
+  }
 
+  private trackRevealProgress(manager: QuizManager, question: QuizQuestion, token: string): void {
     const translation = manager.getTranslation(question.translationId);
-    if (translation === undefined) {
-      return result;
-    }
+    if (translation === undefined) return;
 
     const quizState = manager.getState();
     const currentProgress = quizState.progress.find((p) => p.translationId === question.translationId);
-    if (currentProgress === undefined) {
-      return result;
-    }
+    if (currentProgress === undefined) return;
 
-    const level = parseInt(currentProgress.level.replace('LEVEL_', ''));
+    const level = Number.parseInt(currentProgress.level.replace('LEVEL_', ''));
     const existing = this.progressMap.get(translation.id) ?? {
       correctCount: 0,
       incorrectCount: 0,
@@ -223,8 +223,6 @@ export class QuizService {
     });
 
     this.debouncedSave(token, manager);
-
-    return result;
   }
 
   submitAnswer(manager: QuizManager, question: QuizQuestion, answer: string, token: string): SubmissionResult | null {
@@ -244,7 +242,7 @@ export class QuizService {
       return feedback;
     }
 
-    const level = parseInt(currentProgress.level.replace('LEVEL_', ''));
+    const level = Number.parseInt(currentProgress.level.replace('LEVEL_', ''));
     const existing = this.progressMap.get(translation.id) ?? {
       correctCount: 0,
       incorrectCount: 0,

@@ -6,6 +6,8 @@ from fastapi import HTTPException, Request, status
 
 logger = get_logger(__name__)
 
+ORIGIN_VALIDATION_FAILED = "Origin validation failed"
+
 
 def validate_origin(request: Request) -> None:
     if request.method in {"GET", "HEAD", "OPTIONS"}:
@@ -15,13 +17,12 @@ def validate_origin(request: Request) -> None:
     referer = request.headers.get("Referer")
 
     if not origin and not referer:
-        # Allow internal requests from localhost and Docker network
         if request.url.hostname in {"localhost", "127.0.0.1", "backend", "frontend"}:
             return
         logger.warning(f"Missing Origin/Referer for {request.method} {request.url.path}")
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Origin validation failed",
+            detail=ORIGIN_VALIDATION_FAILED,
         )
 
     source = origin or (urlparse(referer).scheme + "://" + urlparse(referer).netloc if referer else None)
@@ -29,7 +30,7 @@ def validate_origin(request: Request) -> None:
     if not source:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Origin validation failed",
+            detail=ORIGIN_VALIDATION_FAILED,
         )
 
     allowed_origins_set = set(CORS_ALLOWED_ORIGINS)
@@ -37,5 +38,5 @@ def validate_origin(request: Request) -> None:
         logger.warning(f"Invalid origin {source} for {request.method} {request.url.path}")
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Origin validation failed",
+            detail=ORIGIN_VALIDATION_FAILED,
         )

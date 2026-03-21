@@ -142,7 +142,7 @@ export function useQuizSession(
     reset();
     resetQuizSession();
     await releaseWakeLock();
-    void navigate('/');
+    await navigate('/');
   };
 
   const handleSubmitAnswer = async (): Promise<void> => {
@@ -157,7 +157,7 @@ export function useQuizSession(
         if (
           'isCorrect' in result &&
           'vibrate' in navigator &&
-          !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          !globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches
         ) {
           navigator.vibrate(result.isCorrect ? [50] : [50, 30, 50]);
         }

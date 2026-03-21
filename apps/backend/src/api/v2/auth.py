@@ -3,11 +3,12 @@ import re
 from core.auth_helpers import build_access_token, create_and_store_refresh_token, revoke_refresh_token
 from core.config import RATE_LIMIT_ENABLED
 from core.database import execute_write_transaction, query_db
+from core.dependencies import CurrentUser
 from core.error_handler import handle_api_errors
 from core.logging import get_logger, user_id_var
 from core.rate_limit import limiter
-from core.security import get_current_user, hash_password, verify_password, verify_refresh_token
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from core.security import hash_password, verify_password, verify_refresh_token
+from fastapi import APIRouter, HTTPException, Request, status
 from generated.schemas import (
     PasswordChangeRequest,
     RefreshTokenRequest,
@@ -21,6 +22,9 @@ from slowapi.util import get_remote_address
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
+
+PASSWORD_COMPLEXITY_ERROR = "Password does not meet security requirements"  # pragma: allowlist secret
+TIMING_SAFE_DUMMY_HASH = hash_password("dummy-password-for-timing-safety")
 
 
 def get_username_for_rate_limit(request: Request) -> str:
@@ -40,28 +44,27 @@ def validate_password_complexity(password: str) -> None:
     if len(password) < 8:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Password does not meet security requirements",
+            detail=PASSWORD_COMPLEXITY_ERROR,
         )
     if not re.search(r"[A-Z]", password):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Password does not meet security requirements",
+            detail=PASSWORD_COMPLEXITY_ERROR,
         )
     if not re.search(r"[a-z]", password):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Password does not meet security requirements",
+            detail=PASSWORD_COMPLEXITY_ERROR,
         )
     if not re.search(r"\d", password):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Password does not meet security requirements",
+            detail=PASSWORD_COMPLEXITY_ERROR,
         )
 
 
 @router.post(
     "/register",
-    response_model=TokenResponse,
     status_code=status.HTTP_201_CREATED,
 )
 @limiter.limit("3/minute;10/hour")
@@ -108,7 +111,7 @@ def register_user(request: Request, user_data: UserRegistration) -> TokenRespons
     )
 
 
-@router.post("/login", response_model=TokenResponse)
+@router.post("/login")
 @login_limiter.limit("5/minute;10/hour")
 @handle_api_errors("Login")
 def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
@@ -120,8 +123,7 @@ def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
         one=True,
     )
 
-    dummy_hash = "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYFj.N/ssuy"
-    password_hash = user["password"] if user else dummy_hash
+    password_hash = user["password"] if user else TIMING_SAFE_DUMMY_HASH
     password_valid = verify_password(user_data.password, password_hash)
 
     if not user or not password_valid:
@@ -147,7 +149,7 @@ def login_user(request: Request, user_data: UserLogin) -> TokenResponse:
     )
 
 
-@router.post("/refresh", response_model=TokenResponse)
+@router.post("/refresh")
 @limiter.limit("100/15minutes")
 @handle_api_errors("Token refresh")
 def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest) -> TokenResponse:
@@ -185,7 +187,7 @@ def refresh_access_token(request: Request, refresh_request: RefreshTokenRequest)
 def change_password(
     request: Request,
     password_data: PasswordChangeRequest,
-    current_user: dict = Depends(get_current_user),
+    current_user: CurrentUser,
 ) -> dict[str, str]:
     logger.info(f"Password change request for user: {current_user['username']}")
 
@@ -220,7 +222,7 @@ def change_password(
 @handle_api_errors("Account deletion")
 def delete_account(
     request: Request,
-    current_user: dict = Depends(get_current_user),
+    current_user: CurrentUser,
 ) -> dict[str, str]:
     logger.info(f"Account deletion request for user: {current_user['username']}")
     result = execute_write_transaction("DELETE FROM users WHERE id = %s", (current_user["user_id"],))

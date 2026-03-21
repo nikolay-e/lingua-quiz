@@ -2,10 +2,10 @@ import { createZeroLevelCounts } from './levelUtils';
 import type { Translation, ProgressEntry } from './types';
 
 export class StateManager {
-  private translations: Map<string, Translation>;
-  private progress: Map<string, ProgressEntry>;
+  private readonly translations: Map<string, Translation>;
+  private readonly progress: Map<string, ProgressEntry>;
   private progressArrayCache: ProgressEntry[] | null = null;
-  private statisticsCache: Map<boolean, ReturnType<StateManager['getStatistics']>> = new Map();
+  private readonly statisticsCache: Map<boolean, ReturnType<StateManager['getStatistics']>> = new Map();
 
   constructor(translations: Translation[], initialProgress: ProgressEntry[]) {
     this.translations = new Map(translations.map((t) => [t.id, t]));
@@ -28,7 +28,7 @@ export class StateManager {
 
   getProgress(id: string): ProgressEntry | undefined {
     const progress = this.progress.get(id);
-    return progress !== undefined ? { ...progress, recentHistory: [...progress.recentHistory] } : undefined;
+    return progress === undefined ? undefined : { ...progress, recentHistory: [...progress.recentHistory] };
   }
 
   getAllProgress(): ProgressEntry[] {

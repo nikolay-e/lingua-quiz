@@ -16,47 +16,47 @@ const latinToCyrillic: Record<string, string> = {
 };
 
 const stripLatinDiacritics = (s: string): string => {
-  return s.replace(/[àáâãäåæçèéêëìíîïñòóôõöøùúûüýÿ]/g, (char) => {
-    return char.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return s.replaceAll(/[àáâãäåæçèéêëìíîïñòóôõöøùúûüýÿ]/g, (char) => {
+    return char.normalize('NFD').replaceAll(/[\u0300-\u036f]/g, '');
   });
 };
 
 const collapseGerman = (s: string): string => {
   return s
-    .replace(/ä/g, 'a')
-    .replace(/ö/g, 'o')
-    .replace(/ü/g, 'u')
-    .replace(/Ä/g, 'a')
-    .replace(/Ö/g, 'o')
-    .replace(/Ü/g, 'u')
-    .replace(/ß/g, 'ss')
-    .replace(/ae/g, 'a')
-    .replace(/oe/g, 'o')
-    .replace(/ue/g, 'u');
+    .replaceAll('ä', 'a')
+    .replaceAll('ö', 'o')
+    .replaceAll('ü', 'u')
+    .replaceAll('Ä', 'a')
+    .replaceAll('Ö', 'o')
+    .replaceAll('Ü', 'u')
+    .replaceAll('ß', 'ss')
+    .replaceAll('ae', 'a')
+    .replaceAll('oe', 'o')
+    .replaceAll('ue', 'u');
 };
 
 export const normalizeForComparison = (text: string): string => {
   if (text === '') return '';
   let result = text;
 
-  result = result.trim().toLowerCase().replace(/\s+/g, '');
+  result = result.trim().toLowerCase().replaceAll(/\s+/g, '');
   result = collapseGerman(stripLatinDiacritics(result));
 
   const containsCyr = /[а-яё]/i.test(result);
 
   if (containsCyr) {
-    result = result.replace(/[aAcCeEoOpPxXyY]/g, (ch) => latinToCyrillic[ch] ?? ch);
+    result = result.replaceAll(/[aAcCeEoOpPxXyY]/g, (ch) => latinToCyrillic[ch] ?? ch);
   }
 
-  const onlyLookalikes = /^[aAcCeEoOpPxXyY]+$/i.test(result);
+  const onlyLookalikes = /^[aceopsxy]+$/i.test(result);
   if (onlyLookalikes && result.length <= 3) {
     const strongRussianPattern = result.includes('py') || result.includes('op') || result.includes('po');
     if (strongRussianPattern) {
-      result = result.replace(/[aAcCeEoOpPxXyY]/g, (ch) => latinToCyrillic[ch] ?? ch);
+      result = result.replaceAll(/[aAcCeEoOpPxXyY]/g, (ch) => latinToCyrillic[ch] ?? ch);
     }
   }
 
-  result = result.replace(/ё/g, 'е');
+  result = result.replaceAll('ё', 'е');
 
   return result;
 };
@@ -69,7 +69,7 @@ export const formatForDisplay = (input: string): string => {
   if (input === '') return input;
   let text = input;
 
-  text = text.replace(/\(([^)]+)\)/g, (match, inner: unknown) => {
+  text = text.replaceAll(/\(([^)]+)\)/g, (match, inner: unknown) => {
     const innerStr = String(inner);
     if (!innerStr.includes('|')) return match;
     const firstAlt =
@@ -80,23 +80,23 @@ export const formatForDisplay = (input: string): string => {
     return firstAlt;
   });
 
-  while (/\(\s*\)/.test(text)) text = text.replace(/\(\s*\)/g, '');
+  while (/\(\s*\)/.test(text)) text = text.replaceAll(/\(\s*\)/g, '');
 
-  text = text.replace(/\[[^\]]*\]/g, (br) => br.replace(/\|/g, PIPE_SENTINEL));
+  text = text.replaceAll(/\[[^\]]*\]/g, (br) => br.replaceAll('|', PIPE_SENTINEL));
 
   if (text.includes('|')) {
     text = (text.split('|')[0] ?? '').trim();
   }
 
   text = text
-    .replace(new RegExp(PIPE_SENTINEL, 'g'), '|')
-    .replace(/\s*,\s*/g, ', ')
-    .replace(/\s+/g, ' ')
+    .replaceAll(PIPE_SENTINEL, '|')
+    .replaceAll(/\s*,\s*/g, ', ')
+    .replaceAll(/\s+/g, ' ')
     .trim()
     .replace(/^,+\s*/, '')
     .replace(/\s*,+$/, '')
-    .replace(/,+\s*,+/g, ', ')
-    .replace(/^,\s*|,\s*$/g, '')
+    .replaceAll(/,+\s*,+/g, ', ')
+    .replaceAll(/^,\s*|,\s*$/g, '')
     .trim();
 
   return text;
@@ -133,16 +133,15 @@ const expandGroup = (group: string): string[] => {
     g = g.slice(1, -1);
   }
 
-  const bracketMatch = g.match(/^(.*?)(\[(.*?)\])(.*)$/);
+  const bracketMatch = /^(.*?)(\[(.*?)\])(.*)$/.exec(g);
   let baseVariants: string[] = [];
-  if (bracketMatch !== null) {
+  if (bracketMatch === null) {
+    baseVariants = [g];
+  } else {
     const pre = bracketMatch[1] ?? '';
     const opt = bracketMatch[3] ?? '';
     const post = bracketMatch[4] ?? '';
-    baseVariants.push(`${pre}${opt}${post}`);
-    baseVariants.push(`${pre}${post}`);
-  } else {
-    baseVariants = [g];
+    baseVariants.push(`${pre}${opt}${post}`, `${pre}${post}`);
   }
 
   const alts: string[] = [];
@@ -168,6 +167,26 @@ const buildGroups = (correct: string): AltSet[] => {
   });
 };
 
+const findMatchingGroup = (token: string, groups: AltSet[], used: Set<number>): number => {
+  for (let i = 0; i < groups.length; i++) {
+    if (used.has(i)) continue;
+    const group = groups[i];
+    if (group === undefined) continue;
+    if (group.has(token)) return i;
+  }
+  return -1;
+};
+
+const allTokensMatchGroups = (userTokens: string[], correctGroups: AltSet[]): boolean => {
+  const used = new Set<number>();
+  for (const token of userTokens) {
+    const matchIndex = findMatchingGroup(token, correctGroups, used);
+    if (matchIndex === -1) return false;
+    used.add(matchIndex);
+  }
+  return true;
+};
+
 export const checkAnswer = (userAnswer: string, correctAnswer: string): boolean => {
   if (normalize(userAnswer) === '' && normalize(correctAnswer) === '') return true;
 
@@ -182,20 +201,5 @@ export const checkAnswer = (userAnswer: string, correctAnswer: string): boolean 
   const userTokens = splitTopLevelCommas(userAnswer).map((t: string) => normalize(t));
   if (userTokens.length !== correctGroups.length) return false;
 
-  const used = new Set<number>();
-  for (const token of userTokens) {
-    let matched = false;
-    for (let i = 0; i < correctGroups.length; i++) {
-      if (used.has(i)) continue;
-      const group = correctGroups[i];
-      if (group === undefined) continue;
-      if (group.has(token)) {
-        used.add(i);
-        matched = true;
-        break;
-      }
-    }
-    if (!matched) return false;
-  }
-  return true;
+  return allTokensMatchGroups(userTokens, correctGroups);
 };

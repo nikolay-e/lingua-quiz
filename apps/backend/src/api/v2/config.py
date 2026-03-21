@@ -11,7 +11,7 @@ class PublicConfigResponse(BaseModel):
     speech_available: bool
 
 
-@router.get("/config", response_model=PublicConfigResponse)
+@router.get("/config")
 @limiter.limit("60/minute")
 @handle_api_errors("Get public config")
 def get_public_config(request: Request) -> PublicConfigResponse:

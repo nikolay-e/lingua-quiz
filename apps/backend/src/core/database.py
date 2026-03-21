@@ -68,6 +68,44 @@ def _log_slow_query(query_fingerprint: str, duration_ms: float, db_name: str, **
         )
 
 
+def _pick_one_or_all(rows: list, one: bool):
+    if one:
+        return rows[0] if rows else None
+    return rows
+
+
+def _validate_read_query(query_upper: str) -> None:
+    for keyword in WRITE_KEYWORDS:
+        if query_upper.startswith(keyword):
+            raise ValueError(f"Read query detected write operation '{keyword}'. Use write transaction instead.")
+
+
+def _execute_write(cur, conn, one: bool, fetch_results: bool) -> tuple:
+    if fetch_results:
+        rv = cur.fetchall()
+        conn.commit()
+        return _pick_one_or_all(rv, one), {"row_count": len(rv)}
+
+    row_count = cur.rowcount
+    conn.commit()
+    return row_count, {"rows_affected": row_count}
+
+
+def _execute_read(cur, one: bool) -> tuple:
+    rv = cur.fetchall()
+    return _pick_one_or_all(rv, one), {"row_count": len(rv)}
+
+
+def _handle_query_error(e: Exception, db_name: str, query_fingerprint: str, start_time: float, conn, is_write: bool) -> None:
+    duration_ms = (time.perf_counter() - start_time) * 1000
+    label = "pool error" if isinstance(e, psycopg2.pool.PoolError) else "write error" if is_write else "query error"
+    logger.error(
+        f"{db_name.capitalize()} database {label}",
+        extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": db_name},
+    )
+    _safe_rollback(conn)
+
+
 def _execute_query(
     query: str,
     args: tuple,
@@ -81,9 +119,7 @@ def _execute_query(
     query_upper = query.strip().upper()
 
     if not is_write:
-        for keyword in WRITE_KEYWORDS:
-            if query_upper.startswith(keyword):
-                raise ValueError(f"Read query detected write operation '{keyword}'. Use write transaction instead.")
+        _validate_read_query(query_upper)
 
     conn = None
     start_time = time.perf_counter()
@@ -98,40 +134,16 @@ def _execute_query(
             cur.execute(query, args)
 
             if is_write:
-                if fetch_results:
-                    rv = cur.fetchall()
-                    conn.commit()
-                    duration_ms = (time.perf_counter() - start_time) * 1000
-                    _log_slow_query(query_fingerprint, duration_ms, db_name, row_count=len(rv))
-                    return (rv[0] if rv else None) if one else rv
+                result, log_extra = _execute_write(cur, conn, one, fetch_results)
+            else:
+                result, log_extra = _execute_read(cur, one)
 
-                row_count = cur.rowcount
-                conn.commit()
-                duration_ms = (time.perf_counter() - start_time) * 1000
-                _log_slow_query(query_fingerprint, duration_ms, db_name, rows_affected=row_count)
-                return row_count
-
-            rv = cur.fetchall()
             duration_ms = (time.perf_counter() - start_time) * 1000
-            _log_slow_query(query_fingerprint, duration_ms, db_name, row_count=len(rv))
-            return (rv[0] if rv else None) if one else rv
+            _log_slow_query(query_fingerprint, duration_ms, db_name, **log_extra)
+            return result
 
-    except psycopg2.pool.PoolError as e:
-        duration_ms = (time.perf_counter() - start_time) * 1000
-        logger.error(
-            f"{db_name.capitalize()} database pool error",
-            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": db_name},
-        )
-        _safe_rollback(conn)
-        raise
     except Exception as e:
-        duration_ms = (time.perf_counter() - start_time) * 1000
-        op_type = "write" if is_write else "query"
-        logger.error(
-            f"{db_name.capitalize()} database {op_type} error",
-            extra={"query": query_fingerprint, "duration_ms": round(duration_ms, 2), "error": str(e), "db": db_name},
-        )
-        _safe_rollback(conn)
+        _handle_query_error(e, db_name, query_fingerprint, start_time, conn, is_write)
         raise
     finally:
         if conn:

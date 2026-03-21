@@ -1,22 +1,22 @@
 from core.database import execute_write_transaction, get_active_version, query_db, query_words_db, serialize_rows
+from core.dependencies import CurrentUser
 from core.error_handler import handle_api_errors
 from core.logging import get_logger
 from core.rate_limit import limiter
-from core.security import get_current_user
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Request
 from generated.schemas import BulkProgressUpdateRequest, ProgressUpdateRequest, UserProgressResponse
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/user", tags=["Progress"])
 
 
-@router.get("/progress", response_model=list[UserProgressResponse])
+@router.get("/progress")
 @limiter.limit("100/minute")
 @handle_api_errors("Get user progress")
 def get_user_progress(
     request: Request,
+    current_user: CurrentUser,
     list_name: str | None = None,
-    current_user: dict = Depends(get_current_user),
 ) -> list[UserProgressResponse]:
     logger.debug(
         "Fetching user progress",
@@ -80,7 +80,7 @@ def get_user_progress(
 def save_user_progress(
     request: Request,
     progress_data: ProgressUpdateRequest,
-    current_user: dict = Depends(get_current_user),
+    current_user: CurrentUser,
 ) -> dict[str, str]:
     logger.debug(
         "Saving single progress",
@@ -124,7 +124,7 @@ def save_user_progress(
 def save_bulk_progress(
     request: Request,
     bulk_data: BulkProgressUpdateRequest,
-    current_user: dict = Depends(get_current_user),
+    current_user: CurrentUser,
 ) -> dict[str, str]:
     item_count = len(bulk_data.items) if bulk_data.items else 0
     logger.info(

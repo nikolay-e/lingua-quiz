@@ -7,7 +7,7 @@ export type QuestionDirection = 'normal' | 'reverse';
 export type QuestionType = 'translation' | 'usage';
 
 export class LevelEngine {
-  private queueManager: QueueManager;
+  private readonly queueManager: QueueManager;
 
   constructor(queueManager: QueueManager) {
     this.queueManager = queueManager;
@@ -22,7 +22,7 @@ export class LevelEngine {
   }
 
   hasWordsForLevel(level: PracticeLevel): boolean {
-    const levelNum = parseInt(level.replace('LEVEL_', ''));
+    const levelNum = Number.parseInt(level.replace('LEVEL_', ''));
     const queues = LEVEL_QUEUE_MAP[levelNum];
     if (queues === undefined) return false;
     return queues.some((queue) => this.queueManager.getQueueLength(queue) > 0);
@@ -37,7 +37,7 @@ export class LevelEngine {
   }
 
   pickCandidateForLevel(level: PracticeLevel): string | null {
-    const levelNum = parseInt(level.replace('LEVEL_', ''));
+    const levelNum = Number.parseInt(level.replace('LEVEL_', ''));
     const queues = LEVEL_QUEUE_MAP[levelNum];
     if (queues === undefined) return null;
 

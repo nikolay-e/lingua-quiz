@@ -26,8 +26,10 @@ from generated.schemas import (
     UserProgressResponse,
     UserRegistration,
     VersionResponse,
+    VocabularyItemCreate,
     VocabularyItemDetailResponse,
     VocabularyItemResponse,
+    VocabularyItemUpdate,
     WordListResponse,
 )
 import pytest
@@ -389,23 +391,66 @@ class TestAdminVocabulary:
         data = response.json()
         assert isinstance(data, list)
 
-    def test_admin_create_vocabulary_returns_405(self, admin_api_client):
+    def test_admin_create_vocabulary(self, admin_api_client):
+        create_payload = VocabularyItemCreate(
+            source_text="integration-test-word",
+            source_language="en",
+            target_text="интеграционный-тест",
+            target_language="ru",
+            list_name="en-ru-a1",
+        )
         response = admin_api_client.post(
             f"{API_URL}/admin/vocabulary",
-            json={"sourceText": "test", "sourceLanguage": "en", "targetText": "тест", "targetLanguage": "ru", "listName": "test"},
+            json=create_payload.model_dump(by_alias=True),
         )
-        assert response.status_code == 405
+        assert response.status_code == 201
+        data = response.json()
+        assert "id" in data
+        assert "message" in data
 
-    def test_admin_update_vocabulary_returns_405(self, admin_api_client):
+        admin_api_client.delete(f"{API_URL}/admin/vocabulary/{data['id']}")
+
+    def test_admin_update_vocabulary(self, admin_api_client):
+        list_response = admin_api_client.get(f"{API_URL}/admin/vocabulary", params={"limit": 1})
+        if list_response.status_code != 200 or not list_response.json():
+            pytest.skip("No vocabulary items available")
+
+        item = list_response.json()[0]
+        update_payload = VocabularyItemUpdate(target_text="updated-integration-test")
         response = admin_api_client.put(
-            f"{API_URL}/admin/vocabulary/00000000-0000-0000-0000-000000000001",
-            json={"targetText": "updated"},
+            f"{API_URL}/admin/vocabulary/{item['id']}",
+            json=update_payload.model_dump(by_alias=True, exclude_none=True),
         )
-        assert response.status_code == 405
+        assert response.status_code == 200
+        data = response.json()
+        assert "message" in data
 
-    def test_admin_delete_vocabulary_returns_405(self, admin_api_client):
-        response = admin_api_client.delete(f"{API_URL}/admin/vocabulary/00000000-0000-0000-0000-000000000001")
-        assert response.status_code == 405
+        restore_payload = VocabularyItemUpdate(target_text=item["targetText"])
+        admin_api_client.put(
+            f"{API_URL}/admin/vocabulary/{item['id']}",
+            json=restore_payload.model_dump(by_alias=True, exclude_none=True),
+        )
+
+    def test_admin_delete_vocabulary(self, admin_api_client):
+        create_payload = VocabularyItemCreate(
+            source_text="delete-me-test",
+            source_language="en",
+            target_text="удали-меня",
+            target_language="ru",
+            list_name="en-ru-a1",
+        )
+        create_response = admin_api_client.post(
+            f"{API_URL}/admin/vocabulary",
+            json=create_payload.model_dump(by_alias=True),
+        )
+        assert create_response.status_code == 201
+        item_id = create_response.json()["id"]
+
+        delete_response = admin_api_client.delete(f"{API_URL}/admin/vocabulary/{item_id}")
+        assert delete_response.status_code == 200
+
+        get_response = admin_api_client.get(f"{API_URL}/admin/vocabulary/{item_id}")
+        assert get_response.status_code == 404
 
     def test_admin_get_vocabulary_item(self, admin_api_client):
         list_response = admin_api_client.get(f"{API_URL}/admin/vocabulary", params={"limit": 1})
@@ -556,11 +601,11 @@ class TestEdgeCases:
             f"{API_URL}/admin/vocabulary/00000000-0000-0000-0000-000000000000",
             json={"targetText": "updated"},
         )
-        assert response.status_code == 405
+        assert response.status_code == 404
 
     def test_admin_delete_nonexistent_vocabulary_item(self, admin_api_client):
         response = admin_api_client.delete(f"{API_URL}/admin/vocabulary/00000000-0000-0000-0000-000000000000")
-        assert response.status_code == 405
+        assert response.status_code == 404
 
     def test_empty_bulk_progress_rejected(self, authenticated_api_client):
         response = authenticated_api_client.post(

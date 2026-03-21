@@ -89,7 +89,7 @@ export class QueueManager {
     if (needed <= 0) return [];
 
     const availableWords =
-      excludeId !== undefined ? this.queues.LEVEL_0.filter((id) => id !== excludeId) : this.queues.LEVEL_0;
+      excludeId === undefined ? this.queues.LEVEL_0 : this.queues.LEVEL_0.filter((id) => id !== excludeId);
     const wordsToPromote = availableWords.slice(0, needed);
     for (const translationId of wordsToPromote) {
       this.moveWordToLevel(translationId, 'LEVEL_0', 'LEVEL_1');
