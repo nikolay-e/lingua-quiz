@@ -290,6 +290,7 @@ export class QuizService {
   }
 
   private debouncedSave(token: string, manager: QuizManager): void {
+    if (token === '') return;
     this.debounceTimer = clearTimer(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
       this.bulkSaveProgress(token, manager).catch((err) => {
@@ -298,8 +299,24 @@ export class QuizService {
     }, this.DEBOUNCE_DELAY);
   }
 
+  private sanitizeInt(value: number, min: number, max: number): number {
+    const truncated = Math.trunc(value);
+    return Number.isNaN(truncated) ? min : Math.max(min, Math.min(max, truncated));
+  }
+
+  private sanitizeProgressItem(progress: ProgressData): Omit<ProgressData, 'targetLanguage'> {
+    return {
+      level: this.sanitizeInt(progress.level, 0, 5),
+      queuePosition: this.sanitizeInt(progress.queuePosition, 0, Number.MAX_SAFE_INTEGER),
+      correctCount: this.sanitizeInt(progress.correctCount, 0, Number.MAX_SAFE_INTEGER),
+      incorrectCount: this.sanitizeInt(progress.incorrectCount, 0, Number.MAX_SAFE_INTEGER),
+      consecutiveCorrect: this.sanitizeInt(progress.consecutiveCorrect, 0, Number.MAX_SAFE_INTEGER),
+      recentHistory: progress.recentHistory.slice(-20).map(Boolean),
+    };
+  }
+
   private async saveProgressItems(token: string): Promise<void> {
-    if (this.saveInProgress || this.progressMap.size === 0) return;
+    if (this.saveInProgress || this.progressMap.size === 0 || token === '') return;
 
     this.saveInProgress = true;
 
@@ -311,12 +328,7 @@ export class QuizService {
     try {
       const items = Array.from(itemsToSave.entries()).map(([vocabularyItemId, progress]) => ({
         vocabularyItemId,
-        level: progress.level,
-        queuePosition: progress.queuePosition,
-        correctCount: progress.correctCount,
-        incorrectCount: progress.incorrectCount,
-        consecutiveCorrect: progress.consecutiveCorrect,
-        recentHistory: progress.recentHistory,
+        ...this.sanitizeProgressItem(progress),
       }));
 
       if (items.length > 0) {
@@ -373,6 +385,7 @@ export class QuizService {
   }
 
   async restorePendingFromStorage(token: string): Promise<void> {
+    if (token === '') return;
     const pendingJson = safeStorage.getItem(STORAGE_KEYS.PENDING_PROGRESS);
     if (pendingJson === null || pendingJson === '') return;
 

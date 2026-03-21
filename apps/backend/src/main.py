@@ -10,6 +10,7 @@ from core.logging import configure_logging, get_logger
 from core.rate_limit import limiter
 from core.request_logging import RequestLoggingMiddleware
 from fastapi import FastAPI, HTTPException, Request, status
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from generated.schemas import HealthResponse, VersionResponse
@@ -119,6 +120,22 @@ async def health_check() -> HealthResponse:
 @app.get("/api/version", tags=["Health"])
 async def get_version() -> VersionResponse:
     return VersionResponse(version=APP_VERSION)
+
+
+@app.exception_handler(RequestValidationError)
+async def request_validation_error_handler(request: Request, exc: RequestValidationError):
+    logger.warning(
+        "Request validation error",
+        extra={
+            "path": request.url.path,
+            "method": request.method,
+            "errors": exc.errors(),
+        },
+    )
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"detail": "Invalid request data"},
+    )
 
 
 @app.exception_handler(ValidationError)
