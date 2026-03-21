@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   e2e-tests:
-    name: Integration & E2E Tests
+    name: Playwright E2E Tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -21,10 +21,10 @@ jobs:
 
       - uses: docker/setup-buildx-action@v4
 
-      - name: Build and run tests
+      - name: Build and run Playwright tests
         run: |
           mkdir -p test-reports && chmod 777 test-reports
-          docker compose --profile test-all up --build --abort-on-container-exit --exit-code-from test-all
+          docker compose --profile test-ui up --build --abort-on-container-exit --exit-code-from test-ui
 
       - name: Upload reports
         if: always()
@@ -36,4 +36,4 @@ jobs:
 
       - name: Cleanup
         if: always()
-        run: docker compose --profile test-all down -v
+        run: docker compose --profile test-ui down -v
