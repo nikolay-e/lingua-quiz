@@ -91,6 +91,46 @@ repos:
         files: ^(package\.json|packages/.*/package\.json|apps/.*/package\.json)$
         pass_filenames: false
 
+      - id: eslint
+        name: ESLint
+        entry: npm run lint
+        language: system
+        pass_filenames: false
+        always_run: true
+        files: \.(js|jsx|ts|tsx)$
+
+      - id: typecheck
+        name: TypeScript type checking
+        entry: npm run typecheck
+        language: system
+        pass_filenames: false
+        always_run: true
+        files: \.(ts|tsx)$
+
+      - id: mypy
+        name: mypy
+        entry: mypy --python-version=3.13 --check-untyped-defs --ignore-missing-imports --no-warn-unused-ignores apps/backend/src/
+        language: system
+        pass_filenames: false
+        always_run: true
+        files: \.py$
+
+      - id: npm-audit
+        name: npm audit
+        entry: npm audit --audit-level=high --omit=dev
+        language: system
+        pass_filenames: false
+        always_run: true
+        files: package-lock\.json$
+
+      - id: pip-audit
+        name: pip-audit
+        entry: pip-audit -r apps/backend/requirements.txt -r tools/vocab-tools/requirements.txt --ignore-vuln GHSA-7gcm-g887-7qv7 --ignore-vuln GHSA-rf74-v2fm-23pw --ignore-vuln GHSA-gfwx-w7gr-fvh7 --ignore-vuln GHSA-jm6w-m3j8-898g
+        language: system
+        pass_filenames: false
+        always_run: true
+        files: requirements.*\.txt$
+
   - repo: https://github.com/jorisroovers/gitlint
     rev: v0.19.1
     hooks:

@@ -47,23 +47,8 @@ jobs:
 
       - name: Run pre-commit
         run: pre-commit run --all-files --show-diff-on-failure --color=always
-
-      - name: ESLint
-        run: npm run lint
         env:
           NODE_OPTIONS: --max-old-space-size=8192
-
-      - name: TypeScript type checking
-        run: npm run typecheck
-
-      - name: mypy
-        run: mypy --python-version=3.13 --check-untyped-defs --ignore-missing-imports --no-warn-unused-ignores apps/backend/src/
-
-      - name: npm audit
-        run: npm audit --audit-level=high --omit=dev
-
-      - name: pip-audit
-        run: pip-audit -r apps/backend/requirements.txt -r tools/vocab-tools/requirements.txt --ignore-vuln GHSA-7gcm-g887-7qv7 --ignore-vuln GHSA-rf74-v2fm-23pw --ignore-vuln GHSA-gfwx-w7gr-fvh7 --ignore-vuln GHSA-jm6w-m3j8-898g
 
       - name: Run core tests
         run: npm run test --workspace @lingua-quiz/core
