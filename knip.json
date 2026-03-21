@@ -36,7 +36,6 @@
   "ignoreDependencies": [
     "sort-package-json",
     "@axe-core/playwright",
-    "lighthouse",
     "postcss-html",
     "stylelint-config-html",
     "@stylelint/postcss-css-in-js",
