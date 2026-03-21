@@ -23,7 +23,7 @@ configure_logging(log_level=LOG_LEVEL, json_format=LOG_JSON_FORMAT)
 logger = get_logger(__name__)
 
 
-def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+def rate_limit_exceeded_handler(request: Request, exc: Exception) -> JSONResponse:
     client_ip = get_remote_address(request)
     logger.warning(
         "Rate limit exceeded",
@@ -123,7 +123,7 @@ async def get_version() -> VersionResponse:
     return VersionResponse(version=APP_VERSION)
 
 
-def _sanitize_validation_errors(errors: Sequence[dict]) -> list[dict]:
+def _sanitize_validation_errors(errors: Sequence[dict] | list) -> list[dict]:
     return [{"loc": e.get("loc"), "type": e.get("type"), "msg": e.get("msg")} for e in errors]
 
 
