@@ -1,10 +1,10 @@
 export type LanguageCode = 'en-US' | 'fr-FR' | 'es-ES' | 'de-DE';
 
 export const SUPPORTED_SPEAK_LANGS: Record<string, LanguageCode> = {
-  en: 'en-US',
-  es: 'es-ES',
-  fr: 'fr-FR',
-  de: 'de-DE',
+  english: 'en-US',
+  spanish: 'es-ES',
+  french: 'fr-FR',
+  german: 'de-DE',
 };
 
 export interface PronunciationScores {
