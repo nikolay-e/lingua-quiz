@@ -30,13 +30,13 @@
     {
       "id": "a78c468d-d361-49a4-a95c-2e15eccf87f4",
       "sourceText": "adonde",
-      "targetText": "[translation needed for: adonde]",
+      "targetText": "куда",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian C1",
       "difficultyLevel": "c1",
-      "sourceUsageExample": "",
-      "targetUsageExample": "",
+      "sourceUsageExample": "Nadie sabe adonde conduce ese camino si no se atreve a recorrerlo hasta el final.",
+      "targetUsageExample": "Никто не знает, куда ведёт эта дорога, если не осмеливается пройти её до конца.",
       "isActive": true
     },
     {
@@ -1590,13 +1590,13 @@
     {
       "id": "89730d35-fa76-4f7f-816d-de6e62b46475",
       "sourceText": "policia",
-      "targetText": "[translation needed for: policia]",
+      "targetText": "полиция | полицейский",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian C1",
       "difficultyLevel": "c1",
-      "sourceUsageExample": "",
-      "targetUsageExample": "",
+      "sourceUsageExample": "La policía acordonó el perímetro del edificio mientras el policía de guardia interrogaba a los testigos presenciales.",
+      "targetUsageExample": "Полиция оцепила периметр здания, пока дежурный полицейский допрашивал очевидцев.",
       "isActive": true
     },
     {

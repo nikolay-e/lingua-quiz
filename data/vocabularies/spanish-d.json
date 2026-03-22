@@ -11,8 +11,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Adónde vas?",
-      "targetUsageExample": "Куда ты идёшь?",
+      "sourceUsageExample": "¿Adónde vas tan tarde por la noche?",
+      "targetUsageExample": "Куда ты идёшь так поздно ночью?",
       "isActive": true
     },
     {
@@ -23,8 +23,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "El alteza está aquí.",
-      "targetUsageExample": "Объект высочество здесь.",
+      "sourceUsageExample": "Su Alteza llegó al palacio acompañada de la guardia real.",
+      "targetUsageExample": "Её Высочество прибыла во дворец в сопровождении королевской гвардии.",
       "isActive": true
     },
     {
@@ -35,8 +35,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Voy a usar apesta.",
-      "targetUsageExample": "Я буду использовать воняет.",
+      "sourceUsageExample": "Este queso lleva semanas en el refrigerador y ya apesta.",
+      "targetUsageExample": "Этот сыр лежит в холодильнике несколько недель и уже воняет.",
       "isActive": true
     },
     {
@@ -47,8 +47,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Quiero comprar arreglarlo.",
-      "targetUsageExample": "Я хочу купить исправить это.",
+      "sourceUsageExample": "El mecánico dijo que podría arreglarlo en un par de horas.",
+      "targetUsageExample": "Механик сказал, что сможет исправить это за пару часов.",
       "isActive": true
     },
     {
@@ -59,8 +59,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Dónde está arruinado?",
-      "targetUsageExample": "Где разрушенный?",
+      "sourceUsageExample": "El antiguo teatro quedó arruinado tras el incendio.",
+      "targetUsageExample": "Старый театр был разрушен после пожара.",
       "isActive": true
     },
     {
@@ -71,8 +71,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Este asegúrate es bueno.",
-      "targetUsageExample": "Этот убедись хороший.",
+      "sourceUsageExample": "Asegúrate de cerrar la puerta con llave antes de salir.",
+      "targetUsageExample": "Убедись, что запер дверь на ключ, прежде чем выходить.",
       "isActive": true
     },
     {
@@ -83,8 +83,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Quiero comprar camarero.",
-      "targetUsageExample": "Я хочу купить официант.",
+      "sourceUsageExample": "El camarero nos trajo la cuenta sin que se la pidiéramos.",
+      "targetUsageExample": "Официант принёс нам счёт, хотя мы его не просили.",
       "isActive": true
     },
     {
@@ -95,8 +95,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Esto es casarme.",
-      "targetUsageExample": "Это жениться.",
+      "sourceUsageExample": "No estoy listo para casarme todavía; necesito más tiempo.",
+      "targetUsageExample": "Я ещё не готов жениться; мне нужно больше времени.",
       "isActive": true
     },
     {
@@ -107,8 +107,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Necesito conocerla.",
-      "targetUsageExample": "Мне нужно познакомиться с ней.",
+      "sourceUsageExample": "Viajé a Madrid con la esperanza de conocerla en persona.",
+      "targetUsageExample": "Я поехал в Мадрид в надежде познакомиться с ней лично.",
       "isActive": true
     },
     {
@@ -119,8 +119,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Camina deprisa.",
-      "targetUsageExample": "Иди быстро.",
+      "sourceUsageExample": "Habla deprisa y no entiendo la mitad de lo que dice.",
+      "targetUsageExample": "Он говорит быстро, и я понимаю едва половину из того, что он говорит.",
       "isActive": true
     },
     {
@@ -131,8 +131,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Mi despejado es importante.",
-      "targetUsageExample": "Мой ясный важен.",
+      "sourceUsageExample": "El cielo estaba completamente despejado y se podían ver las estrellas.",
+      "targetUsageExample": "Небо было совершенно ясным, и можно было увидеть звёзды.",
       "isActive": true
     },
     {
@@ -143,8 +143,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Dónde está dirás?",
-      "targetUsageExample": "Где скажешь?",
+      "sourceUsageExample": "Cuando lo veas, ya me dirás qué te pareció la película.",
+      "targetUsageExample": "Когда увидишь, скажешь мне, как тебе понравился фильм.",
       "isActive": true
     },
     {
@@ -155,8 +155,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Voy a usar ellen.",
-      "targetUsageExample": "Я буду использовать Эллен.",
+      "sourceUsageExample": "Ellen llegó tarde a la reunión y tuvo que disculparse ante todos.",
+      "targetUsageExample": "Эллен опоздала на встречу и была вынуждена извиниться перед всеми.",
       "isActive": true
     },
     {
@@ -167,8 +167,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Quiero comprar elliot.",
-      "targetUsageExample": "Я хочу купить Эллиот.",
+      "sourceUsageExample": "Elliot trabaja como programador en una empresa de tecnología.",
+      "targetUsageExample": "Эллиот работает программистом в технологической компании.",
       "isActive": true
     },
     {
@@ -179,8 +179,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Quiero comprar ethan.",
-      "targetUsageExample": "Я хочу купить Итан.",
+      "sourceUsageExample": "Ethan llamó a su madre para contarle las noticias.",
+      "targetUsageExample": "Итан позвонил маме, чтобы рассказать ей новости.",
       "isActive": true
     },
     {
@@ -191,8 +191,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Este fabuloso es bueno.",
-      "targetUsageExample": "Этот потрясающий хороший.",
+      "sourceUsageExample": "La actuación del bailarín fue simplemente fabulosa; el público aplaudió de pie.",
+      "targetUsageExample": "Выступление танцора было просто потрясающим; публика аплодировала стоя.",
       "isActive": true
     },
     {
@@ -203,8 +203,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Tienes hechizo?",
-      "targetUsageExample": "У тебя есть заклинание?",
+      "sourceUsageExample": "La bruja lanzó un hechizo que transformó al príncipe en rana.",
+      "targetUsageExample": "Ведьма произнесла заклинание, которое превратило принца в лягушку.",
       "isActive": true
     },
     {
@@ -215,8 +215,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Necesito hmm.",
-      "targetUsageExample": "Мне нужно хм.",
+      "sourceUsageExample": "—Hmm, no estoy seguro de que esa sea la mejor solución —dijo pensativo.",
+      "targetUsageExample": "— Хм, не уверен, что это лучшее решение, — задумчиво произнёс он.",
       "isActive": true
     },
     {
@@ -227,8 +227,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Voy a usar jackie.",
-      "targetUsageExample": "Я буду использовать Джеки.",
+      "sourceUsageExample": "Jackie organizó una fiesta sorpresa para el cumpleaños de su hermana.",
+      "targetUsageExample": "Джеки организовала вечеринку-сюрприз ко дню рождения своей сестры.",
       "isActive": true
     },
     {
@@ -239,8 +239,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Mi julie es importante.",
-      "targetUsageExample": "Мой Джули важен.",
+      "sourceUsageExample": "Julie estudia medicina y planea especializarse en pediatría.",
+      "targetUsageExample": "Джули изучает медицину и планирует специализироваться на педиатрии.",
       "isActive": true
     },
     {
@@ -251,8 +251,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Dónde está matarte?",
-      "targetUsageExample": "Где убить тебя?",
+      "sourceUsageExample": "Te juro que si me tocas otra vez, voy a matarte —dijo en serio.",
+      "targetUsageExample": "Клянусь, если ты ещё раз меня тронешь, я убью тебя, — сказал он серьёзно.",
       "isActive": true
     },
     {
@@ -263,8 +263,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Dónde está niñera?",
-      "targetUsageExample": "Где няня?",
+      "sourceUsageExample": "Contratamos una niñera para que cuide a los niños mientras trabajamos.",
+      "targetUsageExample": "Мы наняли няню, чтобы она присматривала за детьми, пока мы работаем.",
       "isActive": true
     },
     {
@@ -275,8 +275,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Este olvídate es bueno.",
-      "targetUsageExample": "Этот забудь хороший.",
+      "sourceUsageExample": "Olvídate de lo que pasó y empieza de nuevo.",
+      "targetUsageExample": "Забудь о том, что случилось, и начни заново.",
       "isActive": true
     },
     {
@@ -287,8 +287,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Mi piénsalo es importante.",
-      "targetUsageExample": "Мой подумай об этом важен.",
+      "sourceUsageExample": "Antes de decidir, piénsalo bien durante unos días.",
+      "targetUsageExample": "Прежде чем решать, хорошенько подумай об этом несколько дней.",
       "isActive": true
     },
     {
@@ -299,8 +299,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Me gusta pregúntale.",
-      "targetUsageExample": "Мне нравится спроси его.",
+      "sourceUsageExample": "Si no sabes la respuesta, pregúntale al profesor directamente.",
+      "targetUsageExample": "Если не знаешь ответа, спроси об этом у преподавателя напрямую.",
       "isActive": true
     },
     {
@@ -311,8 +311,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Mi pudiéramos es importante.",
-      "targetUsageExample": "Мой могли бы важен.",
+      "sourceUsageExample": "Ojalá pudiéramos quedarnos aquí una semana más.",
+      "targetUsageExample": "Если бы только мы могли бы остаться здесь ещё на неделю.",
       "isActive": true
     },
     {
@@ -323,8 +323,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Dónde está querrás?",
-      "targetUsageExample": "Где захочешь?",
+      "sourceUsageExample": "Cuando pruebes este plato, querrás repetir sin duda alguna.",
+      "targetUsageExample": "Когда попробуешь это блюдо, непременно захочешь добавки.",
       "isActive": true
     },
     {
@@ -335,8 +335,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Dónde está quieto?",
-      "targetUsageExample": "Где спокойный?",
+      "sourceUsageExample": "El perro se quedó quieto mientras el veterinario lo examinaba.",
+      "targetUsageExample": "Собака стояла неподвижно, пока ветеринар её осматривал.",
       "isActive": true
     },
     {
@@ -347,8 +347,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Este reverendo es bueno.",
-      "targetUsageExample": "Этот преподобный хороший.",
+      "sourceUsageExample": "El reverendo pronunció unas palabras de consuelo ante los familiares del difunto.",
+      "targetUsageExample": "Преподобный произнёс слова утешения перед родственниками покойного.",
       "isActive": true
     },
     {
@@ -359,8 +359,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Esto es spencer.",
-      "targetUsageExample": "Это Спенсер.",
+      "sourceUsageExample": "Spencer llegó el primero al entrenamiento y ya estaba calentando.",
+      "targetUsageExample": "Спенсер пришёл на тренировку первым и уже разминался.",
       "isActive": true
     },
     {
@@ -371,8 +371,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Quiero comprar sue.",
-      "targetUsageExample": "Я хочу купить Сью.",
+      "sourceUsageExample": "Sue trabaja de enfermera en el hospital del centro de la ciudad.",
+      "targetUsageExample": "Сью работает медсестрой в больнице в центре города.",
       "isActive": true
     },
     {
@@ -383,8 +383,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "Necesito volviste.",
-      "targetUsageExample": "Мне нужно вернулся.",
+      "sourceUsageExample": "¿Cuándo volviste de tu viaje? No me avisaste que ya estabas aquí.",
+      "targetUsageExample": "Когда ты вернулся из поездки? Ты не предупредил, что уже здесь.",
       "isActive": true
     },
     {
@@ -395,8 +395,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian D",
       "difficultyLevel": "d",
-      "sourceUsageExample": "¿Tienes zoe?",
-      "targetUsageExample": "У тебя есть Зои?",
+      "sourceUsageExample": "Zoe adoptó un gato callejero y lo llamó Manchas.",
+      "targetUsageExample": "Зои взяла бездомного кота и назвала его Пятнышко.",
       "isActive": true
     }
   ]
