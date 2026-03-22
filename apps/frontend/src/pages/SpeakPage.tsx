@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Settings, Shuffle } from 'lucide-react';
 import { AudioRecorder } from '@features/speak/components/AudioRecorder';
 import { ScoreCard } from '@features/speak/components/ScoreCard';
+import { WordPhonemeDisplay } from '@features/speak/components/WordPhonemeDisplay';
 import { useSpeakStore, usePassThreshold, useSpeakLanguage } from '@features/speak/stores/speak.store';
 import { useToken, useIsAuthenticated } from '@features/auth/stores/auth.store';
 import { assessPronunciationViaBackend } from '@api/speech';
@@ -183,22 +184,7 @@ export function SpeakPage(): React.JSX.Element {
             <p className="text-lg font-medium text-center">
               {practiceText !== '' ? practiceText : t('speak.textPlaceholder', 'Enter text to practice...')}
             </p>
-            {wordAssessments.length > 0 && (
-              <div className="flex flex-wrap gap-2 justify-center mt-3">
-                {wordAssessments.map((wa) => (
-                  <span
-                    key={wa.word}
-                    className={cn(
-                      'px-2 py-1 rounded text-sm font-medium',
-                      wa.accuracyScore >= passThreshold ? 'bg-success/20 text-success' : 'bg-error/20 text-error',
-                    )}
-                    title={`${Math.round(wa.accuracyScore)}%`}
-                  >
-                    {wa.word}
-                  </span>
-                ))}
-              </div>
-            )}
+            <WordPhonemeDisplay wordAssessments={wordAssessments} threshold={passThreshold} />
           </div>
 
           <AudioRecorder
