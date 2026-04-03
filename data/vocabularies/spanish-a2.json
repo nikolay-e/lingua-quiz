@@ -1,7 +1,7 @@
 {
   "listName": "Spanish Russian A2",
   "exportedAt": "2026-01-18T20:40:48.334253+00:00",
-  "totalWords": 605,
+  "totalWords": 518,
   "words": [
     {
       "id": "65549fb7-2ac6-4c85-baf2-528fbf30208c",
@@ -66,7 +66,7 @@
     {
       "id": "a0f3ee81-2b0f-4f5d-8dde-9946f3a34842",
       "sourceText": "acaso",
-      "targetText": "разве",
+      "targetText": "разве|может быть",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -78,7 +78,7 @@
     {
       "id": "fa8ddde6-7355-4c66-a4a0-927f2bd2b7f5",
       "sourceText": "accidente",
-      "targetText": "происшествие",
+      "targetText": "авария|несчастный случай",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -107,8 +107,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es actitud.",
-      "targetUsageExample": "Это отношение.",
+      "sourceUsageExample": "Tiene una actitud muy positiva.",
+      "targetUsageExample": "У неё очень позитивный настрой.",
       "isActive": true
     },
     {
@@ -143,20 +143,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es alcanzar.",
-      "targetUsageExample": "Это достигать.",
-      "isActive": true
-    },
-    {
-      "id": "93206e38-3f74-4fd5-9b43-cae522356d5d",
-      "sourceText": "aléjate",
-      "targetText": "отойди",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Aléjate del fuego, es peligroso.",
-      "targetUsageExample": "Отойди от огня, это опасно.",
+      "sourceUsageExample": "Logré alcanzar la cima.",
+      "targetUsageExample": "Мне удалось достичь вершины.",
       "isActive": true
     },
     {
@@ -179,8 +167,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar altura.",
-      "targetUsageExample": "Я буду использовать высота.",
+      "sourceUsageExample": "La altura de esta montaña es de tres mil metros.",
+      "targetUsageExample": "Высота этой горы — три тысячи метров.",
       "isActive": true
     },
     {
@@ -203,8 +191,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta ambiente.",
-      "targetUsageExample": "Мне нравится окружение.",
+      "sourceUsageExample": "Me gusta el ambiente de este café.",
+      "targetUsageExample": "Мне нравится атмосфера этого кафе.",
       "isActive": true
     },
     {
@@ -232,21 +220,9 @@
       "isActive": true
     },
     {
-      "id": "0f1b8431-0808-43c7-a7ef-2cd076925318",
-      "sourceText": "anne",
-      "targetText": "Энн",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Anne llegó tarde a la reunión.",
-      "targetUsageExample": "Энн опоздала на встречу.",
-      "isActive": true
-    },
-    {
       "id": "8e604e8e-f0f6-422a-8487-5aad367377c7",
       "sourceText": "antiguo",
-      "targetText": "древний, старый",
+      "targetText": "древний|старый",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -263,8 +239,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes aparecer?",
-      "targetUsageExample": "У тебя есть появляться?",
+      "sourceUsageExample": "El sol apareció detrás de las nubes.",
+      "targetUsageExample": "Солнце появилось из-за облаков.",
       "isActive": true
     },
     {
@@ -275,8 +251,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este aparte es bueno.",
-      "targetUsageExample": "Этот в стороне хороший.",
+      "sourceUsageExample": "Pon eso aparte, por favor.",
+      "targetUsageExample": "Отложи это в сторону, пожалуйста.",
       "isActive": true
     },
     {
@@ -289,18 +265,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Quiero aprender.",
       "targetUsageExample": "Я хочу учиться.",
-      "isActive": true
-    },
-    {
-      "id": "ffed0bb7-d1bd-40b0-9d3d-f398110a7ddb",
-      "sourceText": "apúrate",
-      "targetText": "поторопись",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Apúrate, el tren sale en cinco minutos.",
-      "targetUsageExample": "Поторопись, поезд отходит через пять минут.",
       "isActive": true
     },
     {
@@ -323,8 +287,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes artista?",
-      "targetUsageExample": "У тебя есть артист?",
+      "sourceUsageExample": "Mi hermana quiere ser artista.",
+      "targetUsageExample": "Моя сестра хочет стать артисткой.",
       "isActive": true
     },
     {
@@ -383,14 +347,14 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Es un asunto important.",
+      "sourceUsageExample": "Es un asunto importante.",
       "targetUsageExample": "Это важное дело.",
       "isActive": true
     },
     {
       "id": "2001ef57-644e-4805-98b5-839c4f035212",
       "sourceText": "ataque",
-      "targetText": "атака, нападение",
+      "targetText": "атака|нападение",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -419,8 +383,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito autoridad.",
-      "targetUsageExample": "Мне нужно власть.",
+      "sourceUsageExample": "La policía es la autoridad aquí.",
+      "targetUsageExample": "Полиция здесь — власть.",
       "isActive": true
     },
     {
@@ -491,8 +455,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es barrio.",
-      "targetUsageExample": "Это район.",
+      "sourceUsageExample": "Vivo en un barrio tranquilo.",
+      "targetUsageExample": "Я живу в тихом районе.",
       "isActive": true
     },
     {
@@ -556,42 +520,6 @@
       "isActive": true
     },
     {
-      "id": "6bb681ce-37b4-41d7-8066-69c0e816352f",
-      "sourceText": "bendiga",
-      "targetText": "благослови",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El sacerdote dijo: «Dios te bendiga».",
-      "targetUsageExample": "Священник сказал: «Да благословит тебя Бог».",
-      "isActive": true
-    },
-    {
-      "id": "cad78d34-b8b6-446a-80b9-e5b10f032c5a",
-      "sourceText": "beth",
-      "targetText": "Бет",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Beth estudia medicina en la universidad.",
-      "targetUsageExample": "Бет изучает медицину в университете.",
-      "isActive": true
-    },
-    {
-      "id": "392e0720-af80-4415-87b9-dfddd2b35988",
-      "sourceText": "big",
-      "targetText": "большой",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Este es un big problema que tenemos que resolver.",
-      "targetUsageExample": "Это большая проблема, которую нам нужно решить.",
-      "isActive": true
-    },
-    {
       "id": "e94a9737-7a39-4a88-956b-e3553b2f2d5a",
       "sourceText": "bola",
       "targetText": "шар|мяч",
@@ -640,18 +568,6 @@
       "isActive": true
     },
     {
-      "id": "96a8eb31-078e-469e-9af5-371603861791",
-      "sourceText": "brad",
-      "targetText": "Брэд",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Brad trabaja como actor en Hollywood.",
-      "targetUsageExample": "Брэд работает актёром в Голливуде.",
-      "isActive": true
-    },
-    {
       "id": "11652627-de0a-482f-8c4e-853300d8bc10",
       "sourceText": "breve",
       "targetText": "краткий|короткий",
@@ -673,18 +589,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "En el cuento, la bruja vivía en el bosque.",
       "targetUsageExample": "В сказке ведьма жила в лесу.",
-      "isActive": true
-    },
-    {
-      "id": "47ca9e89-3fa9-416d-bc34-eddbaa011f5b",
-      "sourceText": "buscas",
-      "targetText": "ищешь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Qué buscas en este cajón?",
-      "targetUsageExample": "Что ты ищешь в этом ящике?",
       "isActive": true
     },
     {
@@ -719,8 +623,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es cadena.",
-      "targetUsageExample": "Это цепь.",
+      "sourceUsageExample": "El perro está atado con una cadena.",
+      "targetUsageExample": "Собака привязана цепью.",
       "isActive": true
     },
     {
@@ -738,7 +642,7 @@
     {
       "id": "a84ab348-07a4-4997-b7f2-37d422320420",
       "sourceText": "calor",
-      "targetText": "тепло",
+      "targetText": "жара|тепло",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -767,8 +671,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El cáncer está aquí.",
-      "targetUsageExample": "Объект рак здесь.",
+      "sourceUsageExample": "El cáncer es una enfermedad grave.",
+      "targetUsageExample": "Рак — серьёзная болезнь.",
       "isActive": true
     },
     {
@@ -791,8 +695,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta capítulo.",
-      "targetUsageExample": "Мне нравится глава.",
+      "sourceUsageExample": "Leí el tercer capítulo del libro.",
+      "targetUsageExample": "Я прочитал третью главу книги.",
       "isActive": true
     },
     {
@@ -827,8 +731,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Disfruta el momento.",
-      "targetUsageExample": "Наслаждайся моментом.",
+      "sourceUsageExample": "La carga del camión es muy pesada.",
+      "targetUsageExample": "Груз грузовика очень тяжёлый.",
       "isActive": true
     },
     {
@@ -868,18 +772,6 @@
       "isActive": true
     },
     {
-      "id": "93dc1617-5d75-4bf6-be37-377943b15c25",
-      "sourceText": "casada",
-      "targetText": "замужем",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "María está casada con un médico.",
-      "targetUsageExample": "Мария замужем за врачом.",
-      "isActive": true
-    },
-    {
       "id": "35136244-693e-4dcc-be38-680bebfb671b",
       "sourceText": "casarte",
       "targetText": "жениться",
@@ -892,18 +784,6 @@
       "isActive": true
     },
     {
-      "id": "07f0d086-60b9-4f19-b144-9a48905dde1d",
-      "sourceText": "casey",
-      "targetText": "Кейси",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Casey llegó primero a la meta en la carrera.",
-      "targetUsageExample": "Кейси первым достиг финиша в гонке.",
-      "isActive": true
-    },
-    {
       "id": "4769cdd4-240a-4b2a-8d0a-af1e5cf01e0f",
       "sourceText": "castillo",
       "targetText": "замок",
@@ -913,18 +793,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El rey vive en un gran castillo de piedra.",
       "targetUsageExample": "Король живёт в большом каменном замке.",
-      "isActive": true
-    },
-    {
-      "id": "58de637f-afa0-4f77-b520-cb50dcad8ab0",
-      "sourceText": "catherine",
-      "targetText": "Кэтрин",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Catherine es mi profesora de inglés favorita.",
-      "targetUsageExample": "Кэтрин — моя любимая учительница английского.",
       "isActive": true
     },
     {
@@ -973,18 +841,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Pagué la cuenta con un cheque en el banco.",
       "targetUsageExample": "Я оплатил счёт чеком в банке.",
-      "isActive": true
-    },
-    {
-      "id": "61485a85-2ffb-4996-a31c-49affb1fcbec",
-      "sourceText": "chloe",
-      "targetText": "Хлоя",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Chloe tiene el cabello largo y rubio.",
-      "targetUsageExample": "У Хлои длинные светлые волосы.",
       "isActive": true
     },
     {
@@ -1060,21 +916,9 @@
       "isActive": true
     },
     {
-      "id": "1ed653ed-c15e-4a49-912f-5b625ba6fb83",
-      "sourceText": "city",
-      "targetText": "город",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Nueva York es una city muy famosa en el mundo.",
-      "targetUsageExample": "Нью-Йорк — очень известный город в мире.",
-      "isActive": true
-    },
-    {
       "id": "8d57e62a-b2d6-4617-b098-7579bef1a05a",
       "sourceText": "claramente",
-      "targetText": "ясно, чётко",
+      "targetText": "ясно|чётко",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -1091,8 +935,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito clave.",
-      "targetUsageExample": "Мне нужно ключ.",
+      "sourceUsageExample": "La clave del éxito es trabajar duro.",
+      "targetUsageExample": "Ключ к успеху — усердная работа.",
       "isActive": true
     },
     {
@@ -1103,8 +947,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar clima.",
-      "targetUsageExample": "Я буду использовать климат.",
+      "sourceUsageExample": "El clima aquí es muy húmedo.",
+      "targetUsageExample": "Климат здесь очень влажный.",
       "isActive": true
     },
     {
@@ -1151,8 +995,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Dónde está colección?",
-      "targetUsageExample": "Где коллекция?",
+      "sourceUsageExample": "Tengo una colección de sellos.",
+      "targetUsageExample": "У меня есть коллекция марок.",
       "isActive": true
     },
     {
@@ -1187,8 +1031,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar comercial.",
-      "targetUsageExample": "Я буду использовать коммерческий.",
+      "sourceUsageExample": "Vi un anuncio comercial gracioso.",
+      "targetUsageExample": "Я видел смешную рекламу.",
       "isActive": true
     },
     {
@@ -1247,8 +1091,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta competencia.",
-      "targetUsageExample": "Мне нравится конкуренция.",
+      "sourceUsageExample": "Hay mucha competencia en este mercado.",
+      "targetUsageExample": "На этом рынке большая конкуренция.",
       "isActive": true
     },
     {
@@ -1295,8 +1139,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este compra es bueno.",
-      "targetUsageExample": "Этот покупка хороший.",
+      "sourceUsageExample": "Hice una buena compra hoy.",
+      "targetUsageExample": "Я сегодня сделал удачную покупку.",
       "isActive": true
     },
     {
@@ -1307,8 +1151,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes compromiso?",
-      "targetUsageExample": "У тебя есть обязательство?",
+      "sourceUsageExample": "Tengo un compromiso esta tarde.",
+      "targetUsageExample": "У меня обязательство на сегодняшний вечер.",
       "isActive": true
     },
     {
@@ -1319,8 +1163,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El conciencia está aquí.",
-      "targetUsageExample": "Объект совесть здесь.",
+      "sourceUsageExample": "Tiene la conciencia tranquila.",
+      "targetUsageExample": "У него чистая совесть.",
       "isActive": true
     },
     {
@@ -1343,8 +1187,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Quiero comprar conferencia.",
-      "targetUsageExample": "Я хочу купить конференция.",
+      "sourceUsageExample": "La conferencia empieza a las diez.",
+      "targetUsageExample": "Конференция начинается в десять.",
       "isActive": true
     },
     {
@@ -1379,8 +1223,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Dónde está conocimiento?",
-      "targetUsageExample": "Где знание?",
+      "sourceUsageExample": "El conocimiento es poder.",
+      "targetUsageExample": "Знание — сила.",
       "isActive": true
     },
     {
@@ -1391,8 +1235,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es consecuencia.",
-      "targetUsageExample": "Это последствие.",
+      "sourceUsageExample": "Cada acción tiene sus consecuencias.",
+      "targetUsageExample": "У каждого действия есть последствия.",
       "isActive": true
     },
     {
@@ -1403,8 +1247,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes construir?",
-      "targetUsageExample": "У тебя есть строить?",
+      "sourceUsageExample": "Quiero construir una casa.",
+      "targetUsageExample": "Я хочу построить дом.",
       "isActive": true
     },
     {
@@ -1415,8 +1259,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este continuación es bueno.",
-      "targetUsageExample": "Этот продолжение хороший.",
+      "sourceUsageExample": "A continuación veremos una película.",
+      "targetUsageExample": "Далее мы посмотрим фильм.",
       "isActive": true
     },
     {
@@ -1429,18 +1273,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Una conversación interesante.",
       "targetUsageExample": "Интересный разговор.",
-      "isActive": true
-    },
-    {
-      "id": "55b92deb-d666-4235-a55f-12503bc37878",
-      "sourceText": "cooper",
-      "targetText": "Купер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Cooper es el perro más inteligente del vecindario.",
-      "targetUsageExample": "Купер — самая умная собака в округе.",
       "isActive": true
     },
     {
@@ -1487,8 +1319,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes corriente?",
-      "targetUsageExample": "У тебя есть течение?",
+      "sourceUsageExample": "La corriente del río es fuerte.",
+      "targetUsageExample": "Течение реки сильное.",
       "isActive": true
     },
     {
@@ -1499,20 +1331,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar corto.",
-      "targetUsageExample": "Я буду использовать короткий.",
-      "isActive": true
-    },
-    {
-      "id": "08d5fcb7-b2c7-4cd5-aa11-75da6bfab93a",
-      "sourceText": "creado",
-      "targetText": "созданный",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi creado es importante.",
-      "targetUsageExample": "Мой созданный важен.",
+      "sourceUsageExample": "El verano aquí es muy corto.",
+      "targetUsageExample": "Лето здесь очень короткое.",
       "isActive": true
     },
     {
@@ -1552,18 +1372,6 @@
       "isActive": true
     },
     {
-      "id": "d1967c55-8656-4378-9335-f7b404174e25",
-      "sourceText": "cristo",
-      "targetText": "Христос",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "La iglesia tiene una imagen grande de Cristo.",
-      "targetUsageExample": "В церкви есть большое изображение Христа.",
-      "isActive": true
-    },
-    {
       "id": "cd3c723e-5b60-4519-980c-97d174b9830d",
       "sourceText": "cruel",
       "targetText": "жестокий",
@@ -1588,21 +1396,9 @@
       "isActive": true
     },
     {
-      "id": "e4f754aa-199d-4f30-a7d6-795156d17082",
-      "sourceText": "crystal",
-      "targetText": "Кристал|кристалл",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Crystal encontró un cristal brillante en la playa.",
-      "targetUsageExample": "Кристал нашла блестящий кристалл на пляже.",
-      "isActive": true
-    },
-    {
       "id": "360b8323-ba42-46c9-ab0f-3ac29ba10cf6",
       "sourceText": "cuándo",
-      "targetText": "когда (вопросительное)",
+      "targetText": "когда",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -1614,7 +1410,7 @@
     {
       "id": "cdb2aa29-720d-44f0-bc71-e271d17d2b04",
       "sourceText": "cuarto",
-      "targetText": "четверть",
+      "targetText": "комната|четверть|четвёртый",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -1655,8 +1451,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi cumplir es importante.",
-      "targetUsageExample": "Мой выполнять важен.",
+      "sourceUsageExample": "Hay que cumplir las promesas.",
+      "targetUsageExample": "Нужно выполнять обещания.",
       "isActive": true
     },
     {
@@ -1672,18 +1468,6 @@
       "isActive": true
     },
     {
-      "id": "a5c30803-0048-45ff-89f8-064be64cd2bd",
-      "sourceText": "davis",
-      "targetText": "Дэвис",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Davis es el apellido más común en esta ciudad.",
-      "targetUsageExample": "Дэвис — самая распространённая фамилия в этом городе.",
-      "isActive": true
-    },
-    {
       "id": "678a8944-f049-4119-b917-673df5a34c99",
       "sourceText": "debajo",
       "targetText": "под",
@@ -1696,18 +1480,6 @@
       "isActive": true
     },
     {
-      "id": "9467a5fd-10c5-464b-8e55-c7bdf14a141f",
-      "sourceText": "debiste",
-      "targetText": "ты должен был",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Debiste llamarme antes de salir de casa.",
-      "targetUsageExample": "Ты должен был позвонить мне перед тем, как выйти из дома.",
-      "isActive": true
-    },
-    {
       "id": "60dad82b-a6d8-47bb-9e18-06c730dae170",
       "sourceText": "decidir",
       "targetText": "решать [принимать решение]",
@@ -1717,30 +1489,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Debes decidir ahora.",
       "targetUsageExample": "Ты должен решить сейчас.",
-      "isActive": true
-    },
-    {
-      "id": "da5f0f5b-7750-4e4e-a6b0-de72bef76884",
-      "sourceText": "déjala",
-      "targetText": "оставь её",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Déjala hablar, tiene algo importante que decir.",
-      "targetUsageExample": "Оставь её говорить, ей есть что сказать важного.",
-      "isActive": true
-    },
-    {
-      "id": "7489fb0f-bc6f-436e-b517-c4e8f2e7157a",
-      "sourceText": "déjenme",
-      "targetText": "оставьте меня",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Déjenme pasar, por favor, tengo prisa.",
-      "targetUsageExample": "Оставьте меня пройти, пожалуйста, я спешу.",
       "isActive": true
     },
     {
@@ -1775,8 +1523,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito demanda.",
-      "targetUsageExample": "Мне нужно иск.",
+      "sourceUsageExample": "Presentó una demanda contra la empresa.",
+      "targetUsageExample": "Он подал иск против компании.",
       "isActive": true
     },
     {
@@ -1799,8 +1547,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta el invierno.",
-      "targetUsageExample": "Мне нравится зима.",
+      "sourceUsageExample": "Todo depende de ti.",
+      "targetUsageExample": "Всё зависит от тебя.",
       "isActive": true
     },
     {
@@ -1811,8 +1559,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar deporte.",
-      "targetUsageExample": "Я буду использовать спорт.",
+      "sourceUsageExample": "El fútbol es mi deporte favorito.",
+      "targetUsageExample": "Футбол — мой любимый вид спорта.",
       "isActive": true
     },
     {
@@ -1825,30 +1573,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Hice un depósito de dinero en el banco esta mañana.",
       "targetUsageExample": "Я сделал денежный депозит в банке этим утром.",
-      "isActive": true
-    },
-    {
-      "id": "df61cb39-779f-4eb0-9a0b-b4e2bb3d8931",
-      "sourceText": "derek",
-      "targetText": "Дерек",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Derek es mi compañero de trabajo favorito.",
-      "targetUsageExample": "Дерек — мой любимый коллега по работе.",
-      "isActive": true
-    },
-    {
-      "id": "e8c85e4f-73b4-44ef-8dde-6b66325bacf0",
-      "sourceText": "deseas",
-      "targetText": "желаешь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Qué deseas comer hoy para la cena?",
-      "targetUsageExample": "Что ты желаешь сегодня на ужин?",
       "isActive": true
     },
     {
@@ -1878,7 +1602,7 @@
     {
       "id": "f9fda9ea-bc1f-4c39-b67e-7d674e18ee1a",
       "sourceText": "destino",
-      "targetText": "судьба, назначение",
+      "targetText": "судьба|назначение",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -1924,33 +1648,9 @@
       "isActive": true
     },
     {
-      "id": "a039c8c1-9431-4402-b433-3c85205de434",
-      "sourceText": "diles",
-      "targetText": "скажи им",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Diles que la reunión empieza a las tres.",
-      "targetUsageExample": "Скажи им, что встреча начинается в три часа.",
-      "isActive": true
-    },
-    {
-      "id": "c4e64f6c-adb2-4546-9b4f-5bf700382b6e",
-      "sourceText": "dilo",
-      "targetText": "скажи это",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Si sabes la respuesta, dilo ahora.",
-      "targetUsageExample": "Если ты знаешь ответ, скажи это сейчас.",
-      "isActive": true
-    },
-    {
       "id": "3d6a3961-1096-4832-9b8e-6e769c0e775d",
       "sourceText": "directamente",
-      "targetText": "прямо, напрямую",
+      "targetText": "прямо|напрямую",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -1979,8 +1679,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes disco?",
-      "targetUsageExample": "У тебя есть диск?",
+      "sourceUsageExample": "Compré el nuevo disco de mi grupo favorito.",
+      "targetUsageExample": "Я купил новый диск любимой группы.",
       "isActive": true
     },
     {
@@ -2015,20 +1715,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este discusión es bueno.",
-      "targetUsageExample": "Этот дискуссия хороший.",
-      "isActive": true
-    },
-    {
-      "id": "8f8dac01-9b5d-4099-a394-b993108b974e",
-      "sourceText": "díselo",
-      "targetText": "скажи ему",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Díselo a tu madre cuando llegues a casa.",
-      "targetUsageExample": "Скажи ему маме, когда придёшь домой.",
+      "sourceUsageExample": "Tuvimos una discusión interesante.",
+      "targetUsageExample": "У нас была интересная дискуссия.",
       "isActive": true
     },
     {
@@ -2063,8 +1751,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito disponible.",
-      "targetUsageExample": "Мне нужно доступный.",
+      "sourceUsageExample": "¿Hay habitaciones disponibles?",
+      "targetUsageExample": "Есть ли свободные номера?",
       "isActive": true
     },
     {
@@ -2099,8 +1787,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Dónde está distrito?",
-      "targetUsageExample": "Где район?",
+      "sourceUsageExample": "Vivo en el distrito norte.",
+      "targetUsageExample": "Я живу в северном районе.",
       "isActive": true
     },
     {
@@ -2111,20 +1799,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes división?",
-      "targetUsageExample": "У тебя есть деление?",
-      "isActive": true
-    },
-    {
-      "id": "81670fc4-4fdb-4902-a80a-7f2fa391756e",
-      "sourceText": "do",
-      "targetText": "до",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi do es importante.",
-      "targetUsageExample": "Мой до важен.",
+      "sourceUsageExample": "La división del trabajo ahorra tiempo.",
+      "targetUsageExample": "Разделение труда экономит время.",
       "isActive": true
     },
     {
@@ -2137,18 +1813,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Quiero una habitación doble.",
       "targetUsageExample": "Я хочу двухместный номер.",
-      "isActive": true
-    },
-    {
-      "id": "1024fbf6-4e2d-4711-8f22-af6e249c5d83",
-      "sourceText": "doc",
-      "targetText": "доктор",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El doc dijo que necesito descansar una semana.",
-      "targetUsageExample": "Доктор сказал, что мне нужно отдохнуть неделю.",
       "isActive": true
     },
     {
@@ -2188,18 +1852,6 @@
       "isActive": true
     },
     {
-      "id": "495667f9-15db-4c5b-b454-455db024a252",
-      "sourceText": "duerme",
-      "targetText": "спит|спи",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El bebé duerme tranquilo en su cuna.",
-      "targetUsageExample": "Малыш спокойно спит в своей кроватке.",
-      "isActive": true
-    },
-    {
       "id": "69ba75be-2c11-41c4-9c46-20ebeb895175",
       "sourceText": "duro",
       "targetText": "твёрдый",
@@ -2209,18 +1861,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Es muy duro.",
       "targetUsageExample": "Это очень твёрдое.",
-      "isActive": true
-    },
-    {
-      "id": "a63d22e5-08b1-467f-877c-eb1f48436d65",
-      "sourceText": "dylan",
-      "targetText": "Дилан",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Dylan toca la guitarra muy bien.",
-      "targetUsageExample": "Дилан очень хорошо играет на гитаре.",
       "isActive": true
     },
     {
@@ -2243,8 +1883,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes ejercicio?",
-      "targetUsageExample": "У тебя есть упражнение?",
+      "sourceUsageExample": "Hago ejercicio todos los días.",
+      "targetUsageExample": "Я занимаюсь спортом каждый день.",
       "isActive": true
     },
     {
@@ -2267,8 +1907,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es empleado.",
-      "targetUsageExample": "Это служащий.",
+      "sourceUsageExample": "El empleado llegó tarde al trabajo.",
+      "targetUsageExample": "Сотрудник опоздал на работу.",
       "isActive": true
     },
     {
@@ -2279,20 +1919,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El empleo está aquí.",
-      "targetUsageExample": "Объект работа здесь.",
-      "isActive": true
-    },
-    {
-      "id": "abe6d29a-62bc-4dd3-9d0a-bd93cc1a4147",
-      "sourceText": "encontrado",
-      "targetText": "найденный",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "He encontrado las llaves.",
-      "targetUsageExample": "Я нашёл ключи.",
+      "sourceUsageExample": "Ella encontró un buen empleo.",
+      "targetUsageExample": "Она нашла хорошую работу.",
       "isActive": true
     },
     {
@@ -2332,18 +1960,6 @@
       "isActive": true
     },
     {
-      "id": "02dde1cd-38ac-4f8a-abce-8d5ffe89e3a4",
-      "sourceText": "enojada",
-      "targetText": "сердитая|злая",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Ella estaba enojada porque llegué tarde.",
-      "targetUsageExample": "Она была сердитая, потому что я опоздал.",
-      "isActive": true
-    },
-    {
       "id": "7438b81a-8ac8-4fc2-88fe-b7cdf5dbf8aa",
       "sourceText": "enorme",
       "targetText": "огромный",
@@ -2363,8 +1979,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Quiero comprar entrega.",
-      "targetUsageExample": "Я хочу купить доставка.",
+      "sourceUsageExample": "La entrega llegó en dos días.",
+      "targetUsageExample": "Доставка пришла за два дня.",
       "isActive": true
     },
     {
@@ -2375,8 +1991,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Quiero comprar entrevista.",
-      "targetUsageExample": "Я хочу купить интервью.",
+      "sourceUsageExample": "Tengo una entrevista de trabajo mañana.",
+      "targetUsageExample": "У меня завтра собеседование.",
       "isActive": true
     },
     {
@@ -2399,8 +2015,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito escritor.",
-      "targetUsageExample": "Мне нужно писатель.",
+      "sourceUsageExample": "Mi escritor favorito es Cervantes.",
+      "targetUsageExample": "Мой любимый писатель — Сервантес.",
       "isActive": true
     },
     {
@@ -2416,18 +2032,6 @@
       "isActive": true
     },
     {
-      "id": "7ca73c9c-c500-4842-a906-5a72d0be9841",
-      "sourceText": "escuchas",
-      "targetText": "слушаешь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Me escuchas bien cuando hablo por teléfono?",
-      "targetUsageExample": "Ты хорошо слушаешь меня, когда я говорю по телефону?",
-      "isActive": true
-    },
-    {
       "id": "094599a1-3aa3-4502-9be9-5bc2429b9d9a",
       "sourceText": "esfuerzo",
       "targetText": "усилие",
@@ -2435,8 +2039,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Quiero comprar esfuerzo.",
-      "targetUsageExample": "Я хочу купить усилие.",
+      "sourceUsageExample": "Aprender idiomas requiere esfuerzo.",
+      "targetUsageExample": "Изучение языков требует усилий.",
       "isActive": true
     },
     {
@@ -2473,18 +2077,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "No pierdas la esperanza.",
       "targetUsageExample": "Не теряй надежду.",
-      "isActive": true
-    },
-    {
-      "id": "71249794-4095-49cb-ab81-008a184e1899",
-      "sourceText": "esperas",
-      "targetText": "ждёшь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "¿A quién esperas aquí en la estación?",
-      "targetUsageExample": "Кого ты ждёшь здесь на станции?",
       "isActive": true
     },
     {
@@ -2531,8 +2123,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Quiero comprar estadounidense.",
-      "targetUsageExample": "Я хочу купить американский.",
+      "sourceUsageExample": "Mi vecino es estadounidense.",
+      "targetUsageExample": "Мой сосед — американец.",
       "isActive": true
     },
     {
@@ -2555,8 +2147,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es estrategia.",
-      "targetUsageExample": "Это стратегия.",
+      "sourceUsageExample": "Necesitamos una buena estrategia.",
+      "targetUsageExample": "Нам нужна хорошая стратегия.",
       "isActive": true
     },
     {
@@ -2639,8 +2231,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este existencia es bueno.",
-      "targetUsageExample": "Этот существование хороший.",
+      "sourceUsageExample": "La existencia de esta ley es importante.",
+      "targetUsageExample": "Существование этого закона важно.",
       "isActive": true
     },
     {
@@ -2663,8 +2255,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar expresión.",
-      "targetUsageExample": "Я буду использовать выражение.",
+      "sourceUsageExample": "Esta expresión se usa mucho.",
+      "targetUsageExample": "Это выражение часто используется.",
       "isActive": true
     },
     {
@@ -2675,20 +2267,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar exterior.",
-      "targetUsageExample": "Я буду использовать внешний.",
-      "isActive": true
-    },
-    {
-      "id": "04cd3c7b-4862-4ad2-99e9-ebef20648b4e",
-      "sourceText": "extrañas",
-      "targetText": "странные|скучаешь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Las costumbres de este pueblo son muy extrañas para mí.",
-      "targetUsageExample": "Обычаи этой деревни для меня очень странные.",
+      "sourceUsageExample": "La puerta exterior está cerrada.",
+      "targetUsageExample": "Наружная дверь закрыта.",
       "isActive": true
     },
     {
@@ -2699,8 +2279,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es extranjero.",
-      "targetUsageExample": "Это иностранец.",
+      "sourceUsageExample": "Él es extranjero, viene de Francia.",
+      "targetUsageExample": "Он иностранец, приехал из Франции.",
       "isActive": true
     },
     {
@@ -2711,14 +2291,14 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar extraño.",
-      "targetUsageExample": "Я буду использовать странный.",
+      "sourceUsageExample": "Escuché un ruido extraño.",
+      "targetUsageExample": "Я услышал странный звук.",
       "isActive": true
     },
     {
       "id": "8572c85a-c14c-48c3-bcab-910cdcc392dc",
       "sourceText": "familiar",
-      "targetText": "родственник",
+      "targetText": "родственник|знакомый",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -2747,8 +2327,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar federal.",
-      "targetUsageExample": "Я буду использовать федеральный.",
+      "sourceUsageExample": "Es una ley federal.",
+      "targetUsageExample": "Это федеральный закон.",
       "isActive": true
     },
     {
@@ -2783,20 +2363,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes formar?",
-      "targetUsageExample": "У тебя есть формировать?",
-      "isActive": true
-    },
-    {
-      "id": "7e5ee912-2535-43d3-87c8-e02329de81e9",
-      "sourceText": "frankie",
-      "targetText": "Фрэнки",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Frankie siempre llega tarde a las clases.",
-      "targetUsageExample": "Фрэнки всегда опаздывает на уроки.",
+      "sourceUsageExample": "Vamos a formar un equipo.",
+      "targetUsageExample": "Давайте сформируем команду.",
       "isActive": true
     },
     {
@@ -2819,8 +2387,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es frontera.",
-      "targetUsageExample": "Это граница.",
+      "sourceUsageExample": "Cruzamos la frontera entre España y Francia.",
+      "targetUsageExample": "Мы пересекли границу между Испанией и Францией.",
       "isActive": true
     },
     {
@@ -2855,8 +2423,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es generación.",
-      "targetUsageExample": "Это поколение.",
+      "sourceUsageExample": "Cada generación tiene sus problemas.",
+      "targetUsageExample": "У каждого поколения свои проблемы.",
       "isActive": true
     },
     {
@@ -2867,8 +2435,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes gobernador?",
-      "targetUsageExample": "У тебя есть губернатор?",
+      "sourceUsageExample": "El gobernador firmó la nueva ley.",
+      "targetUsageExample": "Губернатор подписал новый закон.",
       "isActive": true
     },
     {
@@ -2896,21 +2464,9 @@
       "isActive": true
     },
     {
-      "id": "14bddcc5-b966-4fd5-872c-0200078523ca",
-      "sourceText": "gordon",
-      "targetText": "Гордон",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Gordon es el mejor jugador del equipo de fútbol.",
-      "targetUsageExample": "Гордон — лучший игрок в футбольной команде.",
-      "isActive": true
-    },
-    {
       "id": "28d81ecd-e6ab-4319-b996-2c5020895fb5",
       "sourceText": "gracia",
-      "targetText": "изящество",
+      "targetText": "изящество|грация",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -2927,8 +2483,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes grado?",
-      "targetUsageExample": "У тебя есть степень?",
+      "sourceUsageExample": "La temperatura bajó tres grados.",
+      "targetUsageExample": "Температура упала на три градуса.",
       "isActive": true
     },
     {
@@ -3004,18 +2560,6 @@
       "isActive": true
     },
     {
-      "id": "44113492-db39-434d-b737-74a0305fafbd",
-      "sourceText": "hagámoslo",
-      "targetText": "давай сделаем",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Hagámoslo juntos, será más fácil.",
-      "targetUsageExample": "Давай сделаем это вместе, так будет легче.",
-      "isActive": true
-    },
-    {
       "id": "83f6127a-d37c-4078-86f8-cf78b2d5b282",
       "sourceText": "hambre",
       "targetText": "голод",
@@ -3025,30 +2569,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Tengo mucha hambre.",
       "targetUsageExample": "Я очень голоден.",
-      "isActive": true
-    },
-    {
-      "id": "6c718b49-6d37-46f0-8643-cb3836b8d6dc",
-      "sourceText": "hank",
-      "targetText": "Хэнк",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Hank trabaja en una tienda de ropa en el centro.",
-      "targetUsageExample": "Хэнк работает в магазине одежды в центре города.",
-      "isActive": true
-    },
-    {
-      "id": "00cbdf91-9753-4978-abf0-578d7b1c9bbc",
-      "sourceText": "hannah",
-      "targetText": "Ханна",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Hannah es la hermana mayor de mi mejor amigo.",
-      "targetUsageExample": "Ханна — старшая сестра моего лучшего друга.",
       "isActive": true
     },
     {
@@ -3107,44 +2627,20 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito herramienta.",
-      "targetUsageExample": "Мне нужно инструмент.",
-      "isActive": true
-    },
-    {
-      "id": "08662cd4-3784-4656-87b8-8ebd4168391d",
-      "sourceText": "hitler",
-      "targetText": "Гитлер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Hitler fue el líder de la Alemania nazi en la guerra.",
-      "targetUsageExample": "Гитлер был лидером нацистской Германии во время войны.",
+      "sourceUsageExample": "Necesito una herramienta para esto.",
+      "targetUsageExample": "Мне нужен инструмент для этого.",
       "isActive": true
     },
     {
       "id": "de4cec49-e5b2-4d2d-80b1-bc3e00140cb4",
       "sourceText": "hogar",
-      "targetText": "дом, очаг",
+      "targetText": "дом|очаг",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Es mi hogar.",
       "targetUsageExample": "Это мой дом.",
-      "isActive": true
-    },
-    {
-      "id": "5bfe8cba-c241-42dc-b511-372eb37be1ce",
-      "sourceText": "holmes",
-      "targetText": "Холмс",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Holmes resolvió el misterio antes que la policía.",
-      "targetUsageExample": "Холмс раскрыл тайну раньше полиции.",
       "isActive": true
     },
     {
@@ -3184,18 +2680,6 @@
       "isActive": true
     },
     {
-      "id": "03e0c548-ee5c-4870-a0e2-08bf634d55b6",
-      "sourceText": "howard",
-      "targetText": "Говард",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Howard es el director de la escuela desde hace diez años.",
-      "targetUsageExample": "Говард является директором школы уже десять лет.",
-      "isActive": true
-    },
-    {
       "id": "cfea55f5-b72c-41d8-93dc-8243a785a063",
       "sourceText": "huevo",
       "targetText": "яйцо",
@@ -3215,8 +2699,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar humanidad.",
-      "targetUsageExample": "Я буду использовать человечество.",
+      "sourceUsageExample": "Debemos cuidar a la humanidad.",
+      "targetUsageExample": "Мы должны заботиться о человечестве.",
       "isActive": true
     },
     {
@@ -3227,8 +2711,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar identidad.",
-      "targetUsageExample": "Я буду использовать личность.",
+      "sourceUsageExample": "Perdí mi tarjeta de identidad.",
+      "targetUsageExample": "Я потерял удостоверение личности.",
       "isActive": true
     },
     {
@@ -3251,8 +2735,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta impacto.",
-      "targetUsageExample": "Мне нравится удар.",
+      "sourceUsageExample": "El accidente tuvo un gran impacto.",
+      "targetUsageExample": "Авария оказала большое воздействие.",
       "isActive": true
     },
     {
@@ -3275,8 +2759,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Dónde está impuesto?",
-      "targetUsageExample": "Где налог?",
+      "sourceUsageExample": "El impuesto sobre la renta es alto.",
+      "targetUsageExample": "Подоходный налог высокий.",
       "isActive": true
     },
     {
@@ -3287,8 +2771,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes incluir?",
-      "targetUsageExample": "У тебя есть включать?",
+      "sourceUsageExample": "El precio incluye el desayuno.",
+      "targetUsageExample": "Цена включает завтрак.",
       "isActive": true
     },
     {
@@ -3311,8 +2795,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito indio.",
-      "targetUsageExample": "Мне нужно индеец.",
+      "sourceUsageExample": "La cultura india es muy rica.",
+      "targetUsageExample": "Индийская культура очень богатая.",
       "isActive": true
     },
     {
@@ -3323,8 +2807,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este influencia es bueno.",
-      "targetUsageExample": "Этот влияние хороший.",
+      "sourceUsageExample": "La música tiene mucha influencia.",
+      "targetUsageExample": "Музыка оказывает большое влияние.",
       "isActive": true
     },
     {
@@ -3436,18 +2920,6 @@
       "isActive": true
     },
     {
-      "id": "425d76e1-236d-4c5a-881e-5ed369837d14",
-      "sourceText": "jamie",
-      "targetText": "Джейми",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jamie aprendió español en solo seis meses.",
-      "targetUsageExample": "Джейми выучил испанский всего за шесть месяцев.",
-      "isActive": true
-    },
-    {
       "id": "d1efa935-6a02-4868-ad92-2403a386046e",
       "sourceText": "jefa",
       "targetText": "начальница|босс",
@@ -3460,18 +2932,6 @@
       "isActive": true
     },
     {
-      "id": "f1e7e661-44d8-48d5-8bde-cec773c7f660",
-      "sourceText": "jeremy",
-      "targetText": "Джереми",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jeremy estudia historia en la universidad.",
-      "targetUsageExample": "Джереми изучает историю в университете.",
-      "isActive": true
-    },
-    {
       "id": "540ec33c-ee76-48bc-887f-546d7e92fa12",
       "sourceText": "jersey",
       "targetText": "свитер",
@@ -3481,30 +2941,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Llevo un jersey azul porque hace frío hoy.",
       "targetUsageExample": "Я надел синий свитер, потому что сегодня холодно.",
-      "isActive": true
-    },
-    {
-      "id": "f6d401e7-670c-4d1f-86f5-c0a2be850857",
-      "sourceText": "jones",
-      "targetText": "Джонс",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jones ganó el partido de tenis sin problemas.",
-      "targetUsageExample": "Джонс без труда выиграл теннисный матч.",
-      "isActive": true
-    },
-    {
-      "id": "2c402156-e894-4bc7-bf96-35816baf79c5",
-      "sourceText": "jordan",
-      "targetText": "Джордан",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jordan es el mejor jugador de baloncesto de la historia.",
-      "targetUsageExample": "Джордан — лучший баскетболист в истории.",
       "isActive": true
     },
     {
@@ -3539,8 +2975,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Dónde está jueves?",
-      "targetUsageExample": "Где четверг?",
+      "sourceUsageExample": "Los jueves voy al gimnasio.",
+      "targetUsageExample": "По четвергам я хожу в спортзал.",
       "isActive": true
     },
     {
@@ -3563,8 +2999,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito jugador.",
-      "targetUsageExample": "Мне нужно игрок.",
+      "sourceUsageExample": "El mejor jugador marcó tres goles.",
+      "targetUsageExample": "Лучший игрок забил три гола.",
       "isActive": true
     },
     {
@@ -3575,8 +3011,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi junta es importante.",
-      "targetUsageExample": "Мой совет важен.",
+      "sourceUsageExample": "La junta directiva se reúne el lunes.",
+      "targetUsageExample": "Совет директоров собирается в понедельник.",
       "isActive": true
     },
     {
@@ -3587,32 +3023,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta juventud.",
-      "targetUsageExample": "Мне нравится молодёжь.",
-      "isActive": true
-    },
-    {
-      "id": "5e8360c0-dce2-443c-9d5f-4d7b174a7364",
-      "sourceText": "kenny",
-      "targetText": "Кенни",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Kenny siempre ayuda a sus amigos cuando tienen problemas.",
-      "targetUsageExample": "Кенни всегда помогает своим друзьям, когда у них проблемы.",
-      "isActive": true
-    },
-    {
-      "id": "7a07cf69-fdd4-4b8b-8a82-08bf01a8ef2a",
-      "sourceText": "king",
-      "targetText": "король",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El king de los leones protege a su familia.",
-      "targetUsageExample": "Король львов защищает свою семью.",
+      "sourceUsageExample": "En mi juventud practicaba deporte.",
+      "targetUsageExample": "В молодости я занимался спортом.",
       "isActive": true
     },
     {
@@ -3625,18 +3037,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Un ladrón entró en la tienda y robó dinero.",
       "targetUsageExample": "Вор вошёл в магазин и украл деньги.",
-      "isActive": true
-    },
-    {
-      "id": "09bedf10-a5eb-412c-8a11-74ddda624a86",
-      "sourceText": "lárgate",
-      "targetText": "убирайся",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Lárgate de aquí, no quiero verte más.",
-      "targetUsageExample": "Убирайся отсюда, я больше не хочу тебя видеть.",
       "isActive": true
     },
     {
@@ -3671,8 +3071,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar legal.",
-      "targetUsageExample": "Я буду использовать законный.",
+      "sourceUsageExample": "¿Es legal hacer esto?",
+      "targetUsageExample": "Это законно?",
       "isActive": true
     },
     {
@@ -3695,8 +3095,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este lenguaje es bueno.",
-      "targetUsageExample": "Этот язык хороший.",
+      "sourceUsageExample": "El lenguaje corporal es importante.",
+      "targetUsageExample": "Язык тела важен.",
       "isActive": true
     },
     {
@@ -3707,8 +3107,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar león.",
-      "targetUsageExample": "Я буду использовать лев.",
+      "sourceUsageExample": "El león es el rey de la selva.",
+      "targetUsageExample": "Лев — царь зверей.",
       "isActive": true
     },
     {
@@ -3719,20 +3119,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi letra es importante.",
-      "targetUsageExample": "Мой буква важен.",
-      "isActive": true
-    },
-    {
-      "id": "664e2ca8-4b70-46b4-a306-ccf2658905df",
-      "sourceText": "lewis",
-      "targetText": "Льюис",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Lewis ganó la medalla de oro en los Juegos Olímpicos.",
-      "targetUsageExample": "Льюис завоевал золотую медаль на Олимпийских играх.",
+      "sourceUsageExample": "La primera letra del alfabeto es A.",
+      "targetUsageExample": "Первая буква алфавита — А.",
       "isActive": true
     },
     {
@@ -3796,30 +3184,6 @@
       "isActive": true
     },
     {
-      "id": "19f33fd9-cda9-4921-a4d7-c452c7a3057b",
-      "sourceText": "llevado",
-      "targetText": "принесённый",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Comemos pollo los domingos.",
-      "targetUsageExample": "По воскресеньям мы едим курицу.",
-      "isActive": true
-    },
-    {
-      "id": "93b19bea-5ebc-4c12-bfa6-ca49449a5f3f",
-      "sourceText": "llevé",
-      "targetText": "я отнёс",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Ayer llevé a mi madre al médico por la mañana.",
-      "targetUsageExample": "Вчера я отнёс маму к врачу утром.",
-      "isActive": true
-    },
-    {
       "id": "94ea0609-8fe4-4402-ba68-6d41503be5b0",
       "sourceText": "lograr",
       "targetText": "достигать|добиваться",
@@ -3827,32 +3191,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Dónde está lograr?",
-      "targetUsageExample": "Где достигать?",
-      "isActive": true
-    },
-    {
-      "id": "8726155a-7310-45d5-be8a-9d9df52ba858",
-      "sourceText": "lord",
-      "targetText": "лорд",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El lord inglés vivía en una mansión enorme.",
-      "targetUsageExample": "Английский лорд жил в огромном особняке.",
-      "isActive": true
-    },
-    {
-      "id": "a69493d5-0565-4bb4-b1a6-2d6f32af39b1",
-      "sourceText": "lucas",
-      "targetText": "Лукас",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Lucas es el nombre de mi primo favorito.",
-      "targetUsageExample": "Лукас — имя моего любимого двоюродного брата.",
+      "sourceUsageExample": "Logró terminar el proyecto a tiempo.",
+      "targetUsageExample": "Ему удалось завершить проект вовремя.",
       "isActive": true
     },
     {
@@ -3875,8 +3215,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El lunes está aquí.",
-      "targetUsageExample": "Объект понедельник здесь.",
+      "sourceUsageExample": "El lunes tengo clase de español.",
+      "targetUsageExample": "В понедельник у меня урок испанского.",
       "isActive": true
     },
     {
@@ -3887,8 +3227,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito madera.",
-      "targetUsageExample": "Мне нужно дерево.",
+      "sourceUsageExample": "La mesa está hecha de madera.",
+      "targetUsageExample": "Стол сделан из дерева.",
       "isActive": true
     },
     {
@@ -3904,45 +3244,9 @@
       "isActive": true
     },
     {
-      "id": "94a52dc3-6bf9-4f3b-84ec-a9be58315df1",
-      "sourceText": "maggie",
-      "targetText": "Мэгги",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Maggie llegó tarde a la reunión de la tarde.",
-      "targetUsageExample": "Мэгги опоздала на вечернее собрание.",
-      "isActive": true
-    },
-    {
-      "id": "3c8d41ef-c8fd-4adc-ba81-1007f3d4d1e5",
-      "sourceText": "mama",
-      "targetText": "мама",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Mama, ¿puedo salir a jugar con mis amigos?",
-      "targetUsageExample": "Мама, можно мне выйти поиграть с друзьями?",
-      "isActive": true
-    },
-    {
-      "id": "d8078dee-421a-4f7b-b21b-2c9e9824603d",
-      "sourceText": "man",
-      "targetText": "мужик",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Ese man siempre llega primero al trabajo.",
-      "targetUsageExample": "Этот мужик всегда приходит на работу первым.",
-      "isActive": true
-    },
-    {
       "id": "1d2ad9c0-7215-4c68-b43d-f6f0d1058906",
       "sourceText": "mando",
-      "targetText": "приказываю",
+      "targetText": "командование|пульт управления",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -3954,25 +3258,13 @@
     {
       "id": "1b2250bb-7b7f-49b0-bf79-10812d9d3ef0",
       "sourceText": "manera",
-      "targetText": "манера",
+      "targetText": "способ|манера",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "De esta manera.",
       "targetUsageExample": "Таким способом.",
-      "isActive": true
-    },
-    {
-      "id": "1a7f1604-caca-4605-8683-278b4832f564",
-      "sourceText": "mantén",
-      "targetText": "держи|сохраняй",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Mantén la puerta cerrada cuando salgas.",
-      "targetUsageExample": "Держи дверь закрытой, когда уходишь.",
       "isActive": true
     },
     {
@@ -3988,18 +3280,6 @@
       "isActive": true
     },
     {
-      "id": "4e570cf8-cb60-4964-91c3-1c0913cb0cc6",
-      "sourceText": "marcus",
-      "targetText": "Маркус",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Marcus llegó al aeropuerto con dos horas de antelación.",
-      "targetUsageExample": "Маркус прибыл в аэропорт за два часа до отправления.",
-      "isActive": true
-    },
-    {
       "id": "52c1206b-c2a9-4439-913d-227acd2d6fd9",
       "sourceText": "martes",
       "targetText": "вторник",
@@ -4007,8 +3287,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes martes?",
-      "targetUsageExample": "У тебя есть вторник?",
+      "sourceUsageExample": "El martes tenemos reunión.",
+      "targetUsageExample": "Во вторник у нас собрание.",
       "isActive": true
     },
     {
@@ -4067,8 +3347,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es mejorar.",
-      "targetUsageExample": "Это улучшать.",
+      "sourceUsageExample": "Quiero mejorar mi español.",
+      "targetUsageExample": "Я хочу улучшить свой испанский.",
       "isActive": true
     },
     {
@@ -4086,7 +3366,7 @@
     {
       "id": "c76dacf0-2103-44eb-842e-b05365235d48",
       "sourceText": "menudo",
-      "targetText": "часто",
+      "targetText": "часто [a menudo]",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4156,18 +3436,6 @@
       "isActive": true
     },
     {
-      "id": "c289135a-4039-49ec-9970-ddade476e515",
-      "sourceText": "miller",
-      "targetText": "Миллер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El señor Miller trabaja en el banco del centro.",
-      "targetUsageExample": "Господин Миллер работает в банке в центре города.",
-      "isActive": true
-    },
-    {
       "id": "33498f34-39d2-40d0-b487-ea943f4e3ae4",
       "sourceText": "mínimo",
       "targetText": "минимальный",
@@ -4175,8 +3443,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este mínimo es bueno.",
-      "targetUsageExample": "Этот минимальный хороший.",
+      "sourceUsageExample": "Necesitamos un esfuerzo mínimo.",
+      "targetUsageExample": "Нам нужны минимальные усилия.",
       "isActive": true
     },
     {
@@ -4204,30 +3472,6 @@
       "isActive": true
     },
     {
-      "id": "ba2e8449-a4e6-4ee8-b46a-1c3271b031da",
-      "sourceText": "miss",
-      "targetText": "мисс",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "La miss anunció los resultados del concurso escolar.",
-      "targetUsageExample": "Мисс объявила результаты школьного конкурса.",
-      "isActive": true
-    },
-    {
-      "id": "d3578404-413a-4854-8752-2315dcac294f",
-      "sourceText": "molly",
-      "targetText": "Молли",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Molly prepara el desayuno todas las mañanas muy temprano.",
-      "targetUsageExample": "Молли готовит завтрак каждое утро очень рано.",
-      "isActive": true
-    },
-    {
       "id": "1f565569-de90-4b7a-b8d5-81fff2ff23d2",
       "sourceText": "mono",
       "targetText": "обезьяна|милый",
@@ -4237,18 +3481,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El mono trepó rápidamente por el árbol más alto.",
       "targetUsageExample": "Обезьяна быстро залезла на самое высокое дерево.",
-      "isActive": true
-    },
-    {
-      "id": "b26f5144-34c6-4edf-9f3c-bbd49e13a420",
-      "sourceText": "monsieur",
-      "targetText": "месье",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Monsieur Dupont es el dueño del restaurante francés.",
-      "targetUsageExample": "Месье Дюпон — владелец французского ресторана.",
       "isActive": true
     },
     {
@@ -4266,7 +3498,7 @@
     {
       "id": "be42540b-e51a-4981-9089-541fc38f285b",
       "sourceText": "montón",
-      "targetText": "куча, много",
+      "targetText": "куча|много",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4283,20 +3515,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito moral.",
-      "targetUsageExample": "Мне нужно мораль.",
-      "isActive": true
-    },
-    {
-      "id": "09e6b974-6a92-4bd1-8b04-19786a3b57fa",
-      "sourceText": "morgan",
-      "targetText": "Морган",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Morgan llegó a la ciudad en busca de trabajo.",
-      "targetUsageExample": "Морган приехал в город в поисках работы.",
+      "sourceUsageExample": "La moral de la historia es clara.",
+      "targetUsageExample": "Мораль истории ясна.",
       "isActive": true
     },
     {
@@ -4403,32 +3623,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta museo.",
-      "targetUsageExample": "Мне нравится музей.",
-      "isActive": true
-    },
-    {
-      "id": "7ad864d2-7f6a-4488-bd58-2e7b2ba7e84e",
-      "sourceText": "nate",
-      "targetText": "Нейт",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Nate llama a su madre todos los domingos por teléfono.",
-      "targetUsageExample": "Нейт звонит своей маме каждое воскресенье по телефону.",
-      "isActive": true
-    },
-    {
-      "id": "9e5e3cdb-1033-4d82-8220-a90267f29bdc",
-      "sourceText": "nathan",
-      "targetText": "Натан",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Nathan estudia medicina en la universidad de la capital.",
-      "targetUsageExample": "Натан изучает медицину в столичном университете.",
+      "sourceUsageExample": "Visitamos el museo de arte.",
+      "targetUsageExample": "Мы посетили музей искусства.",
       "isActive": true
     },
     {
@@ -4446,7 +3642,7 @@
     {
       "id": "3bb1c4ec-2ba0-4c59-8239-414a5b0767d5",
       "sourceText": "necesitar",
-      "targetText": "нуждаться, требовать",
+      "targetText": "нуждаться|требовать",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4468,18 +3664,6 @@
       "isActive": true
     },
     {
-      "id": "f5193f6d-fb35-42fb-a062-bf6b7185ee7a",
-      "sourceText": "nina",
-      "targetText": "Нина|девочка",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Nina aprendió a cocinar con su abuela cuando era pequeña.",
-      "targetUsageExample": "Нина научилась готовить со своей бабушкой, когда была маленькой.",
-      "isActive": true
-    },
-    {
       "id": "c6d5bbdc-a68e-4f65-a783-9aee65e35341",
       "sourceText": "niña",
       "targetText": "девочка",
@@ -4494,7 +3678,7 @@
     {
       "id": "defb4c95-3cac-42bb-b95a-c3b8ad5154fd",
       "sourceText": "normalmente",
-      "targetText": "обычно, нормально",
+      "targetText": "обычно|нормально",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4511,14 +3695,14 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El novela está aquí.",
-      "targetUsageExample": "Объект роман здесь.",
+      "sourceUsageExample": "Estoy leyendo una novela interesante.",
+      "targetUsageExample": "Я читаю интересный роман.",
       "isActive": true
     },
     {
       "id": "a5544d90-a82b-4b7f-92fc-2a2df041fb2d",
       "sourceText": "novia",
-      "targetText": "девушка, невеста",
+      "targetText": "девушка|невеста",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4638,25 +3822,13 @@
     {
       "id": "e1a4f6bc-efd4-483d-8e7c-8e1207ca0772",
       "sourceText": "ojalá",
-      "targetText": "хоть бы",
+      "targetText": "хотелось бы|если бы",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Ojalá venga mañana.",
       "targetUsageExample": "Хоть бы он пришел завтра.",
-      "isActive": true
-    },
-    {
-      "id": "022430e7-1440-44e1-8bd9-9cb54bbbba16",
-      "sourceText": "oliver",
-      "targetText": "Оливер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Oliver trabaja como voluntario en el hospital los fines de semana.",
-      "targetUsageExample": "Оливер работает волонтёром в больнице по выходным.",
       "isActive": true
     },
     {
@@ -4686,7 +3858,7 @@
     {
       "id": "74def206-7f8b-496b-b80f-3229763fb71e",
       "sourceText": "opción",
-      "targetText": "вариант",
+      "targetText": "выбор|вариант",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4751,8 +3923,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes palacio?",
-      "targetUsageExample": "У тебя есть дворец?",
+      "sourceUsageExample": "El palacio real es muy grande.",
+      "targetUsageExample": "Королевский дворец очень большой.",
       "isActive": true
     },
     {
@@ -4828,18 +4000,6 @@
       "isActive": true
     },
     {
-      "id": "56094609-3248-4d16-a9dd-e941bcbb5a58",
-      "sourceText": "parker",
-      "targetText": "Паркер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Parker ganó el primer premio en el concurso de fotografía.",
-      "targetUsageExample": "Паркер выиграл первый приз на фотоконкурсе.",
-      "isActive": true
-    },
-    {
       "id": "190ee0f9-cef2-47dd-8b32-6e38abb76aaa",
       "sourceText": "parque",
       "targetText": "парк",
@@ -4859,8 +4019,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este participar es bueno.",
-      "targetUsageExample": "Этот участвовать хороший.",
+      "sourceUsageExample": "Quiero participar en el concurso.",
+      "targetUsageExample": "Я хочу участвовать в конкурсе.",
       "isActive": true
     },
     {
@@ -4871,8 +4031,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este particular es bueno.",
-      "targetUsageExample": "Этот особенный хороший.",
+      "sourceUsageExample": "Este caso es muy particular.",
+      "targetUsageExample": "Этот случай очень особенный.",
       "isActive": true
     },
     {
@@ -4991,8 +4151,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Es su ruta habitual.",
-      "targetUsageExample": "Это его привычный маршрут.",
+      "sourceUsageExample": "La pérdida fue enorme.",
+      "targetUsageExample": "Потеря была огромной.",
       "isActive": true
     },
     {
@@ -5039,8 +4199,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta periodista.",
-      "targetUsageExample": "Мне нравится журналист.",
+      "sourceUsageExample": "El periodista escribió un artículo.",
+      "targetUsageExample": "Журналист написал статью.",
       "isActive": true
     },
     {
@@ -5063,8 +4223,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito personaje.",
-      "targetUsageExample": "Мне нужно персонаж.",
+      "sourceUsageExample": "Mi personaje favorito es Don Quijote.",
+      "targetUsageExample": "Мой любимый персонаж — Дон Кихот.",
       "isActive": true
     },
     {
@@ -5130,7 +4290,7 @@
     {
       "id": "a71d1e00-5087-4c47-a6e5-f6ca2283b19d",
       "sourceText": "piso",
-      "targetText": "этаж, квартира",
+      "targetText": "этаж|квартира",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -5147,8 +4307,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Dónde está planta?",
-      "targetUsageExample": "Где растение?",
+      "sourceUsageExample": "La planta necesita agua y sol.",
+      "targetUsageExample": "Растению нужна вода и солнце.",
       "isActive": true
     },
     {
@@ -5171,8 +4331,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi plazo es importante.",
-      "targetUsageExample": "Мой срок важен.",
+      "sourceUsageExample": "El plazo es hasta el viernes.",
+      "targetUsageExample": "Срок — до пятницы.",
       "isActive": true
     },
     {
@@ -5207,8 +4367,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar práctica.",
-      "targetUsageExample": "Я буду использовать практика.",
+      "sourceUsageExample": "La práctica hace al maestro.",
+      "targetUsageExample": "Практика — путь к мастерству.",
       "isActive": true
     },
     {
@@ -5219,8 +4379,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi precisamente es importante.",
-      "targetUsageExample": "Мой именно важен.",
+      "sourceUsageExample": "Precisamente eso quería decir.",
+      "targetUsageExample": "Именно это я хотел сказать.",
       "isActive": true
     },
     {
@@ -5255,8 +4415,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Dónde está presentar?",
-      "targetUsageExample": "Где представлять?",
+      "sourceUsageExample": "Quiero presentarte a mi amigo.",
+      "targetUsageExample": "Хочу представить тебе моего друга.",
       "isActive": true
     },
     {
@@ -5286,7 +4446,7 @@
     {
       "id": "330064bb-ee13-4128-b397-52e5b6567d02",
       "sourceText": "privado",
-      "targetText": "частный, приватный",
+      "targetText": "частный|приватный",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -5303,8 +4463,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este probable es bueno.",
-      "targetUsageExample": "Этот вероятный хороший.",
+      "sourceUsageExample": "Es probable que llueva mañana.",
+      "targetUsageExample": "Вероятно, завтра будет дождь.",
       "isActive": true
     },
     {
@@ -5327,8 +4487,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes propuesta?",
-      "targetUsageExample": "У тебя есть предложение?",
+      "sourceUsageExample": "Tu propuesta es interesante.",
+      "targetUsageExample": "Твоё предложение интересное.",
       "isActive": true
     },
     {
@@ -5363,8 +4523,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi publicidad es importante.",
-      "targetUsageExample": "Мой реклама важен.",
+      "sourceUsageExample": "Hay mucha publicidad en la televisión.",
+      "targetUsageExample": "На телевидении много рекламы.",
       "isActive": true
     },
     {
@@ -5459,8 +4619,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El rápidamente está aquí.",
-      "targetUsageExample": "Объект быстро здесь.",
+      "sourceUsageExample": "Terminó el trabajo rápidamente.",
+      "targetUsageExample": "Он быстро закончил работу.",
       "isActive": true
     },
     {
@@ -5483,7 +4643,7 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Have un rato.",
+      "sourceUsageExample": "Hace un rato.",
       "targetUsageExample": "Некоторое время назад.",
       "isActive": true
     },
@@ -5495,20 +4655,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes realizar?",
-      "targetUsageExample": "У тебя есть осуществлять?",
-      "isActive": true
-    },
-    {
-      "id": "4342c17a-1412-4891-9815-2a1d322db72e",
-      "sourceText": "recibido",
-      "targetText": "полученный",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "La bola es roja.",
-      "targetUsageExample": "Мяч красный.",
+      "sourceUsageExample": "Vamos a realizar este proyecto.",
+      "targetUsageExample": "Мы осуществим этот проект.",
       "isActive": true
     },
     {
@@ -5543,8 +4691,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es recién.",
-      "targetUsageExample": "Это недавно.",
+      "sourceUsageExample": "El bebé recién nacido duerme mucho.",
+      "targetUsageExample": "Новорождённый много спит.",
       "isActive": true
     },
     {
@@ -5555,8 +4703,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este reconocimiento es bueno.",
-      "targetUsageExample": "Этот признание хороший.",
+      "sourceUsageExample": "Recibió un reconocimiento por su trabajo.",
+      "targetUsageExample": "Он получил признание за свою работу.",
       "isActive": true
     },
     {
@@ -5591,7 +4739,7 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Es una regla important.",
+      "sourceUsageExample": "Es una regla importante.",
       "targetUsageExample": "Это важное правило.",
       "isActive": true
     },
@@ -5663,8 +4811,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi representar es importante.",
-      "targetUsageExample": "Мой представлять важен.",
+      "sourceUsageExample": "Este símbolo representa la paz.",
+      "targetUsageExample": "Этот символ представляет мир.",
       "isActive": true
     },
     {
@@ -5699,8 +4847,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar resistencia.",
-      "targetUsageExample": "Я буду использовать сопротивление.",
+      "sourceUsageExample": "La resistencia del material es alta.",
+      "targetUsageExample": "Прочность материала высокая.",
       "isActive": true
     },
     {
@@ -5723,8 +4871,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El responder está aquí.",
-      "targetUsageExample": "Объект отвечать здесь.",
+      "sourceUsageExample": "Tienes que responder a la pregunta.",
+      "targetUsageExample": "Ты должен ответить на вопрос.",
       "isActive": true
     },
     {
@@ -5783,20 +4931,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este revista es bueno.",
-      "targetUsageExample": "Этот журнал хороший.",
-      "isActive": true
-    },
-    {
-      "id": "f845b8fa-60b7-44a9-9046-a4535c444dde",
-      "sourceText": "ricky",
-      "targetText": "Рики",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Ricky llegó al aeropuerto justo antes de cerrar la puerta.",
-      "targetUsageExample": "Рики добрался до аэропорта прямо перед закрытием выхода на посадку.",
+      "sourceUsageExample": "Compré una revista de moda.",
+      "targetUsageExample": "Я купила журнал мод.",
       "isActive": true
     },
     {
@@ -5836,18 +4972,6 @@
       "isActive": true
     },
     {
-      "id": "0b74a27a-ac40-4ab1-b77d-41e7883daff9",
-      "sourceText": "roy",
-      "targetText": "Рой",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Roy trabaja como fotógrafo y viaja por todo el mundo.",
-      "targetUsageExample": "Рой работает фотографом и путешествует по всему миру.",
-      "isActive": true
-    },
-    {
       "id": "3d9f3945-10f5-4b8f-989e-809983c5f9d2",
       "sourceText": "ruta",
       "targetText": "маршрут|путь",
@@ -5857,18 +4981,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El GPS nos mostró la ruta más rápida hasta el hotel.",
       "targetUsageExample": "GPS показал нам самый быстрый маршрут до гостиницы.",
-      "isActive": true
-    },
-    {
-      "id": "9628ba35-a317-43a9-9a1b-e9d4266c3069",
-      "sourceText": "s.",
-      "targetText": "св.",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "La iglesia de S. Juan es el edificio más antiguo del pueblo.",
-      "targetUsageExample": "Церковь св. Иоанна — самое старое здание в деревне.",
       "isActive": true
     },
     {
@@ -5927,8 +5039,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Voy a usar saludo.",
-      "targetUsageExample": "Я буду использовать приветствие.",
+      "sourceUsageExample": "Le envié un saludo cordial.",
+      "targetUsageExample": "Я послал ему сердечный привет.",
       "isActive": true
     },
     {
@@ -5951,8 +5063,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El sección está aquí.",
-      "targetUsageExample": "Объект секция здесь.",
+      "sourceUsageExample": "La sección de deportes del periódico.",
+      "targetUsageExample": "Спортивная секция газеты.",
       "isActive": true
     },
     {
@@ -5999,8 +5111,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi sencillo es importante.",
-      "targetUsageExample": "Мой простой важен.",
+      "sourceUsageExample": "La respuesta es muy sencilla.",
+      "targetUsageExample": "Ответ очень простой.",
       "isActive": true
     },
     {
@@ -6035,8 +5147,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito sentencia.",
-      "targetUsageExample": "Мне нужно приговор.",
+      "sourceUsageExample": "El juez dictó la sentencia.",
+      "targetUsageExample": "Судья вынес приговор.",
       "isActive": true
     },
     {
@@ -6071,8 +5183,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Esto es sesión.",
-      "targetUsageExample": "Это сессия.",
+      "sourceUsageExample": "La sesión de cine empieza a las ocho.",
+      "targetUsageExample": "Сеанс кино начинается в восемь.",
       "isActive": true
     },
     {
@@ -6083,20 +5195,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "No quiero sufrir.",
-      "targetUsageExample": "Не хочу страдать.",
-      "isActive": true
-    },
-    {
-      "id": "ecbd537a-ae96-49d3-8b19-450e5cbdbe7f",
-      "sourceText": "shawn",
-      "targetText": "Шон",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Shawn y su equipo ganaron el campeonato regional de fútbol.",
-      "targetUsageExample": "Шон и его команда выиграли региональный чемпионат по футболу.",
+      "sourceUsageExample": "La educación sexual es importante.",
+      "targetUsageExample": "Сексуальное образование важно.",
       "isActive": true
     },
     {
@@ -6109,18 +5209,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Hay silencio.",
       "targetUsageExample": "Тишина.",
-      "isActive": true
-    },
-    {
-      "id": "0523f49c-f078-4bf3-b4d6-6e28983be598",
-      "sourceText": "smith",
-      "targetText": "Смит",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El señor Smith trabaja en la embajada desde hace diez años.",
-      "targetUsageExample": "Господин Смит работает в посольстве уже десять лет.",
       "isActive": true
     },
     {
@@ -6155,14 +5243,14 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este solución es bueno.",
-      "targetUsageExample": "Этот решение хороший.",
+      "sourceUsageExample": "Encontramos la solución al problema.",
+      "targetUsageExample": "Мы нашли решение проблемы.",
       "isActive": true
     },
     {
       "id": "10734a2b-8d87-423a-afd6-7f0c2a814d14",
       "sourceText": "sonar",
-      "targetText": "звучать, звонить",
+      "targetText": "звучать|звонить",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -6232,30 +5320,6 @@
       "isActive": true
     },
     {
-      "id": "ee058cbb-5ead-459f-a8fc-54054698b0e3",
-      "sourceText": "stephen",
-      "targetText": "Стивен",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Stephen estudia idiomas en la universidad y habla cuatro lenguas.",
-      "targetUsageExample": "Стивен изучает языки в университете и говорит на четырёх.",
-      "isActive": true
-    },
-    {
-      "id": "5258ddba-fe8c-448a-9dd0-d0d9493884f1",
-      "sourceText": "street",
-      "targetText": "улица",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Vivimos en la calle Street, cerca de la tienda principal.",
-      "targetUsageExample": "Мы живём на улице Стрит, рядом с главным магазином.",
-      "isActive": true
-    },
-    {
       "id": "ae7f3bc2-c5a6-4015-9891-c61d1373e4a1",
       "sourceText": "subir",
       "targetText": "поднимать [ся]",
@@ -6289,18 +5353,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Cuando corro mucho, sudo y necesito beber agua.",
       "targetUsageExample": "Когда я много бегаю, я потею и мне нужно пить воду.",
-      "isActive": true
-    },
-    {
-      "id": "aa22f284-cd25-4eb9-9302-fdf41106d8ad",
-      "sourceText": "suele",
-      "targetText": "обычно",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Este suele es bueno.",
-      "targetUsageExample": "Этот обычно хороший.",
       "isActive": true
     },
     {
@@ -6364,18 +5416,6 @@
       "isActive": true
     },
     {
-      "id": "d45519e9-6862-478a-aa48-b25e2eb25f48",
-      "sourceText": "super",
-      "targetText": "супер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "La fiesta fue super divertida y bailamos toda la noche.",
-      "targetUsageExample": "Вечеринка была супер весёлой, и мы танцевали всю ночь.",
-      "isActive": true
-    },
-    {
       "id": "dc04ba5f-373d-4991-9434-b198a99ed67a",
       "sourceText": "súper",
       "targetText": "супер",
@@ -6395,14 +5435,14 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este superficie es bueno.",
-      "targetUsageExample": "Этот поверхность хороший.",
+      "sourceUsageExample": "La superficie de la mesa es lisa.",
+      "targetUsageExample": "Поверхность стола гладкая.",
       "isActive": true
     },
     {
       "id": "69283dd4-f3f9-44cb-bf11-8298effe72b8",
       "sourceText": "suponer",
-      "targetText": "предполагать, полагать",
+      "targetText": "предполагать|полагать",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -6460,18 +5500,6 @@
       "isActive": true
     },
     {
-      "id": "80858e60-87f1-4f0b-8623-a92099083986",
-      "sourceText": "taylor",
-      "targetText": "Тейлор",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Taylor es la mejor jugadora de tenis del equipo este año.",
-      "targetUsageExample": "Тейлор — лучшая теннисистка в команде в этом году.",
-      "isActive": true
-    },
-    {
       "id": "48dbcd20-c0cf-404a-b526-ae37ef621674",
       "sourceText": "tecnología",
       "targetText": "технология",
@@ -6479,8 +5507,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Quiero comprar tecnología.",
-      "targetUsageExample": "Я хочу купить технология.",
+      "sourceUsageExample": "La tecnología avanza rápidamente.",
+      "targetUsageExample": "Технологии быстро развиваются.",
       "isActive": true
     },
     {
@@ -6575,8 +5603,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito término.",
-      "targetUsageExample": "Мне нужно термин.",
+      "sourceUsageExample": "¿Qué significa este término?",
+      "targetUsageExample": "Что означает этот термин?",
       "isActive": true
     },
     {
@@ -6587,8 +5615,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este terreno es bueno.",
-      "targetUsageExample": "Этот земля хороший.",
+      "sourceUsageExample": "Compraron un terreno en el campo.",
+      "targetUsageExample": "Они купили участок земли за городом.",
       "isActive": true
     },
     {
@@ -6613,18 +5641,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El tesoro escondido fue encontrado por los niños en el jardín.",
       "targetUsageExample": "Спрятанное сокровище нашли дети в саду.",
-      "isActive": true
-    },
-    {
-      "id": "5c9c8c4b-45c3-489e-b2b8-c14fe52c9eda",
-      "sourceText": "that",
-      "targetText": "тот|это",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "That es una palabra inglesa que significa 'ese' en español.",
-      "targetUsageExample": "That — это английское слово, означающее «тот» по-испански.",
       "isActive": true
     },
     {
@@ -6664,18 +5680,6 @@
       "isActive": true
     },
     {
-      "id": "37c89b6d-555d-4f1c-90b5-8e6de3be1ed3",
-      "sourceText": "toby",
-      "targetText": "Тоби",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Toby es el perro más juguetón del vecindario.",
-      "targetUsageExample": "Тоби — самая игривая собака в округе.",
-      "isActive": true
-    },
-    {
       "id": "dc8d94af-8d68-4804-8f42-7a067a1b504d",
       "sourceText": "tocar",
       "targetText": "трогать",
@@ -6685,18 +5689,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "No toques eso.",
       "targetUsageExample": "Не трогай это.",
-      "isActive": true
-    },
-    {
-      "id": "1d9e4a73-ea6d-42b9-b558-dc8a261ce02e",
-      "sourceText": "todd",
-      "targetText": "Тодд",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Todd llegó al trabajo tarde porque perdió el autobús.",
-      "targetUsageExample": "Тодд опоздал на работу, потому что пропустил автобус.",
       "isActive": true
     },
     {
@@ -6731,8 +5723,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Este tradición es bueno.",
-      "targetUsageExample": "Этот традиция хороший.",
+      "sourceUsageExample": "Es una tradición de familia.",
+      "targetUsageExample": "Это семейная традиция.",
       "isActive": true
     },
     {
@@ -6791,8 +5783,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "El tratado está aquí.",
-      "targetUsageExample": "Объект договор здесь.",
+      "sourceUsageExample": "Los países firmaron un tratado de paz.",
+      "targetUsageExample": "Страны подписали мирный договор.",
       "isActive": true
     },
     {
@@ -6882,7 +5874,7 @@
     {
       "id": "26f3f214-c62a-4a14-9fd7-ac1557b5b871",
       "sourceText": "truco",
-      "targetText": "трюк",
+      "targetText": "трюк|фокус",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -6904,18 +5896,6 @@
       "isActive": true
     },
     {
-      "id": "03f1c4f5-756c-4519-9491-e361d875b8f7",
-      "sourceText": "tyler",
-      "targetText": "Тайлер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Tyler llegó a la ciudad con una maleta y muchos sueños.",
-      "targetUsageExample": "Тайлер приехал в город с чемоданом и большими мечтами.",
-      "isActive": true
-    },
-    {
       "id": "64399166-5f1e-4cc2-9c91-0c56247e44c6",
       "sourceText": "uñas",
       "targetText": "ногти",
@@ -6930,7 +5910,7 @@
     {
       "id": "d463858d-0093-4904-a27e-f20579c7ed28",
       "sourceText": "unir",
-      "targetText": "объединять, соединять",
+      "targetText": "объединять|соединять",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -6959,14 +5939,14 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes utilizar?",
-      "targetUsageExample": "У тебя есть использовать?",
+      "sourceUsageExample": "Puedes utilizar mi ordenador.",
+      "targetUsageExample": "Можешь использовать мой компьютер.",
       "isActive": true
     },
     {
       "id": "5d96220f-f425-489f-a769-d02ed8b473f7",
       "sourceText": "vacaciones",
-      "targetText": "каникулы",
+      "targetText": "каникулы|отпуск",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -6983,8 +5963,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Tienes valle?",
-      "targetUsageExample": "У тебя есть долина?",
+      "sourceUsageExample": "El valle es verde y hermoso.",
+      "targetUsageExample": "Долина зелёная и красивая.",
       "isActive": true
     },
     {
@@ -6997,18 +5977,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Por favor, váyanse a casa; el museo está cerrado ahora.",
       "targetUsageExample": "Пожалуйста, уходите домой — музей сейчас закрыт.",
-      "isActive": true
-    },
-    {
-      "id": "1759e07d-8352-4c68-9c4c-31f9b891d40b",
-      "sourceText": "vd.",
-      "targetText": "вы (уваж.)",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Vd. puede llamar al médico en cualquier momento del día.",
-      "targetUsageExample": "Вы (уваж.) можете позвонить врачу в любое время дня.",
       "isActive": true
     },
     {
@@ -7067,8 +6035,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Necesito venta.",
-      "targetUsageExample": "Мне нужно продажа.",
+      "sourceUsageExample": "La venta de la casa fue rápida.",
+      "targetUsageExample": "Продажа дома прошла быстро.",
       "isActive": true
     },
     {
@@ -7180,18 +6148,6 @@
       "isActive": true
     },
     {
-      "id": "02679738-ace5-4704-878d-ea89645ad9dd",
-      "sourceText": "vinimos",
-      "targetText": "мы пришли",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Vinimos a la ciudad hace tres años y todavía nos gusta mucho.",
-      "targetUsageExample": "Мы пришли в этот город три года назад и до сих пор нам здесь очень нравится.",
-      "isActive": true
-    },
-    {
       "id": "2612297b-34bb-4cd1-931c-5eb519ba8cfc",
       "sourceText": "visión",
       "targetText": "зрение|видение",
@@ -7235,8 +6191,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi votar es importante.",
-      "targetUsageExample": "Мой голосовать важен.",
+      "sourceUsageExample": "Todos deben votar en las elecciones.",
+      "targetUsageExample": "Все должны голосовать на выборах.",
       "isActive": true
     },
     {
@@ -7247,8 +6203,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Quiero comprar voto.",
-      "targetUsageExample": "Я хочу купить голос.",
+      "sourceUsageExample": "Cada voto cuenta.",
+      "targetUsageExample": "Каждый голос важен.",
       "isActive": true
     },
     {

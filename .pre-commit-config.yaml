@@ -125,7 +125,7 @@ repos:
 
       - id: pip-audit
         name: pip-audit
-        entry: pip-audit -r apps/backend/requirements.txt -r tools/vocab-tools/requirements.txt --ignore-vuln GHSA-7gcm-g887-7qv7 --ignore-vuln GHSA-rf74-v2fm-23pw --ignore-vuln GHSA-gfwx-w7gr-fvh7 --ignore-vuln GHSA-jm6w-m3j8-898g
+        entry: env DYLD_LIBRARY_PATH=/Users/nikolay/.local/share/mise/installs/python/3.13.11/lib pip-audit -r apps/backend/requirements.txt -r tools/vocab-tools/requirements.txt --ignore-vuln GHSA-7gcm-g887-7qv7 --ignore-vuln GHSA-rf74-v2fm-23pw --ignore-vuln GHSA-gfwx-w7gr-fvh7 --ignore-vuln GHSA-jm6w-m3j8-898g
         language: system
         pass_filenames: false
         always_run: true

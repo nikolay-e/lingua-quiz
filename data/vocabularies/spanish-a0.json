@@ -1,7 +1,7 @@
 {
   "listName": "Spanish Russian A0",
   "exportedAt": "2026-01-18T20:40:48.185125+00:00",
-  "totalWords": 238,
+  "totalWords": 235,
   "words": [
     {
       "id": "9a189596-31e4-4da3-a744-6a9ae62891bc",
@@ -119,8 +119,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Establecer reglas.",
-      "targetUsageExample": "Устанавливать правила.",
+      "sourceUsageExample": "América es un continente grande.",
+      "targetUsageExample": "Америка — большой континент.",
       "isActive": true
     },
     {
@@ -203,7 +203,7 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Me gusta biblioteca.",
+      "sourceUsageExample": "Me gusta la biblioteca.",
       "targetUsageExample": "Мне нравится библиотека.",
       "isActive": true
     },
@@ -239,8 +239,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "¿Tienes bravo?",
-      "targetUsageExample": "У тебя есть браво?",
+      "sourceUsageExample": "¡Bravo! ¡Qué actuación!",
+      "targetUsageExample": "Браво! Какое выступление!",
       "isActive": true
     },
     {
@@ -479,7 +479,7 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "¿Dónde está concurso?",
+      "sourceUsageExample": "¿Dónde está el concurso?",
       "targetUsageExample": "Где конкурс?",
       "isActive": true
     },
@@ -515,8 +515,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Trata al gato con cariño.",
-      "targetUsageExample": "Обращайся с котом ласково.",
+      "sourceUsageExample": "Firmé el contrato ayer.",
+      "targetUsageExample": "Я подписал контракт вчера.",
       "isActive": true
     },
     {
@@ -611,8 +611,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Va a aparecer pronto.",
-      "targetUsageExample": "Он скоро появится.",
+      "sourceUsageExample": "Hizo una declaración oficial.",
+      "targetUsageExample": "Он сделал официальное заявление.",
       "isActive": true
     },
     {
@@ -654,13 +654,13 @@
     {
       "id": "04320a73-b5ee-4751-be11-a2e958b25017",
       "sourceText": "diana",
-      "targetText": "Диана",
+      "targetText": "мишень",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Este diana es bueno.",
-      "targetUsageExample": "Этот Диана хороший.",
+      "sourceUsageExample": "La flecha dio en la diana.",
+      "targetUsageExample": "Стрела попала в мишень.",
       "isActive": true
     },
     {
@@ -731,8 +731,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Esto es drama.",
-      "targetUsageExample": "Это драма.",
+      "sourceUsageExample": "La película es un drama.",
+      "targetUsageExample": "Этот фильм — драма.",
       "isActive": true
     },
     {
@@ -834,7 +834,7 @@
     {
       "id": "df7b1a4a-4074-45c9-a99c-ca0e583dcf17",
       "sourceText": "escenario",
-      "targetText": "сцена, сценарий",
+      "targetText": "сцена|сценарий",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -947,8 +947,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Es una costumbre antigua.",
-      "targetUsageExample": "Это древний обычай.",
+      "sourceUsageExample": "El año fiscal termina en diciembre.",
+      "targetUsageExample": "Финансовый год заканчивается в декабре.",
       "isActive": true
     },
     {
@@ -990,7 +990,7 @@
     {
       "id": "fd832290-e5b8-4632-a33d-2280cf3b3be6",
       "sourceText": "formación",
-      "targetText": "образование, формирование",
+      "targetText": "образование|формирование",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1021,18 +1021,6 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Una frase corta.",
       "targetUsageExample": "Короткая фраза.",
-      "isActive": true
-    },
-    {
-      "id": "f77198d6-e928-4cb3-98fc-453dddd68c62",
-      "sourceText": "fred",
-      "targetText": "Фред",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "El fred está aquí.",
-      "targetUsageExample": "Объект Фред здесь.",
       "isActive": true
     },
     {
@@ -1110,7 +1098,7 @@
     {
       "id": "568df4bf-4510-4b58-a857-3d6e63d53f93",
       "sourceText": "genial",
-      "targetText": "гениальный, классный",
+      "targetText": "гениальный|классный",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1127,8 +1115,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Me gusta la caza.",
-      "targetUsageExample": "Мне нравится охота.",
+      "sourceUsageExample": "Mozart fue un genio de la música.",
+      "targetUsageExample": "Моцарт был музыкальным гением.",
       "isActive": true
     },
     {
@@ -1170,7 +1158,7 @@
     {
       "id": "55c29630-9fd4-46a4-9845-bd7e6eb3368a",
       "sourceText": "humor",
-      "targetText": "настроение, юмор",
+      "targetText": "юмор|настроение",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1211,7 +1199,7 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Importamos products de España.",
+      "sourceUsageExample": "Importamos productos de España.",
       "targetUsageExample": "Мы импортируем продукты из Испании.",
       "isActive": true
     },
@@ -1259,8 +1247,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "A gran escala.",
-      "targetUsageExample": "В большом масштабе.",
+      "sourceUsageExample": "Me interesa la historia.",
+      "targetUsageExample": "Меня интересует история.",
       "isActive": true
     },
     {
@@ -1331,8 +1319,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Reconocer el error.",
-      "targetUsageExample": "Признавать ошибку.",
+      "sourceUsageExample": "Él es el líder del equipo.",
+      "targetUsageExample": "Он лидер команды.",
       "isActive": true
     },
     {
@@ -1379,8 +1367,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "El niño aprende las letras.",
-      "targetUsageExample": "Ребёнок учит буквы.",
+      "sourceUsageExample": "El mago hizo un truco de magia.",
+      "targetUsageExample": "Фокусник показал магический трюк.",
       "isActive": true
     },
     {
@@ -1523,8 +1511,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "¿Tienes metal?",
-      "targetUsageExample": "У тебя есть металл?",
+      "sourceUsageExample": "La puerta es de metal.",
+      "targetUsageExample": "Дверь из металла.",
       "isActive": true
     },
     {
@@ -1612,18 +1600,6 @@
       "isActive": true
     },
     {
-      "id": "4a4e1051-51bb-4bd1-bf61-a3a5cdc9b058",
-      "sourceText": "mmm",
-      "targetText": "ммм",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Me gusta mmm.",
-      "targetUsageExample": "Мне нравится ммм.",
-      "isActive": true
-    },
-    {
       "id": "907468ac-8d09-4794-8480-7d2da9f55613",
       "sourceText": "moda",
       "targetText": "мода",
@@ -1631,8 +1607,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "El moda está aquí.",
-      "targetUsageExample": "Объект мода здесь.",
+      "sourceUsageExample": "La moda cambia cada año.",
+      "targetUsageExample": "Мода меняется каждый год.",
       "isActive": true
     },
     {
@@ -1667,8 +1643,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "El perro mueve la cola.",
-      "targetUsageExample": "Собака виляет хвостом.",
+      "sourceUsageExample": "Los niños tienen miedo del monstruo.",
+      "targetUsageExample": "Дети боятся монстра.",
       "isActive": true
     },
     {
@@ -1901,14 +1877,14 @@
     },
     {
       "id": "921da7e4-1158-4c5c-8e43-390ddd9c7908",
-      "sourceText": "park",
+      "sourceText": "parque",
       "targetText": "парк",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Este park es bueno.",
-      "targetUsageExample": "Этот парк хороший.",
+      "sourceUsageExample": "El parque es muy bonito.",
+      "targetUsageExample": "Парк очень красивый.",
       "isActive": true
     },
     {
@@ -1943,8 +1919,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Mi piloto es importante.",
-      "targetUsageExample": "Мой пилот важен.",
+      "sourceUsageExample": "El piloto aterrizó el avión.",
+      "targetUsageExample": "Пилот посадил самолёт.",
       "isActive": true
     },
     {
@@ -2039,8 +2015,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "¿Tienes porno?",
-      "targetUsageExample": "У тебя есть порно?",
+      "sourceUsageExample": "La industria del porno es grande.",
+      "targetUsageExample": "Порноиндустрия большая.",
       "isActive": true
     },
     {
@@ -2106,7 +2082,7 @@
     {
       "id": "7aba0b52-0494-4d20-87cb-2580aa02d45a",
       "sourceText": "principio",
-      "targetText": "начало, принцип",
+      "targetText": "принцип|начало",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -2183,8 +2159,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Voy a usar prostituta.",
-      "targetUsageExample": "Я буду использовать проститутка.",
+      "sourceUsageExample": "La prostituta es un personaje de la novela.",
+      "targetUsageExample": "Проститутка — персонаж романа.",
       "isActive": true
     },
     {
@@ -2274,7 +2250,7 @@
     {
       "id": "89b06eba-ac21-4ac6-96e2-0dad7d0741d1",
       "sourceText": "re",
-      "targetText": "ре (нота), король (в карточных играх)",
+      "targetText": "ре [король (в картах)]",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -2423,8 +2399,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Mi robot es importante.",
-      "targetUsageExample": "Мой робот важен.",
+      "sourceUsageExample": "El robot limpia la casa.",
+      "targetUsageExample": "Робот убирает дом.",
       "isActive": true
     },
     {
@@ -2502,25 +2478,13 @@
     {
       "id": "94c0e111-e9db-40cb-be75-a48871bde81b",
       "sourceText": "serie",
-      "targetText": "серия, сериал",
+      "targetText": "серия|сериал",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Veo una serie en Netflix.",
       "targetUsageExample": "Смотрю сериал на Netflix.",
-      "isActive": true
-    },
-    {
-      "id": "cf64250c-ca1c-4981-b699-081c811eabff",
-      "sourceText": "series",
-      "targetText": "серия",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Una serie de televisión.",
-      "targetUsageExample": "Телевизионный сериал.",
       "isActive": true
     },
     {
@@ -2598,7 +2562,7 @@
     {
       "id": "dad29e58-1f94-41fe-a9e0-eeceb1f39f4c",
       "sourceText": "tabla",
-      "targetText": "таблица, доска",
+      "targetText": "таблица|доска",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -2615,8 +2579,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Hay que iniciar el proyecto.",
-      "targetUsageExample": "Нужно начать проект.",
+      "sourceUsageExample": "Tiene mucho talento para la música.",
+      "targetUsageExample": "У него большой талант к музыке.",
       "isActive": true
     },
     {
@@ -2723,8 +2687,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Esto es terrorista.",
-      "targetUsageExample": "Это террорист.",
+      "sourceUsageExample": "Capturaron al terrorista.",
+      "targetUsageExample": "Поймали террориста.",
       "isActive": true
     },
     {
@@ -2831,8 +2795,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "El virus está aquí.",
-      "targetUsageExample": "Объект вирус здесь.",
+      "sourceUsageExample": "El virus se propagó rápidamente.",
+      "targetUsageExample": "Вирус быстро распространился.",
       "isActive": true
     },
     {

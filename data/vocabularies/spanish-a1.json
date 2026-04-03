@@ -1,7 +1,7 @@
 {
   "listName": "Spanish Russian A1",
   "exportedAt": "2026-01-18T20:40:48.253732+00:00",
-  "totalWords": 618,
+  "totalWords": 617,
   "words": [
     {
       "id": "c6aa9f0a-8de4-44eb-b877-cf8da42e95f4",
@@ -198,7 +198,7 @@
     {
       "id": "7d6a0d9c-e345-484e-b0d2-e82120216125",
       "sourceText": "ahí",
-      "targetText": "там рядом с тобой",
+      "targetText": "там",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -234,7 +234,7 @@
     {
       "id": "c8042470-a8a5-430f-a0a8-83c54dff8eee",
       "sourceText": "al",
-      "targetText": "к|в [a + el]",
+      "targetText": "к|в",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -306,7 +306,7 @@
     {
       "id": "2129bf21-06b3-445f-84dd-267728bc6ba8",
       "sourceText": "allá",
-      "targetText": "туда|там (далеко)",
+      "targetText": "туда|там",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -318,7 +318,7 @@
     {
       "id": "94202740-6c33-499f-a70d-f916045969a1",
       "sourceText": "allí",
-      "targetText": "там дальше",
+      "targetText": "там",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -534,7 +534,7 @@
     {
       "id": "da837d84-3e65-4a50-a77e-4708cca2040d",
       "sourceText": "aquel",
-      "targetText": "тот далеко",
+      "targetText": "тот",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -558,7 +558,7 @@
     {
       "id": "b3da82ca-0107-48cd-9571-079d5b79983c",
       "sourceText": "área",
-      "targetText": "площадь [территория]",
+      "targetText": "площадь|территория",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -774,7 +774,7 @@
     {
       "id": "c2b45c93-9aef-414f-8a1f-c1e9fd282031",
       "sourceText": "banda",
-      "targetText": "группа [музыкальная]",
+      "targetText": "группа",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -906,7 +906,7 @@
     {
       "id": "aff6cb5e-aff2-4c53-8e1c-baee1a3782e7",
       "sourceText": "brazo",
-      "targetText": "рука (от плеча)",
+      "targetText": "рука",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -983,8 +983,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Al cabo de dos días.",
-      "targetUsageExample": "Через два дня.",
+      "sourceUsageExample": "El Cabo de Buena Esperanza está en África.",
+      "targetUsageExample": "Мыс Доброй Надежды находится в Африке.",
       "isActive": true
     },
     {
@@ -1206,7 +1206,7 @@
     {
       "id": "ebe0dc90-13dd-4103-a7bc-54f5f9b3f0fa",
       "sourceText": "cariño",
-      "targetText": "дорогой|милый",
+      "targetText": "нежность|дорогой",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1266,7 +1266,7 @@
     {
       "id": "18fa846d-7dec-4110-932e-f61a9cb890ee",
       "sourceText": "caso",
-      "targetText": "случай [ситуация]",
+      "targetText": "случай",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1278,7 +1278,7 @@
     {
       "id": "9de1eeac-f521-41b6-8eb4-0dbb758ff644",
       "sourceText": "causa",
-      "targetText": "причина [повод]",
+      "targetText": "причина",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1319,8 +1319,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "¿Tienes champán?",
-      "targetUsageExample": "У тебя есть шампанское?",
+      "sourceUsageExample": "Brindamos con champán en Año Nuevo.",
+      "targetUsageExample": "Мы пьём шампанское на Новый год.",
       "isActive": true
     },
     {
@@ -1338,7 +1338,7 @@
     {
       "id": "4902bb6a-bfcb-498e-9117-11c09bcb4448",
       "sourceText": "chico",
-      "targetText": "парень [юноша]",
+      "targetText": "парень",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1374,7 +1374,7 @@
     {
       "id": "6f220282-ea72-439e-9f2b-df2da3fc8764",
       "sourceText": "cierto",
-      "targetText": "верный",
+      "targetText": "верно|правда",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1542,7 +1542,7 @@
     {
       "id": "0fac258b-8026-41b5-b51b-013ae8a2dffa",
       "sourceText": "común",
-      "targetText": "общий [универсальный]",
+      "targetText": "общий",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1602,7 +1602,7 @@
     {
       "id": "639ff28d-4b1b-4145-a258-38fe4dcdcf97",
       "sourceText": "conocer",
-      "targetText": "знать [быть знакомым]",
+      "targetText": "знать|быть знакомым",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1614,19 +1614,19 @@
     {
       "id": "6e319444-0712-4611-92a3-e7edc09cd1a6",
       "sourceText": "conocido",
-      "targetText": "знакомый",
+      "targetText": "известный|знакомый",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Es muy conocido.",
-      "targetUsageExample": "Он очень знакомый.",
+      "targetUsageExample": "Он очень известный.",
       "isActive": true
     },
     {
       "id": "4f4f86c4-a1a3-41d9-b13d-1569b0e3431a",
       "sourceText": "conseguir",
-      "targetText": "(получать|добывать)|(достигать|добиваться)",
+      "targetText": "получать|добиваться",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1710,7 +1710,7 @@
     {
       "id": "c25605c4-ce52-4610-9a39-8882dc9370ac",
       "sourceText": "corte",
-      "targetText": "суд|разрез",
+      "targetText": "разрез|стрижка|суд",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1746,7 +1746,7 @@
     {
       "id": "ef7cb7ed-c31a-4f3c-8f27-4c889e7eaeee",
       "sourceText": "crear",
-      "targetText": "создавать [новое]",
+      "targetText": "создавать",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1974,7 +1974,7 @@
     {
       "id": "40d0f46b-4d89-4ea3-aadd-44c5c0cc2af5",
       "sourceText": "deber",
-      "targetText": "долг",
+      "targetText": "долг|быть должным",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1985,8 +1985,8 @@
     },
     {
       "id": "54b6996a-705d-458a-9820-47d830a2b281",
-      "sourceText": "debido",
-      "targetText": "из-за",
+      "sourceText": "debido a",
+      "targetText": "из-за|вследствие",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2130,7 +2130,7 @@
     {
       "id": "b899e055-6eaf-44d0-a108-79598520135a",
       "sourceText": "derecha",
-      "targetText": "правый",
+      "targetText": "правая сторона|направо",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2190,7 +2190,7 @@
     {
       "id": "f16f0e1b-f94a-4baa-8e85-27361c17d222",
       "sourceText": "después",
-      "targetText": "после [позднее]",
+      "targetText": "после|потом",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2201,14 +2201,14 @@
     },
     {
       "id": "de5c3326-1df7-4986-84e7-232dfe697cd3",
-      "sourceText": "detente",
-      "targetText": "остановись",
+      "sourceText": "detenerse",
+      "targetText": "останавливаться",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "¡Detente!",
-      "targetUsageExample": "Остановись!",
+      "sourceUsageExample": "Tienes que detenerte aquí.",
+      "targetUsageExample": "Тебе нужно остановиться здесь.",
       "isActive": true
     },
     {
@@ -2250,7 +2250,7 @@
     {
       "id": "3043c049-9cb4-4c90-9a17-83f27b122158",
       "sourceText": "dicho",
-      "targetText": "сказанное|поговорка",
+      "targetText": "поговорка|высказывание",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2334,7 +2334,7 @@
     {
       "id": "c56dbc0c-fb57-4aa0-8b1a-ac6f5d794e9a",
       "sourceText": "dirección",
-      "targetText": "направление",
+      "targetText": "адрес|направление",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2382,7 +2382,7 @@
     {
       "id": "f720dda3-bca3-4a16-9253-d0f261363449",
       "sourceText": "donde",
-      "targetText": "где (в придаточных)",
+      "targetText": "где",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2561,14 +2561,14 @@
     },
     {
       "id": "e4a63cf0-966c-411a-827c-a207a47e81ce",
-      "sourceText": "embargo",
-      "targetText": "однако (sin embargo - тем не менее)",
+      "sourceText": "sin embargo",
+      "targetText": "тем не менее|однако",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Sin embargo, es posible.",
-      "targetUsageExample": "Тем не менее, это возможно.",
+      "sourceUsageExample": "Sin embargo, no me importa.",
+      "targetUsageExample": "Тем не менее, мне всё равно.",
       "isActive": true
     },
     {
@@ -2586,7 +2586,7 @@
     {
       "id": "3414b292-befc-4a12-a7a0-7cfda4073710",
       "sourceText": "empresa",
-      "targetText": "предприятие",
+      "targetText": "компания|предприятие",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2610,7 +2610,7 @@
     {
       "id": "c197c99a-b699-4307-9969-1eb210037074",
       "sourceText": "encima",
-      "targetText": "наверху|сверх того",
+      "targetText": "сверху|поверх",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2886,7 +2886,7 @@
     {
       "id": "35fe9fc1-d6ba-4078-ab69-b5165c879593",
       "sourceText": "estar",
-      "targetText": "быть [временное состояние]",
+      "targetText": "быть",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2910,7 +2910,7 @@
     {
       "id": "70d30cc6-8d7b-464e-a1dd-628c73f4216b",
       "sourceText": "estudio",
-      "targetText": "изучение",
+      "targetText": "учёба|кабинет",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3078,7 +3078,7 @@
     {
       "id": "281ce291-b19c-4196-b0e9-1ef0c42dee87",
       "sourceText": "fin",
-      "targetText": "конец",
+      "targetText": "конец|цель",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3090,7 +3090,7 @@
     {
       "id": "25ddbc10-392a-4fd7-b55e-294531046da4",
       "sourceText": "final",
-      "targetText": "конец",
+      "targetText": "финал|конечный",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3174,7 +3174,7 @@
     {
       "id": "5056121c-dd89-4da4-a34b-d8abb34e7a47",
       "sourceText": "fuera",
-      "targetText": "наружу",
+      "targetText": "снаружи|наружу",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3258,7 +3258,7 @@
     {
       "id": "f7161b5b-9230-43a4-88b4-4e899641bd46",
       "sourceText": "general",
-      "targetText": "общий [общепринятый]",
+      "targetText": "общий|генерал",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3342,7 +3342,7 @@
     {
       "id": "63287ab4-dbb4-4f9e-9927-d8f6010f41be",
       "sourceText": "haber",
-      "targetText": "есть [имеется]",
+      "targetText": "есть|иметься",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3546,7 +3546,7 @@
     {
       "id": "80253754-b67e-41e5-8501-e240d12ec17f",
       "sourceText": "igual",
-      "targetText": "равный",
+      "targetText": "одинаковый|равный",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3558,13 +3558,13 @@
     {
       "id": "4ad5332b-1a36-427e-ba0d-fb77029799a9",
       "sourceText": "imagen",
-      "targetText": "образ",
+      "targetText": "изображение|картинка",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Es una bonita imagen.",
-      "targetUsageExample": "Это красивый образ.",
+      "targetUsageExample": "Это красивое изображение.",
       "isActive": true
     },
     {
@@ -3642,7 +3642,7 @@
     {
       "id": "0f97d7dd-2ba7-4f41-8f48-ab34ef3b25b7",
       "sourceText": "inglés",
-      "targetText": "английский язык",
+      "targetText": "английский",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3714,7 +3714,7 @@
     {
       "id": "cf99669f-a995-4369-8198-082ecdd45227",
       "sourceText": "izquierda",
-      "targetText": "левый|(лево|налево)",
+      "targetText": "левый|налево",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3810,7 +3810,7 @@
     {
       "id": "b4ef818f-fc76-4cb8-8072-164e5cd90633",
       "sourceText": "junto",
-      "targetText": "вместе",
+      "targetText": "вместе|рядом",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3870,7 +3870,7 @@
     {
       "id": "3f1033f3-dcae-4172-bfc5-d3361aa977b9",
       "sourceText": "lamento",
-      "targetText": "сожалею|жаль",
+      "targetText": "сожаление|жалоба",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -4494,7 +4494,7 @@
     {
       "id": "1c6c22be-d7a7-48e2-ba01-4688f9455eaf",
       "sourceText": "mismo",
-      "targetText": "сам",
+      "targetText": "сам|тот же самый",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -4554,7 +4554,7 @@
     {
       "id": "f9c4e771-8632-48d5-9965-5d3cc4c32266",
       "sourceText": "muestra",
-      "targetText": "образец|показывать",
+      "targetText": "образец",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -5334,13 +5334,13 @@
     {
       "id": "13a20432-e96e-4231-910d-623b2761c40f",
       "sourceText": "persona",
-      "targetText": "личность",
+      "targetText": "человек|персона",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Una persona amable.",
-      "targetUsageExample": "Приятная личность.",
+      "targetUsageExample": "Приятный человек.",
       "isActive": true
     },
     {
@@ -5778,7 +5778,7 @@
     {
       "id": "82d46211-7dd0-4195-9b47-b875a79f0b70",
       "sourceText": "que",
-      "targetText": "что",
+      "targetText": "что|который",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -5843,8 +5843,8 @@
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "La persona quien llamó.",
-      "targetUsageExample": "Человек, который звонил.",
+      "sourceUsageExample": "¿Quién es esa persona?",
+      "targetUsageExample": "Кто этот человек?",
       "isActive": true
     },
     {
@@ -5898,7 +5898,7 @@
     {
       "id": "7985b1af-e83e-41ab-b1eb-46ebed8d0436",
       "sourceText": "razón",
-      "targetText": "причина [основание]",
+      "targetText": "правота|причина",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -5982,7 +5982,7 @@
     {
       "id": "c3b53423-8b73-4e68-9394-4603e993b2f8",
       "sourceText": "relajar",
-      "targetText": "расслабься",
+      "targetText": "расслабляться",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6184,18 +6184,6 @@
       "isActive": true
     },
     {
-      "id": "17fd3c65-4b65-47e8-8366-91738f666e27",
-      "sourceText": "san",
-      "targetText": "святой (Сан)",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Vivo en San Francisco.",
-      "targetUsageExample": "Живу в Сан-Франциско.",
-      "isActive": true
-    },
-    {
       "id": "fb26aaa2-04cb-49e8-96bc-0ffa04d0a4c5",
       "sourceText": "sangre",
       "targetText": "кровь",
@@ -6390,13 +6378,13 @@
     {
       "id": "649943eb-ee7f-465c-819f-6a22ac7a8351",
       "sourceText": "servicio",
-      "targetText": "служба",
+      "targetText": "сервис|обслуживание",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Buen servicio.",
-      "targetUsageExample": "Хорошая служба.",
+      "targetUsageExample": "Хорошее обслуживание.",
       "isActive": true
     },
     {
@@ -6486,7 +6474,7 @@
     {
       "id": "59779dce-fa7d-4744-8f44-de6d7bc0570e",
       "sourceText": "significar",
-      "targetText": "означает",
+      "targetText": "означать",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6594,7 +6582,7 @@
     {
       "id": "5fc8b581-00d7-4b67-84ef-35ca78757e48",
       "sourceText": "sitio",
-      "targetText": "местечко",
+      "targetText": "место",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6678,7 +6666,7 @@
     {
       "id": "bb07ac03-35f1-4e1d-8aa9-13980a8751ee",
       "sourceText": "suficiente",
-      "targetText": "достаточно | достаточный",
+      "targetText": "достаточно|достаточный",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6702,7 +6690,7 @@
     {
       "id": "2ced548a-f0cb-4f2d-8ee9-c6341064ce07",
       "sourceText": "supuesto",
-      "targetText": "предположение | предполагаемый",
+      "targetText": "предположение|предполагаемый",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6750,7 +6738,7 @@
     {
       "id": "f931ed6b-4c1b-4a72-bbea-8d678f6bf1d1",
       "sourceText": "tampoco",
-      "targetText": "также не",
+      "targetText": "тоже нет",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6798,7 +6786,7 @@
     {
       "id": "515e0dff-1452-459a-9c05-a9d3a34794fb",
       "sourceText": "te",
-      "targetText": "тебя; тебе",
+      "targetText": "тебя|тебе",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6906,7 +6894,7 @@
     {
       "id": "3b83fcc8-09e2-4ae8-8674-18abac4ca9a6",
       "sourceText": "total",
-      "targetText": "всего",
+      "targetText": "итого|общий",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
