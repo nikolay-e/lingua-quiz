@@ -75,7 +75,7 @@ export function QuizPage(): React.JSX.Element {
     currentQuestion?.targetLanguage ?? quizManager?.getState().translations[0]?.targetLanguage ?? '';
   const currentLevel = quizManager?.getState().currentLevel ?? 'LEVEL_1';
   const currentLanguage = direction === 'normal' ? sourceLanguage : targetLanguage;
-  const speakLanguage: LanguageCode | undefined = SUPPORTED_SPEAK_LANGS[sourceLanguage];
+  const speakLanguage: LanguageCode | undefined = SUPPORTED_SPEAK_LANGS[sourceLanguage.toLowerCase()];
   const canPronounce = speakLanguage !== undefined;
 
   const handlePronunciationContinue = () => {
