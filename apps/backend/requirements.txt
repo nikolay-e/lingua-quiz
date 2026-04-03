@@ -5,7 +5,7 @@ slowapi==0.1.9
 psycopg2-binary==2.9.11
 bcrypt==5.0.0
 pyjwt==2.12.1
-requests==2.33.0
+requests==2.33.1
 httpx==0.28.1
 alembic==1.18.4
 zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
