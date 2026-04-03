@@ -140,8 +140,11 @@ export function WordPhonemeDisplay({ wordAssessments, threshold }: WordPhonemeDi
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    setExpandedIndex(null);
-  }, [wordAssessments]);
+    const firstProblemIndex = wordAssessments.findIndex(
+      (wa) => (wa.accuracyScore < threshold || wa.errorType !== 'None') && wa.phonemes.length > 0,
+    );
+    setExpandedIndex(firstProblemIndex >= 0 ? firstProblemIndex : null);
+  }, [wordAssessments, threshold]);
 
   if (wordAssessments.length === 0) return null;
 
