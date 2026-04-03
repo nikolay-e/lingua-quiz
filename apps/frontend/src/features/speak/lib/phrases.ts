@@ -51,12 +51,16 @@ export const PRACTICE_PHRASES: Record<LanguageCode, string[]> = {
   ],
 };
 
-export function getRandomPhrase(language: LanguageCode): string {
-  const phrases = PRACTICE_PHRASES[language];
-  const randomIndex = Math.floor(Math.random() * phrases.length);
-  return phrases[randomIndex] ?? phrases[0] ?? '';
+export function getRandomPhrase(language: LanguageCode, vocabularyExamples?: string[]): string {
+  const hasExamples = vocabularyExamples !== undefined && vocabularyExamples.length > 0;
+  const pool = hasExamples ? vocabularyExamples : PRACTICE_PHRASES[language];
+  const randomIndex = Math.floor(Math.random() * pool.length);
+  return pool[randomIndex] ?? pool[0] ?? '';
 }
 
-export function getDefaultPhrase(language: LanguageCode): string {
+export function getDefaultPhrase(language: LanguageCode, vocabularyExamples?: string[]): string {
+  if (vocabularyExamples !== undefined && vocabularyExamples.length > 0) {
+    return vocabularyExamples[Math.floor(Math.random() * vocabularyExamples.length)] ?? '';
+  }
   return PRACTICE_PHRASES[language][0] ?? '';
 }

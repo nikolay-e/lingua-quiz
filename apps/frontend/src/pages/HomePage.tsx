@@ -22,6 +22,7 @@ export function HomePage(): React.JSX.Element {
   const startQuiz = useQuizStore((state) => state.startQuiz);
   const reset = useQuizStore((state) => state.reset);
   const setSpeakLanguage = useSpeakStore((state) => state.setLanguage);
+  const setSpeakListName = useSpeakStore((state) => state.setListName);
   const streakDays = useSpeakStore((state) => state.streakDays);
   const attempts = useSpeakStore((state) => state.attempts);
 
@@ -81,6 +82,7 @@ export function HomePage(): React.JSX.Element {
     const speakLang = SUPPORTED_SPEAK_LANGS[selectedLearning];
     if (speakLang === undefined) return;
     setSpeakLanguage(speakLang);
+    setSpeakListName(selectedList?.listName ?? null);
     void navigate('/speak');
   };
 

@@ -1,21 +1,28 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Settings, Shuffle } from 'lucide-react';
 import { AudioRecorder } from '@features/speak/components/AudioRecorder';
 import { ScoreCard } from '@features/speak/components/ScoreCard';
 import { WordPhonemeDisplay } from '@features/speak/components/WordPhonemeDisplay';
-import { useSpeakStore, usePassThreshold, useSpeakLanguage } from '@features/speak/stores/speak.store';
+import {
+  useSpeakStore,
+  usePassThreshold,
+  useSpeakLanguage,
+  useSpeakListName,
+} from '@features/speak/stores/speak.store';
 import { useToken, useIsAuthenticated } from '@features/auth/stores/auth.store';
 import { assessPronunciationViaBackend } from '@api/speech';
 import { generateSimulatedAssessment } from '@features/speak/services/simulation';
 import { getAssessmentFeedback } from '@features/speak/lib/feedback';
 import { getDefaultPhrase, getRandomPhrase } from '@features/speak/lib/phrases';
 import type { PronunciationScores, WordAssessment, AssessmentFeedback } from '@features/speak/types';
-import { cn } from '@shared/utils';
+import type { Translation } from '@api/types';
+import { cn, logger } from '@shared/utils';
 import { Button, Input, Label } from '@shared/ui';
 import { AppShell } from '@shared/components';
 import { requestWakeLock, releaseWakeLock } from '@shared/pwa';
+import api from '@api/api';
 
 export function SpeakPage(): React.JSX.Element {
   const { t } = useTranslation();
@@ -26,8 +33,32 @@ export function SpeakPage(): React.JSX.Element {
   const isAuthenticated = useIsAuthenticated();
   const passThreshold = usePassThreshold();
   const language = useSpeakLanguage();
+  const listName = useSpeakListName();
 
-  const [practiceText, setPracticeText] = useState(() => getDefaultPhrase(language));
+  const [translations, setTranslations] = useState<Translation[]>([]);
+
+  const vocabularyExamples = useMemo(
+    () => translations.map((t) => t.sourceUsageExample).filter((e): e is string => e !== null && e !== ''),
+    [translations],
+  );
+
+  useEffect(() => {
+    if (listName === null || token === null) return;
+    let cancelled = false;
+    api
+      .fetchTranslations(token, listName)
+      .then((data) => {
+        if (!cancelled) setTranslations(data);
+      })
+      .catch((err: unknown) => {
+        logger.error('Failed to fetch vocabulary for speak:', err);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [listName, token]);
+
+  const [practiceText, setPracticeText] = useState('');
   const [scores, setScores] = useState<PronunciationScores | null>(null);
   const [wordAssessments, setWordAssessments] = useState<WordAssessment[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -72,14 +103,14 @@ export function SpeakPage(): React.JSX.Element {
   }, []);
 
   useEffect(() => {
-    setPracticeText(getDefaultPhrase(language));
+    setPracticeText(getDefaultPhrase(language, vocabularyExamples));
     resetState();
-  }, [language, resetState]);
+  }, [language, vocabularyExamples, resetState]);
 
   const handleRandomPhrase = useCallback(() => {
-    setPracticeText(getRandomPhrase(language));
+    setPracticeText(getRandomPhrase(language, vocabularyExamples));
     resetState();
-  }, [language, resetState]);
+  }, [language, vocabularyExamples, resetState]);
 
   const handleRecordingComplete = async (blob: Blob) => {
     if (practiceText.trim() === '') return;
