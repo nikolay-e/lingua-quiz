@@ -25,6 +25,8 @@ interface QuizActions {
     level: ActiveLevel,
     token?: string,
   ) => Promise<{ success: boolean; actualLevel: ActiveLevel; message?: string }>;
+  markPronunciationPassed: (token: string, translationId: string) => void;
+  autoSetPronunciationForUnsupportedLanguage: (token: string) => void;
   reset: () => void;
   saveAndCleanup: (token: string) => Promise<void>;
   flushImmediately: (token: string, isUnloading?: boolean) => void;
@@ -133,6 +135,18 @@ export const useQuizStore = create<QuizStore>()((set, get) => ({
     set({ currentQuestion: questionResult.question });
 
     return result;
+  },
+
+  markPronunciationPassed: (token: string, translationId: string) => {
+    const state = get();
+    if (state.quizManager === null) return;
+    quizService.markPronunciationPassed(state.quizManager, translationId, token);
+  },
+
+  autoSetPronunciationForUnsupportedLanguage: (token: string) => {
+    const state = get();
+    if (state.quizManager === null) return;
+    quizService.autoSetPronunciationForUnsupportedLanguage(state.quizManager, token);
   },
 
   reset: () => {

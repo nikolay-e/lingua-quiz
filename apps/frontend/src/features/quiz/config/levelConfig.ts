@@ -1,9 +1,9 @@
 import type { LevelKey } from '@lingua-quiz/core';
-import { List, ListTodo, CheckCircle, Star, Trophy, type LucideIcon } from 'lucide-react';
+import { List, ListTodo, CheckCircle, Star, Mic, Trophy, type LucideIcon } from 'lucide-react';
 
 export interface LevelConfigItem {
   id: string;
-  key: LevelKey;
+  key: LevelKey | 'PRONUNCIATION';
   label: string;
   icon: LucideIcon;
   description: (sourceLanguage: string, targetLanguage: string) => string;
@@ -49,6 +49,13 @@ export const LEVEL_CONFIG: readonly LevelConfigItem[] = [
     icon: Star,
     description: (sourceLanguage: string, targetLanguage: string) =>
       `Reverse Context (${targetLanguage} ➔ ${sourceLanguage})`,
+  },
+  {
+    id: 'pronunciation',
+    key: 'PRONUNCIATION',
+    label: 'Pronunciation Practice',
+    icon: Mic,
+    description: () => 'Pronunciation Practice',
   },
   {
     id: 'level5',

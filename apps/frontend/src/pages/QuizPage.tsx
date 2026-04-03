@@ -3,7 +3,7 @@ import { Mic, MicOff } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { ttsService } from '@features/quiz/services/tts-service';
-import { useLevelWordLists, useQuizSession, useUiPreferences } from '@features/quiz/hooks';
+import { useLevelWordLists, usePronunciationQueue, useQuizSession, useUiPreferences } from '@features/quiz/hooks';
 import {
   QuizHeader,
   QuestionDisplay,
@@ -39,8 +39,13 @@ export function QuizPage(): React.JSX.Element {
   const restorePending = useQuizStore((state) => state.restorePending);
   const hasPendingChanges = useQuizStore((state) => state.hasPendingChanges);
   const setSaveErrorCallback = useQuizStore((state) => state.setSaveErrorCallback);
+  const markPronunciationPassed = useQuizStore((state) => state.markPronunciationPassed);
+  const autoSetPronunciationForUnsupportedLanguage = useQuizStore(
+    (state) => state.autoSetPronunciationForUnsupportedLanguage,
+  );
 
   const levelWordLists = useLevelWordLists(quizManager);
+  const pronunciationQueue = usePronunciationQueue(quizManager);
   const { foldedLists, toggleFold, pronunciationMode, togglePronunciationMode } = useUiPreferences();
 
   const answerInputRef = useRef<AnswerInputRef>(null);
@@ -78,12 +83,29 @@ export function QuizPage(): React.JSX.Element {
   const speakLanguage: LanguageCode | undefined = SUPPORTED_SPEAK_LANGS[sourceLanguage.toLowerCase()];
   const canPronounce = speakLanguage !== undefined;
 
+  const pronunciationWord = pronunciationMode && canPronounce ? pronunciationQueue.currentWord : null;
+
+  const handlePronunciationPassed = () => {
+    if (token !== null && pronunciationWord !== null) {
+      markPronunciationPassed(token, pronunciationWord.id);
+    }
+    pronunciationQueue.advance();
+  };
+
   const handlePronunciationContinue = () => {
-    handleSkip();
+    if (pronunciationWord !== null) {
+      pronunciationQueue.advance();
+    } else {
+      handleSkip();
+    }
   };
 
   const handlePronunciationSkip = () => {
-    handleSkip();
+    if (pronunciationWord !== null) {
+      pronunciationQueue.advance();
+    } else {
+      handleSkip();
+    }
   };
 
   useEffect(() => {
@@ -110,6 +132,12 @@ export function QuizPage(): React.JSX.Element {
       ttsService.destroy();
     };
   }, [token, restorePending, handleLoadWordLists, setSaveErrorCallback, toast]);
+
+  useEffect(() => {
+    if (quizManager !== null && token !== null && !canPronounce) {
+      autoSetPronunciationForUnsupportedLanguage(token);
+    }
+  }, [quizManager, token, canPronounce, autoSetPronunciationForUnsupportedLanguage]);
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent): void => {
@@ -182,7 +210,14 @@ export function QuizPage(): React.JSX.Element {
               <div className="flex flex-col gap-4 md:gap-6">
                 <FeedCard
                   dense
-                  title={pronunciationMode && canPronounce ? 'Say this word' : 'Translate'}
+                  title={
+                    // eslint-disable-next-line no-nested-ternary
+                    pronunciationMode && canPronounce
+                      ? pronunciationWord !== null
+                        ? 'Say this word'
+                        : 'Pronunciation Complete'
+                      : 'Translate'
+                  }
                   headerAction={
                     currentQuestion !== null && token !== null ? (
                       <div className="flex items-center gap-1">
@@ -214,19 +249,33 @@ export function QuizPage(): React.JSX.Element {
                     currentQuestion={currentQuestion}
                     levelWordLists={levelWordLists}
                     pronunciationMode={pronunciationMode && canPronounce}
+                    pronunciationText={pronunciationWord?.sourceText}
+                    pronunciationLanguage={pronunciationWord?.sourceLanguage}
                   />
                 </FeedCard>
 
                 {currentQuestion !== null && (
                   <FeedCard dense>
+                    {/* eslint-disable-next-line no-nested-ternary */}
                     {pronunciationMode && speakLanguage !== undefined && token !== null ? (
-                      <PronunciationMode
-                        questionText={currentQuestion.questionText}
-                        language={speakLanguage}
-                        token={token}
-                        onContinue={handlePronunciationContinue}
-                        onSkip={handlePronunciationSkip}
-                      />
+                      pronunciationWord !== null ? (
+                        <PronunciationMode
+                          questionText={pronunciationWord.sourceText}
+                          language={speakLanguage}
+                          token={token}
+                          onContinue={handlePronunciationContinue}
+                          onPronunciationPassed={handlePronunciationPassed}
+                          onSkip={handlePronunciationSkip}
+                        />
+                      ) : (
+                        <div className="flex flex-col items-center gap-3 p-6 text-center">
+                          <p className="text-lg font-medium text-success">All pronunciation complete!</p>
+                          <p className="text-sm text-muted-foreground">
+                            All mastered words have been pronounced. Switch back to translation mode to continue
+                            learning.
+                          </p>
+                        </div>
+                      )
                     ) : (
                       <>
                         <AnswerInput

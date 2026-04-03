@@ -19,4 +19,5 @@ export interface ProgressEntry {
   consecutiveCorrect: number;
   recentHistory: boolean[];
   lastAskedAt?: string;
+  pronunciationPassed?: boolean;
 }

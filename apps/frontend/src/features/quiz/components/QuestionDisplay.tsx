@@ -8,12 +8,16 @@ interface QuestionDisplayProps {
   currentQuestion?: QuizQuestion | null;
   levelWordLists?: LevelWordLists;
   pronunciationMode?: boolean;
+  pronunciationText?: string | null;
+  pronunciationLanguage?: string;
 }
 
 export function QuestionDisplay({
   currentQuestion = null,
   levelWordLists = {},
   pronunciationMode = false,
+  pronunciationText = null,
+  pronunciationLanguage = 'en',
 }: QuestionDisplayProps): React.JSX.Element {
   const { t } = useTranslation();
 
@@ -39,7 +43,7 @@ export function QuestionDisplay({
   );
 
   const masteredCount = useMemo(() => {
-    const masteredLevels = ['level3', 'level4', 'level5'];
+    const masteredLevels = ['level3', 'level4', 'pronunciation', 'level5'];
     return Object.entries(levelWordLists)
       .filter(([id]) => masteredLevels.includes(id))
       .reduce((sum, [, l]) => sum + l.count, 0);
@@ -80,9 +84,9 @@ export function QuestionDisplay({
         <span
           id="word"
           className="question-text text-xl font-bold text-primary text-center wrap-break-word hyphens-auto"
-          lang={questionLanguage}
+          lang={pronunciationMode && pronunciationText !== null ? pronunciationLanguage : questionLanguage}
         >
-          {currentQuestion.questionText}
+          {pronunciationMode && pronunciationText !== null ? pronunciationText : currentQuestion.questionText}
         </span>
       </div>
     </div>

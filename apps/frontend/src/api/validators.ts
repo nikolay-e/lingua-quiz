@@ -62,6 +62,7 @@ const schemas = {
       'consecutiveCorrect',
       'lastPracticed',
       'recentHistory',
+      'pronunciationPassed',
     ],
     properties: {
       vocabularyItemId: { type: 'string' },
@@ -75,6 +76,7 @@ const schemas = {
       consecutiveCorrect: { type: 'integer' },
       lastPracticed: { anyOf: [{ type: 'string' }, { type: 'null' }] },
       recentHistory: { type: 'array', items: { type: 'boolean' } },
+      pronunciationPassed: { type: 'boolean' },
     },
   },
   ProgressUpdateRequest: {
@@ -96,6 +98,7 @@ const schemas = {
       incorrectCount: { type: 'integer', minimum: 0 },
       consecutiveCorrect: { type: 'integer', minimum: 0 },
       recentHistory: { type: 'array', items: { type: 'boolean' }, maxItems: 20 },
+      pronunciationPassed: { anyOf: [{ type: 'boolean' }, { type: 'null' }] },
     },
   },
   ContentVersionResponse: {

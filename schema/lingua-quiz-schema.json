@@ -1004,6 +1004,18 @@
             },
             "maxItems": 20,
             "title": "Recenthistory"
+          },
+          "pronunciationPassed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pronunciationpassed"
           }
         },
         "type": "object",
@@ -1217,6 +1229,10 @@
               "type": "boolean"
             },
             "title": "Recenthistory"
+          },
+          "pronunciationPassed": {
+            "type": "boolean",
+            "title": "Pronunciationpassed"
           }
         },
         "type": "object",
@@ -1231,7 +1247,8 @@
           "incorrectCount",
           "consecutiveCorrect",
           "lastPracticed",
-          "recentHistory"
+          "recentHistory",
+          "pronunciationPassed"
         ],
         "title": "UserProgressResponse"
       },

@@ -406,6 +406,14 @@ export class QuizManager {
     return this.stateManager.getStatistics(this.opts.enableUsageExamples);
   };
 
+  markPronunciationPassed = (translationId: string): void => {
+    this.stateManager.markPronunciationPassed(translationId);
+  };
+
+  getWordsPendingPronunciation = (): string[] => {
+    return this.stateManager.getWordsPendingPronunciation();
+  };
+
   getCurrentLevel = (): PracticeLevel => this.currentLevel;
 
   getOptions = (): Required<QuizOptions> => ({ ...this.opts });

@@ -14,4 +14,5 @@ export type UserProgressResponse = {
   consecutiveCorrect: number;
   lastPracticed: string | null;
   recentHistory: boolean[];
+  pronunciationPassed: boolean;
 };

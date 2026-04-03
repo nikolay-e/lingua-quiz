@@ -10,4 +10,5 @@ export type ProgressUpdateRequest = {
   incorrectCount: number;
   consecutiveCorrect: number;
   recentHistory: boolean[];
+  pronunciationPassed?: boolean | null;
 };

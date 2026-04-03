@@ -17,6 +17,7 @@ interface PronunciationModeProps {
   language: LanguageCode;
   token: string;
   onContinue: () => void;
+  onPronunciationPassed: () => void;
   onSkip: () => void;
 }
 
@@ -25,6 +26,7 @@ export function PronunciationMode({
   language,
   token,
   onContinue,
+  onPronunciationPassed,
   onSkip,
 }: PronunciationModeProps): React.JSX.Element {
   const { t } = useTranslation();
@@ -141,7 +143,7 @@ export function PronunciationMode({
             </div>
           )}
 
-          <Button className="w-full" onClick={onContinue}>
+          <Button className="w-full" onClick={feedback?.passed === true ? onPronunciationPassed : onContinue}>
             {t('quiz.continue', 'Continue')} →
           </Button>
         </>

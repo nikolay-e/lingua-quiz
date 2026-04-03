@@ -66,9 +66,15 @@ export class StateManager {
     });
 
     const targetLevel = enableUsageExamples ? 'LEVEL_5' : 'LEVEL_3';
-    const completed = allProgress.filter((p) => p.level === targetLevel).length;
+    const completed = allProgress.filter(
+      (p) => p.level === targetLevel && (targetLevel !== 'LEVEL_5' || p.pronunciationPassed === true),
+    ).length;
     const completionPercentage = allProgress.length === 0 ? 0 : Math.round((completed / allProgress.length) * 100);
-    const isComplete = allProgress.length > 0 && allProgress.every((p) => p.level === targetLevel);
+    const isComplete =
+      allProgress.length > 0 &&
+      allProgress.every(
+        (p) => p.level === targetLevel && (targetLevel !== 'LEVEL_5' || p.pronunciationPassed === true),
+      );
 
     const result = {
       totalWords: allProgress.length,
@@ -79,6 +85,16 @@ export class StateManager {
 
     this.statisticsCache.set(enableUsageExamples, result);
     return result;
+  }
+
+  markPronunciationPassed(translationId: string): void {
+    this.updateProgress(translationId, { pronunciationPassed: true });
+  }
+
+  getWordsPendingPronunciation(): string[] {
+    return Array.from(this.progress.values())
+      .filter((p) => p.level === 'LEVEL_5' && p.pronunciationPassed !== true)
+      .map((p) => p.translationId);
   }
 
   isQuizComplete(enableUsageExamples: boolean): boolean {

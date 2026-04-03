@@ -30,6 +30,7 @@ class ProgressUpdateRequest(APIBaseModel):
     incorrect_count: Annotated[int, Field(alias="incorrectCount", ge=0, title="Incorrectcount")]
     consecutive_correct: Annotated[int, Field(alias="consecutiveCorrect", ge=0, title="Consecutivecorrect")]
     recent_history: Annotated[list[bool], Field(alias="recentHistory", max_length=20, title="Recenthistory")]
+    pronunciation_passed: Annotated[bool | None, Field(None, alias="pronunciationPassed", title="Pronunciationpassed")]
 
 
 class RefreshTokenRequest(APIBaseModel):
@@ -78,6 +79,7 @@ class UserProgressResponse(APIBaseModel):
     consecutive_correct: Annotated[int, Field(alias="consecutiveCorrect", title="Consecutivecorrect")]
     last_practiced: Annotated[str | None, Field(alias="lastPracticed", title="Lastpracticed")]
     recent_history: Annotated[list[bool], Field(alias="recentHistory", title="Recenthistory")]
+    pronunciation_passed: Annotated[bool, Field(alias="pronunciationPassed", title="Pronunciationpassed")]
 
 
 class UserRegistration(APIBaseModel):

@@ -13,6 +13,7 @@ export interface ProgressData {
   consecutiveCorrect: number;
   recentHistory: boolean[];
   targetLanguage: string;
+  pronunciationPassed?: boolean;
 }
 
 export interface QuizSession {
@@ -107,6 +108,7 @@ export class QuizService {
         consecutiveCorrect: number;
         recentHistory: boolean[];
         lastPracticed: string | null;
+        pronunciationPassed: boolean;
       }
 
       const progressLookup = new Map<string, ProgressEntry>(
@@ -120,6 +122,7 @@ export class QuizService {
             consecutiveCorrect: p.consecutiveCorrect,
             recentHistory: p.recentHistory ?? [],
             lastPracticed: p.lastPracticed,
+            pronunciationPassed: p.pronunciationPassed,
           },
         ]),
       );
@@ -155,6 +158,7 @@ export class QuizService {
           consecutiveCorrect: userProg?.consecutiveCorrect ?? 0,
           recentHistory: userProg?.recentHistory ?? ([] as boolean[]),
           lastAskedAt: userProg?.lastPracticed ?? undefined,
+          pronunciationPassed: userProg?.pronunciationPassed ?? false,
         };
       });
 
@@ -171,6 +175,7 @@ export class QuizService {
             consecutiveCorrect: prog.consecutiveCorrect,
             recentHistory: prog.recentHistory,
             targetLanguage: translation.targetLanguage,
+            pronunciationPassed: prog.pronunciationPassed,
           });
         }
       }
@@ -210,6 +215,7 @@ export class QuizService {
       consecutiveCorrect: 0,
       recentHistory: [] as boolean[],
       targetLanguage: translation.targetLanguage,
+      pronunciationPassed: false,
     };
 
     this.progressMap.set(translation.id, {
@@ -220,6 +226,7 @@ export class QuizService {
       consecutiveCorrect: currentProgress.consecutiveCorrect,
       recentHistory: currentProgress.recentHistory,
       targetLanguage: translation.targetLanguage,
+      pronunciationPassed: currentProgress.pronunciationPassed ?? existing.pronunciationPassed,
     });
 
     this.debouncedSave(token, manager);
@@ -251,6 +258,7 @@ export class QuizService {
       consecutiveCorrect: 0,
       recentHistory: [] as boolean[],
       targetLanguage: translation.targetLanguage,
+      pronunciationPassed: false,
     };
 
     this.progressMap.set(translation.id, {
@@ -261,11 +269,76 @@ export class QuizService {
       consecutiveCorrect: currentProgress.consecutiveCorrect,
       recentHistory: currentProgress.recentHistory,
       targetLanguage: translation.targetLanguage,
+      pronunciationPassed: currentProgress.pronunciationPassed ?? existing.pronunciationPassed,
     });
 
     this.debouncedSave(token, manager);
 
     return feedback;
+  }
+
+  markPronunciationPassed(manager: QuizManager, translationId: string, token: string): void {
+    manager.markPronunciationPassed(translationId);
+
+    const translation = manager.getTranslation(translationId);
+    if (translation === undefined) return;
+
+    const existing = this.progressMap.get(translationId);
+    if (existing !== undefined) {
+      existing.pronunciationPassed = true;
+    } else {
+      const quizState = manager.getState();
+      const currentProgress = quizState.progress.find((p) => p.translationId === translationId);
+      if (currentProgress === undefined) return;
+
+      const level = Number.parseInt(currentProgress.level.replace('LEVEL_', ''));
+      this.progressMap.set(translationId, {
+        level,
+        queuePosition: currentProgress.queuePosition ?? 0,
+        correctCount: 0,
+        incorrectCount: 0,
+        consecutiveCorrect: currentProgress.consecutiveCorrect,
+        recentHistory: currentProgress.recentHistory,
+        targetLanguage: translation.targetLanguage,
+        pronunciationPassed: true,
+      });
+    }
+
+    this.debouncedSave(token, manager);
+  }
+
+  autoSetPronunciationForUnsupportedLanguage(manager: QuizManager, token: string): void {
+    const pending = manager.getWordsPendingPronunciation();
+    if (pending.length === 0) return;
+
+    for (const translationId of pending) {
+      manager.markPronunciationPassed(translationId);
+
+      const translation = manager.getTranslation(translationId);
+      if (translation === undefined) continue;
+
+      const existing = this.progressMap.get(translationId);
+      if (existing !== undefined) {
+        existing.pronunciationPassed = true;
+      } else {
+        const quizState = manager.getState();
+        const currentProgress = quizState.progress.find((p) => p.translationId === translationId);
+        if (currentProgress === undefined) continue;
+
+        this.progressMap.set(translationId, {
+          level: 5,
+          queuePosition: currentProgress.queuePosition ?? 0,
+          correctCount: 0,
+          incorrectCount: 0,
+          consecutiveCorrect: currentProgress.consecutiveCorrect,
+          recentHistory: currentProgress.recentHistory,
+          targetLanguage: translation.targetLanguage,
+          pronunciationPassed: true,
+        });
+      }
+    }
+
+    this.debouncedSave(token, manager);
   }
 
   async setLevel(
@@ -304,7 +377,9 @@ export class QuizService {
     return Number.isNaN(truncated) ? min : Math.max(min, Math.min(max, truncated));
   }
 
-  private sanitizeProgressItem(progress: ProgressData): Omit<ProgressData, 'targetLanguage'> {
+  private sanitizeProgressItem(
+    progress: ProgressData,
+  ): Omit<ProgressData, 'targetLanguage'> & { pronunciationPassed?: boolean } {
     return {
       level: this.sanitizeInt(progress.level, 0, 5),
       queuePosition: this.sanitizeInt(progress.queuePosition, 0, Number.MAX_SAFE_INTEGER),
@@ -312,6 +387,7 @@ export class QuizService {
       incorrectCount: this.sanitizeInt(progress.incorrectCount, 0, Number.MAX_SAFE_INTEGER),
       consecutiveCorrect: this.sanitizeInt(progress.consecutiveCorrect, 0, Number.MAX_SAFE_INTEGER),
       recentHistory: progress.recentHistory.slice(-20).map(Boolean),
+      pronunciationPassed: progress.pronunciationPassed,
     };
   }
 
@@ -403,6 +479,7 @@ export class QuizService {
             consecutiveCorrect: item.consecutiveCorrect ?? 0,
             recentHistory: item.recentHistory ?? [],
             targetLanguage: item.targetLanguage,
+            pronunciationPassed: item.pronunciationPassed,
           });
         }
       }
