@@ -93,7 +93,7 @@ export class StateManager {
 
   getWordsPendingPronunciation(): string[] {
     return Array.from(this.progress.values())
-      .filter((p) => p.level === 'LEVEL_5' && p.pronunciationPassed !== true)
+      .filter((p) => p.pronunciationPassed !== true)
       .map((p) => p.translationId);
   }
 

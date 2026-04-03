@@ -43,7 +43,7 @@ export function QuestionDisplay({
   );
 
   const masteredCount = useMemo(() => {
-    const masteredLevels = ['level3', 'level4', 'pronunciation', 'level5'];
+    const masteredLevels = ['level3', 'level4', 'level5'];
     return Object.entries(levelWordLists)
       .filter(([id]) => masteredLevels.includes(id))
       .reduce((sum, [, l]) => sum + l.count, 0);
