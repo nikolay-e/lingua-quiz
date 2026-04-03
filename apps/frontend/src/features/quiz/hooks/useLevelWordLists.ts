@@ -13,8 +13,19 @@ export function useLevelWordLists(quizManager: QuizManager | null): LevelWordLis
     }
 
     const state = quizManager.getState();
+    const pronunciationPassedIds = quizManager.getWordsPronunciationPassed();
 
     return LEVEL_CONFIG.reduce<LevelWordLists>((acc, level) => {
+      if (level.key === 'PRONUNCIATION') {
+        const words = pronunciationPassedIds
+          .map((id) => quizManager.getTranslationForDisplay(id))
+          .filter((translation): translation is TranslationDisplay => translation !== undefined)
+          .map((w) => `${w.source} -> ${w.target}`);
+
+        acc[level.id] = { ...level, words, count: pronunciationPassedIds.length };
+        return acc;
+      }
+
       const queue = state.queues[level.key];
       const words = queue
         .map((id) => quizManager.getTranslationForDisplay(id))

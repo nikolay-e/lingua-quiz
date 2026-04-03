@@ -97,6 +97,12 @@ export class StateManager {
       .map((p) => p.translationId);
   }
 
+  getWordsPronunciationPassed(): string[] {
+    return Array.from(this.progress.values())
+      .filter((p) => p.pronunciationPassed === true)
+      .map((p) => p.translationId);
+  }
+
   isQuizComplete(enableUsageExamples: boolean): boolean {
     return this.getStatistics(enableUsageExamples).isComplete;
   }
