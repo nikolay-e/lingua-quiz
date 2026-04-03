@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { RootLayout } from '@pages';
 import { ProtectedRoute } from '@app/routing/ProtectedRoute';
 import { AdminRoute } from '@app/routing/AdminRoute';
@@ -13,7 +13,6 @@ const LoginPage = lazy(() => import('@pages/LoginPage').then((m) => ({ default: 
 const RegisterPage = lazy(() => import('@pages/RegisterPage').then((m) => ({ default: m.RegisterPage })));
 const SettingsPage = lazy(() => import('@pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
 const AdminPage = lazy(() => import('@pages/admin').then((m) => ({ default: m.AdminPage })));
-const SpeakPage = lazy(() => import('@pages/SpeakPage').then((m) => ({ default: m.SpeakPage })));
 
 function PageLoader(): React.JSX.Element {
   return (
@@ -50,13 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'speak',
-        element: (
-          <ProtectedRoute>
-            <Suspense fallback={<PageLoader />}>
-              <SpeakPage />
-            </Suspense>
-          </ProtectedRoute>
-        ),
+        element: <Navigate to="/quiz" replace />,
       },
       {
         path: 'login',

@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { Mic, MicOff } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { ttsService } from '@features/quiz/services/tts-service';
@@ -11,11 +12,15 @@ import {
   UsageExamples,
   LearningProgress,
   LevelChangeAnimation,
+  PronunciationMode,
   TTSButton,
   QuizSkeleton,
   type AnswerInputRef,
 } from '@features/quiz/components';
+import { SUPPORTED_SPEAK_LANGS } from '@features/speak';
+import type { LanguageCode } from '@features/speak/types';
 import { AppShell, FeedCard, ErrorDisplay, useToast } from '@shared/components';
+import { Button } from '@shared/ui';
 import { logger, isTouchDevice } from '@shared/utils';
 import { reacquireWakeLockOnVisibilityChange } from '@shared/pwa';
 
@@ -36,7 +41,7 @@ export function QuizPage(): React.JSX.Element {
   const setSaveErrorCallback = useQuizStore((state) => state.setSaveErrorCallback);
 
   const levelWordLists = useLevelWordLists(quizManager);
-  const { foldedLists, toggleFold } = useUiPreferences();
+  const { foldedLists, toggleFold, pronunciationMode, togglePronunciationMode } = useUiPreferences();
 
   const answerInputRef = useRef<AnswerInputRef>(null);
 
@@ -70,6 +75,16 @@ export function QuizPage(): React.JSX.Element {
     currentQuestion?.targetLanguage ?? quizManager?.getState().translations[0]?.targetLanguage ?? '';
   const currentLevel = quizManager?.getState().currentLevel ?? 'LEVEL_1';
   const currentLanguage = direction === 'normal' ? sourceLanguage : targetLanguage;
+  const speakLanguage: LanguageCode | undefined = SUPPORTED_SPEAK_LANGS[sourceLanguage];
+  const canPronounce = speakLanguage !== undefined;
+
+  const handlePronunciationContinue = () => {
+    handleSkip();
+  };
+
+  const handlePronunciationSkip = () => {
+    handleSkip();
+  };
 
   useEffect(() => {
     setSaveErrorCallback((message: string) => {
@@ -167,46 +182,78 @@ export function QuizPage(): React.JSX.Element {
               <div className="flex flex-col gap-4 md:gap-6">
                 <FeedCard
                   dense
-                  title="Translate"
+                  title={pronunciationMode && canPronounce ? 'Say this word' : 'Translate'}
                   headerAction={
                     currentQuestion !== null && token !== null ? (
-                      <TTSButton
-                        key={currentQuestion.questionText}
-                        token={token}
-                        text={currentQuestion.questionText}
-                        language={currentLanguage}
-                      />
+                      <div className="flex items-center gap-1">
+                        {canPronounce && (
+                          <Button
+                            variant={pronunciationMode ? 'default' : 'ghost'}
+                            size="icon"
+                            onClick={togglePronunciationMode}
+                            aria-label={pronunciationMode ? 'Switch to typing' : 'Switch to pronunciation'}
+                            aria-pressed={pronunciationMode}
+                            className="h-8 w-8"
+                          >
+                            {pronunciationMode ? <MicOff size={16} /> : <Mic size={16} />}
+                          </Button>
+                        )}
+                        {!(pronunciationMode && canPronounce) && (
+                          <TTSButton
+                            key={currentQuestion.questionText}
+                            token={token}
+                            text={currentQuestion.questionText}
+                            language={currentLanguage}
+                          />
+                        )}
+                      </div>
                     ) : undefined
                   }
                 >
-                  <QuestionDisplay currentQuestion={currentQuestion} levelWordLists={levelWordLists} />
+                  <QuestionDisplay
+                    currentQuestion={currentQuestion}
+                    levelWordLists={levelWordLists}
+                    pronunciationMode={pronunciationMode && canPronounce}
+                  />
                 </FeedCard>
 
                 {currentQuestion !== null && (
                   <FeedCard dense>
-                    <AnswerInput
-                      ref={answerInputRef}
-                      value={userAnswer}
-                      disabled={isSubmitting}
-                      isLoading={isSubmitting}
-                      onSubmit={handleSubmitClick}
-                      onValueChange={handleValueChange}
-                      onSkip={handleSkip}
-                    />
-                    {feedback !== null && (
-                      <FeedbackDisplay
-                        feedback={feedback}
-                        questionForFeedback={questionForFeedback}
-                        submittedAnswer={submittedAnswer}
-                        onRetry={retryLastOperation}
+                    {pronunciationMode && speakLanguage !== undefined && token !== null ? (
+                      <PronunciationMode
+                        questionText={currentQuestion.questionText}
+                        language={speakLanguage}
+                        token={token}
+                        onContinue={handlePronunciationContinue}
+                        onSkip={handlePronunciationSkip}
                       />
-                    )}
-                    {usageExamples !== null && (
-                      <UsageExamples
-                        examples={usageExamples}
-                        sourceLanguage={sourceLanguage}
-                        targetLanguage={targetLanguage}
-                      />
+                    ) : (
+                      <>
+                        <AnswerInput
+                          ref={answerInputRef}
+                          value={userAnswer}
+                          disabled={isSubmitting}
+                          isLoading={isSubmitting}
+                          onSubmit={handleSubmitClick}
+                          onValueChange={handleValueChange}
+                          onSkip={handleSkip}
+                        />
+                        {feedback !== null && (
+                          <FeedbackDisplay
+                            feedback={feedback}
+                            questionForFeedback={questionForFeedback}
+                            submittedAnswer={submittedAnswer}
+                            onRetry={retryLastOperation}
+                          />
+                        )}
+                        {usageExamples !== null && (
+                          <UsageExamples
+                            examples={usageExamples}
+                            sourceLanguage={sourceLanguage}
+                            targetLanguage={targetLanguage}
+                          />
+                        )}
+                      </>
                     )}
                   </FeedCard>
                 )}

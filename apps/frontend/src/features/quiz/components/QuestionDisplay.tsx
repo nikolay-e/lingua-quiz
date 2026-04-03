@@ -7,11 +7,13 @@ import { LEVEL_CONFIG } from '../config/levelConfig';
 interface QuestionDisplayProps {
   currentQuestion?: QuizQuestion | null;
   levelWordLists?: LevelWordLists;
+  pronunciationMode?: boolean;
 }
 
 export function QuestionDisplay({
   currentQuestion = null,
   levelWordLists = {},
+  pronunciationMode = false,
 }: QuestionDisplayProps): React.JSX.Element {
   const { t } = useTranslation();
 
@@ -58,13 +60,13 @@ export function QuestionDisplay({
 
   return (
     <div className="flex flex-col gap-2">
-      {levelInfo !== null && (
+      {levelInfo !== null && !pronunciationMode && (
         <div className="flex justify-between items-center">
           <span className="text-sm text-muted-foreground">{levelInfo.description}</span>
           <output className="text-sm text-muted-foreground font-medium">{completionPercent}%</output>
         </div>
       )}
-      {levelInfo !== null && (
+      {levelInfo !== null && !pronunciationMode && (
         <progress
           className="progress-bar"
           value={completionPercent}

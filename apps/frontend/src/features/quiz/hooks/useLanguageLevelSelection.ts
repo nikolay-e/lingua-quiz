@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { WordList } from '@api/types';
-import { SUPPORTED_SPEAK_LANGS } from '@features/speak';
 import { safeStorage } from '@shared/utils';
 import { parseListName, type ParsedList } from '../utils';
 
@@ -128,6 +127,5 @@ export function useLanguageLevelSelection(wordLists: WordList[]) {
     handleLearningChange,
     handleLevelChange,
     canStart: selectedList !== null,
-    canSpeak: selectedLearning !== undefined && selectedLearning in SUPPORTED_SPEAK_LANGS,
   };
 }

@@ -7,6 +7,7 @@ export const STORAGE_KEYS = {
   FOLDED_LISTS: 'foldedLists',
   CONTENT_VERSION: 'contentVersion',
   PENDING_PROGRESS: 'pendingProgress',
+  PRONUNCIATION_MODE: 'pronunciationMode',
 } as const;
 
 export const THEME_MODES = {

@@ -8,3 +8,4 @@ export { LearningProgress } from './LearningProgress';
 export { LevelChangeAnimation } from './LevelChangeAnimation';
 export { TTSButton } from './TTSButton';
 export { QuizSkeleton } from './QuizSkeleton';
+export { PronunciationMode } from './PronunciationMode';

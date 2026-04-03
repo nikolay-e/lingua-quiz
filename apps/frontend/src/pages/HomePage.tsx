@@ -7,7 +7,7 @@ import { AppShell, ErrorDisplay, ModeCard, useToast } from '@shared/components';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { useLanguageLevelSelection } from '@features/quiz/hooks';
-import { useSpeakStore, SUPPORTED_SPEAK_LANGS } from '@features/speak';
+import { useSpeakStore } from '@features/speak';
 import { logger, extractErrorMessage, cn } from '@shared/utils';
 
 export function HomePage(): React.JSX.Element {
@@ -21,8 +21,6 @@ export function HomePage(): React.JSX.Element {
   const loadWordLists = useQuizStore((state) => state.loadWordLists);
   const startQuiz = useQuizStore((state) => state.startQuiz);
   const reset = useQuizStore((state) => state.reset);
-  const setSpeakLanguage = useSpeakStore((state) => state.setLanguage);
-  const setSpeakListName = useSpeakStore((state) => state.setListName);
   const streakDays = useSpeakStore((state) => state.streakDays);
   const attempts = useSpeakStore((state) => state.attempts);
 
@@ -38,7 +36,6 @@ export function HomePage(): React.JSX.Element {
     handleLearningChange,
     handleLevelChange,
     canStart,
-    canSpeak,
   } = useLanguageLevelSelection(wordLists);
 
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -77,15 +74,6 @@ export function HomePage(): React.JSX.Element {
     }
   };
 
-  const handlePracticePronunciation = () => {
-    if (selectedLearning === undefined) return;
-    const speakLang = SUPPORTED_SPEAK_LANGS[selectedLearning];
-    if (speakLang === undefined) return;
-    setSpeakLanguage(speakLang);
-    setSpeakListName(selectedList?.listName ?? null);
-    void navigate('/speak');
-  };
-
   return (
     <AppShell maxWidth="2xl">
       {hasStats && (
@@ -120,27 +108,17 @@ export function HomePage(): React.JSX.Element {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <ModeCard
-          icon={BookOpen}
-          title={t('home.learnWords')}
-          description={t('home.learnWordsDesc')}
-          disabled={!canStart}
-          variant="primary"
-          onClick={() => {
-            void handleLearnWords();
-          }}
-          badge={selectedList?.listName}
-        />
-        <ModeCard
-          icon={Mic}
-          title={t('home.practicePronunciation')}
-          description={t('home.practicePronunciationDesc')}
-          disabled={!canSpeak}
-          variant="secondary"
-          onClick={handlePracticePronunciation}
-        />
-      </div>
+      <ModeCard
+        icon={BookOpen}
+        title={t('home.learnWords')}
+        description={t('home.learnWordsDesc')}
+        disabled={!canStart}
+        variant="primary"
+        onClick={() => {
+          void handleLearnWords();
+        }}
+        badge={selectedList?.listName}
+      />
 
       <details open>
         <summary className="cursor-pointer select-none flex items-center gap-2 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors list-none [&::-webkit-details-marker]:hidden">

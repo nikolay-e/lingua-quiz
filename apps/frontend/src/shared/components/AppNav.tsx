@@ -1,12 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, BookOpen, Mic, Settings, Shield } from 'lucide-react';
+import { Home, BookOpen, Settings, Shield } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@shared/utils';
 
 const NAV_LINKS = [
   { path: '/', icon: Home, labelKey: 'nav.home' },
   { path: '/quiz', icon: BookOpen, labelKey: 'nav.quiz' },
-  { path: '/speak', icon: Mic, labelKey: 'nav.speak' },
 ] as const;
 
 interface AppNavProps {

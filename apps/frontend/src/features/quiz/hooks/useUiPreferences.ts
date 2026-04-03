@@ -8,6 +8,8 @@ interface FoldedLists {
 interface UiPreferences {
   foldedLists: FoldedLists;
   toggleFold: (levelId: string) => void;
+  pronunciationMode: boolean;
+  togglePronunciationMode: () => void;
 }
 
 const loadFoldedLists = (): FoldedLists => {
@@ -24,10 +26,17 @@ const loadFoldedLists = (): FoldedLists => {
 
 export function useUiPreferences(): UiPreferences {
   const [foldedLists, setFoldedLists] = useState<FoldedLists>(loadFoldedLists);
+  const [pronunciationMode, setPronunciationMode] = useState<boolean>(
+    () => safeStorage.getItem(STORAGE_KEYS.PRONUNCIATION_MODE) === 'true',
+  );
 
   useEffect(() => {
     safeStorage.setItem(STORAGE_KEYS.FOLDED_LISTS, JSON.stringify(foldedLists));
   }, [foldedLists]);
+
+  useEffect(() => {
+    safeStorage.setItem(STORAGE_KEYS.PRONUNCIATION_MODE, String(pronunciationMode));
+  }, [pronunciationMode]);
 
   const toggleFold = useCallback((levelId: string) => {
     setFoldedLists((prev) => ({
@@ -36,8 +45,14 @@ export function useUiPreferences(): UiPreferences {
     }));
   }, []);
 
+  const togglePronunciationMode = useCallback(() => {
+    setPronunciationMode((prev) => !prev);
+  }, []);
+
   return {
     foldedLists,
     toggleFold,
+    pronunciationMode,
+    togglePronunciationMode,
   };
 }

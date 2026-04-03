@@ -5,4 +5,3 @@ export { LoginPage } from './LoginPage';
 export { RegisterPage } from './RegisterPage';
 export { SettingsPage } from './SettingsPage';
 export { AdminPage } from './admin';
-export { SpeakPage } from './SpeakPage';
