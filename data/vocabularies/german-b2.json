@@ -1,7 +1,7 @@
 {
   "listName": "German Russian B2",
   "exportedAt": "2026-01-18T20:40:48.118994+00:00",
-  "totalWords": 1450,
+  "totalWords": 1469,
   "words": [
     {
       "id": "a45107de-077e-4979-89ca-f35b16318d2c",
@@ -292,18 +292,6 @@
       "isActive": true
     },
     {
-      "id": "c513645f-3e6a-49a6-bc0e-dd75cac4d74a",
-      "sourceText": "Ähnlichkeit",
-      "targetText": "сходство",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Ähnlichkeit zwischen den beiden Schwestern ist so groß, dass man sie kaum unterscheiden kann.",
-      "targetUsageExample": "Сходство между двумя сёстрами настолько велико, что их почти невозможно различить.",
-      "isActive": true
-    },
-    {
       "id": "a0fb98b6-ed2a-47d1-866e-e732918f66da",
       "sourceText": "Aids",
       "targetText": "СПИД",
@@ -532,18 +520,6 @@
       "isActive": true
     },
     {
-      "id": "c6b0d574-a24b-47de-bea2-a747a84d2208",
-      "sourceText": "Änderung",
-      "targetText": "изменение",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Änderung des Gesetzes tritt erst nächstes Jahr in Kraft und betrifft alle Steuerpflichtigen.",
-      "targetUsageExample": "Изменение закона вступит в силу только в следующем году и затронет всех налогоплательщиков.",
-      "isActive": true
-    },
-    {
       "id": "0f3c1147-d5df-43d0-9f1c-9cad8404852c",
       "sourceText": "Andeuten",
       "targetText": "намекать",
@@ -664,15 +640,15 @@
       "isActive": true
     },
     {
-      "id": "d20ea0ac-1eb7-44a4-b390-d35419311028",
-      "sourceText": "Ängste",
-      "targetText": "страхи",
+      "id": "161eb2d9-15aa-4dee-a9f2-e5723f575387",
+      "sourceText": "angreifen",
+      "targetText": "атаковать|нападать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian B2",
       "difficultyLevel": "b2",
-      "sourceUsageExample": "Ihre Ängste vor dem Fliegen wurden durch eine Therapie deutlich reduziert.",
-      "targetUsageExample": "Её страхи перед полётами значительно уменьшились благодаря терапии.",
+      "sourceUsageExample": "Der Feind hat die Stadt angegriffen.",
+      "targetUsageExample": "Враг атаковал город.",
       "isActive": true
     },
     {
@@ -1120,30 +1096,6 @@
       "isActive": true
     },
     {
-      "id": "07d4b15d-2d0c-4e90-b78a-bebdfa1836b6",
-      "sourceText": "ärgerlich",
-      "targetText": "досадный|раздражённый",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Es ist ärgerlich, wenn man stundenlang wartet und dann einfach vergessen wird.",
-      "targetUsageExample": "Досадно, когда часами ждёшь, а потом тебя просто забывают.",
-      "isActive": true
-    },
-    {
-      "id": "f7106616-c5d7-4655-94f8-cf9df27e4041",
-      "sourceText": "Ärmel",
-      "targetText": "рукав",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Ärmel seines Hemdes war so lang, dass er ihn mehrfach hochkrempeln musste.",
-      "targetUsageExample": "Рукав его рубашки был настолько длинным, что ему приходилось подворачивать его несколько раз.",
-      "isActive": true
-    },
-    {
       "id": "765a604d-8bb5-49b7-af3f-174285a82726",
       "sourceText": "Armut",
       "targetText": "бедность",
@@ -1237,18 +1189,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Das Attentat auf den Politiker erschütterte das ganze Land und löste eine Welle der Empörung aus.",
       "targetUsageExample": "Покушение на политика потрясло всю страну и вызвало волну возмущения.",
-      "isActive": true
-    },
-    {
-      "id": "47d28533-cbd1-4fcb-af69-afc4247464a0",
-      "sourceText": "ätzend",
-      "targetText": "едкий|отстойный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der ätzende Geruch der Chemikalie im Labor war kaum zu ertragen und gefährlich.",
-      "targetUsageExample": "Едкий запах химического вещества в лаборатории был едва переносим и опасен.",
       "isActive": true
     },
     {
@@ -1468,18 +1408,6 @@
       "isActive": true
     },
     {
-      "id": "ed31cb85-4169-46ad-9cfc-a106aba05b9a",
-      "sourceText": "aufwärmen",
-      "targetText": "разогревать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Wärm das Essen bitte auf, bevor du es servierst, damit es nicht kalt auf den Tisch kommt.",
-      "targetUsageExample": "Пожалуйста, разогрей еду перед подачей, чтобы она не оказалась на столе холодной.",
-      "isActive": true
-    },
-    {
       "id": "9ef25f69-3571-4c96-ae8c-cc2006c75c03",
       "sourceText": "Aufwecken",
       "targetText": "будить",
@@ -1489,6 +1417,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Das laute Klingeln des Weckers weckte ihn abrupt aus einem tiefen Schlaf auf.",
       "targetUsageExample": "Громкий звонок будильника резко разбудил его из глубокого сна.",
+      "isActive": true
+    },
+    {
+      "id": "ed31cb85-4169-46ad-9cfc-a106aba05b9a",
+      "sourceText": "aufwärmen",
+      "targetText": "разогревать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Wärm das Essen bitte auf, bevor du es servierst, damit es nicht kalt auf den Tisch kommt.",
+      "targetUsageExample": "Пожалуйста, разогрей еду перед подачей, чтобы она не оказалась на столе холодной.",
       "isActive": true
     },
     {
@@ -1756,30 +1696,6 @@
       "isActive": true
     },
     {
-      "id": "c9d7442c-4880-4f1b-a15e-84238a03f527",
-      "sourceText": "Außenseiter",
-      "targetText": "аутсайдер",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Als Außenseiter in der Gruppe fiel es ihm schwer, Anschluss an die anderen zu finden.",
-      "targetUsageExample": "Будучи аутсайдером в группе, ему было трудно найти контакт с остальными.",
-      "isActive": true
-    },
-    {
-      "id": "928a1ec5-0a08-4be6-a2d6-5f44c8884ef3",
-      "sourceText": "außerordentlich",
-      "targetText": "чрезвычайный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Leistungen des jungen Musikers waren außerordentlich und übertrafen alle Erwartungen des Publikums.",
-      "targetUsageExample": "Выступления молодого музыканта были чрезвычайными и превзошли все ожидания публики.",
-      "isActive": true
-    },
-    {
       "id": "e7d580de-b243-459f-b417-e99730045ca8",
       "sourceText": "Aussetzen",
       "targetText": "приостанавливать|подвергать",
@@ -1804,18 +1720,6 @@
       "isActive": true
     },
     {
-      "id": "b934e03c-e34b-4612-9eaf-57d75f8a0db3",
-      "sourceText": "auswählen",
-      "targetText": "выбирать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Sie wählte sorgfältig aus den Bewerbern denjenigen aus, der am besten zur Stelle passte.",
-      "targetUsageExample": "Она тщательно выбрала из кандидатов того, кто лучше всего подходил на эту должность.",
-      "isActive": true
-    },
-    {
       "id": "252a0dfa-48e9-4022-8e5d-b8bd89629a47",
       "sourceText": "Ausweichen",
       "targetText": "уклоняться",
@@ -1825,6 +1729,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er wich der direkten Frage geschickt aus und lenkte das Gespräch auf ein anderes Thema.",
       "targetUsageExample": "Он ловко уклонился от прямого вопроса и перевёл разговор на другую тему.",
+      "isActive": true
+    },
+    {
+      "id": "b934e03c-e34b-4612-9eaf-57d75f8a0db3",
+      "sourceText": "auswählen",
+      "targetText": "выбирать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sie wählte sorgfältig aus den Bewerbern denjenigen aus, der am besten zur Stelle passte.",
+      "targetUsageExample": "Она тщательно выбрала из кандидатов того, кто лучше всего подходил на эту должность.",
       "isActive": true
     },
     {
@@ -1885,6 +1801,30 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Autsch! Das hat wehgetan — ich hätte besser aufpassen sollen.",
       "targetUsageExample": "Ой! Это было больно — мне следовало быть осторожнее.",
+      "isActive": true
+    },
+    {
+      "id": "c9d7442c-4880-4f1b-a15e-84238a03f527",
+      "sourceText": "Außenseiter",
+      "targetText": "аутсайдер",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Als Außenseiter in der Gruppe fiel es ihm schwer, Anschluss an die anderen zu finden.",
+      "targetUsageExample": "Будучи аутсайдером в группе, ему было трудно найти контакт с остальными.",
+      "isActive": true
+    },
+    {
+      "id": "928a1ec5-0a08-4be6-a2d6-5f44c8884ef3",
+      "sourceText": "außerordentlich",
+      "targetText": "чрезвычайный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Leistungen des jungen Musikers waren außerordentlich und übertrafen alle Erwartungen des Publikums.",
+      "targetUsageExample": "Выступления молодого музыканта были чрезвычайными и превзошли все ожидания публики.",
       "isActive": true
     },
     {
@@ -2116,18 +2056,6 @@
       "isActive": true
     },
     {
-      "id": "f7903c74-818a-4c8b-9c0e-de84c822a56a",
-      "sourceText": "Befördern",
-      "targetText": "повышать|перевозить",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er wurde nach fünf Jahren treuer Arbeit zum Abteilungsleiter befördert.",
-      "targetUsageExample": "После пяти лет добросовестной работы его повысили до руководителя отдела.",
-      "isActive": true
-    },
-    {
       "id": "9801a3f1-b00f-4719-b0b4-fbde6d206da3",
       "sourceText": "Befreiung",
       "targetText": "освобождение",
@@ -2137,6 +2065,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Befreiung der Geiseln verlief ohne Blutvergießen und endete mit der Festnahme aller Täter.",
       "targetUsageExample": "Освобождение заложников прошло без кровопролития и завершилось задержанием всех преступников.",
+      "isActive": true
+    },
+    {
+      "id": "f7903c74-818a-4c8b-9c0e-de84c822a56a",
+      "sourceText": "Befördern",
+      "targetText": "повышать|перевозить",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er wurde nach fünf Jahren treuer Arbeit zum Abteilungsleiter befördert.",
+      "targetUsageExample": "После пяти лет добросовестной работы его повысили до руководителя отдела.",
       "isActive": true
     },
     {
@@ -2212,18 +2152,6 @@
       "isActive": true
     },
     {
-      "id": "78119ecd-75f4-4848-ac64-4e0e284e2471",
-      "sourceText": "Behälter",
-      "targetText": "контейнер|ёмкость",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der luftdichte Behälter hielt das Essen tagelang frisch, ohne dass es verdarb.",
-      "targetUsageExample": "Герметичный контейнер сохранял еду свежей несколько дней, не давая ей испортиться.",
-      "isActive": true
-    },
-    {
       "id": "d8a2f09e-fb59-4bd2-808f-d5421dcbdb71",
       "sourceText": "beheben",
       "targetText": "устранять",
@@ -2233,6 +2161,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Techniker konnte den Fehler im System schnell beheben, sodass alles wieder funktionierte.",
       "targetUsageExample": "Техник быстро устранил ошибку в системе, и всё заработало снова.",
+      "isActive": true
+    },
+    {
+      "id": "78119ecd-75f4-4848-ac64-4e0e284e2471",
+      "sourceText": "Behälter",
+      "targetText": "контейнер|ёмкость",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der luftdichte Behälter hielt das Essen tagelang frisch, ohne dass es verdarb.",
+      "targetUsageExample": "Герметичный контейнер сохранял еду свежей несколько дней, не давая ей испортиться.",
       "isActive": true
     },
     {
@@ -2308,18 +2248,6 @@
       "isActive": true
     },
     {
-      "id": "8ae1263c-d830-4d6b-8428-95763ea39ce2",
-      "sourceText": "Belästigung",
-      "targetText": "домогательство",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Belästigung am Arbeitsplatz ist ein ernstes Problem, das nicht toleriert werden darf.",
-      "targetUsageExample": "Домогательство на рабочем месте — серьёзная проблема, которую нельзя терпеть.",
-      "isActive": true
-    },
-    {
       "id": "51010848-ffac-49a4-b355-aafdc754b0ab",
       "sourceText": "Belastung",
       "targetText": "нагрузка|бремя",
@@ -2329,6 +2257,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die ständige Belastung durch Überstunden führte dazu, dass mehrere Mitarbeiter ausgebrannt waren.",
       "targetUsageExample": "Постоянная нагрузка из-за сверхурочной работы привела к тому, что несколько сотрудников выгорели.",
+      "isActive": true
+    },
+    {
+      "id": "8ae1263c-d830-4d6b-8428-95763ea39ce2",
+      "sourceText": "Belästigung",
+      "targetText": "домогательство",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Belästigung am Arbeitsplatz ist ein ernstes Problem, das nicht toleriert werden darf.",
+      "targetUsageExample": "Домогательство на рабочем месте — серьёзная проблема, которую нельзя терпеть.",
       "isActive": true
     },
     {
@@ -2452,18 +2392,6 @@
       "isActive": true
     },
     {
-      "id": "50565d2a-266d-4251-a5ed-e10304df26b1",
-      "sourceText": "beschämt",
-      "targetText": "пристыжённый",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er war beschämt, als er merkte, dass er die falsche Antwort gegeben hatte.",
-      "targetUsageExample": "Он был пристыжён, когда понял, что дал неверный ответ.",
-      "isActive": true
-    },
-    {
       "id": "54563e39-48d8-4060-9a2f-cdbfc2ed28a9",
       "sourceText": "beschleunigen",
       "targetText": "ускорять",
@@ -2476,18 +2404,6 @@
       "isActive": true
     },
     {
-      "id": "e6011f5b-d6ef-49ce-bd0c-a8892181313c",
-      "sourceText": "Beschützer",
-      "targetText": "защитник",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er sah sich als Beschützer der Schwächeren in seiner Gemeinschaft.",
-      "targetUsageExample": "Он считал себя защитником слабых в своей общине.",
-      "isActive": true
-    },
-    {
       "id": "79025406-764b-4ab3-af6b-9bc66d8cb8b1",
       "sourceText": "Beschwerden",
       "targetText": "жалобы",
@@ -2497,6 +2413,30 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Beschwerden der Kunden wurden vom Manager ernst genommen.",
       "targetUsageExample": "Жалобы клиентов были восприняты менеджером серьёзно.",
+      "isActive": true
+    },
+    {
+      "id": "50565d2a-266d-4251-a5ed-e10304df26b1",
+      "sourceText": "beschämt",
+      "targetText": "пристыжённый",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er war beschämt, als er merkte, dass er die falsche Antwort gegeben hatte.",
+      "targetUsageExample": "Он был пристыжён, когда понял, что дал неверный ответ.",
+      "isActive": true
+    },
+    {
+      "id": "e6011f5b-d6ef-49ce-bd0c-a8892181313c",
+      "sourceText": "Beschützer",
+      "targetText": "защитник",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er sah sich als Beschützer der Schwächeren in seiner Gemeinschaft.",
+      "targetUsageExample": "Он считал себя защитником слабых в своей общине.",
       "isActive": true
     },
     {
@@ -2593,6 +2533,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Sie betreibt seit Jahren ein kleines Café in der Stadtmitte.",
       "targetUsageExample": "Она уже много лет ведёт небольшое кафе в центре города.",
+      "isActive": true
+    },
+    {
+      "id": "11eccbf4-55d5-4df9-a385-3820e7157bab",
+      "sourceText": "betreten",
+      "targetText": "входить|ступать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Bitte betreten Sie den Raum.",
+      "targetUsageExample": "Пожалуйста, войдите в комнату.",
       "isActive": true
     },
     {
@@ -2908,30 +2860,6 @@
       "isActive": true
     },
     {
-      "id": "a5061e2a-53bb-4b2c-90ee-3525f47cb2d8",
-      "sourceText": "Börse",
-      "targetText": "биржа",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "An der Börse können die Kurse innerhalb eines Tages stark schwanken.",
-      "targetUsageExample": "На бирже курсы могут сильно колебаться в течение одного дня.",
-      "isActive": true
-    },
-    {
-      "id": "77862512-3d5c-4983-8e94-4f1090c6cfad",
-      "sourceText": "bösewicht",
-      "targetText": "злодей",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Bösewicht im Film wurde am Ende von den Helden besiegt.",
-      "targetUsageExample": "Злодей в фильме в конце концов был побеждён героями.",
-      "isActive": true
-    },
-    {
       "id": "fb174380-01c9-43d6-afd6-1dfa72bea6c5",
       "sourceText": "Boulevard",
       "targetText": "бульвар",
@@ -2953,18 +2881,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er bestellte einen Bourbon on the Rocks an der Bar.",
       "targetUsageExample": "Он заказал бурбон со льдом в баре.",
-      "isActive": true
-    },
-    {
-      "id": "17cc8575-0127-4045-9c9c-11987daa4ce8",
-      "sourceText": "Bräute",
-      "targetText": "невесты",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Alle Bräute trugen weiße Kleider bei der traditionellen Zeremonie.",
-      "targetUsageExample": "Все невесты были в белых платьях на традиционной церемонии.",
       "isActive": true
     },
     {
@@ -3004,18 +2920,6 @@
       "isActive": true
     },
     {
-      "id": "804a0577-604a-4165-9a96-02bffb88a9ee",
-      "sourceText": "Brötchen",
-      "targetText": "булочка",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Zum Frühstück kauft er sich jeden Morgen frische Brötchen beim Bäcker.",
-      "targetUsageExample": "На завтрак он каждое утро покупает свежие булочки у пекаря.",
-      "isActive": true
-    },
-    {
       "id": "41feb6da-0894-4839-85aa-3af359073b03",
       "sourceText": "Bruch",
       "targetText": "перелом|разрыв",
@@ -3037,6 +2941,30 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Bruderschaft der Ritter schwor, sich gegenseitig zu beschützen.",
       "targetUsageExample": "Братство рыцарей поклялось защищать друг друга.",
+      "isActive": true
+    },
+    {
+      "id": "17cc8575-0127-4045-9c9c-11987daa4ce8",
+      "sourceText": "Bräute",
+      "targetText": "невесты",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Alle Bräute trugen weiße Kleider bei der traditionellen Zeremonie.",
+      "targetUsageExample": "Все невесты были в белых платьях на традиционной церемонии.",
+      "isActive": true
+    },
+    {
+      "id": "804a0577-604a-4165-9a96-02bffb88a9ee",
+      "sourceText": "Brötchen",
+      "targetText": "булочка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Zum Frühstück kauft er sich jeden Morgen frische Brötchen beim Bäcker.",
+      "targetUsageExample": "На завтрак он каждое утро покупает свежие булочки у пекаря.",
       "isActive": true
     },
     {
@@ -3124,18 +3052,6 @@
       "isActive": true
     },
     {
-      "id": "a9a1a83a-b949-49f7-8561-93e7507b92c0",
-      "sourceText": "Bürgerkrieg",
-      "targetText": "гражданская война",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Bürgerkrieg hinterließ tiefe Narben in der Geschichte des Landes.",
-      "targetUsageExample": "Гражданская война оставила глубокие шрамы в истории страны.",
-      "isActive": true
-    },
-    {
       "id": "bd8efcd1-af27-4e78-8ba6-1f3d6131a8ce",
       "sourceText": "Business",
       "targetText": "бизнес",
@@ -3157,6 +3073,42 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er musste eine Buße zahlen, weil er zu schnell gefahren war.",
       "targetUsageExample": "Ему пришлось заплатить штраф, потому что он ехал слишком быстро.",
+      "isActive": true
+    },
+    {
+      "id": "a5061e2a-53bb-4b2c-90ee-3525f47cb2d8",
+      "sourceText": "Börse",
+      "targetText": "биржа",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "An der Börse können die Kurse innerhalb eines Tages stark schwanken.",
+      "targetUsageExample": "На бирже курсы могут сильно колебаться в течение одного дня.",
+      "isActive": true
+    },
+    {
+      "id": "77862512-3d5c-4983-8e94-4f1090c6cfad",
+      "sourceText": "bösewicht",
+      "targetText": "злодей",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Bösewicht im Film wurde am Ende von den Helden besiegt.",
+      "targetUsageExample": "Злодей в фильме в конце концов был побеждён героями.",
+      "isActive": true
+    },
+    {
+      "id": "a9a1a83a-b949-49f7-8561-93e7507b92c0",
+      "sourceText": "Bürgerkrieg",
+      "targetText": "гражданская война",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Bürgerkrieg hinterließ tiefe Narben in der Geschichte des Landes.",
+      "targetUsageExample": "Гражданская война оставила глубокие шрамы в истории страны.",
       "isActive": true
     },
     {
@@ -3277,6 +3229,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Als Christ feiert er Weihnachten jedes Jahr mit seiner Familie.",
       "targetUsageExample": "Как христианин он каждый год празднует Рождество со своей семьёй.",
+      "isActive": true
+    },
+    {
+      "id": "11d38964-aaa9-4600-b4d9-60c8a28d2686",
+      "sourceText": "ciao",
+      "targetText": "чао|пока",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Ciao! Bis zum nächsten Mal!",
+      "targetUsageExample": "Чао! До следующего раза!",
       "isActive": true
     },
     {
@@ -3736,6 +3700,18 @@
       "isActive": true
     },
     {
+      "id": "1cf78278-0bdf-4a1f-89a0-0316c5d2a957",
+      "sourceText": "dingern",
+      "targetText": "вещами|предметами",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er spielt mit den Dingern auf dem Tisch.",
+      "targetUsageExample": "Он играет с вещами на столе.",
+      "isActive": true
+    },
+    {
       "id": "3f158552-ad5b-40e0-b131-12aafbb169fd",
       "sourceText": "Dinosaurier",
       "targetText": "динозавр",
@@ -3844,15 +3820,15 @@
       "isActive": true
     },
     {
-      "id": "c4106692-1ace-4e13-a458-70828e29ad90",
-      "sourceText": "drängt",
-      "targetText": "давит|торопит",
+      "id": "6465b64a-6088-417b-8d2d-61db1923185e",
+      "sourceText": "dreizehn",
+      "targetText": "тринадцать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian B2",
       "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Zeit drängt, wir müssen uns sofort entscheiden.",
-      "targetUsageExample": "Время поджимает, нам нужно принять решение немедленно.",
+      "sourceUsageExample": "Er wartete dreizehn Minuten, bevor er die Tür öffnete.",
+      "targetUsageExample": "Он ждал тринадцать минут, прежде чем открыть дверь.",
       "isActive": true
     },
     {
@@ -3865,18 +3841,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "In dreißig Jahren hat sich die Stadt kaum verändert.",
       "targetUsageExample": "За тридцать лет город почти не изменился.",
-      "isActive": true
-    },
-    {
-      "id": "6465b64a-6088-417b-8d2d-61db1923185e",
-      "sourceText": "dreizehn",
-      "targetText": "тринадцать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er wartete dreizehn Minuten, bevor er die Tür öffnete.",
-      "targetUsageExample": "Он ждал тринадцать минут, прежде чем открыть дверь.",
       "isActive": true
     },
     {
@@ -3961,6 +3925,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Regierung nutzte wirtschaftliche Druckmittel, um das Abkommen durchzusetzen.",
       "targetUsageExample": "Правительство использовало экономические средства давления, чтобы добиться заключения соглашения.",
+      "isActive": true
+    },
+    {
+      "id": "c4106692-1ace-4e13-a458-70828e29ad90",
+      "sourceText": "drängt",
+      "targetText": "давит|торопит",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Zeit drängt, wir müssen uns sofort entscheiden.",
+      "targetUsageExample": "Время поджимает, нам нужно принять решение немедленно.",
       "isActive": true
     },
     {
@@ -4600,18 +4576,6 @@
       "isActive": true
     },
     {
-      "id": "404d31dd-36ec-48d2-b9ae-cd0ecc518775",
-      "sourceText": "entzückt",
-      "targetText": "восхищённый",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Kinder waren entzückt, als sie die Überraschungsparty sahen.",
-      "targetUsageExample": "Дети были восхищены, когда увидели вечеринку-сюрприз.",
-      "isActive": true
-    },
-    {
       "id": "14c914f3-743e-4b6b-bc68-40c40146f1db",
       "sourceText": "Entzug",
       "targetText": "отмена|ломка",
@@ -4621,6 +4585,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Entzug der Lizenz war die härteste Strafe, die man sich vorstellen konnte.",
       "targetUsageExample": "Отмена лицензии была самым суровым наказанием, которое можно было себе представить.",
+      "isActive": true
+    },
+    {
+      "id": "404d31dd-36ec-48d2-b9ae-cd0ecc518775",
+      "sourceText": "entzückt",
+      "targetText": "восхищённый",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Kinder waren entzückt, als sie die Überraschungsparty sahen.",
+      "targetUsageExample": "Дети были восхищены, когда увидели вечеринку-сюрприз.",
       "isActive": true
     },
     {
@@ -4684,18 +4660,6 @@
       "isActive": true
     },
     {
-      "id": "f03f037f-b199-4e91-a9f7-6a4c5843e106",
-      "sourceText": "Erkältung",
-      "targetText": "простуда",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Sie lag mit einer schlimmen Erkältung im Bett und konnte nicht zur Arbeit gehen.",
-      "targetUsageExample": "Она лежала в постели с сильной простудой и не могла идти на работу.",
-      "isActive": true
-    },
-    {
       "id": "7f8077d5-68ad-4562-a739-62e227506142",
       "sourceText": "Erkenntnis",
       "targetText": "познание|вывод",
@@ -4705,6 +4669,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die wichtigste Erkenntnis aus dem Experiment war, dass die Theorie falsch war.",
       "targetUsageExample": "Главным выводом из эксперимента было то, что теория была ошибочной.",
+      "isActive": true
+    },
+    {
+      "id": "f03f037f-b199-4e91-a9f7-6a4c5843e106",
+      "sourceText": "Erkältung",
+      "targetText": "простуда",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sie lag mit einer schlimmen Erkältung im Bett und konnte nicht zur Arbeit gehen.",
+      "targetUsageExample": "Она лежала в постели с сильной простудой и не могла идти на работу.",
       "isActive": true
     },
     {
@@ -4789,18 +4765,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Bauern ernteten in diesem Jahr eine besonders reiche Ernte.",
       "targetUsageExample": "Крестьяне в этом году собрали особенно богатый урожай.",
-      "isActive": true
-    },
-    {
-      "id": "a61da980-0067-4fda-80c5-8865e9ddffab",
-      "sourceText": "Eröffnung",
-      "targetText": "открытие",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die feierliche Eröffnung des neuen Museums zog viele Gäste an.",
-      "targetUsageExample": "Торжественное открытие нового музея привлекло множество гостей.",
       "isActive": true
     },
     {
@@ -4924,6 +4888,18 @@
       "isActive": true
     },
     {
+      "id": "e99d261e-e3d0-4642-87c4-b8855f431457",
+      "sourceText": "Erziehen",
+      "targetText": "воспитывать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Eltern erziehen ihre Kinder mit Liebe und Geduld.",
+      "targetUsageExample": "Родители воспитывают своих детей с любовью и терпением.",
+      "isActive": true
+    },
+    {
       "id": "6badf4b0-bf4f-471b-bd72-519ecb7dc993",
       "sourceText": "Erzähler",
       "targetText": "рассказчик",
@@ -4936,15 +4912,15 @@
       "isActive": true
     },
     {
-      "id": "e99d261e-e3d0-4642-87c4-b8855f431457",
-      "sourceText": "Erziehen",
-      "targetText": "воспитывать",
+      "id": "a61da980-0067-4fda-80c5-8865e9ddffab",
+      "sourceText": "Eröffnung",
+      "targetText": "открытие",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian B2",
       "difficultyLevel": "b2",
-      "sourceUsageExample": "Eltern erziehen ihre Kinder mit Liebe und Geduld.",
-      "targetUsageExample": "Родители воспитывают своих детей с любовью и терпением.",
+      "sourceUsageExample": "Die feierliche Eröffnung des neuen Museums zog viele Gäste an.",
+      "targetUsageExample": "Торжественное открытие нового музея привлекло множество гостей.",
       "isActive": true
     },
     {
@@ -5032,18 +5008,6 @@
       "isActive": true
     },
     {
-      "id": "fa84dc1c-1f31-4b6b-bf07-328bcccb9dc9",
-      "sourceText": "Fähre",
-      "targetText": "паром",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Wir nahmen die Fähre über den Rhein.",
-      "targetUsageExample": "Мы переплыли Рейн на пароме.",
-      "isActive": true
-    },
-    {
       "id": "9bef9937-c975-4bef-980b-2fc5fb4d53d5",
       "sourceText": "Fahrkarte",
       "targetText": "билет",
@@ -5065,18 +5029,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Es ist ein Fakt, dass die Erde sich um die Sonne dreht.",
       "targetUsageExample": "Факт состоит в том, что Земля вращается вокруг Солнца.",
-      "isActive": true
-    },
-    {
-      "id": "6ab99bea-385e-494b-919b-f3ac289bcfca",
-      "sourceText": "Fälschung",
-      "targetText": "подделка",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Polizei entdeckte eine Fälschung des Gemäldes.",
-      "targetUsageExample": "Полиция обнаружила подделку картины.",
       "isActive": true
     },
     {
@@ -5332,18 +5284,6 @@
       "isActive": true
     },
     {
-      "id": "69030b38-cace-48eb-8f33-01263e6d883a",
-      "sourceText": "förmlich",
-      "targetText": "формальный|буквально",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er begrüßte sie förmlich mit einem Handschlag.",
-      "targetUsageExample": "Он поприветствовал её формально рукопожатием.",
-      "isActive": true
-    },
-    {
       "id": "b68917ee-25a1-4ef2-a100-638d0ab8b714",
       "sourceText": "formular",
       "targetText": "формуляр|бланк",
@@ -5500,6 +5440,54 @@
       "isActive": true
     },
     {
+      "id": "b4594a22-b567-473b-8767-e1083a57ce21",
+      "sourceText": "Fußboden",
+      "targetText": "пол",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Fußboden im Wohnzimmer ist aus Eichenholz.",
+      "targetUsageExample": "Пол в гостиной сделан из дубового дерева.",
+      "isActive": true
+    },
+    {
+      "id": "fa84dc1c-1f31-4b6b-bf07-328bcccb9dc9",
+      "sourceText": "Fähre",
+      "targetText": "паром",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Wir nahmen die Fähre über den Rhein.",
+      "targetUsageExample": "Мы переплыли Рейн на пароме.",
+      "isActive": true
+    },
+    {
+      "id": "6ab99bea-385e-494b-919b-f3ac289bcfca",
+      "sourceText": "Fälschung",
+      "targetText": "подделка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Polizei entdeckte eine Fälschung des Gemäldes.",
+      "targetUsageExample": "Полиция обнаружила подделку картины.",
+      "isActive": true
+    },
+    {
+      "id": "69030b38-cace-48eb-8f33-01263e6d883a",
+      "sourceText": "förmlich",
+      "targetText": "формальный|буквально",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er begrüßte sie förmlich mit einem Handschlag.",
+      "targetUsageExample": "Он поприветствовал её формально рукопожатием.",
+      "isActive": true
+    },
+    {
       "id": "2dfaaf71-f06d-4405-9cea-be8496250033",
       "sourceText": "fügen",
       "targetText": "добавлять|подчиняться",
@@ -5536,18 +5524,6 @@
       "isActive": true
     },
     {
-      "id": "b4594a22-b567-473b-8767-e1083a57ce21",
-      "sourceText": "Fußboden",
-      "targetText": "пол",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Fußboden im Wohnzimmer ist aus Eichenholz.",
-      "targetUsageExample": "Пол в гостиной сделан из дубового дерева.",
-      "isActive": true
-    },
-    {
       "id": "a38469f1-6185-423a-b3e3-d65aab1c97d8",
       "sourceText": "galgen",
       "targetText": "виселица",
@@ -5581,30 +5557,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Garde des Königs bewachte den Palast Tag und Nacht.",
       "targetUsageExample": "Гвардия короля охраняла дворец день и ночь.",
-      "isActive": true
-    },
-    {
-      "id": "9af30821-903e-4f06-b8d5-89495851bc51",
-      "sourceText": "gärtner",
-      "targetText": "садовник",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Gärtner pflegte sorgfältig die Rosen im Park.",
-      "targetUsageExample": "Садовник тщательно ухаживал за розами в парке.",
-      "isActive": true
-    },
-    {
-      "id": "b7ca982f-0ae0-41b3-bb2a-2f6fe1b806eb",
-      "sourceText": "Gästezimmer",
-      "targetText": "гостевая комната",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Gästezimmer ist für unsere Besucher vorbereitet.",
-      "targetUsageExample": "Гостевая комната подготовлена для наших гостей.",
       "isActive": true
     },
     {
@@ -5656,18 +5608,6 @@
       "isActive": true
     },
     {
-      "id": "ae52839f-a695-420e-989c-dd583130b6c8",
-      "sourceText": "gefällig",
-      "targetText": "угодно|любезный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Kann ich Ihnen gefällig sein?",
-      "targetUsageExample": "Могу ли я быть вам угоден?",
-      "isActive": true
-    },
-    {
       "id": "79763bb0-eaa3-4ab3-86a4-348ead9a6d66",
       "sourceText": "Gefangenschaft",
       "targetText": "плен",
@@ -5677,6 +5617,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er verbrachte drei Jahre in Gefangenschaft.",
       "targetUsageExample": "Он провёл три года в плену.",
+      "isActive": true
+    },
+    {
+      "id": "ae52839f-a695-420e-989c-dd583130b6c8",
+      "sourceText": "gefällig",
+      "targetText": "угодно|любезный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Kann ich Ihnen gefällig sein?",
+      "targetUsageExample": "Могу ли я быть вам угоден?",
       "isActive": true
     },
     {
@@ -5824,6 +5776,30 @@
       "isActive": true
     },
     {
+      "id": "624b850e-364d-4778-84eb-8a2f73435aea",
+      "sourceText": "Genial",
+      "targetText": "гениальный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Seine Idee war wirklich genial.",
+      "targetUsageExample": "Его идея была действительно гениальной.",
+      "isActive": true
+    },
+    {
+      "id": "afe56107-d5f8-4571-951b-bddecab6ae1d",
+      "sourceText": "genie",
+      "targetText": "гений",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Mozart war ein musikalisches Genie.",
+      "targetUsageExample": "Моцарт был музыкальным гением.",
+      "isActive": true
+    },
+    {
       "id": "b97ad076-82d9-4a2d-a342-5f273d9b6224",
       "sourceText": "geradezu",
       "targetText": "прямо-таки|буквально",
@@ -5860,30 +5836,6 @@
       "isActive": true
     },
     {
-      "id": "03600a21-8cfe-4bf9-8320-905356d281c3",
-      "sourceText": "Geschäftsführer",
-      "targetText": "директор|управляющий",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Geschäftsführer leitet die Firma seit zehn Jahren.",
-      "targetUsageExample": "Директор руководит фирмой уже десять лет.",
-      "isActive": true
-    },
-    {
-      "id": "1f203abf-597d-417c-afab-eb9d6adb6d0f",
-      "sourceText": "Geschäftspartner",
-      "targetText": "деловой партнёр",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er traf seinen Geschäftspartner zum Mittagessen.",
-      "targetUsageExample": "Он встретился со своим деловым партнёром на обед.",
-      "isActive": true
-    },
-    {
       "id": "4ce02446-5883-481c-b36e-504542efb43d",
       "sourceText": "Geschirr",
       "targetText": "посуда",
@@ -5917,6 +5869,30 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er konnte kaum sprechen, geschweige denn singen.",
       "targetUsageExample": "Он едва мог говорить, не говоря уже о пении.",
+      "isActive": true
+    },
+    {
+      "id": "03600a21-8cfe-4bf9-8320-905356d281c3",
+      "sourceText": "Geschäftsführer",
+      "targetText": "директор|управляющий",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Geschäftsführer leitet die Firma seit zehn Jahren.",
+      "targetUsageExample": "Директор руководит фирмой уже десять лет.",
+      "isActive": true
+    },
+    {
+      "id": "1f203abf-597d-417c-afab-eb9d6adb6d0f",
+      "sourceText": "Geschäftspartner",
+      "targetText": "деловой партнёр",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er traf seinen Geschäftspartner zum Mittagessen.",
+      "targetUsageExample": "Он встретился со своим деловым партнёром на обед.",
       "isActive": true
     },
     {
@@ -6220,18 +6196,6 @@
       "isActive": true
     },
     {
-      "id": "fce83038-e4c5-4e53-bfd6-4b8059d9e0d5",
-      "sourceText": "gönnen",
-      "targetText": "позволять|желать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er gönnte sich nach der langen Arbeit eine Pause.",
-      "targetUsageExample": "Он позволил себе перерыв после долгой работы.",
-      "isActive": true
-    },
-    {
       "id": "486c9a9d-8a66-4072-9980-db4cf75f5add",
       "sourceText": "Gorilla",
       "targetText": "горилла",
@@ -6400,6 +6364,54 @@
       "isActive": true
     },
     {
+      "id": "755cede7-2a3c-4b42-b35d-3db79bb21f90",
+      "sourceText": "Gutmachen",
+      "targetText": "исправить|загладить",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er wollte seinen Fehler gutmachen und entschuldigte sich.",
+      "targetUsageExample": "Он хотел исправить свою ошибку и извинился.",
+      "isActive": true
+    },
+    {
+      "id": "9af30821-903e-4f06-b8d5-89495851bc51",
+      "sourceText": "gärtner",
+      "targetText": "садовник",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Gärtner pflegte sorgfältig die Rosen im Park.",
+      "targetUsageExample": "Садовник тщательно ухаживал за розами в парке.",
+      "isActive": true
+    },
+    {
+      "id": "b7ca982f-0ae0-41b3-bb2a-2f6fe1b806eb",
+      "sourceText": "Gästezimmer",
+      "targetText": "гостевая комната",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Gästezimmer ist für unsere Besucher vorbereitet.",
+      "targetUsageExample": "Гостевая комната подготовлена для наших гостей.",
+      "isActive": true
+    },
+    {
+      "id": "fce83038-e4c5-4e53-bfd6-4b8059d9e0d5",
+      "sourceText": "gönnen",
+      "targetText": "позволять|желать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er gönnte sich nach der langen Arbeit eine Pause.",
+      "targetUsageExample": "Он позволил себе перерыв после долгой работы.",
+      "isActive": true
+    },
+    {
       "id": "85822d71-3fc1-4484-86af-12f7471bf1e1",
       "sourceText": "günstig",
       "targetText": "выгодный|благоприятный",
@@ -6424,18 +6436,6 @@
       "isActive": true
     },
     {
-      "id": "755cede7-2a3c-4b42-b35d-3db79bb21f90",
-      "sourceText": "Gutmachen",
-      "targetText": "исправить|загладить",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er wollte seinen Fehler gutmachen und entschuldigte sich.",
-      "targetUsageExample": "Он хотел исправить свою ошибку и извинился.",
-      "isActive": true
-    },
-    {
       "id": "2f4bb585-7584-475f-babc-f4e0e4a6a572",
       "sourceText": "Haarschnitt",
       "targetText": "стрижка",
@@ -6457,18 +6457,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Hacker brach in das Computersystem ein.",
       "targetUsageExample": "Хакер взломал компьютерную систему.",
-      "isActive": true
-    },
-    {
-      "id": "ee2a9f56-e704-4f98-be99-0691c0f7b486",
-      "sourceText": "Häftling",
-      "targetText": "заключённый",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Häftling versuchte aus dem Gefängnis auszubrechen.",
-      "targetUsageExample": "Заключённый попытался сбежать из тюрьмы.",
       "isActive": true
     },
     {
@@ -6505,18 +6493,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Sie trug eine elegante Halskette aus Perlen.",
       "targetUsageExample": "Она носила элегантное жемчужное ожерелье.",
-      "isActive": true
-    },
-    {
-      "id": "a86e7843-d614-40f1-a146-0c5cb97936a8",
-      "sourceText": "Händchen",
-      "targetText": "ручка (маленькая)",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Baby streckte seine kleinen Händchen nach der Mutter aus.",
-      "targetUsageExample": "Малыш тянул свои маленькие ручки к маме.",
       "isActive": true
     },
     {
@@ -6580,18 +6556,6 @@
       "isActive": true
     },
     {
-      "id": "142c90df-3a80-458d-abb7-0c51f064176c",
-      "sourceText": "Häschen",
-      "targetText": "зайчик",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Häschen hüpfte fröhlich über die Wiese.",
-      "targetUsageExample": "Зайчик весело прыгал по лугу.",
-      "isActive": true
-    },
-    {
       "id": "da347d64-8821-4932-ad73-86200947b5c5",
       "sourceText": "Hauch",
       "targetText": "дыхание|дуновение",
@@ -6613,18 +6577,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Junge bekam Hausarrest, weil er zu spät nach Hause kam.",
       "targetUsageExample": "Мальчик получил домашний арест, потому что пришёл домой слишком поздно.",
-      "isActive": true
-    },
-    {
-      "id": "3ddc4f6e-a2d2-4f76-aaf4-ca9771fb7cbd",
-      "sourceText": "Häuschen",
-      "targetText": "домик",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das kleine Häuschen im Wald war aus Holz gebaut.",
-      "targetUsageExample": "Маленький домик в лесу был построен из дерева.",
       "isActive": true
     },
     {
@@ -6892,6 +6844,18 @@
       "isActive": true
     },
     {
+      "id": "63a15371-2659-474e-8096-bff89fcf6792",
+      "sourceText": "heutzutage",
+      "targetText": "в наши дни|сегодня",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Heutzutage haben viele Menschen ein Smartphone.",
+      "targetUsageExample": "В наши дни у многих людей есть смартфон.",
+      "isActive": true
+    },
+    {
       "id": "3e741921-634e-4cb4-aebd-0818a44981be",
       "sourceText": "hierfür",
       "targetText": "для этого",
@@ -7060,6 +7024,18 @@
       "isActive": true
     },
     {
+      "id": "6ec59177-f70e-4ae8-8e81-ce275cf541fe",
+      "sourceText": "Hinweg",
+      "targetText": "прочь|пренебрегать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er geht einfach hinweg über ihre Gefühle.",
+      "targetUsageExample": "Он просто пренебрегает её чувствами.",
+      "isActive": true
+    },
+    {
       "id": "f6ccdf3d-dd9b-474f-b926-0df3ed53bc69",
       "sourceText": "hinzu",
       "targetText": "в дополнение|к тому же",
@@ -7093,6 +7069,138 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Hirsch lief elegant durch den Wald.",
       "targetUsageExample": "Олень грациозно бежал через лес.",
+      "isActive": true
+    },
+    {
+      "id": "ae5ca68a-6145-4fd9-9690-51c358ba0a37",
+      "sourceText": "Holland",
+      "targetText": "Голландия",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Holland ist bekannt für seine Tulpenfelder und Windmühlen.",
+      "targetUsageExample": "Голландия известна своими тюльпанными полями и ветряными мельницами.",
+      "isActive": true
+    },
+    {
+      "id": "b5d3ff3b-9d35-4b5d-b6bb-1f272e07d0e1",
+      "sourceText": "Hoppla",
+      "targetText": "упс|ой",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Hoppla! Das Glas ist mir aus der Hand gefallen.",
+      "targetUsageExample": "Упс! Стакан выпал у меня из рук.",
+      "isActive": true
+    },
+    {
+      "id": "c39097a2-b96a-4568-8b7b-a845a20a3a91",
+      "sourceText": "horizont",
+      "targetText": "горизонт",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er blickte in die Ferne am Horizont.",
+      "targetUsageExample": "Он смотрел вдаль на горизонт.",
+      "isActive": true
+    },
+    {
+      "id": "7a5b5772-f2a5-49d3-8bbd-16b88858447f",
+      "sourceText": "Hospital",
+      "targetText": "больница",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er wurde ins Hospital eingeliefert, nachdem er zusammengebrochen war.",
+      "targetUsageExample": "Его доставили в больницу после того, как он потерял сознание.",
+      "isActive": true
+    },
+    {
+      "id": "0f55fa92-5793-4aff-b541-dc19c9a562bb",
+      "sourceText": "Hydra",
+      "targetText": "гидра",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Hydra ist ein mythologisches Wasserwesen mit vielen Köpfen.",
+      "targetUsageExample": "Гидра — мифологическое водное существо со многими головами.",
+      "isActive": true
+    },
+    {
+      "id": "ca7e5c4b-a449-478f-9654-28bf0ce812a9",
+      "sourceText": "Hypothek",
+      "targetText": "ипотека",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Wir haben eine Hypothek aufgenommen, um das Haus zu kaufen.",
+      "targetUsageExample": "Мы взяли ипотеку, чтобы купить дом.",
+      "isActive": true
+    },
+    {
+      "id": "c8436729-58e6-4d30-ac97-5bca1f32454e",
+      "sourceText": "Hysterisch",
+      "targetText": "истеричный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sie wurde hysterisch, als sie die schlechte Nachricht hörte.",
+      "targetUsageExample": "Она стала истеричной, когда услышала плохую новость.",
+      "isActive": true
+    },
+    {
+      "id": "ee2a9f56-e704-4f98-be99-0691c0f7b486",
+      "sourceText": "Häftling",
+      "targetText": "заключённый",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Häftling versuchte aus dem Gefängnis auszubrechen.",
+      "targetUsageExample": "Заключённый попытался сбежать из тюрьмы.",
+      "isActive": true
+    },
+    {
+      "id": "a86e7843-d614-40f1-a146-0c5cb97936a8",
+      "sourceText": "Händchen",
+      "targetText": "ручка (маленькая)",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Baby streckte seine kleinen Händchen nach der Mutter aus.",
+      "targetUsageExample": "Малыш тянул свои маленькие ручки к маме.",
+      "isActive": true
+    },
+    {
+      "id": "142c90df-3a80-458d-abb7-0c51f064176c",
+      "sourceText": "Häschen",
+      "targetText": "зайчик",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Häschen hüpfte fröhlich über die Wiese.",
+      "targetUsageExample": "Зайчик весело прыгал по лугу.",
+      "isActive": true
+    },
+    {
+      "id": "3ddc4f6e-a2d2-4f76-aaf4-ca9771fb7cbd",
+      "sourceText": "Häuschen",
+      "targetText": "домик",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das kleine Häuschen im Wald war aus Holz gebaut.",
+      "targetUsageExample": "Маленький домик в лесу был построен из дерева.",
       "isActive": true
     },
     {
@@ -7132,30 +7240,6 @@
       "isActive": true
     },
     {
-      "id": "ae5ca68a-6145-4fd9-9690-51c358ba0a37",
-      "sourceText": "Holland",
-      "targetText": "Голландия",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Holland ist bekannt für seine Tulpenfelder und Windmühlen.",
-      "targetUsageExample": "Голландия известна своими тюльпанными полями и ветряными мельницами.",
-      "isActive": true
-    },
-    {
-      "id": "b5d3ff3b-9d35-4b5d-b6bb-1f272e07d0e1",
-      "sourceText": "Hoppla",
-      "targetText": "упс|ой",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Hoppla! Das Glas ist mir aus der Hand gefallen.",
-      "targetUsageExample": "Упс! Стакан выпал у меня из рук.",
-      "isActive": true
-    },
-    {
       "id": "b67d03df-5f9a-4e62-befc-9eaa5c0559d1",
       "sourceText": "Hörer",
       "targetText": "слушатель|трубка",
@@ -7168,18 +7252,6 @@
       "isActive": true
     },
     {
-      "id": "c39097a2-b96a-4568-8b7b-a845a20a3a91",
-      "sourceText": "horizont",
-      "targetText": "горизонт",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er blickte in die Ferne am Horizont.",
-      "targetUsageExample": "Он смотрел вдаль на горизонт.",
-      "isActive": true
-    },
-    {
       "id": "d0ee7365-e48b-485a-bdf1-3404013ea533",
       "sourceText": "Höschen",
       "targetText": "трусики",
@@ -7189,18 +7261,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Das kleine Mädchen trug niedliche Höschen mit Blumenmuster.",
       "targetUsageExample": "Маленькая девочка носила милые трусики с цветочным узором.",
-      "isActive": true
-    },
-    {
-      "id": "7a5b5772-f2a5-49d3-8bbd-16b88858447f",
-      "sourceText": "Hospital",
-      "targetText": "больница",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er wurde ins Hospital eingeliefert, nachdem er zusammengebrochen war.",
-      "targetUsageExample": "Его доставили в больницу после того, как он потерял сознание.",
       "isActive": true
     },
     {
@@ -7225,42 +7285,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Das kleine Hündchen läuft fröhlich durch den Park.",
       "targetUsageExample": "Маленькая собачка радостно бегает по парку.",
-      "isActive": true
-    },
-    {
-      "id": "0f55fa92-5793-4aff-b541-dc19c9a562bb",
-      "sourceText": "Hydra",
-      "targetText": "гидра",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Hydra ist ein mythologisches Wasserwesen mit vielen Köpfen.",
-      "targetUsageExample": "Гидра — мифологическое водное существо со многими головами.",
-      "isActive": true
-    },
-    {
-      "id": "ca7e5c4b-a449-478f-9654-28bf0ce812a9",
-      "sourceText": "Hypothek",
-      "targetText": "ипотека",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Wir haben eine Hypothek aufgenommen, um das Haus zu kaufen.",
-      "targetUsageExample": "Мы взяли ипотеку, чтобы купить дом.",
-      "isActive": true
-    },
-    {
-      "id": "c8436729-58e6-4d30-ac97-5bca1f32454e",
-      "sourceText": "Hysterisch",
-      "targetText": "истеричный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Sie wurde hysterisch, als sie die schlechte Nachricht hörte.",
-      "targetUsageExample": "Она стала истеричной, когда услышала плохую новость.",
       "isActive": true
     },
     {
@@ -8296,18 +8320,6 @@
       "isActive": true
     },
     {
-      "id": "04adef0d-2abf-4ba4-af80-c70fde850ca4",
-      "sourceText": "Köchin",
-      "targetText": "повариха",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Köchin bereitet jeden Tag frische Gerichte zu.",
-      "targetUsageExample": "Повариха каждый день готовит свежие блюда.",
-      "isActive": true
-    },
-    {
       "id": "f0a57f6a-dc60-4876-a3d1-986dd8cfe850",
       "sourceText": "Kodex",
       "targetText": "кодекс",
@@ -8368,18 +8380,6 @@
       "isActive": true
     },
     {
-      "id": "8bc877a1-9b37-464c-a4cc-7ced63609138",
-      "sourceText": "Komödie",
-      "targetText": "комедия",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Wir haben gestern eine lustige Komödie im Kino gesehen.",
-      "targetUsageExample": "Вчера мы посмотрели смешную комедию в кино.",
-      "isActive": true
-    },
-    {
       "id": "bae84039-4c00-4a8f-aec2-b5405a2757ae",
       "sourceText": "Kompass",
       "targetText": "компас",
@@ -8401,6 +8401,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Das Problem ist viel komplexer als zunächst angenommen.",
       "targetUsageExample": "Проблема намного сложнее, чем предполагалось.",
+      "isActive": true
+    },
+    {
+      "id": "8bc877a1-9b37-464c-a4cc-7ced63609138",
+      "sourceText": "Komödie",
+      "targetText": "комедия",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Wir haben gestern eine lustige Komödie im Kino gesehen.",
+      "targetUsageExample": "Вчера мы посмотрели смешную комедию в кино.",
       "isActive": true
     },
     {
@@ -8461,18 +8473,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Kopenhagen ist die Hauptstadt von Dänemark.",
       "targetUsageExample": "Копенгаген — столица Дании.",
-      "isActive": true
-    },
-    {
-      "id": "90bd12bb-763e-4e58-84cd-ab2c63acf1c9",
-      "sourceText": "Köpfchen",
-      "targetText": "головка|умница",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Mädchen ist ein richtiges Köpfchen — sie löst jede Aufgabe.",
-      "targetUsageExample": "Девочка настоящая умница — она решает любое задание.",
       "isActive": true
     },
     {
@@ -8680,42 +8680,6 @@
       "isActive": true
     },
     {
-      "id": "3122975d-cc3f-4b6d-8585-9e0cc309f35e",
-      "sourceText": "Kühl",
-      "targetText": "прохладный|холодный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "An einem kühlen Herbstabend saßen sie am Lagerfeuer.",
-      "targetUsageExample": "В прохладный осенний вечер они сидели у костра.",
-      "isActive": true
-    },
-    {
-      "id": "08a750bc-ba99-4300-9fc7-d197ef291c65",
-      "sourceText": "Kündigung",
-      "targetText": "увольнение|расторжение",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er erhielt eine Kündigung nach fünf Jahren im Betrieb.",
-      "targetUsageExample": "Он получил увольнение после пяти лет на предприятии.",
-      "isActive": true
-    },
-    {
-      "id": "3b279cc6-aa73-419d-971d-4efe4effd607",
-      "sourceText": "Künstlerin",
-      "targetText": "художница",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Künstlerin stellte ihre Werke in einer Galerie aus.",
-      "targetUsageExample": "Художница выставила свои работы в галерее.",
-      "isActive": true
-    },
-    {
       "id": "b2b344d7-0b2e-4a91-82ec-cdab91a33512",
       "sourceText": "Kuppel",
       "targetText": "купол",
@@ -8749,6 +8713,66 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Firma bot eine kurzfristige Lösung für das Problem an.",
       "targetUsageExample": "Компания предложила краткосрочное решение проблемы.",
+      "isActive": true
+    },
+    {
+      "id": "04adef0d-2abf-4ba4-af80-c70fde850ca4",
+      "sourceText": "Köchin",
+      "targetText": "повариха",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Köchin bereitet jeden Tag frische Gerichte zu.",
+      "targetUsageExample": "Повариха каждый день готовит свежие блюда.",
+      "isActive": true
+    },
+    {
+      "id": "90bd12bb-763e-4e58-84cd-ab2c63acf1c9",
+      "sourceText": "Köpfchen",
+      "targetText": "головка|умница",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Mädchen ist ein richtiges Köpfchen — sie löst jede Aufgabe.",
+      "targetUsageExample": "Девочка настоящая умница — она решает любое задание.",
+      "isActive": true
+    },
+    {
+      "id": "3122975d-cc3f-4b6d-8585-9e0cc309f35e",
+      "sourceText": "Kühl",
+      "targetText": "прохладный|холодный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "An einem kühlen Herbstabend saßen sie am Lagerfeuer.",
+      "targetUsageExample": "В прохладный осенний вечер они сидели у костра.",
+      "isActive": true
+    },
+    {
+      "id": "08a750bc-ba99-4300-9fc7-d197ef291c65",
+      "sourceText": "Kündigung",
+      "targetText": "увольнение|расторжение",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er erhielt eine Kündigung nach fünf Jahren im Betrieb.",
+      "targetUsageExample": "Он получил увольнение после пяти лет на предприятии.",
+      "isActive": true
+    },
+    {
+      "id": "3b279cc6-aa73-419d-971d-4efe4effd607",
+      "sourceText": "Künstlerin",
+      "targetText": "художница",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Künstlerin stellte ihre Werke in einer Galerie aus.",
+      "targetUsageExample": "Художница выставила свои работы в галерее.",
       "isActive": true
     },
     {
@@ -8848,18 +8872,6 @@
       "isActive": true
     },
     {
-      "id": "e97836ed-7bb6-4b7a-aaa4-d688dd8821e9",
-      "sourceText": "lästig",
-      "targetText": "назойливый|обременительный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die dauernden Unterbrechungen waren lästig für alle.",
-      "targetUsageExample": "Постоянные перебои были назойливы для всех.",
-      "isActive": true
-    },
-    {
       "id": "65ee401c-c5af-4a21-99e4-b6adf90e42ee",
       "sourceText": "Lastwagen",
       "targetText": "грузовик",
@@ -8896,18 +8908,6 @@
       "isActive": true
     },
     {
-      "id": "63a320b5-ae1e-46fe-bdcc-9516c1f7f78d",
-      "sourceText": "Läufer",
-      "targetText": "бегун|дорожка",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Läufer gewann das Rennen mit großem Vorsprung.",
-      "targetUsageExample": "Бегун выиграл гонку с большим отрывом.",
-      "isActive": true
-    },
-    {
       "id": "af59f965-acac-4c08-ad68-6616a8d7e95c",
       "sourceText": "lautlos",
       "targetText": "бесшумный",
@@ -8920,18 +8920,6 @@
       "isActive": true
     },
     {
-      "id": "7c5e5cfb-2ef6-4a49-83c2-c656985ff1d3",
-      "sourceText": "Lebenslänglich",
-      "targetText": "пожизненно",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er wurde zu lebenslänglich verurteilt für den Mord.",
-      "targetUsageExample": "Он был приговорён к пожизненному заключению за убийство.",
-      "isActive": true
-    },
-    {
       "id": "0bf724b5-a1bc-448a-ab47-f4956cfed31e",
       "sourceText": "Lebenslauf",
       "targetText": "резюме|биография",
@@ -8941,6 +8929,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Sie schickte einen detaillierten Lebenslauf an das Unternehmen.",
       "targetUsageExample": "Она отправила подробное резюме в компанию.",
+      "isActive": true
+    },
+    {
+      "id": "7c5e5cfb-2ef6-4a49-83c2-c656985ff1d3",
+      "sourceText": "Lebenslänglich",
+      "targetText": "пожизненно",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er wurde zu lebenslänglich verurteilt für den Mord.",
+      "targetUsageExample": "Он был приговорён к пожизненному заключению за убийство.",
       "isActive": true
     },
     {
@@ -9208,18 +9208,6 @@
       "isActive": true
     },
     {
-      "id": "e26bdb06-71b5-4d59-ab6c-50b6837ca987",
-      "sourceText": "Lösegeld",
-      "targetText": "выкуп",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Entführer forderten ein Lösegeld von einer Million Euro.",
-      "targetUsageExample": "Похитители потребовали выкуп в один миллион евро.",
-      "isActive": true
-    },
-    {
       "id": "c4a2a3b5-d898-4b0c-bd20-b6d2e56840e1",
       "sourceText": "Losfahren",
       "targetText": "отправляться|трогаться",
@@ -9265,6 +9253,42 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er traf seinen Kollegen zum Lunch in der Kantine.",
       "targetUsageExample": "Он встретился с коллегой на обед в столовой.",
+      "isActive": true
+    },
+    {
+      "id": "e97836ed-7bb6-4b7a-aaa4-d688dd8821e9",
+      "sourceText": "lästig",
+      "targetText": "назойливый|обременительный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die dauernden Unterbrechungen waren lästig für alle.",
+      "targetUsageExample": "Постоянные перебои были назойливы для всех.",
+      "isActive": true
+    },
+    {
+      "id": "63a320b5-ae1e-46fe-bdcc-9516c1f7f78d",
+      "sourceText": "Läufer",
+      "targetText": "бегун|дорожка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Läufer gewann das Rennen mit großem Vorsprung.",
+      "targetUsageExample": "Бегун выиграл гонку с большим отрывом.",
+      "isActive": true
+    },
+    {
+      "id": "e26bdb06-71b5-4d59-ab6c-50b6837ca987",
+      "sourceText": "Lösegeld",
+      "targetText": "выкуп",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Entführer forderten ein Lösegeld von einer Million Euro.",
+      "targetUsageExample": "Похитители потребовали выкуп в один миллион евро.",
       "isActive": true
     },
     {
@@ -9337,18 +9361,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Anwalt beriet seinen Mandanten vor dem Prozess.",
       "targetUsageExample": "Адвокат консультировал своего клиента перед процессом.",
-      "isActive": true
-    },
-    {
-      "id": "75fe710b-c51f-4840-a386-60e7da1090ea",
-      "sourceText": "Männchen",
-      "targetText": "самец",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Männchen des Löwen hat eine große Mähne.",
-      "targetUsageExample": "Самец льва имеет большую гриву.",
       "isActive": true
     },
     {
@@ -9892,30 +9904,6 @@
       "isActive": true
     },
     {
-      "id": "c0574fbf-2c9e-4792-b8b9-07979c503691",
-      "sourceText": "Mörderin",
-      "targetText": "убийца (ж.)",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Mörderin wurde nach Jahren endlich verhaftet.",
-      "targetUsageExample": "Убийца была наконец арестована спустя годы.",
-      "isActive": true
-    },
-    {
-      "id": "7eb3364b-802b-4466-a15d-6348776e090d",
-      "sourceText": "Mörders",
-      "targetText": "убийцы",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Name des Mörders wurde der Presse nicht mitgeteilt.",
-      "targetUsageExample": "Имя убийцы не было сообщено прессе.",
-      "isActive": true
-    },
-    {
       "id": "ff01bb33-287e-4005-9e15-d7541aa4cec7",
       "sourceText": "Mordfall",
       "targetText": "дело об убийстве",
@@ -9976,18 +9964,6 @@
       "isActive": true
     },
     {
-      "id": "4f005c5d-9241-4d51-a0e0-90dcc7c59250",
-      "sourceText": "Mühle",
-      "targetText": "мельница",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die alte Mühle am Fluss ist seit Jahrhunderten in Betrieb.",
-      "targetUsageExample": "Старая мельница у реки работает уже несколько столетий.",
-      "isActive": true
-    },
-    {
       "id": "4e37ec03-26dd-438a-8fb3-2f30c9745436",
       "sourceText": "Mumm",
       "targetText": "смелость|мужество",
@@ -10021,6 +9997,54 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Mythos des Prometheus ist in der griechischen Kultur verwurzelt.",
       "targetUsageExample": "Миф о Прометее уходит корнями в греческую культуру.",
+      "isActive": true
+    },
+    {
+      "id": "75fe710b-c51f-4840-a386-60e7da1090ea",
+      "sourceText": "Männchen",
+      "targetText": "самец",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Männchen des Löwen hat eine große Mähne.",
+      "targetUsageExample": "Самец льва имеет большую гриву.",
+      "isActive": true
+    },
+    {
+      "id": "c0574fbf-2c9e-4792-b8b9-07979c503691",
+      "sourceText": "Mörderin",
+      "targetText": "убийца (ж.)",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Mörderin wurde nach Jahren endlich verhaftet.",
+      "targetUsageExample": "Убийца была наконец арестована спустя годы.",
+      "isActive": true
+    },
+    {
+      "id": "7eb3364b-802b-4466-a15d-6348776e090d",
+      "sourceText": "Mörders",
+      "targetText": "убийцы",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Name des Mörders wurde der Presse nicht mitgeteilt.",
+      "targetUsageExample": "Имя убийцы не было сообщено прессе.",
+      "isActive": true
+    },
+    {
+      "id": "4f005c5d-9241-4d51-a0e0-90dcc7c59250",
+      "sourceText": "Mühle",
+      "targetText": "мельница",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die alte Mühle am Fluss ist seit Jahrhunderten in Betrieb.",
+      "targetUsageExample": "Старая мельница у реки работает уже несколько столетий.",
       "isActive": true
     },
     {
@@ -10216,6 +10240,18 @@
       "isActive": true
     },
     {
+      "id": "7e5c60a2-1805-46ad-a620-a026427170b4",
+      "sourceText": "nieder",
+      "targetText": "вниз|низ",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er legte das Buch nieder auf den Tisch.",
+      "targetUsageExample": "Он положил книгу вниз на стол.",
+      "isActive": true
+    },
+    {
       "id": "39423492-ca77-4ac8-b7ec-aa9f09a350a2",
       "sourceText": "Niedergeschlagen",
       "targetText": "подавленный",
@@ -10384,30 +10420,6 @@
       "isActive": true
     },
     {
-      "id": "a15d31d9-af65-4846-82c3-1384994bf9e7",
-      "sourceText": "Öde",
-      "targetText": "пустынный|скучный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Landschaft war öde und verlassen, kein Baum war zu sehen.",
-      "targetUsageExample": "Пейзаж был пустынным и заброшенным, ни одного дерева не было видно.",
-      "isActive": true
-    },
-    {
-      "id": "3802f654-4daa-4815-8714-2eb0198eb712",
-      "sourceText": "Öfters",
-      "targetText": "часто|неоднократно",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Sie geht öfters ins Theater, mindestens einmal pro Monat.",
-      "targetUsageExample": "Она часто ходит в театр, по меньшей мере раз в месяц.",
-      "isActive": true
-    },
-    {
       "id": "6cee9eef-8599-4d52-b42f-a6dad8d57939",
       "sourceText": "ohnmacht",
       "targetText": "обморок|бессилие",
@@ -10480,30 +10492,6 @@
       "isActive": true
     },
     {
-      "id": "660b8df2-b416-4d9f-9fe7-bfa33c07f8d6",
-      "sourceText": "Örtlichen",
-      "targetText": "местный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die örtlichen Behörden haben neue Regelungen eingeführt.",
-      "targetUsageExample": "Местные власти ввели новые правила.",
-      "isActive": true
-    },
-    {
-      "id": "55b0e59c-5a72-47d8-b91b-3d3359cb52ad",
-      "sourceText": "östlich",
-      "targetText": "восточный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die östliche Küste des Landes ist besonders fruchtbar.",
-      "targetUsageExample": "Восточное побережье страны особенно плодородно.",
-      "isActive": true
-    },
-    {
       "id": "4efcf025-8c7b-46b9-aa2f-25090d919c60",
       "sourceText": "Pakt",
       "targetText": "пакт|договор",
@@ -10525,18 +10513,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Stadt veranstaltete eine große Parade zum Nationalfeiertag.",
       "targetUsageExample": "Город организовал большой парад в честь национального праздника.",
-      "isActive": true
-    },
-    {
-      "id": "605410bf-bcb4-4764-b0b7-4d334e1bf477",
-      "sourceText": "Pärchen",
-      "targetText": "парочка",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das verliebte Pärchen spazierte Hand in Hand durch den Park.",
-      "targetUsageExample": "Влюблённая парочка гуляла по парку рука об руку.",
       "isActive": true
     },
     {
@@ -10660,18 +10636,6 @@
       "isActive": true
     },
     {
-      "id": "d687a163-26cd-42be-ad9a-b304a77e1a60",
-      "sourceText": "Perücke",
-      "targetText": "парик",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Sie setzte eine Perücke auf, um nicht erkannt zu werden.",
-      "targetUsageExample": "Она надела парик, чтобы её не узнали.",
-      "isActive": true
-    },
-    {
       "id": "53858e4d-f660-4975-98bb-208f791a6a26",
       "sourceText": "Pervers",
       "targetText": "извращённый",
@@ -10681,6 +10645,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Sein Verhalten gegenüber anderen war absolut pervers.",
       "targetUsageExample": "Его поведение по отношению к другим было абсолютно извращённым.",
+      "isActive": true
+    },
+    {
+      "id": "d687a163-26cd-42be-ad9a-b304a77e1a60",
+      "sourceText": "Perücke",
+      "targetText": "парик",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sie setzte eine Perücke auf, um nicht erkannt zu werden.",
+      "targetUsageExample": "Она надела парик, чтобы её не узнали.",
       "isActive": true
     },
     {
@@ -10756,18 +10732,6 @@
       "isActive": true
     },
     {
-      "id": "f3b1cf02-b6a3-4a28-9ab3-bccd12685dd7",
-      "sourceText": "Phänomen",
-      "targetText": "феномен|явление",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Nordlicht ist ein einzigartiges Phänomen der Natur.",
-      "targetUsageExample": "Северное сияние — уникальное природное явление.",
-      "isActive": true
-    },
-    {
       "id": "4cd70b88-b3d8-46ac-a01a-40eb686f24da",
       "sourceText": "Phantasie",
       "targetText": "фантазия",
@@ -10828,6 +10792,18 @@
       "isActive": true
     },
     {
+      "id": "f3b1cf02-b6a3-4a28-9ab3-bccd12685dd7",
+      "sourceText": "Phänomen",
+      "targetText": "феномен|явление",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Nordlicht ist ein einzigartiges Phänomen der Natur.",
+      "targetUsageExample": "Северное сияние — уникальное природное явление.",
+      "isActive": true
+    },
+    {
       "id": "d49b15b6-6a08-43ed-b79e-e944163f6eb9",
       "sourceText": "Piepsen",
       "targetText": "пищать",
@@ -10876,18 +10852,6 @@
       "isActive": true
     },
     {
-      "id": "6d0fad46-2a1a-4e53-9a9a-066d2a570288",
-      "sourceText": "Plätzchen",
-      "targetText": "печенье",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Zu Weihnachten backen wir immer Plätzchen mit der ganzen Familie.",
-      "targetUsageExample": "На Рождество мы всегда печём печенье всей семьёй.",
-      "isActive": true
-    },
-    {
       "id": "c8e3d483-18a3-4c4c-ab7b-73a435a3ab20",
       "sourceText": "platziert",
       "targetText": "размещённый",
@@ -10909,6 +10873,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Auf der Plaza versammelten sich Hunderte von Menschen zur Feier.",
       "targetUsageExample": "На площади собрались сотни людей на праздник.",
+      "isActive": true
+    },
+    {
+      "id": "6d0fad46-2a1a-4e53-9a9a-066d2a570288",
+      "sourceText": "Plätzchen",
+      "targetText": "печенье",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Zu Weihnachten backen wir immer Plätzchen mit der ganzen Familie.",
+      "targetUsageExample": "На Рождество мы всегда печём печенье всей семьёй.",
       "isActive": true
     },
     {
@@ -11056,54 +11032,6 @@
       "isActive": true
     },
     {
-      "id": "d3648961-8d08-4ec6-a3bb-ed2fe04fdf97",
-      "sourceText": "prächtig",
-      "targetText": "великолепный|пышный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das prächtige Schloss thronte majestätisch auf dem Hügel.",
-      "targetUsageExample": "Великолепный замок величественно возвышался на холме.",
-      "isActive": true
-    },
-    {
-      "id": "a79f8c4d-2786-453e-89a7-976f4ed64d27",
-      "sourceText": "Präsentation",
-      "targetText": "презентация",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Präsentation war klar strukturiert und hielt das Publikum bei.",
-      "targetUsageExample": "Презентация была чётко структурирована и удерживала внимание аудитории.",
-      "isActive": true
-    },
-    {
-      "id": "e79bfbbd-6555-46f7-b51f-4d45eac84008",
-      "sourceText": "Präsidentin",
-      "targetText": "президент (ж.)",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Präsidentin hielt eine bewegende Rede zur Einheit des Landes.",
-      "targetUsageExample": "Президент произнесла трогательную речь о единстве страны.",
-      "isActive": true
-    },
-    {
-      "id": "7d5b5618-8993-443b-ae07-c86703ea7937",
-      "sourceText": "präzise",
-      "targetText": "точный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Bitte formulieren Sie Ihre Frage präzise und klar.",
-      "targetUsageExample": "Пожалуйста, сформулируйте свой вопрос точно и ясно.",
-      "isActive": true
-    },
-    {
       "id": "ae71504d-d3b9-4093-a63f-641fc0b50437",
       "sourceText": "Prediger",
       "targetText": "проповедник",
@@ -11233,6 +11161,54 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Sein Verhalten sollte die andere Partei provozieren.",
       "targetUsageExample": "Его поведение было призвано провоцировать другую сторону.",
+      "isActive": true
+    },
+    {
+      "id": "d3648961-8d08-4ec6-a3bb-ed2fe04fdf97",
+      "sourceText": "prächtig",
+      "targetText": "великолепный|пышный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das prächtige Schloss thronte majestätisch auf dem Hügel.",
+      "targetUsageExample": "Великолепный замок величественно возвышался на холме.",
+      "isActive": true
+    },
+    {
+      "id": "a79f8c4d-2786-453e-89a7-976f4ed64d27",
+      "sourceText": "Präsentation",
+      "targetText": "презентация",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Präsentation war klar strukturiert und hielt das Publikum bei.",
+      "targetUsageExample": "Презентация была чётко структурирована и удерживала внимание аудитории.",
+      "isActive": true
+    },
+    {
+      "id": "e79bfbbd-6555-46f7-b51f-4d45eac84008",
+      "sourceText": "Präsidentin",
+      "targetText": "президент (ж.)",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Präsidentin hielt eine bewegende Rede zur Einheit des Landes.",
+      "targetUsageExample": "Президент произнесла трогательную речь о единстве страны.",
+      "isActive": true
+    },
+    {
+      "id": "7d5b5618-8993-443b-ae07-c86703ea7937",
+      "sourceText": "präzise",
+      "targetText": "точный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Bitte formulieren Sie Ihre Frage präzise und klar.",
+      "targetUsageExample": "Пожалуйста, сформулируйте свой вопрос точно и ясно.",
       "isActive": true
     },
     {
@@ -11401,6 +11377,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Putzfrau kommt jeden Montag, um das Büro zu reinigen.",
       "targetUsageExample": "Уборщица приходит каждый понедельник убирать офис.",
+      "isActive": true
+    },
+    {
+      "id": "605410bf-bcb4-4764-b0b7-4d334e1bf477",
+      "sourceText": "Pärchen",
+      "targetText": "парочка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das verliebte Pärchen spazierte Hand in Hand durch den Park.",
+      "targetUsageExample": "Влюблённая парочка гуляла по парку рука об руку.",
       "isActive": true
     },
     {
@@ -11836,6 +11824,18 @@
       "isActive": true
     },
     {
+      "id": "31704272-bebd-4f6b-a597-5d2bd7f1ac26",
+      "sourceText": "revier",
+      "targetText": "участок|территория",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das ist das Revier der Polizei.",
+      "targetUsageExample": "Это полицейский участок.",
+      "isActive": true
+    },
+    {
       "id": "317e0930-a77d-4afc-b6f4-80475c117d0b",
       "sourceText": "Rezeption",
       "targetText": "ресепшн|приёмная",
@@ -11896,18 +11896,6 @@
       "isActive": true
     },
     {
-      "id": "d5b5e792-95fe-4ad1-aac0-f09f90c5060d",
-      "sourceText": "Römischen",
-      "targetText": "римский",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Gebäude folgt dem Stil der Römischen Antike.",
-      "targetUsageExample": "Здание следует стилю римской античности.",
-      "isActive": true
-    },
-    {
       "id": "77dfee1c-a5d8-4927-b254-02ec6cb90d86",
       "sourceText": "Routine",
       "targetText": "рутина|распорядок",
@@ -11920,66 +11908,6 @@
       "isActive": true
     },
     {
-      "id": "8d552810-c0a8-4d08-994f-eef4e2503776",
-      "sourceText": "Rückgrat",
-      "targetText": "позвоночник|характер",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er hat kein Rückgrat – er gibt bei jeder Kritik sofort nach.",
-      "targetUsageExample": "У него нет характера — он уступает при малейшей критике.",
-      "isActive": true
-    },
-    {
-      "id": "392ffea1-ce0c-4340-9d0d-071299ce3920",
-      "sourceText": "Rückseite",
-      "targetText": "обратная сторона",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Rückseite des Spiegels war mit einer dünnen Folie versiegelt.",
-      "targetUsageExample": "Обратная сторона зеркала была запечатана тонкой плёнкой.",
-      "isActive": true
-    },
-    {
-      "id": "8223b94d-1be3-4780-a82b-f26de169be3c",
-      "sourceText": "Rücksicht",
-      "targetText": "уважение|внимание",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Man sollte immer Rücksicht auf ältere Menschen nehmen.",
-      "targetUsageExample": "Следует всегда проявлять уважение к пожилым людям.",
-      "isActive": true
-    },
-    {
-      "id": "d1ea11a5-3daa-479b-bd4d-def3261ad1cd",
-      "sourceText": "Rücksitz",
-      "targetText": "заднее сиденье",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Kinder schlafen bequem auf dem Rücksitz des Autos.",
-      "targetUsageExample": "Дети удобно спят на заднем сиденье машины.",
-      "isActive": true
-    },
-    {
-      "id": "6438daca-7d23-4ecc-afbc-0085e27c0609",
-      "sourceText": "Rückweg",
-      "targetText": "обратный путь",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Rückweg nach Hause dauerte länger als erwartet.",
-      "targetUsageExample": "Обратный путь домой занял больше времени, чем ожидалось.",
-      "isActive": true
-    },
-    {
       "id": "4eec31c2-c7a6-4bf0-b72d-7cc1e7fd3d9a",
       "sourceText": "Rudel",
       "targetText": "стая|свора",
@@ -11989,18 +11917,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Das Rudel Wölfe bewegte sich lautlos durch den verschneiten Wald.",
       "targetUsageExample": "Стая волков бесшумно двигалась через заснеженный лес.",
-      "isActive": true
-    },
-    {
-      "id": "a8094930-e3ff-4fe5-9a24-2f475968cc91",
-      "sourceText": "rührend",
-      "targetText": "трогательный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die rührende Geschichte brachte viele Zuschauer zum Weinen.",
-      "targetUsageExample": "Трогательная история заставила многих зрителей заплакать.",
       "isActive": true
     },
     {
@@ -12064,6 +11980,102 @@
       "isActive": true
     },
     {
+      "id": "d60bce70-ba1d-43ad-8203-ea1f6720b49c",
+      "sourceText": "rätseln",
+      "targetText": "гадать|разгадывать загадки",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Wir rätseln, wer das getan hat.",
+      "targetUsageExample": "Мы гадаем, кто это сделал.",
+      "isActive": true
+    },
+    {
+      "id": "d5b5e792-95fe-4ad1-aac0-f09f90c5060d",
+      "sourceText": "Römischen",
+      "targetText": "римский",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Gebäude folgt dem Stil der Römischen Antike.",
+      "targetUsageExample": "Здание следует стилю римской античности.",
+      "isActive": true
+    },
+    {
+      "id": "8d552810-c0a8-4d08-994f-eef4e2503776",
+      "sourceText": "Rückgrat",
+      "targetText": "позвоночник|характер",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er hat kein Rückgrat – er gibt bei jeder Kritik sofort nach.",
+      "targetUsageExample": "У него нет характера — он уступает при малейшей критике.",
+      "isActive": true
+    },
+    {
+      "id": "392ffea1-ce0c-4340-9d0d-071299ce3920",
+      "sourceText": "Rückseite",
+      "targetText": "обратная сторона",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Rückseite des Spiegels war mit einer dünnen Folie versiegelt.",
+      "targetUsageExample": "Обратная сторона зеркала была запечатана тонкой плёнкой.",
+      "isActive": true
+    },
+    {
+      "id": "8223b94d-1be3-4780-a82b-f26de169be3c",
+      "sourceText": "Rücksicht",
+      "targetText": "уважение|внимание",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Man sollte immer Rücksicht auf ältere Menschen nehmen.",
+      "targetUsageExample": "Следует всегда проявлять уважение к пожилым людям.",
+      "isActive": true
+    },
+    {
+      "id": "d1ea11a5-3daa-479b-bd4d-def3261ad1cd",
+      "sourceText": "Rücksitz",
+      "targetText": "заднее сиденье",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Kinder schlafen bequem auf dem Rücksitz des Autos.",
+      "targetUsageExample": "Дети удобно спят на заднем сиденье машины.",
+      "isActive": true
+    },
+    {
+      "id": "6438daca-7d23-4ecc-afbc-0085e27c0609",
+      "sourceText": "Rückweg",
+      "targetText": "обратный путь",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Rückweg nach Hause dauerte länger als erwartet.",
+      "targetUsageExample": "Обратный путь домой занял больше времени, чем ожидалось.",
+      "isActive": true
+    },
+    {
+      "id": "a8094930-e3ff-4fe5-9a24-2f475968cc91",
+      "sourceText": "rührend",
+      "targetText": "трогательный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die rührende Geschichte brachte viele Zuschauer zum Weinen.",
+      "targetUsageExample": "Трогательная история заставила многих зрителей заплакать.",
+      "isActive": true
+    },
+    {
       "id": "c5a14098-d3ba-4d42-ae4b-aec1363fa3fb",
       "sourceText": "Rüstung",
       "targetText": "доспехи|вооружение",
@@ -12124,30 +12136,6 @@
       "isActive": true
     },
     {
-      "id": "24cc1d6a-9503-4926-8cbb-0de130b6bd5e",
-      "sourceText": "sänger",
-      "targetText": "певец",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Sänger betrat die Bühne unter lautem Applaus.",
-      "targetUsageExample": "Певец вышел на сцену под громкие аплодисменты.",
-      "isActive": true
-    },
-    {
-      "id": "5cbb19b2-4582-4db8-8783-ed29a7c5ad99",
-      "sourceText": "Sängerin",
-      "targetText": "певица",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Sängerin gewann mehrere internationale Preise.",
-      "targetUsageExample": "Певица завоевала несколько международных наград.",
-      "isActive": true
-    },
-    {
       "id": "fea38bb7-5a85-49c9-b702-0f21d2b72a21",
       "sourceText": "Sattel",
       "targetText": "седло",
@@ -12181,18 +12169,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er säuft jeden Abend und redet dabei wirres Zeug.",
       "targetUsageExample": "Он бухает каждый вечер и несёт при этом всякую чушь.",
-      "isActive": true
-    },
-    {
-      "id": "e5a8d5ec-c530-4631-b191-d5b0164f0b57",
-      "sourceText": "Säufer",
-      "targetText": "пьяница",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Sein Vater war bekannter Säufer in der ganzen Nachbarschaft.",
-      "targetUsageExample": "Его отец был известным пьяницей на всю округу.",
       "isActive": true
     },
     {
@@ -12316,18 +12292,6 @@
       "isActive": true
     },
     {
-      "id": "bdfc947a-a121-4088-850b-2b4ceb10dab0",
-      "sourceText": "Schlägerei",
-      "targetText": "драка",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Nach dem Spiel kam es vor dem Stadion zu einer Schlägerei.",
-      "targetUsageExample": "После матча перед стадионом завязалась драка.",
-      "isActive": true
-    },
-    {
       "id": "31955ca5-68ee-4be8-bf52-e9ea114f3ce6",
       "sourceText": "schlagzeilen",
       "targetText": "заголовки",
@@ -12448,18 +12412,6 @@
       "isActive": true
     },
     {
-      "id": "706eb434-55f2-49ec-b467-9882d8827018",
-      "sourceText": "Schlösser",
-      "targetText": "замки",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Märchen handelt von Schlössern und Prinzessinnen.",
-      "targetUsageExample": "Сказка рассказывает о замках и принцессах.",
-      "isActive": true
-    },
-    {
       "id": "2a0edf55-e393-4673-add0-6ab3839c885c",
       "sourceText": "Schlucht",
       "targetText": "ущелье",
@@ -12481,6 +12433,30 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Sie versuchte zu sprechen, aber brachte nur ein Schluchzen hervor.",
       "targetUsageExample": "Она пыталась говорить, но смогла лишь всхлипывать.",
+      "isActive": true
+    },
+    {
+      "id": "bdfc947a-a121-4088-850b-2b4ceb10dab0",
+      "sourceText": "Schlägerei",
+      "targetText": "драка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Nach dem Spiel kam es vor dem Stadion zu einer Schlägerei.",
+      "targetUsageExample": "После матча перед стадионом завязалась драка.",
+      "isActive": true
+    },
+    {
+      "id": "706eb434-55f2-49ec-b467-9882d8827018",
+      "sourceText": "Schlösser",
+      "targetText": "замки",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Märchen handelt von Schlössern und Prinzessinnen.",
+      "targetUsageExample": "Сказка рассказывает о замках и принцессах.",
       "isActive": true
     },
     {
@@ -12556,18 +12532,6 @@
       "isActive": true
     },
     {
-      "id": "959f78b3-b55d-48f3-80b6-9ae044fa2491",
-      "sourceText": "Schöpfer",
-      "targetText": "создатель|творец",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Gott gilt in vielen Religionen als Schöpfer der Welt.",
-      "targetUsageExample": "Бог считается создателем мира во многих религиях.",
-      "isActive": true
-    },
-    {
       "id": "052ce9a5-a53e-46e6-b13d-160bbc0a1fd0",
       "sourceText": "Schreibmaschine",
       "targetText": "пишущая машинка",
@@ -12604,18 +12568,6 @@
       "isActive": true
     },
     {
-      "id": "946af3f3-50fa-4f4b-9e76-72da2cd58299",
-      "sourceText": "Schülerin",
-      "targetText": "ученица",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Schülerin beantwortete jede Frage mit Bravour.",
-      "targetUsageExample": "Ученица блестяще ответила на каждый вопрос.",
-      "isActive": true
-    },
-    {
       "id": "193c1117-89d9-4e24-b24d-d4789c892560",
       "sourceText": "Schurke",
       "targetText": "негодяй",
@@ -12625,30 +12577,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Schurke im Film täuschte alle und entkam ungestraft.",
       "targetUsageExample": "Негодяй в фильме обманул всех и ушёл безнаказанным.",
-      "isActive": true
-    },
-    {
-      "id": "a356e2ef-2164-4556-82bf-68e498367865",
-      "sourceText": "schütteln",
-      "targetText": "трясти|встряхивать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er schüttelte den Kopf und verließ wortlos den Raum.",
-      "targetUsageExample": "Он покачал головой и молча вышел из комнаты.",
-      "isActive": true
-    },
-    {
-      "id": "2a1e2e4b-854c-456c-ab0a-5d2afec59f8e",
-      "sourceText": "Schwägerin",
-      "targetText": "невестка|золовка",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Seine Schwägerin ist eine sehr hilfsbereite Person.",
-      "targetUsageExample": "Его невестка — очень отзывчивый человек.",
       "isActive": true
     },
     {
@@ -12781,6 +12709,66 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Bei dieser Hitze schwitzt man beim kleinsten Schritt.",
       "targetUsageExample": "В такую жару потеешь от малейшего движения.",
+      "isActive": true
+    },
+    {
+      "id": "2a1e2e4b-854c-456c-ab0a-5d2afec59f8e",
+      "sourceText": "Schwägerin",
+      "targetText": "невестка|золовка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Seine Schwägerin ist eine sehr hilfsbereite Person.",
+      "targetUsageExample": "Его невестка — очень отзывчивый человек.",
+      "isActive": true
+    },
+    {
+      "id": "959f78b3-b55d-48f3-80b6-9ae044fa2491",
+      "sourceText": "Schöpfer",
+      "targetText": "создатель|творец",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Gott gilt in vielen Religionen als Schöpfer der Welt.",
+      "targetUsageExample": "Бог считается создателем мира во многих религиях.",
+      "isActive": true
+    },
+    {
+      "id": "946af3f3-50fa-4f4b-9e76-72da2cd58299",
+      "sourceText": "Schülerin",
+      "targetText": "ученица",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Schülerin beantwortete jede Frage mit Bravour.",
+      "targetUsageExample": "Ученица блестяще ответила на каждый вопрос.",
+      "isActive": true
+    },
+    {
+      "id": "b4d6084a-1f90-43e6-bffa-28b7fbae2df3",
+      "sourceText": "Schüsse",
+      "targetText": "выстрелы",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Man hörte plötzlich Schüsse in der Nacht.",
+      "targetUsageExample": "Ночью внезапно послышались выстрелы.",
+      "isActive": true
+    },
+    {
+      "id": "a356e2ef-2164-4556-82bf-68e498367865",
+      "sourceText": "schütteln",
+      "targetText": "трясти|встряхивать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er schüttelte den Kopf und verließ wortlos den Raum.",
+      "targetUsageExample": "Он покачал головой и молча вышел из комнаты.",
       "isActive": true
     },
     {
@@ -12964,30 +12952,6 @@
       "isActive": true
     },
     {
-      "id": "f9410312-21ff-411f-9c94-04d9fcec4f57",
-      "sourceText": "Señora",
-      "targetText": "сеньора",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Señora empfing die Gäste herzlich in ihrem Haus.",
-      "targetUsageExample": "Сеньора радушно приняла гостей в своём доме.",
-      "isActive": true
-    },
-    {
-      "id": "1e4c17c5-fd41-484a-a64f-926b2133acf8",
-      "sourceText": "Señorita",
-      "targetText": "сеньорита",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Señorita tanzte Flamenco mit viel Leidenschaft.",
-      "targetUsageExample": "Сеньорита танцевала фламенко с большой страстью.",
-      "isActive": true
-    },
-    {
       "id": "f92c5ade-43f0-4fd4-a098-1d578b0455e7",
       "sourceText": "Sensibel",
       "targetText": "чувствительный",
@@ -13069,6 +13033,30 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Seuche breitete sich im Mittelalter rasend schnell aus.",
       "targetUsageExample": "Чума в Средневековье распространялась с бешеной скоростью.",
+      "isActive": true
+    },
+    {
+      "id": "f9410312-21ff-411f-9c94-04d9fcec4f57",
+      "sourceText": "Señora",
+      "targetText": "сеньора",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Señora empfing die Gäste herzlich in ihrem Haus.",
+      "targetUsageExample": "Сеньора радушно приняла гостей в своём доме.",
+      "isActive": true
+    },
+    {
+      "id": "1e4c17c5-fd41-484a-a64f-926b2133acf8",
+      "sourceText": "Señorita",
+      "targetText": "сеньорита",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Señorita tanzte Flamenco mit viel Leidenschaft.",
+      "targetUsageExample": "Сеньорита танцевала фламенко с большой страстью.",
       "isActive": true
     },
     {
@@ -13336,18 +13324,6 @@
       "isActive": true
     },
     {
-      "id": "748a7957-545e-473b-b6e7-5fd8e1827957",
-      "sourceText": "spätestens",
-      "targetText": "самое позднее",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Du solltest spätestens um zehn Uhr zu Hause sein.",
-      "targetUsageExample": "Ты должен быть дома самое позднее в десять часов.",
-      "isActive": true
-    },
-    {
       "id": "f3fd6d80-7a96-4536-b879-b65335d394ae",
       "sourceText": "Speer",
       "targetText": "копьё",
@@ -13525,6 +13501,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Täter verschwand spurlos in der Nacht.",
       "targetUsageExample": "Преступник бесследно исчез в ночи.",
+      "isActive": true
+    },
+    {
+      "id": "748a7957-545e-473b-b6e7-5fd8e1827957",
+      "sourceText": "spätestens",
+      "targetText": "самое позднее",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Du solltest spätestens um zehn Uhr zu Hause sein.",
+      "targetUsageExample": "Ты должен быть дома самое позднее в десять часов.",
       "isActive": true
     },
     {
@@ -13828,18 +13816,6 @@
       "isActive": true
     },
     {
-      "id": "a4716c1e-f7ce-4fa5-91ad-3c5a6e60bbf4",
-      "sourceText": "Stückchen",
-      "targetText": "кусочек",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Sie brach ein kleines Stückchen Schokolade ab und aß es.",
-      "targetUsageExample": "Она отломила маленький кусочек шоколада и съела его.",
-      "isActive": true
-    },
-    {
       "id": "9266dd52-7c29-4173-a584-b1c4cea46680",
       "sourceText": "Studentin",
       "targetText": "студентка",
@@ -13876,6 +13852,30 @@
       "isActive": true
     },
     {
+      "id": "79b73a3d-72eb-466c-93be-df8409d41f02",
+      "sourceText": "störung",
+      "targetText": "помеха|нарушение",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Es gibt eine Störung im Netz.",
+      "targetUsageExample": "В сети есть помеха.",
+      "isActive": true
+    },
+    {
+      "id": "a4716c1e-f7ce-4fa5-91ad-3c5a6e60bbf4",
+      "sourceText": "Stückchen",
+      "targetText": "кусочек",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sie brach ein kleines Stückchen Schokolade ab und aß es.",
+      "targetUsageExample": "Она отломила маленький кусочек шоколада и съела его.",
+      "isActive": true
+    },
+    {
       "id": "4b98be99-6968-423e-a0bc-5ad22526fffb",
       "sourceText": "stützpunkt",
       "targetText": "база|опорный пункт",
@@ -13897,6 +13897,54 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Substanz war für Menschen bei hoher Konzentration giftig.",
       "targetUsageExample": "Вещество было токсично для людей при высокой концентрации.",
+      "isActive": true
+    },
+    {
+      "id": "cde9eb97-5eaf-43f1-a565-4e72dc743b4b",
+      "sourceText": "sympathisch",
+      "targetText": "симпатичный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er ist sehr sympathisch — alle mögen ihn sofort.",
+      "targetUsageExample": "Он очень симпатичный — все сразу его полюбили.",
+      "isActive": true
+    },
+    {
+      "id": "24cc1d6a-9503-4926-8cbb-0de130b6bd5e",
+      "sourceText": "sänger",
+      "targetText": "певец",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Sänger betrat die Bühne unter lautem Applaus.",
+      "targetUsageExample": "Певец вышел на сцену под громкие аплодисменты.",
+      "isActive": true
+    },
+    {
+      "id": "5cbb19b2-4582-4db8-8783-ed29a7c5ad99",
+      "sourceText": "Sängerin",
+      "targetText": "певица",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Sängerin gewann mehrere internationale Preise.",
+      "targetUsageExample": "Певица завоевала несколько международных наград.",
+      "isActive": true
+    },
+    {
+      "id": "e5a8d5ec-c530-4631-b191-d5b0164f0b57",
+      "sourceText": "Säufer",
+      "targetText": "пьяница",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sein Vater war bekannter Säufer in der ganzen Nachbarschaft.",
+      "targetUsageExample": "Его отец был известным пьяницей на всю округу.",
       "isActive": true
     },
     {
@@ -13933,18 +13981,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Das Dorf liegt südlich der großen Stadt, etwa zwanzig Kilometer entfernt.",
       "targetUsageExample": "Деревня расположена к югу от большого города, примерно в двадцати километрах.",
-      "isActive": true
-    },
-    {
-      "id": "cde9eb97-5eaf-43f1-a565-4e72dc743b4b",
-      "sourceText": "sympathisch",
-      "targetText": "симпатичный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er ist sehr sympathisch — alle mögen ihn sofort.",
-      "targetUsageExample": "Он очень симпатичный — все сразу его полюбили.",
       "isActive": true
     },
     {
@@ -14032,18 +14068,6 @@
       "isActive": true
     },
     {
-      "id": "35e3a8d7-7841-4918-97af-f3ebb28c05b3",
-      "sourceText": "Tänzer",
-      "targetText": "танцор",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Tänzer bewegte sich mit Anmut und Präzision auf der Bühne.",
-      "targetUsageExample": "Танцор двигался на сцене с грацией и точностью.",
-      "isActive": true
-    },
-    {
       "id": "b75332bd-8ed3-4fc4-8252-f0d1f663e13a",
       "sourceText": "Tapferkeit",
       "targetText": "храбрость",
@@ -14077,30 +14101,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er reichte ihr ein Taschentuch, als sie zu weinen begann.",
       "targetUsageExample": "Он протянул ей носовой платок, когда она начала плакать.",
-      "isActive": true
-    },
-    {
-      "id": "3edd74b3-1581-4620-9935-7324fff9cedb",
-      "sourceText": "tätig",
-      "targetText": "деятельный|занятый",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Sie ist in der Forschung tätig und veröffentlicht regelmäßig Artikel.",
-      "targetUsageExample": "Она занята в исследовательской деятельности и регулярно публикует статьи.",
-      "isActive": true
-    },
-    {
-      "id": "a5085efc-a996-4ae7-9dde-bee61c0e8d5b",
-      "sourceText": "Täuschung",
-      "targetText": "обман|заблуждение",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Werbung war eine Täuschung — das Produkt hielt nicht, was es versprach.",
-      "targetUsageExample": "Реклама была обманом — продукт не оправдал обещаний.",
       "isActive": true
     },
     {
@@ -14248,6 +14248,18 @@
       "isActive": true
     },
     {
+      "id": "59f9890b-dbf4-404c-bc02-ee7ee73df588",
+      "sourceText": "theorie",
+      "targetText": "теория",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er erklärt die Theorie sehr gut.",
+      "targetUsageExample": "Он объясняет теорию очень хорошо.",
+      "isActive": true
+    },
+    {
       "id": "8254e806-95c6-436e-8bb7-72f811553106",
       "sourceText": "Tierarzt",
       "targetText": "ветеринар",
@@ -14317,18 +14329,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Auf dem Herd stand ein Topf mit kochender Suppe.",
       "targetUsageExample": "На плите стояла кастрюля с кипящим супом.",
-      "isActive": true
-    },
-    {
-      "id": "b81b7384-a5ea-4510-8af3-9253c1bc3981",
-      "sourceText": "Töricht",
-      "targetText": "глупый",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Es wäre töricht, diese Gelegenheit zu verpassen.",
-      "targetUsageExample": "Было бы глупо упустить эту возможность.",
       "isActive": true
     },
     {
@@ -14476,123 +14476,51 @@
       "isActive": true
     },
     {
-      "id": "efc0bda3-58f6-401b-b41c-a09d6c876f53",
-      "sourceText": "Überbringen",
-      "targetText": "доставлять|передавать",
+      "id": "35e3a8d7-7841-4918-97af-f3ebb28c05b3",
+      "sourceText": "Tänzer",
+      "targetText": "танцор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian B2",
       "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Bote wurde beauftragt, die Nachricht persönlich zu überbringen.",
-      "targetUsageExample": "Посыльному было поручено лично доставить сообщение.",
+      "sourceUsageExample": "Der Tänzer bewegte sich mit Anmut und Präzision auf der Bühne.",
+      "targetUsageExample": "Танцор двигался на сцене с грацией и точностью.",
       "isActive": true
     },
     {
-      "id": "bd84b5d1-d103-4529-b5d4-574717ab7bee",
-      "sourceText": "Übereinstimmung",
-      "targetText": "совпадение|согласие",
+      "id": "3edd74b3-1581-4620-9935-7324fff9cedb",
+      "sourceText": "tätig",
+      "targetText": "деятельный|занятый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian B2",
       "difficultyLevel": "b2",
-      "sourceUsageExample": "Es besteht eine weitgehende Übereinstimmung zwischen den beiden Verträgen.",
-      "targetUsageExample": "Между двумя договорами существует значительное совпадение.",
+      "sourceUsageExample": "Sie ist in der Forschung tätig und veröffentlicht regelmäßig Artikel.",
+      "targetUsageExample": "Она занята в исследовательской деятельности и регулярно публикует статьи.",
       "isActive": true
     },
     {
-      "id": "6d00f18f-bd5c-4797-a25a-8854400db1b6",
-      "sourceText": "überflüssig",
-      "targetText": "лишний|излишний",
+      "id": "a5085efc-a996-4ae7-9dde-bee61c0e8d5b",
+      "sourceText": "Täuschung",
+      "targetText": "обман|заблуждение",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian B2",
       "difficultyLevel": "b2",
-      "sourceUsageExample": "Diese Informationen sind für den Bericht überflüssig und können weggelassen werden.",
-      "targetUsageExample": "Эта информация лишняя для отчёта и может быть опущена.",
+      "sourceUsageExample": "Die Werbung war eine Täuschung — das Produkt hielt nicht, was es versprach.",
+      "targetUsageExample": "Реклама была обманом — продукт не оправдал обещаний.",
       "isActive": true
     },
     {
-      "id": "5d6602f6-f25f-4262-9ea3-53709c876879",
-      "sourceText": "überfordert",
-      "targetText": "перегруженный",
+      "id": "b81b7384-a5ea-4510-8af3-9253c1bc3981",
+      "sourceText": "Töricht",
+      "targetText": "глупый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian B2",
       "difficultyLevel": "b2",
-      "sourceUsageExample": "Nach drei Projekten gleichzeitig fühlt sie sich völlig überfordert.",
-      "targetUsageExample": "После трёх одновременных проектов она чувствует себя полностью перегруженной.",
-      "isActive": true
-    },
-    {
-      "id": "3af9dba3-3d1e-4a14-b0eb-a5d443bb496a",
-      "sourceText": "übergeschnappt",
-      "targetText": "свихнувшийся",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Bist du übergeschnappt? Du kannst doch nicht mitten in der Nacht losfahren!",
-      "targetUsageExample": "Ты свихнулся? Ты же не можешь уехать среди ночи!",
-      "isActive": true
-    },
-    {
-      "id": "5a10bf37-1586-4894-aa1c-2c4be3b9996c",
-      "sourceText": "überqueren",
-      "targetText": "переходить|пересекать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Es ist gefährlich, die stark befahrene Straße ohne Ampel zu überqueren.",
-      "targetUsageExample": "Опасно переходить оживлённую улицу без светофора.",
-      "isActive": true
-    },
-    {
-      "id": "6c91f6db-3336-48cb-a36f-dea2ca637b5c",
-      "sourceText": "überstürzen",
-      "targetText": "торопиться",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Man sollte wichtige Entscheidungen nicht überstürzen.",
-      "targetUsageExample": "Не следует торопиться с важными решениями.",
-      "isActive": true
-    },
-    {
-      "id": "33f2ce79-81ab-4c22-9ada-b9aca877babf",
-      "sourceText": "überwältigend",
-      "targetText": "ошеломляющий",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Die Aussicht vom Gipfel war überwältigend schön.",
-      "targetUsageExample": "Вид с вершины был ошеломляюще красив.",
-      "isActive": true
-    },
-    {
-      "id": "9c472242-6f75-4f9c-9a0b-a7612b01dd3f",
-      "sourceText": "Überzeugung",
-      "targetText": "убеждение",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er vertritt die feste Überzeugung, dass Bildung die Welt verändern kann.",
-      "targetUsageExample": "Он придерживается твёрдого убеждения, что образование способно изменить мир.",
-      "isActive": true
-    },
-    {
-      "id": "24492751-4196-4835-8a09-08f8781b9c7a",
-      "sourceText": "üble",
-      "targetText": "дурной|скверный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der üble Geruch aus dem Keller ließ sich nicht ignorieren.",
-      "targetUsageExample": "Дурной запах из подвала невозможно было игнорировать.",
+      "sourceUsageExample": "Es wäre töricht, diese Gelegenheit zu verpassen.",
+      "targetUsageExample": "Было бы глупо упустить эту возможность.",
       "isActive": true
     },
     {
@@ -14653,6 +14581,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Im Umkreis von zehn Kilometern gibt es kein Krankenhaus.",
       "targetUsageExample": "В радиусе десяти километров нет больницы.",
+      "isActive": true
+    },
+    {
+      "id": "edd5bfd0-ad55-4325-b270-f6e91dd20c07",
+      "sourceText": "umstände",
+      "targetText": "обстоятельства|условия",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Unter diesen Umständen kann ich nicht helfen.",
+      "targetUsageExample": "При этих обстоятельствах я не могу помочь.",
       "isActive": true
     },
     {
@@ -14764,18 +14704,6 @@
       "isActive": true
     },
     {
-      "id": "bb6128a8-e07e-4806-852b-882aa932936e",
-      "sourceText": "unfähig",
-      "targetText": "неспособный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er fühlt sich unfähig, allein eine so schwere Entscheidung zu treffen.",
-      "targetUsageExample": "Он чувствует себя неспособным принять столь тяжёлое решение в одиночку.",
-      "isActive": true
-    },
-    {
       "id": "434c6475-04f8-40e8-b39f-b4af5b4eddad",
       "sourceText": "Unfug",
       "targetText": "безобразие|чепуха",
@@ -14785,6 +14713,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Hör auf mit dem Unfug! Das ist kein Spiel.",
       "targetUsageExample": "Прекрати это безобразие! Это не игра.",
+      "isActive": true
+    },
+    {
+      "id": "bb6128a8-e07e-4806-852b-882aa932936e",
+      "sourceText": "unfähig",
+      "targetText": "неспособный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er fühlt sich unfähig, allein eine so schwere Entscheidung zu treffen.",
+      "targetUsageExample": "Он чувствует себя неспособным принять столь тяжёлое решение в одиночку.",
       "isActive": true
     },
     {
@@ -14884,6 +14824,18 @@
       "isActive": true
     },
     {
+      "id": "ab8040e8-ab1e-4873-924c-0f2900a2bc6e",
+      "sourceText": "unrecht",
+      "targetText": "неправота|несправедливость",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Du hast unrecht.",
+      "targetUsageExample": "Ты не прав.",
+      "isActive": true
+    },
+    {
       "id": "a408b745-718e-49fc-b66f-78de0a71dfd2",
       "sourceText": "unruhig",
       "targetText": "беспокойный",
@@ -14980,18 +14932,6 @@
       "isActive": true
     },
     {
-      "id": "0bb5e5cb-cd96-409a-b26a-71d558cbd8b8",
-      "sourceText": "unterschätzen",
-      "targetText": "недооценивать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Viele Unternehmen unterschätzen die Bedeutung einer guten Unternehmenskultur.",
-      "targetUsageExample": "Многие компании недооценивают значимость хорошей корпоративной культуры.",
-      "isActive": true
-    },
-    {
       "id": "faa65d44-4808-42f6-ae9b-ad8fb4f34d4d",
       "sourceText": "unterschiedlich",
       "targetText": "различный",
@@ -15013,6 +14953,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Flüchtling fand Unterschlupf in einer verlassenen Scheune.",
       "targetUsageExample": "Беженец нашёл укрытие в заброшенном сарае.",
+      "isActive": true
+    },
+    {
+      "id": "0bb5e5cb-cd96-409a-b26a-71d558cbd8b8",
+      "sourceText": "unterschätzen",
+      "targetText": "недооценивать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Viele Unternehmen unterschätzen die Bedeutung einer guten Unternehmenskultur.",
+      "targetUsageExample": "Многие компании недооценивают значимость хорошей корпоративной культуры.",
       "isActive": true
     },
     {
@@ -15088,18 +15040,6 @@
       "isActive": true
     },
     {
-      "id": "cc175061-b8d6-4414-b239-94e58c1c9962",
-      "sourceText": "unzählige",
-      "targetText": "бесчисленные",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Unzählige Menschen kamen zum Konzert des weltberühmten Pianisten.",
-      "targetUsageExample": "Бесчисленные люди пришли на концерт всемирно известного пианиста.",
-      "isActive": true
-    },
-    {
       "id": "85e0d711-2898-4dc5-b7fc-097d51610fa0",
       "sourceText": "unzufrieden",
       "targetText": "недовольный",
@@ -15109,6 +15049,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er ist unzufrieden mit seinem Job und denkt über einen Wechsel nach.",
       "targetUsageExample": "Он недоволен своей работой и задумывается о смене.",
+      "isActive": true
+    },
+    {
+      "id": "cc175061-b8d6-4414-b239-94e58c1c9962",
+      "sourceText": "unzählige",
+      "targetText": "бесчисленные",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Unzählige Menschen kamen zum Konzert des weltberühmten Pianisten.",
+      "targetUsageExample": "Бесчисленные люди пришли на концерт всемирно известного пианиста.",
       "isActive": true
     },
     {
@@ -15268,18 +15220,6 @@
       "isActive": true
     },
     {
-      "id": "fbf00f40-34ca-4138-9b99-70d7ab30ec8b",
-      "sourceText": "Verärgern",
-      "targetText": "раздражать|злить",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Ständige Kritik ohne Lob kann Mitarbeiter verärgern und demotivieren.",
-      "targetUsageExample": "Постоянная критика без похвалы может раздражать сотрудников и лишать их мотивации.",
-      "isActive": true
-    },
-    {
       "id": "925ee825-fc80-4035-a62b-5f3fc0cdacfa",
       "sourceText": "verborgen",
       "targetText": "скрытый",
@@ -15373,6 +15313,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Er rief verflixt nochmal aus und schlug die Türe zu.",
       "targetUsageExample": "Он воскликнул «чёрт возьми» и хлопнул дверью.",
+      "isActive": true
+    },
+    {
+      "id": "3fcaede1-0808-4840-abf7-5ef2dd51828c",
+      "sourceText": "verflucht",
+      "targetText": "проклятый",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Verflucht! Ich habe den Bus verpasst.",
+      "targetUsageExample": "Чёрт! Я пропустил автобус.",
       "isActive": true
     },
     {
@@ -15568,18 +15520,6 @@
       "isActive": true
     },
     {
-      "id": "56eb1ee1-9a1c-4acd-8675-13f6722af269",
-      "sourceText": "Vermächtnis",
-      "targetText": "наследие|завещание",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das kulturelle Vermächtnis der alten Zivilisation lebt in ihren Bauwerken fort.",
-      "targetUsageExample": "Культурное наследие древней цивилизации живёт в её постройках.",
-      "isActive": true
-    },
-    {
       "id": "a19bd50e-38b9-496b-b293-09c3c102e65b",
       "sourceText": "vermasseln",
       "targetText": "испортить|запороть",
@@ -15637,6 +15577,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Agentur bot ihre Dienste als Vermittlung zwischen Käufer und Verkäufer an.",
       "targetUsageExample": "Агентство предложило свои услуги в качестве посредничества между покупателем и продавцом.",
+      "isActive": true
+    },
+    {
+      "id": "56eb1ee1-9a1c-4acd-8675-13f6722af269",
+      "sourceText": "Vermächtnis",
+      "targetText": "наследие|завещание",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das kulturelle Vermächtnis der alten Zivilisation lebt in ihren Bauwerken fort.",
+      "targetUsageExample": "Культурное наследие древней цивилизации живёт в её постройках.",
       "isActive": true
     },
     {
@@ -15709,6 +15661,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Mit dem Öl auf der Hose hatte er das neue Hemd versaut.",
       "targetUsageExample": "Маслом на брюках он испачкал новую рубашку.",
+      "isActive": true
+    },
+    {
+      "id": "d8797de6-be9e-4236-b0a7-93a23aa70fa8",
+      "sourceText": "versaut",
+      "targetText": "испорченный|развратный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Buch hat eine versaute Szene.",
+      "targetUsageExample": "В книге есть непристойная сцена.",
       "isActive": true
     },
     {
@@ -15796,6 +15760,18 @@
       "isActive": true
     },
     {
+      "id": "70dc9c79-1600-4292-8e62-828c32388a7b",
+      "sourceText": "verstorben",
+      "targetText": "умерший|покойный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er sprach mit großem Respekt über seinen verstorbenen Lehrer.",
+      "targetUsageExample": "Он говорил с большим уважением о своём умершем учителе.",
+      "isActive": true
+    },
+    {
       "id": "aaf08ac8-a6c3-4e68-88a9-d4cffb338ff8",
       "sourceText": "verständigen",
       "targetText": "уведомлять|связаться",
@@ -15817,18 +15793,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Das neue System soll die Sicherheit des Netzwerks erheblich verstärken.",
       "targetUsageExample": "Новая система должна значительно усилить безопасность сети.",
-      "isActive": true
-    },
-    {
-      "id": "70dc9c79-1600-4292-8e62-828c32388a7b",
-      "sourceText": "verstorben",
-      "targetText": "умерший|покойный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er sprach mit großem Respekt über seinen verstorbenen Lehrer.",
-      "targetUsageExample": "Он говорил с большим уважением о своём умершем учителе.",
       "isActive": true
     },
     {
@@ -15940,6 +15904,18 @@
       "isActive": true
     },
     {
+      "id": "fbf00f40-34ca-4138-9b99-70d7ab30ec8b",
+      "sourceText": "Verärgern",
+      "targetText": "раздражать|злить",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Ständige Kritik ohne Lob kann Mitarbeiter verärgern und demotivieren.",
+      "targetUsageExample": "Постоянная критика без похвалы может раздражать сотрудников и лишать их мотивации.",
+      "isActive": true
+    },
+    {
       "id": "cba85e14-c733-4d4d-b1aa-a3437ef63d06",
       "sourceText": "Vetter",
       "targetText": "двоюродный брат",
@@ -15973,18 +15949,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der neue Vizepräsident übernahm die Aufgaben während der Abwesenheit des Präsidenten.",
       "targetUsageExample": "Новый вице-президент взял на себя обязанности в отсутствие президента.",
-      "isActive": true
-    },
-    {
-      "id": "9cc0d91e-c69d-4405-bd12-7207b4d370f2",
-      "sourceText": "Vögelchen",
-      "targetText": "птичка",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das kleine Vögelchen saß auf dem Fensterbrett und sang laut.",
-      "targetUsageExample": "Маленькая птичка сидела на подоконнике и громко пела.",
       "isActive": true
     },
     {
@@ -16300,6 +16264,18 @@
       "isActive": true
     },
     {
+      "id": "9cc0d91e-c69d-4405-bd12-7207b4d370f2",
+      "sourceText": "Vögelchen",
+      "targetText": "птичка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das kleine Vögelchen saß auf dem Fensterbrett und sang laut.",
+      "targetUsageExample": "Маленькая птичка сидела на подоконнике и громко пела.",
+      "isActive": true
+    },
+    {
       "id": "184a9704-826d-47cc-9069-88327f399db7",
       "sourceText": "wachsam",
       "targetText": "бдительный",
@@ -16333,18 +16309,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Wahlkampf war hitziger als je zuvor und polarisierte die Gesellschaft.",
       "targetUsageExample": "Предвыборная кампания была более горячей, чем когда-либо, и поляризовала общество.",
-      "isActive": true
-    },
-    {
-      "id": "df09fece-f712-4af8-84bf-edf0df75a2e2",
-      "sourceText": "währenddessen",
-      "targetText": "тем временем",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Währenddessen bereitete sie das Abendessen zu, während er die Kinder badete.",
-      "targetUsageExample": "Тем временем она готовила ужин, пока он купал детей.",
       "isActive": true
     },
     {
@@ -16768,6 +16732,18 @@
       "isActive": true
     },
     {
+      "id": "53cf9f52-8bc6-4aa4-a219-25b2425f93e2",
+      "sourceText": "womöglich",
+      "targetText": "возможно|может быть",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das ist womöglich richtig.",
+      "targetUsageExample": "Это возможно правильно.",
+      "isActive": true
+    },
+    {
       "id": "3d15fccf-00b8-4f9f-a71e-9f0dd0c6d51b",
       "sourceText": "Worin",
       "targetText": "в чём",
@@ -16816,6 +16792,18 @@
       "isActive": true
     },
     {
+      "id": "df09fece-f712-4af8-84bf-edf0df75a2e2",
+      "sourceText": "währenddessen",
+      "targetText": "тем временем",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Währenddessen bereitete sie das Abendessen zu, während er die Kinder badete.",
+      "targetUsageExample": "Тем временем она готовила ужин, пока он купал детей.",
+      "isActive": true
+    },
+    {
       "id": "daccf1a3-985c-4285-82c3-07ed1a302f5d",
       "sourceText": "Yen",
       "targetText": "иена",
@@ -16837,18 +16825,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Sie praktiziert jeden Morgen Yoga, um den Stress abzubauen.",
       "targetUsageExample": "Каждое утро она занимается йогой, чтобы снять стресс.",
-      "isActive": true
-    },
-    {
-      "id": "cb6c9801-aaef-4e1f-b36d-1bef95c75e16",
-      "sourceText": "zäh",
-      "targetText": "жёсткий|упорный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Das Fleisch war so zäh, dass es kaum zu kauen war.",
-      "targetUsageExample": "Мясо было таким жёстким, что его почти невозможно было жевать.",
       "isActive": true
     },
     {
@@ -17176,18 +17152,6 @@
       "isActive": true
     },
     {
-      "id": "bf2faa1f-03fb-49cf-9011-b7d6db9aad96",
-      "sourceText": "Zünder",
-      "targetText": "детонатор|взрыватель",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Der Zünder der Bombe wurde rechtzeitig von den Experten entschärft.",
-      "targetUsageExample": "Детонатор бомбы был своевременно обезврежен специалистами.",
-      "isActive": true
-    },
-    {
       "id": "c3c89ed9-1f64-43c1-bc5a-c2c417bc9e12",
       "sourceText": "zurückbekommen",
       "targetText": "получить обратно",
@@ -17284,18 +17248,6 @@
       "isActive": true
     },
     {
-      "id": "60077289-09a0-457f-8724-4402b1592c47",
-      "sourceText": "zusätzlich",
-      "targetText": "дополнительный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Für das Projekt wurden zusätzliche Mittel aus dem Budget genehmigt.",
-      "targetUsageExample": "Для проекта были одобрены дополнительные средства из бюджета.",
-      "isActive": true
-    },
-    {
       "id": "e68325df-da33-4912-a053-cddf1143dc0a",
       "sourceText": "Zuschauen",
       "targetText": "наблюдать|смотреть",
@@ -17317,6 +17269,18 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Mir ist etwas Schlimmes zugestoßen – ich habe meinen Pass verloren.",
       "targetUsageExample": "Со мной случилось что-то плохое — я потерял паспорт.",
+      "isActive": true
+    },
+    {
+      "id": "60077289-09a0-457f-8724-4402b1592c47",
+      "sourceText": "zusätzlich",
+      "targetText": "дополнительный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Für das Projekt wurden zusätzliche Mittel aus dem Budget genehmigt.",
+      "targetUsageExample": "Для проекта были одобрены дополнительные средства из бюджета.",
       "isActive": true
     },
     {
@@ -17401,6 +17365,270 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Bei dem Zwischenfall auf dem Flughafen wurden mehrere Personen leicht verletzt.",
       "targetUsageExample": "В результате инцидента в аэропорту несколько человек получили лёгкие травмы.",
+      "isActive": true
+    },
+    {
+      "id": "cb6c9801-aaef-4e1f-b36d-1bef95c75e16",
+      "sourceText": "zäh",
+      "targetText": "жёсткий|упорный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Fleisch war so zäh, dass es kaum zu kauen war.",
+      "targetUsageExample": "Мясо было таким жёстким, что его почти невозможно было жевать.",
+      "isActive": true
+    },
+    {
+      "id": "bf2faa1f-03fb-49cf-9011-b7d6db9aad96",
+      "sourceText": "Zünder",
+      "targetText": "детонатор|взрыватель",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Zünder der Bombe wurde rechtzeitig von den Experten entschärft.",
+      "targetUsageExample": "Детонатор бомбы был своевременно обезврежен специалистами.",
+      "isActive": true
+    },
+    {
+      "id": "c513645f-3e6a-49a6-bc0e-dd75cac4d74a",
+      "sourceText": "Ähnlichkeit",
+      "targetText": "сходство",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Ähnlichkeit zwischen den beiden Schwestern ist so groß, dass man sie kaum unterscheiden kann.",
+      "targetUsageExample": "Сходство между двумя сёстрами настолько велико, что их почти невозможно различить.",
+      "isActive": true
+    },
+    {
+      "id": "c6b0d574-a24b-47de-bea2-a747a84d2208",
+      "sourceText": "Änderung",
+      "targetText": "изменение",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Änderung des Gesetzes tritt erst nächstes Jahr in Kraft und betrifft alle Steuerpflichtigen.",
+      "targetUsageExample": "Изменение закона вступит в силу только в следующем году и затронет всех налогоплательщиков.",
+      "isActive": true
+    },
+    {
+      "id": "d20ea0ac-1eb7-44a4-b390-d35419311028",
+      "sourceText": "Ängste",
+      "targetText": "страхи",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Ihre Ängste vor dem Fliegen wurden durch eine Therapie deutlich reduziert.",
+      "targetUsageExample": "Её страхи перед полётами значительно уменьшились благодаря терапии.",
+      "isActive": true
+    },
+    {
+      "id": "07d4b15d-2d0c-4e90-b78a-bebdfa1836b6",
+      "sourceText": "ärgerlich",
+      "targetText": "досадный|раздражённый",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Es ist ärgerlich, wenn man stundenlang wartet und dann einfach vergessen wird.",
+      "targetUsageExample": "Досадно, когда часами ждёшь, а потом тебя просто забывают.",
+      "isActive": true
+    },
+    {
+      "id": "f7106616-c5d7-4655-94f8-cf9df27e4041",
+      "sourceText": "Ärmel",
+      "targetText": "рукав",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Ärmel seines Hemdes war so lang, dass er ihn mehrfach hochkrempeln musste.",
+      "targetUsageExample": "Рукав его рубашки был настолько длинным, что ему приходилось подворачивать его несколько раз.",
+      "isActive": true
+    },
+    {
+      "id": "47d28533-cbd1-4fcb-af69-afc4247464a0",
+      "sourceText": "ätzend",
+      "targetText": "едкий|отстойный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der ätzende Geruch der Chemikalie im Labor war kaum zu ertragen und gefährlich.",
+      "targetUsageExample": "Едкий запах химического вещества в лаборатории был едва переносим и опасен.",
+      "isActive": true
+    },
+    {
+      "id": "a15d31d9-af65-4846-82c3-1384994bf9e7",
+      "sourceText": "Öde",
+      "targetText": "пустынный|скучный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Landschaft war öde und verlassen, kein Baum war zu sehen.",
+      "targetUsageExample": "Пейзаж был пустынным и заброшенным, ни одного дерева не было видно.",
+      "isActive": true
+    },
+    {
+      "id": "3802f654-4daa-4815-8714-2eb0198eb712",
+      "sourceText": "Öfters",
+      "targetText": "часто|неоднократно",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sie geht öfters ins Theater, mindestens einmal pro Monat.",
+      "targetUsageExample": "Она часто ходит в театр, по меньшей мере раз в месяц.",
+      "isActive": true
+    },
+    {
+      "id": "660b8df2-b416-4d9f-9fe7-bfa33c07f8d6",
+      "sourceText": "Örtlichen",
+      "targetText": "местный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die örtlichen Behörden haben neue Regelungen eingeführt.",
+      "targetUsageExample": "Местные власти ввели новые правила.",
+      "isActive": true
+    },
+    {
+      "id": "55b0e59c-5a72-47d8-b91b-3d3359cb52ad",
+      "sourceText": "östlich",
+      "targetText": "восточный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die östliche Küste des Landes ist besonders fruchtbar.",
+      "targetUsageExample": "Восточное побережье страны особенно плодородно.",
+      "isActive": true
+    },
+    {
+      "id": "efc0bda3-58f6-401b-b41c-a09d6c876f53",
+      "sourceText": "Überbringen",
+      "targetText": "доставлять|передавать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Bote wurde beauftragt, die Nachricht persönlich zu überbringen.",
+      "targetUsageExample": "Посыльному было поручено лично доставить сообщение.",
+      "isActive": true
+    },
+    {
+      "id": "bd84b5d1-d103-4529-b5d4-574717ab7bee",
+      "sourceText": "Übereinstimmung",
+      "targetText": "совпадение|согласие",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Es besteht eine weitgehende Übereinstimmung zwischen den beiden Verträgen.",
+      "targetUsageExample": "Между двумя договорами существует значительное совпадение.",
+      "isActive": true
+    },
+    {
+      "id": "6d00f18f-bd5c-4797-a25a-8854400db1b6",
+      "sourceText": "überflüssig",
+      "targetText": "лишний|излишний",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Diese Informationen sind für den Bericht überflüssig und können weggelassen werden.",
+      "targetUsageExample": "Эта информация лишняя для отчёта и может быть опущена.",
+      "isActive": true
+    },
+    {
+      "id": "5d6602f6-f25f-4262-9ea3-53709c876879",
+      "sourceText": "überfordert",
+      "targetText": "перегруженный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Nach drei Projekten gleichzeitig fühlt sie sich völlig überfordert.",
+      "targetUsageExample": "После трёх одновременных проектов она чувствует себя полностью перегруженной.",
+      "isActive": true
+    },
+    {
+      "id": "3af9dba3-3d1e-4a14-b0eb-a5d443bb496a",
+      "sourceText": "übergeschnappt",
+      "targetText": "свихнувшийся",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Bist du übergeschnappt? Du kannst doch nicht mitten in der Nacht losfahren!",
+      "targetUsageExample": "Ты свихнулся? Ты же не можешь уехать среди ночи!",
+      "isActive": true
+    },
+    {
+      "id": "5a10bf37-1586-4894-aa1c-2c4be3b9996c",
+      "sourceText": "überqueren",
+      "targetText": "переходить|пересекать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Es ist gefährlich, die stark befahrene Straße ohne Ampel zu überqueren.",
+      "targetUsageExample": "Опасно переходить оживлённую улицу без светофора.",
+      "isActive": true
+    },
+    {
+      "id": "6c91f6db-3336-48cb-a36f-dea2ca637b5c",
+      "sourceText": "überstürzen",
+      "targetText": "торопиться",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Man sollte wichtige Entscheidungen nicht überstürzen.",
+      "targetUsageExample": "Не следует торопиться с важными решениями.",
+      "isActive": true
+    },
+    {
+      "id": "33f2ce79-81ab-4c22-9ada-b9aca877babf",
+      "sourceText": "überwältigend",
+      "targetText": "ошеломляющий",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Aussicht vom Gipfel war überwältigend schön.",
+      "targetUsageExample": "Вид с вершины был ошеломляюще красив.",
+      "isActive": true
+    },
+    {
+      "id": "9c472242-6f75-4f9c-9a0b-a7612b01dd3f",
+      "sourceText": "Überzeugung",
+      "targetText": "убеждение",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er vertritt die feste Überzeugung, dass Bildung die Welt verändern kann.",
+      "targetUsageExample": "Он придерживается твёрдого убеждения, что образование способно изменить мир.",
+      "isActive": true
+    },
+    {
+      "id": "24492751-4196-4835-8a09-08f8781b9c7a",
+      "sourceText": "üble",
+      "targetText": "дурной|скверный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der üble Geruch aus dem Keller ließ sich nicht ignorieren.",
+      "targetUsageExample": "Дурной запах из подвала невозможно было игнорировать.",
       "isActive": true
     }
   ]
