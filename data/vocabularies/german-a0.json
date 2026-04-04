@@ -1,7 +1,7 @@
 {
   "listName": "German Russian A0",
   "exportedAt": "2026-01-18T20:40:47.656710+00:00",
-  "totalWords": 91,
+  "totalWords": 87,
   "words": [
     {
       "id": "4a2e91fd-ec69-435d-9a40-835040336da6",
@@ -112,18 +112,6 @@
       "isActive": true
     },
     {
-      "id": "51bb5610-1b03-46a2-9f05-084c016adb92",
-      "sourceText": "die Mama",
-      "targetText": "мама",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Mama, ich liebe dich!",
-      "targetUsageExample": "Мама, я люблю тебя!",
-      "isActive": true
-    },
-    {
       "id": "4ea63c80-6140-4c8d-83d6-2ee348a3215c",
       "sourceText": "die Million",
       "targetText": "миллион",
@@ -144,19 +132,7 @@
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Einen Moment, bitte!",
-      "targetUsageExample": "Одну минуту, пожалуйста!",
-      "isActive": true
-    },
-    {
-      "id": "0dc13d9f-89ee-4bbc-94f0-83ebb7e6b190",
-      "sourceText": "der Papa",
-      "targetText": "папа",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Papa kommt nach Hause.",
-      "targetUsageExample": "Папа приходит домой.",
+      "targetUsageExample": "Один момент, пожалуйста!",
       "isActive": true
     },
     {
@@ -246,7 +222,7 @@
     {
       "id": "4d6ee0b8-212a-45e3-ad0b-cb088cd36b81",
       "sourceText": "das Auto",
-      "targetText": "автомобиль",
+      "targetText": "авто|машина",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
@@ -330,7 +306,7 @@
     {
       "id": "160feb2f-7106-4078-8dcc-4a95890d615a",
       "sourceText": "die Klasse",
-      "targetText": "класс|круто",
+      "targetText": "класс",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
@@ -414,7 +390,7 @@
     {
       "id": "8ad0d098-95a4-4e87-8af9-ee9259ff6420",
       "sourceText": "perfekt",
-      "targetText": "отлично",
+      "targetText": "идеальный|превосходный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
@@ -468,7 +444,7 @@
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Er hat eine gute Position in der Firma.",
-      "targetUsageExample": "У него хорошая должность в фирме.",
+      "targetUsageExample": "У него хорошая позиция в фирме.",
       "isActive": true
     },
     {
@@ -498,13 +474,13 @@
     {
       "id": "a7a05520-b679-4d93-aa8a-3e2750cd6871",
       "sourceText": "der Respekt",
-      "targetText": "уважение",
+      "targetText": "респект|уважение",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Ich habe großen Respekt vor ihm.",
-      "targetUsageExample": "Я очень уважаю его.",
+      "targetUsageExample": "У меня большое уважение к нему.",
       "isActive": true
     },
     {
@@ -618,25 +594,13 @@
     {
       "id": "1068d1ad-4069-4a14-b457-b22ab0f5b7f4",
       "sourceText": "die Natur",
-      "targetText": "природа",
+      "targetText": "природа [натура]",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Die Natur in diesem Land ist sehr schön.",
       "targetUsageExample": "Природа в этой стране очень красивая.",
-      "isActive": true
-    },
-    {
-      "id": "19bb6904-d384-4f28-84de-175776a02c1e",
-      "sourceText": "das Paradies",
-      "targetText": "рай",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Der Garten ist wie ein kleines Paradies.",
-      "targetUsageExample": "Сад — как маленький рай.",
       "isActive": true
     },
     {
@@ -676,21 +640,9 @@
       "isActive": true
     },
     {
-      "id": "6979eab9-96ac-4aa7-bd4b-4a3967c4f58e",
-      "sourceText": "der Pool",
-      "targetText": "бассейн",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Im Sommer schwimme ich gern im Pool.",
-      "targetUsageExample": "Летом я люблю плавать в бассейне.",
-      "isActive": true
-    },
-    {
       "id": "a9f8f73b-42ba-4151-a812-fadc68611508",
       "sourceText": "die Post",
-      "targetText": "почта|пост",
+      "targetText": "почта",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
@@ -888,7 +840,7 @@
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Morgen haben wir einen Test in der Schule.",
-      "targetUsageExample": "Завтра у нас контрольная в школе.",
+      "targetUsageExample": "Завтра у нас тест в школе.",
       "isActive": true
     },
     {
@@ -1056,13 +1008,13 @@
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Das ist ein zentrales Problem.",
-      "targetUsageExample": "Это центральная проблема.",
+      "targetUsageExample": "Это ключевая проблема.",
       "isActive": true
     },
     {
       "id": "f22f8569-7afc-4649-93a7-6ca531157026",
       "sourceText": "die Zentrale",
-      "targetText": "центр|штаб",
+      "targetText": "центральный офис|штаб",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
