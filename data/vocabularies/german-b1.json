@@ -1,7 +1,7 @@
 {
   "listName": "German Russian B1",
   "exportedAt": "2026-01-18T20:40:47.968961+00:00",
-  "totalWords": 433,
+  "totalWords": 436,
   "words": [
     {
       "id": "f902d104-6f56-4f3a-98a6-e18a59af57e5",
@@ -5197,6 +5197,42 @@
       "difficultyLevel": "b1",
       "sourceUsageExample": "Er zwingt mich dazu.",
       "targetUsageExample": "Он заставляет меня это делать.",
+      "isActive": true
+    },
+    {
+      "id": "efb7c412-cb08-47d5-a66c-1eb2d5bfc7ef",
+      "sourceText": "befehlen",
+      "targetText": "приказывать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Der General befehlt den Soldaten.",
+      "targetUsageExample": "Генерал приказывает солдатам.",
+      "isActive": true
+    },
+    {
+      "id": "f95dd7a7-911d-412a-aa31-f4fb2efde43c",
+      "sourceText": "der Richter",
+      "targetText": "судья",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Der Richter verkündet das Urteil.",
+      "targetUsageExample": "Судья объявляет приговор.",
+      "isActive": true
+    },
+    {
+      "id": "eb45bade-d303-448c-8ccd-1b037b8f87cb",
+      "sourceText": "der General",
+      "targetText": "генерал",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Der General gibt seinen Soldaten Befehle.",
+      "targetUsageExample": "Генерал отдаёт приказы своим солдатам.",
       "isActive": true
     }
   ]

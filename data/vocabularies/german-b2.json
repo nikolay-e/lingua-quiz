@@ -1,7 +1,7 @@
 {
   "listName": "German Russian B2",
   "exportedAt": "2026-01-18T20:40:48.118994+00:00",
-  "totalWords": 1469,
+  "totalWords": 1473,
   "words": [
     {
       "id": "a45107de-077e-4979-89ca-f35b16318d2c",
@@ -17629,6 +17629,54 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der üble Geruch aus dem Keller ließ sich nicht ignorieren.",
       "targetUsageExample": "Дурной запах из подвала невозможно было игнорировать.",
+      "isActive": true
+    },
+    {
+      "id": "b7197eeb-8fd1-4ef1-86e4-c709d0907a33",
+      "sourceText": "erschießen",
+      "targetText": "застрелить",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Jäger hat den Hirsch erschossen.",
+      "targetUsageExample": "Охотник застрелил оленя.",
+      "isActive": true
+    },
+    {
+      "id": "e1279021-4925-41ea-9c60-4a93d64dcebc",
+      "sourceText": "die Majestät",
+      "targetText": "величество",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Eure Majestät, bitte folgen Sie mir.",
+      "targetUsageExample": "Ваше Величество, прошу следовать за мной.",
+      "isActive": true
+    },
+    {
+      "id": "ccd16f0e-4493-4cdf-a9c6-4cdd3846efd0",
+      "sourceText": "morden",
+      "targetText": "убивать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "In dem Film wird jemand kaltblütig gemordet.",
+      "targetUsageExample": "В фильме кого-то хладнокровно убивают.",
+      "isActive": true
+    },
+    {
+      "id": "3d7769ad-c607-4d6f-9c53-e94d90dce3cb",
+      "sourceText": "verhaften",
+      "targetText": "арестовывать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Polizei hat den Verdächtigen verhaftet.",
+      "targetUsageExample": "Полиция арестовала подозреваемого.",
       "isActive": true
     }
   ]
