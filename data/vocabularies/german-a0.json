@@ -144,7 +144,7 @@
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Einen Moment, bitte!",
-      "targetUsageExample": "Момент, пожалуйста!",
+      "targetUsageExample": "Одну минуту, пожалуйста!",
       "isActive": true
     },
     {
@@ -239,8 +239,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Die Armee marschiert durch die Stadt.",
-      "targetUsageExample": "Армия марширует через город.",
+      "sourceUsageExample": "Die Armee schützt das Land.",
+      "targetUsageExample": "Армия защищает страну.",
       "isActive": true
     },
     {
@@ -792,7 +792,7 @@
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Sie kleidet sich mit viel Stil.",
-      "targetUsageExample": "Она одевается с большим стилем.",
+      "targetUsageExample": "Она одевается очень стильно.",
       "isActive": true
     },
     {
@@ -1007,8 +1007,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Der Vampir lebt in einem alten Schloss.",
-      "targetUsageExample": "Вампир живёт в старом замке.",
+      "sourceUsageExample": "Im Film gibt es einen Vampir.",
+      "targetUsageExample": "В фильме есть вампир.",
       "isActive": true
     },
     {

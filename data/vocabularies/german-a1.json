@@ -383,7 +383,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Was für eine Art Musik hörst du?",
+      "sourceUsageExample": "Was für Musik hörst du gern?",
       "targetUsageExample": "Какой вид музыки ты слушаешь?",
       "isActive": true
     },
@@ -1044,7 +1044,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Es ist blöd, dass es regnet.",
-      "targetUsageExample": "Глупо, что идет дождь.",
+      "targetUsageExample": "Обидно, что идёт дождь.",
       "isActive": true
     },
     {
@@ -1296,7 +1296,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Damals war alles anders.",
-      "targetUsageExample": "В тот раз всё было по-другому.",
+      "targetUsageExample": "Тогда всё было иначе.",
       "isActive": true
     },
     {
@@ -1811,8 +1811,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Gehe direkt zur Ampel.",
-      "targetUsageExample": "Иди напрямую к светофору.",
+      "sourceUsageExample": "Geh geradeaus bis zur Ampel.",
+      "targetUsageExample": "Иди прямо до светофора.",
       "isActive": true
     },
     {
@@ -1944,7 +1944,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Möchtest du einen Drink?",
-      "targetUsageExample": "Хочешь напиток?",
+      "targetUsageExample": "Хочешь что-нибудь выпить?",
       "isActive": true
     },
     {
@@ -2147,8 +2147,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Wir ehren die Verstorbenen.",
-      "targetUsageExample": "Мы чтим память умерших.",
+      "sourceUsageExample": "Wir ehren das Andenken an unsere Großeltern.",
+      "targetUsageExample": "Мы чтим память наших дедушек и бабушек.",
       "isActive": true
     },
     {
@@ -3035,7 +3035,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Geh fort von hier!",
+      "sourceUsageExample": "Geh weg von hier!",
       "targetUsageExample": "Уходи отсюда!",
       "isActive": true
     },
@@ -3096,7 +3096,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Ich freue mich auf morgen.",
-      "targetUsageExample": "Я радуюсь завтрашнему дню.",
+      "targetUsageExample": "Я с нетерпением жду завтрашнего дня.",
       "isActive": true
     },
     {
@@ -3911,7 +3911,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Ohne Grund kann ich nicht helfen.",
+      "sourceUsageExample": "Ohne einen guten Grund mache ich das nicht.",
       "targetUsageExample": "Без причины я не могу помочь.",
       "isActive": true
     },
@@ -4055,8 +4055,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Halt! Stopp!",
-      "targetUsageExample": "Стой! Остановись!",
+      "sourceUsageExample": "Halt! Nicht weitergehen!",
+      "targetUsageExample": "Стой! Не двигаться!",
       "isActive": true
     },
     {
@@ -4247,7 +4247,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Komm heraus!",
+      "sourceUsageExample": "Komm raus!",
       "targetUsageExample": "Выходи наружу!",
       "isActive": true
     },
@@ -4307,7 +4307,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Von ganzem Herzen danke ich dir.",
+      "sourceUsageExample": "Ich danke dir von ganzem Herzen.",
       "targetUsageExample": "Благодарю тебя от всего сердца.",
       "isActive": true
     },
@@ -4691,8 +4691,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Er hilft, indem er arbeitet.",
-      "targetUsageExample": "Он помогает тем, что работает.",
+      "sourceUsageExample": "Er lernte Deutsch, indem er jeden Tag übte.",
+      "targetUsageExample": "Он учил немецкий, занимаясь каждый день.",
       "isActive": true
     },
     {
@@ -4727,8 +4727,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Das ist insbesondere wichtig.",
-      "targetUsageExample": "Это особенно важно.",
+      "sourceUsageExample": "Ich mag alle Sportarten, insbesondere Schwimmen.",
+      "targetUsageExample": "Я люблю все виды спорта, особенно плавание.",
       "isActive": true
     },
     {
@@ -4895,8 +4895,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Jawohl, Herr Hauptmann!",
-      "targetUsageExample": "Так точно, господин капитан!",
+      "sourceUsageExample": "Jawohl, das mache ich sofort!",
+      "targetUsageExample": "Так точно, сделаю немедленно!",
       "isActive": true
     },
     {
@@ -4992,7 +4992,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Sie bekommen jeweils zehn Euro.",
-      "targetUsageExample": "Они получают соответственно десять евро.",
+      "targetUsageExample": "Они получают по десять евро каждый.",
       "isActive": true
     },
     {
@@ -5376,7 +5376,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Kunst macht mir Spaß.",
-      "targetUsageExample": "Искусство доставляет мне удовольствие.",
+      "targetUsageExample": "Мне нравится искусство.",
       "isActive": true
     },
     {
@@ -5387,8 +5387,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Die Antwort ist kurz und prägnant.",
-      "targetUsageExample": "Ответ короткий и лаконичный.",
+      "sourceUsageExample": "Mach es kurz!",
+      "targetUsageExample": "Говори покороче!",
       "isActive": true
     },
     {
@@ -5867,8 +5867,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Eure Majestät, der König erwartet Sie.",
-      "targetUsageExample": "Ваше Величество, король ожидает вас.",
+      "sourceUsageExample": "Eure Majestät, bitte folgen Sie mir.",
+      "targetUsageExample": "Ваше Величество, прошу следовать за мной.",
       "isActive": true
     },
     {
@@ -5927,7 +5927,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Mancher Mensch ist einfach nett.",
+      "sourceUsageExample": "Manche Menschen sind einfach nett.",
       "targetUsageExample": "Некоторые люди просто добрые.",
       "isActive": true
     },
@@ -6023,8 +6023,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Melden Sie sich bitte.",
-      "targetUsageExample": "Пожалуйста, зарегистрируйтесь.",
+      "sourceUsageExample": "Melden Sie sich bitte bei uns.",
+      "targetUsageExample": "Пожалуйста, свяжитесь с нами.",
       "isActive": true
     },
     {
@@ -6215,8 +6215,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Er hat kaltblütig gemordet.",
-      "targetUsageExample": "Он хладнокровно убил.",
+      "sourceUsageExample": "In dem Film wird jemand kaltblütig gemordet.",
+      "targetUsageExample": "В фильме кого-то хладнокровно убивают.",
       "isActive": true
     },
     {
@@ -6348,7 +6348,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Gute Nacht! Schlaf gut!",
-      "targetUsageExample": "Спокойной ночи! Спи хорошо!",
+      "targetUsageExample": "Спокойной ночи! Сладких снов!",
       "isActive": true
     },
     {
@@ -6372,7 +6372,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Wie ist Ihr Name?",
-      "targetUsageExample": "Как ваше имя?",
+      "targetUsageExample": "Как вас зовут?",
       "isActive": true
     },
     {
@@ -6732,7 +6732,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Er hat offenbar keine Zeit.",
-      "targetUsageExample": "Он, очевидно, не имеет времени.",
+      "targetUsageExample": "Он, похоже, занят.",
       "isActive": true
     },
     {
@@ -6852,7 +6852,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Wir brauchen ein Paar Schuhe.",
-      "targetUsageExample": "Нам нужна пара туфель.",
+      "targetUsageExample": "Нам нужна пара обуви.",
       "isActive": true
     },
     {
@@ -7259,7 +7259,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Ruf mich an!",
+      "sourceUsageExample": "Ruf nach dem Arzt!",
       "targetUsageExample": "Позвони мне!",
       "isActive": true
     },
@@ -7476,7 +7476,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Ich schicke dir eine E-Mail.",
-      "targetUsageExample": "Я посылаю тебе электронное письмо.",
+      "targetUsageExample": "Я отправлю тебе письмо.",
       "isActive": true
     },
     {
@@ -7547,7 +7547,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Schließlich sind wir angekommen.",
+      "sourceUsageExample": "Wir sind schließlich angekommen.",
       "targetUsageExample": "Наконец мы прибыли.",
       "isActive": true
     },
@@ -7812,7 +7812,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Ich sehe den Sonnenuntergang.",
-      "targetUsageExample": "Я вижу закат солнца.",
+      "targetUsageExample": "Я вижу закат.",
       "isActive": true
     },
     {
@@ -7896,7 +7896,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Ich setze das Kind auf den Stuhl.",
-      "targetUsageExample": "Я сажу ребенка на стул.",
+      "targetUsageExample": "Я сажаю ребёнка на стул.",
       "isActive": true
     },
     {
@@ -8087,7 +8087,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Somit ist alles klar.",
+      "sourceUsageExample": "Also, alles klar!",
       "targetUsageExample": "Таким образом, все ясно.",
       "isActive": true
     },
@@ -8339,8 +8339,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Jemand stiehlt mein Fahrrad.",
-      "targetUsageExample": "Кто-то крадет мой велосипед.",
+      "sourceUsageExample": "Jemand hat mein Fahrrad gestohlen.",
+      "targetUsageExample": "Кто-то украл мой велосипед.",
       "isActive": true
     },
     {
@@ -8363,8 +8363,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Er stirbt an einer Krankheit.",
-      "targetUsageExample": "Он умирает от болезни.",
+      "sourceUsageExample": "Er ist an einer Krankheit gestorben.",
+      "targetUsageExample": "Он умер от болезни.",
       "isActive": true
     },
     {
@@ -8664,7 +8664,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Ich trage heute ein neues Hemd.",
-      "targetUsageExample": "Сегодня я ношу новую рубашку.",
+      "targetUsageExample": "Сегодня на мне новая рубашка.",
       "isActive": true
     },
     {
@@ -8939,7 +8939,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Du musst unbedingt einen Arzt aufsuchen.",
+      "sourceUsageExample": "Du musst unbedingt zum Arzt gehen.",
       "targetUsageExample": "Тебе обязательно нужно обратиться к врачу.",
       "isActive": true
     },
@@ -9191,8 +9191,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Man darf niemanden vorschnell verdammen.",
-      "targetUsageExample": "Нельзя никого спешно осуждать.",
+      "sourceUsageExample": "Du solltest ihn nicht so schnell verdammen.",
+      "targetUsageExample": "Не стоит его так быстро осуждать.",
       "isActive": true
     },
     {
@@ -9276,7 +9276,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Sie ist verheiratet und hat zwei Kinder.",
-      "targetUsageExample": "Она замужем и имеет двух детей.",
+      "targetUsageExample": "Она замужем и у неё двое детей.",
       "isActive": true
     },
     {
@@ -9395,8 +9395,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Der Mann verschwindet.",
-      "targetUsageExample": "Мужчина исчезает.",
+      "sourceUsageExample": "Wo ist er? Er ist einfach verschwunden!",
+      "targetUsageExample": "Где он? Он просто исчез!",
       "isActive": true
     },
     {
@@ -9636,7 +9636,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Das Auto steht vorne.",
-      "targetUsageExample": "Машина стоит спереди.",
+      "targetUsageExample": "Машина стоит впереди.",
       "isActive": true
     },
     {
@@ -9683,7 +9683,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Wir müssen vorwärts gehen.",
+      "sourceUsageExample": "Immer vorwärts!",
       "targetUsageExample": "Мы должны идти вперёд.",
       "isActive": true
     },
@@ -9924,7 +9924,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Auf diese Weise geht es schneller.",
-      "targetUsageExample": "Таким способом получится быстрее.",
+      "targetUsageExample": "Так будет быстрее.",
       "isActive": true
     },
     {
@@ -10116,7 +10116,7 @@
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Ich wette, dass du kommst.",
-      "targetUsageExample": "Я уверен, что ты придешь.",
+      "targetUsageExample": "Держу пари, что ты придёшь.",
       "isActive": true
     },
     {
@@ -10307,8 +10307,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Er half mir, wobei er lächelte.",
-      "targetUsageExample": "Он помог мне, при этом улыбаясь.",
+      "sourceUsageExample": "Er hat mir geholfen und dabei gelächelt.",
+      "targetUsageExample": "Он помог мне и при этом улыбался.",
       "isActive": true
     },
     {
@@ -10847,8 +10847,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Das hatte ich zuvor gesagt.",
-      "targetUsageExample": "Я говорил это прежде.",
+      "sourceUsageExample": "Das habe ich doch schon gesagt!",
+      "targetUsageExample": "Я же уже говорил об этом!",
       "isActive": true
     },
     {
@@ -10907,8 +10907,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Der General gibt Befehle.",
-      "targetUsageExample": "Генерал отдаёт приказы.",
+      "sourceUsageExample": "Der General gibt seinen Soldaten Befehle.",
+      "targetUsageExample": "Генерал отдаёт приказы своим солдатам.",
       "isActive": true
     },
     {
@@ -10919,8 +10919,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Der Soldat ist mutig.",
-      "targetUsageExample": "Солдат храбрый.",
+      "sourceUsageExample": "Der Soldat kämpft mutig für sein Land.",
+      "targetUsageExample": "Солдат храбро сражается за свою страну.",
       "isActive": true
     },
     {
@@ -10931,8 +10931,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Das Monster ist groß.",
-      "targetUsageExample": "Монстр большой.",
+      "sourceUsageExample": "Das Monster im Film hat mir Angst gemacht.",
+      "targetUsageExample": "Монстр в фильме меня напугал.",
       "isActive": true
     },
     {
@@ -11099,7 +11099,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Das Buch kostet tausend Euro.",
+      "sourceUsageExample": "Das Auto kostet tausend Euro mehr als erwartet.",
       "targetUsageExample": "Книга стоит тысячу евро.",
       "isActive": true
     },
@@ -11183,8 +11183,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Das Ohr ist ein wichtiges Sinnesorgan.",
-      "targetUsageExample": "Ухо — важный орган чувств.",
+      "sourceUsageExample": "Mein Ohr tut weh.",
+      "targetUsageExample": "У меня болит ухо.",
       "isActive": true
     },
     {

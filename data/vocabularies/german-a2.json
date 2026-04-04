@@ -180,7 +180,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Der Alarm hat uns geweckt.",
-      "targetUsageExample": "Тревога нас разбудила.",
+      "targetUsageExample": "Нас разбудила сигнализация.",
       "isActive": true
     },
     {
@@ -251,8 +251,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Die Messe endet mit Amen.",
-      "targetUsageExample": "Месса заканчивается словом «аминь».",
+      "sourceUsageExample": "Die Gemeinde spricht gemeinsam Amen.",
+      "targetUsageExample": "Прихожане вместе произносят «аминь».",
       "isActive": true
     },
     {
@@ -431,7 +431,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Guten Appetit wünschen wir dir.",
+      "sourceUsageExample": "Guten Appetit!",
       "targetUsageExample": "Желаем тебе приятного аппетита.",
       "isActive": true
     },
@@ -528,7 +528,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Der Sportler hat einen langen Atem.",
-      "targetUsageExample": "У спортсмена сильное дыхание.",
+      "targetUsageExample": "У спортсмена хватает выносливости.",
       "isActive": true
     },
     {
@@ -1559,7 +1559,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Er wohnt daneben, direkt neben mir.",
+      "sourceUsageExample": "Er wohnt direkt daneben.",
       "targetUsageExample": "Он живёт рядом, прямо рядом со мной.",
       "isActive": true
     },
@@ -1884,7 +1884,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Ich habe großen Durst nach dem Sport.",
-      "targetUsageExample": "После спорта у меня большая жажда.",
+      "targetUsageExample": "После тренировки я очень хочу пить.",
       "isActive": true
     },
     {
@@ -2136,7 +2136,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Ich brauche eine Erklärung dafür.",
-      "targetUsageExample": "Мне нужно объяснение для этого.",
+      "targetUsageExample": "Мне нужно объяснение.",
       "isActive": true
     },
     {
@@ -2147,8 +2147,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Darf ich um Ihre Erlaubnis bitten?",
-      "targetUsageExample": "Могу ли я попросить ваше разрешение?",
+      "sourceUsageExample": "Darf ich fragen, ob ich das darf?",
+      "targetUsageExample": "Можно мне разрешение на это?",
       "isActive": true
     },
     {
@@ -2184,7 +2184,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Nach der langen Reise bin ich erschöpft.",
-      "targetUsageExample": "После долгого путешествия я изнурён.",
+      "targetUsageExample": "После долгой дороги я совсем измотан.",
       "isActive": true
     },
     {
@@ -2268,7 +2268,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Er ist mein Ex-Freund.",
-      "targetUsageExample": "Он мой бывший друг.",
+      "targetUsageExample": "Он мой бывший парень.",
       "isActive": true
     },
     {
@@ -2423,8 +2423,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Das Essen sieht fein aus.",
-      "targetUsageExample": "Еда выглядит хорошо.",
+      "sourceUsageExample": "Das Essen sieht lecker aus.",
+      "targetUsageExample": "Еда выглядит вкусно.",
       "isActive": true
     },
     {
@@ -2627,8 +2627,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Ich bin fremd in dieser Stadt.",
-      "targetUsageExample": "Я незнаком с этим городом.",
+      "sourceUsageExample": "Ich bin hier fremd.",
+      "targetUsageExample": "Я здесь не местный.",
       "isActive": true
     },
     {
@@ -2892,7 +2892,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Der Geruch der Rosen ist schön.",
-      "targetUsageExample": "Запах роз приятный.",
+      "targetUsageExample": "У роз приятный запах.",
       "isActive": true
     },
     {
@@ -2915,8 +2915,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Der Geschmack dieser Suppe ist gut.",
-      "targetUsageExample": "Вкус этого супа хороший.",
+      "sourceUsageExample": "Die Suppe schmeckt gut.",
+      "targetUsageExample": "Суп очень вкусный.",
       "isActive": true
     },
     {
@@ -3095,7 +3095,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Das Gras ist grün im Sommer.",
+      "sourceUsageExample": "Im Sommer ist alles grün.",
       "targetUsageExample": "Трава зелёная летом.",
       "isActive": true
     },
@@ -3155,8 +3155,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Er hängt das Bild mit einem Hammer an die Wand.",
-      "targetUsageExample": "Он вешает картину на стену с помощью молотка.",
+      "sourceUsageExample": "Er schlägt mit dem Hammer einen Nagel in die Wand.",
+      "targetUsageExample": "Он забивает молотком гвоздь в стену.",
       "isActive": true
     },
     {
@@ -3264,7 +3264,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Sie hat ihn heimlich angerufen.",
-      "targetUsageExample": "Она позвонила ему тайно.",
+      "targetUsageExample": "Она позвонила ему тайком.",
       "isActive": true
     },
     {
@@ -3384,7 +3384,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Der Lehrer ist sehr hilfreich.",
-      "targetUsageExample": "Учитель очень полезный.",
+      "targetUsageExample": "Учитель всегда готов помочь.",
       "isActive": true
     },
     {
@@ -3539,7 +3539,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Er hat einen guten Humor.",
+      "sourceUsageExample": "Er hat einen guten Sinn für Humor.",
       "targetUsageExample": "У него хорошее чувство юмора.",
       "isActive": true
     },
@@ -3647,7 +3647,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Das innere Gefühl sagt mir, dass es falsch ist.",
+      "sourceUsageExample": "Mein inneres Gefühl sagt mir, dass es falsch ist.",
       "targetUsageExample": "Внутреннее чувство говорит мне, что это неправильно.",
       "isActive": true
     },
@@ -3984,7 +3984,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Hat das mit dem Treffen geklappt?",
-      "targetUsageExample": "Получилось ли с встречей?",
+      "targetUsageExample": "Встреча получилась?",
       "isActive": true
     },
     {
@@ -4187,7 +4187,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Die Aufgabe ist komplett fertig.",
+      "sourceUsageExample": "Die Aufgabe ist vollständig erledigt.",
       "targetUsageExample": "Задание полностью завершено.",
       "isActive": true
     },
@@ -4643,8 +4643,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Ich will diesen alten Stress loswerden.",
-      "targetUsageExample": "Я хочу избавиться от этого старого стресса.",
+      "sourceUsageExample": "Ich will endlich diesen Stress loswerden.",
+      "targetUsageExample": "Я хочу наконец избавиться от этого стресса.",
       "isActive": true
     },
     {
@@ -4692,7 +4692,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Im Mai blühen viele Blumen.",
-      "targetUsageExample": "В мае цветут многие цветы.",
+      "targetUsageExample": "В мае цветёт много цветов.",
       "isActive": true
     },
     {
@@ -5172,7 +5172,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Du nervst mich total!",
-      "targetUsageExample": "Ты меня totally раздражаешь!",
+      "targetUsageExample": "Ты меня жутко раздражаешь!",
       "isActive": true
     },
     {
@@ -5256,7 +5256,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Im Notfall rufe bitte die 112 an.",
-      "targetUsageExample": "В чрезвычайной ситуации позвони по номеру 112.",
+      "targetUsageExample": "В экстренном случае звони по номеру 112.",
       "isActive": true
     },
     {
@@ -5615,7 +5615,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Prost! Auf dein Wohl!",
+      "sourceUsageExample": "Prost! Auf deine Gesundheit!",
       "targetUsageExample": "Прозит! За твоё здоровье!",
       "isActive": true
     },
@@ -5831,8 +5831,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Die Soldaten stehen in Reihen.",
-      "targetUsageExample": "Солдаты стоят в рядах.",
+      "sourceUsageExample": "Die Kinder stehen in einer Reihe und warten.",
+      "targetUsageExample": "Дети стоят в ряд и ждут.",
       "isActive": true
     },
     {
@@ -6047,8 +6047,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Der Schädel des Skeletts lag auf dem Boden.",
-      "targetUsageExample": "Череп скелета лежал на полу.",
+      "sourceUsageExample": "Der Arzt betrachtet das Röntgenbild des Schädels.",
+      "targetUsageExample": "Врач рассматривает рентген черепа.",
       "isActive": true
     },
     {
@@ -6107,8 +6107,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Ich bezahle mit einem Scheck.",
-      "targetUsageExample": "Я плачу чеком.",
+      "sourceUsageExample": "Der Chef schreibt einen Scheck aus.",
+      "targetUsageExample": "Шеф выписывает чек.",
       "isActive": true
     },
     {
@@ -6324,7 +6324,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Ich esse gern Schokolade.",
-      "targetUsageExample": "Я люблю есть шоколад.",
+      "targetUsageExample": "Я люблю шоколад.",
       "isActive": true
     },
     {
@@ -6407,7 +6407,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Er schweigt und sagt nichts dazu.",
+      "sourceUsageExample": "Er schweigt und schaut weg.",
       "targetUsageExample": "Он молчит и ничего на это не говорит.",
       "isActive": true
     },
@@ -6431,8 +6431,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Die Arbeiter befestigen die Last mit Seilen.",
-      "targetUsageExample": "Рабочие закрепляют груз верёвками.",
+      "sourceUsageExample": "Er klettert am Seil hoch.",
+      "targetUsageExample": "Он взбирается по верёвке.",
       "isActive": true
     },
     {
@@ -6575,7 +6575,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Soviel ich weiß, kommt er morgen nicht.",
+      "sourceUsageExample": "So viel ich weiß, kommt er morgen nicht.",
       "targetUsageExample": "Насколько я знаю, завтра он не придёт.",
       "isActive": true
     },
@@ -6900,7 +6900,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Der Strom kommt aus der Steckdose.",
-      "targetUsageExample": "Электричество поступает из розетки.",
+      "targetUsageExample": "Электричество идёт из розетки.",
       "isActive": true
     },
     {
@@ -7055,8 +7055,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Wir machen Touren durch die Stadt.",
-      "targetUsageExample": "Мы совершаем экскурсии по городу.",
+      "sourceUsageExample": "Wir machen eine Tour durch die Stadt.",
+      "targetUsageExample": "Мы делаем экскурсию по городу.",
       "isActive": true
     },
     {
@@ -7116,7 +7116,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Sie trennen sich nach vielen Jahren.",
-      "targetUsageExample": "Они расстаются после многих лет.",
+      "targetUsageExample": "Они расстаются спустя много лет.",
       "isActive": true
     },
     {
@@ -7236,7 +7236,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Wir ziehen nächsten Monat um.",
-      "targetUsageExample": "На следующий месяц мы переезжаем.",
+      "targetUsageExample": "В следующем месяце мы переезжаем.",
       "isActive": true
     },
     {
@@ -7295,7 +7295,7 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Es ist unhöflich, den Mund voll zu reden.",
+      "sourceUsageExample": "Es ist unhöflich, mit vollem Mund zu reden.",
       "targetUsageExample": "Говорить с полным ртом — это грубо.",
       "isActive": true
     },
@@ -7355,8 +7355,8 @@
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Ich habe viele Verabredungen diese Woche.",
-      "targetUsageExample": "На этой неделе у меня много встреч.",
+      "sourceUsageExample": "Ich habe morgen eine Verabredung mit einem Freund.",
+      "targetUsageExample": "Завтра у меня встреча с другом.",
       "isActive": true
     },
     {
@@ -7872,7 +7872,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Kannst du bis zehn zählen?",
-      "targetUsageExample": "Можешь считать до десяти?",
+      "targetUsageExample": "Умеешь считать до десяти?",
       "isActive": true
     },
     {
@@ -8052,7 +8052,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Aufgrund des Regens bleiben wir zu Hause.",
-      "targetUsageExample": "Из-за дождя мы остаемся дома.",
+      "targetUsageExample": "Из-за дождя мы остаёмся дома.",
       "isActive": true
     },
     {
