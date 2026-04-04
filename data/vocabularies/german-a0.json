@@ -5,7 +5,7 @@
   "words": [
     {
       "id": "4a2e91fd-ec69-435d-9a40-835040336da6",
-      "sourceText": "Agent",
+      "sourceText": "der Agent",
       "targetText": "агент",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17,7 +17,7 @@
     },
     {
       "id": "d16dc885-5068-4ea2-bf2f-49a6ba6d4b7b",
-      "sourceText": "Bank",
+      "sourceText": "die Bank",
       "targetText": "банк",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -29,7 +29,7 @@
     },
     {
       "id": "3cd7e17b-40bd-402e-b436-28d0f6c57e93",
-      "sourceText": "Bar",
+      "sourceText": "die Bar",
       "targetText": "бар",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -41,7 +41,7 @@
     },
     {
       "id": "517f96cc-975b-4bad-93c7-f2865d9698f4",
-      "sourceText": "Internet",
+      "sourceText": "das Internet",
       "targetText": "интернет",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -53,7 +53,7 @@
     },
     {
       "id": "25617bd5-b699-4ed8-8130-ef37fd39e05c",
-      "sourceText": "Doktor",
+      "sourceText": "der Doktor",
       "targetText": "доктор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -65,7 +65,7 @@
     },
     {
       "id": "02187d3d-cd50-41e3-b53a-3dfa1fd67c0f",
-      "sourceText": "Dollar",
+      "sourceText": "der Dollar",
       "targetText": "доллар",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -77,7 +77,7 @@
     },
     {
       "id": "3875c533-3853-4aeb-900e-9ffcdf33e485",
-      "sourceText": "Firma",
+      "sourceText": "die Firma",
       "targetText": "фирма",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -89,7 +89,7 @@
     },
     {
       "id": "72fa7972-3179-489c-bf5c-b06e404af03d",
-      "sourceText": "Kamera",
+      "sourceText": "die Kamera",
       "targetText": "камера",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -101,7 +101,7 @@
     },
     {
       "id": "8cb4f64e-dc03-4606-bbb3-7eb54dd99aaa",
-      "sourceText": "Kontakt",
+      "sourceText": "der Kontakt",
       "targetText": "контакт",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -113,7 +113,7 @@
     },
     {
       "id": "51bb5610-1b03-46a2-9f05-084c016adb92",
-      "sourceText": "Mama",
+      "sourceText": "die Mama",
       "targetText": "мама",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -125,7 +125,7 @@
     },
     {
       "id": "4ea63c80-6140-4c8d-83d6-2ee348a3215c",
-      "sourceText": "Million",
+      "sourceText": "die Million",
       "targetText": "миллион",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -137,7 +137,7 @@
     },
     {
       "id": "d75c7d47-e42b-410f-bc15-1e86338f71ed",
-      "sourceText": "Moment",
+      "sourceText": "der Moment",
       "targetText": "момент",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -149,7 +149,7 @@
     },
     {
       "id": "0dc13d9f-89ee-4bbc-94f0-83ebb7e6b190",
-      "sourceText": "Papa",
+      "sourceText": "der Papa",
       "targetText": "папа",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -161,7 +161,7 @@
     },
     {
       "id": "766812fd-8ce7-4390-849f-9f5b1a323b1c",
-      "sourceText": "Plan",
+      "sourceText": "der Plan",
       "targetText": "план",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -173,7 +173,7 @@
     },
     {
       "id": "03d1b44b-9e31-4b77-8b7e-475b2b31d49c",
-      "sourceText": "Professor",
+      "sourceText": "der Professor",
       "targetText": "профессор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -185,7 +185,7 @@
     },
     {
       "id": "206cc7e5-2471-431d-8c3c-f2eefc3d9dbe",
-      "sourceText": "Sex",
+      "sourceText": "der Sex",
       "targetText": "секс",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -197,7 +197,7 @@
     },
     {
       "id": "01175c5a-8845-417e-a934-20a57f0adfb2",
-      "sourceText": "Telefon",
+      "sourceText": "das Telefon",
       "targetText": "телефон",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -221,7 +221,7 @@
     },
     {
       "id": "3975544e-e28a-45ec-ad9a-437c45b393ac",
-      "sourceText": "Adresse",
+      "sourceText": "die Adresse",
       "targetText": "адрес",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -233,7 +233,7 @@
     },
     {
       "id": "b97fec6c-7712-4322-9d3f-23204b995a2e",
-      "sourceText": "Armee",
+      "sourceText": "die Armee",
       "targetText": "армия",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -245,7 +245,7 @@
     },
     {
       "id": "4d6ee0b8-212a-45e3-ad0b-cb088cd36b81",
-      "sourceText": "Auto",
+      "sourceText": "das Auto",
       "targetText": "автомобиль",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -257,7 +257,7 @@
     },
     {
       "id": "0d5d1797-7089-4d0f-8d2a-1f667d1a5e82",
-      "sourceText": "Chance",
+      "sourceText": "die Chance",
       "targetText": "шанс",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -269,7 +269,7 @@
     },
     {
       "id": "c815fe87-c78d-432d-94ae-656c1d7fae4d",
-      "sourceText": "Computer",
+      "sourceText": "der Computer",
       "targetText": "компьютер",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -281,7 +281,7 @@
     },
     {
       "id": "417e769b-fa77-4b5c-b5d7-16d8c093bf38",
-      "sourceText": "Idee",
+      "sourceText": "die Idee",
       "targetText": "идея",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -293,7 +293,7 @@
     },
     {
       "id": "7da7cefa-e0f7-46a8-b882-673671a65834",
-      "sourceText": "Information",
+      "sourceText": "die Information",
       "targetText": "информация",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -305,7 +305,7 @@
     },
     {
       "id": "8514c50b-85d9-4c30-933b-865484e602d9",
-      "sourceText": "Kaffee",
+      "sourceText": "der Kaffee",
       "targetText": "кофе",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -317,7 +317,7 @@
     },
     {
       "id": "c3beebb5-41b5-473f-82b3-4bc3bcd3da8d",
-      "sourceText": "Kapitän",
+      "sourceText": "der Kapitän",
       "targetText": "капитан",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -329,7 +329,7 @@
     },
     {
       "id": "160feb2f-7106-4078-8dcc-4a95890d615a",
-      "sourceText": "Klasse",
+      "sourceText": "die Klasse",
       "targetText": "класс|круто",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -341,7 +341,7 @@
     },
     {
       "id": "0b2bc767-4eaa-4388-9534-b5c6d888ac34",
-      "sourceText": "Kontrolle",
+      "sourceText": "die Kontrolle",
       "targetText": "контроль",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -353,7 +353,7 @@
     },
     {
       "id": "661bd010-d3e8-4fcf-bcb1-559e9c7c5ca8",
-      "sourceText": "Minute",
+      "sourceText": "die Minute",
       "targetText": "минута",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -365,7 +365,7 @@
     },
     {
       "id": "a42be831-7ccf-48eb-9828-4792d44c2b4d",
-      "sourceText": "Mission",
+      "sourceText": "die Mission",
       "targetText": "миссия",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -377,7 +377,7 @@
     },
     {
       "id": "de19c083-f4a7-475d-9e35-819a984c4290",
-      "sourceText": "Musik",
+      "sourceText": "die Musik",
       "targetText": "музыка",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -401,7 +401,7 @@
     },
     {
       "id": "4cc4ab20-d56f-4e55-b147-82a54a0462ea",
-      "sourceText": "Partner",
+      "sourceText": "der Partner",
       "targetText": "партнёр",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -425,7 +425,7 @@
     },
     {
       "id": "0f823d4b-1604-424a-bc2d-0864a102e5b1",
-      "sourceText": "Person",
+      "sourceText": "die Person",
       "targetText": "человек|персона",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -437,7 +437,7 @@
     },
     {
       "id": "e93a84a6-91e8-493b-8128-cf4cc945c4b0",
-      "sourceText": "Pistole",
+      "sourceText": "die Pistole",
       "targetText": "пистолет",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -449,7 +449,7 @@
     },
     {
       "id": "04f4a121-01ba-46d2-bd1a-4fa8e63a3f61",
-      "sourceText": "Polizei",
+      "sourceText": "die Polizei",
       "targetText": "полиция",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -461,7 +461,7 @@
     },
     {
       "id": "b9274b80-f73c-40fd-b1ec-e517d1532ea3",
-      "sourceText": "Position",
+      "sourceText": "die Position",
       "targetText": "позиция",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -473,7 +473,7 @@
     },
     {
       "id": "d8516e23-7b9b-427c-9ab5-d0495481e61a",
-      "sourceText": "Präsident",
+      "sourceText": "der Präsident",
       "targetText": "президент",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -485,7 +485,7 @@
     },
     {
       "id": "3f1dd1da-0f6d-4fd0-a198-ed7c9332df7e",
-      "sourceText": "Problem",
+      "sourceText": "das Problem",
       "targetText": "проблема",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -497,7 +497,7 @@
     },
     {
       "id": "a7a05520-b679-4d93-aa8a-3e2750cd6871",
-      "sourceText": "Respekt",
+      "sourceText": "der Respekt",
       "targetText": "уважение",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -509,7 +509,7 @@
     },
     {
       "id": "26796f07-38b2-4694-8fb6-52e95420fdd1",
-      "sourceText": "Risiko",
+      "sourceText": "das Risiko",
       "targetText": "риск",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -521,7 +521,7 @@
     },
     {
       "id": "c399bfc7-cb38-48d6-b19f-a8bc3c5f41f6",
-      "sourceText": "Sekunde",
+      "sourceText": "die Sekunde",
       "targetText": "секунда",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -533,7 +533,7 @@
     },
     {
       "id": "e6a79f89-e70a-4a18-acfe-6a61fe652a0d",
-      "sourceText": "Situation",
+      "sourceText": "die Situation",
       "targetText": "ситуация",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -545,7 +545,7 @@
     },
     {
       "id": "c864dbfa-590b-4bbb-a9fe-10d90c338132",
-      "sourceText": "Taxi",
+      "sourceText": "das Taxi",
       "targetText": "такси",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -557,7 +557,7 @@
     },
     {
       "id": "1699dbcf-af40-4780-8e00-aa068c0e1444",
-      "sourceText": "Team",
+      "sourceText": "das Team",
       "targetText": "команда",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -569,7 +569,7 @@
     },
     {
       "id": "b93e2e28-d2bf-4491-bf47-7e343d78b1dc",
-      "sourceText": "Garage",
+      "sourceText": "die Garage",
       "targetText": "гараж",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -581,19 +581,19 @@
     },
     {
       "id": "af825830-8704-4257-bd35-718afa8fed46",
-      "sourceText": "Material",
+      "sourceText": "das Material",
       "targetText": "материал",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Das Material für das Projekt fehlt noch.",
-      "targetUsageExample": "Материал для проекта ещё не поступил.",
+      "sourceUsageExample": "Das Material ist sehr gut.",
+      "targetUsageExample": "Материал очень хороший.",
       "isActive": true
     },
     {
       "id": "6303a5ef-9f52-40e0-abc8-041b432f863d",
-      "sourceText": "Medizin",
+      "sourceText": "die Medizin",
       "targetText": "медицина",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -605,7 +605,7 @@
     },
     {
       "id": "af576b24-0520-40bd-b431-a6cadc089141",
-      "sourceText": "Museum",
+      "sourceText": "das Museum",
       "targetText": "музей",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -617,7 +617,7 @@
     },
     {
       "id": "1068d1ad-4069-4a14-b457-b22ab0f5b7f4",
-      "sourceText": "Natur",
+      "sourceText": "die Natur",
       "targetText": "природа",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -629,7 +629,7 @@
     },
     {
       "id": "19bb6904-d384-4f28-84de-175776a02c1e",
-      "sourceText": "Paradies",
+      "sourceText": "das Paradies",
       "targetText": "рай",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -641,7 +641,7 @@
     },
     {
       "id": "ebbafd9d-251a-4412-b31a-0a116ecfec5a",
-      "sourceText": "Patient",
+      "sourceText": "der Patient",
       "targetText": "пациент",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -653,7 +653,7 @@
     },
     {
       "id": "1699cb6e-87d0-47fc-91f4-c6b3d49bcca5",
-      "sourceText": "Personal",
+      "sourceText": "das Personal",
       "targetText": "персонал",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -665,7 +665,7 @@
     },
     {
       "id": "e024e20d-425b-4e80-8432-da0c38323a0c",
-      "sourceText": "Pizza",
+      "sourceText": "die Pizza",
       "targetText": "пицца",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -677,7 +677,7 @@
     },
     {
       "id": "6979eab9-96ac-4aa7-bd4b-4a3967c4f58e",
-      "sourceText": "Pool",
+      "sourceText": "der Pool",
       "targetText": "бассейн",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -689,7 +689,7 @@
     },
     {
       "id": "a9f8f73b-42ba-4151-a812-fadc68611508",
-      "sourceText": "Post",
+      "sourceText": "die Post",
       "targetText": "почта|пост",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -701,31 +701,31 @@
     },
     {
       "id": "632ab6d0-32a7-4832-b43b-a43bcee86ca0",
-      "sourceText": "Prozent",
+      "sourceText": "das Prozent",
       "targetText": "процент",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Der Zins beträgt zwei Prozent.",
-      "targetUsageExample": "Процентная ставка составляет два процента.",
+      "sourceUsageExample": "Zwanzig Prozent der Schüler fehlen heute.",
+      "targetUsageExample": "Двадцать процентов учеников сегодня отсутствуют.",
       "isActive": true
     },
     {
       "id": "2df9c101-3034-4157-a390-9e71551d8deb",
-      "sourceText": "Prozess",
+      "sourceText": "der Prozess",
       "targetText": "процесс|судебный процесс",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Der Prozess dauert schon drei Wochen.",
-      "targetUsageExample": "Судебный процесс идёт уже три недели.",
+      "sourceUsageExample": "Das ist ein langer Prozess.",
+      "targetUsageExample": "Это долгий процесс.",
       "isActive": true
     },
     {
       "id": "2b8c31ce-ce43-4c61-acfe-3314eed38e68",
-      "sourceText": "Radio",
+      "sourceText": "das Radio",
       "targetText": "радио",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -737,7 +737,7 @@
     },
     {
       "id": "1c825c5e-496e-44b9-b46e-c91f8243ca1e",
-      "sourceText": "Restaurant",
+      "sourceText": "das Restaurant",
       "targetText": "ресторан",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -749,7 +749,7 @@
     },
     {
       "id": "b986b77e-395e-4197-971b-9483db6414d4",
-      "sourceText": "Signal",
+      "sourceText": "das Signal",
       "targetText": "сигнал",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -761,7 +761,7 @@
     },
     {
       "id": "a805011a-1b13-43ca-9bc1-8f93e4667907",
-      "sourceText": "Sport",
+      "sourceText": "der Sport",
       "targetText": "спорт",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -773,7 +773,7 @@
     },
     {
       "id": "4c32cbb4-c833-4649-b91e-91c5f33059fb",
-      "sourceText": "Station",
+      "sourceText": "die Station",
       "targetText": "станция|остановка",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -785,19 +785,19 @@
     },
     {
       "id": "2cf43433-a7c5-4019-91e2-30ac0d8e833a",
-      "sourceText": "Stil",
+      "sourceText": "der Stil",
       "targetText": "стиль",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Sie kleidet sich mit viel Stil.",
-      "targetUsageExample": "Она одевается со вкусом.",
+      "targetUsageExample": "Она одевается с большим стилем.",
       "isActive": true
     },
     {
       "id": "a09853fb-1e87-49d4-8268-85f9a90b9403",
-      "sourceText": "Stress",
+      "sourceText": "der Stress",
       "targetText": "стресс",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -809,7 +809,7 @@
     },
     {
       "id": "05366a6d-f7b5-44fd-bec4-6224cb8c25f3",
-      "sourceText": "Studio",
+      "sourceText": "das Studio",
       "targetText": "студия",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -821,7 +821,7 @@
     },
     {
       "id": "6a505475-7504-4182-8080-441fcd76e293",
-      "sourceText": "System",
+      "sourceText": "das System",
       "targetText": "система",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -833,7 +833,7 @@
     },
     {
       "id": "084c56fb-e626-4dce-ae2e-c8f906cdb3b1",
-      "sourceText": "Szene",
+      "sourceText": "die Szene",
       "targetText": "сцена",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -845,7 +845,7 @@
     },
     {
       "id": "a4c6ca84-575f-4616-89e5-becf43a609c5",
-      "sourceText": "Talent",
+      "sourceText": "das Talent",
       "targetText": "талант",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -857,7 +857,7 @@
     },
     {
       "id": "4c0a4a35-1721-43c5-9397-1068d6725cf9",
-      "sourceText": "Technik",
+      "sourceText": "die Technik",
       "targetText": "техника|технология",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -869,7 +869,7 @@
     },
     {
       "id": "83bed089-0560-4c80-a947-47dda23dc115",
-      "sourceText": "Technologie",
+      "sourceText": "die Technologie",
       "targetText": "технология",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -881,7 +881,7 @@
     },
     {
       "id": "b5093ec3-8a1b-4c1a-9657-5428fa4b44f2",
-      "sourceText": "Test",
+      "sourceText": "der Test",
       "targetText": "тест|проверка",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -893,7 +893,7 @@
     },
     {
       "id": "d3464178-9d35-46c9-a809-6b827ecb0107",
-      "sourceText": "Text",
+      "sourceText": "der Text",
       "targetText": "текст",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -905,7 +905,7 @@
     },
     {
       "id": "86331aee-9064-4238-87c4-cbf68536fcfc",
-      "sourceText": "Theater",
+      "sourceText": "das Theater",
       "targetText": "театр",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -917,7 +917,7 @@
     },
     {
       "id": "1c02ab21-3eea-443b-b20d-cb7268353791",
-      "sourceText": "Thema",
+      "sourceText": "das Thema",
       "targetText": "тема",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -929,7 +929,7 @@
     },
     {
       "id": "3c82149d-7731-43dd-9b2a-46a8ae6c33fd",
-      "sourceText": "Tiger",
+      "sourceText": "der Tiger",
       "targetText": "тигр",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -941,7 +941,7 @@
     },
     {
       "id": "c4f2e1c6-22b8-40b7-8a6e-3cf49311f804",
-      "sourceText": "Toilette",
+      "sourceText": "die Toilette",
       "targetText": "туалет",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -953,7 +953,7 @@
     },
     {
       "id": "aeba7a72-b553-44af-9c11-cd141a4f0d0e",
-      "sourceText": "Training",
+      "sourceText": "das Training",
       "targetText": "тренировка",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -965,7 +965,7 @@
     },
     {
       "id": "cd39889a-dbbb-49b5-884b-e4e3d04193bd",
-      "sourceText": "Tunnel",
+      "sourceText": "der Tunnel",
       "targetText": "туннель",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -989,7 +989,7 @@
     },
     {
       "id": "ee2107c8-bad3-433a-9518-84a4ab189686",
-      "sourceText": "Universität",
+      "sourceText": "die Universität",
       "targetText": "университет",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1001,7 +1001,7 @@
     },
     {
       "id": "4e3dbf95-0ccd-48c1-9ffd-301cb512bedb",
-      "sourceText": "Vampir",
+      "sourceText": "der Vampir",
       "targetText": "вампир",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1013,7 +1013,7 @@
     },
     {
       "id": "8ba90151-eeea-47fb-8b2e-2bdbb80f19bc",
-      "sourceText": "Version",
+      "sourceText": "die Version",
       "targetText": "версия",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1025,7 +1025,7 @@
     },
     {
       "id": "0856a04c-fb45-488f-a0a2-6c44f3cb2772",
-      "sourceText": "Video",
+      "sourceText": "das Video",
       "targetText": "видео",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1037,7 +1037,7 @@
     },
     {
       "id": "ba8773d5-b583-41f6-98b3-e920dc4cf00d",
-      "sourceText": "Virus",
+      "sourceText": "das Virus",
       "targetText": "вирус",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1061,19 +1061,19 @@
     },
     {
       "id": "f22f8569-7afc-4649-93a7-6ca531157026",
-      "sourceText": "Zentrale",
+      "sourceText": "die Zentrale",
       "targetText": "центр|штаб",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Rufen Sie die Zentrale an.",
-      "targetUsageExample": "Позвоните в штаб.",
+      "targetUsageExample": "Позвоните в центральный офис.",
       "isActive": true
     },
     {
       "id": "4cd1fc17-26a9-4661-b9d8-53e6c3165ade",
-      "sourceText": "Zigarette",
+      "sourceText": "die Zigarette",
       "targetText": "сигарета",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1085,7 +1085,7 @@
     },
     {
       "id": "9a929181-ac86-4b10-ae40-7b00170b5632",
-      "sourceText": "Zone",
+      "sourceText": "die Zone",
       "targetText": "зона",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
