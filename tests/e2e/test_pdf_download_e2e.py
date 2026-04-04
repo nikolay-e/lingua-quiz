@@ -78,6 +78,20 @@ class TestPdfDownload:
         )
 
 
+class TestPdfFontAvailable:
+    def test_roboto_font_is_served(self, web_session) -> None:
+        """Roboto TTF font should be accessible from the app's own server."""
+        from conftest import FRONTEND_URL
+
+        response = web_session.get(f"{FRONTEND_URL}/fonts/Roboto-Regular.ttf")
+        assert response.status_code == 200, (
+            f"Font file returned {response.status_code}, expected 200"
+        )
+        assert len(response.content) > 100000, (
+            f"Font file too small ({len(response.content)} bytes), likely not a real font"
+        )
+
+
 class TestAppLoadsWithoutErrors:
     def test_no_module_import_errors(self, page: Page) -> None:
         """App should load without 'Importing a module script failed' errors."""

@@ -15,7 +15,7 @@ export default defineConfig({
         enabled: false,
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,gif,ico,svg,woff,woff2}'],
+        globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,gif,ico,svg,woff,woff2,ttf}'],
         maximumFileSizeToCacheInBytes: 3000000,
         skipWaiting: true,
         clientsClaim: true,

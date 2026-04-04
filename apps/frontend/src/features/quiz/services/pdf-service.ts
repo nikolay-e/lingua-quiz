@@ -1,24 +1,21 @@
 import type { Translation } from '@api/types';
 
-const FONT_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-Regular.ttf';
+const FONT_PATH = '/fonts/Roboto-Regular.ttf';
 
 let cachedFontBase64: string | null = null;
 
-async function fetchFontAsBase64(url: string): Promise<string> {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Failed to fetch font: ${response.status}`);
+async function fetchFontAsBase64(): Promise<string> {
+  if (cachedFontBase64 !== null) return cachedFontBase64;
+
+  const response = await fetch(FONT_PATH);
+  if (!response.ok) throw new Error(`Failed to load font: ${response.status}`);
   const buffer = await response.arrayBuffer();
   const bytes = new Uint8Array(buffer);
   let binary = '';
   for (let i = 0; i < bytes.length; i++) {
     binary += String.fromCharCode(bytes[i] ?? 0);
   }
-  return btoa(binary);
-}
-
-async function loadFont(): Promise<string> {
-  if (cachedFontBase64 !== null) return cachedFontBase64;
-  cachedFontBase64 = await fetchFontAsBase64(FONT_URL);
+  cachedFontBase64 = btoa(binary);
   return cachedFontBase64;
 }
 
@@ -30,7 +27,7 @@ export async function generateVocabularyPdf(
   const [{ default: jsPDF }, { default: autoTable }, fontBase64] = await Promise.all([
     import('jspdf'),
     import('jspdf-autotable'),
-    loadFont(),
+    fetchFontAsBase64(),
   ]);
 
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
