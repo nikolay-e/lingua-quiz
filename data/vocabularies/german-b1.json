@@ -1,7 +1,7 @@
 {
   "listName": "German Russian B1",
   "exportedAt": "2026-01-18T20:40:47.968961+00:00",
-  "totalWords": 398,
+  "totalWords": 433,
   "words": [
     {
       "id": "f902d104-6f56-4f3a-98a6-e18a59af57e5",
@@ -41,7 +41,7 @@
     },
     {
       "id": "8ac1f095-439a-4dc2-b191-da2252baec2f",
-      "sourceText": "abmachung",
+      "sourceText": "Abmachung",
       "targetText": "договорённость|соглашение",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -53,7 +53,7 @@
     },
     {
       "id": "1bff6261-da9b-4105-a7f9-2d56612b40b6",
-      "sourceText": "abschluss",
+      "sourceText": "Abschluss",
       "targetText": "завершение|окончание",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -65,7 +65,7 @@
     },
     {
       "id": "e9ad2b6e-cb04-410e-bbc2-d206d7338ade",
-      "sourceText": "absicht",
+      "sourceText": "Absicht",
       "targetText": "намерение|цель",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -77,7 +77,7 @@
     },
     {
       "id": "7fb4216f-ca57-4e47-98c5-802d9d725941",
-      "sourceText": "abteilung",
+      "sourceText": "Abteilung",
       "targetText": "отдел|подразделение",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -89,7 +89,7 @@
     },
     {
       "id": "79334c98-1958-4ffa-b349-e505825508f1",
-      "sourceText": "affäre",
+      "sourceText": "Affäre",
       "targetText": "роман|связь|дело",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -101,7 +101,7 @@
     },
     {
       "id": "d945edfc-ccc1-4273-bef0-232e74dc7f62",
-      "sourceText": "akt",
+      "sourceText": "Akt",
       "targetText": "акт|действие",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -113,7 +113,7 @@
     },
     {
       "id": "24ba5168-1486-48d5-848d-d65c9ac2d82b",
-      "sourceText": "akte",
+      "sourceText": "Akte",
       "targetText": "дело|папка|досье",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -161,7 +161,7 @@
     },
     {
       "id": "61283aa8-d1f6-47b1-bffb-2bc4fee679c5",
-      "sourceText": "anführer",
+      "sourceText": "Anführer",
       "targetText": "лидер|вожак",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -185,7 +185,7 @@
     },
     {
       "id": "88fcd1fa-60ee-4b79-89d4-0b768d1466d2",
-      "sourceText": "angelegenheit",
+      "sourceText": "Angelegenheit",
       "targetText": "дело|вопрос",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -233,7 +233,7 @@
     },
     {
       "id": "989a9bf3-25fa-4678-93b8-833cebe5a95f",
-      "sourceText": "anscheinend",
+      "sourceText": "Anscheinend",
       "targetText": "по всей видимости|кажется",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -257,7 +257,7 @@
     },
     {
       "id": "cbaf8e66-3d42-48c2-902d-922d00b3069b",
-      "sourceText": "anteil",
+      "sourceText": "Anteil",
       "targetText": "доля|часть",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -269,7 +269,7 @@
     },
     {
       "id": "9be3acd1-b274-471b-b912-8d8b4668f0cc",
-      "sourceText": "antrag",
+      "sourceText": "Antrag",
       "targetText": "заявление|запрос",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -281,7 +281,7 @@
     },
     {
       "id": "7c30b507-7f86-46e5-97d6-57d8f16f3066",
-      "sourceText": "antun",
+      "sourceText": "Antun",
       "targetText": "причинять|надевать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -293,7 +293,7 @@
     },
     {
       "id": "d2246547-1b06-4292-8ccb-406b3e59830c",
-      "sourceText": "anweisung",
+      "sourceText": "Anweisung",
       "targetText": "инструкция|указание",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -377,7 +377,7 @@
     },
     {
       "id": "617e0f16-a42e-4d4c-8174-eb5df083dbd0",
-      "sourceText": "aufmerksamkeit",
+      "sourceText": "Aufmerksamkeit",
       "targetText": "внимание",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -425,7 +425,7 @@
     },
     {
       "id": "80aa581c-bb44-4edf-ac53-06926aac3630",
-      "sourceText": "auseinander",
+      "sourceText": "Auseinander",
       "targetText": "врозь|отдельно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -437,7 +437,7 @@
     },
     {
       "id": "a8462ca0-9972-4600-8870-aec554dfd446",
-      "sourceText": "ausgerechnet",
+      "sourceText": "Ausgerechnet",
       "targetText": "именно|как назло",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -545,7 +545,7 @@
     },
     {
       "id": "0052ee8f-c33e-4650-80d9-7fcf72e840e7",
-      "sourceText": "bedingung",
+      "sourceText": "Bedingung",
       "targetText": "условие",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -557,7 +557,7 @@
     },
     {
       "id": "631d769d-4fab-4793-9c9c-e5e6c6f7184c",
-      "sourceText": "bedrohung",
+      "sourceText": "Bedrohung",
       "targetText": "угроза",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -581,7 +581,7 @@
     },
     {
       "id": "5e0a1a4d-aca9-496d-b0da-e109d0f678e8",
-      "sourceText": "beeindruckend",
+      "sourceText": "Beeindruckend",
       "targetText": "впечатляющий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -593,7 +593,7 @@
     },
     {
       "id": "2e8e3745-970f-4626-b048-1c36322a0f0e",
-      "sourceText": "beerdigung",
+      "sourceText": "Beerdigung",
       "targetText": "похороны",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -725,7 +725,7 @@
     },
     {
       "id": "d7473e56-ee29-4303-b4f4-499955643b84",
-      "sourceText": "bereich",
+      "sourceText": "Bereich",
       "targetText": "область|сфера",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -773,7 +773,7 @@
     },
     {
       "id": "9fab9973-14ac-47c5-819b-deb334a5d374",
-      "sourceText": "bescheuert",
+      "sourceText": "Bescheuert",
       "targetText": "идиотский|тупой",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -893,7 +893,7 @@
     },
     {
       "id": "2cdcb2e7-d677-4ed7-9795-10d77dd8b7af",
-      "sourceText": "beute",
+      "sourceText": "Beute",
       "targetText": "добыча",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -905,7 +905,7 @@
     },
     {
       "id": "ff413a5a-43d4-4576-b32c-f38050edfa7d",
-      "sourceText": "bewaffnet",
+      "sourceText": "Bewaffnet",
       "targetText": "вооружённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -977,7 +977,7 @@
     },
     {
       "id": "e754bdfd-928f-4b77-85d8-8ee992ad91c7",
-      "sourceText": "blödsinn",
+      "sourceText": "Blödsinn",
       "targetText": "глупость|чепуха",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1001,7 +1001,7 @@
     },
     {
       "id": "cf8a19e3-c72b-4c49-84d5-5a59a4f3b29d",
-      "sourceText": "bravo",
+      "sourceText": "Bravo",
       "targetText": "браво|молодец",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1025,7 +1025,7 @@
     },
     {
       "id": "246a3940-b578-4aac-bc46-ca3328de1654",
-      "sourceText": "bürgermeister",
+      "sourceText": "Bürgermeister",
       "targetText": "мэр",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1061,7 +1061,7 @@
     },
     {
       "id": "1fea1dbf-49b7-4279-9525-01ee2285a1cc",
-      "sourceText": "deckung",
+      "sourceText": "Deckung",
       "targetText": "укрытие|покрытие",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1073,7 +1073,7 @@
     },
     {
       "id": "c85983a2-9d22-47b3-978b-b1c401d07a7d",
-      "sourceText": "derjenige",
+      "sourceText": "Derjenige",
       "targetText": "тот, кто|тот самый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1085,7 +1085,7 @@
     },
     {
       "id": "60c13ac3-9d46-4fd1-af58-8ecf7f6174ea",
-      "sourceText": "derselbe",
+      "sourceText": "Derselbe",
       "targetText": "тот же самый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1145,7 +1145,7 @@
     },
     {
       "id": "ab8490c6-9350-4179-b5b6-84bbc24fb056",
-      "sourceText": "diener",
+      "sourceText": "Diener",
       "targetText": "слуга",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1181,7 +1181,7 @@
     },
     {
       "id": "69e9bf2e-43da-4278-ba29-9241ac0f0374",
-      "sourceText": "dummkopf",
+      "sourceText": "Dummkopf",
       "targetText": "дурак|болван",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1205,7 +1205,7 @@
     },
     {
       "id": "8aabdf1c-48c2-499d-bb6c-29b4f52c2cbb",
-      "sourceText": "durcheinander",
+      "sourceText": "Durcheinander",
       "targetText": "вперемешку|в беспорядке",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1229,7 +1229,7 @@
     },
     {
       "id": "958a21dc-5390-4bfa-b7fe-05c5f31cbb29",
-      "sourceText": "Durchsuchen",
+      "sourceText": "durchsuchen",
       "targetText": "обыскивать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1241,7 +1241,7 @@
     },
     {
       "id": "12d618e1-3df8-4c22-8a0d-92eaccf7b261",
-      "sourceText": "dämon",
+      "sourceText": "Dämon",
       "targetText": "демон",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1277,7 +1277,7 @@
     },
     {
       "id": "10e03fad-5fd3-4b80-bc17-2841659beca6",
-      "sourceText": "eindruck",
+      "sourceText": "Eindruck",
       "targetText": "впечатление",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1301,7 +1301,7 @@
     },
     {
       "id": "03f28293-2943-42f5-9f9a-6bb074eee299",
-      "sourceText": "einfluss",
+      "sourceText": "Einfluss",
       "targetText": "влияние",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1337,7 +1337,7 @@
     },
     {
       "id": "83237874-a32c-459b-a19a-426d33e67cca",
-      "sourceText": "einsatz",
+      "sourceText": "Einsatz",
       "targetText": "применение|операция",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1361,7 +1361,7 @@
     },
     {
       "id": "37a6b0ca-619a-458d-8af3-55e06b8bcce2",
-      "sourceText": "einst",
+      "sourceText": "Einst",
       "targetText": "некогда|когда-то",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1517,7 +1517,7 @@
     },
     {
       "id": "e24c9652-a63f-4e00-b752-64504967bdaa",
-      "sourceText": "erfolgreich",
+      "sourceText": "Erfolgreich",
       "targetText": "успешный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1565,7 +1565,7 @@
     },
     {
       "id": "ad2abff6-8731-426d-b026-f12ee205258d",
-      "sourceText": "ergebnis",
+      "sourceText": "Ergebnis",
       "targetText": "результат",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1721,7 +1721,7 @@
     },
     {
       "id": "8385162e-68cd-49eb-9e0a-0aa036619d0b",
-      "sourceText": "exzellenz",
+      "sourceText": "Exzellenz",
       "targetText": "превосходительство",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1817,7 +1817,7 @@
     },
     {
       "id": "1799bf36-58b8-4deb-8c38-523503d670c0",
-      "sourceText": "flucht",
+      "sourceText": "Flucht",
       "targetText": "побег|бегство",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1913,7 +1913,7 @@
     },
     {
       "id": "0539c31c-4a9a-4642-8a35-1c57854ebd59",
-      "sourceText": "fähigkeit",
+      "sourceText": "Fähigkeit",
       "targetText": "способность",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1937,7 +1937,7 @@
     },
     {
       "id": "f6b40326-0c73-4246-9008-9cabfffb3faa",
-      "sourceText": "führer",
+      "sourceText": "Führer",
       "targetText": "лидер|вождь|руководитель",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2009,7 +2009,7 @@
     },
     {
       "id": "e9b534ab-b290-4e67-b7a9-87ee30170c71",
-      "sourceText": "gehirn",
+      "sourceText": "Gehirn",
       "targetText": "мозг",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2021,7 +2021,7 @@
     },
     {
       "id": "1b96ad3b-9617-480e-ba0e-f59e0a6fd50e",
-      "sourceText": "geil",
+      "sourceText": "Geil",
       "targetText": "крутой|классный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2057,7 +2057,7 @@
     },
     {
       "id": "b058e931-22bf-49f9-aa34-1a4a9a37d84f",
-      "sourceText": "gemeinde",
+      "sourceText": "Gemeinde",
       "targetText": "община|приход|коммуна",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2081,7 +2081,7 @@
     },
     {
       "id": "fe4eaf04-47d6-4cc9-a16f-eca6e384dc33",
-      "sourceText": "gerechtigkeit",
+      "sourceText": "Gerechtigkeit",
       "targetText": "справедливость",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2093,7 +2093,7 @@
     },
     {
       "id": "36743020-0d58-475e-bc02-cd4fc9349b42",
-      "sourceText": "gerüchte",
+      "sourceText": "Gerüchte",
       "targetText": "слухи|сплетни",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2117,7 +2117,7 @@
     },
     {
       "id": "60060300-81cf-4ae2-bb68-3f3d29ce969e",
-      "sourceText": "gewalt",
+      "sourceText": "Gewalt",
       "targetText": "насилие|сила",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2153,7 +2153,7 @@
     },
     {
       "id": "cedef03d-120a-4780-9711-d0abfc928d0d",
-      "sourceText": "gouverneur",
+      "sourceText": "Gouverneur",
       "targetText": "губернатор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2285,7 +2285,7 @@
     },
     {
       "id": "75ab0c26-78b8-4c93-a6e4-fdbf9ff634ed",
-      "sourceText": "hervorragend",
+      "sourceText": "Hervorragend",
       "targetText": "превосходный|отличный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2345,7 +2345,7 @@
     },
     {
       "id": "3dd98498-c3ff-4991-983a-115fe2cc8f83",
-      "sourceText": "hoheit",
+      "sourceText": "Hoheit",
       "targetText": "высочество|величество",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2417,7 +2417,7 @@
     },
     {
       "id": "1c828e2e-095a-4475-ac2c-87fb0382abd2",
-      "sourceText": "illegal",
+      "sourceText": "Illegal",
       "targetText": "нелегальный|незаконный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2429,7 +2429,7 @@
     },
     {
       "id": "d404216f-64ca-4888-ad78-8a003b469597",
-      "sourceText": "indianer",
+      "sourceText": "Indianer",
       "targetText": "индеец|коренной американец",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2489,7 +2489,7 @@
     },
     {
       "id": "378d319c-2cc6-4d8f-ad07-3b7c2e203b4e",
-      "sourceText": "jenseits",
+      "sourceText": "Jenseits",
       "targetText": "по ту сторону",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2501,7 +2501,7 @@
     },
     {
       "id": "7d16b69f-1a91-4e46-b95e-067e2decbc50",
-      "sourceText": "jungfrau",
+      "sourceText": "Jungfrau",
       "targetText": "девственница|дева",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2513,7 +2513,7 @@
     },
     {
       "id": "33a93ee4-9490-4a9f-953e-7e8e4002b587",
-      "sourceText": "kaiser",
+      "sourceText": "Kaiser",
       "targetText": "император|кайзер",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2549,7 +2549,7 @@
     },
     {
       "id": "4dd8bdcd-6f7c-4ed2-b649-8d4664cbb1b5",
-      "sourceText": "katz",
+      "sourceText": "Katz",
       "targetText": "кот|кошка",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2561,7 +2561,7 @@
     },
     {
       "id": "28d5d027-2e56-43b6-b472-87070e263dbe",
-      "sourceText": "keinerlei",
+      "sourceText": "Keinerlei",
       "targetText": "никакой",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2609,7 +2609,7 @@
     },
     {
       "id": "93bf8f51-1523-43e3-9fd6-351ecb39c14c",
-      "sourceText": "kohle",
+      "sourceText": "Kohle",
       "targetText": "уголь|деньги (разг.)",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2621,7 +2621,7 @@
     },
     {
       "id": "28371225-7519-4b0d-a3cc-c3aa9bb34d4f",
-      "sourceText": "kommandant",
+      "sourceText": "Kommandant",
       "targetText": "комендант|командир",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2681,7 +2681,7 @@
     },
     {
       "id": "33d9db88-e669-4cbd-a414-c1381eeea705",
-      "sourceText": "korrektur",
+      "sourceText": "Korrektur",
       "targetText": "исправление|коррекция",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2705,7 +2705,7 @@
     },
     {
       "id": "bd943b19-e8a4-4d00-af0a-7bb7285c3571",
-      "sourceText": "krebs",
+      "sourceText": "Krebs",
       "targetText": "рак|краб",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2873,7 +2873,7 @@
     },
     {
       "id": "dbad615c-1c28-43c7-900f-96266b63bf03",
-      "sourceText": "leitung",
+      "sourceText": "Leitung",
       "targetText": "управление|руководство|провод",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2885,7 +2885,7 @@
     },
     {
       "id": "668c12ff-a2eb-4c2f-844f-b29db792a1d4",
-      "sourceText": "leutnant",
+      "sourceText": "Leutnant",
       "targetText": "лейтенант",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2945,7 +2945,7 @@
     },
     {
       "id": "cf3b1c54-55cf-4524-8793-76ccc69e95ad",
-      "sourceText": "magie",
+      "sourceText": "Magie",
       "targetText": "магия",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2969,7 +2969,7 @@
     },
     {
       "id": "de9f4a04-450c-48fe-a92d-c64b936396fc",
-      "sourceText": "menschheit",
+      "sourceText": "Menschheit",
       "targetText": "человечество",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3005,7 +3005,7 @@
     },
     {
       "id": "6034a656-b47a-4854-a200-07e399d721ff",
-      "sourceText": "minister",
+      "sourceText": "Minister",
       "targetText": "министр",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3029,7 +3029,7 @@
     },
     {
       "id": "45af04b2-0c61-4998-9ae8-861ee0dae3b8",
-      "sourceText": "mitleid",
+      "sourceText": "Mitleid",
       "targetText": "жалость|сострадание",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3173,7 +3173,7 @@
     },
     {
       "id": "a51c5a9f-fa8b-424d-ba39-59189b36ea1f",
-      "sourceText": "oberst",
+      "sourceText": "Oberst",
       "targetText": "полковник",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3197,7 +3197,7 @@
     },
     {
       "id": "bb77f0a2-0f2d-41ed-836e-f6f93e87db56",
-      "sourceText": "offizier",
+      "sourceText": "Offizier",
       "targetText": "офицер",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3221,7 +3221,7 @@
     },
     {
       "id": "18f860eb-f357-447f-be67-3acb935236b6",
-      "sourceText": "operation",
+      "sourceText": "Operation",
       "targetText": "операция",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3233,7 +3233,7 @@
     },
     {
       "id": "7cb1d5d8-dabb-4dd0-94c0-f53fb07c9ceb",
-      "sourceText": "organisation",
+      "sourceText": "Organisation",
       "targetText": "организация",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3269,7 +3269,7 @@
     },
     {
       "id": "f07cee20-f2a8-4854-9663-5b67093dc361",
-      "sourceText": "pfarrer",
+      "sourceText": "Pfarrer",
       "targetText": "пастор|священник",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3293,7 +3293,7 @@
     },
     {
       "id": "8eb74bf9-2a3b-4a68-b063-90b8d463ef55",
-      "sourceText": "politik",
+      "sourceText": "Politik",
       "targetText": "политика",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3317,7 +3317,7 @@
     },
     {
       "id": "e75c105f-044f-4097-8f17-48df18d057c1",
-      "sourceText": "priester",
+      "sourceText": "Priester",
       "targetText": "священник",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3341,7 +3341,7 @@
     },
     {
       "id": "3ea9185a-fe77-4a07-b016-1f7fb85e8ba5",
-      "sourceText": "publikum",
+      "sourceText": "Publikum",
       "targetText": "публика|аудитория",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3425,7 +3425,7 @@
     },
     {
       "id": "4e2cce72-4571-4964-b69a-2f1c0eb80330",
-      "sourceText": "reaktion",
+      "sourceText": "Reaktion",
       "targetText": "реакция",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3437,7 +3437,7 @@
     },
     {
       "id": "ff265653-5eed-437f-be56-5dd3983aa63b",
-      "sourceText": "reif",
+      "sourceText": "Reif",
       "targetText": "зрелый|спелый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3449,7 +3449,7 @@
     },
     {
       "id": "f5840bef-399f-4f49-8dc7-3f954d560579",
-      "sourceText": "reizend",
+      "sourceText": "Reizend",
       "targetText": "очаровательный|прелестный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3461,7 +3461,7 @@
     },
     {
       "id": "7610dc46-1e64-4251-906a-f1d6153dd5c6",
-      "sourceText": "revolution",
+      "sourceText": "Revolution",
       "targetText": "революция",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3509,7 +3509,7 @@
     },
     {
       "id": "85098379-58d9-4d25-af75-89e88cf7d723",
-      "sourceText": "ritter",
+      "sourceText": "Ritter",
       "targetText": "рыцарь",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3629,7 +3629,7 @@
     },
     {
       "id": "8876b36b-b1c9-422a-b711-ea1dba8795a4",
-      "sourceText": "schwachsinn",
+      "sourceText": "Schwachsinn",
       "targetText": "бессмыслица|глупость",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3641,7 +3641,7 @@
     },
     {
       "id": "e7fb1eff-035d-44e6-812c-617fed09a2c3",
-      "sourceText": "schwul",
+      "sourceText": "Schwul",
       "targetText": "гей",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3665,7 +3665,7 @@
     },
     {
       "id": "1b924992-5119-474a-9a29-d3cc78021a15",
-      "sourceText": "selbstmord",
+      "sourceText": "Selbstmord",
       "targetText": "самоубийство",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3677,7 +3677,7 @@
     },
     {
       "id": "112d9304-4551-438e-84b2-dfe6d189d710",
-      "sourceText": "senator",
+      "sourceText": "Senator",
       "targetText": "сенатор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3773,7 +3773,7 @@
     },
     {
       "id": "62169335-4f0b-41f3-afe6-de5a0bb4506f",
-      "sourceText": "staatsanwalt",
+      "sourceText": "Staatsanwalt",
       "targetText": "прокурор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3809,7 +3809,7 @@
     },
     {
       "id": "238c4b6e-e32a-40e8-a298-e7ca8a666b83",
-      "sourceText": "stellung",
+      "sourceText": "Stellung",
       "targetText": "положение|позиция|должность",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3821,7 +3821,7 @@
     },
     {
       "id": "f2923458-2044-419b-88de-392de4303b1c",
-      "sourceText": "stets",
+      "sourceText": "Stets",
       "targetText": "всегда|постоянно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3929,7 +3929,7 @@
     },
     {
       "id": "11d1c406-a514-404e-a741-f37b0036704f",
-      "sourceText": "terrorist",
+      "sourceText": "Terrorist",
       "targetText": "террорист",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3965,7 +3965,7 @@
     },
     {
       "id": "21dde529-6663-4e16-ab69-7309526270aa",
-      "sourceText": "trottel",
+      "sourceText": "Trottel",
       "targetText": "болван|растяпа",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4037,7 +4037,7 @@
     },
     {
       "id": "7603ce4e-8c37-4d27-b1be-aa8cffe639e6",
-      "sourceText": "umso",
+      "sourceText": "Umso",
       "targetText": "тем более",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4121,7 +4121,7 @@
     },
     {
       "id": "3b191da1-60e8-478d-af39-cccb4e0b81fe",
-      "sourceText": "untersuchung",
+      "sourceText": "Untersuchung",
       "targetText": "исследование|осмотр",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4145,7 +4145,7 @@
     },
     {
       "id": "fa4c5448-a70b-4b82-aa1b-63b501325249",
-      "sourceText": "verdacht",
+      "sourceText": "Verdacht",
       "targetText": "подозрение",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4193,7 +4193,7 @@
     },
     {
       "id": "1caefb6f-4a20-4df0-affc-f1474cd0e009",
-      "sourceText": "verfügung",
+      "sourceText": "Verfügung",
       "targetText": "распоряжение|наличие",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4385,7 +4385,7 @@
     },
     {
       "id": "d8a93fd2-cf27-42a8-a83d-83a059600beb",
-      "sourceText": "verstärkung",
+      "sourceText": "Verstärkung",
       "targetText": "подкрепление|усиление",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4409,7 +4409,7 @@
     },
     {
       "id": "60652181-104a-4401-b76e-0867c942aec5",
-      "sourceText": "verteidigung",
+      "sourceText": "Verteidigung",
       "targetText": "защита|оборона",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4469,7 +4469,7 @@
     },
     {
       "id": "0ed2b19f-7250-49da-bb14-6f49805e9abd",
-      "sourceText": "verzweifelt",
+      "sourceText": "Verzweifelt",
       "targetText": "отчаянный|в отчаянии",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4601,7 +4601,7 @@
     },
     {
       "id": "656e97bc-d115-4e77-9f6b-aab2ec6c3e05",
-      "sourceText": "wirklichkeit",
+      "sourceText": "Wirklichkeit",
       "targetText": "реальность|действительность",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4637,7 +4637,7 @@
     },
     {
       "id": "35b4ac20-3c36-4de6-a277-a37b6d0cf04c",
-      "sourceText": "wissenschaftler",
+      "sourceText": "Wissenschaftler",
       "targetText": "учёный|исследователь",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4661,7 +4661,7 @@
     },
     {
       "id": "bc4cace8-ffcf-40c6-8317-883236393b6e",
-      "sourceText": "wüst",
+      "sourceText": "Wüst",
       "targetText": "дикий|хаотичный|непристойный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4733,7 +4733,7 @@
     },
     {
       "id": "1d148a1d-81aa-4f5e-a18d-b6dec858f270",
-      "sourceText": "äußerst",
+      "sourceText": "Äußerst",
       "targetText": "крайне|чрезвычайно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4745,7 +4745,7 @@
     },
     {
       "id": "7c4a56a6-36a9-436b-aaab-f8e6acb41de3",
-      "sourceText": "öffentlichkeit",
+      "sourceText": "Öffentlichkeit",
       "targetText": "общественность|публика",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4777,6 +4777,426 @@
       "difficultyLevel": "b1",
       "sourceUsageExample": "Er hat den Fehler übersehen.",
       "targetUsageExample": "Он не заметил ошибку.",
+      "isActive": true
+    },
+    {
+      "id": "da9ba440-8543-4895-a840-be38593f34ef",
+      "sourceText": "spinnen",
+      "targetText": "сходить с ума|плести (паутину)",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Du spinnst wohl, das zu glauben!",
+      "targetUsageExample": "Ты, наверное, сходишь с ума, веря в это!",
+      "isActive": true
+    },
+    {
+      "id": "d29f085f-9cc1-4f63-91b4-42c3c03626ce",
+      "sourceText": "steuern",
+      "targetText": "управлять|платить налоги",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Der Fahrer steuert das Auto durch die Stadt.",
+      "targetUsageExample": "Водитель управляет машиной по городу.",
+      "isActive": true
+    },
+    {
+      "id": "9c127746-3328-4972-84e6-a86a3f09fc36",
+      "sourceText": "überzeugen",
+      "targetText": "убеждать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er versucht mich zu überzeugen.",
+      "targetUsageExample": "Он пытается меня убедить.",
+      "isActive": true
+    },
+    {
+      "id": "58e6fd86-5955-47c3-acd2-0bf5fac6805d",
+      "sourceText": "Überzeugt",
+      "targetText": "убеждённый|уверенный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Ich bin überzeugt, dass er recht hat.",
+      "targetUsageExample": "Я убеждён, что он прав.",
+      "isActive": true
+    },
+    {
+      "id": "aea46507-f1a8-4415-bbfe-ebd0f25f52b1",
+      "sourceText": "übersetzen",
+      "targetText": "переводить",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Kannst du diesen Satz übersetzen?",
+      "targetUsageExample": "Ты можешь перевести это предложение?",
+      "isActive": true
+    },
+    {
+      "id": "335b0054-ee77-401f-b262-d1524333a91d",
+      "sourceText": "Übersetzung",
+      "targetText": "перевод",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Die Übersetzung ist sehr gut.",
+      "targetUsageExample": "Перевод очень хороший.",
+      "isActive": true
+    },
+    {
+      "id": "e0f10509-74a8-4bac-9558-9af41845b1d7",
+      "sourceText": "überprüfen",
+      "targetText": "проверять|контролировать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er überprüft die Rechnung genau.",
+      "targetUsageExample": "Он тщательно проверяет счёт.",
+      "isActive": true
+    },
+    {
+      "id": "e0a6ee95-deb2-4ac4-b335-77156f5c0fd0",
+      "sourceText": "Verbrecher",
+      "targetText": "преступник|злодей",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Die Polizei sucht den Verbrecher.",
+      "targetUsageExample": "Полиция ищет преступника.",
+      "isActive": true
+    },
+    {
+      "id": "3d486f9d-1596-4ace-9af4-b9e88158536b",
+      "sourceText": "verbrennen",
+      "targetText": "сжигать|гореть",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er verbrennt die alten Briefe.",
+      "targetUsageExample": "Он сжигает старые письма.",
+      "isActive": true
+    },
+    {
+      "id": "ae230a80-d922-4eea-957f-ad113668332e",
+      "sourceText": "verlangen",
+      "targetText": "требовать|желать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er verlangt eine Erklärung.",
+      "targetUsageExample": "Он требует объяснения.",
+      "isActive": true
+    },
+    {
+      "id": "aeacc391-0d27-4c8e-8979-44fe232438ec",
+      "sourceText": "Versicherung",
+      "targetText": "страховка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Haben Sie eine Versicherung?",
+      "targetUsageExample": "У вас есть страховка?",
+      "isActive": true
+    },
+    {
+      "id": "d3a382e6-b585-4aa0-b668-88ccce6f18be",
+      "sourceText": "Vertrag",
+      "targetText": "договор|контракт",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er unterschreibt den Vertrag.",
+      "targetUsageExample": "Он подписывает договор.",
+      "isActive": true
+    },
+    {
+      "id": "97c6ceda-7d7c-457e-bce6-f7547ea4c840",
+      "sourceText": "wahren",
+      "targetText": "хранить|соблюдать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er wahrt seine Würde.",
+      "targetUsageExample": "Он хранит своё достоинство.",
+      "isActive": true
+    },
+    {
+      "id": "d5c5d27b-8834-456e-8df3-9ee2d9036c1d",
+      "sourceText": "Wahnsinn",
+      "targetText": "сумасшествие|безумие",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Das ist ja Wahnsinn!",
+      "targetUsageExample": "Это просто безумие!",
+      "isActive": true
+    },
+    {
+      "id": "a2e66054-3441-48f9-ac18-369bda0e62c9",
+      "sourceText": "wahnsinnig",
+      "targetText": "безумный|сумасшедший",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er fährt wahnsinnig schnell.",
+      "targetUsageExample": "Он едет безумно быстро.",
+      "isActive": true
+    },
+    {
+      "id": "453a5f03-54db-4fe2-88e5-cd11ba6f96d9",
+      "sourceText": "wehren",
+      "targetText": "защищаться|сопротивляться",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er wehrt sich gegen die Angriffe.",
+      "targetUsageExample": "Он защищается от нападений.",
+      "isActive": true
+    },
+    {
+      "id": "50521f52-39c6-42e1-8fde-d350bec0d38f",
+      "sourceText": "wesen",
+      "targetText": "существо|сущность",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Das ist ein freundliches Wesen.",
+      "targetUsageExample": "Это дружелюбное существо.",
+      "isActive": true
+    },
+    {
+      "id": "f244d24c-7e8e-4f5d-8826-825086c3adbd",
+      "sourceText": "widerlich",
+      "targetText": "отвратительный",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Der Geruch ist widerlich.",
+      "targetUsageExample": "Запах отвратительный.",
+      "isActive": true
+    },
+    {
+      "id": "748d9980-f1d6-4a1b-a0f9-704c7029bb3d",
+      "sourceText": "Zweck",
+      "targetText": "цель|смысл",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Was ist der Zweck dieser Reise?",
+      "targetUsageExample": "Какова цель этой поездки?",
+      "isActive": true
+    },
+    {
+      "id": "724cc6fd-2a3d-4206-85ab-2c100e171f16",
+      "sourceText": "urteilen",
+      "targetText": "судить|оценивать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Man soll nicht zu schnell urteilen.",
+      "targetUsageExample": "Не стоит судить слишком быстро.",
+      "isActive": true
+    },
+    {
+      "id": "c800fa36-34f6-49e1-8648-f76eb2386469",
+      "sourceText": "Zustand",
+      "targetText": "состояние|положение",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Der Patient ist in einem schlechten Zustand.",
+      "targetUsageExample": "Пациент в плохом состоянии.",
+      "isActive": true
+    },
+    {
+      "id": "cacf4c92-121a-4c99-8145-39f58d06c503",
+      "sourceText": "Zurecht",
+      "targetText": "правильно|в порядке",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Kommst du zurecht?",
+      "targetUsageExample": "Ты справляешься?",
+      "isActive": true
+    },
+    {
+      "id": "86143342-460d-4d3f-acf4-e038a4ed6339",
+      "sourceText": "Zelle",
+      "targetText": "камера|клетка",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er sitzt in einer Zelle.",
+      "targetUsageExample": "Он сидит в камере.",
+      "isActive": true
+    },
+    {
+      "id": "87998931-47f9-4a3a-82c1-7b854f96686b",
+      "sourceText": "übergeben",
+      "targetText": "передавать|вручать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er übergibt dem Chef die Dokumente.",
+      "targetUsageExample": "Он передаёт документы начальнику.",
+      "isActive": true
+    },
+    {
+      "id": "dd91bf25-57c3-4bc3-ad08-9895da9fc493",
+      "sourceText": "überlassen",
+      "targetText": "оставлять|предоставлять",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Sie überlässt ihm die Entscheidung.",
+      "targetUsageExample": "Она оставляет решение за ним.",
+      "isActive": true
+    },
+    {
+      "id": "5ad5175a-2fdc-424e-9f3c-68213a5c71a3",
+      "sourceText": "unterschreiben",
+      "targetText": "подписывать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Bitte unterschreiben Sie hier.",
+      "targetUsageExample": "Пожалуйста, подпишите здесь.",
+      "isActive": true
+    },
+    {
+      "id": "5bd25d42-db1c-4753-bccc-ecb8abc6f3df",
+      "sourceText": "unterstützen",
+      "targetText": "поддерживать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Meine Familie unterstützt mich immer.",
+      "targetUsageExample": "Моя семья всегда меня поддерживает.",
+      "isActive": true
+    },
+    {
+      "id": "4216b230-87f7-4c70-922f-210af388d1cd",
+      "sourceText": "Unterstützung",
+      "targetText": "поддержка|помощь",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Ich brauche deine Unterstützung.",
+      "targetUsageExample": "Мне нужна твоя поддержка.",
+      "isActive": true
+    },
+    {
+      "id": "2bfe2090-d744-46c3-9059-8bb3f2aa49ba",
+      "sourceText": "untersuchen",
+      "targetText": "исследовать|изучать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Der Arzt untersucht den Patienten.",
+      "targetUsageExample": "Врач осматривает пациента.",
+      "isActive": true
+    },
+    {
+      "id": "24a5d97a-e50b-4cc3-bd6e-f1bbf0ecbee3",
+      "sourceText": "verabschieden",
+      "targetText": "прощаться",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Sie verabschiedet sich von ihren Freunden.",
+      "targetUsageExample": "Она прощается с друзьями.",
+      "isActive": true
+    },
+    {
+      "id": "e34fa218-1441-4e91-95a8-be4e546e087d",
+      "sourceText": "verbinden",
+      "targetText": "соединять|связывать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Die Brücke verbindet zwei Stadtteile.",
+      "targetUsageExample": "Мост соединяет два района города.",
+      "isActive": true
+    },
+    {
+      "id": "5c52fd2c-09a4-4a11-aa33-1ecf3af87756",
+      "sourceText": "verwenden",
+      "targetText": "использовать|применять",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Man kann dieses Wort in vielen Situationen verwenden.",
+      "targetUsageExample": "Это слово можно использовать во многих ситуациях.",
+      "isActive": true
+    },
+    {
+      "id": "3def2901-be0e-41d3-89b2-0a948aba4ae7",
+      "sourceText": "Vorstellung",
+      "targetText": "представление|идея",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Ich habe keine Vorstellung davon.",
+      "targetUsageExample": "У меня нет об этом представления.",
+      "isActive": true
+    },
+    {
+      "id": "de033f3c-e16c-4eee-a3c8-78e92d23977c",
+      "sourceText": "wählen",
+      "targetText": "выбирать|набирать (номер)",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Wähle eine Antwort aus.",
+      "targetUsageExample": "Выбери ответ.",
+      "isActive": true
+    },
+    {
+      "id": "0b794507-3f66-47c2-9d14-e40733256f48",
+      "sourceText": "zwingen",
+      "targetText": "заставлять|принуждать",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B1",
+      "difficultyLevel": "b1",
+      "sourceUsageExample": "Er zwingt mich dazu.",
+      "targetUsageExample": "Он заставляет меня это делать.",
       "isActive": true
     }
   ]

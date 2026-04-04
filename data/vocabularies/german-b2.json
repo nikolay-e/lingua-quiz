@@ -29,7 +29,7 @@
     },
     {
       "id": "e6ebf97a-32b4-495e-aa49-2489748a819b",
-      "sourceText": "abflug",
+      "sourceText": "Abflug",
       "targetText": "вылет",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -377,7 +377,7 @@
     },
     {
       "id": "702af881-132c-43c7-ae03-f5ea66368c41",
-      "sourceText": "alias",
+      "sourceText": "Alias",
       "targetText": "он же|псевдоним",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -413,7 +413,7 @@
     },
     {
       "id": "e5238769-7673-418f-8426-f6dc0c1997c6",
-      "sourceText": "allerseits",
+      "sourceText": "Allerseits",
       "targetText": "всем|со всех сторон",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -485,7 +485,7 @@
     },
     {
       "id": "248aa483-17c2-4ac4-adf3-837291ba5e6c",
-      "sourceText": "amüsant",
+      "sourceText": "Amüsant",
       "targetText": "забавный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -533,7 +533,7 @@
     },
     {
       "id": "f26a0f95-48d2-403f-8dfb-b949664b0fec",
-      "sourceText": "aneinander",
+      "sourceText": "Aneinander",
       "targetText": "друг к другу",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -545,7 +545,7 @@
     },
     {
       "id": "79d8defd-8267-4e9c-ad78-aa3b14beef35",
-      "sourceText": "anflug",
+      "sourceText": "Anflug",
       "targetText": "прилёт|подлёт",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -569,7 +569,7 @@
     },
     {
       "id": "ad2d5535-92b8-4905-8a3a-cff124cda026",
-      "sourceText": "angeber",
+      "sourceText": "Angeber",
       "targetText": "хвастун",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -593,7 +593,7 @@
     },
     {
       "id": "b57b184a-2944-42d0-8417-ba169017f357",
-      "sourceText": "angepisst",
+      "sourceText": "Angepisst",
       "targetText": "разозлённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -605,7 +605,7 @@
     },
     {
       "id": "af3bad7c-4a9c-428e-9388-31ba8e6526f0",
-      "sourceText": "angesagt",
+      "sourceText": "Angesagt",
       "targetText": "модный|объявленный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -617,7 +617,7 @@
     },
     {
       "id": "236be1c9-429c-4959-881a-3fd21b29a2c6",
-      "sourceText": "angespannt",
+      "sourceText": "Angespannt",
       "targetText": "напряжённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -677,7 +677,7 @@
     },
     {
       "id": "ab01d011-8daf-43eb-a6fc-99db1aece192",
-      "sourceText": "anhand",
+      "sourceText": "Anhand",
       "targetText": "на основании",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -737,7 +737,7 @@
     },
     {
       "id": "c51fe1ba-86c4-4059-af8e-1470ad5260f1",
-      "sourceText": "annähernd",
+      "sourceText": "Annähernd",
       "targetText": "приблизительно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -833,7 +833,7 @@
     },
     {
       "id": "9577e91c-31b4-45be-bb7b-32e4120d7a61",
-      "sourceText": "anschließend",
+      "sourceText": "Anschließend",
       "targetText": "затем|после этого",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -869,7 +869,7 @@
     },
     {
       "id": "5a257c44-58e1-4139-8b35-ec684efcc33e",
-      "sourceText": "ansteckend",
+      "sourceText": "Ansteckend",
       "targetText": "заразный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -881,7 +881,7 @@
     },
     {
       "id": "4adb8510-5aec-4cd0-8b60-ec62f8a64c5d",
-      "sourceText": "anstelle",
+      "sourceText": "Anstelle",
       "targetText": "вместо",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -989,7 +989,7 @@
     },
     {
       "id": "71ee7106-134b-46a9-97e5-4ce6e56fd39d",
-      "sourceText": "apokalypse",
+      "sourceText": "Apokalypse",
       "targetText": "апокалипсис",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1109,7 +1109,7 @@
     },
     {
       "id": "a589a314-e925-450c-9751-2a1a61ea8f0d",
-      "sourceText": "arrogant",
+      "sourceText": "Arrogant",
       "targetText": "высокомерный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1241,7 +1241,7 @@
     },
     {
       "id": "1630800d-4a17-4f3f-af07-0c9ff976d50a",
-      "sourceText": "aufgewühlt",
+      "sourceText": "Aufgewühlt",
       "targetText": "взволнованный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1397,7 +1397,7 @@
     },
     {
       "id": "8af2e74d-0566-479a-bd88-87dca0245672",
-      "sourceText": "aufwand",
+      "sourceText": "Aufwand",
       "targetText": "затраты|усилия",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1505,7 +1505,7 @@
     },
     {
       "id": "2a42a351-c264-4b7f-b7c8-e8019e415084",
-      "sourceText": "auserwählt",
+      "sourceText": "Auserwählt",
       "targetText": "избранный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1553,7 +1553,7 @@
     },
     {
       "id": "d57eff7d-871d-447a-bc3e-2e1cb5a11026",
-      "sourceText": "ausgestattet",
+      "sourceText": "Ausgestattet",
       "targetText": "оснащённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1793,7 +1793,7 @@
     },
     {
       "id": "e43319c3-e53e-4c22-b363-c0d4dd9cea11",
-      "sourceText": "autsch",
+      "sourceText": "Autsch",
       "targetText": "ой|ау",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1901,7 +1901,7 @@
     },
     {
       "id": "265d8e89-cc52-44c1-ae65-39a452224123",
-      "sourceText": "basierend",
+      "sourceText": "Basierend",
       "targetText": "основанный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -1973,7 +1973,7 @@
     },
     {
       "id": "68b168fe-df54-4537-943d-94f64bca1231",
-      "sourceText": "bedacht",
+      "sourceText": "Bedacht",
       "targetText": "обдуманный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2021,7 +2021,7 @@
     },
     {
       "id": "c466e275-8c25-4661-bc48-37a50041a9ae",
-      "sourceText": "bedrückt",
+      "sourceText": "Bedrückt",
       "targetText": "подавленный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2093,7 +2093,7 @@
     },
     {
       "id": "190ea254-e46b-4652-a3d0-7268c81f7d8a",
-      "sourceText": "begehrt",
+      "sourceText": "Begehrt",
       "targetText": "желанный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2129,7 +2129,7 @@
     },
     {
       "id": "ada76213-c57d-4ea4-99ae-ccda0a68e1f8",
-      "sourceText": "begleiter",
+      "sourceText": "Begleiter",
       "targetText": "спутник|сопровождающий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2273,7 +2273,7 @@
     },
     {
       "id": "15ecc2ec-4f7c-4b17-b6e9-25b6b9c03584",
-      "sourceText": "bemerkenswert",
+      "sourceText": "Bemerkenswert",
       "targetText": "замечательный|примечательный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2357,7 +2357,7 @@
     },
     {
       "id": "8090406a-f282-4ba0-bc46-cbd3af1f4109",
-      "sourceText": "beruhigend",
+      "sourceText": "Beruhigend",
       "targetText": "успокаивающий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2417,7 +2417,7 @@
     },
     {
       "id": "50565d2a-266d-4251-a5ed-e10304df26b1",
-      "sourceText": "beschämt",
+      "sourceText": "Beschämt",
       "targetText": "пристыжённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2717,7 +2717,7 @@
     },
     {
       "id": "45f936d4-3d00-4b6e-be27-5f3b7d51b2f3",
-      "sourceText": "bislang",
+      "sourceText": "Bislang",
       "targetText": "до сих пор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2729,7 +2729,7 @@
     },
     {
       "id": "30d44aaa-d420-4253-9d27-dae6ee39ae57",
-      "sourceText": "bitter",
+      "sourceText": "Bitter",
       "targetText": "горький",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2741,7 +2741,7 @@
     },
     {
       "id": "4c0c45eb-584d-431c-bd4e-b5a9221bc76d",
-      "sourceText": "bitteschön",
+      "sourceText": "Bitteschön",
       "targetText": "пожалуйста",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -2777,7 +2777,7 @@
     },
     {
       "id": "550a6afa-0ab6-4686-841c-b346f1558ba7",
-      "sourceText": "blondine",
+      "sourceText": "Blondine",
       "targetText": "блондинка",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3065,7 +3065,7 @@
     },
     {
       "id": "860383c8-5bd0-4eff-bfb0-9d63dbf72d76",
-      "sourceText": "buße",
+      "sourceText": "Buße",
       "targetText": "покаяние|штраф",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3089,7 +3089,7 @@
     },
     {
       "id": "77862512-3d5c-4983-8e94-4f1090c6cfad",
-      "sourceText": "bösewicht",
+      "sourceText": "Bösewicht",
       "targetText": "злодей",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3233,7 +3233,7 @@
     },
     {
       "id": "11d38964-aaa9-4600-b4d9-60c8a28d2686",
-      "sourceText": "ciao",
+      "sourceText": "Ciao",
       "targetText": "чао|пока",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3593,7 +3593,7 @@
     },
     {
       "id": "3007099a-663b-4912-9e3b-cc14172bc17d",
-      "sourceText": "depressiv",
+      "sourceText": "Depressiv",
       "targetText": "депрессивный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3605,7 +3605,7 @@
     },
     {
       "id": "4995bc58-e78d-44af-aed1-a1d9569515d2",
-      "sourceText": "derart",
+      "sourceText": "Derart",
       "targetText": "настолько|таким образом",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3641,7 +3641,7 @@
     },
     {
       "id": "64bf838e-65bb-4b6a-b536-07be51a98f72",
-      "sourceText": "dessert",
+      "sourceText": "Dessert",
       "targetText": "десерт",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3821,7 +3821,7 @@
     },
     {
       "id": "6465b64a-6088-417b-8d2d-61db1923185e",
-      "sourceText": "dreizehn",
+      "sourceText": "Dreizehn",
       "targetText": "тринадцать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3857,7 +3857,7 @@
     },
     {
       "id": "2f190d7e-2496-4c6d-b91f-cfeb7b7127a3",
-      "sourceText": "drittens",
+      "sourceText": "Drittens",
       "targetText": "в-третьих",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3881,7 +3881,7 @@
     },
     {
       "id": "a5a9e659-d473-405f-8552-89b664e22a67",
-      "sourceText": "drohne",
+      "sourceText": "Drohne",
       "targetText": "дрон",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -3929,7 +3929,7 @@
     },
     {
       "id": "c4106692-1ace-4e13-a458-70828e29ad90",
-      "sourceText": "drängt",
+      "sourceText": "Drängt",
       "targetText": "давит|торопит",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4061,7 +4061,7 @@
     },
     {
       "id": "038d08e9-ffde-4805-8ad6-4f5f3c01e0a3",
-      "sourceText": "effektiv",
+      "sourceText": "Effektiv",
       "targetText": "эффективный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4181,7 +4181,7 @@
     },
     {
       "id": "ea8d600a-230d-4a09-bd59-09c984897c49",
-      "sourceText": "eingebildet",
+      "sourceText": "Eingebildet",
       "targetText": "воображаемый|надменный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4193,7 +4193,7 @@
     },
     {
       "id": "e1197200-7658-43c8-81c7-9e3b075ff876",
-      "sourceText": "eingebrockt",
+      "sourceText": "Eingebrockt",
       "targetText": "заварить кашу",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4385,7 +4385,7 @@
     },
     {
       "id": "1d22c540-2659-4854-9bb5-52193673bf39",
-      "sourceText": "elefant",
+      "sourceText": "Elefant",
       "targetText": "слон",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4481,7 +4481,7 @@
     },
     {
       "id": "3410b70a-1883-4d69-9233-53e9185bd0df",
-      "sourceText": "enorm",
+      "sourceText": "Enorm",
       "targetText": "огромный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4517,7 +4517,7 @@
     },
     {
       "id": "07531b5b-3e2e-44a5-87cc-d7e40a1b503a",
-      "sourceText": "entscheidend",
+      "sourceText": "Entscheidend",
       "targetText": "решающий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4553,7 +4553,7 @@
     },
     {
       "id": "b90fcccc-73b7-4822-bb6d-da9b1a5cf53e",
-      "sourceText": "entsprechend",
+      "sourceText": "Entsprechend",
       "targetText": "соответственно|соответствующий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -4589,7 +4589,7 @@
     },
     {
       "id": "404d31dd-36ec-48d2-b9ae-cd0ecc518775",
-      "sourceText": "entzückt",
+      "sourceText": "Entzückt",
       "targetText": "восхищённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5237,7 +5237,7 @@
     },
     {
       "id": "13f836c6-018b-43b8-af9b-f51d0841bd6b",
-      "sourceText": "finanziell",
+      "sourceText": "Finanziell",
       "targetText": "финансовый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5285,7 +5285,7 @@
     },
     {
       "id": "b68917ee-25a1-4ef2-a100-638d0ab8b714",
-      "sourceText": "formular",
+      "sourceText": "Formular",
       "targetText": "формуляр|бланк",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5429,7 +5429,7 @@
     },
     {
       "id": "82d15801-a89d-4552-a834-1d1d713f59d9",
-      "sourceText": "frustriert",
+      "sourceText": "Frustriert",
       "targetText": "разочарованный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5501,7 +5501,7 @@
     },
     {
       "id": "3e294b33-1ec0-4778-b741-c9fc94eeafc1",
-      "sourceText": "fünfzehn",
+      "sourceText": "Fünfzehn",
       "targetText": "пятнадцать",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5633,7 +5633,7 @@
     },
     {
       "id": "b70b0079-18e4-4cad-a45d-bd96aff1c115",
-      "sourceText": "gegeneinander",
+      "sourceText": "Gegeneinander",
       "targetText": "друг против друга",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5729,7 +5729,7 @@
     },
     {
       "id": "703038e4-befc-4a94-a30c-ec486ac5a677",
-      "sourceText": "geleitet",
+      "sourceText": "Geleitet",
       "targetText": "руководимый|управляемый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5753,7 +5753,7 @@
     },
     {
       "id": "29c6996b-5707-4f43-b42e-020cd4925681",
-      "sourceText": "gelobt",
+      "sourceText": "Gelobt",
       "targetText": "хвалённый|обещанный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5789,7 +5789,7 @@
     },
     {
       "id": "afe56107-d5f8-4571-951b-bddecab6ae1d",
-      "sourceText": "genie",
+      "sourceText": "Genie",
       "targetText": "гений",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5801,7 +5801,7 @@
     },
     {
       "id": "b97ad076-82d9-4a2d-a342-5f273d9b6224",
-      "sourceText": "geradezu",
+      "sourceText": "Geradezu",
       "targetText": "прямо-таки|буквально",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -5861,7 +5861,7 @@
     },
     {
       "id": "348c9b3a-5bd9-448c-9d8d-93384ec4a5a8",
-      "sourceText": "geschweige",
+      "sourceText": "Geschweige",
       "targetText": "не говоря уже",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6029,7 +6029,7 @@
     },
     {
       "id": "53240153-8afa-4ebf-9bfe-8e96c471c417",
-      "sourceText": "gewillt",
+      "sourceText": "Gewillt",
       "targetText": "готовый|склонный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6161,7 +6161,7 @@
     },
     {
       "id": "5a9f4b1d-3e32-4fea-afed-b425867f6bd0",
-      "sourceText": "global",
+      "sourceText": "Global",
       "targetText": "глобальный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6209,7 +6209,7 @@
     },
     {
       "id": "d2c80e75-c7af-45ef-be3f-415193ae89e9",
-      "sourceText": "gps",
+      "sourceText": "Gps",
       "targetText": "джипиэс|навигатор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6257,7 +6257,7 @@
     },
     {
       "id": "cc0c50ec-0224-4888-8884-cfaf5d1df792",
-      "sourceText": "grauenvoll",
+      "sourceText": "Grauenvoll",
       "targetText": "ужасный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6377,7 +6377,7 @@
     },
     {
       "id": "9af30821-903e-4f06-b8d5-89495851bc51",
-      "sourceText": "gärtner",
+      "sourceText": "Gärtner",
       "targetText": "садовник",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6641,7 +6641,7 @@
     },
     {
       "id": "ba24ed1f-d1e2-4972-8407-9e62bbca6c47",
-      "sourceText": "hebel",
+      "sourceText": "Hebel",
       "targetText": "рычаг",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6701,7 +6701,7 @@
     },
     {
       "id": "7a1e99e2-a663-4608-95bc-1a1eb6907e5d",
-      "sourceText": "hellseher",
+      "sourceText": "Hellseher",
       "targetText": "ясновидящий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6725,7 +6725,7 @@
     },
     {
       "id": "42416c9b-5b10-4637-abf6-5c19a1bd5641",
-      "sourceText": "herab",
+      "sourceText": "Herab",
       "targetText": "вниз|сверху",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6773,7 +6773,7 @@
     },
     {
       "id": "113aee1a-2f5f-4928-8aac-5f1ea0f65d52",
-      "sourceText": "hergeschickt",
+      "sourceText": "Hergeschickt",
       "targetText": "присланный сюда",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6845,7 +6845,7 @@
     },
     {
       "id": "63a15371-2659-474e-8096-bff89fcf6792",
-      "sourceText": "heutzutage",
+      "sourceText": "Heutzutage",
       "targetText": "в наши дни|сегодня",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6857,7 +6857,7 @@
     },
     {
       "id": "3e741921-634e-4cb4-aebd-0818a44981be",
-      "sourceText": "hierfür",
+      "sourceText": "Hierfür",
       "targetText": "для этого",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6905,7 +6905,7 @@
     },
     {
       "id": "7e6c6510-2ea3-4050-a1e1-6999d1253f35",
-      "sourceText": "hindurch",
+      "sourceText": "Hindurch",
       "targetText": "сквозь|через",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6953,7 +6953,7 @@
     },
     {
       "id": "c3b513cf-c2a2-4657-a48e-918845c24bfd",
-      "sourceText": "hinreißend",
+      "sourceText": "Hinreißend",
       "targetText": "восхитительный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -6977,7 +6977,7 @@
     },
     {
       "id": "95acf800-8937-4b2e-b059-fcf38cd2c7c3",
-      "sourceText": "hintereinander",
+      "sourceText": "Hintereinander",
       "targetText": "друг за другом",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7037,7 +7037,7 @@
     },
     {
       "id": "f6ccdf3d-dd9b-474f-b926-0df3ed53bc69",
-      "sourceText": "hinzu",
+      "sourceText": "Hinzu",
       "targetText": "в дополнение|к тому же",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7097,7 +7097,7 @@
     },
     {
       "id": "c39097a2-b96a-4568-8b7b-a845a20a3a91",
-      "sourceText": "horizont",
+      "sourceText": "Horizont",
       "targetText": "горизонт",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7337,7 +7337,7 @@
     },
     {
       "id": "c5deb0df-ec8e-4cb8-a4e1-8d091c499c6d",
-      "sourceText": "immerzu",
+      "sourceText": "Immerzu",
       "targetText": "постоянно|всё время",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7349,7 +7349,7 @@
     },
     {
       "id": "215db6ba-3cd7-4d17-a78a-52130d195fb9",
-      "sourceText": "immun",
+      "sourceText": "Immun",
       "targetText": "невосприимчивый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7421,7 +7421,7 @@
     },
     {
       "id": "2e710d3e-7992-4944-9eb2-06be575c22c9",
-      "sourceText": "imstande",
+      "sourceText": "Imstande",
       "targetText": "в состоянии",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7445,7 +7445,7 @@
     },
     {
       "id": "9cdcd3f8-aa10-44f7-8634-af07f4ec21a5",
-      "sourceText": "informant",
+      "sourceText": "Informant",
       "targetText": "информатор|осведомитель",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7565,7 +7565,7 @@
     },
     {
       "id": "f27743b3-4e13-41e5-b05e-f1ce3543932d",
-      "sourceText": "intensiv",
+      "sourceText": "Intensiv",
       "targetText": "интенсивный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7637,7 +7637,7 @@
     },
     {
       "id": "c4363827-513a-47e6-8420-71070f90d75a",
-      "sourceText": "involviert",
+      "sourceText": "Involviert",
       "targetText": "вовлечённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7673,7 +7673,7 @@
     },
     {
       "id": "bc5ac72e-7241-4bc9-8bb8-76873a95b522",
-      "sourceText": "irrelevant",
+      "sourceText": "Irrelevant",
       "targetText": "несущественный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7781,7 +7781,7 @@
     },
     {
       "id": "3d656bf2-7505-427f-8246-ccd0bda17a09",
-      "sourceText": "joint",
+      "sourceText": "Joint",
       "targetText": "косяк",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -7853,7 +7853,7 @@
     },
     {
       "id": "ce95d814-7c0d-4148-9d52-236242bc55c4",
-      "sourceText": "kakao",
+      "sourceText": "Kakao",
       "targetText": "какао",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -8021,7 +8021,7 @@
     },
     {
       "id": "5ebf4e65-661b-4df6-8ffa-69285dcaa50e",
-      "sourceText": "kaviar",
+      "sourceText": "Kaviar",
       "targetText": "икра",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -8033,7 +8033,7 @@
     },
     {
       "id": "8c4b1448-db4e-41db-bdbc-2f35c639a010",
-      "sourceText": "keinesfalls",
+      "sourceText": "Keinesfalls",
       "targetText": "ни в коем случае",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -8393,7 +8393,7 @@
     },
     {
       "id": "c749920a-9c01-46d0-9508-5dd4be4d4829",
-      "sourceText": "komplex",
+      "sourceText": "Komplex",
       "targetText": "сложный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -8537,7 +8537,7 @@
     },
     {
       "id": "bb352b9c-89a6-43b5-8a2f-12f76b074eec",
-      "sourceText": "kotzt",
+      "sourceText": "Kotzt",
       "targetText": "тошнит",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -8561,7 +8561,7 @@
     },
     {
       "id": "b223ace2-7650-4715-b047-e895db228ba2",
-      "sourceText": "kreativ",
+      "sourceText": "Kreativ",
       "targetText": "креативный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -8789,7 +8789,7 @@
     },
     {
       "id": "f75f4c92-595e-4642-827b-52018ae51090",
-      "sourceText": "lachend",
+      "sourceText": "Lachend",
       "targetText": "смеясь",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -8837,7 +8837,7 @@
     },
     {
       "id": "ceba53fa-51b1-47d7-992a-efc05f31092e",
-      "sourceText": "lanze",
+      "sourceText": "Lanze",
       "targetText": "копьё",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -9137,7 +9137,7 @@
     },
     {
       "id": "60d3674e-06b3-4f71-be3c-13c6cd0a72e4",
-      "sourceText": "liebevoll",
+      "sourceText": "Liebevoll",
       "targetText": "любящий|ласковый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -9353,7 +9353,7 @@
     },
     {
       "id": "a9ed62c9-342e-4a01-a4f1-ea54887c234a",
-      "sourceText": "mandant",
+      "sourceText": "Mandant",
       "targetText": "клиент (юр.)|доверитель",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -9581,7 +9581,7 @@
     },
     {
       "id": "6abfd6be-4dc9-48bc-b9f3-87a37321bc35",
-      "sourceText": "meinerseits",
+      "sourceText": "Meinerseits",
       "targetText": "с моей стороны",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -10121,7 +10121,7 @@
     },
     {
       "id": "e25e2afd-a417-44aa-b2fb-bc7070a61e1d",
-      "sourceText": "nanny",
+      "sourceText": "Nanny",
       "targetText": "няня",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -10241,7 +10241,7 @@
     },
     {
       "id": "7e5c60a2-1805-46ad-a620-a026427170b4",
-      "sourceText": "nieder",
+      "sourceText": "Nieder",
       "targetText": "вниз|низ",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -10409,7 +10409,7 @@
     },
     {
       "id": "2aa04547-d4f0-432e-956c-c14102ee1ea1",
-      "sourceText": "objekte",
+      "sourceText": "Objekte",
       "targetText": "объекты",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -10421,7 +10421,7 @@
     },
     {
       "id": "6cee9eef-8599-4d52-b42f-a6dad8d57939",
-      "sourceText": "ohnmacht",
+      "sourceText": "Ohnmacht",
       "targetText": "обморок|бессилие",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -10517,7 +10517,7 @@
     },
     {
       "id": "4abfa2a7-9a9a-4477-a73c-e718fcfb6a2d",
-      "sourceText": "parfüm",
+      "sourceText": "Parfüm",
       "targetText": "духи|парфюм",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -10577,7 +10577,7 @@
     },
     {
       "id": "ef9ffa94-83c2-4730-b301-46faff590d24",
-      "sourceText": "passend",
+      "sourceText": "Passend",
       "targetText": "подходящий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -10853,7 +10853,7 @@
     },
     {
       "id": "c8e3d483-18a3-4c4c-ab7b-73a435a3ab20",
-      "sourceText": "platziert",
+      "sourceText": "Platziert",
       "targetText": "размещённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -11045,7 +11045,7 @@
     },
     {
       "id": "0c3184ee-9925-4074-bb0a-0d34b1327ab5",
-      "sourceText": "privatdetektiv",
+      "sourceText": "Privatdetektiv",
       "targetText": "частный детектив",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -11105,7 +11105,7 @@
     },
     {
       "id": "137a7740-df89-4f11-9de5-0901f966a422",
-      "sourceText": "professionell",
+      "sourceText": "Professionell",
       "targetText": "профессиональный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -11201,7 +11201,7 @@
     },
     {
       "id": "7d5b5618-8993-443b-ae07-c86703ea7937",
-      "sourceText": "präzise",
+      "sourceText": "Präzise",
       "targetText": "точный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -11309,7 +11309,7 @@
     },
     {
       "id": "218f9306-5302-4a6a-9818-a076f4b056c2",
-      "sourceText": "puh",
+      "sourceText": "Puh",
       "targetText": "фух|уф",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -11405,7 +11405,7 @@
     },
     {
       "id": "36eccd7c-d0ce-4e73-abcc-48c5a2d28363",
-      "sourceText": "qualifiziert",
+      "sourceText": "Qualifiziert",
       "targetText": "квалифицированный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -11825,7 +11825,7 @@
     },
     {
       "id": "31704272-bebd-4f6b-a597-5d2bd7f1ac26",
-      "sourceText": "revier",
+      "sourceText": "Revier",
       "targetText": "участок|территория",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12065,7 +12065,7 @@
     },
     {
       "id": "a8094930-e3ff-4fe5-9a24-2f475968cc91",
-      "sourceText": "rührend",
+      "sourceText": "Rührend",
       "targetText": "трогательный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12089,7 +12089,7 @@
     },
     {
       "id": "a285aec5-80fc-4546-8879-0d818f42be25",
-      "sourceText": "sahne",
+      "sourceText": "Sahne",
       "targetText": "сливки",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12113,7 +12113,7 @@
     },
     {
       "id": "62a2671d-b277-497f-99c4-56b5862652d0",
-      "sourceText": "samstagabend",
+      "sourceText": "Samstagabend",
       "targetText": "субботний вечер",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12125,7 +12125,7 @@
     },
     {
       "id": "80f1673f-a2ce-4e8b-a555-e600d5b6cca0",
-      "sourceText": "samt",
+      "sourceText": "Samt",
       "targetText": "вместе с|бархат",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12185,7 +12185,7 @@
     },
     {
       "id": "e9b4b939-2739-4630-a472-954525d05574",
-      "sourceText": "scanner",
+      "sourceText": "Scanner",
       "targetText": "сканер",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12377,7 +12377,7 @@
     },
     {
       "id": "2e04b71e-fac5-4ba7-a16d-572a1892068f",
-      "sourceText": "schlicht",
+      "sourceText": "Schlicht",
       "targetText": "простой|скромный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12389,7 +12389,7 @@
     },
     {
       "id": "b1019b52-f51d-4316-9084-a3d1c99a243c",
-      "sourceText": "schließfach",
+      "sourceText": "Schließfach",
       "targetText": "ячейка|шкафчик",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12557,7 +12557,7 @@
     },
     {
       "id": "b6f6a681-0dc4-49e8-8b27-e7b148c6df3a",
-      "sourceText": "schuldgefühle",
+      "sourceText": "Schuldgefühle",
       "targetText": "чувство вины",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12593,7 +12593,7 @@
     },
     {
       "id": "54b6f118-c6ee-4701-a282-77f464df4904",
-      "sourceText": "schweiß",
+      "sourceText": "Schweiß",
       "targetText": "пот",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12785,7 +12785,7 @@
     },
     {
       "id": "4de32c9c-812e-4bfb-8c3f-2b73517e0f58",
-      "sourceText": "seide",
+      "sourceText": "Seide",
       "targetText": "шёлк",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12797,7 +12797,7 @@
     },
     {
       "id": "50bf34d9-324d-4c79-bf0f-31f781e463a5",
-      "sourceText": "seither",
+      "sourceText": "Seither",
       "targetText": "с тех пор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12821,7 +12821,7 @@
     },
     {
       "id": "77e446cb-506e-42c7-a194-08fc913bdec2",
-      "sourceText": "sekte",
+      "sourceText": "Sekte",
       "targetText": "секта",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -12989,7 +12989,7 @@
     },
     {
       "id": "875a23b9-b13c-4982-9bca-b18ac15a4894",
-      "sourceText": "serum",
+      "sourceText": "Serum",
       "targetText": "сыворотка",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13001,7 +13001,7 @@
     },
     {
       "id": "4256fa5e-02d6-45e2-954d-660cf058f427",
-      "sourceText": "server",
+      "sourceText": "Server",
       "targetText": "сервер",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13109,7 +13109,7 @@
     },
     {
       "id": "9a113dcd-9fc3-422d-aef3-33465adb6ee9",
-      "sourceText": "signor",
+      "sourceText": "Signor",
       "targetText": "синьор",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13181,7 +13181,7 @@
     },
     {
       "id": "5c799df2-7f80-499a-b983-c49cb2d6a55d",
-      "sourceText": "smoking",
+      "sourceText": "Smoking",
       "targetText": "смокинг",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13217,7 +13217,7 @@
     },
     {
       "id": "b2be0def-5a2b-4cba-b537-f6a2afe903ff",
-      "sourceText": "solo",
+      "sourceText": "Solo",
       "targetText": "соло|в одиночку",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13241,7 +13241,7 @@
     },
     {
       "id": "3a25d17f-d12e-432f-b6ed-f314d28856da",
-      "sourceText": "sonnenbrille",
+      "sourceText": "Sonnenbrille",
       "targetText": "солнцезащитные очки",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13265,7 +13265,7 @@
     },
     {
       "id": "b71c1daf-1d42-48c9-9bf8-5ebc2d1a933b",
-      "sourceText": "sorgerecht",
+      "sourceText": "Sorgerecht",
       "targetText": "право опеки",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13409,7 +13409,7 @@
     },
     {
       "id": "e65f4bd7-5765-4597-88ff-f6c194e9ecab",
-      "sourceText": "spitzel",
+      "sourceText": "Spitzel",
       "targetText": "шпион|осведомитель",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13421,7 +13421,7 @@
     },
     {
       "id": "11308624-31a0-43b1-828e-1873ba43ca58",
-      "sourceText": "spitzname",
+      "sourceText": "Spitzname",
       "targetText": "прозвище",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13433,7 +13433,7 @@
     },
     {
       "id": "f2e156e9-8edd-4366-9a4b-35fe9bcc4178",
-      "sourceText": "spontan",
+      "sourceText": "Spontan",
       "targetText": "спонтанный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13505,7 +13505,7 @@
     },
     {
       "id": "748a7957-545e-473b-b6e7-5fd8e1827957",
-      "sourceText": "spätestens",
+      "sourceText": "Spätestens",
       "targetText": "самое позднее",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13541,7 +13541,7 @@
     },
     {
       "id": "2b05183a-4a66-41c9-b816-8146cd0767d0",
-      "sourceText": "standard",
+      "sourceText": "Standard",
       "targetText": "стандарт",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13553,7 +13553,7 @@
     },
     {
       "id": "352d9230-bd8c-48a5-a08a-28b2cfdfc04f",
-      "sourceText": "starr",
+      "sourceText": "Starr",
       "targetText": "неподвижный|жёсткий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13577,7 +13577,7 @@
     },
     {
       "id": "979baf98-0465-4da3-b093-10b21f901a07",
-      "sourceText": "stationiert",
+      "sourceText": "Stationiert",
       "targetText": "размещённый|дислоцированный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13637,7 +13637,7 @@
     },
     {
       "id": "7b804d05-6de7-466f-a3e6-953648191098",
-      "sourceText": "stiefvater",
+      "sourceText": "Stiefvater",
       "targetText": "отчим",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13853,7 +13853,7 @@
     },
     {
       "id": "79b73a3d-72eb-466c-93be-df8409d41f02",
-      "sourceText": "störung",
+      "sourceText": "Störung",
       "targetText": "помеха|нарушение",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13877,7 +13877,7 @@
     },
     {
       "id": "4b98be99-6968-423e-a0bc-5ad22526fffb",
-      "sourceText": "stützpunkt",
+      "sourceText": "Stützpunkt",
       "targetText": "база|опорный пункт",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -13913,7 +13913,7 @@
     },
     {
       "id": "24cc1d6a-9503-4926-8cbb-0de130b6bd5e",
-      "sourceText": "sänger",
+      "sourceText": "Sänger",
       "targetText": "певец",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14129,7 +14129,7 @@
     },
     {
       "id": "9d87516e-0a2b-4ba3-9067-4fa93efcd070",
-      "sourceText": "teich",
+      "sourceText": "Teich",
       "targetText": "пруд",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14165,7 +14165,7 @@
     },
     {
       "id": "e7d1b0fb-4e55-438d-83f7-47b990f0e768",
-      "sourceText": "telefonzelle",
+      "sourceText": "Telefonzelle",
       "targetText": "телефонная будка",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14201,7 +14201,7 @@
     },
     {
       "id": "f1a1f027-d490-409e-b501-fe4b71e0f8ef",
-      "sourceText": "terrasse",
+      "sourceText": "Terrasse",
       "targetText": "терраса",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14249,7 +14249,7 @@
     },
     {
       "id": "59f9890b-dbf4-404c-bc02-ee7ee73df588",
-      "sourceText": "theorie",
+      "sourceText": "Theorie",
       "targetText": "теория",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14285,7 +14285,7 @@
     },
     {
       "id": "0dd14a61-f128-421e-ba3d-6f18782011ba",
-      "sourceText": "tipps",
+      "sourceText": "Tipps",
       "targetText": "советы|подсказки",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14561,7 +14561,7 @@
     },
     {
       "id": "db02cee1-dce8-4387-996f-e624d70855c3",
-      "sourceText": "umher",
+      "sourceText": "Umher",
       "targetText": "вокруг|кругом",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14585,7 +14585,7 @@
     },
     {
       "id": "edd5bfd0-ad55-4325-b270-f6e91dd20c07",
-      "sourceText": "umstände",
+      "sourceText": "Umstände",
       "targetText": "обстоятельства|условия",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14597,7 +14597,7 @@
     },
     {
       "id": "70293f98-1427-4184-8c7a-b4cf4af28df2",
-      "sourceText": "umweg",
+      "sourceText": "Umweg",
       "targetText": "обходной путь",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14657,7 +14657,7 @@
     },
     {
       "id": "864fd565-5e21-41d3-92f8-a4133e9bd122",
-      "sourceText": "unbesorgt",
+      "sourceText": "Unbesorgt",
       "targetText": "беззаботный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14669,7 +14669,7 @@
     },
     {
       "id": "aabc003a-6de1-4dd3-b999-386250548e8f",
-      "sourceText": "unbewaffnet",
+      "sourceText": "Unbewaffnet",
       "targetText": "безоружный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14681,7 +14681,7 @@
     },
     {
       "id": "47aff34a-d96c-4e7f-8cdd-f94b5d0be2a1",
-      "sourceText": "undercover",
+      "sourceText": "Undercover",
       "targetText": "под прикрытием",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14693,7 +14693,7 @@
     },
     {
       "id": "9c51a409-a50b-4c7a-8006-ccf8e07a3a1f",
-      "sourceText": "unerwartet",
+      "sourceText": "Unerwartet",
       "targetText": "неожиданный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14741,7 +14741,7 @@
     },
     {
       "id": "9e350186-d34f-4c1b-8b85-277386c70591",
-      "sourceText": "ungeschickt",
+      "sourceText": "Ungeschickt",
       "targetText": "неуклюжий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14753,7 +14753,7 @@
     },
     {
       "id": "e0529dd7-7e2b-4553-833d-e41f63f03f86",
-      "sourceText": "ungestört",
+      "sourceText": "Ungestört",
       "targetText": "беспрепятственный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14801,7 +14801,7 @@
     },
     {
       "id": "d7530319-30a8-4d26-9a1b-a16440b18368",
-      "sourceText": "unklar",
+      "sourceText": "Unklar",
       "targetText": "неясный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14825,7 +14825,7 @@
     },
     {
       "id": "ab8040e8-ab1e-4873-924c-0f2900a2bc6e",
-      "sourceText": "unrecht",
+      "sourceText": "Unrecht",
       "targetText": "неправота|несправедливость",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -14993,7 +14993,7 @@
     },
     {
       "id": "0f7da05d-cef6-4acc-975e-1e1f87d3b5c5",
-      "sourceText": "unverschämt",
+      "sourceText": "Unverschämt",
       "targetText": "нахальный|наглый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15005,7 +15005,7 @@
     },
     {
       "id": "9b3e6ce6-db6c-4835-8e43-a9dc2e8654e4",
-      "sourceText": "unversehrt",
+      "sourceText": "Unversehrt",
       "targetText": "невредимый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15029,7 +15029,7 @@
     },
     {
       "id": "9b628aae-71df-43ad-9a39-6b1cb24adf35",
-      "sourceText": "unwohl",
+      "sourceText": "Unwohl",
       "targetText": "нехорошо|дурно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15053,7 +15053,7 @@
     },
     {
       "id": "cc175061-b8d6-4414-b239-94e58c1c9962",
-      "sourceText": "unzählige",
+      "sourceText": "Unzählige",
       "targetText": "бесчисленные",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15257,7 +15257,7 @@
     },
     {
       "id": "d18fef41-7a51-44a3-81d6-eff805f524ee",
-      "sourceText": "verehrer",
+      "sourceText": "Verehrer",
       "targetText": "поклонник",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15305,7 +15305,7 @@
     },
     {
       "id": "f6541c7f-56bb-4272-b9d4-d47055596513",
-      "sourceText": "verflixt",
+      "sourceText": "Verflixt",
       "targetText": "проклятый|чёрт",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15317,7 +15317,7 @@
     },
     {
       "id": "3fcaede1-0808-4840-abf7-5ef2dd51828c",
-      "sourceText": "verflucht",
+      "sourceText": "Verflucht",
       "targetText": "проклятый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15509,7 +15509,7 @@
     },
     {
       "id": "53698529-6c9f-4861-8cfd-506850ad7917",
-      "sourceText": "verlockend",
+      "sourceText": "Verlockend",
       "targetText": "заманчивый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15665,7 +15665,7 @@
     },
     {
       "id": "d8797de6-be9e-4236-b0a7-93a23aa70fa8",
-      "sourceText": "versaut",
+      "sourceText": "Versaut",
       "targetText": "испорченный|развратный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15689,7 +15689,7 @@
     },
     {
       "id": "d51867a7-1cd3-4b92-8a62-4b3fdfb23f97",
-      "sourceText": "verschluckt",
+      "sourceText": "Verschluckt",
       "targetText": "проглоченный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15749,7 +15749,7 @@
     },
     {
       "id": "51c562b3-54da-4234-afa4-bff5038cb83e",
-      "sourceText": "verspätet",
+      "sourceText": "Verspätet",
       "targetText": "запоздалый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15929,7 +15929,7 @@
     },
     {
       "id": "0c71888a-f140-4ef1-8f79-8deaabc4956b",
-      "sourceText": "vielmehr",
+      "sourceText": "Vielmehr",
       "targetText": "скорее|напротив",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15953,7 +15953,7 @@
     },
     {
       "id": "c18089ec-4cf2-4522-becb-b775fc0125bb",
-      "sourceText": "voilà",
+      "sourceText": "Voilà",
       "targetText": "вуаля",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -15989,7 +15989,7 @@
     },
     {
       "id": "779381c8-6c37-427b-84bf-e989a81de2a9",
-      "sourceText": "vorausgesetzt",
+      "sourceText": "Vorausgesetzt",
       "targetText": "при условии",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16361,7 +16361,7 @@
     },
     {
       "id": "42c0c59f-395b-451f-82bd-9014ed417ca1",
-      "sourceText": "wal",
+      "sourceText": "Wal",
       "targetText": "кит",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16481,7 +16481,7 @@
     },
     {
       "id": "12f13aef-5bd1-4b3c-bc64-ec621bdaaec5",
-      "sourceText": "weitaus",
+      "sourceText": "Weitaus",
       "targetText": "гораздо",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16637,7 +16637,7 @@
     },
     {
       "id": "a71fdefe-bf7f-48c1-aae4-438e47b282b1",
-      "sourceText": "wiederum",
+      "sourceText": "Wiederum",
       "targetText": "в свою очередь",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16697,7 +16697,7 @@
     },
     {
       "id": "43864766-cd00-4549-81bb-f11c17c314b6",
-      "sourceText": "wochenlang",
+      "sourceText": "Wochenlang",
       "targetText": "неделями",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16709,7 +16709,7 @@
     },
     {
       "id": "3a8e9f50-4b4b-408a-b077-a6850834ad28",
-      "sourceText": "wodurch",
+      "sourceText": "Wodurch",
       "targetText": "из-за чего|благодаря чему",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16769,7 +16769,7 @@
     },
     {
       "id": "26ac1293-5c16-4d3d-bb25-5eee34019b85",
-      "sourceText": "wurmloch",
+      "sourceText": "Wurmloch",
       "targetText": "червоточина",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16781,7 +16781,7 @@
     },
     {
       "id": "8933553c-9dbb-41a0-8020-a6ddb9640d42",
-      "sourceText": "wurst",
+      "sourceText": "Wurst",
       "targetText": "колбаса",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16841,7 +16841,7 @@
     },
     {
       "id": "8097cf4f-76b0-424c-af63-5f4dfa81c813",
-      "sourceText": "zart",
+      "sourceText": "Zart",
       "targetText": "нежный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -16865,7 +16865,7 @@
     },
     {
       "id": "7022e60b-b946-4d5d-aace-0084972e0637",
-      "sourceText": "zeh",
+      "sourceText": "Zeh",
       "targetText": "палец ноги",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17081,7 +17081,7 @@
     },
     {
       "id": "0626efb7-a66b-4541-ba53-b42ef7bba3e8",
-      "sourceText": "zugeteilt",
+      "sourceText": "Zugeteilt",
       "targetText": "распределённый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17093,7 +17093,7 @@
     },
     {
       "id": "e1f210aa-cbc7-4756-8181-4a9d2d25768f",
-      "sourceText": "zugleich",
+      "sourceText": "Zugleich",
       "targetText": "одновременно",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17105,7 +17105,7 @@
     },
     {
       "id": "8b879b85-e541-44d7-b6bb-86fba7288593",
-      "sourceText": "zugrunde",
+      "sourceText": "Zugrunde",
       "targetText": "в основе",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17285,7 +17285,7 @@
     },
     {
       "id": "174ef20b-8a9e-474b-84c5-bce60efb28d3",
-      "sourceText": "zutiefst",
+      "sourceText": "Zutiefst",
       "targetText": "глубоко|крайне",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17369,7 +17369,7 @@
     },
     {
       "id": "cb6c9801-aaef-4e1f-b36d-1bef95c75e16",
-      "sourceText": "zäh",
+      "sourceText": "Zäh",
       "targetText": "жёсткий|упорный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17453,7 +17453,7 @@
     },
     {
       "id": "47d28533-cbd1-4fcb-af69-afc4247464a0",
-      "sourceText": "ätzend",
+      "sourceText": "Ätzend",
       "targetText": "едкий|отстойный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17549,7 +17549,7 @@
     },
     {
       "id": "5d6602f6-f25f-4262-9ea3-53709c876879",
-      "sourceText": "überfordert",
+      "sourceText": "Überfordert",
       "targetText": "перегруженный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17561,7 +17561,7 @@
     },
     {
       "id": "3af9dba3-3d1e-4a14-b0eb-a5d443bb496a",
-      "sourceText": "übergeschnappt",
+      "sourceText": "Übergeschnappt",
       "targetText": "свихнувшийся",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17597,7 +17597,7 @@
     },
     {
       "id": "33f2ce79-81ab-4c22-9ada-b9aca877babf",
-      "sourceText": "überwältigend",
+      "sourceText": "Überwältigend",
       "targetText": "ошеломляющий",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
@@ -17621,7 +17621,7 @@
     },
     {
       "id": "24492751-4196-4835-8a09-08f8781b9c7a",
-      "sourceText": "üble",
+      "sourceText": "Üble",
       "targetText": "дурной|скверный",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
