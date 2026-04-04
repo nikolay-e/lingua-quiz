@@ -93,20 +93,15 @@ function generateWithExamples(
     const t = translations[i];
     if (t === undefined) continue;
     rows.push([String(i + 1), t.sourceText, t.targetText]);
-    if (t.sourceUsageExample !== null || t.targetUsageExample !== null) {
-      const exampleParts = [t.sourceUsageExample, t.targetUsageExample].filter(
-        (e): e is string => e !== null && e !== undefined,
-      );
-      if (exampleParts.length > 0) {
-        rows.push([
-          '',
-          {
-            content: exampleParts.join('\n'),
-            styles: { fontSize: 7.5, textColor: [100, 100, 100] },
-          },
-          '',
-        ]);
-      }
+    const srcEx = t.sourceUsageExample ?? '';
+    const tgtEx = t.targetUsageExample ?? '';
+    if (srcEx !== '' || tgtEx !== '') {
+      const exStyle = { fontSize: 7.5, textColor: [100, 100, 100] };
+      rows.push([
+        '',
+        { content: srcEx, styles: exStyle },
+        { content: tgtEx, styles: exStyle },
+      ]);
     }
   }
 
