@@ -1,14 +1,16 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Languages, GraduationCap, BookOpen, Mic, Flame, Target, ChevronDown } from 'lucide-react';
-import { Select, Skeleton } from '@shared/ui';
+import { Languages, GraduationCap, BookOpen, Mic, Flame, Target, ChevronDown, Download } from 'lucide-react';
+import { Button, Select, Skeleton } from '@shared/ui';
 import { AppShell, ErrorDisplay, ModeCard, useToast } from '@shared/components';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { useLanguageLevelSelection } from '@features/quiz/hooks';
 import { useSpeakStore } from '@features/speak';
 import { logger, extractErrorMessage, cn } from '@shared/utils';
+import api from '@api/api';
+import { generateVocabularyPdf } from '@features/quiz/services/pdf-service';
 
 export function HomePage(): React.JSX.Element {
   const { t } = useTranslation();
@@ -63,6 +65,8 @@ export function HomePage(): React.JSX.Element {
     void handleLoadWordLists();
   }, [handleLoadWordLists]);
 
+  const [pdfLoading, setPdfLoading] = useState(false);
+
   const handleLearnWords = async () => {
     if (selectedList === null || token === null) return;
     reset();
@@ -71,6 +75,19 @@ export function HomePage(): React.JSX.Element {
       void navigate('/quiz');
     } catch (error: unknown) {
       toast.error(extractErrorMessage(error, t('common.error')));
+    }
+  };
+
+  const handleDownloadPdf = async (includeExamples: boolean) => {
+    if (selectedList === null || token === null) return;
+    setPdfLoading(true);
+    try {
+      const translations = await api.fetchTranslations(token, selectedList.listName);
+      await generateVocabularyPdf(translations, selectedList.listName, includeExamples);
+    } catch (error: unknown) {
+      toast.error(extractErrorMessage(error, t('common.error')));
+    } finally {
+      setPdfLoading(false);
     }
   };
 
@@ -119,6 +136,33 @@ export function HomePage(): React.JSX.Element {
         }}
         badge={selectedList?.listName}
       />
+
+      {canStart && (
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            className="flex-1"
+            disabled={pdfLoading}
+            onClick={() => {
+              void handleDownloadPdf(false);
+            }}
+          >
+            <Download size={16} />
+            {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdf')}
+          </Button>
+          <Button
+            variant="outline"
+            className="flex-1"
+            disabled={pdfLoading}
+            onClick={() => {
+              void handleDownloadPdf(true);
+            }}
+          >
+            <Download size={16} />
+            {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdfExamples')}
+          </Button>
+        </div>
+      )}
 
       <details open>
         <summary className="cursor-pointer select-none flex items-center gap-2 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors list-none [&::-webkit-details-marker]:hidden">

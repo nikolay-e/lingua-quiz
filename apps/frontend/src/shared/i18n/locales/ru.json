@@ -218,6 +218,9 @@
     "practicePronunciation": "Произношение",
     "practicePronunciationDesc": "Улучшите навыки речи",
     "chooseCourse": "Выбор курса",
+    "downloadPdf": "Скачать PDF",
+    "downloadPdfExamples": "PDF с примерами",
+    "pdfGenerating": "Генерация...",
     "streakDays": "Дней подряд",
     "accuracy": "Точность",
     "attempts": "Попыток"

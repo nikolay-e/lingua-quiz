@@ -27,6 +27,8 @@
     "ajv-formats": "^3.0.1",
     "class-variance-authority": "^0.7.1",
     "i18next": "^25.8.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.7",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.563.0",
     "react": "^19.1.0",
