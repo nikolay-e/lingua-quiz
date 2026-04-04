@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Languages, GraduationCap, BookOpen, Mic, Flame, Target, ChevronDown, Download } from 'lucide-react';
-import { Button, Select, Skeleton } from '@shared/ui';
-import { AppShell, ErrorDisplay, ModeCard, useToast } from '@shared/components';
+import { BookOpen, Mic, Flame, Target, Download } from 'lucide-react';
+import { Button } from '@shared/ui';
+import { AppShell, ModeCard, useToast } from '@shared/components';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { useLanguageLevelSelection } from '@features/quiz/hooks';
 import { useSpeakStore } from '@features/speak';
-import { logger, extractErrorMessage, cn } from '@shared/utils';
+import { extractErrorMessage } from '@shared/utils';
 import api from '@api/api';
 import { generateVocabularyPdf } from '@features/quiz/services/pdf-service';
 
@@ -19,28 +19,11 @@ export function HomePage(): React.JSX.Element {
 
   const token = useAuthStore((state) => state.token);
   const wordLists = useQuizStore((state) => state.wordLists);
-  const loading = useQuizStore((state) => state.loading);
   const loadWordLists = useQuizStore((state) => state.loadWordLists);
-  const startQuiz = useQuizStore((state) => state.startQuiz);
-  const reset = useQuizStore((state) => state.reset);
   const streakDays = useSpeakStore((state) => state.streakDays);
   const attempts = useSpeakStore((state) => state.attempts);
 
-  const {
-    selectedKnown,
-    selectedLearning,
-    selectedLevel,
-    selectedList,
-    knownOptions,
-    learningOptions,
-    levelOptions,
-    handleKnownChange,
-    handleLearningChange,
-    handleLevelChange,
-    canStart,
-  } = useLanguageLevelSelection(wordLists);
-
-  const [loadError, setLoadError] = useState<string | null>(null);
+  const { selectedList } = useLanguageLevelSelection(wordLists);
 
   const speakAccuracy = useMemo(() => {
     if (attempts.length === 0) return null;
@@ -52,12 +35,10 @@ export function HomePage(): React.JSX.Element {
 
   const handleLoadWordLists = useCallback(async (): Promise<void> => {
     if (token === null) return;
-    setLoadError(null);
     try {
       await loadWordLists(token);
-    } catch (error: unknown) {
-      logger.error('Failed to load word lists:', error);
-      setLoadError(extractErrorMessage(error, 'Failed to load quizzes'));
+    } catch {
+      /* word lists will load on quiz page */
     }
   }, [token, loadWordLists]);
 
@@ -66,17 +47,6 @@ export function HomePage(): React.JSX.Element {
   }, [handleLoadWordLists]);
 
   const [pdfLoading, setPdfLoading] = useState(false);
-
-  const handleLearnWords = async () => {
-    if (selectedList === null || token === null) return;
-    reset();
-    try {
-      await startQuiz(token, selectedList.listName);
-      void navigate('/quiz');
-    } catch (error: unknown) {
-      toast.error(extractErrorMessage(error, t('common.error')));
-    }
-  };
 
   const handleDownloadPdf = async (includeExamples: boolean) => {
     if (selectedList === null || token === null) return;
@@ -129,15 +99,15 @@ export function HomePage(): React.JSX.Element {
         icon={BookOpen}
         title={t('home.learnWords')}
         description={t('home.learnWordsDesc')}
-        disabled={!canStart}
+        disabled={false}
         variant="primary"
         onClick={() => {
-          void handleLearnWords();
+          void navigate('/quiz');
         }}
         badge={selectedList?.listName}
       />
 
-      {canStart && (
+      {selectedList !== null && (
         <div className="flex gap-2">
           <Button
             variant="outline"
@@ -163,94 +133,6 @@ export function HomePage(): React.JSX.Element {
           </Button>
         </div>
       )}
-
-      <details open>
-        <summary className="cursor-pointer select-none flex items-center gap-2 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors list-none [&::-webkit-details-marker]:hidden">
-          <ChevronDown
-            size={16}
-            className="transition-transform [[open]>&]:rotate-0 [details:not([open])>&]:-rotate-90"
-          />
-          {t('home.chooseCourse')}
-          {selectedList !== null && (
-            <span className="text-xs text-primary font-normal ml-1">{selectedList.listName}</span>
-          )}
-        </summary>
-        <div className="mt-3 bg-card border border-border rounded-lg p-5">
-          {loading ? (
-            <div className="flex flex-col gap-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="grid grid-cols-[120px_1fr] gap-4 items-center">
-                  <Skeleton className="h-5" />
-                  <Skeleton className="h-10" />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-[120px_1fr] gap-4 items-center">
-                <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
-                  <Languages size={18} className="text-muted-foreground" />
-                  <span>{t('quiz.iSpeak')}</span>
-                </div>
-                <Select
-                  value={selectedKnown}
-                  onValueChange={handleKnownChange}
-                  options={knownOptions}
-                  placeholder={t('quiz.selectLanguage')}
-                />
-              </div>
-
-              <div
-                className={cn(
-                  'grid grid-cols-[120px_1fr] gap-4 items-center transition-opacity',
-                  selectedKnown === undefined && 'opacity-50 pointer-events-none',
-                )}
-              >
-                <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
-                  <BookOpen size={18} className="text-muted-foreground" />
-                  <span>{t('quiz.iLearn')}</span>
-                </div>
-                <Select
-                  value={selectedLearning}
-                  onValueChange={handleLearningChange}
-                  options={learningOptions}
-                  placeholder={t('quiz.selectLanguage')}
-                  disabled={selectedKnown === undefined}
-                />
-              </div>
-
-              <div
-                className={cn(
-                  'grid grid-cols-[120px_1fr] gap-4 items-center transition-opacity',
-                  selectedLearning === undefined && 'opacity-50 pointer-events-none',
-                )}
-              >
-                <div className="flex items-center gap-2 font-medium text-foreground whitespace-nowrap">
-                  <GraduationCap size={18} className="text-muted-foreground" />
-                  <span>{t('quiz.level')}</span>
-                </div>
-                <Select
-                  value={selectedLevel}
-                  onValueChange={handleLevelChange}
-                  options={levelOptions}
-                  placeholder={t('quiz.selectLevel')}
-                  disabled={selectedLearning === undefined}
-                />
-              </div>
-            </div>
-          )}
-
-          {loadError !== null && (
-            <ErrorDisplay
-              message={loadError}
-              onRetry={() => {
-                void handleLoadWordLists();
-              }}
-              retryLabel={t('common.tryAgain')}
-            />
-          )}
-        </div>
-      </details>
     </AppShell>
   );
 }

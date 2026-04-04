@@ -39,7 +39,13 @@ def login_user(page: Page, username: str, password: str) -> None:
     expect(page.locator("text=Learn Words")).to_be_visible(timeout=10000)
 
 
+def navigate_to_quiz(page: Page) -> None:
+    page.get_by_role("button", name="Learn Words").click()
+    page.wait_for_load_state("networkidle")
+
+
 def start_quiz_with_cascading_selectors(page: Page) -> None:
+    navigate_to_quiz(page)
     quiz = QuizPage(page, FRONTEND_URL)
     quiz.select_cascading_and_start()
 

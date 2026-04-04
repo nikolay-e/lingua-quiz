@@ -74,8 +74,12 @@ class QuizPage(BasePage):
             self.selector_triggers.nth(i).click()
             self.page.locator('[role="option"]').first.click()
             self.page.wait_for_timeout(200)
-        self.click_learn_words()
+        self.click_start_learning()
         self.expect_question_visible()
+        return self
+
+    def click_start_learning(self):
+        self.page.get_by_role("button", name="Start Learning").click()
         return self
 
     def advance_to_next(self, timeout: int = 3000):

@@ -2,7 +2,7 @@
 
 import os
 
-from conftest import AuthenticatedUser, login_user
+from conftest import AuthenticatedUser, login_user, navigate_to_quiz
 from pages.quiz_page import QuizPage
 from playwright.sync_api import Page, expect
 import pytest
@@ -16,17 +16,21 @@ class TestPdfDownload:
     def test_pdf_buttons_appear_after_course_selection(
         self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage
     ) -> None:
-        """PDF download buttons should appear when a course is selected."""
+        """PDF download buttons should appear on home page when a course was previously selected."""
         login_user(page, test_user["username"], test_user["password"])
 
-        # Select course via cascading selectors
+        # Navigate to quiz page and select a course
+        navigate_to_quiz(page)
         expect(quiz_page.selector_triggers.first).to_be_visible(timeout=5000)
         for i in range(3):
             quiz_page.selector_triggers.nth(i).click()
             page.locator('[role="option"]').first.click()
             page.wait_for_timeout(200)
 
-        # PDF buttons should be visible
+        # Go back to home page — PDF buttons should be visible (selection persisted)
+        quiz_page.click_back_to_menu()
+        quiz_page.expect_welcome_visible(timeout=3000)
+
         pdf_button = page.get_by_role("button", name="Download PDF")
         pdf_examples_button = page.get_by_role("button", name="PDF with Examples")
 
@@ -39,7 +43,7 @@ class TestPdfDownload:
         """PDF buttons should not be visible when no course is selected."""
         login_user(page, test_user["username"], test_user["password"])
 
-        # Without selecting all 3 dropdowns, PDF buttons should not exist
+        # Without selecting a course, PDF buttons should not exist
         pdf_button = page.get_by_role("button", name="Download PDF")
         expect(pdf_button).to_have_count(0)
 
@@ -49,12 +53,17 @@ class TestPdfDownload:
         """Clicking PDF download should trigger a file download."""
         login_user(page, test_user["username"], test_user["password"])
 
-        # Select course
+        # Select course via quiz page
+        navigate_to_quiz(page)
         expect(quiz_page.selector_triggers.first).to_be_visible(timeout=5000)
         for i in range(3):
             quiz_page.selector_triggers.nth(i).click()
             page.locator('[role="option"]').first.click()
             page.wait_for_timeout(200)
+
+        # Go back to home page
+        quiz_page.click_back_to_menu()
+        quiz_page.expect_welcome_visible(timeout=3000)
 
         pdf_button = page.get_by_role("button", name="Download PDF")
         expect(pdf_button).to_be_visible(timeout=3000)
