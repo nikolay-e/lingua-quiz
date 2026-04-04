@@ -1,21 +1,16 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { BookOpen, Mic, Flame, Target, Download } from 'lucide-react';
-import { Button } from '@shared/ui';
-import { AppShell, ModeCard, useToast } from '@shared/components';
+import { BookOpen, Mic, Flame, Target } from 'lucide-react';
+import { AppShell, ModeCard } from '@shared/components';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
 import { useLanguageLevelSelection } from '@features/quiz/hooks';
 import { useSpeakStore } from '@features/speak';
-import { extractErrorMessage } from '@shared/utils';
-import api from '@api/api';
-import { generateVocabularyPdf } from '@features/quiz/services/pdf-service';
 
 export function HomePage(): React.JSX.Element {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const toast = useToast();
 
   const token = useAuthStore((state) => state.token);
   const wordLists = useQuizStore((state) => state.wordLists);
@@ -45,21 +40,6 @@ export function HomePage(): React.JSX.Element {
   useEffect(() => {
     void handleLoadWordLists();
   }, [handleLoadWordLists]);
-
-  const [pdfLoading, setPdfLoading] = useState(false);
-
-  const handleDownloadPdf = async (includeExamples: boolean) => {
-    if (selectedList === null || token === null) return;
-    setPdfLoading(true);
-    try {
-      const translations = await api.fetchTranslations(token, selectedList.listName);
-      await generateVocabularyPdf(translations, selectedList.listName, includeExamples);
-    } catch (error: unknown) {
-      toast.error(extractErrorMessage(error, t('common.error')));
-    } finally {
-      setPdfLoading(false);
-    }
-  };
 
   return (
     <AppShell maxWidth="2xl">
@@ -107,32 +87,6 @@ export function HomePage(): React.JSX.Element {
         badge={selectedList?.listName}
       />
 
-      {selectedList !== null && (
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            className="flex-1"
-            disabled={pdfLoading}
-            onClick={() => {
-              void handleDownloadPdf(false);
-            }}
-          >
-            <Download size={16} />
-            {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdf')}
-          </Button>
-          <Button
-            variant="outline"
-            className="flex-1"
-            disabled={pdfLoading}
-            onClick={() => {
-              void handleDownloadPdf(true);
-            }}
-          >
-            <Download size={16} />
-            {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdfExamples')}
-          </Button>
-        </div>
-      )}
     </AppShell>
   );
 }

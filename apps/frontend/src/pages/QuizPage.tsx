@@ -1,4 +1,5 @@
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Mic, MicOff } from 'lucide-react';
 import { useAuthStore } from '@features/auth/stores/auth.store';
 import { useQuizStore } from '@features/quiz/stores/quiz.store';
@@ -19,15 +20,19 @@ import {
 } from '@features/quiz/components';
 import { SUPPORTED_SPEAK_LANGS } from '@features/speak';
 import type { LanguageCode } from '@features/speak/types';
+import api from '@api/api';
+import { generateVocabularyPdf } from '@features/quiz/services/pdf-service';
 import { AppShell, FeedCard, ErrorDisplay, useToast } from '@shared/components';
 import { Button } from '@shared/ui';
-import { logger, isTouchDevice } from '@shared/utils';
+import { logger, isTouchDevice, extractErrorMessage } from '@shared/utils';
 import { reacquireWakeLockOnVisibilityChange } from '@shared/pwa';
 
 export function QuizPage(): React.JSX.Element {
+  const { t } = useTranslation();
   const toast = useToast();
 
   const token = useAuthStore((state) => state.token);
+  const [pdfLoading, setPdfLoading] = useState(false);
 
   const wordLists = useQuizStore((state) => state.wordLists);
   const selectedQuiz = useQuizStore((state) => state.selectedQuiz);
@@ -84,6 +89,19 @@ export function QuizPage(): React.JSX.Element {
   const canPronounce = speakLanguage !== undefined;
 
   const pronunciationWord = pronunciationMode && canPronounce ? pronunciationQueue.currentWord : null;
+
+  const handleDownloadPdf = async (listName: string, includeExamples: boolean) => {
+    if (token === null) return;
+    setPdfLoading(true);
+    try {
+      const translations = await api.fetchTranslations(token, listName);
+      await generateVocabularyPdf(translations, listName, includeExamples);
+    } catch (error: unknown) {
+      toast.error(extractErrorMessage(error, t('common.error')));
+    } finally {
+      setPdfLoading(false);
+    }
+  };
 
   const handlePronunciationPassed = () => {
     if (token !== null && pronunciationWord !== null) {
@@ -195,6 +213,10 @@ export function QuizPage(): React.JSX.Element {
               loading={loading}
               onSelect={handleQuizSelect}
               onBackToMenu={handleBackToMenuClick}
+              onDownloadPdf={(listName, includeExamples) => {
+                void handleDownloadPdf(listName, includeExamples);
+              }}
+              pdfLoading={pdfLoading}
             />
             {loadError !== null && selectedQuiz === null && (
               <ErrorDisplay message={loadError} onRetry={handleRetryLoadClick} retryLabel="Reload quizzes" />

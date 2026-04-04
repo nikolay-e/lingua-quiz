@@ -30,7 +30,7 @@ def load_words_from_files(vocabulary_dir):
     for filepath in sorted(Path(vocabulary_dir).glob("*.json")):
         with open(filepath) as f:
             data = json.load(f)
-        for w in data["words"]:
+        for rank, w in enumerate(data["words"]):
             dedup_key = (w["sourceText"], w["sourceLanguage"], w["targetLanguage"])
             entry = (
                 w["id"],
@@ -43,6 +43,7 @@ def load_words_from_files(vocabulary_dir):
                 w.get("sourceUsageExample", ""),
                 w.get("targetUsageExample", ""),
                 w.get("isActive", True),
+                rank,
             )
             if dedup_key in seen:
                 print(f"Skipping duplicate: {w['sourceText']} ({w['sourceLanguage']}->{w['targetLanguage']}) in {filepath.name}")
@@ -99,13 +100,13 @@ def sync(conn, vocabulary_dir):
     if cur.rowcount > 0:
         print(f"Removed {cur.rowcount} stale records with conflicting text keys")
 
-    values = [(w[0], version_id, w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9]) for w in words]
+    values = [(w[0], version_id, w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10]) for w in words]
 
     execute_values(
         cur,
         """INSERT INTO vocabulary_items
            (id, version_id, source_text, source_language, target_text, target_language,
-            list_name, difficulty_level, source_usage_example, target_usage_example, is_active)
+            list_name, difficulty_level, source_usage_example, target_usage_example, is_active, rank)
            VALUES %s
            ON CONFLICT (id) DO UPDATE SET
              source_text = EXCLUDED.source_text,
@@ -118,6 +119,7 @@ def sync(conn, vocabulary_dir):
              target_usage_example = EXCLUDED.target_usage_example,
              is_active = EXCLUDED.is_active,
              version_id = EXCLUDED.version_id,
+             rank = EXCLUDED.rank,
              updated_at = NOW()""",
         values,
         page_size=500,

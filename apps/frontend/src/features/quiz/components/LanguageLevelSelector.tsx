@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Languages, GraduationCap, BookOpen, Play } from 'lucide-react';
+import { Languages, GraduationCap, BookOpen, Play, Download } from 'lucide-react';
 import type { WordList } from '@api/types';
 import { Button, Select, Skeleton } from '@shared/ui';
 import { cn } from '@shared/utils';
@@ -9,12 +9,16 @@ interface LanguageLevelSelectorProps {
   wordLists: WordList[];
   loading?: boolean;
   onSelect: (listName: string) => void;
+  onDownloadPdf?: (listName: string, includeExamples: boolean) => void;
+  pdfLoading?: boolean;
 }
 
 export function LanguageLevelSelector({
   wordLists,
   loading = false,
   onSelect,
+  onDownloadPdf,
+  pdfLoading = false,
 }: LanguageLevelSelectorProps): React.JSX.Element {
   const { t } = useTranslation();
 
@@ -109,11 +113,35 @@ export function LanguageLevelSelector({
       </div>
 
       {canStart && (
-        <div className="pt-4">
+        <div className="flex flex-col gap-2 pt-4">
           <Button size="default" className="w-full" onClick={handleStart}>
             <Play size={18} />
             <span>{t('quiz.startLearning')}</span>
           </Button>
+          {onDownloadPdf !== undefined && selectedList !== null && (
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                disabled={pdfLoading}
+                onClick={() => onDownloadPdf(selectedList.listName, false)}
+              >
+                <Download size={14} />
+                {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdf')}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                disabled={pdfLoading}
+                onClick={() => onDownloadPdf(selectedList.listName, true)}
+              >
+                <Download size={14} />
+                {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdfExamples')}
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </div>

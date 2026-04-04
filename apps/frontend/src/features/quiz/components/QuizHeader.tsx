@@ -10,6 +10,8 @@ interface QuizHeaderProps {
   loading?: boolean;
   onSelect?: (quiz: string) => void;
   onBackToMenu?: () => void;
+  onDownloadPdf?: (listName: string, includeExamples: boolean) => void;
+  pdfLoading?: boolean;
 }
 
 export function QuizHeader({
@@ -18,6 +20,8 @@ export function QuizHeader({
   loading = false,
   onSelect,
   onBackToMenu,
+  onDownloadPdf,
+  pdfLoading = false,
 }: QuizHeaderProps): React.JSX.Element {
   const { t } = useTranslation();
 
@@ -28,7 +32,13 @@ export function QuizHeader({
   if (selectedQuiz === null) {
     return (
       <div className="flex flex-col gap-4">
-        <LanguageLevelSelector wordLists={wordLists} loading={loading} onSelect={handleSelect} />
+        <LanguageLevelSelector
+          wordLists={wordLists}
+          loading={loading}
+          onSelect={handleSelect}
+          onDownloadPdf={onDownloadPdf}
+          pdfLoading={pdfLoading}
+        />
       </div>
     );
   }

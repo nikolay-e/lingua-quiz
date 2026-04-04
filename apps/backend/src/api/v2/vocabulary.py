@@ -44,7 +44,7 @@ def get_translations(
                   list_name, difficulty_level, source_usage_example, target_usage_example
            FROM vocabulary_items
            WHERE list_name = %s AND version_id = %s AND is_active = TRUE
-           ORDER BY source_text""",
+           ORDER BY rank, source_text""",
         (list_name, version_id),
     )
 

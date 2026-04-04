@@ -16,7 +16,7 @@ class TestPdfDownload:
     def test_pdf_buttons_appear_after_course_selection(
         self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage
     ) -> None:
-        """PDF download buttons should appear on home page when a course was previously selected."""
+        """PDF download buttons should appear on quiz page after selecting language and level."""
         login_user(page, test_user["username"], test_user["password"])
 
         # Navigate to quiz page and select a course
@@ -27,10 +27,7 @@ class TestPdfDownload:
             page.locator('[role="option"]').first.click()
             page.wait_for_timeout(200)
 
-        # Go back to home page — PDF buttons should be visible (selection persisted)
-        quiz_page.click_back_to_menu()
-        quiz_page.expect_welcome_visible(timeout=3000)
-
+        # PDF buttons should be visible right after selection (before starting quiz)
         pdf_button = page.get_by_role("button", name="Download PDF")
         pdf_examples_button = page.get_by_role("button", name="PDF with Examples")
 
@@ -43,7 +40,8 @@ class TestPdfDownload:
         """PDF buttons should not be visible when no course is selected."""
         login_user(page, test_user["username"], test_user["password"])
 
-        # Without selecting a course, PDF buttons should not exist
+        navigate_to_quiz(page)
+        # Without completing all 3 selectors, PDF buttons should not exist
         pdf_button = page.get_by_role("button", name="Download PDF")
         expect(pdf_button).to_have_count(0)
 
@@ -60,10 +58,6 @@ class TestPdfDownload:
             quiz_page.selector_triggers.nth(i).click()
             page.locator('[role="option"]').first.click()
             page.wait_for_timeout(200)
-
-        # Go back to home page
-        quiz_page.click_back_to_menu()
-        quiz_page.expect_welcome_visible(timeout=3000)
 
         pdf_button = page.get_by_role("button", name="Download PDF")
         expect(pdf_button).to_be_visible(timeout=3000)
