@@ -13,10 +13,10 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
 
 
 class TestPdfDownload:
-    def test_pdf_buttons_appear_after_course_selection(
+    def test_pdf_button_appears_after_course_selection(
         self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage
     ) -> None:
-        """PDF download buttons should appear on quiz page after selecting language and level."""
+        """PDF download button should appear on quiz page after selecting language and level."""
         login_user(page, test_user["username"], test_user["password"])
 
         # Navigate to quiz page and select a course
@@ -27,12 +27,9 @@ class TestPdfDownload:
             page.locator('[role="option"]').first.click()
             page.wait_for_timeout(200)
 
-        # PDF buttons should be visible right after selection (before starting quiz)
+        # PDF button should be visible right after selection (before starting quiz)
         pdf_button = page.get_by_role("button", name="Download PDF")
-        pdf_examples_button = page.get_by_role("button", name="PDF with Examples")
-
         expect(pdf_button).to_be_visible(timeout=3000)
-        expect(pdf_examples_button).to_be_visible(timeout=3000)
 
     def test_pdf_buttons_hidden_without_selection(
         self, page: Page, test_user: AuthenticatedUser
