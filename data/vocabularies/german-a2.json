@@ -18,7 +18,7 @@
     {
       "id": "7ad762d0-23c1-4985-832e-544c392ace39",
       "sourceText": "die Familie",
-      "targetText": "семьи",
+      "targetText": "семья",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
@@ -30,7 +30,7 @@
     {
       "id": "86776f0d-cf95-43a6-986b-8a623472933d",
       "sourceText": "die Idee",
-      "targetText": "идеи",
+      "targetText": "идея",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
@@ -246,7 +246,7 @@
     {
       "id": "90bc9ad2-0099-4a4b-86dc-618a90872f33",
       "sourceText": "die Entscheidung",
-      "targetText": "решения",
+      "targetText": "решение",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
@@ -1062,7 +1062,7 @@
     {
       "id": "9eafb85e-2845-4cb3-954c-eda4da8b991c",
       "sourceText": "die Erinnerung",
-      "targetText": "воспоминания",
+      "targetText": "воспоминание",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
@@ -1829,14 +1829,14 @@
     },
     {
       "id": "eca9f053-78c8-41db-a9b5-75ce0a2fcc27",
-      "sourceText": "dumme",
+      "sourceText": "dumm",
       "targetText": "глупый|тупой",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Das war eine dumme Frage.",
-      "targetUsageExample": "Это был глупый вопрос.",
+      "sourceUsageExample": "Das war wirklich dumm.",
+      "targetUsageExample": "Это было действительно глупо.",
       "isActive": true
     },
     {
@@ -4673,14 +4673,14 @@
     },
     {
       "id": "4027b271-3b69-4f9a-901a-9c2aa014e392",
-      "sourceText": "besondere",
-      "targetText": "особый|специальный",
+      "sourceText": "besonders",
+      "targetText": "особенно|особый",
       "sourceLanguage": "German",
       "targetLanguage": "Russian",
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Das ist etwas Besonderes.",
-      "targetUsageExample": "Это что-то особенное.",
+      "sourceUsageExample": "Das Essen war besonders gut.",
+      "targetUsageExample": "Еда была особенно хорошая.",
       "isActive": true
     },
     {
@@ -4716,7 +4716,7 @@
       "listName": "German Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Er wohnt direkt daneben.",
-      "targetUsageExample": "Рядом стоит большое дерево.",
+      "targetUsageExample": "Он живёт прямо рядом.",
       "isActive": true
     },
     {
