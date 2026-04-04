@@ -119,28 +119,16 @@ export function LanguageLevelSelector({
             <span>{t('quiz.startLearning')}</span>
           </Button>
           {onDownloadPdf !== undefined && selectedList !== null && (
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                disabled={pdfLoading}
-                onClick={() => onDownloadPdf(selectedList.listName, false)}
-              >
-                <Download size={14} />
-                {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdf')}
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                disabled={pdfLoading}
-                onClick={() => onDownloadPdf(selectedList.listName, true)}
-              >
-                <Download size={14} />
-                {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdfExamples')}
-              </Button>
-            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full"
+              disabled={pdfLoading}
+              onClick={() => onDownloadPdf(selectedList.listName, true)}
+            >
+              <Download size={14} />
+              {pdfLoading ? t('home.pdfGenerating') : t('home.downloadPdf')}
+            </Button>
           )}
         </div>
       )}
