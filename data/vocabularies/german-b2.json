@@ -1,7 +1,7 @@
 {
   "listName": "German Russian B2",
   "exportedAt": "2026-01-18T20:40:48.118994+00:00",
-  "totalWords": 1473,
+  "totalWords": 1482,
   "words": [
     {
       "id": "a45107de-077e-4979-89ca-f35b16318d2c",
@@ -17677,6 +17677,114 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Die Polizei hat den Verdächtigen verhaftet.",
       "targetUsageExample": "Полиция арестовала подозреваемого.",
+      "isActive": true
+    },
+    {
+      "id": "2f2cf31a-56ca-408b-a147-709abe3a4bf6",
+      "sourceText": "das Alibi",
+      "targetText": "алиби",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sein Alibi ist sehr stark.",
+      "targetUsageExample": "Его алиби очень убедительное.",
+      "isActive": true
+    },
+    {
+      "id": "113c3896-04b9-4f08-9073-0534dc6647a4",
+      "sourceText": "amen",
+      "targetText": "аминь",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Gemeinde spricht gemeinsam Amen.",
+      "targetUsageExample": "Прихожане вместе произносят «аминь».",
+      "isActive": true
+    },
+    {
+      "id": "11dcffaf-9067-4a3c-9bf8-e2488a8fb68a",
+      "sourceText": "das College",
+      "targetText": "колледж",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Sie studiert am College in der Stadt.",
+      "targetUsageExample": "Она учится в колледже в городе.",
+      "isActive": true
+    },
+    {
+      "id": "30f830cf-1aaf-4b7d-81ef-2770b696ff88",
+      "sourceText": "ex",
+      "targetText": "бывший",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er ist mein Ex-Freund.",
+      "targetUsageExample": "Он мой бывший парень.",
+      "isActive": true
+    },
+    {
+      "id": "b050cee4-fb73-4b38-b885-1ed2d44b4303",
+      "sourceText": "Herrgott",
+      "targetText": "боже мой|господи",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Herrgott, das ist aber schwer!",
+      "targetUsageExample": "Господи, это же очень тяжело!",
+      "isActive": true
+    },
+    {
+      "id": "c7b6376a-a237-4a6a-bebc-3f8abe7d9e26",
+      "sourceText": "der Killer",
+      "targetText": "убийца|киллер",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Die Polizei sucht den Killer.",
+      "targetUsageExample": "Полиция ищет убийцу.",
+      "isActive": true
+    },
+    {
+      "id": "c84d9290-30bd-4856-81f6-9635256add7b",
+      "sourceText": "km",
+      "targetText": "км",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Der Supermarkt ist nur 2 km von hier.",
+      "targetUsageExample": "Супермаркет находится всего в 2 км отсюда.",
+      "isActive": true
+    },
+    {
+      "id": "f24c846f-b4f0-4963-8a28-64c25f3af74b",
+      "sourceText": "die Meile",
+      "targetText": "миля",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Das Dorf ist zehn Meilen entfernt.",
+      "targetUsageExample": "Деревня находится в десяти милях.",
+      "isActive": true
+    },
+    {
+      "id": "b9ad97b1-df8a-4c98-aca7-f30f736b759f",
+      "sourceText": "der Knast",
+      "targetText": "тюрьма",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian B2",
+      "difficultyLevel": "b2",
+      "sourceUsageExample": "Er saß drei Jahre im Knast.",
+      "targetUsageExample": "Он сидел три года в тюрьме.",
       "isActive": true
     }
   ]
