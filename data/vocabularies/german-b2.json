@@ -1,7 +1,7 @@
 {
   "listName": "German Russian B2",
   "exportedAt": "2026-01-18T20:40:48.118994+00:00",
-  "totalWords": 1505,
+  "totalWords": 1495,
   "words": [
     {
       "id": "a45107de-077e-4979-89ca-f35b16318d2c",
@@ -17821,126 +17821,6 @@
       "difficultyLevel": "b2",
       "sourceUsageExample": "Der Hund schnappt nach dem Ball.",
       "targetUsageExample": "Собака хватает мяч.",
-      "isActive": true
-    },
-    {
-      "id": "00f50d2d-4fb4-4af4-be5c-447becd8c3fe",
-      "sourceText": "stöhnen",
-      "targetText": "стонать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er stöhnt vor Schmerzen.",
-      "targetUsageExample": "Он стонет от боли.",
-      "isActive": true
-    },
-    {
-      "id": "2accc474-5026-4d1c-8311-835837a71ce2",
-      "sourceText": "umbringen",
-      "targetText": "убивать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er hat versucht, ihn umzubringen.",
-      "targetUsageExample": "Он пытался его убить.",
-      "isActive": true
-    },
-    {
-      "id": "6c6141eb-988d-4a2d-b294-eaa43e2b5485",
-      "sourceText": "verdammen",
-      "targetText": "проклинать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Du solltest ihn nicht so schnell verdammen.",
-      "targetUsageExample": "Не стоит его так быстро осуждать.",
-      "isActive": true
-    },
-    {
-      "id": "4f7c4ff4-df75-4b40-ab40-1ff2cddb810b",
-      "sourceText": "verdammt",
-      "targetText": "проклятый",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Verdammt, ich habe es vergessen!",
-      "targetUsageExample": "Чёрт, я забыл!",
-      "isActive": true
-    },
-    {
-      "id": "cbe6d97f-ce14-42d2-bd9f-229b46666e73",
-      "sourceText": "wobei",
-      "targetText": "при этом|причём",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Er hat mir geholfen und dabei gelächelt.",
-      "targetUsageExample": "Он помог мне и при этом улыбался.",
-      "isActive": true
-    },
-    {
-      "id": "7a867d26-4788-44eb-8418-a5ba4dbac88f",
-      "sourceText": "worauf",
-      "targetText": "на что",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Worauf wartest du?",
-      "targetUsageExample": "Чего ты ждёшь?",
-      "isActive": true
-    },
-    {
-      "id": "ba7cb8db-5d8a-49b8-a8a6-f0adf5c28d73",
-      "sourceText": "worum",
-      "targetText": "о чём",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Worum geht es?",
-      "targetUsageExample": "О чём речь?",
-      "isActive": true
-    },
-    {
-      "id": "2c5d2b8e-95be-4d46-81ea-92e9c4e33270",
-      "sourceText": "worüber",
-      "targetText": "о чём",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Worüber sprecht ihr?",
-      "targetUsageExample": "О чём вы говорите?",
-      "isActive": true
-    },
-    {
-      "id": "e93cb173-91ab-4490-a32f-ffcf4f4322ee",
-      "sourceText": "wovon",
-      "targetText": "о чём",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Wovon träumst du?",
-      "targetUsageExample": "О чём ты мечтаешь?",
-      "isActive": true
-    },
-    {
-      "id": "2b212041-0418-4d9f-87e7-667a04360265",
-      "sourceText": "wozu",
-      "targetText": "для чего",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B2",
-      "difficultyLevel": "b2",
-      "sourceUsageExample": "Wozu brauchst du das?",
-      "targetUsageExample": "Для чего тебе это?",
       "isActive": true
     },
     {

@@ -1,7 +1,7 @@
 {
   "listName": "German Russian B1",
   "exportedAt": "2026-01-18T20:40:47.968961+00:00",
-  "totalWords": 455,
+  "totalWords": 447,
   "words": [
     {
       "id": "f902d104-6f56-4f3a-98a6-e18a59af57e5",
@@ -5269,102 +5269,6 @@
       "difficultyLevel": "b1",
       "sourceUsageExample": "Es ist kalt, zieh dich an, du bist nackt!",
       "targetUsageExample": "Холодно, одевайся, ты голый!",
-      "isActive": true
-    },
-    {
-      "id": "1e378f1d-6506-4da8-ba4d-614c4fcee581",
-      "sourceText": "bescheiden",
-      "targetText": "скромный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Er ist ein bescheidener Mensch.",
-      "targetUsageExample": "Он скромный человек.",
-      "isActive": true
-    },
-    {
-      "id": "2845599c-d95f-4673-a880-8938654781ae",
-      "sourceText": "der Major",
-      "targetText": "майор",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Der Major gibt den Befehl.",
-      "targetUsageExample": "Майор отдаёт приказ.",
-      "isActive": true
-    },
-    {
-      "id": "204c1c12-2236-4bf3-a67a-a236ef9dae03",
-      "sourceText": "die Weile",
-      "targetText": "время",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Wir haben uns eine Weile nicht gesehen.",
-      "targetUsageExample": "Мы давно не виделись.",
-      "isActive": true
-    },
-    {
-      "id": "d3f9ef34-18f4-4204-b6fa-12b7ca3f89dc",
-      "sourceText": "die Weise",
-      "targetText": "способ",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Auf diese Weise geht es schneller.",
-      "targetUsageExample": "Так будет быстрее.",
-      "isActive": true
-    },
-    {
-      "id": "feb7d605-921c-473a-add1-67b6f828c95e",
-      "sourceText": "ehren",
-      "targetText": "почитать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Wir ehren das Andenken an unsere Großeltern.",
-      "targetUsageExample": "Мы чтим память наших дедушек и бабушек.",
-      "isActive": true
-    },
-    {
-      "id": "11286d85-8dca-45fb-afe1-99e282c869c7",
-      "sourceText": "entkommen",
-      "targetText": "сбежать",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Der Dieb konnte entkommen.",
-      "targetUsageExample": "Вор смог сбежать.",
-      "isActive": true
-    },
-    {
-      "id": "30316b40-1d09-4a60-ad4c-92421f26c7e6",
-      "sourceText": "schätzen",
-      "targetText": "ценить",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Ich schätze deine Hilfe.",
-      "targetUsageExample": "Я ценю твою помощь.",
-      "isActive": true
-    },
-    {
-      "id": "f33c6643-0e47-4a08-a026-6ba2a2ba4392",
-      "sourceText": "schwören",
-      "targetText": "клясться",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian B1",
-      "difficultyLevel": "b1",
-      "sourceUsageExample": "Ich schwöre, ich sage die Wahrheit.",
-      "targetUsageExample": "Клянусь, я говорю правду.",
       "isActive": true
     },
     {

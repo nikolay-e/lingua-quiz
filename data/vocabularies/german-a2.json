@@ -1,7 +1,7 @@
 {
   "listName": "German Russian A2",
   "exportedAt": "2026-01-18T20:40:47.922526+00:00",
-  "totalWords": 652,
+  "totalWords": 651,
   "words": [
     {
       "id": "bb6950c9-89eb-4af9-a74a-9af991f82c0c",
@@ -365,18 +365,6 @@
     },
     {
       "id": "2016b836-0ec9-4c6f-80d0-1fd0f756ed35",
-      "sourceText": "der Feind",
-      "targetText": "враг",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Der Feind steht vor dem Tor.",
-      "targetUsageExample": "Враг стоит у ворот.",
-      "isActive": true
-    },
-    {
-      "id": "7dfcea4a-4a31-435a-a1a1-051a0c8a25bb",
       "sourceText": "der Feind",
       "targetText": "враг",
       "sourceLanguage": "German",

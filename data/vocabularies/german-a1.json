@@ -1,7 +1,7 @@
 {
   "listName": "German Russian A1",
   "exportedAt": "2026-01-18T20:40:47.749471+00:00",
-  "totalWords": 889,
+  "totalWords": 891,
   "words": [
     {
       "id": "7f64b68f-1846-46be-ac32-3c3c71a7829c",
@@ -10669,6 +10669,30 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Im Sommer schwimme ich gern im Pool.",
       "targetUsageExample": "Летом я люблю плавать в бассейне.",
+      "isActive": true
+    },
+    {
+      "id": "1699dbcf-af40-4780-8e00-aa068c0e1444",
+      "sourceText": "das Team",
+      "targetText": "команда",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Unser Team hat gewonnen!",
+      "targetUsageExample": "Наша команда победила!",
+      "isActive": true
+    },
+    {
+      "id": "a9f8f73b-42ba-4151-a812-fadc68611508",
+      "sourceText": "die Post",
+      "targetText": "почта",
+      "sourceLanguage": "German",
+      "targetLanguage": "Russian",
+      "listName": "German Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Ich schicke den Brief per Post.",
+      "targetUsageExample": "Я отправляю письмо по почте.",
       "isActive": true
     }
   ]
