@@ -1,5 +1,3 @@
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import type { Translation } from '@api/types';
 
 const FONT_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-Regular.ttf';
@@ -24,20 +22,22 @@ async function loadFont(): Promise<string> {
   return cachedFontBase64;
 }
 
-function setupFont(doc: jsPDF, fontBase64: string): void {
-  doc.addFileToVFS('Roboto-Regular.ttf', fontBase64);
-  doc.addFont('Roboto-Regular.ttf', 'Roboto', 'normal');
-  doc.setFont('Roboto', 'normal');
-}
-
 export async function generateVocabularyPdf(
   translations: Translation[],
   listName: string,
   includeExamples: boolean,
 ): Promise<void> {
-  const fontBase64 = await loadFont();
+  const [{ default: jsPDF }, { default: autoTable }, fontBase64] = await Promise.all([
+    import('jspdf'),
+    import('jspdf-autotable'),
+    loadFont(),
+  ]);
+
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-  setupFont(doc, fontBase64);
+
+  doc.addFileToVFS('Roboto-Regular.ttf', fontBase64);
+  doc.addFont('Roboto-Regular.ttf', 'Roboto', 'normal');
+  doc.setFont('Roboto', 'normal');
 
   // Title
   doc.setFontSize(18);
@@ -51,15 +51,23 @@ export async function generateVocabularyPdf(
   const fontName = 'Roboto';
 
   if (includeExamples) {
-    generateWithExamples(doc, translations, fontName);
+    generateWithExamples(doc, autoTable, translations, fontName);
   } else {
-    generateCompact(doc, translations, fontName);
+    generateCompact(doc, autoTable, translations, fontName);
   }
 
   doc.save(`${listName.replace(/\s+/g, '-')}.pdf`);
 }
 
-function generateCompact(doc: jsPDF, translations: Translation[], fontName: string): void {
+type AutoTableFn = typeof import('jspdf-autotable').default;
+type JsPDFInstance = InstanceType<typeof import('jspdf').default>;
+
+function generateCompact(
+  doc: JsPDFInstance,
+  autoTable: AutoTableFn,
+  translations: Translation[],
+  fontName: string,
+): void {
   const rows: string[][] = translations.map((t, i) => [String(i + 1), t.sourceText, t.targetText]);
 
   autoTable(doc, {
@@ -76,7 +84,12 @@ function generateCompact(doc: jsPDF, translations: Translation[], fontName: stri
   });
 }
 
-function generateWithExamples(doc: jsPDF, translations: Translation[], fontName: string): void {
+function generateWithExamples(
+  doc: JsPDFInstance,
+  autoTable: AutoTableFn,
+  translations: Translation[],
+  fontName: string,
+): void {
   const rows: (string | { content: string; styles: Record<string, unknown> })[][] = [];
 
   for (let i = 0; i < translations.length; i++) {
