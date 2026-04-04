@@ -1,7 +1,7 @@
 {
   "listName": "German Russian A1",
   "exportedAt": "2026-01-18T20:40:47.749471+00:00",
-  "totalWords": 905,
+  "totalWords": 889,
   "words": [
     {
       "id": "7f64b68f-1846-46be-ac32-3c3c71a7829c",
@@ -5224,18 +5224,6 @@
       "isActive": true
     },
     {
-      "id": "eac181b2-9b11-4d56-b40f-44bd66e88d27",
-      "sourceText": "der Boss",
-      "targetText": "босс|начальник",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Mein Boss ist heute nicht da.",
-      "targetUsageExample": "Моего начальника сегодня нет.",
-      "isActive": true
-    },
-    {
       "id": "86f3c4ef-6d5d-4075-bddc-4e8c8ed6c4dc",
       "sourceText": "der Mund",
       "targetText": "рот",
@@ -6208,18 +6196,6 @@
       "isActive": true
     },
     {
-      "id": "958eb032-6eb9-4e0b-aea6-1bc6453fae8b",
-      "sourceText": "die Dame",
-      "targetText": "дама",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Diese Dame ist sehr freundlich.",
-      "targetUsageExample": "Эта дама очень приветлива.",
-      "isActive": true
-    },
-    {
       "id": "a3e3db4d-de4b-4ede-8212-fb2fd631374f",
       "sourceText": "jedenfalls",
       "targetText": "во всяком случае",
@@ -7156,18 +7132,6 @@
       "isActive": true
     },
     {
-      "id": "2a6b7a38-d3ef-4aa0-892f-7652a8f051a9",
-      "sourceText": "die Show",
-      "targetText": "шоу",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Die Show beginnt um acht.",
-      "targetUsageExample": "Шоу начинается в восемь.",
-      "isActive": true
-    },
-    {
       "id": "ed0ef539-6e67-4bb6-8472-211b6dafa967",
       "sourceText": "die Überraschung",
       "targetText": "сюрприз",
@@ -7384,18 +7348,6 @@
       "isActive": true
     },
     {
-      "id": "141ab146-c893-4c70-8c19-bac2c84aff27",
-      "sourceText": "interessant",
-      "targetText": "интересный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Dieses Buch ist sehr interessant.",
-      "targetUsageExample": "Эта книга очень интересная.",
-      "isActive": true
-    },
-    {
       "id": "280118c3-d914-4cae-85df-5c02d8832e4e",
       "sourceText": "entscheiden",
       "targetText": "решать",
@@ -7573,18 +7525,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Der Film hat deutsche Untertitel.",
       "targetUsageExample": "У фильма немецкие субтитры.",
-      "isActive": true
-    },
-    {
-      "id": "f9a31408-11c6-4605-ba15-552d983cec07",
-      "sourceText": "nervös",
-      "targetText": "нервный",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Ich bin vor der Prüfung nervös.",
-      "targetUsageExample": "Я нервничаю перед экзаменом.",
       "isActive": true
     },
     {
@@ -8320,18 +8260,6 @@
       "isActive": true
     },
     {
-      "id": "8cc80611-0eae-45f1-80dc-1d90fc2f0680",
-      "sourceText": "die Gruppe",
-      "targetText": "группа",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Unsere Gruppe hat zehn Personen.",
-      "targetUsageExample": "В нашей группе десять человек.",
-      "isActive": true
-    },
-    {
       "id": "f38c842e-dbef-425f-8686-b745fa376129",
       "sourceText": "der Deal",
       "targetText": "сделка",
@@ -8476,18 +8404,6 @@
       "isActive": true
     },
     {
-      "id": "64bf125b-3e7a-465c-ba99-55b3129c75fd",
-      "sourceText": "die Prinzessin",
-      "targetText": "принцесса",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Die Prinzessin wohnt im Schloss.",
-      "targetUsageExample": "Принцесса живёт в замке.",
-      "isActive": true
-    },
-    {
       "id": "7265b1a7-8990-4968-9621-571dbe31b420",
       "sourceText": "fernsehen",
       "targetText": "смотреть телевизор",
@@ -8545,18 +8461,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Er hat ihr einen Ring geschenkt.",
       "targetUsageExample": "Он подарил ей кольцо.",
-      "isActive": true
-    },
-    {
-      "id": "3c1bdd57-ab22-4e5f-b600-4b175c64ae44",
-      "sourceText": "fantastisch",
-      "targetText": "фантастический",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Das Essen war fantastisch!",
-      "targetUsageExample": "Еда была фантастической!",
       "isActive": true
     },
     {
@@ -8752,18 +8656,6 @@
       "isActive": true
     },
     {
-      "id": "59b9ad9a-0fad-4fcd-9014-a5606db25b73",
-      "sourceText": "die Energie",
-      "targetText": "энергия",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Ich habe heute keine Energie.",
-      "targetUsageExample": "У меня сегодня нет энергии.",
-      "isActive": true
-    },
-    {
       "id": "b40f1582-fed0-457d-8d26-ec30e73be97f",
       "sourceText": "das Fleisch",
       "targetText": "мясо",
@@ -8893,18 +8785,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "In der Straße ist ein Loch.",
       "targetUsageExample": "На дороге яма.",
-      "isActive": true
-    },
-    {
-      "id": "9c63fa2e-378f-4bce-b683-53290256813d",
-      "sourceText": "das Interesse",
-      "targetText": "интерес",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Ich habe kein Interesse daran.",
-      "targetUsageExample": "Мне это неинтересно.",
       "isActive": true
     },
     {
@@ -9196,18 +9076,6 @@
       "isActive": true
     },
     {
-      "id": "8ae253ec-bc52-43da-8414-5dd56a54a737",
-      "sourceText": "der Grad",
-      "targetText": "градус|степень",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Heute sind es 20 Grad.",
-      "targetUsageExample": "Сегодня 20 градусов.",
-      "isActive": true
-    },
-    {
       "id": "e4e55b62-a561-494c-b573-c075469b8321",
       "sourceText": "hinaus",
       "targetText": "наружу|вон",
@@ -9448,18 +9316,6 @@
       "isActive": true
     },
     {
-      "id": "08209f10-814e-4c69-be6d-584ce85f0fbe",
-      "sourceText": "der Soldat",
-      "targetText": "солдат",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Der Soldat kämpft mutig für sein Land.",
-      "targetUsageExample": "Солдат храбро сражается за свою страну.",
-      "isActive": true
-    },
-    {
       "id": "fdf0ac12-1d49-401d-a6ce-7b7ae00deab5",
       "sourceText": "reisen",
       "targetText": "путешествовать",
@@ -9577,18 +9433,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Ich habe ein gebrauchtes Auto gekauft.",
       "targetUsageExample": "Я купил подержанную машину.",
-      "isActive": true
-    },
-    {
-      "id": "3fe96c7d-c513-46ef-92b3-2d8c0a8f6a0a",
-      "sourceText": "die Form",
-      "targetText": "форма",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Welche Form hat das Paket?",
-      "targetUsageExample": "Какой формы посылка?",
       "isActive": true
     },
     {
@@ -10672,18 +10516,6 @@
       "isActive": true
     },
     {
-      "id": "fcc816d4-7afb-4981-8e43-048efb5c935c",
-      "sourceText": "das Monster",
-      "targetText": "монстр",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Das Monster im Film hat mir Angst gemacht.",
-      "targetUsageExample": "Монстр в фильме меня напугал.",
-      "isActive": true
-    },
-    {
       "id": "fc4bf547-48a5-4203-a91a-5310c33e0ddd",
       "sourceText": "her",
       "targetText": "сюда",
@@ -10813,30 +10645,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Wo ein Wille ist, ist auch ein Weg.",
       "targetUsageExample": "Где есть воля, есть и путь.",
-      "isActive": true
-    },
-    {
-      "id": "51bb5610-1b03-46a2-9f05-084c016adb92",
-      "sourceText": "die Mama",
-      "targetText": "мама",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Mama, ich liebe dich!",
-      "targetUsageExample": "Мама, я люблю тебя!",
-      "isActive": true
-    },
-    {
-      "id": "0dc13d9f-89ee-4bbc-94f0-83ebb7e6b190",
-      "sourceText": "der Papa",
-      "targetText": "папа",
-      "sourceLanguage": "German",
-      "targetLanguage": "Russian",
-      "listName": "German Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Papa kommt nach Hause.",
-      "targetUsageExample": "Папа приходит домой.",
       "isActive": true
     },
     {
