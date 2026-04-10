@@ -255,7 +255,7 @@ jobs:
           environment-url: 'https://lingua-quiz.org'
 
       - name: Create GitHub Release
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             let previousTag;
