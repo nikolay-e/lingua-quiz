@@ -163,6 +163,7 @@ export function SettingsPage(): React.JSX.Element {
                 onValueChange={handleLanguageChange}
                 options={languageOptions}
                 className="w-full"
+                aria-label={t('settings.language')}
               />
             </CardContent>
           </Card>
@@ -178,7 +179,13 @@ export function SettingsPage(): React.JSX.Element {
               <CardDescription>{t('settings.themeDesc')}</CardDescription>
             </CardHeader>
             <CardContent>
-              <Select value={mode} onValueChange={handleThemeChange} options={themeOptions} className="w-full" />
+              <Select
+                value={mode}
+                onValueChange={handleThemeChange}
+                options={themeOptions}
+                className="w-full"
+                aria-label={t('settings.theme')}
+              />
             </CardContent>
           </Card>
         </section>
