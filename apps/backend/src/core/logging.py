@@ -9,14 +9,16 @@ import uuid
 request_id_var: ContextVar[str] = ContextVar("request_id", default="")
 user_id_var: ContextVar[str] = ContextVar("user_id", default="")
 
+MASKED_REPLACEMENT = r"\1***"
+
 SENSITIVE_PATTERNS = [
-    (re.compile(r"(password[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), r"\1***"),
-    (re.compile(r"(secret[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), r"\1***"),
-    (re.compile(r"(token[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), r"\1***"),
-    (re.compile(r"(api[_-]?key[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), r"\1***"),
-    (re.compile(r"(authorization[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), r"\1***"),
-    (re.compile(r"(bearer\s+)[^\s\"']+", re.IGNORECASE), r"\1***"),
-    (re.compile(r"(basic\s+)[^\s\"']+", re.IGNORECASE), r"\1***"),
+    (re.compile(r"(password[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), MASKED_REPLACEMENT),
+    (re.compile(r"(secret[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), MASKED_REPLACEMENT),
+    (re.compile(r"(token[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), MASKED_REPLACEMENT),
+    (re.compile(r"(api[_-]?key[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), MASKED_REPLACEMENT),
+    (re.compile(r"(authorization[\"']?\s*[:=]\s*[\"']?)[^\"'\s,}]+", re.IGNORECASE), MASKED_REPLACEMENT),
+    (re.compile(r"(bearer\s+)[^\s\"']+", re.IGNORECASE), MASKED_REPLACEMENT),
+    (re.compile(r"(basic\s+)[^\s\"']+", re.IGNORECASE), MASKED_REPLACEMENT),
     (re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"), "***@***.***"),
 ]
 

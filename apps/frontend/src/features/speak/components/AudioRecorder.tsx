@@ -97,7 +97,7 @@ export function AudioRecorder({
     audioUrlRef.current = URL.createObjectURL(audioBlob);
     audioRef.current = new Audio(audioUrlRef.current);
     audioRef.current.onended = () => setIsPlaying(false);
-    void audioRef.current.play();
+    audioRef.current.play().catch(() => {});
     setIsPlaying(true);
   };
 

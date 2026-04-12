@@ -33,12 +33,12 @@ export function AdminSearchBar({
             onSearchQueryChange(e.target.value);
           }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') void onSearch();
+            if (e.key === 'Enter') onSearch();
           }}
         />
         <Button
           onClick={() => {
-            void onSearch();
+            onSearch();
           }}
           disabled={searchLoading}
         >

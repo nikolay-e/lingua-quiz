@@ -39,6 +39,9 @@ runs:
         DEPLOY_PROD: ${{ inputs.is-production }}
         DEPLOY_TRANSIENT: ${{ inputs.is-transient }}
         DEPLOY_PAYLOAD: ${{ inputs.payload }}
+        DEPLOY_INITIAL_STATUS: ${{ inputs.initial-status }}
+        DEPLOY_STATUS_DESC: ${{ inputs.status-description }}
+        DEPLOY_ENV_URL: ${{ inputs.environment-url }}
       run: |
         BODY=$(jq -n \
           --arg ref "$DEPLOY_REF" \
@@ -68,6 +71,6 @@ runs:
         echo "deployment-id=${DEPLOY_ID}" >> "$GITHUB_OUTPUT"
 
         gh api "repos/${{ github.repository }}/deployments/${DEPLOY_ID}/statuses" \
-          -f state="${{ inputs.initial-status }}" \
-          -f description="${{ inputs.status-description }}" \
-          -f environment_url="${{ inputs.environment-url }}"
+          -f state="${DEPLOY_INITIAL_STATUS}" \
+          -f description="${DEPLOY_STATUS_DESC}" \
+          -f environment_url="${DEPLOY_ENV_URL}"

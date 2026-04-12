@@ -63,10 +63,10 @@ export class QuizService {
     } catch (error: unknown) {
       const errorInfo = this.handleAuthError(error);
       onError?.(errorInfo.message);
-      if (!errorInfo.isUnauthorized) {
-        throw error;
+      if (errorInfo.isUnauthorized) {
+        return null;
       }
-      return null;
+      throw error;
     }
   }
 

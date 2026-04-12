@@ -29,22 +29,25 @@ function getInitialLocale(): string {
   return DEFAULT_LOCALE;
 }
 
-void i18n.use(initReactI18next).init({
-  resources: {
-    en: { translation: en },
-    ru: { translation: ru },
-    es: { translation: es },
-    de: { translation: de },
-  },
-  lng: getInitialLocale(),
-  fallbackLng: DEFAULT_LOCALE,
-  interpolation: {
-    escapeValue: false,
-  },
-});
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en: { translation: en },
+      ru: { translation: ru },
+      es: { translation: es },
+      de: { translation: de },
+    },
+    lng: getInitialLocale(),
+    fallbackLng: DEFAULT_LOCALE,
+    interpolation: {
+      escapeValue: false,
+    },
+  })
+  .catch(() => {});
 
 export function setLocale(newLocale: SupportedLocale): void {
-  void i18n.changeLanguage(newLocale);
+  i18n.changeLanguage(newLocale).catch(() => {});
   if (typeof window !== 'undefined') {
     safeStorage.setItem(STORAGE_KEY, newLocale);
   }

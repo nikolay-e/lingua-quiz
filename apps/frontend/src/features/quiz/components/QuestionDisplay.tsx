@@ -18,7 +18,7 @@ export function QuestionDisplay({
   pronunciationMode = false,
   pronunciationText = null,
   pronunciationLanguage = 'en',
-}: QuestionDisplayProps): React.JSX.Element {
+}: Readonly<QuestionDisplayProps>): React.JSX.Element {
   const { t } = useTranslation();
 
   const questionLanguage =
@@ -43,9 +43,9 @@ export function QuestionDisplay({
   );
 
   const masteredCount = useMemo(() => {
-    const masteredLevels = ['level3', 'level4', 'level5', 'pronunciation'];
+    const masteredLevels = new Set(['level3', 'level4', 'level5', 'pronunciation']);
     return Object.entries(levelWordLists)
-      .filter(([id]) => masteredLevels.includes(id))
+      .filter(([id]) => masteredLevels.has(id))
       .reduce((sum, [, l]) => sum + l.count, 0);
   }, [levelWordLists]);
 

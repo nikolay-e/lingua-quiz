@@ -27,7 +27,7 @@ export function LoginPage(): React.JSX.Element {
     try {
       await login(username, password);
       setMessage(t('auth.loginSuccess'));
-      void navigate('/');
+      Promise.resolve(navigate('/')).catch(() => {});
     } catch (error: unknown) {
       setMessage(extractErrorMessage(error, t('auth.loginFailed')));
       setHasError(true);

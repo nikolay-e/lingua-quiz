@@ -37,7 +37,7 @@ export function RegisterPage(): React.JSX.Element {
     try {
       await register(username, password);
       setMessage(t('auth.registerSuccess'));
-      void navigate('/');
+      Promise.resolve(navigate('/')).catch(() => {});
     } catch (error: unknown) {
       setMessage(extractErrorMessage(error, t('auth.registerFailed')));
       setHasError(true);

@@ -1,4 +1,5 @@
 import base64
+from typing import Annotated
 
 from core.config import AZURE_SPEECH_API_KEY, AZURE_SPEECH_REGION
 from core.dependencies import CurrentUser
@@ -149,7 +150,7 @@ async def assess_pronunciation(
     text: str,
     language: str,
     current_user: CurrentUser,
-    audio: UploadFile = File(...),
+    audio: Annotated[UploadFile, File()],
 ) -> SpeechAssessResponse:
     if not AZURE_SPEECH_API_KEY:
         raise HTTPException(

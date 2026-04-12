@@ -124,7 +124,7 @@ export function AdminCreateDialog({
               </Button>
               <Button
                 onClick={() => {
-                  void onCreate();
+                  onCreate();
                 }}
                 disabled={loading}
                 className="flex-1"

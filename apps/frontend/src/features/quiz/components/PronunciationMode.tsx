@@ -28,7 +28,7 @@ export function PronunciationMode({
   onContinue,
   onPronunciationPassed,
   onSkip,
-}: PronunciationModeProps): React.JSX.Element {
+}: Readonly<PronunciationModeProps>): React.JSX.Element {
   const { t } = useTranslation();
   const isAuthenticated = useIsAuthenticated();
   const passThreshold = usePassThreshold();
@@ -63,8 +63,8 @@ export function PronunciationMode({
         toggleRecordingRef.current?.();
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    globalThis.addEventListener('keydown', handleKeyDown);
+    return () => globalThis.removeEventListener('keydown', handleKeyDown);
   }, [hasResult]);
 
   const handleRecordingComplete = async (blob: Blob) => {

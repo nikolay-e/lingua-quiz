@@ -180,7 +180,7 @@ def upgrade() -> None:
     op.execute(
         """
         INSERT INTO users (username, password, is_admin)
-        VALUES ('admin', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5eX7L7kztK5dC', TRUE)
+        VALUES ('admin', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5eX7L7kztK5dC', TRUE)  -- nosonar: seed data placeholder, replaced on first login
     """
     )
 

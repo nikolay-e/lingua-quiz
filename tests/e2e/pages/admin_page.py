@@ -2,6 +2,10 @@ from playwright.sync_api import Page, expect
 
 from .base_page import BasePage
 
+SELECT_SLOT_SELECTOR = '[data-slot="select"]'
+LISTBOX_SELECTOR = '[role="listbox"]'
+TABLE_ROWS_SELECTOR = "table tbody tr"
+
 
 class AdminPage(BasePage):
     def __init__(self, page: Page, base_url: str):
@@ -39,9 +43,9 @@ class AdminPage(BasePage):
         return self
 
     def select_language_filter(self, language: str):
-        selects = self.page.locator('[data-slot="select"]')
+        selects = self.page.locator(SELECT_SLOT_SELECTOR)
         selects.nth(0).click()
-        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
+        self.page.locator(LISTBOX_SELECTOR).wait_for(state="visible", timeout=5000)
         language_map = {
             "en": "English",
             "de": "German",
@@ -52,9 +56,9 @@ class AdminPage(BasePage):
         return self
 
     def select_status_filter(self, status: str):
-        selects = self.page.locator('[data-slot="select"]')
+        selects = self.page.locator(SELECT_SLOT_SELECTOR)
         selects.nth(1).click()
-        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
+        self.page.locator(LISTBOX_SELECTOR).wait_for(state="visible", timeout=5000)
         status_map = {"active": "Active", "inactive": "Inactive", "all": "All Status"}
         self.page.get_by_role("option", name=status_map.get(status, status), exact=True).click()
         return self
@@ -80,14 +84,14 @@ class AdminPage(BasePage):
         inputs.nth(1).fill(target_text)
 
         lang_map = {"en": "English", "de": "German", "es": "Spanish", "ru": "Russian"}
-        selects = dialog.locator('[data-slot="select"]')
+        selects = dialog.locator(SELECT_SLOT_SELECTOR)
 
         selects.nth(0).click()
-        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
+        self.page.locator(LISTBOX_SELECTOR).wait_for(state="visible", timeout=5000)
         self.page.get_by_role("option", name=lang_map.get(source_lang, source_lang), exact=True).click(timeout=5000)
 
         selects.nth(1).click()
-        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
+        self.page.locator(LISTBOX_SELECTOR).wait_for(state="visible", timeout=5000)
         self.page.get_by_role("option", name=lang_map.get(target_lang, target_lang), exact=True).click(timeout=5000)
 
         diff_map = {
@@ -99,7 +103,7 @@ class AdminPage(BasePage):
             "C2": "C2 - Proficiency",
         }
         selects.nth(4).click()
-        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
+        self.page.locator(LISTBOX_SELECTOR).wait_for(state="visible", timeout=5000)
         self.page.get_by_role("option", name=diff_map.get(difficulty, difficulty), exact=True).click(timeout=5000)
 
         list_name_map = {
@@ -120,7 +124,7 @@ class AdminPage(BasePage):
             "spanish-russian-b2": "Spanish-Russian B2",
         }
         selects.nth(3).click()
-        self.page.locator('[role="listbox"]').wait_for(state="visible", timeout=5000)
+        self.page.locator(LISTBOX_SELECTOR).wait_for(state="visible", timeout=5000)
         mapped_name = list_name_map.get(list_name, list_name)
         self.page.get_by_role("option", name=mapped_name, exact=False).first.click(timeout=5000)
         return self
@@ -140,7 +144,7 @@ class AdminPage(BasePage):
         return self
 
     def click_edit_button(self, row_index: int = 0):
-        rows = self.page.locator("table tbody tr")
+        rows = self.page.locator(TABLE_ROWS_SELECTOR)
         rows.nth(row_index).locator('button[aria-label*="Edit"]').click()
         return self
 
@@ -162,7 +166,7 @@ class AdminPage(BasePage):
         return self
 
     def click_delete_button(self, row_index: int = 0):
-        rows = self.page.locator("table tbody tr")
+        rows = self.page.locator(TABLE_ROWS_SELECTOR)
         rows.nth(row_index).locator('button[aria-label*="Delete"]').click()
         return self
 
@@ -186,7 +190,7 @@ class AdminPage(BasePage):
         return self.get_table_row_count()
 
     def get_table_row_count(self) -> int:
-        return self.page.locator("table tbody tr").count()
+        return self.page.locator(TABLE_ROWS_SELECTOR).count()
 
     def expect_stats_visible(self):
         expect(self.page.locator("text=Total Items")).to_be_visible(timeout=3000)

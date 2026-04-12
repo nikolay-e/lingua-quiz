@@ -100,7 +100,7 @@ export function AdminEditDialog({
               </Button>
               <Button
                 onClick={() => {
-                  void onSave();
+                  onSave();
                 }}
                 disabled={loading}
                 className="flex-1"

@@ -22,7 +22,7 @@ export function QuizHeader({
   onBackToMenu,
   onDownloadPdf,
   pdfLoading = false,
-}: QuizHeaderProps): React.JSX.Element {
+}: Readonly<QuizHeaderProps>): React.JSX.Element {
   const { t } = useTranslation();
 
   const handleSelect = (listName: string): void => {

@@ -4,8 +4,8 @@ import AxeBuilder from '@axe-core/playwright';
 const BASE_URL = process.env.CRAWL_URL || 'https://lingua-quiz.org';
 const USERNAME = process.env.CRAWL_USERNAME || 'crawler_test_user';
 const PASSWORD = process.env.CRAWL_PASSWORD || '';
-const MAX_PAGES = parseInt(process.env.CRAWL_MAX_PAGES || '30', 10);
-const WAIT_MS = parseInt(process.env.CRAWL_WAIT_MS || '2000', 10);
+const MAX_PAGES = Number.parseInt(process.env.CRAWL_MAX_PAGES || '30', 10);
+const WAIT_MS = Number.parseInt(process.env.CRAWL_WAIT_MS || '2000', 10);
 
 const visited = new Set();
 const queue = [];
@@ -162,40 +162,7 @@ async function crawlPage(page, path) {
   page.removeAllListeners('response');
 }
 
-async function main() {
-  if (!PASSWORD) {
-    console.error('CRAWL_PASSWORD required');
-    process.exit(1);
-  }
-
-  console.log(`\nCrawling ${BASE_URL} (max ${MAX_PAGES} pages)\n`);
-
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({
-    viewport: { width: 1440, height: 900 },
-    ignoreHTTPSErrors: true,
-  });
-  const page = await context.newPage();
-
-  await login(page);
-  console.log('Logged in\n');
-
-  queue.push('/', '/quiz', '/login', '/register', '/settings');
-
-  while (queue.length > 0 && visited.size < MAX_PAGES) {
-    const path = queue.shift();
-    await crawlPage(page, path);
-  }
-
-  await browser.close();
-
-  console.log('\n========== CRAWL REPORT ==========');
-  console.log(`Pages visited: ${results.pagesVisited}`);
-  console.log(`JS errors: ${results.jsErrors.length}`);
-  console.log(`Network errors: ${results.networkErrors.length}`);
-  console.log(`Axe violations: ${results.axeViolations.length}`);
-  console.log(`Broken links: ${results.brokenLinks.length}`);
-
+function printSectionErrors() {
   if (results.jsErrors.length > 0) {
     console.log('\n--- JS ERRORS ---');
     for (const e of results.jsErrors) {
@@ -238,15 +205,52 @@ async function main() {
       console.log(`  ${b.path} -> ${b.status}`);
     }
   }
-
-  console.log('\n==================================');
-
-  const hasFailures =
-    results.jsErrors.length > 0 ||
-    results.brokenLinks.length > 0 ||
-    results.axeViolations.some((v) => v.impact === 'critical');
-
-  process.exit(hasFailures ? 1 : 0);
 }
 
-main();
+function printReport() {
+  console.log('\n========== CRAWL REPORT ==========');
+  console.log(`Pages visited: ${results.pagesVisited}`);
+  console.log(`JS errors: ${results.jsErrors.length}`);
+  console.log(`Network errors: ${results.networkErrors.length}`);
+  console.log(`Axe violations: ${results.axeViolations.length}`);
+  console.log(`Broken links: ${results.brokenLinks.length}`);
+
+  printSectionErrors();
+
+  console.log('\n==================================');
+}
+
+if (!PASSWORD) {
+  console.error('CRAWL_PASSWORD required');
+  process.exit(1);
+}
+
+console.log(`\nCrawling ${BASE_URL} (max ${MAX_PAGES} pages)\n`);
+
+const browser = await chromium.launch({ headless: true });
+const context = await browser.newContext({
+  viewport: { width: 1440, height: 900 },
+  ignoreHTTPSErrors: true,
+});
+const page = await context.newPage();
+
+await login(page);
+console.log('Logged in\n');
+
+queue.push('/', '/quiz', '/login', '/register', '/settings');
+
+while (queue.length > 0 && visited.size < MAX_PAGES) {
+  const path = queue.shift();
+  await crawlPage(page, path);
+}
+
+await browser.close();
+
+printReport();
+
+const hasFailures =
+  results.jsErrors.length > 0 ||
+  results.brokenLinks.length > 0 ||
+  results.axeViolations.some((v) => v.impact === 'critical');
+
+process.exit(hasFailures ? 1 : 0);

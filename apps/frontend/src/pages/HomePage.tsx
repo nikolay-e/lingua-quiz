@@ -38,7 +38,7 @@ export function HomePage(): React.JSX.Element {
   }, [token, loadWordLists]);
 
   useEffect(() => {
-    void handleLoadWordLists();
+    handleLoadWordLists().catch(() => {});
   }, [handleLoadWordLists]);
 
   return (
@@ -83,7 +83,7 @@ export function HomePage(): React.JSX.Element {
         disabled={false}
         variant="primary"
         onClick={() => {
-          void navigate('/quiz');
+          Promise.resolve(navigate('/quiz')).catch(() => {});
         }}
         badge={selectedList?.listName}
       />

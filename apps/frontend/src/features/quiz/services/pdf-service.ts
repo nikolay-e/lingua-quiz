@@ -12,8 +12,8 @@ async function fetchFontAsBase64(): Promise<string> {
   const buffer = await response.arrayBuffer();
   const bytes = new Uint8Array(buffer);
   let binary = '';
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i] ?? 0);
+  for (const byte of bytes) {
+    binary += String.fromCodePoint(byte);
   }
   cachedFontBase64 = btoa(binary);
   return cachedFontBase64;
@@ -89,9 +89,7 @@ function generateWithExamples(
 ): void {
   const rows: (string | { content: string; styles: Record<string, unknown> })[][] = [];
 
-  for (let i = 0; i < translations.length; i++) {
-    const t = translations[i];
-    if (t === undefined) continue;
+  for (const [i, t] of translations.entries()) {
     rows.push([String(i + 1), t.sourceText, t.targetText]);
     const srcEx = t.sourceUsageExample ?? '';
     const tgtEx = t.targetUsageExample ?? '';

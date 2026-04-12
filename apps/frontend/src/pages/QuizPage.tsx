@@ -26,6 +26,45 @@ import { AppShell, FeedCard, ErrorDisplay, useToast } from '@shared/components';
 import { Button } from '@shared/ui';
 import { logger, isTouchDevice, extractErrorMessage } from '@shared/utils';
 import { reacquireWakeLockOnVisibilityChange } from '@shared/pwa';
+import type { Translation } from '@lingua-quiz/core';
+
+interface PronunciationContentProps {
+  pronunciationWord: Translation | null;
+  speakLanguage: LanguageCode;
+  token: string;
+  onContinueOrSkip: () => void;
+  onPronunciationPassed: () => void;
+}
+
+function PronunciationContent({
+  pronunciationWord,
+  speakLanguage,
+  token,
+  onContinueOrSkip,
+  onPronunciationPassed,
+}: Readonly<PronunciationContentProps>): React.JSX.Element {
+  if (pronunciationWord !== null) {
+    return (
+      <PronunciationMode
+        questionText={pronunciationWord.sourceText}
+        language={speakLanguage}
+        token={token}
+        onContinue={onContinueOrSkip}
+        onPronunciationPassed={onPronunciationPassed}
+        onSkip={onContinueOrSkip}
+      />
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center gap-3 p-6 text-center">
+      <p className="text-lg font-medium text-success">All pronunciation complete!</p>
+      <p className="text-sm text-muted-foreground">
+        All mastered words have been pronounced. Switch back to translation mode to continue learning.
+      </p>
+    </div>
+  );
+}
 
 export function QuizPage(): React.JSX.Element {
   const { t } = useTranslation();
@@ -90,6 +129,13 @@ export function QuizPage(): React.JSX.Element {
 
   const pronunciationWord = pronunciationMode && canPronounce ? pronunciationQueue.currentWord : null;
 
+  const isPronunciationActive = pronunciationMode && canPronounce;
+  const cardTitle = isPronunciationActive
+    ? pronunciationWord !== null
+      ? 'Say this word'
+      : 'Pronunciation Complete'
+    : 'Translate';
+
   const handleDownloadPdf = async (listName: string, includeExamples: boolean) => {
     if (token === null) return;
     setPdfLoading(true);
@@ -110,15 +156,7 @@ export function QuizPage(): React.JSX.Element {
     pronunciationQueue.advance();
   };
 
-  const handlePronunciationContinue = () => {
-    if (pronunciationWord !== null) {
-      pronunciationQueue.advance();
-    } else {
-      handleSkip();
-    }
-  };
-
-  const handlePronunciationSkip = () => {
+  const handlePronunciationContinueOrSkip = () => {
     if (pronunciationWord !== null) {
       pronunciationQueue.advance();
     } else {
@@ -142,7 +180,7 @@ export function QuizPage(): React.JSX.Element {
       if (!isTouchDevice()) answerInputRef.current?.focus();
     };
 
-    void initialize().catch((error) => {
+    initialize().catch((error) => {
       logger.error('Failed to initialize quiz:', error);
     });
 
@@ -172,17 +210,17 @@ export function QuizPage(): React.JSX.Element {
     };
 
     const handleVisibilityChange = async (): Promise<void> => {
-      if (document.hidden && token !== null && quizManager !== null) {
-        flushImmediately(token, true);
-      }
-
-      if (!document.hidden && selectedQuiz !== null) {
+      if (document.hidden) {
+        if (token !== null && quizManager !== null) {
+          flushImmediately(token, true);
+        }
+      } else if (selectedQuiz !== null) {
         await reacquireWakeLockOnVisibilityChange();
       }
     };
 
     const visibilityHandler = (): void => {
-      void handleVisibilityChange();
+      handleVisibilityChange().catch(() => {});
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -215,7 +253,7 @@ export function QuizPage(): React.JSX.Element {
               onSelect={handleQuizSelect}
               onBackToMenu={handleBackToMenuClick}
               onDownloadPdf={(listName, includeExamples) => {
-                void handleDownloadPdf(listName, includeExamples);
+                handleDownloadPdf(listName, includeExamples).catch(() => {});
               }}
               pdfLoading={pdfLoading}
             />
@@ -233,14 +271,7 @@ export function QuizPage(): React.JSX.Element {
               <div className="flex flex-col gap-4 md:gap-6">
                 <FeedCard
                   dense
-                  title={
-                    // eslint-disable-next-line no-nested-ternary
-                    pronunciationMode && canPronounce
-                      ? pronunciationWord !== null
-                        ? 'Say this word'
-                        : 'Pronunciation Complete'
-                      : 'Translate'
-                  }
+                  title={cardTitle}
                   headerAction={
                     currentQuestion !== null && token !== null ? (
                       <div className="flex items-center gap-1">
@@ -279,26 +310,14 @@ export function QuizPage(): React.JSX.Element {
 
                 {currentQuestion !== null && (
                   <FeedCard dense>
-                    {/* eslint-disable-next-line no-nested-ternary */}
                     {pronunciationMode && speakLanguage !== undefined && token !== null ? (
-                      pronunciationWord !== null ? (
-                        <PronunciationMode
-                          questionText={pronunciationWord.sourceText}
-                          language={speakLanguage}
-                          token={token}
-                          onContinue={handlePronunciationContinue}
-                          onPronunciationPassed={handlePronunciationPassed}
-                          onSkip={handlePronunciationSkip}
-                        />
-                      ) : (
-                        <div className="flex flex-col items-center gap-3 p-6 text-center">
-                          <p className="text-lg font-medium text-success">All pronunciation complete!</p>
-                          <p className="text-sm text-muted-foreground">
-                            All mastered words have been pronounced. Switch back to translation mode to continue
-                            learning.
-                          </p>
-                        </div>
-                      )
+                      <PronunciationContent
+                        pronunciationWord={pronunciationWord}
+                        speakLanguage={speakLanguage}
+                        token={token}
+                        onContinueOrSkip={handlePronunciationContinueOrSkip}
+                        onPronunciationPassed={handlePronunciationPassed}
+                      />
                     ) : (
                       <>
                         <AnswerInput

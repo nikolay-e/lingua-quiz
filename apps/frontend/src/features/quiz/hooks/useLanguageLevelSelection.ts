@@ -49,11 +49,16 @@ export function useLanguageLevelSelection(wordLists: WordList[]) {
     [wordLists],
   );
 
-  const knownLanguages = useMemo(() => [...new Set(parsedLists.map((p) => p.target))].sort(), [parsedLists]);
+  const knownLanguages = useMemo(
+    () => [...new Set(parsedLists.map((p) => p.target))].sort((a, b) => a.localeCompare(b)),
+    [parsedLists],
+  );
 
   const learningLanguages = useMemo(() => {
     if (selectedKnown === undefined) return [];
-    return [...new Set(parsedLists.filter((p) => p.target === selectedKnown).map((p) => p.source))].sort();
+    return [...new Set(parsedLists.filter((p) => p.target === selectedKnown).map((p) => p.source))].sort((a, b) =>
+      a.localeCompare(b),
+    );
   }, [parsedLists, selectedKnown]);
 
   const availableLevels = useMemo(() => {

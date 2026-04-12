@@ -32,11 +32,11 @@ export function RootLayout(): React.JSX.Element {
     const publicRoutes = ['/login', '/register'];
 
     if (!isAuthenticated && protectedRoutes.includes(currentPath)) {
-      void navigate('/login', { replace: true });
+      Promise.resolve(navigate('/login', { replace: true })).catch(() => {});
     } else if (isAuthenticated && publicRoutes.includes(currentPath)) {
-      void navigate('/', { replace: true });
+      Promise.resolve(navigate('/', { replace: true })).catch(() => {});
     } else if (currentPath === '/admin' && !isAdmin) {
-      void navigate('/', { replace: true });
+      Promise.resolve(navigate('/', { replace: true })).catch(() => {});
     }
   }, [isAuthenticated, isAdmin, currentPath, navigate]);
 

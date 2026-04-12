@@ -27,7 +27,7 @@ const ERROR_TYPE_CONFIG: Record<string, { icon: typeof AlertTriangle; label: str
   },
 };
 
-function ErrorTypeBadge({ errorType }: { errorType: ErrorType }) {
+function ErrorTypeBadge({ errorType }: Readonly<{ errorType: ErrorType }>) {
   if (errorType === 'None') return null;
 
   const cfg = ERROR_TYPE_CONFIG[errorType];
@@ -47,12 +47,12 @@ function PhonemeChip({
   score,
   expected,
   actual,
-}: {
+}: Readonly<{
   phoneme: string;
   score: number;
   expected: string;
   actual?: string;
-}) {
+}>) {
   const color = scoreToColor(score);
   const hasError = actual !== undefined && actual !== '' && actual !== expected;
   const roundedScore = Math.round(score);
@@ -77,11 +77,11 @@ function WordCard({
   assessment,
   isExpanded,
   onToggle,
-}: {
+}: Readonly<{
   assessment: WordAssessment;
   isExpanded: boolean;
   onToggle: () => void;
-}) {
+}>) {
   const color = scoreToColor(assessment.accuracyScore);
   const roundedScore = Math.round(assessment.accuracyScore);
   const hasPhonemes = assessment.phonemes.length > 0;
@@ -136,7 +136,7 @@ function WordCard({
   );
 }
 
-export function WordPhonemeDisplay({ wordAssessments, threshold }: WordPhonemeDisplayProps) {
+export function WordPhonemeDisplay({ wordAssessments, threshold }: Readonly<WordPhonemeDisplayProps>) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   useEffect(() => {

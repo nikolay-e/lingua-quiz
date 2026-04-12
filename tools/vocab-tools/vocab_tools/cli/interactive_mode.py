@@ -268,7 +268,7 @@ def run_interactive_mode():
                     console.print()
                     from .commands.analyze import analyze
 
-                    analyze(language_level=lang_level, format="all", top_n=None, output_dir=None)
+                    analyze(language_level=lang_level, output_dir=None)
 
             elif command == "export":
                 console.print("\n[dim]Command: export[/dim]")
@@ -320,8 +320,6 @@ def run_interactive_mode():
                         input_path=input_path,
                         dry_run=dry_run,
                         update_existing=update,
-                        skip_existing=True,
-                        batch_size=50,
                     )
 
             elif command == "sync":

@@ -23,7 +23,7 @@ export function AdminDeleteDialog({
       description={`Are you sure you want to delete "${item.sourceText}"? This action cannot be undone.`}
       confirmLabel="Delete"
       onConfirm={() => {
-        void onConfirm();
+        onConfirm();
       }}
       onCancel={onCancel}
     />

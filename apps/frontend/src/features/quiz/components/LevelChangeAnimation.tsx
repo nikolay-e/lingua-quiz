@@ -29,7 +29,7 @@ export function LevelChangeAnimation({
     const element = animationRef.current;
     if (element !== null) {
       element.style.animation = 'none';
-      void element.offsetHeight;
+      element.offsetHeight; // eslint-disable-line @typescript-eslint/no-unused-expressions -- force reflow
       element.style.animation = '';
     }
 

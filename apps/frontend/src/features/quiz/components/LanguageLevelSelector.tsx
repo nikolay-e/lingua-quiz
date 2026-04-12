@@ -19,7 +19,7 @@ export function LanguageLevelSelector({
   onSelect,
   onDownloadPdf,
   pdfLoading = false,
-}: LanguageLevelSelectorProps): React.JSX.Element {
+}: Readonly<LanguageLevelSelectorProps>): React.JSX.Element {
   const { t } = useTranslation();
 
   const {

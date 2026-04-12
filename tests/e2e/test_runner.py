@@ -1,21 +1,71 @@
 #!/usr/bin/env python3
-"""
-Integration and E2E Test Runner
-Runs all tests with proper reporting and exit codes
-"""
 
 import os
 from pathlib import Path
 import subprocess
 import sys
+import time
+import urllib.error
+import urllib.request
+
+
+def wait_for_service(url: str, name: str, max_attempts: int = 30, interval: float = 2):
+    for attempt in range(max_attempts):
+        try:
+            urllib.request.urlopen(url, timeout=5)
+            print(f"✓ {name} is ready ({url})")
+            return
+        except (urllib.error.URLError, OSError):
+            if attempt < max_attempts - 1:
+                time.sleep(interval)
+            else:
+                print(f"✗ {name} not ready after {max_attempts * interval:.0f}s ({url})")
+
+
+def wait_for_all_services(api_url: str, frontend_url: str):
+    for url, name in [(api_url + "/health", "Backend"), (frontend_url, "Frontend")]:
+        wait_for_service(url, name)
+    print()
+
+
+def build_pytest_command(workers: str, test_type: str) -> list[str]:
+    cmd = [
+        sys.executable,
+        "-m",
+        "pytest",
+        ".",
+        "-v",
+        "--tb=short",
+        "--html=reports/test_report.html",
+        "--self-contained-html",
+        "-n",
+        workers,
+        "--dist=loadfile",
+    ]
+
+    if test_type == "integration":
+        cmd.extend(["-m", "integration"])
+    elif test_type == "e2e":
+        cmd.extend(["-m", "e2e"])
+
+    return cmd
+
+
+def run_tests(cmd: list[str]) -> int:
+    try:
+        result = subprocess.run(cmd, check=False)
+        return result.returncode
+    except FileNotFoundError:
+        print("❌ pytest not found. Please install requirements.txt")
+        return 1
+    except KeyboardInterrupt:
+        print("❌ Tests interrupted by user")
+        return 130
 
 
 def main():
-    """Run all integration tests."""
-    # Set working directory to the package root
     os.chdir(Path(__file__).parent)
 
-    # Environment configuration
     api_url = os.getenv("API_URL", "http://localhost:9000/api")
     frontend_url = os.getenv("FRONTEND_URL", "http://localhost:80")
     skip_tts = os.getenv("SKIP_TTS_TESTS", "true")
@@ -26,65 +76,18 @@ def main():
     print(f"Skip TTS Tests: {skip_tts}")
     print()
 
-    import time as _time
-    import urllib.error
-    import urllib.request
+    wait_for_all_services(api_url, frontend_url)
 
-    for url, name in [(api_url + "/health", "Backend"), (frontend_url, "Frontend")]:
-        for attempt in range(30):
-            try:
-                urllib.request.urlopen(url, timeout=5)
-                print(f"✓ {name} is ready ({url})")
-                break
-            except (urllib.error.URLError, OSError):
-                if attempt < 29:
-                    _time.sleep(2)
-                else:
-                    print(f"✗ {name} not ready after 60s ({url})")
-    print()
-
-    # Parallel workers (default 8 for powerful machines)
     workers = os.getenv("PYTEST_WORKERS", "8")
-
-    # Run pytest with proper configuration
-    cmd = [
-        sys.executable,
-        "-m",
-        "pytest",
-        ".",
-        "-v",  # Verbose output
-        "--tb=short",  # Short traceback format
-        "--html=reports/test_report.html",  # HTML report
-        "--self-contained-html",  # Embed CSS/JS in HTML report
-        "-n",
-        workers,  # Parallel execution
-        "--dist=loadfile",  # Distribute by file for max parallelism
-    ]
-
-    # Add markers for different test types
     test_type = os.getenv("TEST_TYPE", "all")
-    if test_type == "integration":
-        cmd.extend(["-m", "integration"])
-    elif test_type == "e2e":
-        cmd.extend(["-m", "e2e"])
-    # else run all tests
+    cmd = build_pytest_command(workers, test_type)
 
     print("Running command:", " ".join(cmd))
     print("=" * 50)
 
-    # Create reports directory
     Path("reports").mkdir(exist_ok=True)
 
-    # Run the tests
-    try:
-        result = subprocess.run(cmd, check=False)
-        exit_code = result.returncode
-    except FileNotFoundError:
-        print("❌ pytest not found. Please install requirements.txt")
-        return 1
-    except KeyboardInterrupt:
-        print("❌ Tests interrupted by user")
-        return 130
+    exit_code = run_tests(cmd)
 
     print("=" * 50)
 

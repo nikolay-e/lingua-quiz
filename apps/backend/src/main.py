@@ -193,4 +193,4 @@ async def internal_server_error_handler(request: Request, exc):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=PORT)  # nosec B104
+    uvicorn.run(app, host="0.0.0.0", port=PORT)  # nosec B104  # nosonar - Docker container requires binding to all interfaces

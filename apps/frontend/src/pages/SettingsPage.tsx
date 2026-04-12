@@ -91,7 +91,7 @@ export function SettingsPage(): React.JSX.Element {
   };
 
   const handleLogout = (): void => {
-    void logout();
+    logout().catch(() => {});
   };
 
   const languageOptions = useMemo(
@@ -119,7 +119,7 @@ export function SettingsPage(): React.JSX.Element {
             variant="ghost"
             size="sm"
             onClick={() => {
-              void navigate('/');
+              Promise.resolve(navigate('/')).catch(() => {});
             }}
             className="self-start mb-2"
           >
@@ -204,7 +204,7 @@ export function SettingsPage(): React.JSX.Element {
                 className="flex flex-col gap-4"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  void handleChangePassword();
+                  handleChangePassword().catch(() => {});
                 }}
               >
                 <PasswordInput
@@ -322,7 +322,7 @@ export function SettingsPage(): React.JSX.Element {
           description={t('settings.deleteConfirmDesc')}
           confirmLabel={t('settings.deleteAccount')}
           onConfirm={() => {
-            void handleDeleteAccount();
+            handleDeleteAccount().catch(() => {});
           }}
           onCancel={() => {
             setShowDeleteConfirm(false);

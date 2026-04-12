@@ -164,7 +164,7 @@ function Select({
   className,
   id,
   'aria-label': ariaLabel,
-}: SelectProps): React.JSX.Element {
+}: Readonly<SelectProps>): React.JSX.Element {
   return (
     <SelectRoot value={value} onValueChange={onValueChange} disabled={disabled}>
       <SelectTrigger className={className} id={id} aria-label={ariaLabel}>
