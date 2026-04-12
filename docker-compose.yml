@@ -124,6 +124,10 @@ services:
       FRONTEND_URL: http://frontend:80
       SKIP_TTS_TESTS: 'true'
       TEST_TYPE: e2e
+      DB_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres # pragma: allowlist secret
+      PYTEST_WORKERS: '4'
     volumes:
       - ./test-reports:/home/pwuser/tests/reports
     depends_on:

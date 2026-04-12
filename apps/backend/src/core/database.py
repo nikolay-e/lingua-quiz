@@ -142,6 +142,11 @@ def _execute_query(
             _log_slow_query(query_fingerprint, duration_ms, db_name, **log_extra)
             return result
 
+    except psycopg2.OperationalError as e:
+        _handle_query_error(e, db_name, query_fingerprint, start_time, conn, is_write)
+        _safe_close(conn)
+        conn = None
+        raise
     except Exception as e:
         _handle_query_error(e, db_name, query_fingerprint, start_time, conn, is_write)
         raise
@@ -153,6 +158,14 @@ def _execute_query(
                 logger.critical(f"Failed to return {db_name} connection to pool: {e}")
                 _safe_close(conn)
 
+
+KEEPALIVE_PARAMS = {
+    "keepalives": 1,
+    "keepalives_idle": 30,
+    "keepalives_interval": 10,
+    "keepalives_count": 5,
+    "connect_timeout": 10,
+}
 
 SKIP_DB_INIT = os.getenv("SKIP_DB_INIT", "false").lower() in {"1", "true", "yes"}
 
@@ -170,6 +183,7 @@ else:
         database=DB_NAME,
         user=DB_USER,
         password=DB_PASSWORD,
+        **KEEPALIVE_PARAMS,
     )
 
     tts_db_pool = SimpleConnectionPool(
@@ -180,6 +194,7 @@ else:
         database=TTS_DB_NAME,
         user=TTS_DB_USER,
         password=TTS_DB_PASSWORD,
+        **KEEPALIVE_PARAMS,
     )
     logger.info("TTS database pool initialized (host=%s, db=%s)", TTS_DB_HOST, TTS_DB_NAME)
 
@@ -191,6 +206,7 @@ else:
         database=WORDS_DB_NAME,
         user=WORDS_DB_USER,
         password=WORDS_DB_PASSWORD,
+        **KEEPALIVE_PARAMS,
     )
     logger.info("Words database pool initialized (host=%s, db=%s)", WORDS_DB_HOST, WORDS_DB_NAME)
 

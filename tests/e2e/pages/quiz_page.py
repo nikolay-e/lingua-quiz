@@ -76,6 +76,14 @@ class QuizPage(BasePage):
             self.page.wait_for_timeout(200)
         self.click_start_learning()
         self.expect_question_visible()
+        self.ensure_typing_mode()
+        return self
+
+    def ensure_typing_mode(self):
+        toggle = self.page.get_by_role("button", name="Switch to typing")
+        if toggle.count() > 0 and toggle.is_visible():
+            toggle.click()
+            self.page.wait_for_timeout(300)
         return self
 
     def click_start_learning(self):

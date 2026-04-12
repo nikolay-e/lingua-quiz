@@ -171,3 +171,48 @@ jobs:
       - name: Cleanup
         if: always()
         run: docker compose --profile test-api down -v
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: [build]
+    timeout-minutes: 30
+    continue-on-error: true
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull and tag images
+        env:
+          TAG: ${{ needs.build.outputs.tag }}
+        run: |
+          for svc in backend frontend integration-e2e-tests; do
+            docker pull "${{ env.REGISTRY }}/lingua-quiz-${svc}:${TAG}"
+          done
+          docker tag "${{ env.REGISTRY }}/lingua-quiz-backend:${TAG}" lingua-quiz-backend:latest
+          docker tag "${{ env.REGISTRY }}/lingua-quiz-frontend:${TAG}" lingua-quiz-frontend:latest
+          docker tag "${{ env.REGISTRY }}/lingua-quiz-integration-e2e-tests:${TAG}" lingua-quiz-tests:latest
+
+      - name: Run E2E tests
+        run: |
+          mkdir -p test-reports && chmod 777 test-reports
+          docker compose --profile test-ui up --no-build --abort-on-container-exit --exit-code-from test-ui
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-reports
+          path: test-reports/
+          retention-days: 7
+
+      - name: Cleanup
+        if: always()
+        run: docker compose --profile test-ui down -v

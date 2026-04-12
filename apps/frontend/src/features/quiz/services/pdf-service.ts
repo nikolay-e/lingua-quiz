@@ -97,11 +97,7 @@ function generateWithExamples(
     const tgtEx = t.targetUsageExample ?? '';
     if (srcEx !== '' || tgtEx !== '') {
       const exStyle = { fontSize: 7.5, textColor: [100, 100, 100] };
-      rows.push([
-        '',
-        { content: srcEx, styles: exStyle },
-        { content: tgtEx, styles: exStyle },
-      ]);
+      rows.push(['', { content: srcEx, styles: exStyle }, { content: tgtEx, styles: exStyle }]);
     }
   }
 

@@ -86,7 +86,6 @@ export function HomePage(): React.JSX.Element {
         }}
         badge={selectedList?.listName}
       />
-
     </AppShell>
   );
 }

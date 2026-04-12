@@ -13,9 +13,7 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://frontend")
 
 
 class TestPdfDownload:
-    def test_pdf_button_appears_after_course_selection(
-        self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage
-    ) -> None:
+    def test_pdf_button_appears_after_course_selection(self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage) -> None:
         """PDF download button should appear on quiz page after selecting language and level."""
         login_user(page, test_user["username"], test_user["password"])
 
@@ -31,9 +29,7 @@ class TestPdfDownload:
         pdf_button = page.get_by_role("button", name="Download PDF")
         expect(pdf_button).to_be_visible(timeout=3000)
 
-    def test_pdf_buttons_hidden_without_selection(
-        self, page: Page, test_user: AuthenticatedUser
-    ) -> None:
+    def test_pdf_buttons_hidden_without_selection(self, page: Page, test_user: AuthenticatedUser) -> None:
         """PDF buttons should not be visible when no course is selected."""
         login_user(page, test_user["username"], test_user["password"])
 
@@ -42,9 +38,7 @@ class TestPdfDownload:
         pdf_button = page.get_by_role("button", name="Download PDF")
         expect(pdf_button).to_have_count(0)
 
-    def test_pdf_download_triggers(
-        self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage
-    ) -> None:
+    def test_pdf_download_triggers(self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage) -> None:
         """Clicking PDF download should trigger a file download."""
         login_user(page, test_user["username"], test_user["password"])
 
@@ -64,9 +58,7 @@ class TestPdfDownload:
             pdf_button.click()
 
         download = download_info.value
-        assert download.suggested_filename.endswith(".pdf"), (
-            f"Expected .pdf file, got: {download.suggested_filename}"
-        )
+        assert download.suggested_filename.endswith(".pdf"), f"Expected .pdf file, got: {download.suggested_filename}"
 
 
 class TestPdfFontAvailable:
@@ -75,12 +67,8 @@ class TestPdfFontAvailable:
         from conftest import FRONTEND_URL
 
         response = web_session.get(f"{FRONTEND_URL}/fonts/Roboto-Regular.ttf")
-        assert response.status_code == 200, (
-            f"Font file returned {response.status_code}, expected 200"
-        )
-        assert len(response.content) > 100000, (
-            f"Font file too small ({len(response.content)} bytes), likely not a real font"
-        )
+        assert response.status_code == 200, f"Font file returned {response.status_code}, expected 200"
+        assert len(response.content) > 100000, f"Font file too small ({len(response.content)} bytes), likely not a real font"
 
 
 class TestAppLoadsWithoutErrors:
@@ -96,9 +84,7 @@ class TestAppLoadsWithoutErrors:
         page.wait_for_load_state("networkidle", timeout=15000)
 
         module_errors = [e for e in errors if "module" in e.lower() or "import" in e.lower()]
-        assert len(module_errors) == 0, (
-            f"Module import errors detected on page load: {module_errors}"
-        )
+        assert len(module_errors) == 0, f"Module import errors detected on page load: {module_errors}"
 
     def test_app_renders_login_or_home(self, page: Page) -> None:
         """App should render either login page or home page without crashing."""
@@ -110,8 +96,5 @@ class TestAppLoadsWithoutErrors:
         expect(error_text).to_have_count(0)
 
         # Should show either login or home page content
-        page_has_content = (
-            page.locator("text=Sign In").count() > 0
-            or page.locator("text=Learn Words").count() > 0
-        )
+        page_has_content = page.locator("text=Sign In").count() > 0 or page.locator("text=Learn Words").count() > 0
         assert page_has_content, "App did not render any expected content"
