@@ -26,6 +26,23 @@ def main():
     print(f"Skip TTS Tests: {skip_tts}")
     print()
 
+    import time as _time
+    import urllib.error
+    import urllib.request
+
+    for url, name in [(api_url + "/health", "Backend"), (frontend_url, "Frontend")]:
+        for attempt in range(30):
+            try:
+                urllib.request.urlopen(url, timeout=5)
+                print(f"✓ {name} is ready ({url})")
+                break
+            except (urllib.error.URLError, OSError):
+                if attempt < 29:
+                    _time.sleep(2)
+                else:
+                    print(f"✗ {name} not ready after 60s ({url})")
+    print()
+
     # Parallel workers (default 8 for powerful machines)
     workers = os.getenv("PYTEST_WORKERS", "8")
 
