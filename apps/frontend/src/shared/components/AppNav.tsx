@@ -36,7 +36,7 @@ export function AppNav({ username, isAdmin }: AppNavProps): React.JSX.Element {
               className={cn(
                 'flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm no-underline transition-colors',
                 isActive(path)
-                  ? 'text-primary bg-primary/10'
+                  ? 'text-primary bg-primary/15 font-medium'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted',
               )}
             >

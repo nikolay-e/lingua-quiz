@@ -152,6 +152,7 @@ interface SelectProps {
   disabled?: boolean;
   className?: string;
   id?: string;
+  'aria-label'?: string;
 }
 
 function Select({
@@ -162,10 +163,11 @@ function Select({
   disabled = false,
   className,
   id,
+  'aria-label': ariaLabel,
 }: SelectProps): React.JSX.Element {
   return (
     <SelectRoot value={value} onValueChange={onValueChange} disabled={disabled}>
-      <SelectTrigger className={className} id={id}>
+      <SelectTrigger className={className} id={id} aria-label={ariaLabel}>
         <SelectPrimitive.Value placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

@@ -70,6 +70,7 @@ export function LanguageLevelSelector({
             onValueChange={handleKnownChange}
             options={knownOptions}
             placeholder={t('quiz.selectLanguage')}
+            aria-label={t('quiz.iSpeak')}
           />
         </div>
 
@@ -89,6 +90,7 @@ export function LanguageLevelSelector({
             options={learningOptions}
             placeholder={t('quiz.selectLanguage')}
             disabled={selectedKnown === undefined}
+            aria-label={t('quiz.iLearn')}
           />
         </div>
 
@@ -108,6 +110,7 @@ export function LanguageLevelSelector({
             options={levelOptions}
             placeholder={t('quiz.selectLevel')}
             disabled={selectedLearning === undefined}
+            aria-label={t('quiz.level')}
           />
         </div>
       </div>
