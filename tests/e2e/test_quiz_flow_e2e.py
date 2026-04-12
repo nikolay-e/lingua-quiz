@@ -1,6 +1,6 @@
 import re
 
-from conftest import AuthenticatedUser, login_and_start_quiz, login_user
+from conftest import AuthenticatedUser, login_and_start_quiz, login_user, navigate_to_quiz
 from pages.quiz_page import QuizPage
 from playwright.sync_api import Page, expect
 import pytest
@@ -53,6 +53,7 @@ class TestQuizFlowE2E:
         quiz_page.click_back_to_menu()
         quiz_page.expect_welcome_visible(timeout=3000)
 
+        navigate_to_quiz(page)
         quiz_page.select_cascading_and_start()
 
     def test_answer_input_clears_after_submit(self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage) -> None:
@@ -94,6 +95,7 @@ class TestProgressPersistence:
 class TestQuizListSelection:
     def test_cascading_selectors_populated(self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage) -> None:
         login_user(page, test_user["username"], test_user["password"])
+        navigate_to_quiz(page)
 
         expect(quiz_page.selector_triggers.first).to_be_visible(timeout=5000)
 
@@ -104,6 +106,7 @@ class TestQuizListSelection:
 
     def test_cascading_selectors_flow(self, page: Page, test_user: AuthenticatedUser, quiz_page: QuizPage) -> None:
         login_user(page, test_user["username"], test_user["password"])
+        navigate_to_quiz(page)
 
         expect(quiz_page.selector_triggers.first).to_be_visible(timeout=5000)
 
