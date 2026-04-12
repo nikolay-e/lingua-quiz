@@ -87,6 +87,7 @@ async def add_security_headers(request: Request, call_next):
     permissions_policy = "geolocation=(), microphone=(self), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
     response.headers["Permissions-Policy"] = permissions_policy
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
     csp_policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
     response.headers["Content-Security-Policy"] = csp_policy
     if request.url.path.startswith("/api/"):
@@ -131,6 +132,23 @@ async def get_version() -> VersionResponse:
     return VersionResponse(version=APP_VERSION)
 
 
+SECURITY_HEADERS = {
+    "X-Frame-Options": "DENY",
+    "X-Content-Type-Options": "nosniff",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+    "Cross-Origin-Embedder-Policy": "credentialless",
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0",
+}
+
+
+def _secure_json_response(status_code: int, content: dict) -> JSONResponse:
+    return JSONResponse(status_code=status_code, content=content, headers=SECURITY_HEADERS)
+
+
 def _sanitize_validation_errors(errors: Sequence[dict] | list) -> list[dict]:
     return [{"loc": e.get("loc"), "type": e.get("type"), "msg": e.get("msg")} for e in errors]
 
@@ -145,10 +163,7 @@ async def request_validation_error_handler(request: Request, exc: RequestValidat
             "errors": _sanitize_validation_errors(exc.errors()),
         },
     )
-    return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={"detail": _sanitize_validation_errors(exc.errors())},
-    )
+    return _secure_json_response(status.HTTP_422_UNPROCESSABLE_ENTITY, {"detail": _sanitize_validation_errors(exc.errors())})
 
 
 @app.exception_handler(ValidationError)
@@ -161,24 +176,18 @@ async def validation_exception_handler(request: Request, exc: ValidationError):
             "errors": _sanitize_validation_errors(exc.errors()),
         },
     )
-    return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={"detail": _sanitize_validation_errors(exc.errors())},
-    )
+    return _secure_json_response(status.HTTP_422_UNPROCESSABLE_ENTITY, {"detail": _sanitize_validation_errors(exc.errors())})
 
 
 @app.exception_handler(404)
 async def not_found_handler(_request: Request, _exc):
-    return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"error": "Resource not found"})
+    return _secure_json_response(status.HTTP_404_NOT_FOUND, {"error": "Resource not found"})
 
 
 @app.exception_handler(500)
 async def internal_server_error_handler(request: Request, exc):
     logger.error(f"Internal server error: {exc}")
-    return JSONResponse(
-        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"error": "Internal server error"},
-    )
+    return _secure_json_response(status.HTTP_500_INTERNAL_SERVER_ERROR, {"error": "Internal server error"})
 
 
 if __name__ == "__main__":
