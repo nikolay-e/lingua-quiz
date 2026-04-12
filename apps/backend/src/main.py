@@ -186,8 +186,8 @@ async def not_found_handler(_request: Request, _exc):
 
 @app.exception_handler(500)
 async def internal_server_error_handler(request: Request, exc):
-    logger.error(f"Internal server error: {exc}")
-    return _secure_json_response(status.HTTP_500_INTERNAL_SERVER_ERROR, {"error": "Internal server error"})
+    logger.error("Unhandled error", extra={"path": request.url.path, "method": request.method})
+    return _secure_json_response(status.HTTP_500_INTERNAL_SERVER_ERROR, {"error": "An error occurred"})
 
 
 if __name__ == "__main__":

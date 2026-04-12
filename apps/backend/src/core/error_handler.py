@@ -4,10 +4,13 @@ from typing import Any, TypeVar
 
 from core.logging import get_logger
 from fastapi import HTTPException
+import psycopg2
 
 T = TypeVar("T")
 
 logger = get_logger(__name__)
+
+GENERIC_ERROR = "An error occurred"
 
 
 def handle_api_errors(
@@ -20,12 +23,12 @@ def handle_api_errors(
                 return await func(*args, **kwargs)  # type: ignore[misc,no-any-return]
             except HTTPException:
                 raise
+            except (psycopg2.DataError, psycopg2.IntegrityError, psycopg2.OperationalError, ValueError, TypeError) as e:
+                logger.warning(f"{operation_name} bad input: {e}")
+                raise HTTPException(status_code=400, detail=GENERIC_ERROR)
             except Exception as e:
                 logger.error(f"{operation_name} error: {e}", exc_info=True)
-                raise HTTPException(
-                    status_code=500,
-                    detail=f"{operation_name} failed",
-                )
+                raise HTTPException(status_code=500, detail=GENERIC_ERROR)
 
         @wraps(func)
         def sync_wrapper(*args: Any, **kwargs: Any) -> T:
@@ -33,12 +36,12 @@ def handle_api_errors(
                 return func(*args, **kwargs)
             except HTTPException:
                 raise
+            except (psycopg2.DataError, psycopg2.IntegrityError, psycopg2.OperationalError, ValueError, TypeError) as e:
+                logger.warning(f"{operation_name} bad input: {e}")
+                raise HTTPException(status_code=400, detail=GENERIC_ERROR)
             except Exception as e:
                 logger.error(f"{operation_name} error: {e}", exc_info=True)
-                raise HTTPException(
-                    status_code=500,
-                    detail=f"{operation_name} failed",
-                )
+                raise HTTPException(status_code=500, detail=GENERIC_ERROR)
 
         import inspect
 
