@@ -61,6 +61,14 @@ app.add_middleware(
 
 
 @app.middleware("http")
+async def reject_null_bytes(request: Request, call_next):
+    if "\x00" in str(request.url):
+        return JSONResponse(status_code=400, content={"detail": "Invalid characters in request"})
+    response = await call_next(request)
+    return response
+
+
+@app.middleware("http")
 async def csrf_protection(request: Request, call_next):
     if request.url.path.startswith("/api/"):
         validate_origin(request)
@@ -139,7 +147,7 @@ async def request_validation_error_handler(request: Request, exc: RequestValidat
     )
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={"detail": "Invalid request data"},
+        content={"detail": _sanitize_validation_errors(exc.errors())},
     )
 
 
@@ -155,7 +163,7 @@ async def validation_exception_handler(request: Request, exc: ValidationError):
     )
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={"detail": "Invalid request data"},
+        content={"detail": _sanitize_validation_errors(exc.errors())},
     )
 
 

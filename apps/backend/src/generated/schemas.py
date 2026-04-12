@@ -23,7 +23,7 @@ class HealthResponse(APIBaseModel):
 
 
 class ProgressUpdateRequest(APIBaseModel):
-    vocabulary_item_id: Annotated[str, Field(alias="vocabularyItemId", title="Vocabularyitemid")]
+    vocabulary_item_id: Annotated[str, Field(alias="vocabularyItemId", min_length=1, title="Vocabularyitemid")]
     level: Annotated[int, Field(ge=0, le=5, title="Level")]
     queue_position: Annotated[int, Field(alias="queuePosition", ge=0, title="Queueposition")]
     correct_count: Annotated[int, Field(alias="correctCount", ge=0, title="Correctcount")]
