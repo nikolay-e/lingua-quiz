@@ -205,6 +205,7 @@ export function QuizPage(): React.JSX.Element {
   return (
     <>
       <AppShell className="max-w-5xl">
+        <h1 className="sr-only">LinguaQuiz</h1>
         <FeedCard>
           <div className="flex flex-col gap-4">
             <QuizHeader

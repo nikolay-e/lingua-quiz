@@ -127,6 +127,7 @@ export function AudioRecorder({
           onClick={handleToggleRecording}
           disabled={disabled}
           className={cn('w-16 h-16 rounded-full', isRecording && 'animate-pulse')}
+          aria-label={isRecording ? 'Stop recording' : 'Start recording'}
         >
           {isRecording ? <Square size={24} /> : <Mic size={28} />}
         </Button>

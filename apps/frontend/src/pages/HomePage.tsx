@@ -43,6 +43,7 @@ export function HomePage(): React.JSX.Element {
 
   return (
     <AppShell maxWidth="2xl">
+      <h1 className="sr-only">LinguaQuiz</h1>
       {hasStats && (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {streakDays > 0 && (
