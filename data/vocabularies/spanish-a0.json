@@ -1,7 +1,7 @@
 {
   "listName": "Spanish Russian A0",
   "exportedAt": "2026-01-18T20:40:48.185125+00:00",
-  "totalWords": 240,
+  "totalWords": 239,
   "words": [
     {
       "id": "ba0e09f6-bd57-43cc-93b0-6fd68e0b9599",
@@ -198,7 +198,7 @@
     {
       "id": "f41755df-333d-4d86-b3c9-b302e8928433",
       "sourceText": "bomba",
-      "targetText": "бомба",
+      "targetText": "бомба|насос",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -234,7 +234,7 @@
     {
       "id": "ed0382e3-705c-4ab8-9c89-3edd39660bcd",
       "sourceText": "café",
-      "targetText": "кофе",
+      "targetText": "кофе|кафе",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -294,7 +294,7 @@
     {
       "id": "67e0c2d5-d834-41b9-b407-d6e4cdbccc33",
       "sourceText": "carrera",
-      "targetText": "карьера",
+      "targetText": "карьера|забег|специальность",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -426,7 +426,7 @@
     {
       "id": "7d984c77-a397-4a36-a5c3-78c94b2a3403",
       "sourceText": "colonia",
-      "targetText": "колония",
+      "targetText": "колония|одеколон",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -449,14 +449,14 @@
     },
     {
       "id": "fd47c1e5-77d8-49f9-aafa-9e70e937f129",
-      "sourceText": "comentarios",
-      "targetText": "комментарии",
+      "sourceText": "comentario",
+      "targetText": "комментарий",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Lee los comentarios del artículo.",
-      "targetUsageExample": "Прочитай комментарии к статье.",
+      "sourceUsageExample": "Dejó un comentario en el artículo.",
+      "targetUsageExample": "Он оставил комментарий к статье.",
       "isActive": true
     },
     {
@@ -666,7 +666,7 @@
     {
       "id": "8b754cde-879a-4683-a8cb-5d1adb55782e",
       "sourceText": "declaración",
-      "targetText": "декларация",
+      "targetText": "заявление|декларация",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -882,7 +882,7 @@
     {
       "id": "ecff3a64-0247-4e53-8830-7b8c2315ff6c",
       "sourceText": "estación",
-      "targetText": "станция",
+      "targetText": "станция|время года",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -990,13 +990,13 @@
     {
       "id": "d540056e-ff0c-44ee-ad88-37deaa3305ea",
       "sourceText": "fiscal",
-      "targetText": "фискальный",
+      "targetText": "прокурор|фискальный",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "El año fiscal termina en diciembre.",
-      "targetUsageExample": "Фискальный год заканчивается в декабре.",
+      "sourceUsageExample": "El fiscal presentó las pruebas ante el juez.",
+      "targetUsageExample": "Прокурор представил доказательства перед судьёй.",
       "isActive": true
     },
     {
@@ -1074,19 +1074,19 @@
     {
       "id": "1e992aa6-c82c-4594-8d62-81655fe1c9e8",
       "sourceText": "funcionar",
-      "targetText": "функционировать",
+      "targetText": "работать|функционировать",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "La máquina no funciona.",
-      "targetUsageExample": "Машина не функционирует.",
+      "targetUsageExample": "Машина не работает.",
       "isActive": true
     },
     {
       "id": "4eba350c-78e2-4a2d-a345-45461fffce53",
       "sourceText": "función",
-      "targetText": "функция",
+      "targetText": "функция|спектакль",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1158,7 +1158,7 @@
     {
       "id": "b3bc0c99-e8db-4d53-a85a-de7f371fa430",
       "sourceText": "genio",
-      "targetText": "гений",
+      "targetText": "гений|характер|нрав",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1266,13 +1266,13 @@
     {
       "id": "b49af990-0e06-484c-8b0b-0dff4cab5772",
       "sourceText": "importar",
-      "targetText": "импортировать",
+      "targetText": "иметь значение|импортировать",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Importamos productos de España.",
-      "targetUsageExample": "Мы импортируем продукты из Испании.",
+      "sourceUsageExample": "No me importa lo que digan.",
+      "targetUsageExample": "Мне неважно, что они говорят.",
       "isActive": true
     },
     {
@@ -1300,18 +1300,6 @@
       "isActive": true
     },
     {
-      "id": "b0654998-8548-4a76-abca-79433d273d8a",
-      "sourceText": "interesa",
-      "targetText": "интересует",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Me interesa la historia.",
-      "targetUsageExample": "Меня интересует история.",
-      "isActive": true
-    },
-    {
       "id": "ab0d3d4f-bdeb-464a-a797-5729ddc166a6",
       "sourceText": "interesante",
       "targetText": "интересный",
@@ -1321,6 +1309,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Es un libro interesante.",
       "targetUsageExample": "Это интересная книга.",
+      "isActive": true
+    },
+    {
+      "id": "b0654998-8548-4a76-abca-79433d273d8a",
+      "sourceText": "interesar",
+      "targetText": "интересовать",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Me interesa la historia.",
+      "targetUsageExample": "Меня интересует история.",
       "isActive": true
     },
     {
@@ -1434,7 +1434,7 @@
     {
       "id": "3ea24300-b1e2-4460-a1d6-b73ae6fa4a12",
       "sourceText": "marca",
-      "targetText": "марка",
+      "targetText": "марка|бренд|след",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1458,7 +1458,7 @@
     {
       "id": "5b0645eb-0276-42ad-99e1-fc7f9ffc3917",
       "sourceText": "materia",
-      "targetText": "материя",
+      "targetText": "материя|учебный предмет",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1482,7 +1482,7 @@
     {
       "id": "f8eaf6c9-d0b9-4bf5-b3ee-e95f6700a529",
       "sourceText": "medicina",
-      "targetText": "медицина",
+      "targetText": "медицина|лекарство",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1938,7 +1938,7 @@
     {
       "id": "5b831b4b-0135-4983-abf5-29a07c63e1a4",
       "sourceText": "policía",
-      "targetText": "полиция",
+      "targetText": "полиция|полицейский",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -2130,13 +2130,13 @@
     {
       "id": "dbf52af8-c665-4995-9094-880c38b1eb3f",
       "sourceText": "prueba",
-      "targetText": "проба",
+      "targetText": "тест|доказательство|испытание",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Es solo una prueba.",
-      "targetUsageExample": "Это только проба.",
+      "sourceUsageExample": "Mañana tenemos una prueba de matemáticas.",
+      "targetUsageExample": "Завтра у нас тест по математике.",
       "isActive": true
     },
     {
@@ -2250,13 +2250,13 @@
     {
       "id": "7ebec844-9efb-4ac2-a221-c85ce5898c65",
       "sourceText": "real",
-      "targetText": "реальный",
+      "targetText": "реальный|королевский",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Es un problema real.",
-      "targetUsageExample": "Это реальная проблема.",
+      "sourceUsageExample": "La familia real vive en el palacio.",
+      "targetUsageExample": "Королевская семья живёт во дворце.",
       "isActive": true
     },
     {
@@ -2269,18 +2269,6 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "La realidad supera la ficción.",
       "targetUsageExample": "Реальность превосходит вымысел.",
-      "isActive": true
-    },
-    {
-      "id": "fa13eb29-bb87-49e4-b0c4-3b18ffe5117f",
-      "sourceText": "recursos",
-      "targetText": "ресурсы",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Necesitamos más recursos.",
-      "targetUsageExample": "Нам нужно больше ресурсов.",
       "isActive": true
     },
     {
@@ -2406,7 +2394,7 @@
     {
       "id": "291bf721-11aa-418f-9957-672402c1affd",
       "sourceText": "rosa",
-      "targetText": "роза",
+      "targetText": "роза|розовый",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",

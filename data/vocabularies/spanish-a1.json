@@ -1,7 +1,7 @@
 {
   "listName": "Spanish Russian A1",
   "exportedAt": "2026-01-18T20:40:48.253732+00:00",
-  "totalWords": 627,
+  "totalWords": 636,
   "words": [
     {
       "id": "c6aa9f0a-8de4-44eb-b877-cf8da42e95f4",
@@ -966,13 +966,13 @@
     {
       "id": "c61a15cf-af86-457d-945b-1e182f66da2e",
       "sourceText": "cabo",
-      "targetText": "мыс",
+      "targetText": "конец|мыс",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "El Cabo de Buena Esperanza está en África.",
-      "targetUsageExample": "Мыс Доброй Надежды находится в Африке.",
+      "sourceUsageExample": "Al fin y al cabo, todo salió bien.",
+      "targetUsageExample": "В конце концов, всё прошло хорошо.",
       "isActive": true
     },
     {
@@ -1002,7 +1002,7 @@
     {
       "id": "718aaad9-90a6-4b91-ba68-8068cdc41c00",
       "sourceText": "caja",
-      "targetText": "коробка|ящик",
+      "targetText": "коробка|ящик|касса",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1158,7 +1158,7 @@
     {
       "id": "49cb0c1f-6ce8-4056-9a06-e44d10955ef5",
       "sourceText": "capital",
-      "targetText": "столица",
+      "targetText": "столица|капитал",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1206,7 +1206,7 @@
     {
       "id": "29e39483-7d4e-4350-9062-c0e8e49b571b",
       "sourceText": "carta",
-      "targetText": "письмо",
+      "targetText": "письмо|карта (игральная)|меню",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1422,7 +1422,7 @@
     {
       "id": "6807fee2-f0f0-48d3-9fd2-011199dfa55c",
       "sourceText": "claro",
-      "targetText": "ясный",
+      "targetText": "ясный|конечно",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -1902,13 +1902,13 @@
     {
       "id": "ab8269e2-b6ee-4f23-b92a-fa5daabc18c2",
       "sourceText": "dado",
-      "targetText": "игральный кубик",
+      "targetText": "dado que — учитывая что|игральный кубик",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Tira el dado.",
-      "targetUsageExample": "Брось кубик.",
+      "sourceUsageExample": "Dado que llueve, nos quedamos en casa.",
+      "targetUsageExample": "Учитывая, что идёт дождь, мы остаёмся дома.",
       "isActive": true
     },
     {
@@ -2130,7 +2130,7 @@
     {
       "id": "cb27bfdf-6c20-4baf-b7dc-ecabe78539ba",
       "sourceText": "derecho",
-      "targetText": "право",
+      "targetText": "право|прямой",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2214,7 +2214,7 @@
     {
       "id": "a0db860d-20ec-4242-a6e7-11758f884328",
       "sourceText": "diario",
-      "targetText": "дневник|газета",
+      "targetText": "дневник|газета|ежедневный",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2526,7 +2526,7 @@
     {
       "id": "266df4ad-520a-4c41-ac60-fd1e3730e3c7",
       "sourceText": "elección",
-      "targetText": "выбор",
+      "targetText": "выбор|выборы",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2658,7 +2658,7 @@
     {
       "id": "50a340ca-d9e9-4366-b452-f0db7d058a99",
       "sourceText": "entrada",
-      "targetText": "вход",
+      "targetText": "вход|билет",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -2850,7 +2850,7 @@
     {
       "id": "fb9011c4-0ff2-40b3-9c37-0c55e96f34c8",
       "sourceText": "estado",
-      "targetText": "состояние",
+      "targetText": "состояние|государство",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -3078,13 +3078,13 @@
     {
       "id": "7e12f05e-7a1e-4614-baf3-ba96af2b8d1b",
       "sourceText": "frente",
-      "targetText": "лоб",
+      "targetText": "фронт|передняя часть|лоб",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
-      "sourceUsageExample": "Tiene fiebre en la frente.",
-      "targetUsageExample": "У него горячий лоб.",
+      "sourceUsageExample": "El edificio está frente a la plaza.",
+      "targetUsageExample": "Здание находится напротив площади.",
       "isActive": true
     },
     {
@@ -3385,6 +3385,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Es un hecho.",
       "targetUsageExample": "Это факт.",
+      "isActive": true
+    },
+    {
+      "id": "a8ee1b45-703f-4efd-831d-0550a0d24d70",
+      "sourceText": "hermana",
+      "targetText": "сестра",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Mi hermana es pequeña.",
+      "targetUsageExample": "Моя сестра маленькая.",
       "isActive": true
     },
     {
@@ -3748,6 +3760,18 @@
       "isActive": true
     },
     {
+      "id": "50f8645e-df44-4a61-bb8e-5cf89616b44a",
+      "sourceText": "jueves",
+      "targetText": "четверг",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Los jueves voy al gimnasio.",
+      "targetUsageExample": "По четвергам я хожу в спортзал.",
+      "isActive": true
+    },
+    {
       "id": "bc140b38-370d-4386-8cbe-3d7203e28b84",
       "sourceText": "jugar",
       "targetText": "играть",
@@ -4072,6 +4096,18 @@
       "isActive": true
     },
     {
+      "id": "6c48d458-930d-4a37-b989-6ac1456a2697",
+      "sourceText": "lunes",
+      "targetText": "понедельник",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "El lunes tengo clase de español.",
+      "targetUsageExample": "В понедельник у меня урок испанского.",
+      "isActive": true
+    },
+    {
       "id": "8028da9a-1a01-4d13-b90d-b5397a6c5edc",
       "sourceText": "luz",
       "targetText": "свет",
@@ -4213,6 +4249,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "La marcha comenzó.",
       "targetUsageExample": "Марш начался.",
+      "isActive": true
+    },
+    {
+      "id": "52c1206b-c2a9-4439-913d-227acd2d6fd9",
+      "sourceText": "martes",
+      "targetText": "вторник",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "El martes tenemos reunión.",
+      "targetUsageExample": "Во вторник у нас собрание.",
       "isActive": true
     },
     {
@@ -4528,6 +4576,18 @@
       "isActive": true
     },
     {
+      "id": "a5bd8c74-eab6-4d47-91ea-394db2ecd48d",
+      "sourceText": "miércoles",
+      "targetText": "среда",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Los miércoles tengo clase de español.",
+      "targetUsageExample": "По средам у меня урок испанского.",
+      "isActive": true
+    },
+    {
       "id": "fc315a20-371d-40d9-ac4d-3ba90f7ade8b",
       "sourceText": "modo",
       "targetText": "способ [образ действия]",
@@ -4578,7 +4638,7 @@
     {
       "id": "c8d886d8-c69c-4efb-bd7d-4507f4bd007c",
       "sourceText": "mujer",
-      "targetText": "женщина",
+      "targetText": "женщина|жена",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -4744,6 +4804,18 @@
       "isActive": true
     },
     {
+      "id": "c6d5bbdc-a68e-4f65-a783-9aee65e35341",
+      "sourceText": "niña",
+      "targetText": "девочка",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "La niña juega en el parque.",
+      "targetUsageExample": "Девочка играет в парке.",
+      "isActive": true
+    },
+    {
       "id": "04f6a86e-8121-4450-9615-8f37c5f2d8b5",
       "sourceText": "niño",
       "targetText": "ребёнок",
@@ -4806,7 +4878,7 @@
     {
       "id": "b0f64020-8dae-419f-9975-bd4ea9b5eeec",
       "sourceText": "nota",
-      "targetText": "заметка",
+      "targetText": "заметка|оценка",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -4825,6 +4897,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Tengo una buena noticia.",
       "targetUsageExample": "У меня хорошая новость.",
+      "isActive": true
+    },
+    {
+      "id": "a5544d90-a82b-4b7f-92fc-2a2df041fb2d",
+      "sourceText": "novia",
+      "targetText": "девушка|невеста",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Es mi novia.",
+      "targetUsageExample": "Это моя девушка.",
       "isActive": true
     },
     {
@@ -4864,6 +4948,18 @@
       "isActive": true
     },
     {
+      "id": "9d420fd6-0ad5-4ecf-97dd-382f21fa6c71",
+      "sourceText": "nueve",
+      "targetText": "девять",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Son las nueve en punto.",
+      "targetUsageExample": "Ровно девять часов.",
+      "isActive": true
+    },
+    {
       "id": "cc3ce5b6-e039-407b-9baf-6a5303c0d6d9",
       "sourceText": "nuevo",
       "targetText": "новый",
@@ -4890,7 +4986,7 @@
     {
       "id": "9bd34c46-be15-48e5-9810-6d56a8fab0a3",
       "sourceText": "número",
-      "targetText": "число",
+      "targetText": "число|номер",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -4926,13 +5022,25 @@
     {
       "id": "6d08bde3-c07b-43b2-aee0-ee36f6b0075a",
       "sourceText": "obra",
-      "targetText": "произведение",
+      "targetText": "произведение|стройка",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Es una obra de arte.",
       "targetUsageExample": "Это произведение искусства.",
+      "isActive": true
+    },
+    {
+      "id": "d1f1b157-cb4f-4942-9a1d-620f2cbce010",
+      "sourceText": "ocho",
+      "targetText": "восемь",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Son las ocho de la mañana.",
+      "targetUsageExample": "Сейчас восемь часов утра.",
       "isActive": true
     },
     {
@@ -4986,7 +5094,7 @@
     {
       "id": "68111fec-a56b-4442-b938-b6f4655cac03",
       "sourceText": "orden",
-      "targetText": "порядок",
+      "targetText": "порядок|приказ|заказ",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -5070,25 +5178,13 @@
     {
       "id": "a8aab4fc-3013-4932-a562-3de03ebe8731",
       "sourceText": "papel",
-      "targetText": "бумага",
+      "targetText": "бумага|роль",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
       "difficultyLevel": "a1",
       "sourceUsageExample": "Necesito papel para imprimir.",
       "targetUsageExample": "Мне нужна бумага для печати.",
-      "isActive": true
-    },
-    {
-      "id": "1e6ebf5a-0c29-4170-84ba-7e0397ede6ff",
-      "sourceText": "papi",
-      "targetText": "папочка",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "¡Papi, ven aquí!",
-      "targetUsageExample": "Папочка, иди сюда!",
       "isActive": true
     },
     {
@@ -5166,7 +5262,7 @@
     {
       "id": "75262fc8-8ebe-491c-89cb-e511a0d16501",
       "sourceText": "partido",
-      "targetText": "матч",
+      "targetText": "матч|партия",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -5178,7 +5274,7 @@
     {
       "id": "50f1381c-8a5b-4a7b-b48d-458bc9ac9854",
       "sourceText": "partir",
-      "targetText": "отправляться|делить",
+      "targetText": "отправляться|делить|a partir de — начиная с",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -5406,7 +5502,7 @@
     {
       "id": "6091c18f-c3fc-43d9-9646-d3f10aabc4bd",
       "sourceText": "pesar",
-      "targetText": "весить",
+      "targetText": "весить|a pesar de — несмотря на",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -5502,7 +5598,7 @@
     {
       "id": "53614c22-02c6-48aa-a59c-4753df768842",
       "sourceText": "poder",
-      "targetText": "мочь",
+      "targetText": "мочь|власть",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -5886,7 +5982,7 @@
     {
       "id": "7618e459-89e4-4fe1-9316-91c679a0a173",
       "sourceText": "querer",
-      "targetText": "хотеть",
+      "targetText": "хотеть|любить",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6496,18 +6592,6 @@
       "isActive": true
     },
     {
-      "id": "6ae0b02c-dca0-4878-8e3f-1b1cc6006a2b",
-      "sourceText": "sheriff",
-      "targetText": "шериф",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "El sheriff llegó al pueblo.",
-      "targetUsageExample": "Шериф прибыл в город.",
-      "isActive": true
-    },
-    {
       "id": "18fb8d7a-76ea-49ed-b068-97bf69f16753",
       "sourceText": "si",
       "targetText": "если",
@@ -6678,7 +6762,7 @@
     {
       "id": "ea92f42b-3557-40c6-8a9f-dbc2db7368ca",
       "sourceText": "sobre",
-      "targetText": "над|о",
+      "targetText": "над|о|конверт",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -6781,6 +6865,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Viaja al sur.",
       "targetUsageExample": "Едет на юг.",
+      "isActive": true
+    },
+    {
+      "id": "96d7cbe4-b2b2-4ca5-a35e-8e9c9fc242e6",
+      "sourceText": "sábado",
+      "targetText": "суббота",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "El sábado duermo tarde.",
+      "targetUsageExample": "В субботу я сплю допоздна.",
       "isActive": true
     },
     {
@@ -7230,7 +7326,7 @@
     {
       "id": "70b9d2fe-0644-4283-83c1-80bc535cf41a",
       "sourceText": "valor",
-      "targetText": "ценность",
+      "targetText": "ценность|храбрость",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A1",
@@ -7333,6 +7429,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Un viejo amigo.",
       "targetUsageExample": "Старый друг.",
+      "isActive": true
+    },
+    {
+      "id": "72e4b34d-f529-4d95-b5b6-df646a8a5bf5",
+      "sourceText": "viernes",
+      "targetText": "пятница",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "El viernes termina la semana.",
+      "targetUsageExample": "В пятницу заканчивается неделя.",
       "isActive": true
     },
     {

@@ -1,8 +1,20 @@
 {
   "listName": "Spanish Russian A2",
   "exportedAt": "2026-01-18T20:40:48.334253+00:00",
-  "totalWords": 449,
+  "totalWords": 437,
   "words": [
+    {
+      "id": "c76dacf0-2103-44eb-842e-b05365235d48",
+      "sourceText": "a menudo",
+      "targetText": "часто",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "A menudo visito este parque.",
+      "targetUsageExample": "Я часто хожу в этот парк.",
+      "isActive": true
+    },
     {
       "id": "65549fb7-2ac6-4c85-baf2-528fbf30208c",
       "sourceText": "abierto",
@@ -810,7 +822,7 @@
     {
       "id": "39716242-35c5-4402-8f37-9b6aa81f7d76",
       "sourceText": "cita",
-      "targetText": "встреча|свидание",
+      "targetText": "встреча|свидание|цитата",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -1300,18 +1312,6 @@
       "isActive": true
     },
     {
-      "id": "360b8323-ba42-46c9-ab0f-3ac29ba10cf6",
-      "sourceText": "cuándo",
-      "targetText": "когда",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "¿Cuándo llegas?",
-      "targetUsageExample": "Когда ты приедешь?",
-      "isActive": true
-    },
-    {
       "id": "891a8628-3c80-4208-b927-7ffff81dc401",
       "sourceText": "cáncer",
       "targetText": "рак",
@@ -1528,6 +1528,18 @@
       "isActive": true
     },
     {
+      "id": "0be67011-fe88-4ace-971a-68f769a6d9f8",
+      "sourceText": "disculpar",
+      "targetText": "извинять|прощать",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "Discúlpeme, ¿dónde está la estación?",
+      "targetUsageExample": "Извините, где находится станция?",
+      "isActive": true
+    },
+    {
       "id": "d5dbc216-0cd8-4b3b-887a-82d56d3d813f",
       "sourceText": "discurso",
       "targetText": "речь|выступление",
@@ -1542,25 +1554,13 @@
     {
       "id": "9feb4f85-2949-4468-b0fd-e5e99936623a",
       "sourceText": "discusión",
-      "targetText": "дискуссия|спор",
+      "targetText": "спор|ссора|дискуссия",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "Tuvimos una discusión interesante.",
       "targetUsageExample": "У нас была интересная дискуссия.",
-      "isActive": true
-    },
-    {
-      "id": "0be67011-fe88-4ace-971a-68f769a6d9f8",
-      "sourceText": "discúlpeme",
-      "targetText": "извините меня",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Discúlpeme, ¿puede repetir eso, por favor?",
-      "targetUsageExample": "Извините меня, не могли бы вы повторить это?",
       "isActive": true
     },
     {
@@ -2238,7 +2238,7 @@
     {
       "id": "13616f2a-a3ce-4414-b38e-3a810da85a63",
       "sourceText": "golpe",
-      "targetText": "удар",
+      "targetText": "удар|переворот",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -2262,7 +2262,7 @@
     {
       "id": "28d81ecd-e6ab-4319-b996-2c5020895fb5",
       "sourceText": "gracia",
-      "targetText": "изящество|грация",
+      "targetText": "изящество|грация|шутка",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -2365,18 +2365,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Estoy harto de esperar tanto tiempo en la fila.",
       "targetUsageExample": "Я сыт по горло ожиданием в очереди так долго.",
-      "isActive": true
-    },
-    {
-      "id": "a8ee1b45-703f-4efd-831d-0550a0d24d70",
-      "sourceText": "hermana",
-      "targetText": "сестра",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Mi hermana es pequeña.",
-      "targetUsageExample": "Моя сестра маленькая.",
       "isActive": true
     },
     {
@@ -2598,13 +2586,13 @@
     {
       "id": "31cc39ec-467e-4db0-a2e1-42e5b2b7c56c",
       "sourceText": "inteligencia",
-      "targetText": "разведка|интеллект",
+      "targetText": "интеллект|ум|разведка",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Los agentes de inteligencia trabajan en secreto.",
-      "targetUsageExample": "Агенты разведки работают тайно.",
+      "sourceUsageExample": "Es una persona de gran inteligencia.",
+      "targetUsageExample": "Это человек большого ума.",
       "isActive": true
     },
     {
@@ -2701,18 +2689,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El barrio judío de la ciudad tiene una historia muy larga.",
       "targetUsageExample": "Еврейский квартал города имеет очень долгую историю.",
-      "isActive": true
-    },
-    {
-      "id": "50f8645e-df44-4a61-bb8e-5cf89616b44a",
-      "sourceText": "jueves",
-      "targetText": "четверг",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Los jueves voy al gimnasio.",
-      "targetUsageExample": "По четвергам я хожу в спортзал.",
       "isActive": true
     },
     {
@@ -2886,7 +2862,7 @@
     {
       "id": "24c383d1-55fd-49ac-b57d-9da35ac14190",
       "sourceText": "listo",
-      "targetText": "готовый",
+      "targetText": "готовый|умный",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -2944,18 +2920,6 @@
       "isActive": true
     },
     {
-      "id": "6c48d458-930d-4a37-b989-6ac1456a2697",
-      "sourceText": "lunes",
-      "targetText": "понедельник",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El lunes tengo clase de español.",
-      "targetUsageExample": "В понедельник у меня урок испанского.",
-      "isActive": true
-    },
-    {
       "id": "bb23c649-ac77-469d-b593-3f64289dbe84",
       "sourceText": "madera",
       "targetText": "дерево|древесина",
@@ -3001,18 +2965,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "El arco iris después de la lluvia es una maravilla de la naturaleza.",
       "targetUsageExample": "Радуга после дождя — это чудо природы.",
-      "isActive": true
-    },
-    {
-      "id": "52c1206b-c2a9-4439-913d-227acd2d6fd9",
-      "sourceText": "martes",
-      "targetText": "вторник",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El martes tenemos reunión.",
-      "targetUsageExample": "Во вторник у нас собрание.",
       "isActive": true
     },
     {
@@ -3064,18 +3016,6 @@
       "isActive": true
     },
     {
-      "id": "c76dacf0-2103-44eb-842e-b05365235d48",
-      "sourceText": "menudo",
-      "targetText": "часто [a menudo]",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "A menudo visito este parque.",
-      "targetUsageExample": "Я часто посещаю этот парк.",
-      "isActive": true
-    },
-    {
       "id": "0025510f-5c62-4e6f-9602-9f4bf435578a",
       "sourceText": "meter",
       "targetText": "положить|засунуть",
@@ -3090,7 +3030,7 @@
     {
       "id": "49275b3d-b1a0-484b-a02a-072af03650ec",
       "sourceText": "miel",
-      "targetText": "мёд|милая",
+      "targetText": "мёд",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -3316,18 +3256,6 @@
       "isActive": true
     },
     {
-      "id": "c6d5bbdc-a68e-4f65-a783-9aee65e35341",
-      "sourceText": "niña",
-      "targetText": "девочка",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "La niña juega en el parque.",
-      "targetUsageExample": "Девочка играет в парке.",
-      "isActive": true
-    },
-    {
       "id": "defb4c95-3cac-42bb-b95a-c3b8ad5154fd",
       "sourceText": "normalmente",
       "targetText": "обычно|нормально",
@@ -3352,30 +3280,6 @@
       "isActive": true
     },
     {
-      "id": "a5544d90-a82b-4b7f-92fc-2a2df041fb2d",
-      "sourceText": "novia",
-      "targetText": "девушка|невеста",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Es mi novia.",
-      "targetUsageExample": "Это моя девушка.",
-      "isActive": true
-    },
-    {
-      "id": "9d420fd6-0ad5-4ecf-97dd-382f21fa6c71",
-      "sourceText": "nueve",
-      "targetText": "девять",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Son las nueve en punto.",
-      "targetUsageExample": "Ровно девять часов.",
-      "isActive": true
-    },
-    {
       "id": "dcf41e5e-38bd-4531-9b56-5ceca912bd2d",
       "sourceText": "obtener",
       "targetText": "получать [добывать]",
@@ -3397,18 +3301,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Fue una ocasión especial celebrar el cumpleaños con toda la familia.",
       "targetUsageExample": "Это был особый повод — отмечать день рождения со всей семьёй.",
-      "isActive": true
-    },
-    {
-      "id": "d1f1b157-cb4f-4942-9a1d-620f2cbce010",
-      "sourceText": "ocho",
-      "targetText": "восемь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Son las ocho de la mañana.",
-      "targetUsageExample": "Сейчас восемь часов утра.",
       "isActive": true
     },
     {
@@ -3558,13 +3450,13 @@
     {
       "id": "84d6fddc-aa71-4dd6-9e17-e243167231ba",
       "sourceText": "papa",
-      "targetText": "картофель",
+      "targetText": "картофель (лат. ам.)|папа римский",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Me gusta la papa.",
-      "targetUsageExample": "Мне нравится картофель.",
+      "sourceUsageExample": "La papa es originaria de América.",
+      "targetUsageExample": "Картофель родом из Америки.",
       "isActive": true
     },
     {
@@ -3630,7 +3522,7 @@
     {
       "id": "e3446edb-68b8-4eb6-8946-0a42cf0d0942",
       "sourceText": "pedir",
-      "targetText": "просить",
+      "targetText": "просить|заказывать",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -3810,7 +3702,7 @@
     {
       "id": "9d382b57-8e60-4da1-97b0-91f7eba3a7ec",
       "sourceText": "planta",
-      "targetText": "растение|завод",
+      "targetText": "растение|завод|этаж",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4134,7 +4026,7 @@
     {
       "id": "ea703aa5-1aa6-4ef7-b0b5-32f8fef8485b",
       "sourceText": "regla",
-      "targetText": "правило",
+      "targetText": "правило|линейка",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4350,7 +4242,7 @@
     {
       "id": "f99f6d18-96ce-4aca-993c-684df467f9eb",
       "sourceText": "sala",
-      "targetText": "зал",
+      "targetText": "зал|гостиная",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4686,7 +4578,7 @@
     {
       "id": "a0ef566f-e182-4817-85a7-83378cc319a4",
       "sourceText": "sueño",
-      "targetText": "сон",
+      "targetText": "сон|мечта",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -4753,18 +4645,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Supongo que sí.",
       "targetUsageExample": "Полагаю, что да.",
-      "isActive": true
-    },
-    {
-      "id": "96d7cbe4-b2b2-4ca5-a35e-8e9c9fc242e6",
-      "sourceText": "sábado",
-      "targetText": "суббота",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El sábado duermo tarde.",
-      "targetUsageExample": "В субботу я сплю допоздна.",
       "isActive": true
     },
     {
@@ -4960,27 +4840,15 @@
       "isActive": true
     },
     {
-      "id": "b4131b2b-90ef-458c-87f9-3b562e68a5b2",
-      "sourceText": "tina",
-      "targetText": "Тина|ванна",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Tina llena la tina de baño con agua caliente cada noche.",
-      "targetUsageExample": "Тина каждый вечер наполняет ванну горячей водой.",
-      "isActive": true
-    },
-    {
       "id": "dc8d94af-8d68-4804-8f42-7a067a1b504d",
       "sourceText": "tocar",
-      "targetText": "трогать",
+      "targetText": "трогать|играть (на инструменте)",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "No toques eso.",
-      "targetUsageExample": "Не трогай это.",
+      "sourceUsageExample": "Ella toca el piano muy bien.",
+      "targetUsageExample": "Она очень хорошо играет на пианино.",
       "isActive": true
     },
     {
@@ -5034,7 +4902,7 @@
     {
       "id": "7147db60-dd99-42ee-98d6-518c5106e56f",
       "sourceText": "trato",
-      "targetText": "обращение",
+      "targetText": "обращение|сделка",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
@@ -5296,18 +5164,6 @@
       "isActive": true
     },
     {
-      "id": "72e4b34d-f529-4d95-b5b6-df646a8a5bf5",
-      "sourceText": "viernes",
-      "targetText": "пятница",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "El viernes termina la semana.",
-      "targetUsageExample": "В пятницу заканчивается неделя.",
-      "isActive": true
-    },
-    {
       "id": "2612297b-34bb-4cd1-931c-5eb519ba8cfc",
       "sourceText": "visión",
       "targetText": "зрение|видение",
@@ -5382,7 +5238,7 @@
     {
       "id": "873ac75a-24c2-4e88-a06c-c9b95296caaa",
       "sourceText": "zorra",
-      "targetText": "лиса|сука",
+      "targetText": "лиса",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A2",
