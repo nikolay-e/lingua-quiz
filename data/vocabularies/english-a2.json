@@ -1,8 +1,32 @@
 {
   "listName": "English Russian A2",
   "exportedAt": "2026-01-18T20:40:47.275329+00:00",
-  "totalWords": 1064,
+  "totalWords": 948,
   "words": [
+    {
+      "id": "cd6589d7-24c0-4a70-b465-f71196c80fdf",
+      "sourceText": "'i",
+      "targetText": "я бы|я хотел бы",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "I'd like to go to the cinema tonight.",
+      "targetUsageExample": "Я бы хотел пойти в кино сегодня вечером.",
+      "isActive": true
+    },
+    {
+      "id": "c1686c62-e08c-4d55-ba7e-26b77a32c6ca",
+      "sourceText": "a.m.",
+      "targetText": "до полудня",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "The meeting starts at 9 a.m. tomorrow.",
+      "targetUsageExample": "Встреча начинается в 9 утра завтра.",
+      "isActive": true
+    },
     {
       "id": "6d7b231a-2618-4e6d-b70f-40e2ebe41bea",
       "sourceText": "abandoned",
@@ -13,18 +37,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The old house looked abandoned after years with no one living there.",
       "targetUsageExample": "Старый дом выглядел заброшенным после многих лет без жильцов.",
-      "isActive": true
-    },
-    {
-      "id": "de20c67a-cee9-4a01-8e99-c7e9e83d20de",
-      "sourceText": "abby",
-      "targetText": "Эбби",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Abby is my best friend at school.",
-      "targetUsageExample": "Эбби — моя лучшая подруга в школе.",
       "isActive": true
     },
     {
@@ -47,20 +59,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a aboard.",
-      "targetUsageExample": "Я видел на борту вчера.",
-      "isActive": true
-    },
-    {
-      "id": "19e16654-1c1f-4d36-ac88-52d609163692",
-      "sourceText": "accent",
-      "targetText": "акцент",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She speaks English with a French accent.",
-      "targetUsageExample": "Она говорит по-английски с французским акцентом.",
+      "sourceUsageExample": "All passengers were aboard the ship before it sailed.",
+      "targetUsageExample": "Все пассажиры были на борту корабля до его отплытия.",
       "isActive": true
     },
     {
@@ -85,18 +85,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "He accused his brother of breaking the window.",
       "targetUsageExample": "Он обвинил своего брата в том, что тот разбил окно.",
-      "isActive": true
-    },
-    {
-      "id": "fe403ea2-62d8-45fb-9613-033089abdf95",
-      "sourceText": "actor",
-      "targetText": "актёр",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a actor.",
-      "targetUsageExample": "Нам нужен новый актёр.",
       "isActive": true
     },
     {
@@ -126,7 +114,7 @@
     {
       "id": "c12d6de2-0514-47c0-93e9-ae50a17514d7",
       "sourceText": "advance",
-      "targetText": "продвижение|аванс",
+      "targetText": "продвижение|заранее [in advance]",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
@@ -155,8 +143,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a advice?",
-      "targetUsageExample": "Она купила совет.",
+      "sourceUsageExample": "My mother gave me good advice about choosing a job.",
+      "targetUsageExample": "Мама дала мне хороший совет по выбору работы.",
       "isActive": true
     },
     {
@@ -167,8 +155,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a afterwards?",
-      "targetUsageExample": "Ты можешь после?",
+      "sourceUsageExample": "We had dinner and afterwards went for a walk.",
+      "targetUsageExample": "Мы поужинали и потом пошли на прогулку.",
       "isActive": true
     },
     {
@@ -210,25 +198,13 @@
     {
       "id": "28fd75f6-48e5-4e2d-a55c-1fae33983d89",
       "sourceText": "alarm",
-      "targetText": "сигнализация|тревога",
+      "targetText": "будильник|сигнализация|тревога",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
       "sourceUsageExample": "He set the alarm for 6:30 AM.",
       "targetUsageExample": "Он поставил будильник на 6:30 утра.",
-      "isActive": true
-    },
-    {
-      "id": "5a65dd4a-932d-4098-8de0-a1bba61dae1a",
-      "sourceText": "alcohol",
-      "targetText": "алкоголь|спиртное",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "He decided not to drink alcohol at the party.",
-      "targetUsageExample": "Он решил не пить алкоголь на вечеринке.",
       "isActive": true
     },
     {
@@ -256,18 +232,6 @@
       "isActive": true
     },
     {
-      "id": "c1686c62-e08c-4d55-ba7e-26b77a32c6ca",
-      "sourceText": "a.m.",
-      "targetText": "до полудня",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a a.m. yesterday.",
-      "targetUsageExample": "Я видел до полудня вчера.",
-      "isActive": true
-    },
-    {
       "id": "63712836-5e8b-401d-b7d5-287cc8da3676",
       "sourceText": "ambulance",
       "targetText": "скорая помощь",
@@ -287,8 +251,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The amen is very interesting.",
-      "targetUsageExample": "Я видел аминь вчера.",
+      "sourceUsageExample": "The priest said amen at the end of the prayer.",
+      "targetUsageExample": "Священник сказал аминь в конце молитвы.",
       "isActive": true
     },
     {
@@ -306,7 +270,7 @@
     {
       "id": "44d5809c-b4e1-4c93-bd68-c19fbed657ab",
       "sourceText": "amount",
-      "targetText": "количество",
+      "targetText": "сумма|количество",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
@@ -347,8 +311,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a announcer.",
-      "targetUsageExample": "Это диктор.",
+      "sourceUsageExample": "The announcer on the radio said it would rain today.",
+      "targetUsageExample": "Диктор на радио сказал, что сегодня будет дождь.",
       "isActive": true
     },
     {
@@ -359,8 +323,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a anytime yesterday.",
-      "targetUsageExample": "Я видел в любое время вчера.",
+      "sourceUsageExample": "You can call me anytime you need help.",
+      "targetUsageExample": "Ты можешь позвонить мне в любое время, когда тебе нужна помощь.",
       "isActive": true
     },
     {
@@ -479,8 +443,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Can you arrange a meeting for tomorrow?",
-      "targetUsageExample": "Можете организовать встречу на завтра?",
+      "sourceUsageExample": "Can you arrange a meeting for tomorrow afternoon?",
+      "targetUsageExample": "Можешь организовать встречу на завтра после обеда?",
       "isActive": true
     },
     {
@@ -491,8 +455,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new artist.",
-      "targetUsageExample": "Я видел художник вчера.",
+      "sourceUsageExample": "The artist painted a beautiful picture of the city.",
+      "targetUsageExample": "Художник нарисовал красивую картину города.",
       "isActive": true
     },
     {
@@ -676,27 +640,15 @@
       "isActive": true
     },
     {
-      "id": "c18fea36-3a95-4fc9-82cc-37534e7eda90",
-      "sourceText": "aw",
-      "targetText": "ой|ах",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a aw?",
-      "targetUsageExample": "Мне нравится ой.",
-      "isActive": true
-    },
-    {
       "id": "cc73d762-90d1-4888-a0a3-3fa7405eb540",
       "sourceText": "awake",
-      "targetText": "проснувшийся|не спящий",
+      "targetText": "бодрствующий|не спящий",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new awake.",
-      "targetUsageExample": "Ты можешь проснувшийся?",
+      "sourceUsageExample": "I was awake all night because of the noise.",
+      "targetUsageExample": "Я был не спящий всю ночь из-за шума.",
       "isActive": true
     },
     {
@@ -736,18 +688,6 @@
       "isActive": true
     },
     {
-      "id": "5e9e4ec2-1b2f-486d-9733-be0559461f96",
-      "sourceText": "aye",
-      "targetText": "да|так точно",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The aye is very interesting.",
-      "targetUsageExample": "да здесь.",
-      "isActive": true
-    },
-    {
       "id": "8c292c4e-5f4d-4ec5-8339-36fae8590458",
       "sourceText": "babe",
       "targetText": "малыш|детка",
@@ -755,8 +695,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a babe.",
-      "targetUsageExample": "Мне нравится малыш.",
+      "sourceUsageExample": "Come on, babe, let's go to the park.",
+      "targetUsageExample": "Давай, малыш, пойдём в парк.",
       "isActive": true
     },
     {
@@ -808,18 +748,6 @@
       "isActive": true
     },
     {
-      "id": "4467b15c-7e66-44c6-bf0b-becb18168eec",
-      "sourceText": "barking",
-      "targetText": "лай|лающий",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She likes to barking.",
-      "targetUsageExample": "Я видел лай вчера.",
-      "isActive": true
-    },
-    {
       "id": "78f0a5e7-0a82-4b6f-b8b1-0051f4af89e1",
       "sourceText": "base",
       "targetText": "основа|база",
@@ -839,8 +767,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a baseball?",
-      "targetUsageExample": "Ты можешь бейсбол?",
+      "sourceUsageExample": "My brother plays baseball every weekend.",
+      "targetUsageExample": "Мой брат играет в бейсбол каждые выходные.",
       "isActive": true
     },
     {
@@ -899,8 +827,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a bath.",
-      "targetUsageExample": "Нам нужен новый ванна.",
+      "sourceUsageExample": "I like to take a hot bath after a long day.",
+      "targetUsageExample": "Я люблю принимать горячую ванну после долгого дня.",
       "isActive": true
     },
     {
@@ -935,8 +863,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a bedroom.",
-      "targetUsageExample": "спальня очень интересный.",
+      "sourceUsageExample": "Her bedroom has a large window with a nice view.",
+      "targetUsageExample": "Её спальня имеет большое окно с красивым видом.",
       "isActive": true
     },
     {
@@ -959,8 +887,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new beep.",
-      "targetUsageExample": "Это гудок.",
+      "sourceUsageExample": "I heard a beep from my phone when the message arrived.",
+      "targetUsageExample": "Я услышал гудок телефона, когда пришло сообщение.",
       "isActive": true
     },
     {
@@ -1067,8 +995,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new bike.",
-      "targetUsageExample": "Это велосипед.",
+      "sourceUsageExample": "I ride my bike to school every morning.",
+      "targetUsageExample": "Я езжу на велосипеде в школу каждое утро.",
       "isActive": true
     },
     {
@@ -1120,18 +1048,6 @@
       "isActive": true
     },
     {
-      "id": "9b3d1b8f-65c4-4cbb-8fc4-9a450b69b81f",
-      "sourceText": "blake",
-      "targetText": "Блейк",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Blake is a common surname in English-speaking countries.",
-      "targetUsageExample": "Блейк — распространённая фамилия в англоязычных странах.",
-      "isActive": true
-    },
-    {
       "id": "99709263-4f39-44a3-9ad9-d0bafdf9808d",
       "sourceText": "blast",
       "targetText": "взрыв|удар",
@@ -1141,30 +1057,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The blast from the explosion was heard across the city.",
       "targetUsageExample": "Взрыв был слышен по всему городу.",
-      "isActive": true
-    },
-    {
-      "id": "48ef686f-5ef5-4cca-b61e-f566d246e9d4",
-      "sourceText": "bleeding",
-      "targetText": "кровотечение|кровоточащий",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I bleeding every day.",
-      "targetUsageExample": "Это кровотечение.",
-      "isActive": true
-    },
-    {
-      "id": "6ff2487c-2c9a-4917-bc67-d6c10efd6342",
-      "sourceText": "bleep",
-      "targetText": "писк (цензура)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The bleep is very interesting.",
-      "targetUsageExample": "писк цензура здесь.",
       "isActive": true
     },
     {
@@ -1235,8 +1127,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a boot.",
-      "targetUsageExample": "Я видел ботинок вчера.",
+      "sourceUsageExample": "I need a new pair of boots for the winter.",
+      "targetUsageExample": "Мне нужна новая пара ботинок на зиму.",
       "isActive": true
     },
     {
@@ -1259,8 +1151,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a bored yesterday.",
-      "targetUsageExample": "Ты можешь скучающий?",
+      "sourceUsageExample": "I feel bored when there is nothing to do at home.",
+      "targetUsageExample": "Мне скучно, когда дома нечего делать.",
       "isActive": true
     },
     {
@@ -1271,8 +1163,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "They boring often.",
-      "targetUsageExample": "скучный здесь.",
+      "sourceUsageExample": "The movie was so boring that I fell asleep.",
+      "targetUsageExample": "Фильм был настолько скучный, что я уснул.",
       "isActive": true
     },
     {
@@ -1331,8 +1223,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a brad?",
-      "targetUsageExample": "Мне нравится гвоздь.",
+      "sourceUsageExample": "He used a small brad to hang the picture on the wall.",
+      "targetUsageExample": "Он использовал маленький гвоздь, чтобы повесить картину на стену.",
       "isActive": true
     },
     {
@@ -1367,8 +1259,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a bread?",
-      "targetUsageExample": "У тебя есть хлеб?",
+      "sourceUsageExample": "We buy fresh bread from the bakery every morning.",
+      "targetUsageExample": "Мы покупаем свежий хлеб в пекарне каждое утро.",
       "isActive": true
     },
     {
@@ -1415,8 +1307,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The sun is very bright today.",
-      "targetUsageExample": "Сегодня очень яркое солнце.",
+      "sourceUsageExample": "The sun is very bright today, so wear sunglasses.",
+      "targetUsageExample": "Сегодня очень яркое солнце, поэтому надень очки.",
       "isActive": true
     },
     {
@@ -1433,7 +1325,7 @@
     },
     {
       "id": "b7462884-6b3e-453d-add1-b05eb11bf9e1",
-      "sourceText": "british",
+      "sourceText": "British",
       "targetText": "британский",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -1463,8 +1355,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a bud?",
-      "targetUsageExample": "Ты можешь приятель?",
+      "sourceUsageExample": "Hey bud, do you want to play football with us?",
+      "targetUsageExample": "Привет, приятель, хочешь поиграть с нами в футбол?",
       "isActive": true
     },
     {
@@ -1501,18 +1393,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The police found a bullet at the scene of the crime.",
       "targetUsageExample": "Полиция нашла пулю на месте преступления.",
-      "isActive": true
-    },
-    {
-      "id": "ba232b37-0a22-4abe-bcfd-1877ed493eb0",
-      "sourceText": "burning",
-      "targetText": "горящий|горение",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Can you burning?",
-      "targetUsageExample": "Это горящий.",
       "isActive": true
     },
     {
@@ -1559,8 +1439,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a butter.",
-      "targetUsageExample": "Нам нужен новый масло.",
+      "sourceUsageExample": "Please pass me the butter for my toast.",
+      "targetUsageExample": "Пожалуйста, передай мне масло для тоста.",
       "isActive": true
     },
     {
@@ -1583,8 +1463,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new cab.",
-      "targetUsageExample": "Это такси.",
+      "sourceUsageExample": "We took a cab to the airport because we were late.",
+      "targetUsageExample": "Мы взяли такси в аэропорт, потому что опаздывали.",
       "isActive": true
     },
     {
@@ -1607,8 +1487,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The cake is very interesting.",
-      "targetUsageExample": "Она купила торт.",
+      "sourceUsageExample": "My mother baked a chocolate cake for my birthday.",
+      "targetUsageExample": "Мама испекла шоколадный торт на мой день рождения.",
       "isActive": true
     },
     {
@@ -1816,30 +1696,6 @@
       "isActive": true
     },
     {
-      "id": "fa4ea09d-322e-4465-971f-c90e5d96477a",
-      "sourceText": "champagne",
-      "targetText": "шампанское",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "We opened a bottle of champagne to celebrate the new year.",
-      "targetUsageExample": "Мы открыли бутылку шампанского, чтобы встретить новый год.",
-      "isActive": true
-    },
-    {
-      "id": "3332095e-d7cd-46c5-b123-0de996631ab5",
-      "sourceText": "champion",
-      "targetText": "чемпион|победитель",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She became the chess champion after winning the tournament.",
-      "targetUsageExample": "Она стала чемпионом по шахматам, выиграв турнир.",
-      "isActive": true
-    },
-    {
       "id": "9e7edcf0-7667-415f-bb8f-f91ddb3a308c",
       "sourceText": "charity",
       "targetText": "благотворительность",
@@ -1907,8 +1763,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a cheap umbrella at the market for two euros.",
-      "targetUsageExample": "Она купила дешёвый зонт на рынке за два евро.",
+      "sourceUsageExample": "This store sells cheap clothes of good quality.",
+      "targetUsageExample": "В этом магазине продаётся дешёвая одежда хорошего качества.",
       "isActive": true
     },
     {
@@ -1921,18 +1777,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "It is wrong to cheat during an exam.",
       "targetUsageExample": "Списывать на экзамене неправильно.",
-      "isActive": true
-    },
-    {
-      "id": "c3a7533c-78e5-425b-9f5b-9bb2efa64a8b",
-      "sourceText": "cheating",
-      "targetText": "обман|мошенничество",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "They cheating often.",
-      "targetUsageExample": "обман здесь.",
       "isActive": true
     },
     {
@@ -1991,8 +1835,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a chick.",
-      "targetUsageExample": "Мне нравится цыплёнок.",
+      "sourceUsageExample": "The little chick followed the hen around the yard.",
+      "targetUsageExample": "Маленький цыплёнок ходил за курицей по двору.",
       "isActive": true
     },
     {
@@ -2021,7 +1865,7 @@
     },
     {
       "id": "c4a79a1e-89f0-4ce4-ada8-39e7a916980d",
-      "sourceText": "chinese",
+      "sourceText": "Chinese",
       "targetText": "китайский",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -2029,18 +1873,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "She ordered Chinese food for delivery on Friday evening.",
       "targetUsageExample": "Она заказала китайскую еду с доставкой в пятницу вечером.",
-      "isActive": true
-    },
-    {
-      "id": "6c1139ae-4dda-4a58-bfb7-607d20d44f15",
-      "sourceText": "chocolate",
-      "targetText": "шоколад",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new chocolate.",
-      "targetUsageExample": "Мне нравится шоколад.",
       "isActive": true
     },
     {
@@ -2053,18 +1885,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "She was raised in a Christian family and went to church every week.",
       "targetUsageExample": "Она выросла в христианской семье и каждую неделю ходила в церковь.",
-      "isActive": true
-    },
-    {
-      "id": "7b498d9a-361a-4d61-b20a-2933cc2143ec",
-      "sourceText": "cigarette",
-      "targetText": "сигарета",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "He lit a cigarette and walked slowly down the empty street.",
-      "targetUsageExample": "Он закурил сигарету и медленно пошёл по пустой улице.",
       "isActive": true
     },
     {
@@ -2128,18 +1948,6 @@
       "isActive": true
     },
     {
-      "id": "a0e18197-6244-434c-b7f4-70bf0de5d63b",
-      "sourceText": "cleaning",
-      "targetText": "уборка|чистка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "They cleaning often.",
-      "targetUsageExample": "Мне нравится уборка.",
-      "isActive": true
-    },
-    {
       "id": "6788e667-fb35-40eb-82f5-5f49a35cd8d8",
       "sourceText": "clearly",
       "targetText": "ясно|чётко|очевидно",
@@ -2188,18 +1996,6 @@
       "isActive": true
     },
     {
-      "id": "bca4b77f-2d15-416e-bf1b-8e0bb651f831",
-      "sourceText": "clinic",
-      "targetText": "клиника|поликлиника",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She went to the clinic to get her flu vaccination.",
-      "targetUsageExample": "Она пошла в поликлинику, чтобы сделать прививку от гриппа.",
-      "isActive": true
-    },
-    {
       "id": "0a72a668-8b22-4bd1-a58e-b89ce67f0811",
       "sourceText": "clock",
       "targetText": "часы",
@@ -2207,8 +2003,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a clock.",
-      "targetUsageExample": "Это часы.",
+      "sourceUsageExample": "The clock on the wall shows that it is three o'clock.",
+      "targetUsageExample": "Часы на стене показывают, что сейчас три часа.",
       "isActive": true
     },
     {
@@ -2221,18 +2017,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "I hung my coat in the closet.",
       "targetUsageExample": "Я повесил пальто в шкаф.",
-      "isActive": true
-    },
-    {
-      "id": "a8f532ba-ae89-44d4-a54e-6148a7e4b1cb",
-      "sourceText": "closing",
-      "targetText": "закрытие",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Can you closing?",
-      "targetUsageExample": "Это закрытие.",
       "isActive": true
     },
     {
@@ -2279,8 +2063,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The coat is very interesting.",
-      "targetUsageExample": "Ты можешь пальто?",
+      "sourceUsageExample": "Put on your coat before you go outside, it's cold.",
+      "targetUsageExample": "Надень пальто, прежде чем выходить, на улице холодно.",
       "isActive": true
     },
     {
@@ -2423,8 +2207,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The comrade is very interesting.",
-      "targetUsageExample": "Ты можешь товарищ?",
+      "sourceUsageExample": "The soldier called his comrade for help.",
+      "targetUsageExample": "Солдат позвал своего товарища на помощь.",
       "isActive": true
     },
     {
@@ -2449,18 +2233,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "He was concerned about his father's health after the operation.",
       "targetUsageExample": "Он был обеспокоен здоровьем своего отца после операции.",
-      "isActive": true
-    },
-    {
-      "id": "4a2303d6-1d47-4778-ae8c-b6c7bcecbe0e",
-      "sourceText": "concert",
-      "targetText": "концерт",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a concert.",
-      "targetUsageExample": "У тебя есть концерт?",
       "isActive": true
     },
     {
@@ -2584,18 +2356,6 @@
       "isActive": true
     },
     {
-      "id": "9604a3f9-16ac-4b04-a0d8-ef987ee17afb",
-      "sourceText": "contract",
-      "targetText": "контракт|договор",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "He signed a contract with the new company for three years.",
-      "targetUsageExample": "Он подписал контракт с новой компанией на три года.",
-      "isActive": true
-    },
-    {
       "id": "c05ea1d1-7612-4b09-aedc-6e99737139b8",
       "sourceText": "conversation",
       "targetText": "разговор|беседа",
@@ -2603,8 +2363,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a conversation?",
-      "targetUsageExample": "Я видел разговор вчера.",
+      "sourceUsageExample": "I had a long conversation with my friend about our plans.",
+      "targetUsageExample": "У меня был долгий разговор с другом о наших планах.",
       "isActive": true
     },
     {
@@ -2617,18 +2377,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "She tried to convince her brother to come to the party.",
       "targetUsageExample": "Она пыталась убедить своего брата прийти на вечеринку.",
-      "isActive": true
-    },
-    {
-      "id": "063ab3c8-bb7c-4518-b159-bae0c97f52dd",
-      "sourceText": "cooking",
-      "targetText": "готовка|приготовление",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I cooking every day.",
-      "targetUsageExample": "Нам нужен новый готовка.",
       "isActive": true
     },
     {
@@ -2651,20 +2399,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a couch yesterday.",
-      "targetUsageExample": "Нам нужен новый диван.",
-      "isActive": true
-    },
-    {
-      "id": "0301674b-3ab1-46ed-ad28-990789b7c7f3",
-      "sourceText": "counting",
-      "targetText": "счёт|подсчёт",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Can you counting?",
-      "targetUsageExample": "Это счёт.",
+      "sourceUsageExample": "I like to sit on the couch and watch TV in the evening.",
+      "targetUsageExample": "Я люблю сидеть на диване и смотреть телевизор вечером.",
       "isActive": true
     },
     {
@@ -2682,7 +2418,7 @@
     {
       "id": "68296a9c-ac72-4818-ab27-8b21c89e65e3",
       "sourceText": "cousin",
-      "targetText": "двоюродный брат|кузен",
+      "targetText": "двоюродный брат|двоюродная сестра",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
@@ -2699,8 +2435,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a cow?",
-      "targetUsageExample": "Ты можешь корова?",
+      "sourceUsageExample": "The cow gives us fresh milk every morning.",
+      "targetUsageExample": "Корова даёт нам свежее молоко каждое утро.",
       "isActive": true
     },
     {
@@ -2711,8 +2447,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a coward?",
-      "targetUsageExample": "Это трус.",
+      "sourceUsageExample": "Don't be a coward, just tell them the truth.",
+      "targetUsageExample": "Не будь трусом, просто скажи им правду.",
       "isActive": true
     },
     {
@@ -2788,18 +2524,6 @@
       "isActive": true
     },
     {
-      "id": "3eb58ba2-faf9-4983-adc9-7de52ea0b494",
-      "sourceText": "crisis",
-      "targetText": "кризис",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The country faced a financial crisis and many people lost their jobs.",
-      "targetUsageExample": "Страна столкнулась с финансовым кризисом, и многие люди потеряли работу.",
-      "isActive": true
-    },
-    {
       "id": "4c7c583d-ad1a-448c-9d9c-ec0557fcb8fc",
       "sourceText": "cruel",
       "targetText": "жестокий",
@@ -2855,8 +2579,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a curse?",
-      "targetUsageExample": "Это проклятие.",
+      "sourceUsageExample": "In the old story, a witch put a curse on the princess.",
+      "targetUsageExample": "В старой сказке ведьма наложила проклятие на принцессу.",
       "isActive": true
     },
     {
@@ -2879,20 +2603,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a customer yesterday.",
-      "targetUsageExample": "Ты можешь покупатель?",
-      "isActive": true
-    },
-    {
-      "id": "44d5e7e8-b492-4c94-acf4-b148bd983f64",
-      "sourceText": "da",
-      "targetText": "да",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The da is very interesting.",
-      "targetUsageExample": "да здесь.",
+      "sourceUsageExample": "The customer asked the waiter for the menu.",
+      "targetUsageExample": "Клиент попросил у официанта меню.",
       "isActive": true
     },
     {
@@ -2915,20 +2627,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a damned.",
-      "targetUsageExample": "Я видел проклятый вчера.",
-      "isActive": true
-    },
-    {
-      "id": "93145f05-6e15-4d8d-a9c3-acb2976e49c2",
-      "sourceText": "dancing",
-      "targetText": "танцы|танцевание",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Can you dancing?",
-      "targetUsageExample": "Она купила танцы.",
+      "sourceUsageExample": "This damned rain has been going on for three days.",
+      "targetUsageExample": "Этот проклятый дождь идёт уже три дня.",
       "isActive": true
     },
     {
@@ -2941,18 +2641,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "She was afraid of the darkness and always slept with a light on.",
       "targetUsageExample": "Она боялась темноты и всегда спала с включённым светом.",
-      "isActive": true
-    },
-    {
-      "id": "8b744c43-36d7-4848-8d5f-88b10c726385",
-      "sourceText": "dating",
-      "targetText": "свидания|встречи",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "We should dating now.",
-      "targetUsageExample": "Мне нравится свидания.",
       "isActive": true
     },
     {
@@ -3167,8 +2855,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The describe is very interesting.",
-      "targetUsageExample": "Мне нравится описывать.",
+      "sourceUsageExample": "Can you describe what the thief looked like?",
+      "targetUsageExample": "Можешь описать, как выглядел вор?",
       "isActive": true
     },
     {
@@ -3203,8 +2891,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a desk?",
-      "targetUsageExample": "письменный стол очень интересный.",
+      "sourceUsageExample": "I keep all my books on my desk at school.",
+      "targetUsageExample": "Я держу все свои книги на парте в школе.",
       "isActive": true
     },
     {
@@ -3227,8 +2915,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a despite.",
-      "targetUsageExample": "Это несмотря на.",
+      "sourceUsageExample": "Despite the rain, we decided to go for a walk.",
+      "targetUsageExample": "Несмотря на дождь, мы решили пойти на прогулку.",
       "isActive": true
     },
     {
@@ -3239,8 +2927,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The destiny is very interesting.",
-      "targetUsageExample": "Ты можешь судьба?",
+      "sourceUsageExample": "She believed it was her destiny to become a doctor.",
+      "targetUsageExample": "Она верила, что стать врачом — её судьба.",
       "isActive": true
     },
     {
@@ -3431,8 +3119,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a discuss?",
-      "targetUsageExample": "Мне нравится обсуждать.",
+      "sourceUsageExample": "Let's discuss our plans for the summer vacation.",
+      "targetUsageExample": "Давайте обсудим наши планы на летние каникулы.",
       "isActive": true
     },
     {
@@ -3455,8 +3143,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Can you disgusting?",
-      "targetUsageExample": "Ты можешь отвратительный?",
+      "sourceUsageExample": "The old food in the fridge smells disgusting.",
+      "targetUsageExample": "Старая еда в холодильнике пахнет отвратительно.",
       "isActive": true
     },
     {
@@ -3467,8 +3155,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a dish.",
-      "targetUsageExample": "Нам нужен новый блюдо.",
+      "sourceUsageExample": "My favorite dish is pasta with tomato sauce.",
+      "targetUsageExample": "Моё любимое блюдо — паста с томатным соусом.",
       "isActive": true
     },
     {
@@ -3544,18 +3232,6 @@
       "isActive": true
     },
     {
-      "id": "fe06e619-2368-4909-8017-14e5617977bc",
-      "sourceText": "doin",
-      "targetText": "делать (разг.)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a doin yesterday.",
-      "targetUsageExample": "Ты можешь делать разг.?",
-      "isActive": true
-    },
-    {
       "id": "6bc83d21-960f-4620-addd-27fd056eeb79",
       "sourceText": "doll",
       "targetText": "кукла",
@@ -3563,8 +3239,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The doll is very interesting.",
-      "targetUsageExample": "Это кукла.",
+      "sourceUsageExample": "The little girl plays with her doll every day.",
+      "targetUsageExample": "Маленькая девочка играет со своей куклой каждый день.",
       "isActive": true
     },
     {
@@ -3587,8 +3263,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a downstairs?",
-      "targetUsageExample": "Это внизу.",
+      "sourceUsageExample": "The kitchen is downstairs, next to the living room.",
+      "targetUsageExample": "Кухня внизу, рядом с гостиной.",
       "isActive": true
     },
     {
@@ -3599,8 +3275,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a dozen eggs at the supermarket.",
-      "targetUsageExample": "Она купила дюжину яиц в супермаркете.",
+      "sourceUsageExample": "I bought a dozen eggs at the supermarket.",
+      "targetUsageExample": "Я купил дюжину яиц в супермаркете.",
       "isActive": true
     },
     {
@@ -3628,18 +3304,6 @@
       "isActive": true
     },
     {
-      "id": "fc85afa5-56ae-4eb8-b8c6-562cf6b99bcd",
-      "sourceText": "dramatic",
-      "targetText": "драматичный|театральный",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The dramatic ending of the film surprised everyone in the cinema.",
-      "targetUsageExample": "Драматичная концовка фильма удивила всех в кинотеатре.",
-      "isActive": true
-    },
-    {
       "id": "002055b3-5d78-4dd4-a033-8425bd9e6131",
       "sourceText": "draw",
       "targetText": "рисовать|ничья",
@@ -3661,18 +3325,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "This is a drawing of my house.",
       "targetUsageExample": "Это рисунок моего дома.",
-      "isActive": true
-    },
-    {
-      "id": "ad468ddc-0d96-4106-8d2e-868776d8bfc7",
-      "sourceText": "dreaming",
-      "targetText": "мечтающий|сновидение",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Can you dreaming?",
-      "targetUsageExample": "Ты можешь мечтающий?",
       "isActive": true
     },
     {
@@ -3707,8 +3359,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new duck.",
-      "targetUsageExample": "Мне нравится утка.",
+      "sourceUsageExample": "We saw a duck swimming in the pond.",
+      "targetUsageExample": "Мы видели утку, плавающую в пруду.",
       "isActive": true
     },
     {
@@ -3731,14 +3383,14 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a duke.",
-      "targetUsageExample": "герцог здесь.",
+      "sourceUsageExample": "The duke lived in a large castle in the countryside.",
+      "targetUsageExample": "Герцог жил в большом замке в сельской местности.",
       "isActive": true
     },
     {
       "id": "0b715b42-905f-46cf-bd52-ca4685d24f61",
       "sourceText": "dumb",
-      "targetText": "тупой|немой",
+      "targetText": "тупой (разг.)|немой",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
@@ -3779,8 +3431,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a ear.",
-      "targetUsageExample": "Ты можешь ухо?",
+      "sourceUsageExample": "She whispered something in his ear.",
+      "targetUsageExample": "Она прошептала что-то ему на ухо.",
       "isActive": true
     },
     {
@@ -3839,8 +3491,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a egg yesterday.",
-      "targetUsageExample": "Ты можешь яйцо?",
+      "sourceUsageExample": "I eat a boiled egg for breakfast every morning.",
+      "targetUsageExample": "Я ем варёное яйцо на завтрак каждое утро.",
       "isActive": true
     },
     {
@@ -3868,18 +3520,6 @@
       "isActive": true
     },
     {
-      "id": "295fbe8f-3b51-4df4-955f-442ff6aea09e",
-      "sourceText": "ellen",
-      "targetText": "Эллен (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a ellen?",
-      "targetUsageExample": "Это Эллен имя.",
-      "isActive": true
-    },
-    {
       "id": "052a171f-7d8c-4451-8ec0-7f0b9feecb3a",
       "sourceText": "embarrassing",
       "targetText": "неловкий|стыдный",
@@ -3901,54 +3541,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "In case of an emergency, please call this number.",
       "targetUsageExample": "В случае чрезвычайной ситуации, пожалуйста, позвоните по этому номеру.",
-      "isActive": true
-    },
-    {
-      "id": "8e1cc33c-51fd-44c3-af64-dcc3ca27ee87",
-      "sourceText": "emily",
-      "targetText": "Эмили (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Here is an example with emily.",
-      "targetUsageExample": "Эмили имя здесь.",
-      "isActive": true
-    },
-    {
-      "id": "7a32ee22-a57b-44d7-bce3-964eece12298",
-      "sourceText": "emotional",
-      "targetText": "эмоциональный",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The farewell scene in the movie was very emotional.",
-      "targetUsageExample": "Сцена прощания в фильме была очень эмоциональной.",
-      "isActive": true
-    },
-    {
-      "id": "710380a4-8a05-4881-a05c-6768ea55294a",
-      "sourceText": "emperor",
-      "targetText": "император",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a emperor yesterday.",
-      "targetUsageExample": "Я видел император вчера.",
-      "isActive": true
-    },
-    {
-      "id": "54251401-af3d-4d0a-ac9e-7f1ded355998",
-      "sourceText": "empire",
-      "targetText": "империя",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The Roman Empire once ruled a large part of the world.",
-      "targetUsageExample": "Римская империя когда-то управляла большой частью мира.",
       "isActive": true
     },
     {
@@ -4012,18 +3604,6 @@
       "isActive": true
     },
     {
-      "id": "bc6647c2-0205-49a0-ae9b-c5a5d9e9bb27",
-      "sourceText": "episode",
-      "targetText": "эпизод|серия",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I watched three episodes of the series in one evening.",
-      "targetUsageExample": "Я посмотрел три серии сериала за один вечер.",
-      "isActive": true
-    },
-    {
       "id": "6796d938-e251-4eaa-802d-92e4e994436a",
       "sourceText": "equal",
       "targetText": "равный",
@@ -4045,18 +3625,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The gym has a lot of new equipment.",
       "targetUsageExample": "В спортзале много нового оборудования.",
-      "isActive": true
-    },
-    {
-      "id": "02140000-40b7-4f78-922c-5bb1767bf970",
-      "sourceText": "erm",
-      "targetText": "э-э|эм",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The erm is very interesting.",
-      "targetUsageExample": "Мне нравится э-э.",
       "isActive": true
     },
     {
@@ -4151,8 +3719,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She likes to exciting.",
-      "targetUsageExample": "Ты можешь волнующий?",
+      "sourceUsageExample": "The football game was really exciting last night.",
+      "targetUsageExample": "Футбольный матч был действительно захватывающий вчера вечером.",
       "isActive": true
     },
     {
@@ -4163,8 +3731,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a exercise.",
-      "targetUsageExample": "Ты можешь упражнение?",
+      "sourceUsageExample": "I do exercise every morning to stay healthy.",
+      "targetUsageExample": "Я делаю упражнения каждое утро, чтобы быть здоровым.",
       "isActive": true
     },
     {
@@ -4175,8 +3743,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The exhale is very interesting.",
-      "targetUsageExample": "Мне нравится выдыхать.",
+      "sourceUsageExample": "The doctor asked me to exhale slowly.",
+      "targetUsageExample": "Врач попросил меня медленно выдохнуть.",
       "isActive": true
     },
     {
@@ -4211,8 +3779,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The weather is expensive today.",
-      "targetUsageExample": "Я видел дорогой вчера.",
+      "sourceUsageExample": "This restaurant is too expensive for us.",
+      "targetUsageExample": "Этот ресторан слишком дорогой для нас.",
       "isActive": true
     },
     {
@@ -4343,8 +3911,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a false?",
-      "targetUsageExample": "Ты можешь ложный?",
+      "sourceUsageExample": "The answer to question three is false.",
+      "targetUsageExample": "Ответ на третий вопрос — ложь.",
       "isActive": true
     },
     {
@@ -4362,7 +3930,7 @@
     {
       "id": "6825749b-d683-4bd7-994c-c9c5acd0931a",
       "sourceText": "fancy",
-      "targetText": "нарядный|воображать",
+      "targetText": "нарядный|роскошный",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
@@ -4386,7 +3954,7 @@
     {
       "id": "e2875c16-77f2-4986-b8c8-568db20a5ba5",
       "sourceText": "farm",
-      "targetText": "обрабатывать землю",
+      "targetText": "ферма|фермерское хозяйство",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
@@ -4487,8 +4055,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a fellas.",
-      "targetUsageExample": "Я видел парни вчера.",
+      "sourceUsageExample": "Come on, fellas, let's finish this work together.",
+      "targetUsageExample": "Давайте, ребята, закончим эту работу вместе.",
       "isActive": true
     },
     {
@@ -4511,8 +4079,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "This is a female cat.",
-      "targetUsageExample": "Это кошка.",
+      "sourceUsageExample": "The female doctor examined the patient carefully.",
+      "targetUsageExample": "Женщина-врач тщательно осмотрела пациента.",
       "isActive": true
     },
     {
@@ -4535,8 +4103,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a fifth yesterday.",
-      "targetUsageExample": "пятый здесь.",
+      "sourceUsageExample": "Our apartment is on the fifth floor of the building.",
+      "targetUsageExample": "Наша квартира на пятом этаже здания.",
       "isActive": true
     },
     {
@@ -4559,8 +4127,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a fill?",
-      "targetUsageExample": "Я видел заполнять вчера.",
+      "sourceUsageExample": "Please fill this glass with water.",
+      "targetUsageExample": "Пожалуйста, наполни этот стакан водой.",
       "isActive": true
     },
     {
@@ -4667,8 +4235,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a footsteps.",
-      "targetUsageExample": "Ты можешь шаги?",
+      "sourceUsageExample": "I heard footsteps in the hallway late at night.",
+      "targetUsageExample": "Я услышал шаги в коридоре поздно ночью.",
       "isActive": true
     },
     {
@@ -4703,8 +4271,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a fourth yesterday.",
-      "targetUsageExample": "Это четвёртый.",
+      "sourceUsageExample": "Today is the fourth of July.",
+      "targetUsageExample": "Сегодня четвёртое июля.",
       "isActive": true
     },
     {
@@ -4727,8 +4295,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a freak.",
-      "targetUsageExample": "Мне нравится псих.",
+      "sourceUsageExample": "Don't freak out, everything is going to be fine.",
+      "targetUsageExample": "Не паникуй, всё будет хорошо.",
       "isActive": true
     },
     {
@@ -4757,7 +4325,7 @@
     },
     {
       "id": "12ea1268-43f2-4068-a5b4-eaf80ebfb1b8",
-      "sourceText": "friday",
+      "sourceText": "Friday",
       "targetText": "пятница",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -4775,8 +4343,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I use friendly often.",
-      "targetUsageExample": "Ты можешь дружелюбный?",
+      "sourceUsageExample": "The people in this town are very friendly.",
+      "targetUsageExample": "Люди в этом городке очень дружелюбные.",
       "isActive": true
     },
     {
@@ -4811,8 +4379,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new fruit.",
-      "targetUsageExample": "У тебя есть фрукт?",
+      "sourceUsageExample": "We should eat more fruit and vegetables.",
+      "targetUsageExample": "Нам нужно есть больше фруктов и овощей.",
       "isActive": true
     },
     {
@@ -4864,18 +4432,6 @@
       "isActive": true
     },
     {
-      "id": "7bd219fb-1b27-4194-beb1-6485df1d3b19",
-      "sourceText": "garbage",
-      "targetText": "мусор",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Please take out the garbage.",
-      "targetUsageExample": "Пожалуйста, вынеси мусор.",
-      "isActive": true
-    },
-    {
       "id": "a602d144-3688-4c13-815b-56c2317007d0",
       "sourceText": "garden",
       "targetText": "сад",
@@ -4883,8 +4439,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new garden.",
-      "targetUsageExample": "Нам нужен новый сад.",
+      "sourceUsageExample": "My grandmother grows flowers in her garden.",
+      "targetUsageExample": "Моя бабушка выращивает цветы в своём саду.",
       "isActive": true
     },
     {
@@ -4924,18 +4480,6 @@
       "isActive": true
     },
     {
-      "id": "90e87158-3a6e-49e8-90cf-ebf5c4ae0dac",
-      "sourceText": "gee",
-      "targetText": "ого|надо же",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The gee is very interesting.",
-      "targetUsageExample": "Ты можешь ого?",
-      "isActive": true
-    },
-    {
       "id": "cc463e25-6399-43a6-a8f6-9c34e347beed",
       "sourceText": "general",
       "targetText": "общий, генерал",
@@ -4943,8 +4487,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "This is a general rule.",
-      "targetUsageExample": "Это общее правило.",
+      "sourceUsageExample": "The general gave orders to his soldiers.",
+      "targetUsageExample": "Генерал отдал приказы своим солдатам.",
       "isActive": true
     },
     {
@@ -5009,7 +4553,7 @@
     },
     {
       "id": "174195e3-e1f9-46b6-8a2d-641a09cd9bd5",
-      "sourceText": "german",
+      "sourceText": "German",
       "targetText": "немецкий",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -5051,8 +4595,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a glasses yesterday.",
-      "targetUsageExample": "Мне нравится очки.",
+      "sourceUsageExample": "I need to wear glasses to read small text.",
+      "targetUsageExample": "Мне нужно носить очки, чтобы читать мелкий текст.",
       "isActive": true
     },
     {
@@ -5065,18 +4609,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The athlete achieved glory after winning the race.",
       "targetUsageExample": "Спортсмен достиг славы после победы в гонке.",
-      "isActive": true
-    },
-    {
-      "id": "264d5678-8074-4d76-91f7-f89db6f09b1d",
-      "sourceText": "goin",
-      "targetText": "идёт (разг.)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a goin yesterday.",
-      "targetUsageExample": "идёт разг. здесь.",
       "isActive": true
     },
     {
@@ -5099,8 +4631,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new good-bye.",
-      "targetUsageExample": "Мне нравится до свидания.",
+      "sourceUsageExample": "She said good-bye and left the room.",
+      "targetUsageExample": "Она сказала до свидания и вышла из комнаты.",
       "isActive": true
     },
     {
@@ -5123,20 +4655,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The goodnight is very interesting.",
-      "targetUsageExample": "Ты можешь спокойной ночи?",
-      "isActive": true
-    },
-    {
-      "id": "737dc994-152b-4f52-a693-374a5b214c52",
-      "sourceText": "gordon",
-      "targetText": "Гордон",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Gordon is a very popular name in Scotland.",
-      "targetUsageExample": "Гордон — очень популярное имя в Шотландии.",
+      "sourceUsageExample": "Goodnight, sleep well and see you tomorrow.",
+      "targetUsageExample": "Спокойной ночи, хороших снов, увидимся завтра.",
       "isActive": true
     },
     {
@@ -5149,18 +4669,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "What a gorgeous sunset over the mountains!",
       "targetUsageExample": "Какой великолепный закат над горами!",
-      "isActive": true
-    },
-    {
-      "id": "6a0f03f3-dece-4354-9da2-fefa042f5902",
-      "sourceText": "gosh",
-      "targetText": "боже мой|ого",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a gosh.",
-      "targetUsageExample": "боже мой здесь.",
       "isActive": true
     },
     {
@@ -5195,20 +4703,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a grandfather.",
-      "targetUsageExample": "Нам нужен новый дедушка.",
-      "isActive": true
-    },
-    {
-      "id": "26f23e6d-33d3-4807-97c4-be41a3f0a6c1",
-      "sourceText": "grandma",
-      "targetText": "бабушка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a grandma yesterday.",
-      "targetUsageExample": "Нам нужен новый бабушка.",
+      "sourceUsageExample": "My grandfather tells us stories about the war.",
+      "targetUsageExample": "Мой дедушка рассказывает нам истории о войне.",
       "isActive": true
     },
     {
@@ -5219,20 +4715,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The grandmother is very interesting.",
-      "targetUsageExample": "бабушка здесь.",
-      "isActive": true
-    },
-    {
-      "id": "347fbe6a-408f-4b36-a717-7bd43baebc68",
-      "sourceText": "grandpa",
-      "targetText": "дедушка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Every weekend grandpa reads books in his chair.",
-      "targetUsageExample": "Каждые выходные дедушка читает книги в своём кресле.",
+      "sourceUsageExample": "My grandmother makes the best apple pie.",
+      "targetUsageExample": "Моя бабушка готовит лучший яблочный пирог.",
       "isActive": true
     },
     {
@@ -5291,8 +4775,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Can you greeting?",
-      "targetUsageExample": "Ты можешь приветствие?",
+      "sourceUsageExample": "He sent a greeting card to his friend on New Year.",
+      "targetUsageExample": "Он послал поздравительную открытку другу на Новый год.",
       "isActive": true
     },
     {
@@ -5332,18 +4816,6 @@
       "isActive": true
     },
     {
-      "id": "7c976640-9f6b-44f8-b858-7d6817e359f4",
-      "sourceText": "guitar",
-      "targetText": "гитара",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She plays guitar every evening before bed.",
-      "targetUsageExample": "Она играет на гитаре каждый вечер перед сном.",
-      "isActive": true
-    },
-    {
       "id": "a5d07556-6ade-46c3-8853-48dbe48dbfb8",
       "sourceText": "gun",
       "targetText": "пистолет|оружие",
@@ -5363,8 +4835,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a gunshot?",
-      "targetUsageExample": "Это выстрел.",
+      "sourceUsageExample": "We heard a loud gunshot from the forest.",
+      "targetUsageExample": "Мы услышали громкий выстрел из леса.",
       "isActive": true
     },
     {
@@ -5387,20 +4859,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The handsome is very interesting.",
-      "targetUsageExample": "Это красивый.",
-      "isActive": true
-    },
-    {
-      "id": "fd66fd29-22c9-4bd3-82a2-ba784b179613",
-      "sourceText": "hank",
-      "targetText": "моток",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "He bought a hank of wool at the market.",
-      "targetUsageExample": "Он купил моток шерсти на рынке.",
+      "sourceUsageExample": "She thinks that actor is very handsome.",
+      "targetUsageExample": "Она считает, что тот актёр очень красивый.",
       "isActive": true
     },
     {
@@ -5447,8 +4907,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a headed.",
-      "targetUsageExample": "Я видел направляющийся вчера.",
+      "sourceUsageExample": "We headed to the beach early in the morning.",
+      "targetUsageExample": "Мы направились на пляж рано утром.",
       "isActive": true
     },
     {
@@ -5471,8 +4931,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new healthy.",
-      "targetUsageExample": "Мне нравится здоровый.",
+      "sourceUsageExample": "Eating vegetables every day keeps you healthy.",
+      "targetUsageExample": "Есть овощи каждый день помогает оставаться здоровым.",
       "isActive": true
     },
     {
@@ -5531,20 +4991,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a heck.",
-      "targetUsageExample": "чёрт здесь.",
-      "isActive": true
-    },
-    {
-      "id": "cb395394-55b8-4798-b251-9b131bc31fe7",
-      "sourceText": "heh",
-      "targetText": "хех",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Heh, that was a funny joke you told.",
-      "targetUsageExample": "Хех, это была смешная шутка, которую ты рассказал.",
+      "sourceUsageExample": "What the heck is going on here?",
+      "targetUsageExample": "Что тут вообще происходит?",
       "isActive": true
     },
     {
@@ -5567,8 +5015,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new highness.",
-      "targetUsageExample": "Ты можешь высочество?",
+      "sourceUsageExample": "Your Highness, the guests have arrived.",
+      "targetUsageExample": "Ваше Высочество, гости прибыли.",
       "isActive": true
     },
     {
@@ -5596,30 +5044,6 @@
       "isActive": true
     },
     {
-      "id": "63c1f4a2-988d-4c8f-9010-83d01a71ada0",
-      "sourceText": "hitler",
-      "targetText": "Гитлер",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Hitler was the leader of Nazi Germany in World War II.",
-      "targetUsageExample": "Гитлер был лидером нацистской Германии во Второй мировой войне.",
-      "isActive": true
-    },
-    {
-      "id": "ae372d4c-d144-477b-8475-07dd741a1d1c",
-      "sourceText": "hm",
-      "targetText": "хм|угу",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Hm, I am not sure what to do about this.",
-      "targetUsageExample": "Хм, я не уверен, что делать с этим.",
-      "isActive": true
-    },
-    {
       "id": "687b2d59-a263-4526-b9f9-85de5b7805a0",
       "sourceText": "holiday",
       "targetText": "праздник|отпуск",
@@ -5632,30 +5056,6 @@
       "isActive": true
     },
     {
-      "id": "0efa5be9-72be-44f5-a6fe-c4be49059f8a",
-      "sourceText": "holly",
-      "targetText": "Холли (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "This shows holly.",
-      "targetUsageExample": "Это Холли имя.",
-      "isActive": true
-    },
-    {
-      "id": "95474300-650c-4ae4-b13a-58aec8efe7f8",
-      "sourceText": "hollywood",
-      "targetText": "Голливуд",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a hollywood yesterday.",
-      "targetUsageExample": "Голливуд здесь.",
-      "isActive": true
-    },
-    {
       "id": "45f1184b-0e6c-4b94-9cee-4c26007c4df1",
       "sourceText": "honestly",
       "targetText": "честно говоря|по правде",
@@ -5663,20 +5063,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "This shows honestly.",
-      "targetUsageExample": "честно говоря здесь.",
-      "isActive": true
-    },
-    {
-      "id": "39905b44-cc3e-4071-98e2-ff26bdc14822",
-      "sourceText": "hong",
-      "targetText": "Гонконг",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Hong Kong is a busy city with many tall buildings.",
-      "targetUsageExample": "Гонконг — оживлённый город со многими высокими зданиями.",
+      "sourceUsageExample": "I honestly don't know the answer to your question.",
+      "targetUsageExample": "Я честно не знаю ответ на твой вопрос.",
       "isActive": true
     },
     {
@@ -5687,8 +5075,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The honour is very interesting.",
-      "targetUsageExample": "Я видел честь вчера.",
+      "sourceUsageExample": "It is a great honour to receive this award.",
+      "targetUsageExample": "Это большая честь получить эту награду.",
       "isActive": true
     },
     {
@@ -5740,18 +5128,6 @@
       "isActive": true
     },
     {
-      "id": "41cd9b78-9f6c-4a24-a8b8-2462b8295240",
-      "sourceText": "howard",
-      "targetText": "Ховард (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new howard.",
-      "targetUsageExample": "Ты можешь Ховард имя?",
-      "isActive": true
-    },
-    {
       "id": "f6669acd-1494-4fb1-a619-6bae7bd7af60",
       "sourceText": "hunt",
       "targetText": "охотиться|преследовать",
@@ -5771,8 +5147,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a hunter yesterday.",
-      "targetUsageExample": "Мне нравится охотник.",
+      "sourceUsageExample": "The hunter walked quietly through the forest.",
+      "targetUsageExample": "Охотник тихо шёл через лес.",
       "isActive": true
     },
     {
@@ -5785,18 +5161,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Hunting is not allowed in this national park.",
       "targetUsageExample": "Охота запрещена в этом национальном парке.",
-      "isActive": true
-    },
-    {
-      "id": "cd6589d7-24c0-4a70-b465-f71196c80fdf",
-      "sourceText": "'i",
-      "targetText": "я бы|я хотел бы",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I'd like to go to the cinema tonight.",
-      "targetUsageExample": "Я бы хотел пойти в кино сегодня вечером.",
       "isActive": true
     },
     {
@@ -6047,8 +5411,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a insane.",
-      "targetUsageExample": "безумный здесь.",
+      "sourceUsageExample": "That roller coaster ride was insane!",
+      "targetUsageExample": "Эта поездка на американских горках была безумной!",
       "isActive": true
     },
     {
@@ -6061,18 +5425,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "She insisted on paying for the dinner herself.",
       "targetUsageExample": "Она настаивала на том, чтобы самой заплатить за ужин.",
-      "isActive": true
-    },
-    {
-      "id": "dbe5a2f6-a70e-4686-9846-3f2e393fbb95",
-      "sourceText": "inspector",
-      "targetText": "инспектор",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The inspector checked all the rooms in the building.",
-      "targetUsageExample": "Инспектор проверил все комнаты в здании.",
       "isActive": true
     },
     {
@@ -6112,18 +5464,6 @@
       "isActive": true
     },
     {
-      "id": "a2f9e4e0-bec1-481b-9e3d-2ad32ac2a3fd",
-      "sourceText": "interview",
-      "targetText": "интервью|собеседование",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The interview is very interesting.",
-      "targetUsageExample": "интервью здесь.",
-      "isActive": true
-    },
-    {
       "id": "76bec462-690b-47bd-9e20-260244401b94",
       "sourceText": "introduce",
       "targetText": "представлять|знакомить",
@@ -6131,8 +5471,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a introduce.",
-      "targetUsageExample": "Ты можешь представлять?",
+      "sourceUsageExample": "Let me introduce you to my best friend.",
+      "targetUsageExample": "Позволь представить тебе моего лучшего друга.",
       "isActive": true
     },
     {
@@ -6173,7 +5513,7 @@
     },
     {
       "id": "906bd224-5604-4505-9304-3fc11f52ffac",
-      "sourceText": "italian",
+      "sourceText": "Italian",
       "targetText": "итальянский",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -6191,49 +5531,13 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new jacket.",
-      "targetUsageExample": "куртка здесь.",
-      "isActive": true
-    },
-    {
-      "id": "bad56841-4e0c-42b8-ba1b-508ae8d69a62",
-      "sourceText": "jackie",
-      "targetText": "Джеки",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jackie is my best friend from school.",
-      "targetUsageExample": "Джеки — моя лучшая подруга со школы.",
-      "isActive": true
-    },
-    {
-      "id": "bbce45da-e333-4c71-897e-8e499daa84b0",
-      "sourceText": "jackson",
-      "targetText": "Джексон",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jackson is a city in the state of Mississippi.",
-      "targetUsageExample": "Джексон — город в штате Миссисипи.",
-      "isActive": true
-    },
-    {
-      "id": "c5ac425c-60da-4a33-baa7-0e570f2815e8",
-      "sourceText": "jamie",
-      "targetText": "Джейми",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jamie helped me carry the bags to the car.",
-      "targetUsageExample": "Джейми помог мне донести сумки до машины.",
+      "sourceUsageExample": "You should wear a jacket because it's cold outside.",
+      "targetUsageExample": "Тебе стоит надеть куртку, потому что на улице холодно.",
       "isActive": true
     },
     {
       "id": "06d21a6d-b15b-4d70-9e9c-b84c4b464c7c",
-      "sourceText": "japanese",
+      "sourceText": "Japanese",
       "targetText": "японский",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -6251,8 +5555,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I feel jealous.",
-      "targetUsageExample": "Я видел ревнивый вчера.",
+      "sourceUsageExample": "He felt jealous when he saw her talking to another man.",
+      "targetUsageExample": "Он почувствовал ревность, когда увидел её разговаривающей с другим мужчиной.",
       "isActive": true
     },
     {
@@ -6263,20 +5567,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a new pair of jeans at the mall.",
-      "targetUsageExample": "Она купила новые джинсы в торговом центре.",
-      "isActive": true
-    },
-    {
-      "id": "e23c0660-330a-4b9f-a885-55dd8ad7a433",
-      "sourceText": "jeremy",
-      "targetText": "Джереми (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a jeremy?",
-      "targetUsageExample": "Это Джереми имя.",
+      "sourceUsageExample": "Jean is a common French name for boys.",
+      "targetUsageExample": "Жан — распространённое французское мужское имя.",
       "isActive": true
     },
     {
@@ -6292,42 +5584,6 @@
       "isActive": true
     },
     {
-      "id": "c87537e4-9c3d-42d9-b917-fd06d132a86a",
-      "sourceText": "jesse",
-      "targetText": "Джесси",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jesse is always late to our morning meetings.",
-      "targetUsageExample": "Джесси всегда опаздывает на наши утренние встречи.",
-      "isActive": true
-    },
-    {
-      "id": "490fa5d4-6f1f-4350-ab66-4a0a8f46dd17",
-      "sourceText": "jo",
-      "targetText": "Джо",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jo said she would meet us at the park.",
-      "targetUsageExample": "Джо сказала, что встретит нас в парке.",
-      "isActive": true
-    },
-    {
-      "id": "47141834-c414-4638-a116-8ec296661c40",
-      "sourceText": "johnson",
-      "targetText": "Джонсон",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Johnson is a very common surname in the United States.",
-      "targetUsageExample": "Джонсон — очень распространённая фамилия в Соединённых Штатах.",
-      "isActive": true
-    },
-    {
       "id": "2373141f-576b-4ce2-9522-341097ed728e",
       "sourceText": "joint",
       "targetText": "сустав|место|совместный",
@@ -6337,18 +5593,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The doctor examined the joint in her knee.",
       "targetUsageExample": "Доктор обследовал сустав в её колене.",
-      "isActive": true
-    },
-    {
-      "id": "7b0c0b3d-7ba0-413d-902a-baa3191f134c",
-      "sourceText": "jones",
-      "targetText": "Джонс",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Jones is the name of our new English teacher.",
-      "targetUsageExample": "Джонс — это имя нашего нового учителя английского.",
       "isActive": true
     },
     {
@@ -6409,18 +5653,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Justice must be served in this case.",
       "targetUsageExample": "Справедливость должна восторжествовать в этом деле.",
-      "isActive": true
-    },
-    {
-      "id": "c5cda5ee-07bb-4092-b709-65ddc96de6f2",
-      "sourceText": "katie",
-      "targetText": "Кейти",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Katie made a delicious cake for the party.",
-      "targetUsageExample": "Кейти приготовила вкусный торт для вечеринки.",
       "isActive": true
     },
     {
@@ -6570,7 +5802,7 @@
     {
       "id": "75243f66-8f5a-41b7-8da0-533b5350077c",
       "sourceText": "lay",
-      "targetText": "класть|лежать|положить",
+      "targetText": "класть|положить",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
@@ -6628,18 +5860,6 @@
       "isActive": true
     },
     {
-      "id": "89dff471-5ca1-4faf-ab29-5ce956032927",
-      "sourceText": "lf",
-      "targetText": "перевод строки|LF",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The text file uses LF as a line ending character.",
-      "targetUsageExample": "Текстовый файл использует LF как символ конца строки.",
-      "isActive": true
-    },
-    {
       "id": "34ca51b3-ccae-4379-a3f2-34a049ab5a4b",
       "sourceText": "liar",
       "targetText": "лжец|врун",
@@ -6647,8 +5867,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a liar.",
-      "targetUsageExample": "лжец здесь.",
+      "sourceUsageExample": "Don't trust him, he is a liar.",
+      "targetUsageExample": "Не доверяй ему, он лжец.",
       "isActive": true
     },
     {
@@ -6659,8 +5879,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new library.",
-      "targetUsageExample": "У тебя есть библиотека?",
+      "sourceUsageExample": "I borrowed three books from the library.",
+      "targetUsageExample": "Я взял три книги в библиотеке.",
       "isActive": true
     },
     {
@@ -6700,18 +5920,6 @@
       "isActive": true
     },
     {
-      "id": "5f474858-508d-420a-bb05-3239eb81abb0",
-      "sourceText": "lily",
-      "targetText": "Лилия|Лили (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I use lily often.",
-      "targetUsageExample": "Лилия здесь.",
-      "isActive": true
-    },
-    {
       "id": "660a365a-fd6e-4688-9aba-303e67fa6259",
       "sourceText": "link",
       "targetText": "ссылка",
@@ -6731,8 +5939,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a lion?",
-      "targetUsageExample": "Ты можешь лев?",
+      "sourceUsageExample": "The lion is called the king of the animals.",
+      "targetUsageExample": "Льва называют царём зверей.",
       "isActive": true
     },
     {
@@ -6745,18 +5953,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "He was literally shaking with excitement.",
       "targetUsageExample": "Он буквально дрожал от волнения.",
-      "isActive": true
-    },
-    {
-      "id": "6385ff1f-491d-475b-908d-1a4c5ef61f19",
-      "sourceText": "ll",
-      "targetText": "буду|будет",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I'll be there in five minutes, don't worry.",
-      "targetUsageExample": "Я буду там через пять минут, не волнуйся.",
       "isActive": true
     },
     {
@@ -6827,8 +6023,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a loser?",
-      "targetUsageExample": "Ты можешь неудачник?",
+      "sourceUsageExample": "Nobody likes to be called a loser.",
+      "targetUsageExample": "Никто не любит, когда его называют неудачником.",
       "isActive": true
     },
     {
@@ -6863,8 +6059,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We should loving now.",
-      "targetUsageExample": "Ты можешь любящий?",
+      "sourceUsageExample": "She is a very loving and caring mother.",
+      "targetUsageExample": "Она очень любящая и заботливая мать.",
       "isActive": true
     },
     {
@@ -6887,8 +6083,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a madame yesterday.",
-      "targetUsageExample": "мадам здесь.",
+      "sourceUsageExample": "Good evening, madame, your table is ready.",
+      "targetUsageExample": "Добрый вечер, мадам, ваш стол готов.",
       "isActive": true
     },
     {
@@ -6899,20 +6095,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a magazine.",
-      "targetUsageExample": "Я видел журнал вчера.",
-      "isActive": true
-    },
-    {
-      "id": "790b5c7d-d010-4350-94a4-c2dced9369f2",
-      "sourceText": "maggie",
-      "targetText": "Мэгги",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Maggie helped her mother cook dinner after school.",
-      "targetUsageExample": "Мэгги помогла маме приготовить ужин после школы.",
+      "sourceUsageExample": "I read an interesting article in a magazine.",
+      "targetUsageExample": "Я прочитал интересную статью в журнале.",
       "isActive": true
     },
     {
@@ -6923,8 +6107,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new maid.",
-      "targetUsageExample": "горничная здесь.",
+      "sourceUsageExample": "The maid cleans the rooms in the hotel every day.",
+      "targetUsageExample": "Горничная убирает номера в отеле каждый день.",
       "isActive": true
     },
     {
@@ -7000,18 +6184,6 @@
       "isActive": true
     },
     {
-      "id": "7c8a2d4f-832c-4beb-a598-228d39600268",
-      "sourceText": "marty",
-      "targetText": "Марти",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Marty arrived late to the party but had a great time.",
-      "targetUsageExample": "Марти опоздал на вечеринку, но хорошо провёл время.",
-      "isActive": true
-    },
-    {
       "id": "905fa1f7-c4f7-487c-8c18-ea9723542fbf",
       "sourceText": "massive",
       "targetText": "огромный|массивный",
@@ -7043,8 +6215,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a meal?",
-      "targetUsageExample": "Она купила еда.",
+      "sourceUsageExample": "Dinner is the biggest meal of the day for our family.",
+      "targetUsageExample": "Ужин — самый большой приём пищи за день для нашей семьи.",
       "isActive": true
     },
     {
@@ -7055,8 +6227,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "They meaning often.",
-      "targetUsageExample": "Я видел значение вчера.",
+      "sourceUsageExample": "What is the meaning of this word in English?",
+      "targetUsageExample": "Какое значение этого слова на английском?",
       "isActive": true
     },
     {
@@ -7067,8 +6239,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a meat?",
-      "targetUsageExample": "мясо очень интересный.",
+      "sourceUsageExample": "We don't eat meat on Fridays in our family.",
+      "targetUsageExample": "В нашей семье мы не едим мясо по пятницам.",
       "isActive": true
     },
     {
@@ -7103,8 +6275,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a merry.",
-      "targetUsageExample": "Ты можешь весёлый?",
+      "sourceUsageExample": "Merry Christmas and Happy New Year!",
+      "targetUsageExample": "С Рождеством и Новым годом!",
       "isActive": true
     },
     {
@@ -7127,8 +6299,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a mighty.",
-      "targetUsageExample": "могучий здесь.",
+      "sourceUsageExample": "The mighty warrior defeated all his enemies.",
+      "targetUsageExample": "Могучий воин победил всех своих врагов.",
       "isActive": true
     },
     {
@@ -7139,8 +6311,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a milk.",
-      "targetUsageExample": "Я видел молоко вчера.",
+      "sourceUsageExample": "Children should drink milk every day.",
+      "targetUsageExample": "Дети должны пить молоко каждый день.",
       "isActive": true
     },
     {
@@ -7187,8 +6359,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a mistress?",
-      "targetUsageExample": "Мне нравится любовница.",
+      "sourceUsageExample": "The mistress of the house welcomed her guests warmly.",
+      "targetUsageExample": "Хозяйка дома тепло встретила своих гостей.",
       "isActive": true
     },
     {
@@ -7204,20 +6376,8 @@
       "isActive": true
     },
     {
-      "id": "06a58234-c8ce-4321-86ee-c81bd7a68723",
-      "sourceText": "molly",
-      "targetText": "Молли (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Here is an example with molly.",
-      "targetUsageExample": "Мне нравится Молли имя.",
-      "isActive": true
-    },
-    {
       "id": "7a59e7ed-07d9-46ed-9715-e1071647bc5b",
-      "sourceText": "monday",
+      "sourceText": "Monday",
       "targetText": "понедельник",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -7247,8 +6407,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new monsieur.",
-      "targetUsageExample": "месье здесь.",
+      "sourceUsageExample": "Bonjour, monsieur, how can I help you today?",
+      "targetUsageExample": "Здравствуйте, месье, чем могу помочь?",
       "isActive": true
     },
     {
@@ -7276,18 +6436,6 @@
       "isActive": true
     },
     {
-      "id": "cb7e90e7-5a91-4831-9fba-1235bf7f7992",
-      "sourceText": "morgan",
-      "targetText": "Морган",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Morgan is a popular family name in Wales.",
-      "targetUsageExample": "Морган — популярная фамилия в Уэльсе.",
-      "isActive": true
-    },
-    {
       "id": "2b925301-3164-476b-83d6-dfbb2dec0671",
       "sourceText": "mostly",
       "targetText": "в основном|главным образом",
@@ -7297,18 +6445,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The audience was mostly young people.",
       "targetUsageExample": "Аудитория состояла в основном из молодых людей.",
-      "isActive": true
-    },
-    {
-      "id": "c104502f-443c-4a0f-993d-fdb7e3163997",
-      "sourceText": "motherfucker",
-      "targetText": "мать твою|ублюдок",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "He was so angry he called the driver a motherfucker.",
-      "targetUsageExample": "Он был так зол, что назвал водителя ублюдком.",
       "isActive": true
     },
     {
@@ -7331,8 +6467,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a mountain?",
-      "targetUsageExample": "гора здесь.",
+      "sourceUsageExample": "We climbed a mountain during our vacation last summer.",
+      "targetUsageExample": "Мы поднялись на гору во время отпуска прошлым летом.",
       "isActive": true
     },
     {
@@ -7343,8 +6479,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a movement in the bushes.",
-      "targetUsageExample": "Я увидел движение в кустах.",
+      "sourceUsageExample": "The police noticed a movement behind the building.",
+      "targetUsageExample": "Полиция заметила движение за зданием.",
       "isActive": true
     },
     {
@@ -7355,20 +6491,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new murderer.",
-      "targetUsageExample": "убийца здесь.",
-      "isActive": true
-    },
-    {
-      "id": "ec1abb9f-5152-4497-b7ab-6bae69cf46b1",
-      "sourceText": "museum",
-      "targetText": "музей",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "We visited the art museum during our trip to Paris.",
-      "targetUsageExample": "Мы посетили художественный музей во время поездки в Париж.",
+      "sourceUsageExample": "The police caught the murderer after a long search.",
+      "targetUsageExample": "Полиция поймала убийцу после долгих поисков.",
       "isActive": true
     },
     {
@@ -7487,8 +6611,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The neighborhood is very interesting.",
-      "targetUsageExample": "Нам нужен новый район.",
+      "sourceUsageExample": "We moved to a quiet neighborhood near the park.",
+      "targetUsageExample": "Мы переехали в тихий район рядом с парком.",
       "isActive": true
     },
     {
@@ -7535,8 +6659,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a newspaper.",
-      "targetUsageExample": "Ты можешь газета?",
+      "sourceUsageExample": "My father reads the newspaper every morning.",
+      "targetUsageExample": "Мой отец читает газету каждое утро.",
       "isActive": true
     },
     {
@@ -7549,6 +6673,18 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The traffic jam was a complete nightmare.",
       "targetUsageExample": "Пробка на дороге была настоящим кошмаром.",
+      "isActive": true
+    },
+    {
+      "id": "08e3978a-7d0f-4599-8ab1-169338aa0dc7",
+      "sourceText": "no-one",
+      "targetText": "никто",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A2",
+      "difficultyLevel": "a2",
+      "sourceUsageExample": "No-one knew where he went after the party.",
+      "targetUsageExample": "Никто не знал, куда он ушёл после вечеринки.",
       "isActive": true
     },
     {
@@ -7588,18 +6724,6 @@
       "isActive": true
     },
     {
-      "id": "08e3978a-7d0f-4599-8ab1-169338aa0dc7",
-      "sourceText": "no-one",
-      "targetText": "никто",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "No-one knew where he went after the party.",
-      "targetUsageExample": "Никто не знал, куда он ушёл после вечеринки.",
-      "isActive": true
-    },
-    {
       "id": "98e02977-d332-4756-bddd-0d4ff203486b",
       "sourceText": "nor",
       "targetText": "и не|ни",
@@ -7621,18 +6745,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "I normally go to bed at 11 PM.",
       "targetUsageExample": "Обычно я ложусь спать в 11 вечера.",
-      "isActive": true
-    },
-    {
-      "id": "a177e068-38ac-4e4e-a769-26d2e2fc998d",
-      "sourceText": "nothin",
-      "targetText": "ничего (разг.)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new nothin.",
-      "targetUsageExample": "Мне нравится ничего разг..",
       "isActive": true
     },
     {
@@ -7667,8 +6779,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new nurse.",
-      "targetUsageExample": "медсестра здесь.",
+      "sourceUsageExample": "The nurse took my temperature and checked my blood pressure.",
+      "targetUsageExample": "Медсестра измерила мне температуру и проверила давление.",
       "isActive": true
     },
     {
@@ -7720,18 +6832,6 @@
       "isActive": true
     },
     {
-      "id": "4302dd0e-f133-443e-bc5d-c973f476a112",
-      "sourceText": "oliver",
-      "targetText": "Оливер (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new oliver.",
-      "targetUsageExample": "Оливер имя здесь.",
-      "isActive": true
-    },
-    {
       "id": "b9a1adc5-1ccb-4bd7-9a20-bff83cfb54a0",
       "sourceText": "onto",
       "targetText": "на (на поверхность)",
@@ -7756,18 +6856,6 @@
       "isActive": true
     },
     {
-      "id": "31dc5037-e6f3-4703-8eca-c15a21f589a6",
-      "sourceText": "operation",
-      "targetText": "операция",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The doctor performed a successful operation on her knee.",
-      "targetUsageExample": "Врач провёл успешную операцию на её колене.",
-      "isActive": true
-    },
-    {
       "id": "6946f7d0-69fb-47b4-8d7f-a9ffd0474127",
       "sourceText": "opinion",
       "targetText": "мнение",
@@ -7775,8 +6863,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a opinion yesterday.",
-      "targetUsageExample": "Мне нравится мнение.",
+      "sourceUsageExample": "In my opinion, this film is the best one this year.",
+      "targetUsageExample": "По моему мнению, этот фильм лучший в этом году.",
       "isActive": true
     },
     {
@@ -7799,8 +6887,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a opposite?",
-      "targetUsageExample": "Ты можешь противоположный?",
+      "sourceUsageExample": "The bank is on the opposite side of the street.",
+      "targetUsageExample": "Банк на противоположной стороне улицы.",
       "isActive": true
     },
     {
@@ -7835,8 +6923,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The ought is very interesting.",
-      "targetUsageExample": "Я видел следует вчера.",
+      "sourceUsageExample": "You ought to study harder for the exam.",
+      "targetUsageExample": "Тебе следует учиться усерднее к экзамену.",
       "isActive": true
     },
     {
@@ -7895,8 +6983,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The paint is very interesting.",
-      "targetUsageExample": "Я видел краска вчера.",
+      "sourceUsageExample": "We need to paint the walls in the kitchen.",
+      "targetUsageExample": "Нам нужно покрасить стены на кухне.",
       "isActive": true
     },
     {
@@ -7907,8 +6995,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She likes to painting.",
-      "targetUsageExample": "Она купила картина.",
+      "sourceUsageExample": "There is a beautiful painting on the wall.",
+      "targetUsageExample": "На стене висит красивая картина.",
       "isActive": true
     },
     {
@@ -7919,8 +7007,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a pair yesterday.",
-      "targetUsageExample": "Ты можешь пара?",
+      "sourceUsageExample": "I bought a new pair of shoes yesterday.",
+      "targetUsageExample": "Я купил новую пару обуви вчера.",
       "isActive": true
     },
     {
@@ -7967,8 +7055,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new pant.",
-      "targetUsageExample": "штанина здесь.",
+      "sourceUsageExample": "He began to pant after running up the stairs.",
+      "targetUsageExample": "Он начал тяжело дышать, поднявшись по лестнице.",
       "isActive": true
     },
     {
@@ -7979,8 +7067,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new papa.",
-      "targetUsageExample": "Это папа.",
+      "sourceUsageExample": "Papa, can you read me a bedtime story?",
+      "targetUsageExample": "Папа, ты прочитаешь мне сказку на ночь?",
       "isActive": true
     },
     {
@@ -7991,20 +7079,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a pardon?",
-      "targetUsageExample": "Нам нужен новый прощение.",
-      "isActive": true
-    },
-    {
-      "id": "40e468b5-dc81-4f66-8e87-a548bda2bdc9",
-      "sourceText": "parker",
-      "targetText": "Паркер",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Parker fixed my car in less than an hour.",
-      "targetUsageExample": "Паркер починил мою машину менее чем за час.",
+      "sourceUsageExample": "Pardon me, could you repeat that please?",
+      "targetUsageExample": "Простите, не могли бы вы повторить?",
       "isActive": true
     },
     {
@@ -8087,8 +7163,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a pathetic yesterday.",
-      "targetUsageExample": "Это жалкий.",
+      "sourceUsageExample": "His excuse for being late was pathetic.",
+      "targetUsageExample": "Его оправдание за опоздание было жалким.",
       "isActive": true
     },
     {
@@ -8099,8 +7175,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new pen.",
-      "targetUsageExample": "ручка здесь.",
+      "sourceUsageExample": "Can I borrow your pen to write a note?",
+      "targetUsageExample": "Можно одолжить твою ручку, чтобы написать записку?",
       "isActive": true
     },
     {
@@ -8164,18 +7240,6 @@
       "isActive": true
     },
     {
-      "id": "9bc183b1-f8b4-49e0-8293-2f4a8dc3686e",
-      "sourceText": "pete",
-      "targetText": "Пит (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a pete yesterday.",
-      "targetUsageExample": "Ты можешь Пит имя?",
-      "isActive": true
-    },
-    {
       "id": "449a1863-355f-4213-9a3a-71c38a196845",
       "sourceText": "photo",
       "targetText": "фото|фотография",
@@ -8207,8 +7271,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a piano yesterday.",
-      "targetUsageExample": "Ты можешь пианино?",
+      "sourceUsageExample": "She has been playing the piano since she was six.",
+      "targetUsageExample": "Она играет на пианино с шести лет.",
       "isActive": true
     },
     {
@@ -8219,8 +7283,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a pie yesterday.",
-      "targetUsageExample": "пирог здесь.",
+      "sourceUsageExample": "Grandma made a delicious apple pie for dessert.",
+      "targetUsageExample": "Бабушка приготовила вкусный яблочный пирог на десерт.",
       "isActive": true
     },
     {
@@ -8231,8 +7295,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a pig yesterday.",
-      "targetUsageExample": "Мне нравится свинья.",
+      "sourceUsageExample": "The farmer has a big pig on his farm.",
+      "targetUsageExample": "У фермера большая свинья на ферме.",
       "isActive": true
     },
     {
@@ -8255,8 +7319,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a pink yesterday.",
-      "targetUsageExample": "Я видел розовый вчера.",
+      "sourceUsageExample": "She wore a pretty pink dress to the party.",
+      "targetUsageExample": "Она надела красивое розовое платье на вечеринку.",
       "isActive": true
     },
     {
@@ -8411,8 +7475,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new pool.",
-      "targetUsageExample": "бассейн здесь.",
+      "sourceUsageExample": "The children are swimming in the pool.",
+      "targetUsageExample": "Дети плавают в бассейне.",
       "isActive": true
     },
     {
@@ -8483,8 +7547,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The pound is very interesting.",
-      "targetUsageExample": "фунт здесь.",
+      "sourceUsageExample": "This bag of apples weighs about two pounds.",
+      "targetUsageExample": "Этот пакет яблок весит около двух фунтов.",
       "isActive": true
     },
     {
@@ -8507,8 +7571,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I use practically often.",
-      "targetUsageExample": "практически здесь.",
+      "sourceUsageExample": "He practically lives at the office because he works so much.",
+      "targetUsageExample": "Он практически живёт в офисе, потому что много работает.",
       "isActive": true
     },
     {
@@ -8543,8 +7607,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a prefer?",
-      "targetUsageExample": "Мне нравится предпочитать.",
+      "sourceUsageExample": "I prefer tea to coffee in the morning.",
+      "targetUsageExample": "Я предпочитаю чай кофе по утрам.",
       "isActive": true
     },
     {
@@ -8687,8 +7751,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a product yesterday.",
-      "targetUsageExample": "Это продукт.",
+      "sourceUsageExample": "This is a high quality product made in Germany.",
+      "targetUsageExample": "Это высококачественный продукт, сделанный в Германии.",
       "isActive": true
     },
     {
@@ -8795,8 +7859,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The purse is very interesting.",
-      "targetUsageExample": "Я видел кошелёк вчера.",
+      "sourceUsageExample": "She keeps her keys and phone in her purse.",
+      "targetUsageExample": "Она держит ключи и телефон в своей сумочке.",
       "isActive": true
     },
     {
@@ -8807,8 +7871,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a quarter?",
-      "targetUsageExample": "четверть здесь.",
+      "sourceUsageExample": "It is a quarter past three in the afternoon.",
+      "targetUsageExample": "Сейчас четверть четвёртого дня.",
       "isActive": true
     },
     {
@@ -8843,8 +7907,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a rabbit?",
-      "targetUsageExample": "Ты можешь кролик?",
+      "sourceUsageExample": "The white rabbit ran across the garden.",
+      "targetUsageExample": "Белый кролик пробежал через сад.",
       "isActive": true
     },
     {
@@ -8884,18 +7948,6 @@
       "isActive": true
     },
     {
-      "id": "0d168aa5-281f-49ee-86c2-70f7ddaac407",
-      "sourceText": "re",
-      "targetText": "относительно",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a re.",
-      "targetUsageExample": "Мне нравится относительно.",
-      "isActive": true
-    },
-    {
       "id": "06814767-a1ca-4a94-a798-6230f2784893",
       "sourceText": "reaction",
       "targetText": "реакция",
@@ -8927,8 +7979,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new realise.",
-      "targetUsageExample": "осознавать здесь.",
+      "sourceUsageExample": "I didn't realise how late it was until I looked at the clock.",
+      "targetUsageExample": "Я не осознал, как поздно было, пока не посмотрел на часы.",
       "isActive": true
     },
     {
@@ -8941,18 +7993,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "You need to face reality and make a decision.",
       "targetUsageExample": "Тебе нужно принять реальность и принять решение.",
-      "isActive": true
-    },
-    {
-      "id": "181f6baf-ebcd-4867-910a-809922aa8841",
-      "sourceText": "rebecca",
-      "targetText": "Ребекка (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new rebecca.",
-      "targetUsageExample": "Ребекка имя здесь.",
       "isActive": true
     },
     {
@@ -9203,8 +8243,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a restaurant.",
-      "targetUsageExample": "Нам нужен новый ресторан.",
+      "sourceUsageExample": "We had a wonderful dinner at the Italian restaurant.",
+      "targetUsageExample": "Мы прекрасно поужинали в итальянском ресторане.",
       "isActive": true
     },
     {
@@ -9217,18 +8257,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "He wanted revenge for what they had done to his brother.",
       "targetUsageExample": "Он хотел мести за то, что они сделали с его братом.",
-      "isActive": true
-    },
-    {
-      "id": "6acf8d06-8d1e-4a51-8940-7ca6ab784271",
-      "sourceText": "revolution",
-      "targetText": "революция",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The industrial revolution changed the way people worked.",
-      "targetUsageExample": "Промышленная революция изменила то, как люди работают.",
       "isActive": true
     },
     {
@@ -9251,20 +8279,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a rice yesterday.",
-      "targetUsageExample": "Мне нравится рис.",
-      "isActive": true
-    },
-    {
-      "id": "3f070474-2bdd-4e1b-8d89-edc30cc22024",
-      "sourceText": "ricky",
-      "targetText": "Рикки (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a ricky.",
-      "targetUsageExample": "Это Рикки имя.",
+      "sourceUsageExample": "In many Asian countries, people eat rice every day.",
+      "targetUsageExample": "Во многих азиатских странах люди едят рис каждый день.",
       "isActive": true
     },
     {
@@ -9287,8 +8303,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I riding every day.",
-      "targetUsageExample": "Это езда.",
+      "sourceUsageExample": "She enjoys riding her horse on the weekends.",
+      "targetUsageExample": "Ей нравится кататься верхом на лошади по выходным.",
       "isActive": true
     },
     {
@@ -9328,18 +8344,6 @@
       "isActive": true
     },
     {
-      "id": "206e3cb1-555a-416d-b90e-b2a9f95200b3",
-      "sourceText": "robot",
-      "targetText": "робот",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The factory uses a robot to assemble the car parts.",
-      "targetUsageExample": "На заводе используется робот для сборки деталей автомобиля.",
-      "isActive": true
-    },
-    {
       "id": "d5f568c4-609b-45d4-a4c3-1aa37a256e6c",
       "sourceText": "roman",
       "targetText": "римский|Роман (имя)",
@@ -9347,20 +8351,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new roman.",
-      "targetUsageExample": "Ты можешь римский?",
-      "isActive": true
-    },
-    {
-      "id": "2461fd9b-1494-4d97-99c7-38ff3f36a0c6",
-      "sourceText": "romantic",
-      "targetText": "романтический|романтичный",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "They had a romantic dinner by candlelight.",
-      "targetUsageExample": "У них был романтический ужин при свечах.",
+      "sourceUsageExample": "We visited the old Roman ruins during our trip to Italy.",
+      "targetUsageExample": "Мы посетили старые римские руины во время поездки в Италию.",
       "isActive": true
     },
     {
@@ -9419,8 +8411,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The table is round.",
-      "targetUsageExample": "Стол круглый.",
+      "sourceUsageExample": "The children sat in a round circle on the floor.",
+      "targetUsageExample": "Дети сели в круг на полу.",
       "isActive": true
     },
     {
@@ -9457,18 +8449,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Their house is the third one in the row.",
       "targetUsageExample": "Их дом — третий в ряду.",
-      "isActive": true
-    },
-    {
-      "id": "8c3aea3b-0e5d-42d1-a583-0789ff35d031",
-      "sourceText": "roy",
-      "targetText": "Рой",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Roy is the name of the main character in that film.",
-      "targetUsageExample": "Рой — имя главного персонажа в том фильме.",
       "isActive": true
     },
     {
@@ -9509,7 +8489,7 @@
     },
     {
       "id": "39de9897-b161-4bb2-abb6-c2de69838c2f",
-      "sourceText": "russian",
+      "sourceText": "Russian",
       "targetText": "русский",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -9563,8 +8543,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The house is for sale.",
-      "targetUsageExample": "Дом продается.",
+      "sourceUsageExample": "Everything in the store is on sale this week.",
+      "targetUsageExample": "На этой неделе всё в магазине на распродаже.",
       "isActive": true
     },
     {
@@ -9575,8 +8555,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a salt.",
-      "targetUsageExample": "Она купила соль.",
+      "sourceUsageExample": "Could you pass me the salt, please?",
+      "targetUsageExample": "Передайте мне соль, пожалуйста.",
       "isActive": true
     },
     {
@@ -9599,25 +8579,13 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a sandwich.",
-      "targetUsageExample": "Я видел бутерброд вчера.",
-      "isActive": true
-    },
-    {
-      "id": "66602f50-41cb-4572-8ac7-97717dbe065a",
-      "sourceText": "santa",
-      "targetText": "санта",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Children around the world wait for Santa on Christmas Eve.",
-      "targetUsageExample": "Дети по всему миру ждут Санту в канун Рождества.",
+      "sourceUsageExample": "I made a cheese sandwich for lunch.",
+      "targetUsageExample": "Я сделал бутерброд с сыром на обед.",
       "isActive": true
     },
     {
       "id": "08eea440-c7db-44f2-aba4-68a17f70f694",
-      "sourceText": "saturday",
+      "sourceText": "Saturday",
       "targetText": "суббота",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -9683,8 +8651,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The scoff is very interesting.",
-      "targetUsageExample": "насмехаться здесь.",
+      "sourceUsageExample": "Don't scoff at his idea, it might actually work.",
+      "targetUsageExample": "Не насмехайся над его идеей, она может сработать.",
       "isActive": true
     },
     {
@@ -9736,18 +8704,6 @@
       "isActive": true
     },
     {
-      "id": "68cab3a6-7d45-4953-a743-7e08ebcccb9c",
-      "sourceText": "script",
-      "targetText": "сценарий|скрипт",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The actor studied his script carefully before the rehearsal.",
-      "targetUsageExample": "Актёр тщательно изучил сценарий перед репетицией.",
-      "isActive": true
-    },
-    {
       "id": "3f2d5273-12e1-4a58-8b42-aea897f5a53f",
       "sourceText": "seal",
       "targetText": "тюлень|печать|запечатывать",
@@ -9757,18 +8713,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "Please seal the envelope before sending it.",
       "targetUsageExample": "Пожалуйста, запечатай конверт перед отправкой.",
-      "isActive": true
-    },
-    {
-      "id": "ee3c072c-ad6e-4e2c-b176-5dc6bb710895",
-      "sourceText": "sean",
-      "targetText": "Шон (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a sean yesterday.",
-      "targetUsageExample": "Мне нравится Шон имя.",
       "isActive": true
     },
     {
@@ -9803,8 +8747,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new selfish.",
-      "targetUsageExample": "Ты можешь эгоистичный?",
+      "sourceUsageExample": "It's selfish to take all the cake for yourself.",
+      "targetUsageExample": "Эгоистично забирать весь торт себе.",
       "isActive": true
     },
     {
@@ -9853,18 +8797,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "We have separate rooms.",
       "targetUsageExample": "У нас отдельные комнаты.",
-      "isActive": true
-    },
-    {
-      "id": "29629c63-6d29-4430-b09a-e235305fb912",
-      "sourceText": "series",
-      "targetText": "серия|сериал",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I watched the whole series in just three days.",
-      "targetUsageExample": "Я посмотрел весь сериал всего за три дня.",
       "isActive": true
     },
     {
@@ -10007,8 +8939,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a sheep yesterday.",
-      "targetUsageExample": "Я видел овца вчера.",
+      "sourceUsageExample": "The farmer has fifty sheep in his field.",
+      "targetUsageExample": "У фермера пятьдесят овец на поле.",
       "isActive": true
     },
     {
@@ -10055,8 +8987,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a shirt yesterday.",
-      "targetUsageExample": "рубашка здесь.",
+      "sourceUsageExample": "He wore a white shirt and a blue tie to work.",
+      "targetUsageExample": "Он надел белую рубашку и синий галстук на работу.",
       "isActive": true
     },
     {
@@ -10072,18 +9004,6 @@
       "isActive": true
     },
     {
-      "id": "65ab8e30-491c-4a6b-9b13-8c74c105cc1e",
-      "sourceText": "shooting",
-      "targetText": "стрельба|съёмка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The shooting happened late at night.",
-      "targetUsageExample": "Стрельба произошла поздно ночью.",
-      "isActive": true
-    },
-    {
       "id": "2a201a47-36ce-41f7-a804-d2afdb5bea0c",
       "sourceText": "shopping",
       "targetText": "покупки|шоппинг",
@@ -10091,8 +9011,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She likes to shopping.",
-      "targetUsageExample": "Ты можешь покупки?",
+      "sourceUsageExample": "We go shopping at the mall every Saturday.",
+      "targetUsageExample": "Мы ходим за покупками в торговый центр каждую субботу.",
       "isActive": true
     },
     {
@@ -10120,18 +9040,6 @@
       "isActive": true
     },
     {
-      "id": "f29c09e6-2517-4f63-b172-67c1a6394d03",
-      "sourceText": "shouting",
-      "targetText": "крик|кричание",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She likes to shouting.",
-      "targetUsageExample": "крик очень интересный.",
-      "isActive": true
-    },
-    {
       "id": "b42a4403-4422-40df-88fa-f774707985ee",
       "sourceText": "shower",
       "targetText": "душ",
@@ -10139,8 +9047,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new shower.",
-      "targetUsageExample": "Нам нужен новый душ.",
+      "sourceUsageExample": "I take a shower every morning before work.",
+      "targetUsageExample": "Я принимаю душ каждое утро перед работой.",
       "isActive": true
     },
     {
@@ -10165,18 +9073,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The Grand Canyon is an incredible sight.",
       "targetUsageExample": "Гранд-Каньон — это невероятное зрелище.",
-      "isActive": true
-    },
-    {
-      "id": "6ca6d087-35dd-4965-95ae-2b72a82f6347",
-      "sourceText": "signal",
-      "targetText": "сигнал|знак|подавать знак",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The driver gave a signal before turning left.",
-      "targetUsageExample": "Водитель подал сигнал перед поворотом налево.",
       "isActive": true
     },
     {
@@ -10223,8 +9119,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The singer is very interesting.",
-      "targetUsageExample": "Я видел певец вчера.",
+      "sourceUsageExample": "The singer has a beautiful voice.",
+      "targetUsageExample": "У певицы красивый голос.",
       "isActive": true
     },
     {
@@ -10247,8 +9143,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a skill?",
-      "targetUsageExample": "Я видел навык вчера.",
+      "sourceUsageExample": "Learning a new skill takes time and practice.",
+      "targetUsageExample": "Изучение нового навыка требует времени и практики.",
       "isActive": true
     },
     {
@@ -10300,18 +9196,6 @@
       "isActive": true
     },
     {
-      "id": "b922a64d-fa42-4039-a3e5-255914dbc99f",
-      "sourceText": "smoking",
-      "targetText": "курение",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Smoking is bad for your health.",
-      "targetUsageExample": "Курение вредно для вашего здоровья.",
-      "isActive": true
-    },
-    {
       "id": "b1bd6c4f-dbe8-4619-85b3-d79647af2b4c",
       "sourceText": "snake",
       "targetText": "змея",
@@ -10319,8 +9203,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a snake?",
-      "targetUsageExample": "Ты можешь змея?",
+      "sourceUsageExample": "Be careful, there is a snake in the grass!",
+      "targetUsageExample": "Осторожно, в траве змея!",
       "isActive": true
     },
     {
@@ -10331,20 +9215,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new snow.",
-      "targetUsageExample": "Она купила снег.",
-      "isActive": true
-    },
-    {
-      "id": "6135d56f-bec8-485a-aba5-469150857b54",
-      "sourceText": "sobbing",
-      "targetText": "рыдание|всхлипывание",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She could hear sobbing coming from the next room.",
-      "targetUsageExample": "Она слышала рыдания из соседней комнаты.",
+      "sourceUsageExample": "The children love to play in the snow.",
+      "targetUsageExample": "Дети любят играть в снегу.",
       "isActive": true
     },
     {
@@ -10367,8 +9239,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "He is a brave soldier.",
-      "targetUsageExample": "Он храбрый солдат.",
+      "sourceUsageExample": "The soldier returned home after a year away.",
+      "targetUsageExample": "Солдат вернулся домой после года отсутствия.",
       "isActive": true
     },
     {
@@ -10415,8 +9287,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a someday yesterday.",
-      "targetUsageExample": "Это когда-нибудь.",
+      "sourceUsageExample": "I hope to visit Japan someday.",
+      "targetUsageExample": "Я надеюсь когда-нибудь побывать в Японии.",
       "isActive": true
     },
     {
@@ -10457,7 +9329,7 @@
     },
     {
       "id": "0807d25f-dc9b-41ca-ba12-94c60b65f8b7",
-      "sourceText": "spanish",
+      "sourceText": "Spanish",
       "targetText": "испанский",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -10475,8 +9347,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a spare pen I can borrow?",
-      "targetUsageExample": "У тебя есть запасная ручка, которую я могу взять?",
+      "sourceUsageExample": "Do you have a spare pen I could borrow?",
+      "targetUsageExample": "У тебя есть запасная ручка, которую я мог бы одолжить?",
       "isActive": true
     },
     {
@@ -10487,8 +9359,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "This is a special occasion.",
-      "targetUsageExample": "Это особый случай.",
+      "sourceUsageExample": "Today is a special day because it's her birthday.",
+      "targetUsageExample": "Сегодня особенный день, потому что у неё день рождения.",
       "isActive": true
     },
     {
@@ -10540,18 +9412,6 @@
       "isActive": true
     },
     {
-      "id": "13ec518c-54b0-4b01-980d-b59b6f270379",
-      "sourceText": "spending",
-      "targetText": "расходы|трата денег",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The government plans to cut spending on public transport.",
-      "targetUsageExample": "Правительство планирует сократить расходы на общественный транспорт.",
-      "isActive": true
-    },
-    {
       "id": "24ce8f69-6af2-470d-9234-14a613e64a0e",
       "sourceText": "split",
       "targetText": "разделять|раскалывать|расщепление",
@@ -10571,8 +9431,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a sport.",
-      "targetUsageExample": "Я видел спорт вчера.",
+      "sourceUsageExample": "Football is the most popular sport in our country.",
+      "targetUsageExample": "Футбол — самый популярный вид спорта в нашей стране.",
       "isActive": true
     },
     {
@@ -10624,18 +9484,6 @@
       "isActive": true
     },
     {
-      "id": "1aa9808f-7c57-47d7-9665-27d017bf8cf0",
-      "sourceText": "stair",
-      "targetText": "ступенька",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Be careful on the stairs.",
-      "targetUsageExample": "Будьте осторожны на лестнице.",
-      "isActive": true
-    },
-    {
       "id": "5d62a6ae-cb74-4cde-a1b8-b972de73fbb0",
       "sourceText": "stairs",
       "targetText": "лестница|ступеньки",
@@ -10679,8 +9527,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a statement.",
-      "targetUsageExample": "Мне нравится заявление.",
+      "sourceUsageExample": "The police asked him to make a statement about what happened.",
+      "targetUsageExample": "Полиция попросила его дать показания о случившемся.",
       "isActive": true
     },
     {
@@ -10717,18 +9565,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The bridge was made from reinforced steel and concrete.",
       "targetUsageExample": "Мост был сделан из армированной стали и бетона.",
-      "isActive": true
-    },
-    {
-      "id": "81959699-8134-43b0-a5e7-9c3418536f7a",
-      "sourceText": "stephen",
-      "targetText": "Стивен (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a stephen?",
-      "targetUsageExample": "Мне нравится Стивен имя.",
       "isActive": true
     },
     {
@@ -10840,18 +9676,6 @@
       "isActive": true
     },
     {
-      "id": "5327e606-7935-4620-bc51-daf44f2da2d4",
-      "sourceText": "studio",
-      "targetText": "студия",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The band recorded their new album in a studio in London.",
-      "targetUsageExample": "Группа записала новый альбом в студии в Лондоне.",
-      "isActive": true
-    },
-    {
       "id": "59431f1f-3cf3-4b99-b011-c31f2eabdb8a",
       "sourceText": "subject",
       "targetText": "тема|предмет|подданный",
@@ -10871,8 +9695,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new subtitle.",
-      "targetUsageExample": "Я видел субтитр вчера.",
+      "sourceUsageExample": "I watch foreign films with subtitle turned on.",
+      "targetUsageExample": "Я смотрю иностранные фильмы с включёнными субтитрами.",
       "isActive": true
     },
     {
@@ -10943,8 +9767,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new sugar.",
-      "targetUsageExample": "Она купила сахар.",
+      "sourceUsageExample": "Would you like some sugar in your tea?",
+      "targetUsageExample": "Хотите сахар в чай?",
       "isActive": true
     },
     {
@@ -10973,7 +9797,7 @@
     },
     {
       "id": "8b586e2a-587b-4d29-a9b3-5ebaf3e7a2a4",
-      "sourceText": "sunday",
+      "sourceText": "Sunday",
       "targetText": "воскресенье",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -11099,8 +9923,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a sweat.",
-      "targetUsageExample": "Мне нравится пот.",
+      "sourceUsageExample": "After running, he wiped the sweat from his face.",
+      "targetUsageExample": "После бега он вытер пот с лица.",
       "isActive": true
     },
     {
@@ -11195,8 +10019,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a tall yesterday.",
-      "targetUsageExample": "Это высокий.",
+      "sourceUsageExample": "My brother is very tall, almost two meters.",
+      "targetUsageExample": "Мой брат очень высокий, почти два метра.",
       "isActive": true
     },
     {
@@ -11243,8 +10067,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "This is a difficult task.",
-      "targetUsageExample": "Это сложная задача.",
+      "sourceUsageExample": "The teacher gave us a difficult task to complete.",
+      "targetUsageExample": "Учитель дал нам сложное задание.",
       "isActive": true
     },
     {
@@ -11255,20 +10079,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a taxi?",
-      "targetUsageExample": "Ты можешь такси?",
-      "isActive": true
-    },
-    {
-      "id": "8c090a22-1484-4f1c-b8ff-25c2ce400994",
-      "sourceText": "taylor",
-      "targetText": "Тейлор",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Taylor is a popular last name in English.",
-      "targetUsageExample": "Тейлор — популярная фамилия на английском языке.",
+      "sourceUsageExample": "We called a taxi to take us to the train station.",
+      "targetUsageExample": "Мы вызвали такси, чтобы доехать до вокзала.",
       "isActive": true
     },
     {
@@ -11284,18 +10096,6 @@
       "isActive": true
     },
     {
-      "id": "d9d21918-cfc3-4ab8-8ade-568490ddb7df",
-      "sourceText": "ted",
-      "targetText": "Тед (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a ted.",
-      "targetUsageExample": "Тед имя здесь.",
-      "isActive": true
-    },
-    {
       "id": "f3ba78b4-e6d5-4ab3-9042-792d120e6137",
       "sourceText": "telephone",
       "targetText": "телефон",
@@ -11303,8 +10103,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a telephone.",
-      "targetUsageExample": "Мне нравится телефон.",
+      "sourceUsageExample": "The telephone rang three times before she answered.",
+      "targetUsageExample": "Телефон прозвонил три раза, прежде чем она ответила.",
       "isActive": true
     },
     {
@@ -11315,8 +10115,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a television?",
-      "targetUsageExample": "Я видел телевидение вчера.",
+      "sourceUsageExample": "We watched the news on television last night.",
+      "targetUsageExample": "Мы смотрели новости по телевизору вчера вечером.",
       "isActive": true
     },
     {
@@ -11344,30 +10144,6 @@
       "isActive": true
     },
     {
-      "id": "283a2947-e3f5-4fcf-a37e-0f2bd45db158",
-      "sourceText": "theater",
-      "targetText": "театр",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a theater.",
-      "targetUsageExample": "театр очень интересный.",
-      "isActive": true
-    },
-    {
-      "id": "f7925157-adcd-4eb9-8556-7488d7ff12b2",
-      "sourceText": "thee",
-      "targetText": "тебе|тебя (арх.)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a thee.",
-      "targetUsageExample": "тебе здесь.",
-      "isActive": true
-    },
-    {
       "id": "96655db1-9713-429a-a840-20cf5bb8823b",
       "sourceText": "theme",
       "targetText": "тема",
@@ -11377,30 +10153,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The theme of the story is friendship.",
       "targetUsageExample": "Тема рассказа — дружба.",
-      "isActive": true
-    },
-    {
-      "id": "2dcd49aa-5ede-4bf2-b13b-e1d38f2ed7fa",
-      "sourceText": "theory",
-      "targetText": "теория",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "He has a theory about why the plant died.",
-      "targetUsageExample": "У него есть теория о том, почему растение погибло.",
-      "isActive": true
-    },
-    {
-      "id": "098253e1-6f3a-419d-855e-0546a296f2f7",
-      "sourceText": "therapy",
-      "targetText": "терапия|лечение",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The doctor suggested therapy to help with stress.",
-      "targetUsageExample": "Врач посоветовал терапию, чтобы справиться со стрессом.",
       "isActive": true
     },
     {
@@ -11437,18 +10189,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The ice is very thin.",
       "targetUsageExample": "Лед очень тонкий.",
-      "isActive": true
-    },
-    {
-      "id": "fe7b45af-2dad-4587-a8bd-66efef0f32fb",
-      "sourceText": "thou",
-      "targetText": "ты (устар.)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "In old poetry, thou is used instead of you.",
-      "targetUsageExample": "В старой поэзии «ты» (устар.) используется вместо «вы».",
       "isActive": true
     },
     {
@@ -11495,13 +10235,13 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new thunder.",
-      "targetUsageExample": "Мне нравится гром.",
+      "sourceUsageExample": "The children were scared by the loud thunder.",
+      "targetUsageExample": "Дети испугались громкого грома.",
       "isActive": true
     },
     {
       "id": "e47e6cc6-d53f-4f66-b4ac-49e38d8b8fd7",
-      "sourceText": "thursday",
+      "sourceText": "Thursday",
       "targetText": "четверг",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -11512,18 +10252,6 @@
       "isActive": true
     },
     {
-      "id": "6c93a827-57b9-4e66-9571-0d0bbcce4603",
-      "sourceText": "thy",
-      "targetText": "твой (устар.)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "In Shakespeare's plays, thy means your.",
-      "targetUsageExample": "В пьесах Шекспира «твой» (устар.) означает «ваш».",
-      "isActive": true
-    },
-    {
       "id": "3a2a20b1-c8ff-4de1-bb95-f54980fa0f26",
       "sourceText": "ticket",
       "targetText": "билет",
@@ -11531,8 +10259,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "Do you have a ticket?",
-      "targetUsageExample": "Нам нужен новый билет.",
+      "sourceUsageExample": "I bought a ticket for the concert next Friday.",
+      "targetUsageExample": "Я купил билет на концерт в следующую пятницу.",
       "isActive": true
     },
     {
@@ -11545,18 +10273,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "He is wearing a tie.",
       "targetUsageExample": "На нем галстук.",
-      "isActive": true
-    },
-    {
-      "id": "ce0b74c9-abaf-4289-b92f-9d4b1f0029ba",
-      "sourceText": "tiger",
-      "targetText": "тигр",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a tiger yesterday.",
-      "targetUsageExample": "Это тигр.",
       "isActive": true
     },
     {
@@ -11615,8 +10331,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new toast.",
-      "targetUsageExample": "Я видел тост вчера.",
+      "sourceUsageExample": "I had toast with butter and jam for breakfast.",
+      "targetUsageExample": "На завтрак я ел тост с маслом и джемом.",
       "isActive": true
     },
     {
@@ -11627,8 +10343,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a toilet yesterday.",
-      "targetUsageExample": "У тебя есть туалет?",
+      "sourceUsageExample": "Excuse me, where is the toilet?",
+      "targetUsageExample": "Извините, где туалет?",
       "isActive": true
     },
     {
@@ -11651,8 +10367,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new torture.",
-      "targetUsageExample": "Это пытка.",
+      "sourceUsageExample": "Waiting for the exam results was pure torture.",
+      "targetUsageExample": "Ожидание результатов экзамена было настоящей пыткой.",
       "isActive": true
     },
     {
@@ -11663,20 +10379,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a toward yesterday.",
-      "targetUsageExample": "Это к.",
-      "isActive": true
-    },
-    {
-      "id": "918e3b15-2646-4525-a451-e4c1156e0e8b",
-      "sourceText": "towards",
-      "targetText": "к|по направлению к",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a towards yesterday.",
-      "targetUsageExample": "Я видел к вчера.",
+      "sourceUsageExample": "The dog ran toward its owner.",
+      "targetUsageExample": "Собака побежала к своему хозяину.",
       "isActive": true
     },
     {
@@ -11699,8 +10403,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a traffic.",
-      "targetUsageExample": "дорожное движение здесь.",
+      "sourceUsageExample": "There is always a lot of traffic in the morning.",
+      "targetUsageExample": "Утром всегда много пробок.",
       "isActive": true
     },
     {
@@ -11711,8 +10415,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The trail is very interesting.",
-      "targetUsageExample": "Я видел след вчера.",
+      "sourceUsageExample": "We followed a trail through the forest.",
+      "targetUsageExample": "Мы шли по тропе через лес.",
       "isActive": true
     },
     {
@@ -11831,8 +10535,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a troops yesterday.",
-      "targetUsageExample": "Мне нравится войска.",
+      "sourceUsageExample": "The troops marched through the town.",
+      "targetUsageExample": "Войска прошли через город.",
       "isActive": true
     },
     {
@@ -11849,7 +10553,7 @@
     },
     {
       "id": "1a79a8a4-aa06-4952-86a1-61489aca061a",
-      "sourceText": "tuesday",
+      "sourceText": "Tuesday",
       "targetText": "вторник",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -11860,18 +10564,6 @@
       "isActive": true
     },
     {
-      "id": "c3404a79-bdd3-4eea-9b33-dc849891711e",
-      "sourceText": "tunnel",
-      "targetText": "тоннель",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "The train goes through a long tunnel in the mountain.",
-      "targetUsageExample": "Поезд проходит через длинный тоннель в горе.",
-      "isActive": true
-    },
-    {
       "id": "aa6a161f-6c4f-496e-b693-82c90c395eda",
       "sourceText": "twenty",
       "targetText": "двадцать",
@@ -11879,8 +10571,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a twenty.",
-      "targetUsageExample": "Мне нравится двадцать.",
+      "sourceUsageExample": "She will turn twenty years old next month.",
+      "targetUsageExample": "Ей исполнится двадцать лет в следующем месяце.",
       "isActive": true
     },
     {
@@ -11903,8 +10595,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The weather is unbelievable today.",
-      "targetUsageExample": "невероятный здесь.",
+      "sourceUsageExample": "The view from the mountain top was unbelievable.",
+      "targetUsageExample": "Вид с вершины горы был невероятный.",
       "isActive": true
     },
     {
@@ -11927,8 +10619,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a underneath yesterday.",
-      "targetUsageExample": "под здесь.",
+      "sourceUsageExample": "The cat was hiding underneath the bed.",
+      "targetUsageExample": "Кот прятался под кроватью.",
       "isActive": true
     },
     {
@@ -12047,8 +10739,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I feel useful.",
-      "targetUsageExample": "Это полезный.",
+      "sourceUsageExample": "This book is very useful for learning English.",
+      "targetUsageExample": "Эта книга очень полезна для изучения английского.",
       "isActive": true
     },
     {
@@ -12083,8 +10775,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new vacation.",
-      "targetUsageExample": "отпуск очень интересный.",
+      "sourceUsageExample": "We spent our vacation at the seaside last summer.",
+      "targetUsageExample": "Мы провели отпуск на море прошлым летом.",
       "isActive": true
     },
     {
@@ -12109,18 +10801,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The museum contains many valuable works of art.",
       "targetUsageExample": "В музее хранится много ценных произведений искусства.",
-      "isActive": true
-    },
-    {
-      "id": "49dbe264-8f4f-437c-9a5d-7b77be29b3a4",
-      "sourceText": "vampire",
-      "targetText": "вампир",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a vampire.",
-      "targetUsageExample": "Я видел вампир вчера.",
       "isActive": true
     },
     {
@@ -12155,8 +10835,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The vice is very interesting.",
-      "targetUsageExample": "Это порок.",
+      "sourceUsageExample": "The vice president spoke at the meeting.",
+      "targetUsageExample": "Вице-президент выступил на собрании.",
       "isActive": true
     },
     {
@@ -12167,8 +10847,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The victor is very interesting.",
-      "targetUsageExample": "Мне нравится Виктор имя.",
+      "sourceUsageExample": "Victor is the winner of this year's chess tournament.",
+      "targetUsageExample": "Виктор — победитель шахматного турнира в этом году.",
       "isActive": true
     },
     {
@@ -12181,18 +10861,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The team celebrated their victory with great joy.",
       "targetUsageExample": "Команда отметила свою победу с большой радостью.",
-      "isActive": true
-    },
-    {
-      "id": "b98917e5-beeb-4b5d-9419-0df24265526c",
-      "sourceText": "vincent",
-      "targetText": "Винсент",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Vincent van Gogh was a famous painter.",
-      "targetUsageExample": "Винсент ван Гог был известным художником.",
       "isActive": true
     },
     {
@@ -12263,20 +10931,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The wallet is very interesting.",
-      "targetUsageExample": "Я видел бумажник вчера.",
-      "isActive": true
-    },
-    {
-      "id": "c802d0b8-e161-4b98-8e4a-d4eda8a0cd40",
-      "sourceText": "walter",
-      "targetText": "Уолтер (имя)",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a walter.",
-      "targetUsageExample": "Я видел Уолтер имя вчера.",
+      "sourceUsageExample": "He lost his wallet with all his money in it.",
+      "targetUsageExample": "Он потерял бумажник со всеми деньгами.",
       "isActive": true
     },
     {
@@ -12359,8 +11015,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "She bought a weather.",
-      "targetUsageExample": "Она купила погода.",
+      "sourceUsageExample": "The weather is nice today, let's go for a walk.",
+      "targetUsageExample": "Сегодня хорошая погода, давай пойдём на прогулку.",
       "isActive": true
     },
     {
@@ -12419,8 +11075,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a whenever yesterday.",
-      "targetUsageExample": "Я видел когда бы ни вчера.",
+      "sourceUsageExample": "You can come to visit us whenever you want.",
+      "targetUsageExample": "Ты можешь приходить к нам в гости, когда захочешь.",
       "isActive": true
     },
     {
@@ -12431,8 +11087,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new wherever.",
-      "targetUsageExample": "Мне нравится где бы ни.",
+      "sourceUsageExample": "I will follow you wherever you go.",
+      "targetUsageExample": "Я последую за тобой, куда бы ты ни пошёл.",
       "isActive": true
     },
     {
@@ -12455,8 +11111,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a whistle yesterday.",
-      "targetUsageExample": "Это свисток.",
+      "sourceUsageExample": "The referee blew the whistle to start the game.",
+      "targetUsageExample": "Судья дунул в свисток, чтобы начать игру.",
       "isActive": true
     },
     {
@@ -12481,30 +11137,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "To whom should I address this letter?",
       "targetUsageExample": "Кому мне адресовать это письмо?",
-      "isActive": true
-    },
-    {
-      "id": "6b140cfe-0ba3-4790-87e2-3727b56951f8",
-      "sourceText": "whoo",
-      "targetText": "ух|вух",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Whoo! That was an amazing jump!",
-      "targetUsageExample": "Ух! Это был потрясающий прыжок!",
-      "isActive": true
-    },
-    {
-      "id": "29b7f9e5-4bb1-4392-bd20-08c943e7ccd1",
-      "sourceText": "whore",
-      "targetText": "шлюха|проститутка",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "He called her a whore, which was very offensive.",
-      "targetUsageExample": "Он назвал её шлюхой, что было очень оскорбительно.",
       "isActive": true
     },
     {
@@ -12541,18 +11173,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "I am willing to help you with this task.",
       "targetUsageExample": "Я готов помочь тебе с этой задачей.",
-      "isActive": true
-    },
-    {
-      "id": "6bb7146e-d28b-468b-b30d-a6a363793403",
-      "sourceText": "wilson",
-      "targetText": "Уилсон",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "Wilson is a common last name in English-speaking countries.",
-      "targetUsageExample": "Уилсон — распространённая фамилия в англоязычных странах.",
       "isActive": true
     },
     {
@@ -12659,8 +11279,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The worker is very interesting.",
-      "targetUsageExample": "Мне нравится рабочий.",
+      "sourceUsageExample": "The worker finished the job before the deadline.",
+      "targetUsageExample": "Рабочий закончил работу до крайнего срока.",
       "isActive": true
     },
     {
@@ -12683,8 +11303,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new writer.",
-      "targetUsageExample": "писатель здесь.",
+      "sourceUsageExample": "She wants to become a famous writer someday.",
+      "targetUsageExample": "Она хочет когда-нибудь стать известным писателем.",
       "isActive": true
     },
     {
@@ -12695,8 +11315,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "I saw a yard yesterday.",
-      "targetUsageExample": "Она купила двор.",
+      "sourceUsageExample": "The children play in the yard after school.",
+      "targetUsageExample": "Дети играют во дворе после школы.",
       "isActive": true
     },
     {
@@ -12719,8 +11339,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "The yellow is very interesting.",
-      "targetUsageExample": "Ты можешь жёлтый?",
+      "sourceUsageExample": "The taxi was painted bright yellow.",
+      "targetUsageExample": "Такси было окрашено в ярко-жёлтый цвет.",
       "isActive": true
     },
     {
@@ -12731,8 +11351,8 @@
       "targetLanguage": "Russian",
       "listName": "English Russian A2",
       "difficultyLevel": "a2",
-      "sourceUsageExample": "We need a new yourselves.",
-      "targetUsageExample": "вы сами здесь.",
+      "sourceUsageExample": "You should be proud of yourselves for finishing the project.",
+      "targetUsageExample": "Вы должны гордиться собой за завершение проекта.",
       "isActive": true
     },
     {
@@ -12757,18 +11377,6 @@
       "difficultyLevel": "a2",
       "sourceUsageExample": "The temperature is zero degrees.",
       "targetUsageExample": "Температура ноль градусов.",
-      "isActive": true
-    },
-    {
-      "id": "ffd0bce0-113e-4565-aeac-354140304c62",
-      "sourceText": "zone",
-      "targetText": "зона|район",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A2",
-      "difficultyLevel": "a2",
-      "sourceUsageExample": "This is a no-parking zone.",
-      "targetUsageExample": "Это зона, где парковка запрещена.",
       "isActive": true
     }
   ]

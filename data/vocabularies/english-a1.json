@@ -1,7 +1,7 @@
 {
   "listName": "English Russian A1",
   "exportedAt": "2026-01-18T20:40:47.188476+00:00",
-  "totalWords": 928,
+  "totalWords": 929,
   "words": [
     {
       "id": "68cbde9f-5cdd-4daf-bc0a-07079052eff9",
@@ -112,6 +112,18 @@
       "isActive": true
     },
     {
+      "id": "b12b73d9-c106-477a-932f-7591ad9c5ca7",
+      "sourceText": "action",
+      "targetText": "действие",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "The action starts now.",
+      "targetUsageExample": "Действие начинается сейчас.",
+      "isActive": true
+    },
+    {
       "id": "33ddd1d5-5f3a-44a5-80db-0ad22177cd47",
       "sourceText": "actually",
       "targetText": "на самом деле|фактически",
@@ -174,7 +186,7 @@
     {
       "id": "1453a4a7-90d7-4795-b180-e65f75732a3d",
       "sourceText": "afternoon",
-      "targetText": "день|после полудня",
+      "targetText": "послеобеденное время|вторая половина дня",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -318,7 +330,7 @@
     {
       "id": "97973417-9c51-44a4-8c89-22baa8763aa1",
       "sourceText": "alone",
-      "targetText": "один|одна|одинокий",
+      "targetText": "один|одна|в одиночестве",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -553,6 +565,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "They live far apart.",
       "targetUsageExample": "Они живут далеко друг от друга.",
+      "isActive": true
+    },
+    {
+      "id": "a04d38dd-a55c-4936-a4c4-487708220270",
+      "sourceText": "apartment",
+      "targetText": "квартира",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "I live in an apartment.",
+      "targetUsageExample": "Я живу в квартире.",
       "isActive": true
     },
     {
@@ -1600,6 +1624,18 @@
       "isActive": true
     },
     {
+      "id": "81ae4a0e-f4dd-4a37-b046-35a6f76a1524",
+      "sourceText": "cat",
+      "targetText": "кошка|кот",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "I have a cat.",
+      "targetUsageExample": "У меня есть кошка.",
+      "isActive": true
+    },
+    {
       "id": "eaeab935-592e-486d-869a-46b664337d9b",
       "sourceText": "catch",
       "targetText": "ловить",
@@ -2305,6 +2341,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Hello, darling.",
       "targetUsageExample": "Привет, дорогая.",
+      "isActive": true
+    },
+    {
+      "id": "cc3a6baf-3cd2-4bd5-ba19-7940b3753854",
+      "sourceText": "data",
+      "targetText": "данные",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "We need more data.",
+      "targetUsageExample": "Нам нужно больше данных.",
       "isActive": true
     },
     {
@@ -3316,18 +3364,6 @@
       "isActive": true
     },
     {
-      "id": "2357829b-a93d-4897-8b71-4450bb4d5eaf",
-      "sourceText": "February",
-      "targetText": "февраль",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "My birthday is in February.",
-      "targetUsageExample": "Мой день рождения в феврале.",
-      "isActive": true
-    },
-    {
       "id": "f8fd9b2b-2984-4e28-aa33-d82ddc2a9fee",
       "sourceText": "feel",
       "targetText": "чувствовать",
@@ -3713,7 +3749,7 @@
     },
     {
       "id": "400c64b0-13f1-4850-a712-77643942cdc3",
-      "sourceText": "french",
+      "sourceText": "French",
       "targetText": "французский",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
@@ -4312,18 +4348,6 @@
       "isActive": true
     },
     {
-      "id": "f62a5ace-6e71-48ed-a74f-e47db7cb48b5",
-      "sourceText": "held",
-      "targetText": "держал|проводил",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "The meeting was held yesterday.",
-      "targetUsageExample": "Встреча состоялась вчера.",
-      "isActive": true
-    },
-    {
       "id": "bdfe265a-01fc-4a68-9009-0c17282571b9",
       "sourceText": "hell",
       "targetText": "ад",
@@ -4530,7 +4554,7 @@
     {
       "id": "830502e2-96ff-4330-ac0b-37528e5134e7",
       "sourceText": "honey",
-      "targetText": "дорогой|дорогая|мёд",
+      "targetText": "мёд|дорогой [обращение]",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -4734,7 +4758,7 @@
     {
       "id": "bd1e1b71-64d9-416d-9b73-b3e0ec8f579e",
       "sourceText": "ice",
-      "targetText": "лёд|мороженое|ледяной",
+      "targetText": "лёд|ледяной",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -5130,7 +5154,7 @@
     {
       "id": "8e79c348-3f03-474f-b993-8984474b76fc",
       "sourceText": "kind",
-      "targetText": "вид|род",
+      "targetText": "добрый|любезный",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A1",
@@ -6472,6 +6496,18 @@
       "isActive": true
     },
     {
+      "id": "39520554-d68f-4f32-a318-eb2f452610a1",
+      "sourceText": "nose",
+      "targetText": "нос",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "My nose is cold.",
+      "targetUsageExample": "У меня холодный нос.",
+      "isActive": true
+    },
+    {
       "id": "055e8797-78aa-432e-b209-db8701797a83",
       "sourceText": "not",
       "targetText": "не",
@@ -7588,18 +7624,6 @@
       "isActive": true
     },
     {
-      "id": "5d83b265-5785-47d4-b4be-35ca9d3e0483",
-      "sourceText": "reading",
-      "targetText": "чтение",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Reading is my hobby.",
-      "targetUsageExample": "Чтение - мое хобби.",
-      "isActive": true
-    },
-    {
       "id": "136e13c6-d97c-49c8-9691-99b054fc7dff",
       "sourceText": "ready",
       "targetText": "готовый",
@@ -7969,18 +7993,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I run in the park every morning.",
       "targetUsageExample": "Я бегаю в парке каждое утро.",
-      "isActive": true
-    },
-    {
-      "id": "f62245a7-39d2-4b01-bc3e-c8ebf5897d77",
-      "sourceText": "running",
-      "targetText": "бег|бегущий|работающий",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I am running.",
-      "targetUsageExample": "Я бегу.",
       "isActive": true
     },
     {
@@ -8584,6 +8596,30 @@
       "isActive": true
     },
     {
+      "id": "917729d0-a7e4-40ca-a870-222e0aa3b2e4",
+      "sourceText": "sister",
+      "targetText": "сестра",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "My sister is older than me.",
+      "targetUsageExample": "Моя сестра старше меня.",
+      "isActive": true
+    },
+    {
+      "id": "ccf7c0fd-e099-4308-aab8-af8f365b8cf6",
+      "sourceText": "sit",
+      "targetText": "сидеть",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Please sit down.",
+      "targetUsageExample": "Пожалуйста, садитесь.",
+      "isActive": true
+    },
+    {
       "id": "f21a8c62-3d0a-4f4c-9a0f-1a22c0a4492b",
       "sourceText": "site",
       "targetText": "место|сайт",
@@ -8641,18 +8677,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I need to sleep.",
       "targetUsageExample": "Мне нужно спать.",
-      "isActive": true
-    },
-    {
-      "id": "9ea5d59f-fbb6-4283-a276-3a99677f491f",
-      "sourceText": "sleeping",
-      "targetText": "спящий|сон",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "The baby is sleeping.",
-      "targetUsageExample": "Ребёнок спит.",
       "isActive": true
     },
     {
@@ -8836,6 +8860,18 @@
       "isActive": true
     },
     {
+      "id": "cd4511f3-6b42-461d-a7ea-000e0ca6dd39",
+      "sourceText": "son",
+      "targetText": "сын",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "He is my son.",
+      "targetUsageExample": "Он мой сын.",
+      "isActive": true
+    },
+    {
       "id": "777d09c8-efa6-4623-b470-fee994eb886d",
       "sourceText": "song",
       "targetText": "песня",
@@ -9004,18 +9040,6 @@
       "isActive": true
     },
     {
-      "id": "0d4d4a4d-a082-42c0-a6e5-96033fa78cf4",
-      "sourceText": "standing",
-      "targetText": "стояние|положение|стоящий",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I am standing.",
-      "targetUsageExample": "Я стою.",
-      "isActive": true
-    },
-    {
       "id": "9a7de4a3-c9cd-47e1-846b-9756e4a7f262",
       "sourceText": "star",
       "targetText": "звезда",
@@ -9121,6 +9145,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I am going to the store.",
       "targetUsageExample": "Я иду в магазин.",
+      "isActive": true
+    },
+    {
+      "id": "fbd76f42-6883-4211-99a8-d9380b6e42f8",
+      "sourceText": "story",
+      "targetText": "история|рассказ",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "Tell me a story.",
+      "targetUsageExample": "Расскажи мне историю.",
       "isActive": true
     },
     {
@@ -9544,6 +9580,18 @@
       "isActive": true
     },
     {
+      "id": "a642a5dc-b2a1-4081-8280-980e58a2bfc8",
+      "sourceText": "that",
+      "targetText": "тот|та|то",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "That is my house.",
+      "targetUsageExample": "Это мой дом.",
+      "isActive": true
+    },
+    {
       "id": "67cc4690-9d3b-4c8a-9c45-aa026398282c",
       "sourceText": "their",
       "targetText": "их",
@@ -9685,6 +9733,18 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "A thousand people were there.",
       "targetUsageExample": "Там была тысяча человек.",
+      "isActive": true
+    },
+    {
+      "id": "4cb4db2d-4a9f-4055-8d90-e40a6fa7c374",
+      "sourceText": "three",
+      "targetText": "три",
+      "sourceLanguage": "English",
+      "targetLanguage": "Russian",
+      "listName": "English Russian A1",
+      "difficultyLevel": "a1",
+      "sourceUsageExample": "I have three cats.",
+      "targetUsageExample": "У меня три кошки.",
       "isActive": true
     },
     {
@@ -10348,18 +10408,6 @@
       "isActive": true
     },
     {
-      "id": "212edd4d-7dee-4699-9215-6aa6cfd8b11e",
-      "sourceText": "waiting",
-      "targetText": "ожидание|ждать",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I am waiting.",
-      "targetUsageExample": "Я жду.",
-      "isActive": true
-    },
-    {
       "id": "5f9e18ff-cbfb-43e1-952a-c7382f3023bf",
       "sourceText": "wake",
       "targetText": "просыпаться|будить",
@@ -10381,18 +10429,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "Let's go for a walk.",
       "targetUsageExample": "Пойдем на прогулку.",
-      "isActive": true
-    },
-    {
-      "id": "8950e2a1-f178-4b66-ab03-0a864e6c08b2",
-      "sourceText": "walking",
-      "targetText": "ходьба|прогулка|идущий",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I am walking.",
-      "targetUsageExample": "Я иду.",
       "isActive": true
     },
     {
@@ -10900,18 +10936,6 @@
       "isActive": true
     },
     {
-      "id": "1aa8abf8-3ede-40d2-8e37-f197ca9bf924",
-      "sourceText": "words",
-      "targetText": "слова",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "I have no words.",
-      "targetUsageExample": "У меня нет слов.",
-      "isActive": true
-    },
-    {
       "id": "229aacc3-6b37-43a2-a460-556a3c1ef664",
       "sourceText": "work",
       "targetText": "работа|работать",
@@ -11005,18 +11029,6 @@
       "difficultyLevel": "a1",
       "sourceUsageExample": "I need to write a letter.",
       "targetUsageExample": "Мне нужно написать письмо.",
-      "isActive": true
-    },
-    {
-      "id": "8f738590-e55b-4ea7-88a8-d0814d305f42",
-      "sourceText": "writing",
-      "targetText": "письмо|написание",
-      "sourceLanguage": "English",
-      "targetLanguage": "Russian",
-      "listName": "English Russian A1",
-      "difficultyLevel": "a1",
-      "sourceUsageExample": "Your writing is very good.",
-      "targetUsageExample": "Твое письмо очень хорошее.",
       "isActive": true
     },
     {

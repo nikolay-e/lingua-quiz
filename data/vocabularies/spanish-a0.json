@@ -1,20 +1,8 @@
 {
   "listName": "Spanish Russian A0",
   "exportedAt": "2026-01-18T20:40:48.185125+00:00",
-  "totalWords": 235,
+  "totalWords": 240,
   "words": [
-    {
-      "id": "9a189596-31e4-4da3-a744-6a9ae62891bc",
-      "sourceText": "abril",
-      "targetText": "апрель",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "En abril llueve mucho.",
-      "targetUsageExample": "В апреле много дождей.",
-      "isActive": true
-    },
     {
       "id": "ba0e09f6-bd57-43cc-93b0-6fd68e0b9599",
       "sourceText": "absoluto",
@@ -88,18 +76,6 @@
       "isActive": true
     },
     {
-      "id": "69fcce83-bab3-4eb7-978d-b666ec29fcbe",
-      "sourceText": "agosto",
-      "targetText": "август",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "El festival se celebra en agosto.",
-      "targetUsageExample": "Фестиваль проходит в августе.",
-      "isActive": true
-    },
-    {
       "id": "ddc6ccfa-9de0-4d94-bd21-e7cbd620f3b6",
       "sourceText": "alcohol",
       "targetText": "алкоголь",
@@ -138,13 +114,25 @@
     {
       "id": "ae3ec762-93e8-4848-a8cf-2d65644892ca",
       "sourceText": "auto",
-      "targetText": "автомобиль",
+      "targetText": "авто|автомобиль",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Necesito reparar mi auto.",
       "targetUsageExample": "Мне нужно починить мой автомобиль.",
+      "isActive": true
+    },
+    {
+      "id": "69912f9e-cff2-4e54-b3fa-a268989de835",
+      "sourceText": "autobús",
+      "targetText": "автобус",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El autobús llega a las ocho.",
+      "targetUsageExample": "Автобус приходит в восемь.",
       "isActive": true
     },
     {
@@ -181,18 +169,6 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Vamos al bar.",
       "targetUsageExample": "Пойдём в бар.",
-      "isActive": true
-    },
-    {
-      "id": "85dc1c9c-4c4c-4130-9740-22f322466b89",
-      "sourceText": "básico",
-      "targetText": "базовый",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Es un conocimiento básico.",
-      "targetUsageExample": "Это базовые знания.",
       "isActive": true
     },
     {
@@ -244,6 +220,18 @@
       "isActive": true
     },
     {
+      "id": "85dc1c9c-4c4c-4130-9740-22f322466b89",
+      "sourceText": "básico",
+      "targetText": "базовый",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Es un conocimiento básico.",
+      "targetUsageExample": "Это базовые знания.",
+      "isActive": true
+    },
+    {
       "id": "ed0382e3-705c-4ab8-9c89-3edd39660bcd",
       "sourceText": "café",
       "targetText": "кофе",
@@ -253,18 +241,6 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Me gusta el café.",
       "targetUsageExample": "Мне нравится кофе.",
-      "isActive": true
-    },
-    {
-      "id": "524f9915-a975-4171-9500-28d1e4b3a254",
-      "sourceText": "cámara",
-      "targetText": "камера",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Una cámara de fotos.",
-      "targetUsageExample": "Фотокамера.",
       "isActive": true
     },
     {
@@ -292,6 +268,18 @@
       "isActive": true
     },
     {
+      "id": "4a731f73-b3e0-49c2-b705-df2fd41c1bc3",
+      "sourceText": "caos",
+      "targetText": "хаос",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Había un caos total en las calles después del accidente.",
+      "targetUsageExample": "На улицах после аварии царил полный хаос.",
+      "isActive": true
+    },
+    {
       "id": "4f93ef79-1906-4d37-b60f-3f6749e75ae0",
       "sourceText": "capitán",
       "targetText": "капитан",
@@ -304,18 +292,6 @@
       "isActive": true
     },
     {
-      "id": "457f329d-65d6-457e-b5b8-efe5fc23b0ce",
-      "sourceText": "carácter",
-      "targetText": "характер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Tiene un carácter fuerte.",
-      "targetUsageExample": "У него сильный характер.",
-      "isActive": true
-    },
-    {
       "id": "67e0c2d5-d834-41b9-b407-d6e4cdbccc33",
       "sourceText": "carrera",
       "targetText": "карьера",
@@ -325,6 +301,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Tiene una buena carrera.",
       "targetUsageExample": "У него хорошая карьера.",
+      "isActive": true
+    },
+    {
+      "id": "457f329d-65d6-457e-b5b8-efe5fc23b0ce",
+      "sourceText": "carácter",
+      "targetText": "характер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Tiene un carácter fuerte.",
+      "targetUsageExample": "У него сильный характер.",
       "isActive": true
     },
     {
@@ -364,6 +352,18 @@
       "isActive": true
     },
     {
+      "id": "69a3bc7f-2b47-4e0a-a293-fc8c0f3eeae0",
+      "sourceText": "circo",
+      "targetText": "цирк",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Los niños fueron al circo y vieron a los payasos.",
+      "targetUsageExample": "Дети пошли в цирк и увидели клоунов.",
+      "isActive": true
+    },
+    {
       "id": "0279b421-fc48-47ca-8469-ab2dec7005f0",
       "sourceText": "clase",
       "targetText": "класс",
@@ -372,7 +372,7 @@
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "La clase de español.",
-      "targetUsageExample": "Урок испанского языка.",
+      "targetUsageExample": "Класс испанского языка",
       "isActive": true
     },
     {
@@ -397,6 +397,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "El club de fútbol.",
       "targetUsageExample": "Футбольный клуб.",
+      "isActive": true
+    },
+    {
+      "id": "1f9a8b6f-3d9f-4a89-b421-1b15e2565d87",
+      "sourceText": "colección",
+      "targetText": "коллекция",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Tengo una colección de sellos.",
+      "targetUsageExample": "У меня есть коллекция марок.",
       "isActive": true
     },
     {
@@ -460,6 +472,18 @@
       "isActive": true
     },
     {
+      "id": "ab5ad946-a3ec-485f-b4fe-4da564c4f76e",
+      "sourceText": "comité",
+      "targetText": "комитет",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El comité decidió cambiar las reglas del juego.",
+      "targetUsageExample": "Комитет решил изменить правила игры.",
+      "isActive": true
+    },
+    {
       "id": "781b88a4-df7e-4404-b22b-b6a3b5509238",
       "sourceText": "compañía",
       "targetText": "компания",
@@ -481,6 +505,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "¿Dónde está el concurso?",
       "targetUsageExample": "Где конкурс?",
+      "isActive": true
+    },
+    {
+      "id": "5a0ba09a-d6cd-41c5-903e-2324835417ab",
+      "sourceText": "conferencia",
+      "targetText": "конференция",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "La conferencia empieza a las diez.",
+      "targetUsageExample": "Конференция начинается в десять.",
       "isActive": true
     },
     {
@@ -544,6 +580,18 @@
       "isActive": true
     },
     {
+      "id": "5127e1d1-8b44-4884-bc56-19e831ff1d5f",
+      "sourceText": "corona",
+      "targetText": "корона",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "La reina llevaba una corona de oro en la cabeza.",
+      "targetUsageExample": "Королева носила золотую корону на голове.",
+      "isActive": true
+    },
+    {
       "id": "986fdcd5-dec6-4ec6-b008-84e71dc9c740",
       "sourceText": "crisis",
       "targetText": "кризис",
@@ -589,6 +637,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Un curso de idiomas.",
       "targetUsageExample": "Языковой курс.",
+      "isActive": true
+    },
+    {
+      "id": "524f9915-a975-4171-9500-28d1e4b3a254",
+      "sourceText": "cámara",
+      "targetText": "камера",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Una cámara de fotos.",
+      "targetUsageExample": "Фотокамера.",
       "isActive": true
     },
     {
@@ -652,30 +712,6 @@
       "isActive": true
     },
     {
-      "id": "04320a73-b5ee-4751-be11-a2e958b25017",
-      "sourceText": "diana",
-      "targetText": "мишень",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "La flecha dio en la diana.",
-      "targetUsageExample": "Стрела попала в мишень.",
-      "isActive": true
-    },
-    {
-      "id": "d29c15a8-9b8c-4b2b-b272-e405cbf74521",
-      "sourceText": "diciembre",
-      "targetText": "декабрь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "La Navidad es en diciembre.",
-      "targetUsageExample": "Рождество в декабре.",
-      "isActive": true
-    },
-    {
       "id": "6f93f2c2-b034-49e6-afe7-c09921dc5505",
       "sourceText": "director",
       "targetText": "директор",
@@ -712,18 +748,6 @@
       "isActive": true
     },
     {
-      "id": "11a546dd-efeb-48c2-8758-c2cdec110228",
-      "sourceText": "dólar",
-      "targetText": "доллар",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Cuesta cien dólares.",
-      "targetUsageExample": "Это стоит сто долларов.",
-      "isActive": true
-    },
-    {
       "id": "0dbb8388-e54d-48fa-9b63-ec95e3136768",
       "sourceText": "drama",
       "targetText": "драма",
@@ -733,6 +757,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "La película es un drama.",
       "targetUsageExample": "Этот фильм — драма.",
+      "isActive": true
+    },
+    {
+      "id": "11a546dd-efeb-48c2-8758-c2cdec110228",
+      "sourceText": "dólar",
+      "targetText": "доллар",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Cuesta cien dólares.",
+      "targetUsageExample": "Это стоит сто долларов.",
       "isActive": true
     },
     {
@@ -772,18 +808,6 @@
       "isActive": true
     },
     {
-      "id": "48116286-2d46-4029-9931-4533af02b2bc",
-      "sourceText": "eléctrico",
-      "targetText": "электрический",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Un coche eléctrico.",
-      "targetUsageExample": "Электромобиль.",
-      "isActive": true
-    },
-    {
       "id": "a2191487-e6ed-4977-be56-86395d45b2f2",
       "sourceText": "elemento",
       "targetText": "элемент",
@@ -796,6 +820,18 @@
       "isActive": true
     },
     {
+      "id": "48116286-2d46-4029-9931-4533af02b2bc",
+      "sourceText": "eléctrico",
+      "targetText": "электрический",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Un coche eléctrico.",
+      "targetUsageExample": "Электрический автомобиль",
+      "isActive": true
+    },
+    {
       "id": "ec348221-f8b2-4592-9473-119ce104fdb0",
       "sourceText": "energía",
       "targetText": "энергия",
@@ -805,18 +841,6 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Energía solar.",
       "targetUsageExample": "Солнечная энергия.",
-      "isActive": true
-    },
-    {
-      "id": "75dc53a4-0af7-4355-84d3-374b325d50dc",
-      "sourceText": "época",
-      "targetText": "эпоха",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "La época medieval.",
-      "targetUsageExample": "Средневековая эпоха.",
       "isActive": true
     },
     {
@@ -844,6 +868,18 @@
       "isActive": true
     },
     {
+      "id": "ec206a0f-e068-4ef9-8ab5-15d8e274552e",
+      "sourceText": "escándalo",
+      "targetText": "скандал",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El escándalo en la empresa salió en las noticias.",
+      "targetUsageExample": "Скандал на предприятии попал в новости.",
+      "isActive": true
+    },
+    {
       "id": "ecff3a64-0247-4e53-8830-7b8c2315ff6c",
       "sourceText": "estación",
       "targetText": "станция",
@@ -865,6 +901,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Un estilo moderno.",
       "targetUsageExample": "Современный стиль.",
+      "isActive": true
+    },
+    {
+      "id": "07bd857b-ae9a-4ba2-a898-01f5fb17aadb",
+      "sourceText": "estrategia",
+      "targetText": "стратегия",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Necesitamos una buena estrategia.",
+      "targetUsageExample": "Нам нужна хорошая стратегия.",
       "isActive": true
     },
     {
@@ -916,15 +964,15 @@
       "isActive": true
     },
     {
-      "id": "49a12934-28c4-4068-ba79-d0e9545b3c05",
-      "sourceText": "febrero",
-      "targetText": "февраль",
+      "id": "20f3efba-bd8e-4880-a397-dd34d643b751",
+      "sourceText": "fantástico",
+      "targetText": "фантастический|потрясающий",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "San Valentín es en febrero.",
-      "targetUsageExample": "День святого Валентина в феврале.",
+      "sourceUsageExample": "¡Es fantástico!",
+      "targetUsageExample": "Это фантастически!",
       "isActive": true
     },
     {
@@ -948,25 +996,13 @@
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "El año fiscal termina en diciembre.",
-      "targetUsageExample": "Финансовый год заканчивается в декабре.",
-      "isActive": true
-    },
-    {
-      "id": "0bd3c446-64f6-4c27-8143-eb3b268fdc2d",
-      "sourceText": "físico",
-      "targetText": "физический",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "El ejercicio físico.",
-      "targetUsageExample": "Физические упражнения.",
+      "targetUsageExample": "Фискальный год заканчивается в декабре.",
       "isActive": true
     },
     {
       "id": "d21e5c99-661f-483c-a9df-b0b324743a51",
       "sourceText": "fondo",
-      "targetText": "фон",
+      "targetText": "фонд|фон",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -990,7 +1026,7 @@
     {
       "id": "fd832290-e5b8-4632-a33d-2280cf3b3be6",
       "sourceText": "formación",
-      "targetText": "образование|формирование",
+      "targetText": "формация|формирование",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1000,15 +1036,15 @@
       "isActive": true
     },
     {
-      "id": "75227d35-53db-4f01-abd5-40787c1dfa4b",
-      "sourceText": "francés",
-      "targetText": "французский",
+      "id": "f0644ebd-c3fe-4704-a88c-38de337b6634",
+      "sourceText": "foto",
+      "targetText": "фотография",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Hablo francés.",
-      "targetUsageExample": "Я говорю по-французски.",
+      "sourceUsageExample": "Es una foto bonita.",
+      "targetUsageExample": "Это красивая фотография.",
       "isActive": true
     },
     {
@@ -1036,6 +1072,18 @@
       "isActive": true
     },
     {
+      "id": "1e992aa6-c82c-4594-8d62-81655fe1c9e8",
+      "sourceText": "funcionar",
+      "targetText": "функционировать",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "La máquina no funciona.",
+      "targetUsageExample": "Машина не функционирует.",
+      "isActive": true
+    },
+    {
       "id": "4eba350c-78e2-4a2d-a345-45461fffce53",
       "sourceText": "función",
       "targetText": "функция",
@@ -1048,18 +1096,6 @@
       "isActive": true
     },
     {
-      "id": "1e992aa6-c82c-4594-8d62-81655fe1c9e8",
-      "sourceText": "funcionar",
-      "targetText": "функционировать",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "La máquina no funciona.",
-      "targetUsageExample": "Машина не работает.",
-      "isActive": true
-    },
-    {
       "id": "39841eeb-3bb4-450a-8656-995d05ac2a01",
       "sourceText": "fundamental",
       "targetText": "фундаментальный",
@@ -1069,6 +1105,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Un derecho fundamental.",
       "targetUsageExample": "Фундаментальное право.",
+      "isActive": true
+    },
+    {
+      "id": "0bd3c446-64f6-4c27-8143-eb3b268fdc2d",
+      "sourceText": "físico",
+      "targetText": "физический",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El ejercicio físico.",
+      "targetUsageExample": "Физические упражнения.",
       "isActive": true
     },
     {
@@ -1117,6 +1165,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Mozart fue un genio de la música.",
       "targetUsageExample": "Моцарт был музыкальным гением.",
+      "isActive": true
+    },
+    {
+      "id": "dfa7a645-9bda-40a0-8e23-4ba6ea19318d",
+      "sourceText": "gobernador",
+      "targetText": "губернатор",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El gobernador firmó la nueva ley.",
+      "targetUsageExample": "Губернатор подписал новый закон.",
       "isActive": true
     },
     {
@@ -1192,6 +1252,18 @@
       "isActive": true
     },
     {
+      "id": "aa10eaec-f552-466c-91a5-8cb1406501a4",
+      "sourceText": "imperio",
+      "targetText": "империя",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El Imperio Romano fue muy grande y poderoso.",
+      "targetUsageExample": "Римская империя была очень большой и могущественной.",
+      "isActive": true
+    },
+    {
       "id": "b49af990-0e06-484c-8b0b-0dff4cab5772",
       "sourceText": "importar",
       "targetText": "импортировать",
@@ -1228,18 +1300,6 @@
       "isActive": true
     },
     {
-      "id": "f2b99917-2bc6-4bc2-b16d-019e0fa53089",
-      "sourceText": "interés",
-      "targetText": "интерес",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Tengo interés en el arte.",
-      "targetUsageExample": "Меня интересует искусство.",
-      "isActive": true
-    },
-    {
       "id": "b0654998-8548-4a76-abca-79433d273d8a",
       "sourceText": "interesa",
       "targetText": "интересует",
@@ -1264,27 +1324,15 @@
       "isActive": true
     },
     {
-      "id": "97674aac-e9f0-4672-863c-a5168bd37c1e",
-      "sourceText": "julio",
-      "targetText": "июль",
+      "id": "f2b99917-2bc6-4bc2-b16d-019e0fa53089",
+      "sourceText": "interés",
+      "targetText": "интерес",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Mis vacaciones son en julio.",
-      "targetUsageExample": "Мой отпуск в июле.",
-      "isActive": true
-    },
-    {
-      "id": "1b8794a6-af11-4ba8-ab44-6e449aa95eb1",
-      "sourceText": "junio",
-      "targetText": "июнь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "El verano empieza en junio.",
-      "targetUsageExample": "Лето начинается в июне.",
+      "sourceUsageExample": "Tengo interés en el arte.",
+      "targetUsageExample": "Меня интересует искусство.",
       "isActive": true
     },
     {
@@ -1312,30 +1360,6 @@
       "isActive": true
     },
     {
-      "id": "8316506e-ca4a-45bb-96e6-ac17b49c8c36",
-      "sourceText": "líder",
-      "targetText": "лидер",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Él es el líder del equipo.",
-      "targetUsageExample": "Он лидер команды.",
-      "isActive": true
-    },
-    {
-      "id": "2e25ca38-8c0f-4e9d-a70e-4705a092c549",
-      "sourceText": "línea",
-      "targetText": "линия",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Una línea recta.",
-      "targetUsageExample": "Прямая линия.",
-      "isActive": true
-    },
-    {
       "id": "0806c943-9a04-4bf9-a6d3-a2ac63f73490",
       "sourceText": "literatura",
       "targetText": "литература",
@@ -1357,6 +1381,30 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "La luna brilla.",
       "targetUsageExample": "Луна светит.",
+      "isActive": true
+    },
+    {
+      "id": "8316506e-ca4a-45bb-96e6-ac17b49c8c36",
+      "sourceText": "líder",
+      "targetText": "лидер",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Él es el líder del equipo.",
+      "targetUsageExample": "Он лидер команды.",
+      "isActive": true
+    },
+    {
+      "id": "2e25ca38-8c0f-4e9d-a70e-4705a092c549",
+      "sourceText": "línea",
+      "targetText": "линия",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Una línea recta.",
+      "targetUsageExample": "Прямая линия.",
       "isActive": true
     },
     {
@@ -1396,18 +1444,6 @@
       "isActive": true
     },
     {
-      "id": "610f0e64-29f7-4cc6-b8b2-3e8b088c1be8",
-      "sourceText": "marzo",
-      "targetText": "март",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "La primavera llega en marzo.",
-      "targetUsageExample": "Весна приходит в марте.",
-      "isActive": true
-    },
-    {
       "id": "cae786b4-fa81-46be-bc67-b522191cc036",
       "sourceText": "masa",
       "targetText": "масса",
@@ -1444,30 +1480,6 @@
       "isActive": true
     },
     {
-      "id": "ae2d9b87-cab3-4caa-a85b-6a9deb142e23",
-      "sourceText": "máximo",
-      "targetText": "максимальный",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Es el precio máximo.",
-      "targetUsageExample": "Это максимальная цена.",
-      "isActive": true
-    },
-    {
-      "id": "2a4235c0-66fe-4f89-9738-768e9f8874b5",
-      "sourceText": "mayo",
-      "targetText": "май",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "El primero de mayo.",
-      "targetUsageExample": "Первое мая.",
-      "isActive": true
-    },
-    {
       "id": "f8eaf6c9-d0b9-4bf5-b3ee-e95f6700a529",
       "sourceText": "medicina",
       "targetText": "медицина",
@@ -1492,18 +1504,6 @@
       "isActive": true
     },
     {
-      "id": "3bf91301-4263-4077-9131-e1ad3609b478",
-      "sourceText": "mes",
-      "targetText": "месяц",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "El próximo mes.",
-      "targetUsageExample": "Следующий месяц.",
-      "isActive": true
-    },
-    {
       "id": "7547bd0e-5bdf-49b6-800c-823b89b72bd5",
       "sourceText": "metal",
       "targetText": "металл",
@@ -1516,21 +1516,9 @@
       "isActive": true
     },
     {
-      "id": "73c23bb8-adc9-49ee-8fab-5eecfa383396",
-      "sourceText": "método",
-      "targetText": "метод",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Un método efectivo.",
-      "targetUsageExample": "Эффективный метод.",
-      "isActive": true
-    },
-    {
       "id": "fc0cc6fc-4f59-4c21-9e72-fd0edd82ce3c",
       "sourceText": "metro",
-      "targetText": "метр",
+      "targetText": "метро|метр",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
@@ -1660,6 +1648,30 @@
       "isActive": true
     },
     {
+      "id": "ae2d9b87-cab3-4caa-a85b-6a9deb142e23",
+      "sourceText": "máximo",
+      "targetText": "максимальный",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Es el precio máximo.",
+      "targetUsageExample": "Это максимальная цена.",
+      "isActive": true
+    },
+    {
+      "id": "73c23bb8-adc9-49ee-8fab-5eecfa383396",
+      "sourceText": "método",
+      "targetText": "метод",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Un método efectivo.",
+      "targetUsageExample": "Эффективный метод.",
+      "isActive": true
+    },
+    {
       "id": "5b580569-81fb-46ae-a044-eab8055d5679",
       "sourceText": "música",
       "targetText": "музыка",
@@ -1669,18 +1681,6 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Me gusta la música.",
       "targetUsageExample": "Мне нравится музыка.",
-      "isActive": true
-    },
-    {
-      "id": "7b141cc7-4fac-49f7-a7f0-ff1a44810fec",
-      "sourceText": "nación",
-      "targetText": "нация",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "La nación española.",
-      "targetUsageExample": "Испанская нация.",
       "isActive": true
     },
     {
@@ -1696,27 +1696,15 @@
       "isActive": true
     },
     {
-      "id": "7c0b1e3c-b019-4209-bcf9-121cfb8d926a",
-      "sourceText": "ni",
-      "targetText": "ни",
+      "id": "7b141cc7-4fac-49f7-a7f0-ff1a44810fec",
+      "sourceText": "nación",
+      "targetText": "нация",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Ni tú ni yo.",
-      "targetUsageExample": "Ни ты, ни я.",
-      "isActive": true
-    },
-    {
-      "id": "e1b05209-d30a-4d8a-a3f4-106123441b70",
-      "sourceText": "noche",
-      "targetText": "ночь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Buenas noches.",
-      "targetUsageExample": "Спокойной ночи.",
+      "sourceUsageExample": "La nación española.",
+      "targetUsageExample": "Испанская нация.",
       "isActive": true
     },
     {
@@ -1732,18 +1720,6 @@
       "isActive": true
     },
     {
-      "id": "37bd7c54-e671-4fed-8e68-1d24c3cc58e0",
-      "sourceText": "noviembre",
-      "targetText": "ноябрь",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Hace frío en noviembre.",
-      "targetUsageExample": "В ноябре холодно.",
-      "isActive": true
-    },
-    {
       "id": "582e2d48-ee57-40ae-af6d-aa1600962a78",
       "sourceText": "objeto",
       "targetText": "объект",
@@ -1756,18 +1732,6 @@
       "isActive": true
     },
     {
-      "id": "fe1a9c9c-5485-4be7-8c9a-c8a79f5c0cc1",
-      "sourceText": "océano",
-      "targetText": "океан",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "El océano Atlántico.",
-      "targetUsageExample": "Атлантический океан.",
-      "isActive": true
-    },
-    {
       "id": "d6a82e9d-5d95-4006-a4d5-cc3b94f6cd3c",
       "sourceText": "octubre",
       "targetText": "октябрь",
@@ -1777,6 +1741,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "El otoño en octubre.",
       "targetUsageExample": "Осень в октябре.",
+      "isActive": true
+    },
+    {
+      "id": "fe1a9c9c-5485-4be7-8c9a-c8a79f5c0cc1",
+      "sourceText": "océano",
+      "targetText": "океан",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El océano Atlántico.",
+      "targetUsageExample": "Атлантический океан.",
       "isActive": true
     },
     {
@@ -1888,15 +1864,15 @@
       "isActive": true
     },
     {
-      "id": "93ce092a-e74e-4c54-bf05-5fbc7a655ce2",
-      "sourceText": "párrafo",
-      "targetText": "абзац|параграф",
+      "id": "aaffbc6c-9ef6-4227-ac66-d2fe02e272c0",
+      "sourceText": "perfil",
+      "targetText": "профиль",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Lee el primer párrafo.",
-      "targetUsageExample": "Прочитай первый параграф.",
+      "sourceUsageExample": "¿Dónde está el perfil?",
+      "targetUsageExample": "Где профиль?",
       "isActive": true
     },
     {
@@ -1960,18 +1936,6 @@
       "isActive": true
     },
     {
-      "id": "0025ed34-ba28-4d2b-8406-a0c01647437b",
-      "sourceText": "playa",
-      "targetText": "пляж",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Vamos a la playa.",
-      "targetUsageExample": "Пойдём на пляж.",
-      "isActive": true
-    },
-    {
       "id": "5b831b4b-0135-4983-abf5-29a07c63e1a4",
       "sourceText": "policía",
       "targetText": "полиция",
@@ -2008,18 +1972,6 @@
       "isActive": true
     },
     {
-      "id": "4534894e-fa16-4960-ae4b-e067a06f1629",
-      "sourceText": "porno",
-      "targetText": "порно",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "La industria del porno es grande.",
-      "targetUsageExample": "Порноиндустрия большая.",
-      "isActive": true
-    },
-    {
       "id": "bc020c9c-6356-4f22-9d96-4e2d52bbf67b",
       "sourceText": "portal",
       "targetText": "портал",
@@ -2044,18 +1996,6 @@
       "isActive": true
     },
     {
-      "id": "0d721505-49ee-46f9-bfff-8ef929479071",
-      "sourceText": "práctico",
-      "targetText": "практичный",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Es un método muy práctico.",
-      "targetUsageExample": "Это очень практичный метод.",
-      "isActive": true
-    },
-    {
       "id": "bdaa0f74-637c-432b-961f-2c700c678bee",
       "sourceText": "prensa",
       "targetText": "пресса",
@@ -2065,6 +2005,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "La libertad de prensa.",
       "targetUsageExample": "Свобода прессы.",
+      "isActive": true
+    },
+    {
+      "id": "9f4ec1b3-9121-4613-8132-47e79d62c5a0",
+      "sourceText": "presentación",
+      "targetText": "презентация",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "La presentación sobre el proyecto duró casi una hora.",
+      "targetUsageExample": "Презентация по проекту длилась почти час.",
       "isActive": true
     },
     {
@@ -2142,25 +2094,13 @@
     {
       "id": "3dfdcfab-288b-4967-8c27-6bea7ff024f5",
       "sourceText": "profesor",
-      "targetText": "профессор",
+      "targetText": "преподаватель|профессор",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Mi profesor de matemáticas.",
       "targetUsageExample": "Мой профессор математики.",
-      "isActive": true
-    },
-    {
-      "id": "3d8ed424-ad23-497c-afad-ebe3798489b0",
-      "sourceText": "prostituta",
-      "targetText": "проститутка",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "La prostituta es un personaje de la novela.",
-      "targetUsageExample": "Проститутка — персонаж романа.",
       "isActive": true
     },
     {
@@ -2200,6 +2140,18 @@
       "isActive": true
     },
     {
+      "id": "0d721505-49ee-46f9-bfff-8ef929479071",
+      "sourceText": "práctico",
+      "targetText": "практичный",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Es un método muy práctico.",
+      "targetUsageExample": "Это очень практичный метод.",
+      "isActive": true
+    },
+    {
       "id": "6abb4863-4856-43d9-be6b-421e1c149b6b",
       "sourceText": "publicar",
       "targetText": "публиковать",
@@ -2212,18 +2164,6 @@
       "isActive": true
     },
     {
-      "id": "9ef47034-f9b3-4d97-b9a6-5fb7791ddc08",
-      "sourceText": "público",
-      "targetText": "публичный",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Es un evento público.",
-      "targetUsageExample": "Это публичное мероприятие.",
-      "isActive": true
-    },
-    {
       "id": "f9985b0d-eeee-4255-b896-b1dd1a9e25e1",
       "sourceText": "puerto",
       "targetText": "порт",
@@ -2233,6 +2173,54 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "El barco está en el puerto.",
       "targetUsageExample": "Корабль в порту.",
+      "isActive": true
+    },
+    {
+      "id": "6ad01101-0ea7-4188-8379-7287b141d78f",
+      "sourceText": "pulso",
+      "targetText": "пульс",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "La enfermera tomó el pulso del paciente antes de la operación.",
+      "targetUsageExample": "Медсестра измерила пульс пациента перед операцией.",
+      "isActive": true
+    },
+    {
+      "id": "c757e382-b66c-406a-be2f-3d981f5df6d9",
+      "sourceText": "pánico",
+      "targetText": "паника",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Cuando vio el accidente, le entró pánico y no supo qué hacer.",
+      "targetUsageExample": "Когда она увидела аварию, её охватила паника, и она не знала, что делать.",
+      "isActive": true
+    },
+    {
+      "id": "93ce092a-e74e-4c54-bf05-5fbc7a655ce2",
+      "sourceText": "párrafo",
+      "targetText": "абзац|параграф",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Lee el primer párrafo.",
+      "targetUsageExample": "Прочитай первый параграф.",
+      "isActive": true
+    },
+    {
+      "id": "9ef47034-f9b3-4d97-b9a6-5fb7791ddc08",
+      "sourceText": "público",
+      "targetText": "публичный",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Es un evento público.",
+      "targetUsageExample": "Это публичное мероприятие.",
       "isActive": true
     },
     {
@@ -2250,13 +2238,13 @@
     {
       "id": "89b06eba-ac21-4ac6-96e2-0dad7d0741d1",
       "sourceText": "re",
-      "targetText": "ре [король (в картах)]",
+      "targetText": "ре (нота)",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "La nota re.",
-      "targetUsageExample": "Нота ре.",
+      "sourceUsageExample": "La nota re es importante en música.",
+      "targetUsageExample": "Нота ре важна в музыке.",
       "isActive": true
     },
     {
@@ -2296,18 +2284,6 @@
       "isActive": true
     },
     {
-      "id": "f03479ba-3376-473d-9de4-67d88f24df7a",
-      "sourceText": "región",
-      "targetText": "регион",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Una región montañosa.",
-      "targetUsageExample": "Горный регион.",
-      "isActive": true
-    },
-    {
       "id": "2b37f7c7-33f9-4ab0-ac7a-91fd9076856e",
       "sourceText": "registro",
       "targetText": "регистрация",
@@ -2320,6 +2296,18 @@
       "isActive": true
     },
     {
+      "id": "f03479ba-3376-473d-9de4-67d88f24df7a",
+      "sourceText": "región",
+      "targetText": "регион",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Una región montañosa.",
+      "targetUsageExample": "Горный регион.",
+      "isActive": true
+    },
+    {
       "id": "6b343ecc-6153-49d3-bf80-19f5fa14405b",
       "sourceText": "religión",
       "targetText": "религия",
@@ -2329,6 +2317,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Respeto su religión.",
       "targetUsageExample": "Я уважаю его религию.",
+      "isActive": true
+    },
+    {
+      "id": "77310177-595b-4f0f-adeb-1e050bb3d542",
+      "sourceText": "reputación",
+      "targetText": "репутация",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Una buena reputación es difícil de ganar y fácil de perder.",
+      "targetUsageExample": "Хорошую репутацию трудно заработать и легко потерять.",
       "isActive": true
     },
     {
@@ -2380,15 +2380,15 @@
       "isActive": true
     },
     {
-      "id": "df276aec-3ec7-4469-aa92-2ee97838135e",
-      "sourceText": "riesgo",
-      "targetText": "риск",
+      "id": "3b9d07a4-0cfe-4c30-a3f3-2ef60e89edd8",
+      "sourceText": "ritmo",
+      "targetText": "ритм",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Es un gran riesgo.",
-      "targetUsageExample": "Это большой риск.",
+      "sourceUsageExample": "La música tiene un ritmo rápido que invita a bailar.",
+      "targetUsageExample": "У музыки быстрый ритм, который хочется танцевать.",
       "isActive": true
     },
     {
@@ -2442,25 +2442,13 @@
     {
       "id": "2609aea8-d435-4311-85e8-698c67751657",
       "sourceText": "segundo",
-      "targetText": "секунда",
+      "targetText": "второй|секунда",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
       "sourceUsageExample": "Espera un segundo.",
       "targetUsageExample": "Подожди секунду.",
-      "isActive": true
-    },
-    {
-      "id": "216a7aeb-0386-4856-b82b-f4997a5138cb",
-      "sourceText": "señal",
-      "targetText": "сигнал",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Da la señal.",
-      "targetUsageExample": "Дай сигнал.",
       "isActive": true
     },
     {
@@ -2485,18 +2473,6 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Veo una serie en Netflix.",
       "targetUsageExample": "Смотрю сериал на Netflix.",
-      "isActive": true
-    },
-    {
-      "id": "98c4f94f-247f-4bb6-984c-117c1df62b56",
-      "sourceText": "símbolo",
-      "targetText": "символ",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "El símbolo de la paz.",
-      "targetUsageExample": "Символ мира.",
       "isActive": true
     },
     {
@@ -2560,6 +2536,18 @@
       "isActive": true
     },
     {
+      "id": "98c4f94f-247f-4bb6-984c-117c1df62b56",
+      "sourceText": "símbolo",
+      "targetText": "символ",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El símbolo de la paz.",
+      "targetUsageExample": "Символ мира.",
+      "isActive": true
+    },
+    {
       "id": "dad29e58-1f94-41fe-a9e0-eeceb1f39f4c",
       "sourceText": "tabla",
       "targetText": "таблица|доска",
@@ -2584,6 +2572,18 @@
       "isActive": true
     },
     {
+      "id": "cf5082f5-de97-4c2a-b38f-cd0f801e3959",
+      "sourceText": "taxi",
+      "targetText": "такси",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Llama un taxi.",
+      "targetUsageExample": "Вызови такси.",
+      "isActive": true
+    },
+    {
       "id": "5bfb9d5e-a983-4223-af26-196910722af5",
       "sourceText": "teatro",
       "targetText": "театр",
@@ -2596,27 +2596,15 @@
       "isActive": true
     },
     {
-      "id": "d296a0ac-162b-4a9c-b54c-faedcbd6363d",
-      "sourceText": "técnica",
-      "targetText": "техника",
+      "id": "48dbcd20-c0cf-404a-b526-ae37ef621674",
+      "sourceText": "tecnología",
+      "targetText": "технология",
       "sourceLanguage": "Spanish",
       "targetLanguage": "Russian",
       "listName": "Spanish Russian A0",
       "difficultyLevel": "a0",
-      "sourceUsageExample": "Una técnica nueva.",
-      "targetUsageExample": "Новая техника.",
-      "isActive": true
-    },
-    {
-      "id": "de817a3f-a507-42be-98df-f51026fa0e6a",
-      "sourceText": "teléfono",
-      "targetText": "телефон",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Mi teléfono suena.",
-      "targetUsageExample": "Мой телефон звонит.",
+      "sourceUsageExample": "La tecnología avanza rápidamente.",
+      "targetUsageExample": "Технологии быстро развиваются.",
       "isActive": true
     },
     {
@@ -2629,6 +2617,18 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Veo la televisión.",
       "targetUsageExample": "Я смотрю телевизор.",
+      "isActive": true
+    },
+    {
+      "id": "de817a3f-a507-42be-98df-f51026fa0e6a",
+      "sourceText": "teléfono",
+      "targetText": "телефон",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Mi teléfono suena.",
+      "targetUsageExample": "Мой телефон звонит.",
       "isActive": true
     },
     {
@@ -2728,6 +2728,18 @@
       "isActive": true
     },
     {
+      "id": "c29d2c12-aafc-4111-b7c2-a3b8432e053b",
+      "sourceText": "tradición",
+      "targetText": "традиция",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Es una tradición de familia.",
+      "targetUsageExample": "Это семейная традиция.",
+      "isActive": true
+    },
+    {
       "id": "648892a2-75f2-4264-bea5-699346217348",
       "sourceText": "transporte",
       "targetText": "транспорт",
@@ -2737,6 +2749,30 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "El transporte público.",
       "targetUsageExample": "Общественный транспорт.",
+      "isActive": true
+    },
+    {
+      "id": "d296a0ac-162b-4a9c-b54c-faedcbd6363d",
+      "sourceText": "técnica",
+      "targetText": "техника",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Una técnica nueva.",
+      "targetUsageExample": "Новая техника.",
+      "isActive": true
+    },
+    {
+      "id": "3ec496f6-62fe-4833-bcf2-81fccbbe1b31",
+      "sourceText": "túnel",
+      "targetText": "туннель",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "El tren pasa por un túnel largo debajo de la montaña.",
+      "targetUsageExample": "Поезд проходит через длинный туннель под горой.",
       "isActive": true
     },
     {
@@ -2761,18 +2797,6 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "La última versión del programa.",
       "targetUsageExample": "Последняя версия программы.",
-      "isActive": true
-    },
-    {
-      "id": "c0c96f8d-02e8-4fd6-8b63-cd41125a6663",
-      "sourceText": "vídeo",
-      "targetText": "видео",
-      "sourceLanguage": "Spanish",
-      "targetLanguage": "Russian",
-      "listName": "Spanish Russian A0",
-      "difficultyLevel": "a0",
-      "sourceUsageExample": "Mira este vídeo.",
-      "targetUsageExample": "Посмотри это видео.",
       "isActive": true
     },
     {
@@ -2812,6 +2836,18 @@
       "isActive": true
     },
     {
+      "id": "c0c96f8d-02e8-4fd6-8b63-cd41125a6663",
+      "sourceText": "vídeo",
+      "targetText": "видео",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Mira este vídeo.",
+      "targetUsageExample": "Посмотри это видео.",
+      "isActive": true
+    },
+    {
       "id": "47c0dc0c-7c9f-4461-a1e5-e84dce2eb720",
       "sourceText": "zona",
       "targetText": "зона",
@@ -2821,6 +2857,30 @@
       "difficultyLevel": "a0",
       "sourceUsageExample": "Una zona peligrosa.",
       "targetUsageExample": "Опасная зона.",
+      "isActive": true
+    },
+    {
+      "id": "214b1fcd-42a1-482b-89e7-bd4eade0795b",
+      "sourceText": "ángel",
+      "targetText": "ангел",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "Un ángel en el cielo.",
+      "targetUsageExample": "Ангел на небе.",
+      "isActive": true
+    },
+    {
+      "id": "75dc53a4-0af7-4355-84d3-374b325d50dc",
+      "sourceText": "época",
+      "targetText": "эпоха",
+      "sourceLanguage": "Spanish",
+      "targetLanguage": "Russian",
+      "listName": "Spanish Russian A0",
+      "difficultyLevel": "a0",
+      "sourceUsageExample": "La época medieval.",
+      "targetUsageExample": "Средневековая эпоха.",
       "isActive": true
     }
   ]
