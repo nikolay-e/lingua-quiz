@@ -268,7 +268,7 @@ def run_interactive_mode():
                     console.print()
                     from .commands.analyze import analyze
 
-                    analyze(language_level=lang_level, output_dir=None)
+                    analyze(language_level=lang_level, output_dir=Path(__file__).parent.parent.parent / "reports")
 
             elif command == "export":
                 console.print("\n[dim]Command: export[/dim]")

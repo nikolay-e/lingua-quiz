@@ -5,7 +5,6 @@ from pathlib import Path
 import subprocess
 import sys
 import time
-import urllib.error
 import urllib.request
 
 
@@ -15,7 +14,7 @@ def wait_for_service(url: str, name: str, max_attempts: int = 30, interval: floa
             urllib.request.urlopen(url, timeout=5)
             print(f"✓ {name} is ready ({url})")
             return
-        except (urllib.error.URLError, OSError):
+        except OSError:
             if attempt < max_attempts - 1:
                 time.sleep(interval)
             else:

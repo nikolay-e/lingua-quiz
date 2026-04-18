@@ -71,7 +71,10 @@ async def reject_null_bytes(request: Request, call_next):
 @app.middleware("http")
 async def csrf_protection(request: Request, call_next):
     if request.url.path.startswith("/api/"):
-        validate_origin(request)
+        try:
+            validate_origin(request)
+        except HTTPException as exc:
+            return JSONResponse(status_code=exc.status_code, content={"detail": exc.detail})
     response = await call_next(request)
     return response
 

@@ -162,49 +162,57 @@ async function crawlPage(page, path) {
   page.removeAllListeners('response');
 }
 
+function printJsErrors() {
+  if (results.jsErrors.length === 0) return;
+  console.log('\n--- JS ERRORS ---');
+  for (const e of results.jsErrors) {
+    console.log(`  [${e.path}] ${e.error}`);
+  }
+}
+
+function printNetworkErrors() {
+  if (results.networkErrors.length === 0) return;
+  console.log('\n--- NETWORK ERRORS ---');
+  const unique = new Map();
+  for (const e of results.networkErrors) {
+    const key = `${e.status} ${new URL(e.url).pathname}`;
+    if (!unique.has(key)) unique.set(key, e);
+  }
+  for (const [, e] of unique) {
+    console.log(`  [${e.path}] ${e.status} ${e.url}`);
+  }
+}
+
+function printAxeViolations() {
+  if (results.axeViolations.length === 0) return;
+  console.log('\n--- ACCESSIBILITY VIOLATIONS ---');
+  const grouped = new Map();
+  for (const v of results.axeViolations) {
+    if (!grouped.has(v.id)) {
+      grouped.set(v.id, { ...v, totalNodes: 0, pages: [] });
+    }
+    const g = grouped.get(v.id);
+    g.totalNodes += v.nodes;
+    g.pages.push(v.path);
+  }
+  for (const [, v] of grouped) {
+    console.log(`  [${v.impact}] ${v.id}: ${v.description} (${v.totalNodes} nodes on ${v.pages.length} pages)`);
+  }
+}
+
+function printBrokenLinks() {
+  if (results.brokenLinks.length === 0) return;
+  console.log('\n--- BROKEN LINKS ---');
+  for (const b of results.brokenLinks) {
+    console.log(`  ${b.path} -> ${b.status}`);
+  }
+}
+
 function printSectionErrors() {
-  if (results.jsErrors.length > 0) {
-    console.log('\n--- JS ERRORS ---');
-    for (const e of results.jsErrors) {
-      console.log(`  [${e.path}] ${e.error}`);
-    }
-  }
-
-  if (results.networkErrors.length > 0) {
-    console.log('\n--- NETWORK ERRORS ---');
-    const unique = new Map();
-    for (const e of results.networkErrors) {
-      const key = `${e.status} ${new URL(e.url).pathname}`;
-      if (!unique.has(key)) unique.set(key, e);
-    }
-    for (const [, e] of unique) {
-      console.log(`  [${e.path}] ${e.status} ${e.url}`);
-    }
-  }
-
-  if (results.axeViolations.length > 0) {
-    console.log('\n--- ACCESSIBILITY VIOLATIONS ---');
-    const grouped = new Map();
-    for (const v of results.axeViolations) {
-      const key = v.id;
-      if (!grouped.has(key)) {
-        grouped.set(key, { ...v, totalNodes: 0, pages: [] });
-      }
-      const g = grouped.get(key);
-      g.totalNodes += v.nodes;
-      g.pages.push(v.path);
-    }
-    for (const [, v] of grouped) {
-      console.log(`  [${v.impact}] ${v.id}: ${v.description} (${v.totalNodes} nodes on ${v.pages.length} pages)`);
-    }
-  }
-
-  if (results.brokenLinks.length > 0) {
-    console.log('\n--- BROKEN LINKS ---');
-    for (const b of results.brokenLinks) {
-      console.log(`  ${b.path} -> ${b.status}`);
-    }
-  }
+  printJsErrors();
+  printNetworkErrors();
+  printAxeViolations();
+  printBrokenLinks();
 }
 
 function printReport() {

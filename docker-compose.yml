@@ -127,7 +127,7 @@ services:
       TEST_TYPE: e2e
       DB_HOST: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres # pragma: allowlist secret
+      POSTGRES_PASSWORD: postgres # pragma: allowlist secret  # NOSONAR
       PYTEST_WORKERS: '4'
     volumes:
       - ./test-reports:/home/pwuser/tests/reports

@@ -207,6 +207,16 @@ export function SettingsPage(): React.JSX.Element {
                   handleChangePassword().catch(() => {});
                 }}
               >
+                <input
+                  type="text"
+                  name="username"
+                  autoComplete="username"
+                  value={username ?? ''}
+                  readOnly
+                  className="sr-only"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                />
                 <PasswordInput
                   value={currentPassword}
                   onChange={setCurrentPassword}

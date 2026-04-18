@@ -1,4 +1,4 @@
-import { useState, type RefObject } from 'react';
+import { useState, useCallback, type RefObject } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { QuizQuestion } from '@lingua-quiz/core';
 import { useAuthStore } from '@features/auth/stores/auth.store';
@@ -193,7 +193,7 @@ export function useQuizSession(
     }
   };
 
-  const handleLoadWordLists = async (): Promise<void> => {
+  const handleLoadWordLists = useCallback(async (): Promise<void> => {
     if (token === null) return;
     setLoadError(null);
     try {
@@ -202,7 +202,7 @@ export function useQuizSession(
       logger.error('Failed to load word lists:', error);
       setLoadError(extractErrorMessage(error, 'Failed to load quizzes'));
     }
-  };
+  }, [token, loadWordLists]);
 
   const handleBackToMenuClick = () => {
     void handleBackToMenu();
