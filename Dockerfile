@@ -12,7 +12,8 @@ ENV APP_VERSION=${APP_VERSION} \
     APP_ENVIRONMENT=${APP_ENVIRONMENT}
 RUN apk add --no-cache postgresql-libs
 COPY --chown=appuser:appuser apps/backend/requirements.txt ./
-RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev postgresql-dev linux-headers \
+RUN --mount=type=cache,target=/root/.cache/pip \
+    apk add --no-cache --virtual .build-deps gcc g++ musl-dev postgresql-dev linux-headers \
     && pip install --no-cache-dir -r requirements.txt \
     && apk --purge del .build-deps
 
@@ -38,7 +39,8 @@ COPY package.json package-lock.json ./
 COPY packages/core/package.json ./packages/core/
 COPY packages/api-client/package.json ./packages/api-client/
 COPY apps/frontend/package.json ./apps/frontend/
-RUN npm ci
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
 COPY packages/core/ ./packages/core/
 COPY packages/api-client/ ./packages/api-client/
 RUN npm run build --workspace @lingua-quiz/core
