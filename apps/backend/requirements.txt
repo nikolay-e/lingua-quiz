@@ -2,7 +2,7 @@ fastapi==0.136.0
 uvicorn[standard]==0.45.0
 python-multipart==0.0.26
 slowapi==0.1.9
-psycopg2-binary==2.9.11
+psycopg2-binary==2.9.12
 bcrypt==5.0.0
 pyjwt==2.12.1
 requests==2.33.1
