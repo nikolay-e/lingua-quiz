@@ -106,7 +106,7 @@ export function useQuizSession(
       applyLevelChange(result);
       input.setUserAnswer('');
       getNextQuestion();
-      answerInputRef.current?.focus();
+      if (!isTouchDevice()) answerInputRef.current?.focus();
     }
   };
 
@@ -171,7 +171,7 @@ export function useQuizSession(
         }
         input.setUserAnswer('');
         getNextQuestion();
-        answerInputRef.current?.focus();
+        if (!isTouchDevice()) answerInputRef.current?.focus();
       }
     } catch (error: unknown) {
       logger.error('Error submitting answer:', error);

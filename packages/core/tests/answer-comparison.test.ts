@@ -289,12 +289,12 @@ describe('Answer Comparison and Text Processing', () => {
       const examples = [
         { user: 'этаж, квартира', correct: 'этаж, квартира', expected: true },
         { user: 'квартира, этаж', correct: 'этаж, квартира', expected: true },
-        { user: 'этаж', correct: 'этаж, квартира', expected: false },
-        { user: 'квартира', correct: 'этаж, квартира', expected: false },
+        { user: 'этаж', correct: 'этаж, квартира', expected: true }  // any valid translation accepted,
+        { user: 'квартира', correct: 'этаж, квартира', expected: true }  // any valid translation accepted,
         { user: 'письмо, карта, меню', correct: 'письмо, карта, меню', expected: true },
         { user: 'меню, письмо, карта', correct: 'письмо, карта, меню', expected: true },
-        { user: 'письмо', correct: 'письмо, карта, меню', expected: false },
-        { user: 'письмо, карта', correct: 'письмо, карта, меню', expected: false },
+        { user: 'письмо', correct: 'письмо, карта, меню', expected: true }  // any valid translation accepted,
+        { user: 'письмо, карта', correct: 'письмо, карта, меню', expected: true }  // subset of valid translations accepted,
         { user: 'спасибо', correct: 'спасибо|благодарю', expected: true },
         { user: 'благодарю', correct: 'спасибо|благодарю', expected: true },
         { user: 'пожалуйста', correct: 'спасибо|благодарю', expected: false },
@@ -306,8 +306,8 @@ describe('Answer Comparison and Text Processing', () => {
         { user: 'равный, сразу', correct: '(равный|одинаковый), (сейчас|сразу)', expected: true },
         { user: 'одинаковый, сейчас', correct: '(равный|одинаковый), (сейчас|сразу)', expected: true },
         { user: 'сейчас, равный', correct: '(равный|одинаковый), (сейчас|сразу)', expected: true },
-        { user: 'равный', correct: '(равный|одинаковый), (сейчас|сразу)', expected: false },
-        { user: 'сейчас', correct: '(равный|одинаковый), (сейчас|сразу)', expected: false },
+        { user: 'равный', correct: '(равный|одинаковый), (сейчас|сразу)', expected: true }  // any valid translation accepted,
+        { user: 'сейчас', correct: '(равный|одинаковый), (сейчас|сразу)', expected: true }  // any valid translation accepted,
         { user: 'равный, одинаковый, сейчас', correct: '(равный|одинаковый), (сейчас|сразу)', expected: false },
         { user: 'мир', correct: 'мир [вселенная]', expected: true },
         { user: 'мир вселенная', correct: 'мир [вселенная]', expected: true },
@@ -514,10 +514,10 @@ describe('Answer Comparison and Text Processing', () => {
   describe('6. Integration Tests - Complex Real-World Scenarios', () => {
     const realWorldTests = [
       {
-        description: 'German verb with multiple meanings',
+        description: 'German verb with multiple meanings - both tokens same group',
         user: 'machen, tun',
         correct: '(machen|tun), (erstellen|schaffen)',
-        expected: false, // Missing second group
+        expected: false, // Both tokens are in group 1, neither covers group 2
       },
       {
         description: 'German verb with complete answer',
@@ -561,6 +561,40 @@ describe('Answer Comparison and Text Processing', () => {
       it(`${description}: "${user}" vs "${correct}" should be ${expected}`, () => {
         expect(checkAnswer(user, correct)).toBe(expected);
       });
+    });
+  });
+});
+
+
+describe('formatForDisplay with multi-part bare-pipe answers', () => {
+  it('shows both parts of a multi-part answer with bare pipes', () => {
+    expect(formatForDisplay('ущерб|повреждение, повреждать')).toBe('ущерб, повреждать');
+    expect(formatForDisplay('ущерб|повреждение|урон, повреждать')).toBe('ущерб, повреждать');
+  });
+
+  it('handles single group with bare pipe as before', () => {
+    expect(formatForDisplay('machine|car')).toBe('machine');
+    expect(formatForDisplay('машина|автомобиль')).toBe('машина');
+  });
+}
+  describe('7. Single-group match from multi-group answer', () => {
+    it('accepts any single valid translation from a multi-part answer', () => {
+      expect(checkAnswer('ущерб', 'ущерб|повреждение, повреждать')).toBe(true);
+      expect(checkAnswer('повреждать', 'ущерб|повреждение, повреждать')).toBe(true);
+      expect(checkAnswer('повреждение', 'ущерб|повреждение, повреждать')).toBe(true);
+      expect(checkAnswer('урон', 'ущерб|повреждение|урон, повреждать')).toBe(true);
+    });
+
+    it('also accepts the full multi-part answer', () => {
+      expect(checkAnswer('ущерб, повреждать', 'ущерб|повреждение, повреждать')).toBe(true);
+    });
+
+    it('rejects answer where tokens all match the same group', () => {
+      expect(checkAnswer('machen, tun', '(machen|tun), (erstellen|schaffen)')).toBe(false);
+    });
+
+    it('rejects completely wrong answer', () => {
+      expect(checkAnswer('совсем не то', 'ущерб|повреждение, повреждать')).toBe(false);
     });
   });
 });

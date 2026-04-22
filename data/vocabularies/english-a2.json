@@ -2610,7 +2610,7 @@
     {
       "id": "c271153d-4034-4539-b2cf-c150507b5a08",
       "sourceText": "damage",
-      "targetText": "ущерб|повреждение, повреждать",
+      "targetText": "ущерб|повреждение|урон, повреждать",
       "sourceLanguage": "English",
       "targetLanguage": "Russian",
       "listName": "English Russian A2",

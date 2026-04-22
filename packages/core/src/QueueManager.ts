@@ -43,10 +43,16 @@ export class QueueManager {
     });
   }
 
-  pickFromQueue(level: LevelStatus, windowSize = 3): string | null {
+  pickFromQueue(level: LevelStatus, windowSize = 3, excludeId?: string): string | null {
     const queue = this.queues[level];
     if (queue.length === 0) return null;
     const maxIndex = Math.min(windowSize, queue.length);
+    if (excludeId !== undefined && queue.length > 1) {
+      for (let attempt = 0; attempt < 5; attempt++) {
+        const idx = Math.floor(Math.random() * maxIndex);
+        if (queue[idx] !== excludeId) return queue[idx] ?? null;
+      }
+    }
     const randomIndex = Math.floor(Math.random() * maxIndex);
     return queue[randomIndex] ?? null;
   }

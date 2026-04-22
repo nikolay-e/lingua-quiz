@@ -78,6 +78,7 @@ export class QuizManager {
   private currentLevel: PracticeLevel;
   private opts: Required<QuizOptions>;
   private submissionStartTime: number | null = null;
+  private lastNotCorrectId: string | null = null;
 
   constructor(translations: Translation[], initialState: InitialState = {}, options: QuizOptions = {}) {
     this.opts = {
@@ -151,7 +152,7 @@ export class QuizManager {
   };
 
   private generateQuestion = (): QuizQuestion | null => {
-    const candidateId = this.levelEngine.pickCandidateForLevel(this.currentLevel);
+    const candidateId = this.levelEngine.pickCandidateForLevel(this.currentLevel, this.lastNotCorrectId ?? undefined);
 
     if (candidateId === null) {
       return null;
@@ -277,6 +278,7 @@ export class QuizManager {
       });
     }
 
+    this.lastNotCorrectId = translationId;
     return {
       correctAnswerText,
       translation: t,
@@ -295,7 +297,6 @@ export class QuizManager {
     const direction = this.levelEngine.getDirection(this.currentLevel);
     const correctAnswerText = direction === 'normal' ? t.targetText : t.sourceText;
     const isCorrect = checkAnswer(userAnswer, correctAnswerText);
-
     const responseTimeMs = this.submissionStartTime !== null ? Date.now() - this.submissionStartTime : undefined;
     this.submissionStartTime = null;
 
@@ -355,6 +356,7 @@ export class QuizManager {
       });
     }
 
+    this.lastNotCorrectId = isCorrect ? null : translationId;
     return {
       isCorrect,
       correctAnswerText,
