@@ -209,27 +209,11 @@ export const checkAnswer = (userAnswer: string, correctAnswer: string): boolean 
   }
 
   const userTokens = splitTopLevelCommas(userAnswer).map((t: string) => normalize(t));
-  if (userTokens.length !== correctGroups.length) return false;
+
+  // Accept if user provided any valid subset of groups (any correct translation counts)
+  // e.g. 'ущерб' is accepted for 'ущерб|повреждение, повреждать'
+  if (userTokens.length === 0 || userTokens.length > correctGroups.length) return false;
 
   return allTokensMatchGroups(userTokens, correctGroups);
 };
 
-// Returns true when the answer partially matches a multi-part correct answer
-// (at least one required group is matched but not all groups)
-export const isPartialAnswer = (userAnswer: string, correctAnswer: string): boolean => {
-  const correctGroups = buildGroups(correctAnswer);
-  if (correctGroups.length <= 1) return false;
-
-  const userTokens = splitTopLevelCommas(userAnswer).map((t: string) => normalize(t));
-
-  if (userTokens.length === correctGroups.length && allTokensMatchGroups(userTokens, correctGroups)) {
-    return false;
-  }
-
-  const used = new Set<number>();
-  for (const token of userTokens) {
-    const matchIndex = findMatchingGroup(token, correctGroups, used);
-    if (matchIndex !== -1) return true;
-  }
-  return false;
-};

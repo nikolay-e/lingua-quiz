@@ -162,21 +162,16 @@ export function useQuizSession(
           navigator.vibrate(result.isCorrect ? [50] : [50, 30, 50]);
         }
         fb.setFeedback(result);
-        input.setUserAnswer('');
-        if ('isPartial' in result && result.isPartial === true) {
-          // Partial match: stay on the same word, let user retry
-          if (!isTouchDevice()) answerInputRef.current?.focus();
-        } else {
-          input.setAwaitingNextInput(true);
-          if ('translation' in result) {
-            applyResultExamples(result);
-          }
-          if ('levelChange' in result) {
-            applyLevelChange(result);
-          }
-          getNextQuestion();
-          if (!isTouchDevice()) answerInputRef.current?.focus();
+        input.setAwaitingNextInput(true);
+        if ('translation' in result) {
+          applyResultExamples(result);
         }
+        if ('levelChange' in result) {
+          applyLevelChange(result);
+        }
+        input.setUserAnswer('');
+        getNextQuestion();
+        if (!isTouchDevice()) answerInputRef.current?.focus();
       }
     } catch (error: unknown) {
       logger.error('Error submitting answer:', error);

@@ -108,8 +108,7 @@
     "playing": "Reproduciendo...",
     "ttsUnavailable": "TTS no disponible para {{language}}",
     "levelUp": "¡Subiste de nivel!",
-    "levelDown": "Bajaste de nivel",
-    "partialMatch": "Respuesta incompleta, inténtalo de nuevo"
+    "levelDown": "Bajaste de nivel"
   },
   "languages": {
     "english": "Inglés",

@@ -9,7 +9,7 @@ import {
   BETWEEN_SESSION_DECAY_BASE,
   LEVEL_STABILITY_DAYS,
 } from './constants';
-import { checkAnswer, isPartialAnswer, formatForDisplay } from './answer-comparison';
+import { checkAnswer, formatForDisplay } from './answer-comparison';
 import type { Translation, ProgressEntry } from './types';
 import type { LevelKey } from './levels';
 import { QueueManager, type LevelStatus, type Queues } from './QueueManager';
@@ -31,7 +31,6 @@ export interface QuizQuestion {
 
 export interface SubmissionResult {
   isCorrect: boolean;
-  isPartial?: boolean;
   correctAnswerText: string;
   submittedAnswerText: string;
   translation: Translation;
@@ -298,22 +297,8 @@ export class QuizManager {
     const direction = this.levelEngine.getDirection(this.currentLevel);
     const correctAnswerText = direction === 'normal' ? t.targetText : t.sourceText;
     const isCorrect = checkAnswer(userAnswer, correctAnswerText);
-    const isPartial = !isCorrect && isPartialAnswer(userAnswer, correctAnswerText);
-
     const responseTimeMs = this.submissionStartTime !== null ? Date.now() - this.submissionStartTime : undefined;
     this.submissionStartTime = null;
-
-    if (isPartial) {
-      this.lastNotCorrectId = translationId;
-      return {
-        isCorrect: false,
-        isPartial: true,
-        correctAnswerText,
-        submittedAnswerText: userAnswer,
-        translation: t,
-        responseTimeMs,
-      };
-    }
 
     const recentHistory = [...p.recentHistory.slice(-this.opts.historySizeForDegradation + 1), isCorrect];
     const consecutiveCorrect = isCorrect ? p.consecutiveCorrect + 1 : 0;
