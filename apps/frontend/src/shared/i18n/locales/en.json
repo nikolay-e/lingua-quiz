@@ -108,7 +108,8 @@
     "playing": "Playing...",
     "ttsUnavailable": "TTS unavailable for {{language}}",
     "levelUp": "Level Up!",
-    "levelDown": "Level Down"
+    "levelDown": "Level Down",
+    "partialMatch": "Incomplete answer — try again"
   },
   "languages": {
     "english": "English",

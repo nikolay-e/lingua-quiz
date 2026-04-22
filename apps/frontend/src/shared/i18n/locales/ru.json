@@ -108,7 +108,8 @@
     "playing": "Воспроизведение...",
     "ttsUnavailable": "Озвучка недоступна для {{language}}",
     "levelUp": "Уровень повышен!",
-    "levelDown": "Уровень понижен"
+    "levelDown": "Уровень понижен",
+    "partialMatch": "Неполный ответ — попробуйте ещё раз"
   },
   "languages": {
     "english": "Английский",

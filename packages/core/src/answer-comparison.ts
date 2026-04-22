@@ -17,7 +17,7 @@ const latinToCyrillic: Record<string, string> = {
 
 const stripLatinDiacritics = (s: string): string => {
   return s.replaceAll(/[àáâãäåæçèéêëìíîïñòóôõöøùúûüýÿ]/g, (char) => {
-    return char.normalize('NFD').replaceAll(/[\u0300-\u036f]/g, '');
+    return char.normalize('NFD').replaceAll(/[̀-ͯ]/g, '');
   });
 };
 
@@ -65,11 +65,10 @@ export const normalize = (text: string): string => normalizeForComparison(text);
 
 const PIPE_SENTINEL = '§§PIPE§§';
 
-export const formatForDisplay = (input: string): string => {
-  if (input === '') return input;
-  let text = input;
+const processGroupForDisplay = (group: string): string => {
+  let g = group.trim();
 
-  text = text.replaceAll(/\(([^)]+)\)/g, (match, inner: unknown) => {
+  g = g.replaceAll(/\(([^)]+)\)/g, (match, inner: unknown) => {
     const innerStr = String(inner);
     if (!innerStr.includes('|')) return match;
     const firstAlt =
@@ -80,16 +79,27 @@ export const formatForDisplay = (input: string): string => {
     return firstAlt;
   });
 
-  while (/\(\s*\)/.test(text)) text = text.replaceAll(/\(\s*\)/g, '');
+  while (/\(\s*\)/.test(g)) g = g.replaceAll(/\(\s*\)/g, '');
 
-  text = text.replaceAll(/\[[^\]]*\]/g, (br) => br.replaceAll('|', PIPE_SENTINEL));
+  g = g.replaceAll(/\[[^\]]*\]/g, (br) => br.replaceAll('|', PIPE_SENTINEL));
 
-  if (text.includes('|')) {
-    text = (text.split('|')[0] ?? '').trim();
+  if (g.includes('|')) {
+    g = (g.split('|')[0] ?? '').trim();
   }
 
-  text = text
-    .replaceAll(PIPE_SENTINEL, '|')
+  g = g.replaceAll(PIPE_SENTINEL, '|').trim();
+  return g;
+};
+
+export const formatForDisplay = (input: string): string => {
+  if (input === '') return input;
+
+  // Process each top-level comma group independently to preserve multi-part answers
+  const groups = splitTopLevelCommas(input);
+  const processedGroups = groups.map(processGroupForDisplay).filter((g) => g !== '');
+
+  const text = processedGroups
+    .join(', ')
     .replaceAll(/\s*,\s*/g, ', ')
     .replaceAll(/\s+/g, ' ')
     .trim()
@@ -202,4 +212,24 @@ export const checkAnswer = (userAnswer: string, correctAnswer: string): boolean 
   if (userTokens.length !== correctGroups.length) return false;
 
   return allTokensMatchGroups(userTokens, correctGroups);
+};
+
+// Returns true when the answer partially matches a multi-part correct answer
+// (at least one required group is matched but not all groups)
+export const isPartialAnswer = (userAnswer: string, correctAnswer: string): boolean => {
+  const correctGroups = buildGroups(correctAnswer);
+  if (correctGroups.length <= 1) return false;
+
+  const userTokens = splitTopLevelCommas(userAnswer).map((t: string) => normalize(t));
+
+  if (userTokens.length === correctGroups.length && allTokensMatchGroups(userTokens, correctGroups)) {
+    return false;
+  }
+
+  const used = new Set<number>();
+  for (const token of userTokens) {
+    const matchIndex = findMatchingGroup(token, correctGroups, used);
+    if (matchIndex !== -1) return true;
+  }
+  return false;
 };

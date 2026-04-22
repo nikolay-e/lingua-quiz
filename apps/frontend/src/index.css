@@ -21,6 +21,7 @@
   --color-primary: #2563eb;
   --color-secondary: #f39c12;
   --color-success: #22c55e;
+  --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-background: #f4f7f9;
   --color-surface: var(--color-white);
@@ -132,6 +133,7 @@
   --color-primary: #60a5fa;
   --color-secondary: #f5b041;
   --color-success: #2ecc71;
+  --color-warning: #fbbf24;
   --color-error: #e67e73;
   --color-background: #1a1a1a;
   --color-surface: #2a2a2a;

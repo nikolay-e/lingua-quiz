@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { formatForDisplay, type SubmissionResult, type QuizQuestion, type RevealResult } from '@lingua-quiz/core';
-import { RefreshCw, Check, X, Circle } from 'lucide-react';
+import { RefreshCw, Check, X, Circle, AlertCircle } from 'lucide-react';
 import { cn } from '@shared/utils';
 import { Button } from '@shared/ui';
 import type { QuizFeedback } from '@api/types';
@@ -31,6 +31,7 @@ export function FeedbackDisplay({
     return false;
   }, [feedback]);
 
+  const isPartial = feedback !== null && 'isPartial' in feedback && (feedback as { isPartial?: boolean }).isPartial === true;
   const isQuizFeedback = feedback !== null && 'isSuccess' in feedback && !('isCorrect' in feedback);
   const showRetry = isQuizFeedback && !isSuccess && onRetry !== undefined;
 
@@ -50,19 +51,23 @@ export function FeedbackDisplay({
           'feedback-text flex items-center justify-center gap-3 px-4 py-3 min-h-10 font-semibold rounded-lg border text-center transition-colors',
           isRevealResult && 'revealed text-muted-foreground bg-muted/50 border-border animate-fade-in',
           isSuccess && 'success text-success bg-success/10 border-success ring-1 ring-success animate-success-pulse',
+          !isRevealResult && !isSuccess && isPartial && 'partial text-warning bg-warning/10 border-warning ring-1 ring-warning',
           !isRevealResult &&
             !isSuccess &&
+            !isPartial &&
             'error text-destructive bg-destructive/10 border-destructive ring-1 ring-destructive animate-shake',
         )}
       >
         <span className="text-lg" aria-hidden="true">
           {isRevealResult && <Circle size={18} />}
           {!isRevealResult && isSuccess && <Check size={18} className="animate-icon-pop" />}
-          {!isRevealResult && !isSuccess && <X size={18} />}
+          {!isRevealResult && !isSuccess && isPartial && <AlertCircle size={18} />}
+          {!isRevealResult && !isSuccess && !isPartial && <X size={18} />}
         </span>
         {!isRevealResult && !isSuccess && submittedAnswer !== undefined && submittedAnswer !== '' ? (
           <div className="flex flex-col items-center gap-1">
             <span className="line-through opacity-60">{submittedAnswer}</span>
+            {isPartial && <span className="text-xs opacity-75">{t('quiz.partialMatch')}</span>}
             <span>{feedbackMessage}</span>
           </div>
         ) : (

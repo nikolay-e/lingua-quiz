@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { checkAnswer, formatForDisplay, normalizeForComparison } from '../src/answer-comparison';
+import { checkAnswer, formatForDisplay, isPartialAnswer, normalizeForComparison } from '../src/answer-comparison';
 
 function getPermutations<T>(array: T[]): T[][] {
   if (array.length === 0) return [[]];
@@ -564,3 +564,37 @@ describe('Answer Comparison and Text Processing', () => {
     });
   });
 });
+
+describe('isPartialAnswer', () => {
+  it('returns false for single-group answers', () => {
+    expect(isPartialAnswer('ущерб', 'ущерб|повреждение')).toBe(false);
+    expect(isPartialAnswer('wrong', 'damage')).toBe(false);
+  });
+
+  it('returns false when answer is fully correct', () => {
+    expect(isPartialAnswer('ущерб, повреждать', 'ущерб|повреждение, повреждать')).toBe(false);
+  });
+
+  it('returns true when only one of multiple required groups matches', () => {
+    expect(isPartialAnswer('ущерб', 'ущерб|повреждение, повреждать')).toBe(true);
+    expect(isPartialAnswer('повреждать', 'ущерб|повреждение, повреждать')).toBe(true);
+    expect(isPartialAnswer('повреждение', 'ущерб|повреждение, повреждать')).toBe(true);
+  });
+
+  it('returns false when no group matches', () => {
+    expect(isPartialAnswer('совсем не то', 'ущерб|повреждение, повреждать')).toBe(false);
+  });
+});
+
+describe('formatForDisplay with multi-part bare-pipe answers', () => {
+  it('shows both parts of a multi-part answer with bare pipes', () => {
+    expect(formatForDisplay('ущерб|повреждение, повреждать')).toBe('ущерб, повреждать');
+    expect(formatForDisplay('ущерб|повреждение|урон, повреждать')).toBe('ущерб, повреждать');
+  });
+
+  it('handles single group with bare pipe as before', () => {
+    expect(formatForDisplay('machine|car')).toBe('machine');
+    expect(formatForDisplay('машина|автомобиль')).toBe('машина');
+  });
+});
+

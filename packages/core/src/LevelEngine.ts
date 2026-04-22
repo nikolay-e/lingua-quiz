@@ -36,7 +36,7 @@ export class LevelEngine {
     return 'LEVEL_1';
   }
 
-  pickCandidateForLevel(level: PracticeLevel): string | null {
+  pickCandidateForLevel(level: PracticeLevel, excludeId?: string): string | null {
     const levelNum = Number.parseInt(level.replace('LEVEL_', ''));
     const queues = LEVEL_QUEUE_MAP[levelNum];
     if (queues === undefined) return null;
@@ -44,7 +44,7 @@ export class LevelEngine {
     for (const queue of queues) {
       const queueLength = this.queueManager.getQueueLength(queue);
       if (queueLength > 0) {
-        return this.queueManager.pickFromQueue(queue, queueLength);
+        return this.queueManager.pickFromQueue(queue, queueLength, excludeId);
       }
     }
     return null;
