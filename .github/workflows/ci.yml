@@ -113,7 +113,7 @@ jobs:
           cache-to: type=registry,ref=ghcr.io/nikolay-e/lingua-quiz/lingua-quiz-${{ matrix.service }}:buildcache,mode=max,image-manifest=true
 
       - name: Trivy scan
-        uses: aquasecurity/trivy-action@0.35.0
+        uses: aquasecurity/trivy-action@v0.36.0
         continue-on-error: true
         with:
           image-ref: ${{ env.REGISTRY }}/lingua-quiz-${{ matrix.service }}:${{ steps.tag.outputs.value }}
